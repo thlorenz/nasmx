@@ -1,0 +1,143 @@
+%ifndef __mapi32_INC__
+%define __mapi32_INC__
+
+IMPORT BuildDisplayTable, 40
+IMPORT CbOfEncoded, 4
+IMPORT CchOfEncoding, 4
+IMPORT ChangeIdleRoutine, 28
+IMPORT CloseIMsgSession, 4
+IMPORT CreateIProp, 24
+IMPORT CreateTable, 36
+IMPORT DeinitMapiUtil, 0
+IMPORT DeregisterIdleRoutine, 4
+IMPORT EnableIdleRoutine, 8
+IMPORT EncodeID, 12
+IMPORT FBadColumnSet, 4
+IMPORT FBadEntryList, 4
+IMPORT FBadProp, 4
+IMPORT FBadPropTag, 4
+IMPORT FBadRestriction, 4
+IMPORT FBadRglpNameID, 8
+IMPORT FBadRglpszA, 8
+IMPORT FBadRglpszW, 8
+IMPORT FBadRow, 4
+IMPORT FBadRowSet, 4
+IMPORT FBadSortOrderSet, 4
+IMPORT FBinFromHex, 8
+IMPORT FDecodeID, 12
+IMPORT FEqualNames, 8
+IMPORT FGetComponentPath
+IMPORT FPropCompareProp, 12
+IMPORT FPropContainsProp, 12
+IMPORT FPropExists, 8
+IMPORT FixMAPI
+IMPORT FreePadrlist, 4
+IMPORT FreeProws, 4
+IMPORT FtAdcFt, 20
+IMPORT FtAddFt, 16
+IMPORT FtDivFtBogus, 20
+IMPORT FtMulDw, 12
+IMPORT FtMulDwDw, 8
+IMPORT FtNegFt, 8
+IMPORT FtSubFt, 16
+IMPORT FtgRegisterIdleRoutine, 20
+IMPORT GetAttribIMsgOnIStg, 12
+IMPORT GetOutlookVersion
+IMPORT GetTnefStreamCodepage, 12
+IMPORT HexFromBin, 12
+IMPORT HrAddColumns, 16
+IMPORT HrAddColumnsEx, 20
+IMPORT HrAllocAdviseSink, 12
+IMPORT HrComposeEID, 28
+IMPORT HrComposeMsgID, 24
+IMPORT HrDecomposeEID, 28
+IMPORT HrDecomposeMsgID, 24
+IMPORT HrDispatchNotifications, 4
+IMPORT HrEntryIDFromSz, 12
+IMPORT HrGetOmiProvidersFlags, 8
+IMPORT HrGetOneProp, 12
+IMPORT HrIStorageFromStream, 16
+IMPORT HrQueryAllRows, 24
+IMPORT HrSetOmiProvidersFlagsInvalid, 4
+IMPORT HrSetOneProp, 8
+IMPORT HrSzFromEntryID, 12
+IMPORT HrThisThreadAdviseSink, 8
+IMPORT HrValidateIPMSubtree, 20
+IMPORT HrValidateParameters, 8
+IMPORT InstallFilterHook, 4
+IMPORT IsBadBoundedStringPtr, 8
+IMPORT LAUNCHWIZARD
+IMPORT LPropCompareProp, 8
+IMPORT LaunchWizard, 20
+IMPORT LpValFindProp, 12
+IMPORT MAPIAdminProfiles, 8
+IMPORT MAPIAllocateBuffer, 8
+IMPORT MAPIAllocateMore, 12
+IMPORT MAPIDeinitIdle, 0
+IMPORT MAPIFreeBuffer, 4
+IMPORT MAPIGetDefaultMalloc, 0
+IMPORT MAPIInitIdle, 4
+IMPORT MAPIInitialize, 4
+IMPORT MAPILogonEx, 20
+IMPORT MAPIOpenFormMgr, 8
+IMPORT MAPIOpenLocalFormContainer, 4
+IMPORT MAPIUninitialize, 0
+IMPORT MNLS_CompareStringW, 24
+IMPORT MNLS_IsBadStringPtrW, 8
+IMPORT MNLS_MultiByteToWideChar, 24
+IMPORT MNLS_WideCharToMultiByte, 32
+IMPORT MNLS_lstrcmpW, 8
+IMPORT MNLS_lstrcpyW, 8
+IMPORT MNLS_lstrlenW, 4
+IMPORT MapStorageSCode, 4
+IMPORT OpenIMsgOnIStg, 44
+IMPORT OpenIMsgSession, 12
+IMPORT OpenStreamOnFile, 24
+IMPORT OpenTnefStream, 28
+IMPORT OpenTnefStreamEx, 32
+IMPORT PRProviderInit
+IMPORT PpropFindProp, 12
+IMPORT PropCopyMore, 16
+IMPORT RTFSync, 12
+IMPORT ScBinFromHexBounded, 12
+IMPORT ScCopyNotifications, 16
+IMPORT ScCopyProps, 16
+IMPORT ScCountNotifications, 12
+IMPORT ScCountProps, 12
+IMPORT ScCreateConversationIndex, 16
+IMPORT ScDupPropset, 16
+IMPORT ScGenerateMuid, 4
+IMPORT ScInitMapiUtil, 4
+IMPORT ScLocalPathFromUNC, 12
+IMPORT ScMAPIXFromCMC
+IMPORT ScMAPIXFromSMAPI
+IMPORT ScRelocNotifications, 20
+IMPORT ScRelocProps, 20
+IMPORT ScSplEntry
+IMPORT ScUNCFromLocalPath, 12
+IMPORT SetAttribIMsgOnIStg, 16
+IMPORT SwapPlong, 8
+IMPORT SwapPword, 8
+IMPORT SzFindCh, 8
+IMPORT SzFindLastCh, 8
+IMPORT SzFindSz, 8
+IMPORT UFromSz, 4
+IMPORT UNKOBJ_COFree, 8
+IMPORT UNKOBJ_Free, 8
+IMPORT UNKOBJ_FreeRows, 8
+IMPORT UNKOBJ_ScAllocate, 12
+IMPORT UNKOBJ_ScAllocateMore, 16
+IMPORT UNKOBJ_ScCOAllocate, 12
+IMPORT UNKOBJ_ScCOReallocate, 12
+IMPORT UNKOBJ_ScSzFromIdsAlloc, 20
+IMPORT UlAddRef, 4
+IMPORT UlFromSzHex, 4
+IMPORT UlPropSize, 4
+IMPORT UlRelease, 4
+IMPORT WrapCompressedRTFStream, 12
+IMPORT WrapProgress, 20
+IMPORT WrapStoreEntryID, 24
+IMPORT __CPPValidateParameters, 8
+IMPORT __ValidateParameters, 8
+
+%endif

@@ -1,0 +1,61 @@
+%ifndef __winfax_INC__
+%define __winfax_INC__
+
+IMPORT FaxAbort, 8
+IMPORT FaxAccessCheck, 8
+IMPORT FaxClose, 4
+IMPORT FaxCompleteJobParamsA, 8
+IMPORT FaxCompleteJobParamsW, 8
+IMPORT FaxConnectFaxServerA, 8
+IMPORT FaxConnectFaxServerW, 8
+IMPORT FaxEnableRoutingMethodA, 12
+IMPORT FaxEnableRoutingMethodW, 12
+IMPORT FaxEnumGlobalRoutingInfoA, 12
+IMPORT FaxEnumGlobalRoutingInfoW, 12
+IMPORT FaxEnumJobsA, 12
+IMPORT FaxEnumJobsW, 12
+IMPORT FaxEnumPortsA, 12
+IMPORT FaxEnumPortsW, 12
+IMPORT FaxEnumRoutingMethodsA, 12
+IMPORT FaxEnumRoutingMethodsW, 12
+IMPORT FaxFreeBuffer, 4
+IMPORT FaxGetConfigurationA, 8
+IMPORT FaxGetConfigurationW, 8
+IMPORT FaxGetDeviceStatusA, 8
+IMPORT FaxGetDeviceStatusW, 8
+IMPORT FaxGetJobA, 12
+IMPORT FaxGetJobW, 12
+IMPORT FaxGetLoggingCategoriesA, 12
+IMPORT FaxGetLoggingCategoriesW, 12
+IMPORT FaxGetPageData, 24
+IMPORT FaxGetPortA, 8
+IMPORT FaxGetPortW, 8
+IMPORT FaxGetRoutingInfoA, 16
+IMPORT FaxGetRoutingInfoW, 16
+IMPORT FaxInitializeEventQueue, 20
+IMPORT FaxOpenPort, 16
+IMPORT FaxPrintCoverPageA, 8
+IMPORT FaxPrintCoverPageW, 8
+IMPORT FaxRegisterRoutingExtensionW, 24
+IMPORT FaxRegisterServiceProviderW, 16
+IMPORT FaxSendDocumentA, 20
+IMPORT FaxSendDocumentForBroadcastA, 20
+IMPORT FaxSendDocumentForBroadcastW, 20
+IMPORT FaxSendDocumentW, 20
+IMPORT FaxSetConfigurationA, 8
+IMPORT FaxSetConfigurationW, 8
+IMPORT FaxSetGlobalRoutingInfoA, 8
+IMPORT FaxSetGlobalRoutingInfoW, 8
+IMPORT FaxSetJobA, 16
+IMPORT FaxSetJobW, 16
+IMPORT FaxSetLoggingCategoriesA, 12
+IMPORT FaxSetLoggingCategoriesW, 12
+IMPORT FaxSetPortA, 8
+IMPORT FaxSetPortW, 8
+IMPORT FaxSetRoutingInfoA, 16
+IMPORT FaxSetRoutingInfoW, 16
+IMPORT FaxStartPrintJobA, 16
+IMPORT FaxStartPrintJobW, 16
+IMPORT FaxUnregisterServiceProviderW, 4
+
+%endif

@@ -1,0 +1,250 @@
+NASMX Notes:
+~~~~~~~~~~~~
+Current Release: 8:05 PM 1/12/2009, by Keith Kanios
+- Updated Win32 "bin" directory with latest versions
+  of NASM, NDISASM, GoLink, GoRC and ResEd.
+
+- Generated new Win32 "resource.h" file based solely
+  on NASMX Win32 include files.
+
+- Removed redundant .CODE, .TEXT, .DATA and .BSS macros
+  from nasmx.inc due to conflict with local labels.
+
+Archived Release: 9:30 PM 9/30/2007, by Keith Kanios
+- Renamed project from "NASM32" to "NASMX" due to the
+  inclusion of 64-bit material and cross-platform nature
+  of the project.
+
+- Revamped NASMX.INC to automatically detect object formats
+  and "BITS" modes for seemless detection and use of INVOKE
+  calling conventions.
+
+- POLIB, POMAKE, PORC and POLINK have been removed in favor
+  of GoLink and GoRC. GoLink supports Win64 linking.
+
+- The Win32 DEMO batch files have been modified to reflect
+  the use of GoLink and GoRC.
+
+- The Windows installer no longer requires building the
+  include and library files due to the nature and use of
+  GoLink.
+
+- The "def" and "lib" directories have been removed due to
+  their obsolete nature.
+
+- Added Win64 DEMOs 1 through 4.
+
+- Added Linux syscall.inc in which employs the new SYSCALL
+  macro that works similar to INVOKE for calling the Linux
+  Kernel.
+
+- Added Linux DEMO1 which illustrates SYSCALL usage for
+  calling Linux Kernel functions.
+
+- Changed Linux X11 DEMO1 to Destroy the Window and Close
+  the Connection to X11 upon program exit.
+
+- The "docs" directory has been deprecated and removed. All
+  of the files that were in the "docs" directory have been
+  placed in the root install directory.
+
+Archived Release: 6:30 PM 8/5/2007, by Keith Kanios
+- Added X11 DEMO1, an example of a basic X11 Window.
+
+- Added partial X11 and Linux LibC include files only
+  to support the X11 DEMO1. More complete versions
+  will come later.
+
+- Compiled new Linux release package under the standard
+  GZIP Tarball compression format.
+
+Archived Release: 7:03 AM 3/8/2007, by Keith Kanios
+- Switched to using a compressed installation package.
+
+- Added disclaimer the README.TXT file to help
+  warn assembly language beginners become aware
+  of the "basic" content of the packaged DEMOS.
+
+- Removed tools from the BIN directory that were not
+  vital to basic application development.
+
+- Removed the DOS version of NASM (NASM.EXE) from the
+  BIN directory, as this project has no direct intention
+  of supporting the DOS environment. This also includes
+  the removal of the DOS version of NDISASM (NDISASM.EXE)
+  from the BIN directory as well.
+
+- The 32-bit Windows NASM version (NASMW.EXE) has been
+  renamed to simply NASM.EXE. This also includes the
+  renaming of the 32-bit Windows NDISASM version
+  (NDISASMW.EXE) to simply NDISASM.EXE as well.
+
+- The Win32 and XBOX DEMO batch files have been changed
+  to reflect the new layout/changes of the BIN directory.
+
+Archived Release: 11:51 AM 2/16/2007, by Keith Kanios
+- Added "def" directory for use with export
+  definition files.
+
+- Added Win32 export definition files to "def/win32".
+
+- Developed and added DEF2INC program for creating all
+  Win32 include files as this method allows for a smaller
+  package download.
+
+- Utilizing POLIB for creating all Win32 library
+  files as this method allows for a smaller package
+  download.
+
+- Changed the layout of the "lib" directory to reflect
+  future platform separation (i.e. Win32/Linux/etc...)
+
+- Added DEMO12 to the list of Win32 example applications.
+  Read the "README.TXT" file in the "demos/win32" directory
+  for more information.
+
+- Placed "stdwin.inc" back into the "inc/win32" subdirectory
+  as it is Win32 API specific. DEMO7, DEMO8 and DEMO10 of
+  the Win32 demos reflect this change.
+
+- Added support for XBOX. Include file added ("xbe.inc") for
+  development of XBE files directly from NASM. Include file
+  added ("kernel.inc") to assist with XBOX Kernel calls.
+
+- Added DEMO1 to the list of XBOX example applications.
+  Read the "README.TXT" file in the "demos/xbox" directory
+  for more information.
+
+Archived Release: 2:13 AM 7/9/2006, by Keith Kanios and Bryant Keller
+- Fixed string bug in INVOKE and cleaned-up
+  obsolete symbols.
+
+- Major rework done to give capatibility with
+  The Win32ASM Project, which utilizes Pelle's Tools.
+  Rewrote nasm32.inc to combine features from libc.mac,
+  making a unifed nasm32.inc that will be the basis
+  for future mutli-platform support.
+
+- Forked Bryant's Demos for use on Win32 with Pelle's Tools,
+  ALINK and GORC are no longer needed, or supported,
+  in the package.
+
+- Forked include and library files in preparation
+  for multi-platform support. Win32 specific files can
+  now be found in "win32" subdirectories. See the
+  accompanying Win32 demos for usage.
+
+  CHANGE: Renamed the "examples" directory to "demos".
+
+  CHANGE: ALINK was removed from the package, in favor of
+  POLINK support for the Win32 platform. This also removes
+  the use of the OMF object format (-f obj) in favor of
+  MS COFF (-f win32).
+
+  CHANGE: GORC was removed from the package, in favor of
+  PORC support for the Win32 platform.
+
+Archived Release: 1:26 PM 3/10/2006, by Bryant Keller
+- Added nasm32\macros\libc.mac which gives you
+  the ability to build your applications using
+  libc with ease. libc.mac _CANNOT_ be used with
+  nasm32.inc because it contains the same macros,
+  just for use with libc. This also means that
+  Nasm32 can build applications on Linux/BSD systems
+  which support gcc and libc.
+
+Archived Release: 10:07 PM 2/13/2006, by Bryant Keller
+- Added inline argument defining, similar to
+  FASM and MASM, to the proc macro.
+
+  NOTE: defining arguments inline means that
+  the arguments are dword values by default.
+  to define other sized arguments, use the
+  old argd macro.
+
+- Added if/elsif/else/endif macros for conditional
+  assembly, as well as definitions for a cleaner
+  syntax.
+
+- Cleaned up the switch/case/default/break/endswitch
+  macros to enable nested switch/case statments.
+
+- Added a new demo, DEMO10 to show off inline
+  argument defining using proc and to show how
+  the if/elsif/else/endif macros work.
+
+Archived Release: 6:46 PM 12/15/2005, by Bryant Keller
+- Fixed a bug in the PROTO macro, added the
+  dllproc macro, and included a demo on creating
+  dynamically linked libraries.
+
+Archived Release: 9:39 PM 12/12/2005, by Bryant Keller
+- Added do/while, do/until, and switch/case
+  support to the nasm32.inc include.
+
+Archived Release: 10:47 PM 12/11/2005, by Bryant Keller
+- Added many more include files to the
+  /nasm32/inc directory. I've got most
+  of the windows API completed in that
+  aspect. I now have the wide character
+  versions of each of the associated API's
+  included as well for Unicode support
+
+Archived Release: 6:12 PM 12/11/2005, by Bryant Keller
+- Updated Demo7 to include all of the new
+  'stdwin.inc' CreateWindowEx wrappers.
+
+- Updated include file 'stdwin.inc' for the
+  other standard controls that I left out.
+
+  New Features:
+   ComboCtl - Creates a standard combobox control
+   ListBoxCtl - Creates a standard listbox control
+
+Archived Release: 6:56 PM 12/10/2005, by Bryant Keller
+- Added Demo7 to show off the new include
+  file.
+
+- New include file 'stdwin.inc' encapsulates
+  CreateWindowEx calls to simplify the creation
+  of windows and controls. (requires nasm32.inc)
+
+  Features:
+   StdWindow - Creates a standard SDI Window
+   ButtonCtl - Creates a standard Button Control
+   EditCtl - Creates a standard Edit Control
+   StaticCtl - Creates a standard Static Control (centered text)
+
+Archived Release: 3:24 AM 12/9/2005, by Bryant Keller
+- Combined WinConst.Inc and WinStruct.Inc
+  into Windows.Inc
+
+- Changed icall to invoke to make it easier
+  for people moving from Masm32
+
+  Example:
+   invoke GetModuleHandle
+   invoke MessageBoxA, dword NULL, dword string, dword title, dword MB_OK
+
+Archived Release: 2:25 PM 12/7/2005, by Bryant Keller
+- Removed the xcall macro and set icall to handle
+  routines with no arguments.
+
+Archived Release: 4:44 PM 12/6/2005, by Bryant Keller
+- This release is fully functional and contains
+  six demo applications to show it's abilities.
+
+- There is no resource compiler with this current
+  release as I have not yet asked permission from
+  any developers for the use, all software and
+  source code is copywritten under the General
+  Public License, just like the Netwide Assembler.
+  (I used GoRC to compile the examples with resources)
+
+- xcall should be used with routines which have no
+  arguments, while icall should be used with routines
+  which have arguments.
+
+  Example:
+   xcall GetModuleHandle
+   icall MessageBoxA, dword NULL, dword string, dword title, dword MB_OK
