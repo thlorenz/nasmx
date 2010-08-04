@@ -1,10 +1,19 @@
-; Windows.Inc
-; created by Bryant Keller
+;//////////////////////////////////////////////////////////////
+;//
+;// NASMX Preprocessor
+;// Copyright (c) 2005-2010, The NASMX Project
+;//
+;// Windows.Inc
+;// created by Bryant Keller
+;// modified by Rob Neff
+;//
+;// 1 Aug 2010 - Rob Neff
+;//   - Now using new typedef system
 
 %ifndef __WINDOWS_INC__
 %define __WINDOWS_INC__
 
-; constants
+;// constants
 %define TRUE 1
 %define FALSE 0
 %define NULL FALSE
@@ -7751,4205 +7760,5121 @@
 %define ACN_START 1
 %define ACN_STOP 2
 
-; structures
-STRUC RECT
-.left RESD 1
-.top RESD 1
-.right RESD 1
-.bottom RESD 1
-ENDSTRUC
-
-STRUC POINT
-.x RESD 1
-.y RESD 1
-ENDSTRUC
-
-STRUC SIZEL
-.x RESD 1
-.y RESD 1
-ENDSTRUC
-
-STRUC MSG
-.hwnd RESD 1
-.message RESD 1
-.wParam RESD 1
-.lParam RESD 1
-.time RESD 1
-.pt RESB POINT_size
-ENDSTRUC
-
-STRUC SID_AND_ATTRIBUTES
-.Sid RESD 1
-.Attributes RESD 1
-ENDSTRUC
-
-STRUC SID_IDENTIFIER_AUTHORITY
-.Value RESB 1
-ENDSTRUC
-
-STRUC OVERLAPPED
-.Internal RESD 1
-.InternalHigh RESD 1
-.loffset RESD 1
-.OffsetHigh RESD 1
-.hEvent RESD 1
-ENDSTRUC
-
-STRUC SECURITY_ATTRIBUTES
-.niLength RESD 1
-.lpSecurityDescriptor RESD 1
-.bInheritHandle RESD 1
-ENDSTRUC
-
-STRUC PROCESS_INFORMATION
-.hProcess RESD 1
-.hThread RESD 1
-.dwProcessId RESD 1
-.dwThreadId RESD 1
-ENDSTRUC
-
-STRUC FILETIME
-.dwLowDateTime RESD 1
-.dwHighDateTime RESD 1
-ENDSTRUC
-
-STRUC SYSTEMTIME
-.wYear RESW 1
-.wMonth RESW 1
-.wDayOfWeek RESW 1
-.wDay RESW 1
-.wHour RESW 1
-.wMinute RESW 1
-.wSecond RESW 1
-.wMilliseconds RESW 1
-ENDSTRUC
-
-STRUC COMMPROP
-.wPacketiLength RESW 1
-.wPacketVersion RESW 1
-.dwServiceMask RESD 1
-.dwReserved1 RESD 1
-.dwMaxTxQueue RESD 1
-.dwMaxRxQueue RESD 1
-.dwMaxBaud RESD 1
-.dwProvSubType RESD 1
-.dwProvCapabilities RESD 1
-.dwSettableParams RESD 1
-.dwSettableBaud RESD 1
-.wSettableData RESW 1
-.wSettableStopParity RESW 1
-.dwCurrentTxQueue RESD 1
-.dwCurrentRxQueue RESD 1
-.dwProvSpec1 RESD 1
-.dwProvSpec2 RESD 1
-.wcProvChar RESW 1
-ENDSTRUC
-
-STRUC COMSTAT
-.fCtsHold RESD 1
-.fDsrHold RESD 1
-.fRlsdHold RESD 1
-.fXoffHold RESD 1
-.fXoffSent RESD 1
-.fEof RESD 1
-.fTxim RESD 1
-.fReserved RESD 1
-.cbInQue RESD 1
-.cbOutQue RESD 1
-ENDSTRUC
-
-STRUC DCB
-.DCBlength RESD 1
-.BaudRate RESD 1
-.fbits RESD 1
-.wReserved RESW 1
-.XonLim RESW 1
-.XoffLim RESW 1
-.ByteSize RESB 1
-.Parity RESB 1
-.StopBits RESB 1
-.XonChar RESB 1
-.XoffChar RESB 1
-.ErrorChar RESB 1
-.EofChar RESB 1
-.EvtChar RESB 1
-ENDSTRUC
-
-STRUC COMMTIMEOUTS
-.ReadIntervalTimeout RESD 1
-.ReadTotalTimeoutMultiplier RESD 1
-.ReadTotalTimeoutConstant RESD 1
-.WriteTotalTimeoutMultiplier RESD 1
-.WriteTotalTimeoutConstant RESD 1
-ENDSTRUC
-
-STRUC SYSTEM_INFO
-.dwOemID RESD 1
-.dwPageSize RESD 1
-.lpMinimumApplicationAddress RESD 1
-.lpMaximumApplicationAddress RESD 1
-.dwActiveProcessorMask RESD 1
-.dwNumberOrfProcessors RESD 1
-.dwProcessorType RESD 1
-.dwAllocationGranularity RESD 1
-.wProcessorLevel RESW 1
-.wProcessorRevision RESW 1
-ENDSTRUC
-
-STRUC MEMORYSTATUS
-.dwiLength RESD 1
-.dwMemoryLoad RESD 1
-.dwTotalPhys RESD 1
-.dwAvailPhys RESD 1
-.dwTotalPageFile RESD 1
-.dwAvailPageFile RESD 1
-.dwTotalVirtual RESD 1
-.dwAvailVirtual RESD 1
-ENDSTRUC
-
-STRUC TPMPARAMS
-.cbSize RESD 1
-.rcExclude RESB RECT_size
-ENDSTRUC
-
-STRUC GENERIC_MAPPING
-.GenericRead RESD 1
-.GenericWrite RESD 1
-.GenericExecute RESD 1
-.GenericAll RESD 1
-ENDSTRUC
-
-STRUC LUID
-.LowPart RESD 1
-.HighPart RESD 1
-ENDSTRUC
-
-STRUC LUID_AND_ATTRIBUTES
-.pLuid RESD 1
-.Attributes RESD 1
-ENDSTRUC
-
-STRUC ACL
-.AclRevision RESB 1
-.Sbz1 RESB 1
-.AclSize RESW 1
-.AceCount RESW 1
-.Sbz2 RESW 1
-ENDSTRUC
-
-STRUC ACE_HEADER
-.AceType RESB 1
-.AceFlags RESB 1
-.AceSize RESD 1
-ENDSTRUC
-
-STRUC ACCESS_ALLOWED_ACE
-.Header RESD 1
-.imask RESD 1
-.SidStart RESD 1
-ENDSTRUC
-
-STRUC ACCESS_DENIED_ACE
-.Header RESD 1
-.imask RESD 1
-.SidStart RESD 1
-ENDSTRUC
-
-STRUC SYSTEM_AUDIT_ACE
-.Header RESD 1
-.imask RESD 1
-.SidStart RESD 1
-ENDSTRUC
-
-STRUC SYSTEM_ALARM_ACE
-.Header RESD 1
-.imask RESD 1
-.SidStart RESD 1
-ENDSTRUC
-
-STRUC ACL_REVISION_INFORMATION
-.AclRevision RESD 1
-ENDSTRUC
-
-STRUC ACL_SIZE_INFORMATION
-.AceCount RESD 1
-.AclBytesInUse RESD 1
-.AclBytesFree RESD 1
-ENDSTRUC
-
-STRUC SECURITY_DESCRIPTOR
-.Revision RESB 1
-.Sbz1 RESB 1
-.Control RESD 1
-.Owner RESD 1
-.lGroup RESD 1
-.Sacl RESD 1
-.Dacl RESD 1
-ENDSTRUC
-
-STRUC PRIVILEGE_SET
-.PrivilegeCount RESD 1
-.Control RESD 1
-.Privilege RESD 1
-ENDSTRUC
-
-STRUC EXCEPTION_RECORD
-.ExceptionCode RESD 1
-.ExceptionFlags RESD 1
-.pExceptionRecord RESD 1
-.ExceptionAddress RESD 1
-.NumberParameters RESD 1
-.ExceptionInformation RESD 1
-ENDSTRUC
-
-STRUC EXCEPTION_DEBUG_INFO
-.pExceptionRecord RESD 1
-.dwFirstChance RESD 1
-ENDSTRUC
-
-STRUC CREATE_THREAD_DEBUG_INFO
-.hThread RESD 1
-.lpThreadLocalBase RESD 1
-.lpStartAddress RESD 1
-ENDSTRUC
-
-STRUC CREATE_PROCESS_DEBUG_INFO
-.hFile RESD 1
-.hProcess RESD 1
-.hThread RESD 1
-.lpBaseOfImage RESD 1
-.dwDebugInfoFileOffset RESD 1
-.nDebugInfoSize RESD 1
-.lpThreadLocalBase RESD 1
-.lpStartAddress RESD 1
-.lpImageName RESD 1
-.fUnicode RESD 1
-ENDSTRUC
-
-STRUC EXIT_THREAD_DEBUG_INFO
-.dwExitCode RESD 1
-ENDSTRUC
-
-STRUC EXIT_PROCESS_DEBUG_INFO
-.dwExitCode RESD 1
-ENDSTRUC
-
-STRUC LOAD_DLL_DEBUG_INFO
-.hFile RESD 1
-.lpBaseOfDll RESD 1
-.dwDebugInfoFileOffset RESD 1
-.nDebugInfoSize RESD 1
-.lpImageName RESD 1
-.fUnicode RESW 1
-ENDSTRUC
-
-STRUC UNLOAD_DLL_DEBUG_INFO
-.lpBaseOfDll RESD 1
-ENDSTRUC
-
-STRUC OUTPUT_DEBUG_STRING_INFO
-.lpDebugStringData RESD 1
-.fUnicode RESW 1
-.nDebugStringiLength RESW 1
-ENDSTRUC
-
-STRUC RIP_INFO
-.dwError RESD 1
-.dwType RESD 1
-ENDSTRUC
-
-STRUC OFSTRUCT
-.cBytes RESB 1
-.fFixedDisk RESB 1
-.nErrCode RESW 1
-.Reserved1 RESW 1
-.Reserved2 RESW 1
-.szPathName RESB 1
-ENDSTRUC
-
-STRUC WNDCLASSEX
-.cbSize RESD 1
-.style RESD 1
-.lpfnWndProc RESD 1
-.cbClsExtra RESD 1
-.cbWndExtra RESD 1
-.hInstance RESD 1
-.hIcon RESD 1
-.hCursor RESD 1
-.hbrBackground RESD 1
-.lpszMenuName RESD 1
-.lpszClassName RESD 1
-.hIconSm RESD 1
-ENDSTRUC
-
-STRUC WNDCLASS
-.style RESD 1
-.lpfnWndProc RESD 1
-.cbClsExtra RESD 1
-.cbWndExtra RESD 1
-.hInstance RESD 1
-.hIcon RESD 1
-.hCursor RESD 1
-.hbrBackground RESD 1
-.lpszMenuName RESD 1
-.lpszClassName RESD 1
-ENDSTRUC
-
-STRUC CRITICAL_SECTION
-.Par1 RESD 1
-.Par2 RESD 1
-.Par3 RESD 1
-.Par4 RESD 1
-.Par5 RESD 1
-.Par6 RESD 1
-ENDSTRUC
-
-STRUC BY_HANDLE_FILE_INFORMATION
-.dwFileAttributes RESD 1
-.ftCreationTime RESB FILETIME_size
-.ftLastAccessTime RESB FILETIME_size
-.ftLastWriteTime RESB FILETIME_size
-.dwVolumeSerialNumber RESD 1
-.nFileSizeHigh RESD 1
-.nFileSizeLow RESD 1
-.nNumberOfLinks RESD 1
-.nFileIndexHigh RESD 1
-.nFileIndexLow RESD 1
-ENDSTRUC
-
-STRUC MEMORY_BASIC_INFORMATION
-.BaseAddress RESD 1
-.AllocationBase RESD 1
-.AllocationProtect RESD 1
-.RegionSize RESD 1
-.State RESD 1
-.Protect RESD 1
-.lType RESD 1
-ENDSTRUC
-
-STRUC EVENTLOGRECORD
-.iLength RESD 1
-.Reserved RESD 1
-.RecordNumber RESD 1
-.TimeGenerated RESD 1
-.TimeWritten RESD 1
-.EventID RESD 1
-.EventType RESW 1
-.NumStrings RESW 1
-.EventCategory RESW 1
-.ReservedFlags RESW 1
-.ClosingRecordNumber RESD 1
-.StringOffset RESD 1
-.UserSidiLength RESD 1
-.UserSidOffset RESD 1
-.DataiLength RESD 1
-.DataOffset RESD 1
-ENDSTRUC
-
-STRUC TOKEN_GROUPS
-.GroupCount RESD 1
-.Groups RESD 1
-ENDSTRUC
-
-STRUC TOKEN_PRIVILEGES
-.PrivilegeCount RESD 1
-.Privileges RESD 1
-ENDSTRUC
-
-STRUC FLOATING_SAVE_AREA
-.ControlWord RESD 1
-.StatusWord RESD 1
-.TagWord RESD 1
-.ErrorOffset RESD 1
-.ErrorSelector RESD 1
-.DataOffset RESD 1
-.DataSelector RESD 1
-.RegisterArea RESB 1
-.Cr0NpxState RESD 1
-ENDSTRUC
-
-STRUC CONTEXT
-.ContextFlags RESD 1
-.iDr0 RESD 1
-.iDr1 RESD 1
-.iDr2 RESD 1
-.iDr3 RESD 1
-.iDr6 RESD 1
-.iDr7 RESD 1
-.FloatSave RESD 1
-.regGs RESD 1
-.regFs RESD 1
-.regEs RESD 1
-.regDs RESD 1
-.regEdi RESD 1
-.regEsi RESD 1
-.regEbx RESD 1
-.regEdx RESD 1
-.regEcx RESD 1
-.regEax RESD 1
-.regEbp RESD 1
-.regEip RESD 1
-.regCs RESD 1
-.regFlag RESD 1
-.regEsp RESD 1
-.regSs RESD 1
-ENDSTRUC
-
-STRUC EXCEPTION_POINTERS
-.pExceptionRecord RESD 1
-.ContextRecord RESD 1
-ENDSTRUC
-
-STRUC LDT_BYTES
-.BaseMid RESB 1
-.Flags1 RESB 1
-.Flags2 RESB 1
-.BaseHi RESB 1
-ENDSTRUC
-
-STRUC LDT_ENTRY
-.LimitLow RESW 1
-.BaseLow RESW 1
-.HiWord RESD 1
-ENDSTRUC
-
-STRUC TIME_ZONE_INFORMATION
-.Bias RESD 1
-.StandardName RESW 1
-.StandardDate RESD 1
-.StandardBias RESD 1
-.DaylightName RESW 1
-.DaylightDate RESD 1
-.DaylightBias RESD 1
-ENDSTRUC
-
-STRUC WIN32_STREAM_ID
-.dwStreamID RESD 1
-.dwStreamAttributes RESD 1
-.dwStreamSizeLow RESD 1
-.dwStreamSizeHigh RESD 1
-.dwStreamNameSize RESD 1
-.cStreamName RESB 1
-ENDSTRUC
-
-STRUC STARTUPINFO
-.cb RESD 1
-.lpReserved RESD 1
-.lpDesktop RESD 1
-.lpTitle RESD 1
-.dwX RESD 1
-.dwY RESD 1
-.dwXSize RESD 1
-.dwYSize RESD 1
-.dwXCountChars RESD 1
-.dwYCountChars RESD 1
-.dwFillAttribute RESD 1
-.dwFlags RESD 1
-.wShowWindow RESW 1
-.cbReserved2 RESW 1
-.lpReserved2 RESB 1
-.hStdInput RESD 1
-.hStdOutput RESD 1
-.hStdError RESD 1
-ENDSTRUC
-
-STRUC WIN32_FIND_DATA
-.dwFileAttributes RESD 1
-.ftCreationTime RESB FILETIME_size
-.ftLastAccessTime RESB FILETIME_size
-.ftLastWriteTime RESB FILETIME_size
-.nFileSizeHigh RESD 1
-.nFileSizeLow RESD 1
-.dwReserved0 RESD 1
-.dwReserved1 RESD 1
-.cFileName RESB MAX_PATH
-.cAlternate RESB 14 
-ENDSTRUC
-
-STRUC CPINFO
-.MaxCharSize RESD 1
-.DefaultChar RESB 1
-.LeadByte RESB 1
-ENDSTRUC
-
-STRUC NUMBERFMT
-.NumDigits RESD 1
-.LeadingZero RESD 1
-.Grouping RESD 1
-.lpDecimalSep RESD 1
-.lpThousandSep RESD 1
-.NegativeOrder RESD 1
-ENDSTRUC
-
-STRUC CURRENCYFMT
-.NumDigits RESD 1
-.LeadingZero RESD 1
-.Grouping RESD 1
-.lpDecimalSep RESD 1
-.lpThousandSep RESD 1
-.NegativeOrder RESD 1
-.PositiveOrder RESD 1
-.lpCurrencySymbol RESD 1
-ENDSTRUC
-
-STRUC COORD
-.x RESW 1
-.y RESW 1
-ENDSTRUC
-
-STRUC SMALL_RECT
-.left RESW 1
-.top RESW 1
-.right RESW 1
-.bottom RESW 1
-ENDSTRUC
-
-STRUC KEY_EVENT_RECORD
-.bKeyDown RESD 1
-.wRepeatCount RESW 1
-.wVirtualKeyCode RESW 1
-.wVirtualScanCode RESW 1
-.uChar RESW 1
-.dwControlKeyState RESD 1
-ENDSTRUC
-
-STRUC MOUSE_EVENT_RECORD
-.dwMousePosition RESD 1
-.dwButtonState RESD 1
-.dwControlKeyState RESD 1
-.dwEventFlags RESD 1
-ENDSTRUC
-
-STRUC WINDOW_BUFFER_SIZE_RECORD
-.dwSize RESD 1
-ENDSTRUC
-
-STRUC MENU_EVENT_RECORD
-.dwCommandId RESD 1
-ENDSTRUC
-
-STRUC FOCUS_EVENT_RECORD
-.bSetFocus RESD 1
-ENDSTRUC
-
-STRUC CHAR_INFO
-.Char RESW 1
-.Attributes RESW 1
-ENDSTRUC
-
-STRUC CONSOLE_SCREEN_BUFFER_INFO
-.dwSize RESD 1
-.dwCursorPosition RESD 1
-.wAttributes RESW 1
-.srWindow RESB SMALL_RECT_size
-.dwMaximumWindowSize RESD 1
-ENDSTRUC
-
-STRUC CONSOLE_CURSOR_INFO
-.dwSize RESD 1
-.bVisible RESD 1
-ENDSTRUC
-
-STRUC XFORM
-.eM11 RESQ 1
-.eM12 RESQ 1
-.eM21 RESQ 1
-.eM22 RESQ 1
-.ex RESQ 1
-.ey RESQ 1
-ENDSTRUC
-
-STRUC BITMAP
-.bmType RESD 1
-.bmWidth RESD 1
-.bmHeight RESD 1
-.bmWidthBytes RESD 1
-.bmPlanes RESW 1
-.bmBitsPixel RESW 1
-.bmBits RESD 1
-ENDSTRUC
-
-STRUC RGBTRIPLE
-.rgbtBlue RESB 1
-.rgbtGreen RESB 1
-.rgbtRed RESB 1
-ENDSTRUC
-
-STRUC RGBQUAD
-.rgbBlue RESB 1
-.rgbGreen RESB 1
-.rgbRed RESB 1
-.rgbReserved RESB 1
-ENDSTRUC
-
-STRUC BITMAPCOREHEADER
-.bcSize RESD 1
-.bcWidth RESW 1
-.bcHeight RESW 1
-.bcPlanes RESW 1
-.bcBitCount RESW 1
-ENDSTRUC
-
-STRUC BITMAPINFOHEADER
-.biSize RESD 1
-.biWidth RESD 1
-.biHeight RESD 1
-.biPlanes RESW 1
-.biBitCount RESW 1
-.biCompression RESD 1
-.biSizeImage RESD 1
-.biXPelsPerMeter RESD 1
-.biYPelsPerMeter RESD 1
-.biClrUsed RESD 1
-.biClrImportant RESD 1
-ENDSTRUC
-
-STRUC BITMAPINFO
-.bmiHeader RESD 1
-.bmiColors RESD 1
-ENDSTRUC
-
-STRUC BITMAPCOREINFO
-.bmciHeader RESD 1
-.bmciColors RESD 1
-ENDSTRUC
-
-STRUC BITMAPFILEHEADER
-.bfType RESW 1
-.bfSize RESD 1
-.bfReserved1 RESW 1
-.bfReserved2 RESW 1
-.bfOffBits RESD 1
-ENDSTRUC
-
-STRUC HANDLETABLE
-.objectHandle RESD 1
-ENDSTRUC
-
-STRUC METARECORD
-.rdSize RESD 1
-.rdFunction RESW 1
-.rdParm1 RESW 1
-ENDSTRUC
-
-STRUC METAFILEPICT
-.imm RESD 1
-.xExt RESD 1
-.yExt RESD 1
-.hMF RESD 1
-ENDSTRUC
-
-STRUC METAHEADER
-.mtType RESW 1
-.mtHeaderSize RESW 1
-.mtVersion RESW 1
-.mtSize RESD 1
-.mtNoObjects RESW 1
-.mtMaxRecord RESD 1
-.mtNoParameters RESW 1
-ENDSTRUC
-
-STRUC ENHMETARECORD
-.iType RESD 1
-.nSize RESD 1
-.dParm1 RESD 1
-ENDSTRUC
-
-STRUC ENHMETAHEADER
-.iType RESD 1
-.nSize RESD 1
-.rclBounds RESB RECT_size
-.rclFrame RESB RECT_size
-.dSignature RESD 1
-.nVersion RESD 1
-.nBytes RESD 1
-.nRecords RESD 1
-.nHandles RESW 1
-.sReserved RESW 1
-.nDescription RESD 1
-.offDescription RESD 1
-.nPalEntries RESD 1
-.szlDevice RESD 1
-.szlMillimeters RESD 1
-ENDSTRUC
-
-STRUC TEXTMETRIC
-.tmHeight RESD 1
-.tmAscent RESD 1
-.tmDescent RESD 1
-.tmInternalLeading RESD 1
-.tmExternalLeading RESD 1
-.tmAveCharWidth RESD 1
-.tmMaxCharWidth RESD 1
-.tmWeight RESD 1
-.tmOverhang RESD 1
-.tmDigitizedAspectX RESD 1
-.tmDigitizedAspectY RESD 1
-.tmFirstChar RESB 1
-.tmLastChar RESB 1
-.tmDefaultChar RESB 1
-.tmBreakChar RESB 1
-.tmItalic RESB 1
-.tmUnderlined RESB 1
-.tmStruckOut RESB 1
-.tmPitchAndFamily RESB 1
-.tmCharSet RESB 1
-ENDSTRUC
-
-STRUC NEWTEXTMETRIC
-.tmHeight RESD 1
-.tmAscent RESD 1
-.tmDescent RESD 1
-.tmInternalLeading RESD 1
-.tmExternalLeading RESD 1
-.tmAveCharWidth RESD 1
-.tmMaxCharWidth RESD 1
-.tmWeight RESD 1
-.tmOverhang RESD 1
-.tmDigitizedAspectX RESD 1
-.tmDigitizedAspectY RESD 1
-.tmFirstChar RESB 1
-.tmLastChar RESB 1
-.tmDefaultChar RESB 1
-.tmBreakChar RESB 1
-.tmItalic RESB 1
-.tmUnderlined RESB 1
-.tmStruckOut RESB 1
-.tmPitchAndFamily RESB 1
-.tmCharSet RESB 1
-.ntmFlags RESD 1
-.ntmSizeEM RESD 1
-.ntmCellHeight RESD 1
-.ntmAveWidth RESD 1
-ENDSTRUC
-
-STRUC PELARRAY
-.paXCount RESD 1
-.paYCount RESD 1
-.paXExt RESD 1
-.paYExt RESD 1
-.paRGBs RESW 1
-ENDSTRUC
-
-STRUC LOGBRUSH
-.lbStyle RESD 1
-.lbColor RESD 1
-.lbHatch RESD 1
-ENDSTRUC
-
-STRUC LOGPEN
-.lopnStyle RESD 1
-.lopnWidth RESD 1
-.lopnColor RESD 1
-ENDSTRUC
-
-STRUC EXTLOGPEN
-.elpPenStyle RESD 1
-.elpWidth RESD 1
-.elpBrushStyle RESD 1
-.elpColor RESD 1
-.elpHatch RESD 1
-.elpNumEntries RESD 1
-.elpStyleEntry RESD 1
-ENDSTRUC
-
-STRUC PALETTEENTRY
-.peRed RESB 1
-.peGreen RESB 1
-.peBlue RESB 1
-.peFlags RESB 1
-ENDSTRUC
-
-STRUC LOGPALETTE
-.palVersion RESW 1
-.palNumEntries RESW 1
-.palPalEntry RESD 1
-ENDSTRUC
-
-STRUC LOGFONT
-.lfHeight RESD 1
-.lfWidth RESD 1
-.lfEscapement RESD 1
-.lfOrientation RESD 1
-.lfWeight RESD 1
-.lfItalic RESB 1
-.lfUnderline RESB 1
-.lfStrikeOut RESB 1
-.lfCharSet RESB 1
-.lfOutPrecision RESB 1
-.lfClipPrecision RESB 1
-.lfQuality RESB 1
-.lfPitchAndFamily RESB 1
-.lfFaceName RESB LF_FACESIZE
-ENDSTRUC
-
-STRUC NONCLIENTMETRICS
-.cbSize RESD 1
-.iBorderWidth RESD 1
-.iScrollWidth RESD 1
-.iScrollHeight RESD 1
-.iCaptionWidth RESD 1
-.iCaptionHeight RESD 1
-.lfCaptionFont RESD 1
-.iSMCaptionWidth RESD 1
-.iSMCaptionHeight RESD 1
-.lfSMCaptionFont RESD 1
-.iMenuWidth RESD 1
-.iMenuHeight RESD 1
-.lfMenuFont RESD 1
-.lfStatusFont RESD 1
-.lfMessageFont RESD 1
-ENDSTRUC
-
-STRUC ENUMLOGFONT
-.elfLogFont RESD 1
-.elfFullName RESB 1
-.elfStyle RESB 1
-ENDSTRUC
-
-STRUC PANOSE
-.ulculture RESD 1
-.bFamilyType RESB 1
-.bSerifStyle RESB 1
-.bWeight RESB 1
-.bProportion RESB 1
-.bContrast RESB 1
-.bStrokeVariation RESB 1
-.bArmStyle RESB 1
-.bLetterform RESB 1
-.bMidline RESB 1
-.bXHeight RESB 1
-ENDSTRUC
-
-STRUC EXTLOGFONT
-.elfLogFont RESD 1
-.elfFullName RESB 1
-.elfStyle RESB 1
-.elfVersion RESD 1
-.elfStyleSize RESD 1
-.elfMatch RESD 1
-.elfReserved RESD 1
-.elfVendorId RESB 1
-.elfCulture RESD 1
-.elfPanose RESD 1
-ENDSTRUC
-
-STRUC DEVMODE
-.dmDeviceName RESB 1
-.dmSpecVersion RESW 1
-.dmDriverVersion RESW 1
-.dmSize RESW 1
-.dmDriverExtra RESW 1
-.dmFields RESD 1
-.dmOrientation RESW 1
-.dmPaperSize RESW 1
-.dmPaperiLength RESW 1
-.dmPaperWidth RESW 1
-.dmScale RESW 1
-.dmCopies RESW 1
-.dmDefaultSource RESW 1
-.dmPrintQuality RESW 1
-.dmColor RESW 1
-.dmDuplex RESW 1
-.dmYResolution RESW 1
-.dmTTOption RESW 1
-.dmCollate RESW 1
-.dmFormName RESB CCHFORMNAME
-.dmUnusedPadding RESW 1
-.dmBitsPerPel RESW 1
-.dmPelsWidth RESD 1
-.dmPelsHeight RESD 1
-.dmDisplayFlags RESD 1
-.dmDisplayFrequency RESD 1
-ENDSTRUC
-
-STRUC RGNDATAHEADER
-.dwSize RESD 1
-.iType RESD 1
-.nCount RESD 1
-.nRgnSize RESD 1
-.rcBound RESB RECT_size
-ENDSTRUC
-
-STRUC RGNDATA
-.rdh RESD 1
-.Buffer RESB 1
-ENDSTRUC
-
-STRUC ABC
-.abcA RESD 1
-.abcB RESD 1
-.abcC RESD 1
-ENDSTRUC
-
-STRUC ABCFLOAT
-.abcfA RESQ 1
-.abcfB RESQ 1
-.abcfC RESQ 1
-ENDSTRUC
-
-STRUC OUTLINETEXTMETRIC
-.otmSize RESD 1
-.otmTextMetrics RESD 1
-.otmFiller RESB 1
-.otmPanoseNumber RESD 1
-.otmfsSelection RESD 1
-.otmfsType RESD 1
-.otmsCharSlopeRise RESD 1
-.otmsCharSlopeRun RESD 1
-.otmItalicAngle RESD 1
-.otmEMSquare RESD 1
-.otmAscent RESD 1
-.otmDescent RESD 1
-.otmLineGap RESD 1
-.otmsCapEmHeight RESD 1
-.otmsXHeight RESD 1
-.otmrcFontBox RESB RECT_size
-.otmMacAscent RESD 1
-.otmMacDescent RESD 1
-.otmMacLineGap RESD 1
-.otmusMinimumPPEM RESD 1
-.otmptSubscriptSize RESD 1
-.otmptSubscriptOffset RESD 1
-.otmptSuperscriptSize RESD 1
-.otmptSuperscriptOffset RESD 1
-.otmsStrikeoutSize RESD 1
-.otmsStrikeoutPosition RESD 1
-.otmsUnderscorePosition RESD 1
-.otmsUnderscoreSize RESD 1
-.otmpFamilyName RESD 1
-.otmpFaceName RESD 1
-.otmpStyleName RESD 1
-.otmpFullName RESD 1
-ENDSTRUC
-
-STRUC POLYTEXT
-.x RESD 1
-.y RESD 1
-.n RESD 1
-.lpStr RESD 1
-.uiFlags RESD 1
-.rcl RESB RECT_size
-.pdx RESD 1
-ENDSTRUC
-
-STRUC FIXED
-.fract RESW 1
-.Value RESW 1
-ENDSTRUC
-
-STRUC MAT2
-.eM11 RESD 1
-.eM12 RESD 1
-.eM21 RESD 1
-.eM22 RESD 1
-ENDSTRUC
-
-STRUC GLYPHMETRICS
-.gmBlackBoxX RESD 1
-.gmBlackBoxY RESD 1
-.gmptGlyphOrigin RESD 1
-.gmCellIncX RESW 1
-.gmCellIncY RESW 1
-ENDSTRUC
-
-STRUC POINTFX
-.x RESD 1
-.y RESD 1
-ENDSTRUC
-
-STRUC TTPOLYCURVE
-.wType RESW 1
-.cpfx RESW 1
-.apfx RESD 1
-ENDSTRUC
-
-STRUC TTPOLYGONHEADER
-.cb RESD 1
-.dwType RESD 1
-.pfxStart RESD 1
-ENDSTRUC
-
-STRUC RASTERIZER_STATUS
-.nSize RESW 1
-.wFlags RESW 1
-.nLanguageID RESW 1
-ENDSTRUC
-
-STRUC COLORADJUSTMENT
-.caSize RESW 1
-.caFlags RESW 1
-.caIlluminantIndex RESW 1
-.caRedGamma RESW 1
-.caGreenGamma RESW 1
-.caBlueGamma RESW 1
-.caReferenceBlack RESW 1
-.caReferenceWhite RESW 1
-.caContrast RESW 1
-.caBrightness RESW 1
-.caColorfulness RESW 1
-.caRedGreenTint RESW 1
-ENDSTRUC
-
-STRUC DOCINFO
-.cbSize RESD 1
-.lpszDocName RESD 1
-.lpszOutput RESD 1
-ENDSTRUC
-
-STRUC KERNINGPAIR
-.wFirst RESW 1
-.wSecond RESW 1
-.iKernAmount RESD 1
-ENDSTRUC
-
-STRUC emr
-.iType RESD 1
-.nSize RESD 1
-ENDSTRUC
-
-STRUC emrtext
-.ptlReference RESB POINT_size
-.nchars RESD 1
-.offString RESD 1
-.fOptions RESD 1
-.ircl RESD 1
-.offDx RESD 1
-ENDSTRUC
-
-STRUC EMR
-.iType RESD 1
-.nSize RESD 1
-ENDSTRUC
-
-STRUC EMRABORTPATH
-.emr RESB EMR_size
-ENDSTRUC
-
-STRUC EMRBEGINPATH
-.emr RESB EMR_size
-ENDSTRUC
-
-STRUC EMRENDPATH
-.emr RESB EMR_size
-ENDSTRUC
-
-STRUC EMRCLOSEFIGURE
-.emr RESB EMR_size
-ENDSTRUC
-
-STRUC EMRFLATTENPATH
-.emr RESB EMR_size
-ENDSTRUC
-
-STRUC EMRWIDENPATH
-.emr RESB EMR_size
-ENDSTRUC
-
-STRUC EMRSETMETARGN
-.emr RESB EMR_size
-ENDSTRUC
-
-STRUC EMREMRSAVEDC
-.emr RESB EMR_size
-ENDSTRUC
-
-STRUC EMRREALIZEPALETTE
-.emr RESB EMR_size
-ENDSTRUC
-
-STRUC EMRSELECTCLIPPATH
-.emr RESB EMR_size
-.iMode RESD 1
-ENDSTRUC
-
-STRUC EMRSETBKMODE
-.emr RESB EMR_size
-.iMode RESD 1
-ENDSTRUC
-
-STRUC EMRSETMAPMODE
-.emr RESB EMR_size
-.iMode RESD 1
-ENDSTRUC
-
-STRUC EMRSETPOLYFILLMODE
-.emr RESB EMR_size
-.iMode RESD 1
-ENDSTRUC
-
-STRUC EMRSETROP2
-.emr RESB EMR_size
-.iMode RESD 1
-ENDSTRUC
-
-STRUC EMRSETSTRETCHBLTMODE
-.emr RESB EMR_size
-.iMode RESD 1
-ENDSTRUC
-
-STRUC EMRSETTEXTALIGN
-.emr RESB EMR_size
-.iMode RESD 1
-ENDSTRUC
-
-STRUC EMRSETMITERLIMIT
-.emr RESB EMR_size
-.eMiterLimit RESQ 1
-ENDSTRUC
-
-STRUC EMRRESTOREDC
-.emr RESB EMR_size
-.iRelative RESD 1
-ENDSTRUC
-
-STRUC EMRSETARCDIRECTION
-.emr RESB EMR_size
-.iArcDirection RESD 1
-ENDSTRUC
-
-STRUC EMRSETMAPPERFLAGS
-.emr RESB EMR_size
-.dwFlags RESD 1
-ENDSTRUC
-
-STRUC EMRSETTEXTCOLOR
-.emr RESB EMR_size
-.crColor RESD 1
-ENDSTRUC
-
-STRUC EMRSETBKCOLOR
-.emr RESB EMR_size
-.crColor RESD 1
-ENDSTRUC
-
-STRUC EMRSELECTOBJECT
-.emr RESB EMR_size
-.ihObject RESD 1
-ENDSTRUC
-
-STRUC EMRDELETEOBJECT
-.emr RESB EMR_size
-.ihObject RESD 1
-ENDSTRUC
-
-STRUC EMRSELECTPALETTE
-.emr RESB EMR_size
-.ihPal RESD 1
-ENDSTRUC
-
-STRUC EMRRESIZEPALETTE
-.emr RESB EMR_size
-.ihPal RESD 1
-.cEntries RESD 1
-ENDSTRUC
-
-STRUC EMRSETPALETTEENTRIES
-.emr RESB EMR_size
-.ihPal RESD 1
-.iStart RESD 1
-.cEntries RESD 1
-.aPalEntries RESD 1
-ENDSTRUC
-
-STRUC EMRSETCOLORADJUSTMENT
-.emr RESB EMR_size
-.ColorAdjustment RESD 1
-ENDSTRUC
-
-STRUC EMRGDICOMMENT
-.emr RESB EMR_size
-.cbData RESD 1
-.xData1 RESW 1
-ENDSTRUC
-
-STRUC EMREOF
-.emr RESB EMR_size
-.nPalEntries RESD 1
-.offPalEntries RESD 1
-.nSizeLast RESD 1
-ENDSTRUC
-
-STRUC EMRLINETO
-.emr RESB EMR_size
-.ptl RESB POINT_size
-ENDSTRUC
-
-STRUC EMRMOVETOEX
-.emr RESB EMR_size
-.ptl RESB POINT_size
-ENDSTRUC
-
-STRUC EMROFFSETCLIPRGN
-.emr RESB EMR_size
-.ptlOffset RESB POINT_size
-ENDSTRUC
-
-STRUC EMRFILLPATH
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-ENDSTRUC
-
-STRUC EMRSTROKEANDFILLPATH
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-ENDSTRUC
-
-STRUC EMRSTROKEPATH
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-ENDSTRUC
-
-STRUC EMREXCLUDECLIPRECT
-.emr RESB EMR_size
-.rclClip RESB RECT_size
-ENDSTRUC
-
-STRUC EMRINTERSECTCLIPRECT
-.emr RESB EMR_size
-.rclClip RESB RECT_size
-ENDSTRUC
-
-STRUC EMRSETVIEWPORTORGEX
-.emr RESB EMR_size
-.ptlOrigin RESB POINT_size
-ENDSTRUC
-
-STRUC EMRSETWINDOWORGEX
-.emr RESB EMR_size
-.ptlOrigin RESB POINT_size
-ENDSTRUC
-
-STRUC EMRSETBRUSHORGEX
-.emr RESB EMR_size
-.ptlOrigin RESB POINT_size
-ENDSTRUC
-
-STRUC EMRSETVIEWPORTEXTEX
-.emr RESB EMR_size
-.szlExtent RESD 1
-ENDSTRUC
-
-STRUC EMRSETWINDOWEXTEX
-.emr RESB EMR_size
-.szlExtent RESD 1
-ENDSTRUC
-
-STRUC EMRSCALEVIEWPORTEXTEX
-.emr RESB EMR_size
-.xNum RESD 1
-.xDenom RESD 1
-.yNum RESD 1
-.yDemon RESD 1
-ENDSTRUC
-
-STRUC EMRSCALEWINDOWEXTEX
-.emr RESB EMR_size
-.xNum RESD 1
-.xDenom RESD 1
-.yNum RESD 1
-.yDemon RESD 1
-ENDSTRUC
-
-STRUC EMRSETWORLDTRANSFORM
-.emr RESB EMR_size
-.xform RESD 1
-ENDSTRUC
-
-STRUC EMRMODIFYWORLDTRANSFORM
-.emr RESB EMR_size
-.xform RESD 1
-.iMode RESD 1
-ENDSTRUC
-
-STRUC EMRSETPIXELV
-.emr RESB EMR_size
-.ptlPixel RESB POINT_size
-.crColor RESD 1
-ENDSTRUC
-
-STRUC EMREXTFLOODFILL
-.emr RESB EMR_size
-.ptlStart RESB POINT_size
-.crColor RESD 1
-.iMode RESD 1
-ENDSTRUC
-
-STRUC EMRELLIPSE
-.emr RESB EMR_size
-.rclBox RESB RECT_size
-ENDSTRUC
-
-STRUC EMRRECTANGLE
-.emr RESB EMR_size
-.rclBox RESB RECT_size
-ENDSTRUC
-
-STRUC EMRROUNDRECT
-.emr RESB EMR_size
-.rclBox RESB RECT_size
-.szlCorner RESD 1
-ENDSTRUC
-
-STRUC EMRARC
-.emr RESB EMR_size
-.rclBox RESB RECT_size
-.ptlStart RESB POINT_size
-.ptlEnd RESB POINT_size
-ENDSTRUC
-
-STRUC EMRARCTO
-.emr RESB EMR_size
-.rclBox RESB RECT_size
-.ptlStart RESB POINT_size
-.ptlEnd RESB POINT_size
-ENDSTRUC
-
-STRUC EMRCHORD
-.emr RESB EMR_size
-.rclBox RESB RECT_size
-.ptlStart RESB POINT_size
-.ptlEnd RESB POINT_size
-ENDSTRUC
-
-STRUC EMRPIE
-.emr RESB EMR_size
-.rclBox RESB RECT_size
-.ptlStart RESB POINT_size
-.ptlEnd RESB POINT_size
-ENDSTRUC
-
-STRUC EMRANGLEARC
-.emr RESB EMR_size
-.ptlCenter RESB POINT_size
-.nRadius RESD 1
-.eStartAngle RESQ 1
-.eSweepAngle RESQ 1
-ENDSTRUC
-
-STRUC EMRPOLYLINE
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cptl RESD 1
-.aptl1 RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYBEZIER
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cptl RESD 1
-.aptl1 RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYGON
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cptl RESD 1
-.aptl1 RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYBEZIERTO
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cptl RESD 1
-.aptl1 RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYLINE16
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cpts RESD 1
-.apts1 RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYBEZIER16
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cpts RESD 1
-.apts1 RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYGON16
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cpts RESD 1
-.apts1 RESD 1
-ENDSTRUC
-
-STRUC EMRPLOYBEZIERTO16
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cpts RESD 1
-.apts1 RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYLINETO16
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cpts RESD 1
-.apts1 RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYDRAW
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cptl RESD 1
-.aptl1 RESD 1
-.abTypes1 RESW 1
-ENDSTRUC
-
-STRUC EMRPOLYDRAW16
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cpts RESD 1
-.apts RESD 1
-.abTypes RESW 1
-ENDSTRUC
-
-STRUC EMRPOLYPOLYLINE
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.nPolys RESD 1
-.cptl RESD 1
-.aPolyCounts RESD 1
-.aptl RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYPOLYGON
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.nPolys RESD 1
-.cptl RESD 1
-.aPolyCounts RESD 1
-.aptl1 RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYPOLYLINE16
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.nPolys RESD 1
-.cpts RESD 1
-.aPolyCounts RESD 1
-.apts1 RESD 1
-ENDSTRUC
-
-STRUC EMRPOLYPOLYGON16
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.nPolys RESD 1
-.cpts RESD 1
-.aPolyCounts RESD 1
-.apts1 RESD 1
-ENDSTRUC
-
-STRUC EMRINVERTRGN
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cbRgnData RESD 1
-.RgnData1 RESW 1
-ENDSTRUC
-
-STRUC EMRPAINTRGN
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cbRgnData RESD 1
-.RgnData1 RESW 1
-ENDSTRUC
-
-STRUC EMRFILLRGN
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cbRgnData RESD 1
-.ihBrush RESD 1
-.RgnData RESW 1
-ENDSTRUC
-
-STRUC EMRFRAMERGN
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.cbRgnData RESD 1
-.ihBrush RESD 1
-.szlStroke RESD 1
-.RgnData1 RESW 1
-ENDSTRUC
-
-STRUC EMREXTSELECTCLIPRGN
-.emr RESB EMR_size
-.cbRgnData RESD 1
-.iMode RESD 1
-.RgnData RESW 1
-ENDSTRUC
-
-STRUC EMREXTTEXTOUT
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.iGraphicsMode RESD 1
-.exScale RESQ 1
-.eyScale RESQ 1
-.emrtext RESD 1
-ENDSTRUC
-
-STRUC EMRBITBLT
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.xDest RESD 1
-.yDest RESD 1
-.cxDest RESD 1
-.cyDest RESD 1
-.dwRop RESD 1
-.xSrc RESD 1
-.ySrc RESD 1
-.xformSrc RESD 1
-.crBkColorSrc RESD 1
-.iUsageSrc RESD 1
-.offBmiSrc RESD 1
-.cbBmiSrc RESD 1
-.offBitsSrc RESD 1
-.cbBitsSrc RESD 1
-ENDSTRUC
-
-STRUC EMRSTRETCHBLT
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.xDest RESD 1
-.yDest RESD 1
-.cxDest RESD 1
-.cyDest RESD 1
-.dwRop RESD 1
-.xSrc RESD 1
-.ySrc RESD 1
-.xformSrc RESD 1
-.crBkColorSrc RESD 1
-.iUsageSrc RESD 1
-.offBmiSrc RESD 1
-.cbBmiSrc RESD 1
-.offBitsSrc RESD 1
-.cbBitsSrc RESD 1
-.cxSrc RESD 1
-.cySrc RESD 1
-ENDSTRUC
-
-STRUC EMRMASKBLT
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.xDest RESD 1
-.yDest RESD 1
-.cxDest RESD 1
-.cyDest RESD 1
-.dwRop RESD 1
-.xSrc2 RESD 1
-.cyDest2 RESD 1
-.dwRop2 RESD 1
-.xSrc RESD 1
-.ySrc RESD 1
-.xformSrc RESD 1
-.crBkColorSrc RESD 1
-.iUsageSrc RESD 1
-.offBmiSrc RESD 1
-.cbBmiSrc RESD 1
-.offBitsSrc RESD 1
-.cbBitsSrc RESD 1
-.xMask RESD 1
-.yMask RESD 1
-.iUsageMask RESD 1
-.offBmiMask RESD 1
-.cbBmiMask RESD 1
-.offBitsMask RESD 1
-.cbBitsMask RESD 1
-ENDSTRUC
-
-STRUC EMRPLGBLT
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.aptlDest3 RESD 1
-.xSrc RESD 1
-.ySrc RESD 1
-.cxSrc RESD 1
-.cySrc RESD 1
-.xformSrc RESD 1
-.crBkColorSrc RESD 1
-.iUsageSrc RESD 1
-.offBmiSrc RESD 1
-.cbBmiSrc RESD 1
-.offBitsSrc RESD 1
-.cbBitsSrc RESD 1
-.xMask RESD 1
-.yMask RESD 1
-.iUsageMask RESD 1
-.offBmiMask RESD 1
-.cbBmiMask RESD 1
-.offBitsMask RESD 1
-.cbBitsMask RESD 1
-ENDSTRUC
-
-STRUC EMRSETDIBITSTODEVICE
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.xDest RESD 1
-.yDest RESD 1
-.xSrc RESD 1
-.ySrc RESD 1
-.cxSrc RESD 1
-.cySrc RESD 1
-.offBmiSrc RESD 1
-.cbBmiSrc RESD 1
-.offBitsSrc RESD 1
-.cbBitsSrc RESD 1
-.iUsageSrc RESD 1
-.iStartScan RESD 1
-.cScans RESD 1
-ENDSTRUC
-
-STRUC EMRSTRETCHDIBITS
-.emr RESB EMR_size
-.rclBounds RESB RECT_size
-.xDest RESD 1
-.yDest RESD 1
-.xSrc RESD 1
-.ySrc RESD 1
-.cxSrc RESD 1
-.cySrc RESD 1
-.offBmiSrc RESD 1
-.cbBmiSrc RESD 1
-.offBitsSrc RESD 1
-.cbBitsSrc RESD 1
-.iUsageSrc RESD 1
-.dwRop RESD 1
-.cxDest RESD 1
-.cyDest RESD 1
-ENDSTRUC
-
-STRUC EMREXTCREATEFONTINDIRECT
-.emr RESB EMR_size
-.ihFont RESD 1
-.elfw RESD 1
-ENDSTRUC
-
-STRUC EMRCREATEPALETTE
-.emr RESB EMR_size
-.ihPal RESD 1
-.lgpl RESD 1
-ENDSTRUC
-
-STRUC EMRCREATEPEN
-.emr RESB EMR_size
-.ihPen RESD 1
-.lopn RESD 1
-ENDSTRUC
-
-STRUC EMREXTCREATEPEN
-.emr RESB EMR_size
-.ihPen RESD 1
-.offBmi RESD 1
-.cbBmi RESD 1
-.offBits RESD 1
-.cbBits RESD 1
-.elp RESD 1
-ENDSTRUC
-
-STRUC EMRCREATEBRUSHINDIRECT
-.emr RESB EMR_size
-.ihBrush RESD 1
-.lb RESD 1
-ENDSTRUC
-
-STRUC EMRCREATEMONOBRUSH
-.emr RESB EMR_size
-.ihBrush RESD 1
-.iUsage RESD 1
-.offBmi RESD 1
-.cbBmi RESD 1
-.offBits RESD 1
-.cbBits RESD 1
-ENDSTRUC
-
-STRUC EMRCREATEDIBPATTERNBRUSHPT
-.emr RESB EMR_size
-.ihBursh RESD 1
-.iUsage RESD 1
-.offBmi RESD 1
-.cbBmi RESD 1
-.offBits RESD 1
-.cbBits RESD 1
-ENDSTRUC
-
-STRUC BITMAPV4HEADER
-.bV4Size RESD 1
-.bV4Width RESD 1
-.bV4Height RESD 1
-.bV4Planes RESW 1
-.bV4BitCount RESW 1
-.bV4V4Compression RESD 1
-.bV4SizeImage RESD 1
-.bV4XPelsPerMeter RESD 1
-.bV4YPelsPerMeter RESD 1
-.bV4ClrUsed RESD 1
-.bV4ClrImportant RESD 1
-.bV4RedMask RESD 1
-.bV4GreenMask RESD 1
-.bV4BlueMask RESD 1
-.bV4AlphaMask RESD 1
-.bV4CSType RESD 1
-.bV4Endpoints RESD 1
-.bV4GammaRed RESD 1
-.bV4GammaGreen RESD 1
-.bV4GammaBlue RESD 1
-ENDSTRUC
-
-STRUC FONTSIGNATURE
-.fsUsb4 RESD 1
-.fsCsb2 RESD 1
-ENDSTRUC
-
-STRUC CHARSETINFO
-.ciCharset RESD 1
-.ciACP RESD 1
-.xlfs RESD 1
-ENDSTRUC
-
-STRUC LOCALESIGNATURE
-.lsUsb4 RESD 1
-.lsCsbDefault RESD 1
-.lsCsbSupported RESD 1
-ENDSTRUC
-
-STRUC NEWTEXTMETRICEX
-.ntmTm RESD 1
-.ntmFontSig RESD 1
-ENDSTRUC
-
-STRUC ENUMLOGFONTEX
-.elfLogFont RESD 1
-.elfFullName RESB 1
-.elfStyle RESB 1
-.elfScript RESB 1
-ENDSTRUC
-
-STRUC GCP_RESULTS
-.lStructSize RESD 1
-.lpOutString RESD 1
-.lpOrder RESD 1
-.lpDX RESD 1
-.lpCaretPos RESD 1
-.lpClass RESD 1
-.lpGlyphs RESD 1
-.nGlyphs RESD 1
-.nMaxFit RESD 1
-ENDSTRUC
-
-STRUC CIEXYZ
-.ciexyzX RESD 1
-.ciexyzY RESD 1
-.ciexyzZ RESD 1
-ENDSTRUC
-
-STRUC CIEXYZTRIPLE
-.ciexyzRed RESD 1
-.ciexyzGreen RESD 1
-.ciexyBlue RESD 1
-ENDSTRUC
-
-STRUC LOGCOLORSPACE
-.lcsSignature RESD 1
-.lcsVersion RESD 1
-.lcsSize RESD 1
-.lcsCSType RESD 1
-.lcsIntent RESD 1
-.lcsEndPoints RESD 1
-.lcsGammaRed RESD 1
-.lcsGammaGreen RESD 1
-.lcsGammaBlue RESD 1
-.lcsFileName RESB MAX_PATH
-ENDSTRUC
-
-STRUC EMRSELECTCOLORSPACE
-.emr RESB EMR_size
-.ihCS RESD 1
-ENDSTRUC
-
-STRUC EMRCREATECOLORSPACE
-.emr RESB EMR_size
-.ihCS RESD 1
-.lcs RESD 1
-ENDSTRUC
-
-STRUC CBTACTIVATESTRUCT
-.fMouse RESD 1
-.hWndActive RESD 1
-ENDSTRUC
-
-STRUC EVENTMSG
-.message RESD 1
-.paramL RESD 1
-.paramH RESD 1
-.time RESD 1
-.hwnd RESD 1
-ENDSTRUC
-
-STRUC CWPSTRUCT
-.lParam RESD 1
-.wParam RESD 1
-.message RESD 1
-.hwnd RESD 1
-ENDSTRUC
-
-STRUC DEBUGHOOKINFO
-.hModuleHook RESD 1
-.Reserved RESD 1
-.lParam RESD 1
-.wParam RESD 1
-.code RESD 1
-ENDSTRUC
-
-STRUC MOUSEHOOKSTRUCT
-.pt RESB POINT_size
-.hwnd RESD 1
-.wHitTestCode RESD 1
-.dwExtraInfo RESD 1
-ENDSTRUC
-
-STRUC MINMAXINFO
-.ptReserved RESB POINT_size
-.ptMaxSize RESB POINT_size
-.ptMaxPosition RESB POINT_size
-.ptMinTrackSize RESB POINT_size
-.ptMaxTrackSize RESB POINT_size
-ENDSTRUC
-
-STRUC COPYDATASTRUCT
-.dwData RESD 1
-.cbData RESD 1
-.lpData RESD 1
-ENDSTRUC
-
-STRUC WINDOWPOS
-.hwnd RESD 1
-.hWndInsertAfter RESD 1
-.x RESD 1
-.y RESD 1
-.lx RESD 1
-.ly RESD 1
-.flags RESD 1
-ENDSTRUC
-
-STRUC ACCEL
-.fVirt RESB 1
-.key RESW 1
-.cmd RESW 1
-ENDSTRUC
-
-STRUC PAINTSTRUCT
-.hdc RESD 1
-.fErase RESD 1
-.rcPaint RESB RECT_size
-.fRestore RESD 1
-.fIncUpdate RESD 1
-.rgbReserved RESB 32 
-ENDSTRUC
-
-STRUC CREATESTRUCT
-.lpCreateParams RESD 1
-.hInstance RESD 1
-.hMenu RESD 1
-.hWndParent RESD 1
-.ly RESD 1
-.lx RESD 1
-.y RESD 1
-.x RESD 1
-.style RESD 1
-.lpszName RESD 1
-.lpszClass RESD 1
-.ExStyle RESD 1
-ENDSTRUC
-
-STRUC CBT_CREATEWND
-.lpcs RESD 1
-.hWndInsertAfter RESD 1
-ENDSTRUC
-
-STRUC WINDOWPLACEMENT
-.iLength RESD 1
-.flags RESD 1
-.showCmd RESD 1
-.ptMinPosition RESB POINT_size
-.ptMaxPosition RESB POINT_size
-.rcNormalPosition RESB RECT_size
-ENDSTRUC
-
-STRUC MEASUREITEMSTRUCT
-.CtlType RESD 1
-.CtlID RESD 1
-.itemID RESD 1
-.itemWidth RESD 1
-.itemHeight RESD 1
-.itemData RESD 1
-ENDSTRUC
-
-STRUC DRAWITEMSTRUCT
-.CtlType RESD 1
-.CtlID RESD 1
-.itemID RESD 1
-.itemAction RESD 1
-.itemState RESD 1
-.hwndItem RESD 1
-.hDC RESD 1
-.rcItem RESB RECT_size
-.itemData RESD 1
-ENDSTRUC
-
-STRUC DELETEITEMSTRUCT
-.CtlType RESD 1
-.CtlID RESD 1
-.itemID RESD 1
-.hwndItem RESD 1
-.itemData RESD 1
-ENDSTRUC
-
-STRUC COMPAREITEMSTRUCT
-.CtlType RESD 1
-.CtlID RESD 1
-.hwndItem RESD 1
-.itemID1 RESD 1
-.itemData1 RESD 1
-.itemID2 RESD 1
-.itemData2 RESD 1
-ENDSTRUC
-
-STRUC DLGTEMPLATE
-.style RESD 1
-.dwExtendedStyle RESD 1
-.cdit RESW 1
-.x RESW 1
-.y RESW 1
-.lx RESW 1
-.ly RESW 1
-ENDSTRUC
-
-STRUC DLGITEMTEMPLATE
-.style RESD 1
-.dwExtendedStyle RESD 1
-.x RESW 1
-.y RESW 1
-.lx RESW 1
-.ly RESW 1
-.id RESW 1
-ENDSTRUC
-
-STRUC MENUITEMTEMPLATEHEADER
-.versionNumber RESW 1
-.loffset RESW 1
-ENDSTRUC
-
-STRUC MENUITEMTEMPLATE
-
-.mtOption RESW 1
-.mtID RESW 1
-.mtString RESB 1
-ENDSTRUC
-
-STRUC ICONINFO
-.fIcon RESD 1
-.xHotspot RESD 1
-.yHotspot RESD 1
-.hbmMask RESD 1
-.hbmColor RESD 1
-ENDSTRUC
-
-STRUC MDICREATESTRUCT
-.szClass RESD 1
-.szTitle RESD 1
-.hOwner RESD 1
-.x RESD 1
-.y RESD 1
-.lx RESD 1
-.ly RESD 1
-.style RESD 1
-.lParam RESD 1
-ENDSTRUC
-
-STRUC CLIENTCREATESTRUCT
-.hWindowMenu RESD 1
-.idFirstChild RESD 1
-ENDSTRUC
-
-STRUC MULTIKEYHELP
-.mkSize RESD 1
-.mkKeylist RESB 1
-.szKeyphrase RESB 253
-ENDSTRUC
-
-STRUC HELPWININFO
-.wStructSize RESD 1
-.x RESD 1
-.y RESD 1
-.lx RESD 1
-.ly RESD 1
-.wMax RESD 1
-.rgchMember RESB 2
-ENDSTRUC
-
-STRUC DDEACK
-.bAppReturnCode RESW 1
-.Reserved RESW 1
-.fbusy RESW 1
-.fack RESW 1
-ENDSTRUC
-
-STRUC DDEADVISE
-.Reserved RESW 1
-.fDeferUpd RESW 1
-.fAckReq RESW 1
-.cfFormat RESW 1
-ENDSTRUC
-
-STRUC DDEDATA
-.unused RESW 1
-.fresponse RESW 1
-.fRelease RESW 1
-.Reserved RESW 1
-.fAckReq RESW 1
-.cfFormat RESW 1
-.Value1 RESB 1
-ENDSTRUC
-
-STRUC DDEPOKE
-.unused RESW 1
-.fRelease RESW 1
-.fReserved RESW 1
-.cfFormat RESW 1
-.Value1 RESB 1
-ENDSTRUC
-
-STRUC DDELN
-.unused RESW 1
-.fRelease RESW 1
-.fDeferUpd RESW 1
-.fAckReq RESW 1
-.cfFormat RESW 1
-ENDSTRUC
-
-STRUC DDEUP
-.unused RESW 1
-.fAck RESW 1
-.fRelease RESW 1
-.fReserved RESW 1
-.fAckReq RESW 1
-.cfFormat RESW 1
-.xRGB1 RESB 1
-ENDSTRUC
-
-STRUC HSZPAIR
-.hszSvc RESD 1
-.hszTopic RESD 1
-ENDSTRUC
-
-STRUC SECURITY_QUALITY_OF_SERVICE
-.iLength RESD 1
-.Impersonationlevel RESW 1
-.ContextTrackingMode RESW 1
-.EffectiveOnly RESD 1
-ENDSTRUC
-
-STRUC CONVCONTEXT
-.cb RESD 1
-.wFlags RESD 1
-.wCountryID RESD 1
-.iCodePage RESD 1
-.dwLangID RESD 1
-.dwSecurity RESD 1
-.qos RESD 1
-ENDSTRUC
-
-STRUC CONVINFO
-.cb RESD 1
-.hUser RESD 1
-.hConvPartner RESD 1
-.hszSvcPartner RESD 1
-.hszServiceReq RESD 1
-.hszTopic RESD 1
-.hszItem RESD 1
-.wFmt RESD 1
-.wType RESD 1
-.wStatus RESD 1
-.wConvst RESD 1
-.wLastError RESD 1
-.hConvList RESD 1
-.ConvCtxt RESD 1
-.hwnd RESD 1
-.hwndPartner RESD 1
-ENDSTRUC
-
-STRUC DDEML_MSG_HOOK_DATA
-.uiLo RESD 1
-.uiHi RESD 1
-.cbData RESD 1
-.xData RESD 1
-ENDSTRUC
-
-STRUC MONMSGSTRUCT
-.cb RESD 1
-.hwndTo RESD 1
-.dwTime RESD 1
-.htask RESD 1
-.wMsg RESD 1
-.wParam RESD 1
-.lParam RESD 1
-.dmhd RESD 1
-ENDSTRUC
-
-STRUC MONCBSTRUCT
-.cb RESD 1
-.dwTime RESD 1
-.htask RESD 1
-.dwRet RESD 1
-.wType RESD 1
-.wFmt RESD 1
-.hConv RESD 1
-.hsz1 RESD 1
-.hsz2 RESD 1
-.hData RESD 1
-.dwData1 RESD 1
-.dwData2 RESD 1
-.cc RESD 1
-.cbData RESD 1
-.xData8 RESD 1
-ENDSTRUC
-
-STRUC MONHSZSTRUCT
-.cb RESD 1
-.fsAction RESD 1
-.dwTime RESD 1
-.hsz RESD 1
-.htask RESD 1
-.xstr RESB 1
-ENDSTRUC
-
-STRUC MONERRSTRUCT
-.cb RESD 1
-.wLastError RESD 1
-.dwTime RESD 1
-.htask RESD 1
-ENDSTRUC
-
-STRUC MONLINKSTRUCT
-.cb RESD 1
-.dwTime RESD 1
-.htask RESD 1
-.fEstablished RESD 1
-.fNoData RESD 1
-.hszSvc RESD 1
-.hszTopic RESD 1
-.hszItem RESD 1
-.wFmt RESD 1
-.fServer RESD 1
-.hConvServer RESD 1
-.hConvClient RESD 1
-ENDSTRUC
-
-STRUC MONCONVSTRUCT
-.cb RESD 1
-.fConnect RESD 1
-.dwTime RESD 1
-.htask RESD 1
-.hszSvc RESD 1
-.hszTopic RESD 1
-.hConvClient RESD 1
-.hConvServer RESD 1
-ENDSTRUC
-
-STRUC smpte
-.hour RESB 1
-.minute RESB 1
-.sec RESB 1
-.frame RESB 1
-.fps RESB 1
-.dummy RESB 1
-.pad RESB 1
-ENDSTRUC
-
-STRUC midi
-.songptrpos RESD 1
-ENDSTRUC
-
-STRUC MMTIME
-.wType RESD 1
-.u RESD 1
-ENDSTRUC
-
-STRUC MIDIEVENT
-.dwDeltaTime RESD 1
-.dwStreamID RESD 1
-.dwEvent RESD 1
-.dwParms RESD 1
-ENDSTRUC
-
-STRUC MIDISTRMBUFFVER
-.dwVersion RESD 1
-.dwMid RESD 1
-.dwOEMVersion RESD 1
-ENDSTRUC
-
-STRUC MIDIPROPTIMEDIV
-.cbStruct RESD 1
-.dwTimeDiv RESD 1
-ENDSTRUC
-
-STRUC MIDIPROPTEMPO
-.cbStruct RESD 1
-.dwTempo RESD 1
-ENDSTRUC
-
-STRUC MIXERCAPS
-.wMid RESW 1
-.wPid RESW 1
-.vDriverVersion RESD 1
-.szPname RESB MAXPNAMELEN
-.fdwSupport RESD 1
-.cDestinations RESD 1
-ENDSTRUC
-
-STRUC Target
-.dwType RESD 1
-.dwDeviceID RESD 1
-.wMid RESW 1
-.wPid RESW 1
-.vDriverVersion RESD 1
-.szPname RESB MAXPNAMELEN
-ENDSTRUC
-
-STRUC MIXERLINECONTROLS
-.cbStruct RESD 1
-.dwLineID RESD 1
-.dwControl RESD 1
-.cControls RESD 1
-.cbmxctrl RESD 1
-.pamxctrl RESD 1
-ENDSTRUC
-
-STRUC MIXERCONTROLDETAILS
-.cbStruct RESD 1
-.dwControlID RESD 1
-.cChannels RESD 1
-.item RESD 1
-.cbDetails RESD 1
-.paDetails RESD 1
-ENDSTRUC
-
-STRUC MIXERCONTROLDETAILS_BOOLEAN
-.fValue RESD 1
-ENDSTRUC
-
-STRUC MIXERCONTROLDETAILS_SIGNED
-.lValue RESD 1
-ENDSTRUC
-
-STRUC MIXERCONTROLDETAILS_UNSIGNED
-.dwValue RESD 1
-ENDSTRUC
-
-STRUC JOYINFOEX
-.dwSize RESD 1
-.dwFlags RESD 1
-.dwXpos RESD 1
-.dwYpos RESD 1
-.dwZpos RESD 1
-.dwRpos RESD 1
-.dwUpos RESD 1
-.dwVpos RESD 1
-.dwButtons RESD 1
-.dwButtonNumber RESD 1
-.dwPOV RESD 1
-.dwReserved1 RESD 1
-.dwReserved2 RESD 1
-ENDSTRUC
-
-STRUC DRVCONFIGINFO
-.dwDCISize RESD 1
-.lpszDCISectionName RESD 1
-.lpszDCIAliasName RESD 1
-.dnDevNode RESD 1
-ENDSTRUC
-
-STRUC WAVEHDR
-.lpData RESD 1
-.dwBufferiLength RESD 1
-.dwBytesRecorded RESD 1
-.dwUser RESD 1
-.dwFlags RESD 1
-.dwLoops RESD 1
-.lpNext RESD 1
-.Reserved RESD 1
-ENDSTRUC
-
-STRUC WAVEOUTCAPS
-.wMid RESW 1
-.wPid RESW 1
-.vDriverVersion RESD 1
-.szPname RESB MAXPNAMELEN
-.dwFormats RESD 1
-.wChannels RESW 1
-.dwSupport RESD 1
-ENDSTRUC
-
-STRUC WAVEINCAPS
-.wMid RESW 1
-.wPid RESW 1
-.vDriverVersion RESD 1
-.szPname RESB MAXPNAMELEN
-.dwFormats RESD 1
-.wChannels RESW 1
-ENDSTRUC
-
-STRUC WAVEFORMAT
-.wFormatTag RESW 1
-.nChannels RESW 1
-.nSamplesPerSec RESD 1
-.nAvgBytesPerSec RESD 1
-.nBlockAlign RESW 1
-ENDSTRUC
-
-STRUC PCMWAVEFORMAT
-.wf RESD 1
-.wBitsPerSample RESW 1
-ENDSTRUC
-
-STRUC MIDIOUTCAPS
-.wMid RESW 1
-.wPid RESW 1
-.vDriverVersion RESD 1
-.szPname RESB MAXPNAMELEN
-.wTechnology RESW 1
-.wVoices RESW 1
-.wNotes RESW 1
-.wChannelMask RESW 1
-.dwSupport RESD 1
-ENDSTRUC
-
-STRUC MIDIINCAPS
-.wMid RESW 1
-.wPid RESW 1
-.vDriverVersion RESD 1
-.szPname RESB MAXPNAMELEN
-ENDSTRUC
-
-STRUC MIDIHDR
-.lpData RESD 1
-.dwBufferiLength RESD 1
-.dwBytesRecorded RESD 1
-.dwUser RESD 1
-.dwFlags RESD 1
-.lpNext RESD 1
-.Reserved RESD 1
-ENDSTRUC
-
-STRUC AUXCAPS
-.wMid RESW 1
-.wPid RESW 1
-.vDriverVersion RESD 1
-.szPname RESB MAXPNAMELEN
-.wTechnology RESW 1
-.dwSupport RESD 1
-ENDSTRUC
-
-STRUC TIMECAPS
-.wPeriodMin RESD 1
-.wPeriodMax RESD 1
-ENDSTRUC
-
-STRUC JOYCAPS
-.wMid RESW 1
-.wPid RESW 1
-.szPname RESB MAXPNAMELEN
-.wXmin RESW 1
-.wXmax RESW 1
-.wYmin RESW 1
-.wYmax RESW 1
-.wZmin RESW 1
-.wZmax RESW 1
-.wNumButtons RESW 1
-.wPeriodMin RESW 1
-.wPeriodMax RESW 1
-ENDSTRUC
-
-STRUC JOYINFO
-.wXpos RESW 1
-.wYpos RESW 1
-.wZpos RESW 1
-.wButtons RESW 1
-ENDSTRUC
-
-STRUC MMIOINFO
-.dwFlags RESD 1
-.fccIOProc RESD 1
-.pIOProc RESD 1
-.wErrorRet RESD 1
-.htask RESD 1
-.cchBuffer RESD 1
-.pchBuffer RESD 1
-.pchNext RESD 1
-.pchEndRead RESD 1
-.pchEndWrite RESD 1
-.lBufOffset RESD 1
-.lDiskOffset RESD 1
-.adwInfo4 RESD 1
-.dwReserved1 RESD 1
-.dwReserved2 RESD 1
-.hmmio RESD 1
-ENDSTRUC
-
-STRUC MMCKINFO
-.ckid RESD 1
-.ckSize RESD 1
-.fccType RESD 1
-.dwDataOffset RESD 1
-.dwFlags RESD 1
-ENDSTRUC
-
-STRUC MCI_GENERIC_PARMS
-.dwCallback RESD 1
-ENDSTRUC
-
-STRUC MCI_OPEN_PARMS
-.dwCallback RESD 1
-.wDeviceID RESD 1
-.lpstrDeviceType RESD 1
-.lpstrElementName RESD 1
-.lpstrAlias RESD 1
-ENDSTRUC
-
-STRUC MCI_PLAY_PARMS
-.dwCallback RESD 1
-.dwFrom RESD 1
-.dwTo RESD 1
-ENDSTRUC
-
-STRUC MCI_SEEK_PARMS
-.dwCallback RESD 1
-.dwTo RESD 1
-ENDSTRUC
-
-STRUC MCI_STATUS_PARMS
-.dwCallback RESD 1
-.dwReturn RESD 1
-.dwItem RESD 1
-.dwTrack RESW 1
-ENDSTRUC
-
-STRUC MCI_INFO_PARMS
-.dwCallback RESD 1
-.lpstrReturn RESD 1
-.dwRetSize RESD 1
-ENDSTRUC
-
-STRUC MCI_GETDEVCAPS_PARMS
-.dwCallback RESD 1
-.dwReturn RESD 1
-.dwIten RESD 1
-ENDSTRUC
-
-STRUC MCI_SYSINFO_PARMS
-.dwCallback RESD 1
-.lpstrReturn RESD 1
-.dwRetSize RESD 1
-.dwNumber RESD 1
-.wDeviceType RESD 1
-ENDSTRUC
-
-STRUC MCI_SET_PARMS
-.dwCallback RESD 1
-.dwTimeFormat RESD 1
-.dwAudio RESD 1
-ENDSTRUC
-
-STRUC MCI_BREAK_PARMS
-.dwCallback RESD 1
-.nVirtKey RESD 1
-.hwndBreak RESD 1
-ENDSTRUC
-
-STRUC MCI_SOUND_PARMS
-.dwCallback RESD 1
-.lpstrSoundName RESD 1
-ENDSTRUC
-
-STRUC MCI_SAVE_PARMS
-.dwCallback RESD 1
-.lpFileName RESD 1
-ENDSTRUC
-
-STRUC MCI_LOAD_PARMS
-.dwCallback RESD 1
-.lpFileName RESD 1
-ENDSTRUC
-
-STRUC MCI_RECORD_PARMS
-.dwCallback RESD 1
-.dwFrom RESD 1
-.dwTo RESD 1
-ENDSTRUC
-
-STRUC MCI_VD_PLAY_PARMS
-.dwCallback RESD 1
-.dwFrom RESD 1
-.dwTo RESD 1
-.dwSpeed RESD 1
-ENDSTRUC
-
-STRUC MCI_VD_STEP_PARMS
-.dwCallback RESD 1
-.dwFrames RESD 1
-ENDSTRUC
-
-STRUC MCI_VD_ESCAPE_PARMS
-.dwCallback RESD 1
-.lpstrCommand RESD 1
-ENDSTRUC
-
-STRUC MCI_WAVE_OPEN_PARMS
-.dwCallback RESD 1
-.wDeviceID RESD 1
-.lpstrDeviceType RESD 1
-.lpstrElementName RESD 1
-.lpstrAlias RESD 1
-.dwBufferSeconds RESD 1
-ENDSTRUC
-
-STRUC MCI_WAVE_DELETE_PARMS
-.dwCallback RESD 1
-.dwFrom RESD 1
-.dwTo RESD 1
-ENDSTRUC
-
-STRUC MCI_WAVE_SET_PARMS
-.dwCallback RESD 1
-.dwTimeFormat RESD 1
-.dwAudio RESD 1
-.wInput RESD 1
-.wOutput RESD 1
-.wFormatTag RESW 1
-.wReserved2 RESW 1
-.nChannels RESW 1
-.wReserved3 RESW 1
-.nSamplesPerSec RESD 1
-.nAvgBytesPerSec RESD 1
-.nBlockAlign RESW 1
-.wReserved4 RESW 1
-.wBitsPerSample RESW 1
-.wReserved5 RESW 1
-ENDSTRUC
-
-STRUC MCI_SEQ_SET_PARMS
-.dwCallback RESD 1
-.dwTimeFormat RESD 1
-.dwAudio RESD 1
-.dwTempo RESD 1
-.dwPort RESD 1
-.dwSlave RESD 1
-.dwMaster RESD 1
-.dwOffset RESD 1
-ENDSTRUC
-
-STRUC MCI_ANIM_OPEN_PARMS
-.dwCallback RESD 1
-.wDeviceID RESD 1
-.lpstrDeviceType RESD 1
-.lpstrElementName RESD 1
-.lpstrAlias RESD 1
-.dwStyle RESD 1
-.hWndParent RESD 1
-ENDSTRUC
-
-STRUC MCI_ANIM_PLAY_PARMS
-.dwCallback RESD 1
-.dwFrom RESD 1
-.dwTo RESD 1
-.dwSpeed RESD 1
-ENDSTRUC
-
-STRUC MCI_ANIM_STEP_PARMS
-.dwCallback RESD 1
-.dwFrames RESD 1
-ENDSTRUC
-
-STRUC MCI_ANIM_WINDOW_PARMS
-.dwCallback RESD 1
-.hwnd RESD 1
-.nCmdShow RESD 1
-.lpstrText RESD 1
-ENDSTRUC
-
-STRUC MCI_ANIM_RECT_PARMS
-.dwCallback RESD 1
-.rc RESB RECT_size
-ENDSTRUC
-
-STRUC MCI_ANIM_UPDATE_PARMS
-.dwCallback RESD 1
-.rc RESB RECT_size
-.hDC RESD 1
-ENDSTRUC
-
-STRUC MCI_OVLY_OPEN_PARMS
-.dwCallback RESD 1
-.wDeviceID RESD 1
-.lpstrDeviceType RESD 1
-.lpstrElementName RESD 1
-.lpstrAlias RESD 1
-.dwStyle RESD 1
-.hWndParent RESD 1
-ENDSTRUC
-
-STRUC MCI_OVLY_WINDOW_PARMS
-.dwCallback RESD 1
-.hwnd RESD 1
-.nCmdShow RESD 1
-.lpstrText RESD 1
-ENDSTRUC
-
-STRUC MCI_OVLY_RECT_PARMS
-.dwCallback RESD 1
-.rc RESB RECT_size
-ENDSTRUC
-
-STRUC MCI_OVLY_SAVE_PARMS
-.dwCallback RESD 1
-.lpFileName RESD 1
-.rc RESB RECT_size
-ENDSTRUC
-
-STRUC MCI_OVLY_LOAD_PARMS
-.dwCallback RESD 1
-.lpFileName RESD 1
-.rc RESB RECT_size
-ENDSTRUC
-
-STRUC PRINTER_INFO_1
-.flags RESD 1
-.pDescription RESD 1
-.pName RESD 1
-.pComment RESD 1
-ENDSTRUC
-
-STRUC PRINTER_INFO_2
-.pServerName RESD 1
-.pPrinterName RESD 1
-.pShareName RESD 1
-.pPortName RESD 1
-.pDriverName RESD 1
-.pComment RESD 1
-.pLocation RESD 1
-.pDevMode RESD 1
-.pSepFile RESD 1
-.pPrintProcessor RESD 1
-.pDatatype RESD 1
-.pParameters RESD 1
-.pSecurityDescriptor RESD 1
-.Attributes RESD 1
-.Priority RESD 1
-.DefaultPriority RESD 1
-.StartTime RESD 1
-.UntilTime RESD 1
-.Status RESD 1
-.cJobs RESD 1
-.AveragePPM RESD 1
-ENDSTRUC
-
-STRUC PRINTER_INFO_3
-.pSecurityDescriptor RESD 1
-ENDSTRUC
-
-STRUC JOB_INFO_1
-.JobId RESD 1
-.pPrinterName RESD 1
-.pMachineName RESD 1
-.pUserName RESD 1
-.pDocument RESD 1
-.pDatatype RESD 1
-.pStatus RESD 1
-.Status RESD 1
-.Priority RESD 1
-.Position RESD 1
-.TotalPages RESD 1
-.PagesPrinted RESD 1
-.Submitted RESD 1
-ENDSTRUC
-
-STRUC JOB_INFO_2
-.JobId RESD 1
-.pPrinterName RESD 1
-.pMachineName RESD 1
-.pUserName RESD 1
-.pDocument RESD 1
-.pNotifyName RESD 1
-.pDatatype RESD 1
-.pPrintProcessor RESD 1
-.pParameters RESD 1
-.pDriverName RESD 1
-.pDevMode RESD 1
-.pStatus RESD 1
-.pSecurityDescriptor RESD 1
-.Status RESD 1
-.Priority RESD 1
-.Position RESD 1
-.StartTime RESD 1
-.UntilTime RESD 1
-.TotalPages RESD 1
-.isize RESD 1
-.Submitted RESD 1
-.time RESD 1
-.PagesPrinted RESD 1
-ENDSTRUC
-
-STRUC ADDJOB_INFO_1
-.Path RESD 1
-.JobId RESD 1
-ENDSTRUC
-
-STRUC DRIVER_INFO_1
-.pName RESD 1
-ENDSTRUC
-
-STRUC DRIVER_INFO_2
-.cVersion RESD 1
-.pName RESD 1
-.pEnvironment RESD 1
-.pDriverPath RESD 1
-.pDataFile RESD 1
-.pConfigFile RESD 1
-ENDSTRUC
-
-STRUC DOC_INFO_1
-.pDocName RESD 1
-.pOutputFile RESD 1
-.pDatatype RESD 1
-ENDSTRUC
-
-STRUC FORM_INFO_1
-.pName RESD 1
-.isize RESD 1
-.ImageableArea RESD 1
-ENDSTRUC
-
-STRUC PRINTPROCESSOR_INFO_1
-.pName RESD 1
-ENDSTRUC
-
-STRUC PORT_INFO_1
-.pName RESD 1
-ENDSTRUC
-
-STRUC MONITOR_INFO_1
-.pName RESD 1
-ENDSTRUC
-
-STRUC MONITOR_INFO_2
-.pName RESD 1
-.pEnvironment RESD 1
-.pDLLName RESD 1
-ENDSTRUC
-
-STRUC DATATYPES_INFO_1
-.pName RESD 1
-ENDSTRUC
-
-STRUC PRINTER_DEFAULTS
-.pDatatype RESD 1
-.pDevMode RESD 1
-.DesiredAccess RESD 1
-ENDSTRUC
-
-STRUC PRINTER_INFO_4
-.pPrinterName RESD 1
-.pServerName RESD 1
-.Attributes RESD 1
-ENDSTRUC
-
-STRUC PRINTER_INFO_5
-.pPrinterName RESD 1
-.pPortName RESD 1
-.Attributes RESD 1
-.DeviceNotSelectedTimeout RESD 1
-.TransmissionRetryTimeout RESD 1
-ENDSTRUC
-
-STRUC DRIVER_INFO_3
-.cVersion RESD 1
-.pName RESD 1
-.pEnvironment RESD 1
-.pDriverPath RESD 1
-.pDataFile RESD 1
-.pConfigFile RESD 1
-.pHelpFile RESD 1
-.pDependentFiles RESD 1
-.pMonitorName RESD 1
-.pDefaultDataType RESD 1
-ENDSTRUC
-
-STRUC DOC_INFO_2
-.pDocName RESD 1
-.pOutputFile RESD 1
-.pDatatype RESD 1
-.dwMode RESD 1
-.JobId RESD 1
-ENDSTRUC
-
-STRUC PORT_INFO_2
-.pPortName RESD 1
-.pMonitorName RESD 1
-.pDescription RESD 1
-.fPortType RESD 1
-.Reserved RESD 1
-ENDSTRUC
-
-STRUC PROVIDOR_INFO_1
-.pName RESD 1
-.pEnvironment RESD 1
-.pDLLName RESD 1
-ENDSTRUC
-
-STRUC NETRESOURCE
-.dwScope RESD 1
-.dwType RESD 1
-.dwDisplayType RESD 1
-.dwUsage RESD 1
-.lpLocalName RESD 1
-.lpRemoteName RESD 1
-.lpComment RESD 1
-.lpProvider RESD 1
-ENDSTRUC
-
-STRUC NCB
-.ncb_command RESW 1
-.ncb_retcode RESW 1
-.ncb_lsn RESW 1
-.ncb_num RESW 1
-.ncb_buffer RESD 1
-.ncb_length RESW 1
-.ncb_callname RESB NCBNAMSZ
-.ncb_name RESB NCBNAMSZ
-.ncb_rto RESW 1
-.ncb_sto RESW 1
-.ncb_post RESD 1
-.ncb_lana_num RESW 1
-.ncb_cmd_cplt RESW 1
-.ncb_reserve10 RESB 1
-.ncb_event RESD 1
-ENDSTRUC
-
-STRUC ADAPTER_STATUS
-.adapter_address RESB 6
-.rev_major RESW 1
-.reserved0 RESW 1
-.adapter_type RESW 1
-.rev_minor RESW 1
-.duration RESW 1
-.frmr_recv RESW 1
-.frmr_xmit RESW 1
-.iframe_recv_err RESW 1
-.xmit_aborts RESW 1
-.xmit_success RESD 1
-.recv_success RESD 1
-.iframe_xmit_err RESW 1
-.recv_buff_unavail RESW 1
-.t1_timeouts RESW 1
-.ti_timeouts RESW 1
-.Reserved1 RESD 1
-.free_ncbs RESW 1
-.max_cfg_ncbs RESW 1
-.max_ncbs RESW 1
-.xmit_buf_unavail RESW 1
-.max_dgram_isize RESW 1
-.pending_sess RESW 1
-.max_cfg_sess RESW 1
-.max_sess RESW 1
-.max_sess_pkt_isize RESW 1
-.name_count RESW 1
-ENDSTRUC
-
-STRUC NAME_BUFFER
-.xname RESB NCBNAMSZ
-.name_num RESW 1
-.name_flags RESW 1
-ENDSTRUC
-
-STRUC SESSION_HEADER
-.sess_name RESW 1
-.num_sess RESW 1
-.rcv_dg_outstanding RESW 1
-.rcv_any_outstanding RESW 1
-ENDSTRUC
-
-STRUC SESSION_BUFFER
-.lsn RESW 1
-.State RESW 1
-.local_name RESB NCBNAMSZ
-.remote_name RESB NCBNAMSZ
-.rcvs_outstanding RESW 1
-.sends_outstanding RESW 1
-ENDSTRUC
-
-STRUC LANA_ENUM
-.iLength RESW 1
-.lana RESW 1
-ENDSTRUC
-
-STRUC FIND_NAME_HEADER
-.node_count RESW 1
-.Reserved RESW 1
-.unique_group RESW 1
-ENDSTRUC
-
-STRUC FIND_NAME_BUFFER
-.iLength RESW 1
-.access_control RESW 1
-.frame_control RESW 1
-.destination_addr RESW 1
-.source_addr RESW 1
-.routing_info RESW 1
-ENDSTRUC
-
-STRUC ACTION_HEADER
-.transport_id RESD 1
-.action_code RESW 1
-.Reserved RESW 1
-ENDSTRUC
-
-STRUC CRGB
-.bRed RESB 1
-.bGreen RESB 1
-.bBlue RESB 1
-.bExtra RESB 1
-ENDSTRUC
-
-STRUC SERVICE_STATUS
-.dwServiceType RESD 1
-.dwCurrentState RESD 1
-.dwControlsAccepted RESD 1
-.dwWin32ExitCode RESD 1
-.dwServiceSpecificExitCode RESD 1
-.dwCheckPoint RESD 1
-.dwWaitHint RESD 1
-ENDSTRUC
-
-STRUC ENUM_SERVICE_STATUS
-.lpServiceName RESD 1
-.lpDisplayName RESD 1
-.ServiceStatus RESD 1
-ENDSTRUC
-
-STRUC QUERY_SERVICE_LOCK_STATUS
-.fIsLocked RESD 1
-.lpLockOwner RESD 1
-.dwLockDuration RESD 1
-ENDSTRUC
-
-STRUC QUERY_SERVICE_CONFIG
-.dwServiceType RESD 1
-.dwStartType RESD 1
-.dwErrorControl RESD 1
-.lpBinaryPathName RESD 1
-.lpLoadOrderGroup RESD 1
-.dwTagId RESD 1
-.lpDependencies RESD 1
-.lpServiceStartName RESD 1
-.lpDisplayName RESD 1
-ENDSTRUC
-
-STRUC SERVICE_TABLE_ENTRY
-.lpServiceName RESD 1
-.lpServiceProc RESD 1
-ENDSTRUC
-
-STRUC LARGE_INTEGER
-.lowpart RESD 1
-.highpart RESD 1
-ENDSTRUC
-
-STRUC PERF_DATA_BLOCK
-.Signature RESB 4
-.LittleEndian RESD 1
-.Version RESD 1
-.Revision RESD 1
-.TotalByteiLength RESD 1
-.HeaderiLength RESD 1
-.NumObjectTypes RESD 1
-.DefaultObject RESD 1
-.SystemTime RESD 1
-.PerfTime RESD 1
-.PerfFreq RESD 1
-.PerTime100nSec RESD 1
-.SystemNameiLength RESD 1
-.SystemNameOffset RESD 1
-ENDSTRUC
-
-STRUC PERF_OBJECT_TYPE
-.TotalByteiLength RESD 1
-.DefinitioniLength RESD 1
-.HeaderiLength RESD 1
-.ObjectNameTitleIndex RESD 1
-.ObjectNameTitle RESD 1
-.ObjectHelpTitleIndex RESD 1
-.ObjectHelpTitle RESD 1
-.DetailLevel RESD 1
-.NumCounters RESD 1
-.DefaultCounter RESD 1
-.NumInstances RESD 1
-.CodePage RESD 1
-.PerfTime RESD 1
-.PerfFreq RESD 1
-ENDSTRUC
-
-STRUC PERF_COUNTER_DEFINITION
-.ByteiLength RESD 1
-.CounterNameTitleIndex RESD 1
-.CounterNameTitle RESD 1
-.CounterHelpTitleIndex RESD 1
-.CounterHelpTitle RESD 1
-.DefaultScale RESD 1
-.DetailLevel RESD 1
-.CounterType RESD 1
-.CounterSize RESD 1
-.CounterOffset RESD 1
-ENDSTRUC
-
-STRUC PERF_INSTANCE_DEFINITION
-.ByteiLength RESD 1
-.ParentObjectTitleIndex RESD 1
-.ParentObjectInstance RESD 1
-.UniqueID RESD 1
-.NameOffset RESD 1
-.NameiLength RESD 1
-ENDSTRUC
-
-STRUC PERF_COUNTER_BLOCK
-.ByteiLength RESD 1
-ENDSTRUC
-
-STRUC COMPOSITIONFORM
-.dwStyle RESD 1
-.ptCurrentPos RESB POINT_size
-.rcArea RESB RECT_size
-ENDSTRUC
-
-STRUC CANDIDATEFORM
-.dwIndex RESD 1
-.dwStyle RESD 1
-.ptCurrentPos RESB POINT_size
-.rcArea RESB RECT_size
-ENDSTRUC
-
-STRUC CANDIDATELIST
-.dwSize RESD 1
-.dwStyle RESD 1
-.dwCount RESD 1
-.dwSelection RESD 1
-.dwPageStart RESD 1
-.dwPageSize RESD 1
-.dwOffset1 RESD 1
-ENDSTRUC
-
-STRUC STYLEBUF
-.dwStyle RESD 1
-.szDescription RESB STYLE_DESCRIPTION_SIZE
-ENDSTRUC
-
-STRUC MODEMDEVCAPS
-.dwActualSize RESD 1
-.dwRequiredSize RESD 1
-.dwDevSpecificOffset RESD 1
-.dwDevSpecificSize RESD 1
-.dwModemProviderVersion RESD 1
-.dwModemManufacturerOffset RESD 1
-.dwModemManufacturerSize RESD 1
-.dwModemModelOffset RESD 1
-.dwModemModelSize RESD 1
-.dwModemVersionOffset RESD 1
-.dwModemVersionSize RESD 1
-.dwDialOptions RESD 1
-.dwCallSetupFailTimer RESD 1
-.dwInactivityTimeout RESD 1
-.dwSpeakerVolume RESD 1
-.dwSpeakerMode RESD 1
-.dwModemOptions RESD 1
-.dwMaxDTERate RESD 1
-.dwMaxDCERate RESD 1
-.abVariablePortion RESB 1
-ENDSTRUC
-
-STRUC MODEMSETTINGS
-.dwActualSize RESD 1
-.dwRequiredSize RESD 1
-.dwDevSpecificOffset RESD 1
-.dwDevSpecificSize RESD 1
-.dwCallSetupFailTimer RESD 1
-.dwInactivityTimeout RESD 1
-.dwSpeakerVolume RESD 1
-.dwSpeakerMode RESD 1
-.dwPreferredModemOptions RESD 1
-.dwNegotiatedModemOptions RESD 1
-.dwNegotiatedDCERate RESD 1
-.abVariablePortion RESB 1
-ENDSTRUC
-
-STRUC DRAGINFO
-.uSize RESD 1
-.pt RESB POINT_size
-.fNC RESD 1
-.lpFileList RESD 1
-.grfKeyState RESD 1
-ENDSTRUC
-
-STRUC APPBARDATA
-.cbSize RESD 1
-.hwnd RESD 1
-.uCallbackMessage RESD 1
-.uEdge RESD 1
-.rc RESB RECT_size
-.lParam RESD 1
-ENDSTRUC
-
-STRUC SHFILEOPSTRUCT
-.hwnd RESD 1
-.wFunc RESD 1
-.pFrom RESD 1
-.pTo RESD 1
-.fFlags RESW 1
-.fAnyOperationsAborted RESD 1
-.hNameMappings RESD 1
-.lpszProgressTitle RESD 1
-ENDSTRUC
-
-STRUC SHNAMEMAPPING
-.pszOldPath RESD 1
-.pszNewPath RESD 1
-.cchOldPath RESD 1
-.cchNewPath RESD 1
-ENDSTRUC
-
-STRUC SHELLEXECUTEINFO
-.cbSize RESD 1
-.fMask RESD 1
-.hwnd RESD 1
-.lpVerb RESD 1
-.lpFile RESD 1
-.lpParameters RESD 1
-.lpDirectory RESD 1
-.nShow RESD 1
-.hInstApp RESD 1
-.lpIDList RESD 1
-.lpClass RESD 1
-.hkeyClass RESD 1
-.dwHotKey RESD 1
-.hIcon RESD 1
-.hProcess RESD 1
-ENDSTRUC
-
-STRUC NOTIFYICONDATA
-.cbSize RESD 1
-.hwnd RESD 1
-.uID RESD 1
-.uFlags RESD 1
-.uCallbackMessage RESD 1
-.hIcon RESD 1
-.szTip RESB 64
-ENDSTRUC
-
-STRUC SHFILEINFO
-.hIcon RESD 1
-.iIcon RESD 1
-.dwAttributes RESD 1
-.szDisplayName RESB 1
-.szTypeName RESB 80 
-ENDSTRUC
-
-STRUC VS_FIXEDFILEINFO
-.dwSignature RESD 1
-.dwStrucVersion RESD 1
-.dwFileVersionMS RESD 1
-.dwFileVersionLS RESD 1
-.dwProductVersionMS RESD 1
-.dwProductVersionLS RESD 1
-.dwFileFlagsMask RESD 1
-.dwFileFlags RESD 1
-.dwFileOS RESD 1
-.dwFileType RESD 1
-.dwFileSubtype RESD 1
-.dwFileDateMS RESD 1
-.dwFileDateLS RESD 1
-ENDSTRUC
-
-STRUC ICONMETRICS
-.cbSize RESD 1
-.iHorzSpacing RESD 1
-.iVertSpacing RESD 1
-.iTitleWrap RESD 1
-.lfFont RESD 1
-ENDSTRUC
-
-STRUC HELPINFO
-.cbSize RESD 1
-.iContextType RESD 1
-.iCtrlId RESD 1
-.hItemHandle RESD 1
-.dwContextId RESD 1
-.MousePos RESD 1
-ENDSTRUC
-
-STRUC ANIMATIONINFO
-.cbSize RESD 1
-.iMinAnimate RESD 1
-ENDSTRUC
-
-STRUC MINIMIZEDMETRICS
-.cbSize RESD 1
-.iWidth RESD 1
-.iHorzGap RESD 1
-.iVertGap RESD 1
-.iArrange RESD 1
-.lfFont RESD 1
-ENDSTRUC
-
-STRUC OSVERSIONINFO
-.dwOSVersionInfoSize RESD 1
-.dwMajorVersion RESD 1
-.dwMinorVersion RESD 1
-.dwBuildNumber RESD 1
-.dwPlatformId RESD 1
-.szCSDVersion RESB 128
-ENDSTRUC
-
-STRUC SYSTEM_POWER_STATUS
-.ACLineStatus RESB 1
-.BatteryFlag RESB 1
-.BatteryLifePercent RESB 1
-.Reserved1 RESB 1
-.BatteryLifeTime RESD 1
-.BatteryFullLifeTime RESD 1
-ENDSTRUC
-
-STRUC NMHDR
-.hwndFrom RESD 1
-.idfrom RESD 1
-.code RESD 1
-ENDSTRUC
-
-STRUC DEVNAMES
-.wDriverOffset RESW 1
-.wDeviceOffset RESW 1
-.wOutputOffset RESW 1
-.wDefault RESW 1
-ENDSTRUC
-
-STRUC PAGESETUPDLGAPI
-.lStructSize RESD 1
-.hwndOwner RESD 1
-.hDevMode RESD 1
-.hDevNames RESD 1
-.flags RESD 1
-.ptPaperSize RESB POINT_size
-.rtMinMargin RESD 1
-.rtMargin RESD 1
-.hInstance RESD 1
-.lCustData RESD 1
-.lpfnPageSetupHook RESD 1
-.lpfnPagePaintHook RESD 1
-.lpPageSetupTemplateName RESD 1
-.hPageSetupTemplate RESD 1
-ENDSTRUC
-
-STRUC COMMCONFIG
-.dwSize RESD 1
-.wVersion RESW 1
-.wReserved RESW 1
-.dcbx RESD 1
-.dwProviderSubType RESD 1
-.dwProviderOffset RESD 1
-.dwProviderSize RESD 1
-.wcProviderData RESB 1
-ENDSTRUC
-
-STRUC PIXELFORMATDESCRIPTOR
-.nSize RESW 1
-.nVersion RESW 1
-.dwFlags RESD 1
-.iPixelType RESB 1
-.cColorBits RESB 1
-.cRedBits RESB 1
-.cRedShift RESB 1
-.cGreenBits RESB 1
-.cGreenShift RESB 1
-.cBlueBits RESB 1
-.cBlueShift RESB 1
-.cAlphaBits RESB 1
-.cAlphaShift RESB 1
-.cAccumBits RESB 1
-.cAccumRedBits RESB 1
-.cAccumGreenBits RESB 1
-.cAccumBlueBits RESB 1
-.cAccumAlphaBits RESB 1
-.cDepthBits RESB 1
-.cStencilBits RESB 1
-.cAuxBuffers RESB 1
-.iLayerType RESB 1
-.bReserved RESB 1
-.dwLayerMask RESD 1
-.dwVisibleMask RESD 1
-.dwDamageMask RESD 1
-ENDSTRUC
-
-STRUC DRAWTEXTPARAMS
-.cbSize RESD 1
-.iTabiLength RESD 1
-.iLeftMargin RESD 1
-.iRightMargin RESD 1
-.uiiLengthDrawn RESD 1
-ENDSTRUC
-
-STRUC MENUITEMINFO
-.cbSize RESD 1
-.fMask RESD 1
-.fType RESD 1
-.fState RESD 1
-.wID RESD 1
-.hSubMenu RESD 1
-.hbmpChecked RESD 1
-.hbmpUnchecked RESD 1
-.dwItemData RESD 1
-.dwTypeData RESD 1
-.cch RESD 1
-ENDSTRUC
-
-STRUC SCROLLINFO
-.cbSize RESD 1
-.fMask RESD 1
-.nMin RESD 1
-.nMax RESD 1
-.nPage RESD 1
-.nPos RESD 1
-.nTrackPos RESD 1
-ENDSTRUC
-
-STRUC MSGBOXPARAMS
-.cbSize RESD 1
-.hwndOwner RESD 1
-.hInstance RESD 1
-.lpszText RESD 1
-.lpszCaption RESD 1
-.dwStyle RESD 1
-.lpszIcon RESD 1
-.dwContextHelpId RESD 1
-.lpfnMsgBoxCallback RESD 1
-.dwLanguageId RESD 1
-ENDSTRUC
-
-STRUC DEBUG_EVENT
-.dwDebugEventCode RESD 1
-.dwProcessId RESD 1
-.dwThreadId RESD 1
-.u RESD 1
-ENDSTRUC
-
-STRUC COLORMAP
-.cmFrom RESD 1
-.cmTo RESD 1
-ENDSTRUC
-
-STRUC AuxVol
-.vLow RESW 1
-.vHigh RESW 1
-ENDSTRUC
-
-STRUC DBGTHREAD
-.hThread RESD 1
-.lpStartAddress RESD 1
-.bfState RESD 1
-.nNext RESQ 1
-ENDSTRUC
-
-STRUC DbgProcess
-.hDbgHeap RESD 1
-.dwProcessID RESD 1
-.dwThreadID RESD 1
-.hProcess RESD 1
-.hFile RESD 1
-.lpImage RESD 1
-ENDSTRUC
-
-STRUC IMAGE_DATA_DIRECTORY
-.VirtualAddress RESD 1
-.isize RESD 1
-ENDSTRUC
-
-STRUC IMAGE_OPTIONAL_HEADER
-.Magic RESW 1
-.MajorLinkerVersion RESB 1
-.MinorLinkerVersion RESB 1
-.SizeOfCode RESD 1
-.SizeOfInitializedData RESD 1
-.SizeOfUninitializedData RESD 1
-.AddressOfEntryPoint RESD 1
-.BaseOfCode RESD 1
-.BaseOfData RESD 1
-.ImageBase RESD 1
-.SectionAlignment RESD 1
-.FileAlignment RESD 1
-.MajorOperatingSystemVersion RESW 1
-.MinorOperatingSystemVersion RESW 1
-.MajorImageVersion RESW 1
-.MinorImageVersion RESW 1
-.MajorSubsystemVersion RESW 1
-.MinorSubsystemVersion RESW 1
-.Reserved1 RESD 1
-.SizeOfImage RESD 1
-.SizeOfHeaders RESD 1
-.CheckSum RESD 1
-.Subsystem RESW 1
-.DllCharacteristics RESW 1
-.SizeOfStackReserve RESD 1
-.SizeOfStackCommit RESD 1
-.SizeOfHeapReserve RESD 1
-.SizeOfHeapCommit RESD 1
-.LoaderFlags RESD 1
-.NumberOfRvaAndSizes RESD 1
-.DataDirectory RESQ 1
-ENDSTRUC
-
-STRUC IMAGE_FILE_HEADER
-.Machine RESW 1
-.NumberOfSections RESW 1
-.TimeDateStamp RESD 1
-.PointerToSymbolTable RESD 1
-.NumberOfSymbols RESD 1
-.SizeOfOptionalHeader RESW 1
-.Characteristics RESW 1
-ENDSTRUC
-
-STRUC IMAGE_NT_HEADERS
-.Signature RESD 1
-.FileHeader RESD 1
-.OptionalHeader RESD 1
-ENDSTRUC
-
-STRUC IMAGE_EXPORT_DIRECTORY
-.Characteristics RESD 1
-.TimeDateStamp RESD 1
-.MajorVersion RESW 1
-.MinorVersion RESW 1
-.nName RESD 1
-.nBase RESD 1
-.NumberOfFunctions RESD 1
-.NumberOfNames RESD 1
-.AddressOfFunctions RESD 1
-.AddressOfNames RESD 1
-.AddressOfNameOrdinals RESW 1
-ENDSTRUC
-
-STRUC IMAGE_DOS_HEADER
-.e_magic RESW 1
-.e_cblp RESW 1
-.e_cp RESW 1
-.e_crlc RESW 1
-.e_cparhdr RESW 1
-.e_minalloc RESW 1
-.e_maxalloc RESW 1
-.e_ss RESW 1
-.e_sp RESW 1
-.e_csum RESW 1
-.e_ip RESW 1
-.e_cs RESW 1
-.e_lfarlc RESW 1
-.e_ovno RESW 1
-.e_res4 RESW 1
-.e_oemid RESW 1
-.e_oeminfo RESW 1
-.e_res2 RESW 1
-.e_lfanew RESD 1
-ENDSTRUC
-
-STRUC USER_INFO_3
-.uName RESD 1
-.Password RESD 1
-.PasswordAge RESD 1
-.Privilege RESD 1
-.HomeDir RESD 1
-.Comment RESD 1
-.Flags RESD 1
-.ScriptPath RESD 1
-.AuthFlags RESD 1
-.FullName RESD 1
-.UserComment RESD 1
-.Parms RESD 1
-.Workstations RESD 1
-.LastLogon RESD 1
-.LastLogoff RESD 1
-.AcctExpires RESD 1
-.MaxStorage RESD 1
-.UnitsPerWeek RESD 1
-.LogonHours RESD 1
-.BadPwCount RESD 1
-.NumLogons RESD 1
-.LogonServer RESD 1
-.CountryCode RESD 1
-.CodePage RESD 1
-.UserID RESD 1
-.PrimaryGroupID RESD 1
-.Profile RESD 1
-.HomeDirDrive RESD 1
-.PasswordExpired RESD 1
-ENDSTRUC
-
-STRUC GROUP_INFO_2
-.uName RESD 1
-.Comment RESD 1
-.GroupID RESD 1
-.Attributes RESD 1
-ENDSTRUC
-
-STRUC INIT_COMMON_CONTROLSEX
-.dwSize RESD 1
-.dwICC RESD 1
-ENDSTRUC
-
-STRUC REBARINFO
-.cbSize RESD 1
-.fMask RESD 1
-.himl RESD 1
-ENDSTRUC
-
-STRUC REBARBANDINFO
-.cbSize RESD 1
-.fMask RESD 1
-.fStyle RESD 1
-.clrFore RESD 1
-.clrBack RESD 1
-.lpText RESD 1
-.cch RESD 1
-.iImage RESD 1
-.hwndChild RESD 1
-.cxMinChild RESD 1
-.cyMinChild RESD 1
-.lx RESD 1
-.hbmBack RESD 1
-.wID RESD 1
-.cyChild RESD 1
-.cyMaxChild RESD 1
-.cyIntegral RESD 1
-.cxIdeal RESD 1
-.lParam RESD 1
-.cxHeader RESD 1
-ENDSTRUC
-
-STRUC NMREBARCHILDSIZE
-.hdr RESB NMHDR_size
-.uBand RESD 1
-.wID RESD 1
-.rcChild RESB RECT_size
-.rcBand RESB RECT_size
-ENDSTRUC
-
-STRUC NMREBAR
-.hdr RESB NMHDR_size
-.dwMask RESD 1
-.uBand RESD 1
-.fStyle RESD 1
-.wID RESD 1
-.lParam RESD 1
-ENDSTRUC
-
-STRUC NMRBAUTOSIZE
-.hdr RESB NMHDR_size
-.fChanged RESD 1
-.rcTarget RESB RECT_size
-.rcActual RESB RECT_size
-ENDSTRUC
-
-STRUC RB_HITTESTINFO
-.pt RESB POINT_size
-.flags RESD 1
-.iBand RESW 1
-ENDSTRUC
-
-STRUC IMAGEINFO
-.hbmImage RESD 1
-.hbmMask RESD 1
-.Unused1 RESD 1
-.Unused2 RESD 1
-.rcImage RESB RECT_size
-ENDSTRUC
-
-STRUC HD_ITEM
-.imask RESD 1
-.lxy RESD 1
-.pszText RESD 1
-.hbm RESD 1
-.cchTextMax RESD 1
-.fmt RESD 1
-.lParam RESD 1
-ENDSTRUC
-
-STRUC HD_LAYOUT
-.prc RESD 1
-.pwpos RESD 1
-ENDSTRUC
-
-STRUC HD_HITTESTINFO
-.pt RESB POINT_size
-.flags RESD 1
-.iItem RESD 1
-ENDSTRUC
-
-STRUC HD_NOTIFY
-.hdr RESB NMHDR_size
-.iItem RESD 1
-.iButton RESD 1
-.pitem RESD 1
-ENDSTRUC
-
-STRUC TBBUTTON
-.iBitmap RESD 1
-.idCommand RESD 1
-.fsState RESB 1
-.fsStyle RESB 1
-.dwData RESD 1
-.iString RESD 1
-ENDSTRUC
-
-STRUC ColorMap
-.cmFrom RESD 1
-.cmTo RESD 1
-ENDSTRUC
-
-STRUC TBADDBITMAP
-.hInst RESD 1
-.nId RESD 1
-ENDSTRUC
-
-STRUC TBSAVEPARAMS
-.hkr RESD 1
-.pszSubKey RESD 1
-.pszValueName RESD 1
-ENDSTRUC
-
-STRUC TBREPLACEBITMAP
-.hInstOld RESD 1
-.nIdOld RESD 1
-.hInstNew RESD 1
-.nIdNew RESD 1
-.nButtons RESD 1
-ENDSTRUC
-
-STRUC TBNOTIFY
-.hdr RESB NMHDR_size
-.iItem RESD 1
-.tbButton RESB TBBUTTON_size
-.cchText RESD 1
-.pszText RESD 1
-ENDSTRUC
-
-STRUC TOOLINFO
-.cbSize RESD 1
-.uFlags RESD 1
-.hWnd RESD 1
-.uId RESD 1
-.rect RESB RECT_size
-.hInst RESD 1
-.lpszText RESD 1
-.lParam RESD 1
-ENDSTRUC
-
-STRUC TT_HITTESTINFO
-.hWnd RESD 1
-.pt RESB POINT_size
-.ti RESB TOOLINFO_size
-ENDSTRUC
-
-STRUC TOOLTIPTEXT
-.hdr RESB NMHDR_size
-.lpszText RESD 1
-.szText RESB 80
-.hInst RESD 1
-.uFlags RESD 1
-ENDSTRUC
-
-STRUC DRAGLISTINFO
-.uNotification RESD 1
-.hWnd RESD 1
-.ptCursor RESB POINT_size
-ENDSTRUC
-
-STRUC UDACCEL
-.nSec RESD 1
-.nInc RESD 1
-ENDSTRUC
-
-STRUC NM_UPDOWN
-.hdr RESB NMHDR_size
-.iPos RESD 1
-.iDelta RESD 1
-ENDSTRUC
-
-STRUC LV_ITEM
-.imask RESD 1
-.iItem RESD 1
-.iSubItem RESD 1
-.state RESD 1
-.stateMask RESD 1
-.pszText RESD 1
-.cchTextMax RESD 1
-.iImage RESD 1
-.lParam RESD 1
-ENDSTRUC
-
-STRUC LV_FINDINFO
-.flags RESD 1
-.psz RESD 1
-.lParam RESD 1
-.pt RESB POINT_size
-.vkDirection RESD 1
-ENDSTRUC
-
-STRUC LV_HITTESTINFO
-.pt RESB POINT_size
-.flags RESD 1
-.iItem RESD 1
-ENDSTRUC
-
-STRUC LV_COLUMN
-.imask RESD 1
-.fmt RESD 1
-.lx RESD 1
-.pszText RESD 1
-.cchTextMax RESD 1
-.iSubItem RESD 1
-ENDSTRUC
-
-STRUC NM_LISTVIEW
-.hdr RESB NMHDR_size
-.iItem RESD 1
-.iSubItem RESD 1
-.uNewState RESD 1
-.uOldState RESD 1
-.uChanged RESD 1
-.ptAction RESB POINT_size
-.lParam RESD 1
-ENDSTRUC
-
-STRUC LV_DISPINFO
-.hdr RESB NMHDR_size
-.item RESD 1
-ENDSTRUC
-
-STRUC LV_KEYDOWN
-.hdr RESB NMHDR_size
-.wVKey RESW 1
-.flags RESD 1
-ENDSTRUC
-
-STRUC TREEITEM
-.dummy RESD 1
-ENDSTRUC
-
-STRUC TV_ITEM
-.imask RESD 1
-.hItem RESD 1
-.state RESD 1
-.stateMask RESD 1
-.pszText RESD 1
-.cchTextMax RESD 1
-.iImage RESD 1
-.iSelectedImage RESD 1
-.cChildren RESD 1
-.lParam RESD 1
-ENDSTRUC
-
-STRUC TV_INSERTSTRUCT
-.hParent RESD 1
-.hInsertAfter RESD 1
-.item RESD 1
-ENDSTRUC
-
-STRUC TV_HITTESTINFO
-.pt RESB POINT_size
-.flags RESD 1
-.hItem RESD 1
-ENDSTRUC
-
-STRUC TV_SORTCB
-.hParent RESD 1
-.lpfnCompare RESD 1
-.lParam RESD 1
-ENDSTRUC
-
-STRUC NM_TREEVIEW
-.hdr RESB NMHDR_size
-.action RESD 1
-.itemOld RESD 1
-.itemNew RESD 1
-.ptDrag RESB POINT_size
-ENDSTRUC
-
-STRUC TV_DISPINFO
-.hdr RESB NMHDR_size
-.item RESD 1
-ENDSTRUC
-
-STRUC TV_KEYDOWN
-.hdr RESB NMHDR_size
-.wVKey RESW 1
-.flags RESD 1
-ENDSTRUC
-
-STRUC TC_ITEMHEADER
-.imask RESD 1
-.lpReserved1 RESD 1
-.lpReserved2 RESD 1
-.pszText RESD 1
-.cchTextMax RESD 1
-.iImage RESD 1
-ENDSTRUC
-
-STRUC TC_ITEM
-.imask RESD 1
-.lpReserved1 RESD 1
-.lpReserved2 RESD 1
-.pszText RESD 1
-.cchTextMax RESD 1
-.iImage RESD 1
-.lParam RESD 1
-ENDSTRUC
-
-STRUC TC_HITTESTINFO
-.pt RESB POINT_size
-.flags RESD 1
-ENDSTRUC
-
-STRUC TC_KEYDOWN
-.hdr RESB NMHDR_size
-.wVKey RESW 1
-.flags RESD 1
-ENDSTRUC
-
-STRUC CHOOSECOLORAPI
-.lStructSize RESD 1
-.hwndOwner RESD 1
-.hInstance RESD 1
-.rgbResult RESD 1
-.lpCustColors RESD 1
-.Flags RESD 1
-.lCustData RESD 1
-.lpfnHook RESD 1
-.lpTemplateName RESD 1
-ENDSTRUC
-
-STRUC FINDREPLACE
-.lStructSize RESD 1
-.hWndOwner RESD 1
-.hInstance RESD 1
-.Flags RESD 1
-.lpstrFindWhat RESD 1
-.lpstrReplaceWith RESD 1
-.wFindWhatLen RESW 1
-.wReplaceWithLen RESW 1
-.lCustData RESD 1
-.lpfnHook RESD 1
-.lpTemplateName RESD 1
-ENDSTRUC
-
-STRUC CHOOSEFONTAPI
-.lStructSize RESD 1
-.hWndOwner RESD 1
-.hDC RESD 1
-.lpLogFont RESD 1
-.iPointSize RESD 1
-.Flags RESD 1
-.rgbColors RESD 1
-.lCustData RESD 1
-.lpfnHook RESD 1
-.lpTemplateName RESD 1
-.hInstance RESD 1
-.lpszStyle RESD 1
-.nFontType RESW 1
-.Alignment RESW 1
-.nSizeMin RESD 1
-.nSizeMax RESD 1
-ENDSTRUC
-
-STRUC PRINTDLGAPI
-.lStructSize RESD 1
-.hWndOwner RESD 1
-.hDevMode RESD 1
-.hDevNames RESD 1
-.hDC RESD 1
-.Flags RESD 1
-.nFromPage RESW 1
-.nToPage RESW 1
-.nMinPage RESW 1
-.nMaxPage RESW 1
-.nCopies RESW 1
-.hInstance RESD 1
-.lCustData RESD 1
-.lpfnPrintHook RESD 1
-.lpfnSetupHook RESD 1
-.lpPrintTemplateName RESD 1
-.lpPrintSetupTemplateName RESD 1
-.hPrintTemplate RESD 1
-.hSetupTemplate RESD 1
-ENDSTRUC
-
-STRUC OPENFILENAME
-.lStructSize RESD 1
-.hWndOwner RESD 1
-.hInstance RESD 1
-.lpstrFilter RESD 1
-.lpstrCustomFilter RESD 1
-.nMaxCustFilter RESD 1
-.nFilterIndex RESD 1
-.lpstrFile RESD 1
-.nMaxFile RESD 1
-.lpstrFileTitle RESD 1
-.nMaxFileTitle RESD 1
-.lpstrInitialDir RESD 1
-.lpstrTitle RESD 1
-.Flags RESD 1
-.nFileOffset RESW 1
-.nFileExtension RESW 1
-.lpstrDefExt RESD 1
-.lCustData RESD 1
-.lpfnHook RESD 1
-.lpTemplateName RESD 1
-ENDSTRUC
-
-STRUC CHARFORMAT
-.cbSize RESD 1
-.dwMask RESD 1
-.dwEffects RESD 1
-.yHeight RESD 1
-.yOffset RESD 1
-.crTextColor RESD 1
-.bCharSet RESB 1
-.bPitchAndFamily RESB 1
-.szFaceName RESB 1
-ENDSTRUC
-
-STRUC CHARRANGE
-.cpMin RESD 1
-.cpMax RESD 1
-ENDSTRUC
-
-STRUC TEXTRANGE
-.chrg RESB CHARRANGE_size
-.lpstrText RESD 1
-ENDSTRUC
-
-STRUC EDITSTREAM
-.dwCookie RESD 1
-.dwError RESD 1
-.pfnCallback RESD 1
-ENDSTRUC
-
-STRUC FINDTEXT
-.chrg RESB CHARRANGE_size
-.lpstrText RESD 1
-ENDSTRUC
-
-STRUC FINDTEXTEX
-.chrg RESB CHARRANGE_size
-.lpstrText RESD 1
-.chrgText RESB CHARRANGE_size
-ENDSTRUC
-
-STRUC FORMATRANGE
-.hdc RESD 1
-.hdcTarget RESD 1
-.rc RESB RECT_size
-.rcPage RESB RECT_size
-.chrg RESB CHARRANGE_size
-ENDSTRUC
-
-STRUC PARAFORMAT
-.cbSize RESD 1
-.dwMask RESD 1
-.wNumbering RESW 1
-.wReserved RESW 1
-.dxStartIndent RESD 1
-.dxRightIndent RESD 1
-.dxOffset RESD 1
-.wAlignment RESW 1
-.cTabCount RESW 1
-.rgxTabs RESD 1
-ENDSTRUC
-
-STRUC MSGFILTER
-.nmhdr RESB NMHDR_size
-.msg RESD 1
-.wParam RESD 1
-.lParam RESD 1
-ENDSTRUC
-
-STRUC REQRESIZE
-.nmhdr RESB NMHDR_size
-.rc RESB RECT_size
-ENDSTRUC
-
-STRUC SELCHANGE
-.nmhdr RESB NMHDR_size
-.chrg RESB CHARRANGE_size
-.seltyp RESW 1
-ENDSTRUC
-
-STRUC ENDROPFILES
-.nmhdr RESB NMHDR_size
-.hDrop RESD 1
-.cp RESD 1
-.fProtected RESD 1
-ENDSTRUC
-
-STRUC ENPROTECTED
-.nmhdr RESB NMHDR_size
-.msg RESD 1
-.wParam RESD 1
-.lParam RESD 1
-.chrg RESB CHARRANGE_size
-ENDSTRUC
-
-STRUC ENSAVECLIPBOARD
-.nmhdr RESB NMHDR_size
-.cObjectCount RESD 1
-.cch RESD 1
-ENDSTRUC
-
-STRUC ENOLEOPFAILED
-.nmhdr RESB NMHDR_size
-.iob RESD 1
-.lOper RESD 1
-.hr RESD 1
-ENDSTRUC
-
-STRUC ENCORRECTTEXT
-.nmhdr RESB NMHDR_size
-.chrg RESB CHARRANGE_size
-.seltyp RESW 1
-ENDSTRUC
-
-STRUC PUNCTUATION
-.iSize RESD 1
-.szPunctuation RESD 1
-ENDSTRUC
-
-STRUC COMPCOLOR
-.crText RESD 1
-.crBackground RESD 1
-.dwEffects RESD 1
-ENDSTRUC
-
-STRUC REPASTESPECIAL
-.dwAspect RESD 1
-.dwParam RESD 1
-ENDSTRUC
-
-STRUC fd_setstruc
-.fd_count RESD 1
-.fd_array RESD 1
-ENDSTRUC
-
-STRUC timeval
-.tv_sec RESD 1
-.tv_usec RESD 1
-ENDSTRUC
-
-STRUC sockaddr_in
-.sin_family RESW 1
-.sin_port RESW 1
-.sin_addr RESD 1
-.sin_zero RESB 8
-ENDSTRUC
-
-STRUC sockaddr
-.sa_family RESW 1
-.sa_data RESW 1
-ENDSTRUC
-
-STRUC WSAdata
-.wVersion RESW 1
-.wHighVersion RESW 1
-.szDescription RESB WSADESCRIPTION_LEN+1
-.szSystemStatus RESB WSASYS_STATUS_LEN+1
-.iMaxSockets RESW 1
-.iMaxUdpDg RESW 1
-.lpVendorInfo RESD 1
-ENDSTRUC
-
-STRUC sockproto
-.sp_family RESW 1
-.sp_protocol RESW 1
-ENDSTRUC
-
-STRUC linger
-.l_onoff RESW 1
-.l_linger RESW 1
-ENDSTRUC
-
-STRUC hostentStru
-.h_name RESD 1
-.h_alias RESD 1
-.h_addr RESW 1
-.h_len RESW 1
-.h_list RESD 1
-ENDSTRUC
-
-STRUC netent
-.n_name RESD 1
-.n_aliases RESD 1
-.n_addrtype RESW 1
-.n_net RESD 1
-ENDSTRUC
-
-STRUC servent
-.s_name RESD 1
-.s_aliases RESD 1
-.s_port RESW 1
-.s_proto RESD 1
-ENDSTRUC
-
-STRUC icmp_hdr
-.icmp_type RESB 1
-.icmp_code RESB 1
-.icmp_cksum RESW 1
-.icmp_id RESW 1
-.icmp_seq RESW 1
-.icmp_data RESB 1
-ENDSTRUC
-
-STRUC ip_hdr
-.ip_hlv RESB 1
-.ip_tos RESB 1
-.ip_len RESW 1
-.ip_id RESW 1
-.ip_off RESW 1
-.ip_ttl RESB 1
-.ip_p RESB 1
-.ip_cksum RESW 1
-.ip_src RESD 1
-.ip_dest RESD 1
-ENDSTRUC
-
-STRUC ICMP_OPTIONS
-.Ttl RESB 1
-.Tos RESB 1
-.Flags RESB 1
-.OptionsSize RESB 1
-.OptionsData RESD 1
-ENDSTRUC
-
-STRUC ICMP_ECHO_REPLY
-.Address RESD 1
-.Status RESD 1
-.RoundTripTime RESD 1
-.DataSize RESW 1
-.Reserved RESW 1
-.DataPointer RESD 1
-.Options RESD 1
-.zData RESB 250
-ENDSTRUC
+;// structures
+NASMX_STRUC RECT
+    NASMX_RESERVE left, int32_t, 1
+    NASMX_RESERVE top, int32_t, 1
+    NASMX_RESERVE right, int32_t, 1
+    NASMX_RESERVE bottom, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC POINT
+    NASMX_RESERVE x, int32_t, 1
+    NASMX_RESERVE y, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SIZEL
+    NASMX_RESERVE x, int32_t, 1
+    NASMX_RESERVE y, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MSG
+    NASMX_RESERVE hwnd, NX_PTR, 1
+    NASMX_RESERVE message, uint32_t, 1
+    NASMX_RESERVE wParam, size_t, 1
+    NASMX_RESERVE lParam, size_t, 1
+    NASMX_RESERVE time, uint32_t, 1
+	NASMX_STRUC pt, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	%ifidn __OUTPUT_FORMAT__,macho
+	    NASMX_RESERVE lPrivate, int32_t, 1
+	%elifidn __OUTPUT_FORMAT__,macho32
+	    NASMX_RESERVE lPrivate, int32_t, 1
+	%elifidn __OUTPUT_FORMAT__,macho64
+	    NASMX_RESERVE lPrivate, int64_t, 1
+	%endif
+NASMX_ENDSTRUC
+
+NASMX_STRUC SID_AND_ATTRIBUTES
+    NASMX_RESERVE Sid, NX_PTR, 1
+    NASMX_RESERVE Attributes, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SID_IDENTIFIER_AUTHORITY
+    NASMX_RESERVE Value, int8_t, 6
+NASMX_ENDSTRUC
+
+NASMX_STRUC OVERLAPPED
+    NASMX_RESERVE Internal, NX_PTR, 1
+    NASMX_RESERVE InternalHigh, NX_PTR, 1
+    NASMX_RESERVE loffset, uint32_t, 1
+    NASMX_RESERVE OffsetHigh, uint32_t, 1
+    NASMX_RESERVE hEvent, NX_PTR, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SECURITY_ATTRIBUTES
+    NASMX_RESERVE niLength, uint32_t, 1
+    NASMX_RESERVE lpSecurityDescriptor, NX_PTR, 1
+    NASMX_RESERVE bInheritHandle, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PROCESS_INFORMATION
+    NASMX_RESERVE hProcess, NX_PTR, 1
+    NASMX_RESERVE hThread, NX_PTR, 1
+    NASMX_RESERVE dwProcessId, uint32_t, 1
+    NASMX_RESERVE dwThreadId, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FILETIME
+    NASMX_RESERVE dwLowDateTime, uint32_t, 1
+    NASMX_RESERVE dwHighDateTime, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SYSTEMTIME
+    NASMX_RESERVE wYear, ushort_t, 1
+    NASMX_RESERVE wMonth, ushort_t, 1
+    NASMX_RESERVE wDayOfWeek, ushort_t, 1
+    NASMX_RESERVE wDay, ushort_t, 1
+    NASMX_RESERVE wHour, ushort_t, 1
+    NASMX_RESERVE wMinute, ushort_t, 1
+    NASMX_RESERVE wSecond, ushort_t, 1
+    NASMX_RESERVE wMilliseconds, ushort_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC COMMPROP
+    NASMX_RESERVE wPacketiLength, ushort_t, 1
+    NASMX_RESERVE wPacketVersion, ushort_t, 1
+    NASMX_RESERVE dwServiceMask, uint32_t, 1
+    NASMX_RESERVE dwReserved1, uint32_t, 1
+    NASMX_RESERVE dwMaxTxQueue, uint32_t, 1
+    NASMX_RESERVE dwMaxRxQueue, uint32_t, 1
+    NASMX_RESERVE dwMaxBaud, uint32_t, 1
+    NASMX_RESERVE dwProvSubType, uint32_t, 1
+    NASMX_RESERVE dwProvCapabilities, uint32_t, 1
+    NASMX_RESERVE dwSettableParams, uint32_t, 1
+    NASMX_RESERVE dwSettableBaud, uint32_t, 1
+    NASMX_RESERVE wSettableData, ushort_t, 1
+    NASMX_RESERVE wSettableStopParity, ushort_t, 1
+    NASMX_RESERVE dwCurrentTxQueue, uint32_t, 1
+    NASMX_RESERVE dwCurrentRxQueue, uint32_t, 1
+    NASMX_RESERVE dwProvSpec1, uint32_t, 1
+    NASMX_RESERVE dwProvSpec2, uint32_t, 1
+    NASMX_RESERVE wcProvChar, wchar_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC COMSTAT
+    NASMX_RESERVE fCtsHold, uint32_t, 1
+    NASMX_RESERVE fDsrHold, uint32_t, 1
+    NASMX_RESERVE fRlsdHold, uint32_t, 1
+    NASMX_RESERVE fXoffHold, uint32_t, 1
+    NASMX_RESERVE fXoffSent, uint32_t, 1
+    NASMX_RESERVE fEof, uint32_t, 1
+    NASMX_RESERVE fTxim, uint32_t, 1
+    NASMX_RESERVE fReserved, uint32_t, 1
+    NASMX_RESERVE cbInQue, uint32_t, 1
+    NASMX_RESERVE cbOutQue, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DCB
+    NASMX_RESERVE DCBlength, int32_t, 1
+    NASMX_RESERVE BaudRate, int32_t, 1
+    NASMX_RESERVE fbits, int32_t, 1
+    NASMX_RESERVE wReserved, short_t, 1
+    NASMX_RESERVE XonLim, short_t, 1
+    NASMX_RESERVE XoffLim, short_t, 1
+    NASMX_RESERVE ByteSize, int8_t, 1
+    NASMX_RESERVE Parity, int8_t, 1
+    NASMX_RESERVE StopBits, int8_t, 1
+    NASMX_RESERVE XonChar, int8_t, 1
+    NASMX_RESERVE XoffChar, int8_t, 1
+    NASMX_RESERVE ErrorChar, int8_t, 1
+    NASMX_RESERVE EofChar, int8_t, 1
+    NASMX_RESERVE EvtChar, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC COMMTIMEOUTS
+    NASMX_RESERVE ReadIntervalTimeout, uint32_t, 1
+    NASMX_RESERVE ReadTotalTimeoutMultiplier, uint32_t, 1
+    NASMX_RESERVE ReadTotalTimeoutConstant, uint32_t, 1
+    NASMX_RESERVE WriteTotalTimeoutMultiplier, uint32_t, 1
+    NASMX_RESERVE WriteTotalTimeoutConstant, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SYSTEM_INFO
+    NASMX_RESERVE dwOemID, uint32_t, 1
+    NASMX_RESERVE dwPageSize, uint32_t, 1
+    NASMX_RESERVE lpMinimumApplicationAddress, NX_PTR, 1
+    NASMX_RESERVE lpMaximumApplicationAddress, NX_PTR, 1
+    NASMX_RESERVE dwActiveProcessorMask, size_t, 1
+    NASMX_RESERVE dwNumberOrfProcessors, uint32_t, 1
+    NASMX_RESERVE dwProcessorType, uint32_t, 1
+    NASMX_RESERVE dwAllocationGranularity, uint32_t, 1
+    NASMX_RESERVE wProcessorLevel, ushort_t, 1
+    NASMX_RESERVE wProcessorRevision, ushort_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MEMORYSTATUS
+    NASMX_RESERVE dwiLength, uint32_t, 1
+    NASMX_RESERVE dwMemoryLoad, uint32_t, 1
+    NASMX_RESERVE dwTotalPhys, size_t, 1
+    NASMX_RESERVE dwAvailPhys, size_t, 1
+    NASMX_RESERVE dwTotalPageFile, size_t, 1
+    NASMX_RESERVE dwAvailPageFile, size_t, 1
+    NASMX_RESERVE dwTotalVirtual, size_t, 1
+    NASMX_RESERVE dwAvailVirtual, size_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TPMPARAMS
+    NASMX_RESERVE cbSize, uint32_t, 1
+	NASMX_STRUC rcExclude
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC GENERIC_MAPPING
+    NASMX_RESERVE GenericRead, uint32_t, 1
+    NASMX_RESERVE GenericWrite, uint32_t, 1
+    NASMX_RESERVE GenericExecute, uint32_t, 1
+    NASMX_RESERVE GenericAll, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LUID
+    NASMX_RESERVE LowPart, uint32_t, 1
+    NASMX_RESERVE HighPart, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LUID_AND_ATTRIBUTES
+    NASMX_RESERVE pLuid, NX_PTR, 1
+    NASMX_RESERVE Attributes, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ACL
+    NASMX_RESERVE AclRevision, int8_t, 1
+    NASMX_RESERVE Sbz1, int8_t, 1
+    NASMX_RESERVE AclSize, uint16_t, 1
+    NASMX_RESERVE AceCount, uint16_t, 1
+    NASMX_RESERVE Sbz2, uint16_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ACE_HEADER
+    NASMX_RESERVE AceType, int8_t, 1
+    NASMX_RESERVE AceFlags, int8_t, 1
+    NASMX_RESERVE AceSize, uint16_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ACCESS_ALLOWED_ACE
+	NASMX_STRUC Header, ACE_HEADER
+		NASMX_RESERVE AceType, int8_t, 1
+		NASMX_RESERVE AceFlags, int8_t, 1
+		NASMX_RESERVE AceSize, uint16_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE imask, uint32_t, 1
+    NASMX_RESERVE SidStart, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ACCESS_DENIED_ACE
+	NASMX_STRUC Header, ACE_HEADER
+		NASMX_RESERVE AceType, int8_t, 1
+		NASMX_RESERVE AceFlags, int8_t, 1
+		NASMX_RESERVE AceSize, uint16_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE imask, uint32_t, 1
+    NASMX_RESERVE SidStart, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SYSTEM_AUDIT_ACE
+	NASMX_STRUC Header, ACE_HEADER
+		NASMX_RESERVE AceType, int8_t, 1
+		NASMX_RESERVE AceFlags, int8_t, 1
+		NASMX_RESERVE AceSize, uint16_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE imask, uint32_t, 1
+    NASMX_RESERVE SidStart, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SYSTEM_ALARM_ACE
+	NASMX_STRUC Header, ACE_HEADER
+		NASMX_RESERVE AceType, int8_t, 1
+		NASMX_RESERVE AceFlags, int8_t, 1
+		NASMX_RESERVE AceSize, uint16_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE imask, uint32_t, 1
+    NASMX_RESERVE SidStart, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ACL_REVISION_INFORMATION
+    NASMX_RESERVE AclRevision, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ACL_SIZE_INFORMATION
+    NASMX_RESERVE AceCount, uint32_t, 1
+    NASMX_RESERVE AclBytesInUse, uint32_t, 1
+    NASMX_RESERVE AclBytesFree, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SECURITY_DESCRIPTOR
+    NASMX_RESERVE Revision, int8_t, 1
+    NASMX_RESERVE Sbz1, int8_t, 1
+    NASMX_RESERVE Control, uint16_t, 1
+    NASMX_RESERVE Owner, NX_PTR, 1
+    NASMX_RESERVE lGroup, NX_PTR, 1
+    NASMX_RESERVE Sacl, NX_PTR, 1
+    NASMX_RESERVE Dacl, NX_PTR, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PRIVILEGE_SET
+    NASMX_RESERVE PrivilegeCount, uint32_t, 1
+    NASMX_RESERVE Control, uint32_t, 1
+	NASMX_STRUC Privilege, LUID_AND_ATTRIBUTES
+		NASMX_RESERVE pLuid, NX_PTR, 1
+		NASMX_RESERVE Attributes, uint32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EXCEPTION_RECORD
+    NASMX_RESERVE ExceptionCode, uint32_t, 1
+    NASMX_RESERVE ExceptionFlags, uint32_t, 1
+    NASMX_RESERVE pExceptionRecord, NX_PTR, 1
+    NASMX_RESERVE ExceptionAddress, NX_PTR, 1
+    NASMX_RESERVE NumberParameters, uint32_t, 1
+    NASMX_RESERVE ExceptionInformation, size_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EXCEPTION_DEBUG_INFO
+	NASMX_STRUC pExceptionRecord, EXCEPTION_RECORD
+		NASMX_RESERVE ExceptionCode, uint32_t, 1
+		NASMX_RESERVE ExceptionFlags, uint32_t, 1
+		NASMX_RESERVE pExceptionRecord, NX_PTR, 1
+		NASMX_RESERVE ExceptionAddress, NX_PTR, 1
+		NASMX_RESERVE NumberParameters, uint32_t, 1
+		NASMX_RESERVE ExceptionInformation, size_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE dwFirstChance, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CREATE_THREAD_DEBUG_INFO
+    NASMX_RESERVE hThread, NX_PTR, 1
+    NASMX_RESERVE lpThreadLocalBase, NX_PTR, 1
+    NASMX_RESERVE lpStartAddress, NX_PTR, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CREATE_PROCESS_DEBUG_INFO
+    NASMX_RESERVE hFile, NX_PTR, 1
+    NASMX_RESERVE hProcess, NX_PTR, 1
+    NASMX_RESERVE hThread, NX_PTR, 1
+    NASMX_RESERVE lpBaseOfImage, NX_PTR, 1
+    NASMX_RESERVE dwDebugInfoFileOffset, uint32_t, 1
+    NASMX_RESERVE nDebugInfoSize, uint32_t, 1
+    NASMX_RESERVE lpThreadLocalBase, NX_PTR, 1
+    NASMX_RESERVE lpStartAddress, NX_PTR, 1
+    NASMX_RESERVE lpImageName, NX_PTR, 1
+    NASMX_RESERVE fUnicode, uint16_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EXIT_THREAD_DEBUG_INFO
+    NASMX_RESERVE dwExitCode, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EXIT_PROCESS_DEBUG_INFO
+    NASMX_RESERVE dwExitCode, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LOAD_DLL_DEBUG_INFO
+    NASMX_RESERVE hFile, NX_PTR, 1
+    NASMX_RESERVE lpBaseOfDll, NX_PTR, 1
+    NASMX_RESERVE dwDebugInfoFileOffset, uint32_t, 1
+    NASMX_RESERVE nDebugInfoSize, uint32_t, 1
+    NASMX_RESERVE lpImageName, NX_PTR, 1
+    NASMX_RESERVE fUnicode, uint16_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC UNLOAD_DLL_DEBUG_INFO
+    NASMX_RESERVE lpBaseOfDll, NX_PTR, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC OUTPUT_DEBUG_STRING_INFO
+    NASMX_RESERVE lpDebugStringData, NX_PTR, 1
+    NASMX_RESERVE fUnicode, uint16_t, 1
+    NASMX_RESERVE nDebugStringiLength, uint16_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC RIP_INFO
+    NASMX_RESERVE dwError, uint32_t, 1
+    NASMX_RESERVE dwType, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC OFSTRUCT
+    NASMX_RESERVE cBytes, int8_t, 1
+    NASMX_RESERVE fFixedDisk, int8_t, 1
+    NASMX_RESERVE nErrCode, uint16_t, 1
+    NASMX_RESERVE Reserved1, uint16_t, 1
+    NASMX_RESERVE Reserved2, uint16_t, 1
+    NASMX_RESERVE szPathName, char_t, OFS_MAXPATHNAME
+NASMX_ENDSTRUC
+
+NASMX_STRUC WNDCLASSEX
+    NASMX_RESERVE cbSize, uint32_t, 1
+    NASMX_RESERVE style, uint32_t, 1
+    NASMX_RESERVE lpfnWndProc, NX_PTR, 1
+    NASMX_RESERVE cbClsExtra, int32_t, 1
+    NASMX_RESERVE cbWndExtra, int32_t, 1
+    NASMX_RESERVE hInstance, NX_PTR, 1
+    NASMX_RESERVE hIcon, NX_PTR, 1
+    NASMX_RESERVE hCursor, NX_PTR, 1
+    NASMX_RESERVE hbrBackground, NX_PTR, 1
+    NASMX_RESERVE lpszMenuName, NX_PTR, 1
+    NASMX_RESERVE lpszClassName, NX_PTR, 1
+    NASMX_RESERVE hIconSm, NX_PTR, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WNDCLASS
+    NASMX_RESERVE style, uint32_t, 1
+    NASMX_RESERVE lpfnWndProc, NX_PTR, 1
+    NASMX_RESERVE cbClsExtra, int32_t, 1
+    NASMX_RESERVE cbWndExtra, int32_t, 1
+    NASMX_RESERVE hInstance, NX_PTR, 1
+    NASMX_RESERVE hIcon, NX_PTR, 1
+    NASMX_RESERVE hCursor, NX_PTR, 1
+    NASMX_RESERVE hbrBackground, NX_PTR, 1
+    NASMX_RESERVE lpszMenuName, NX_PTR, 1
+    NASMX_RESERVE lpszClassName, NX_PTR, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CRITICAL_SECTION
+    NASMX_RESERVE DebugInfo, NX_PTR, 1
+    NASMX_RESERVE LockCount, int32_t, 1
+    NASMX_RESERVE RecursionCount, int32_t, 1
+    NASMX_RESERVE OwningThread, NX_PTR, 1
+    NASMX_RESERVE LockSemaphore, NX_PTR, 1
+    NASMX_RESERVE SpinCount, size_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC BY_HANDLE_FILE_INFORMATION
+    NASMX_RESERVE dwFileAttributes, uint32_t, 1
+	NASMX_STRUC ftCreationTime, FILETIME
+		NASMX_RESERVE dwLowDateTime, uint32_t, 1
+		NASMX_RESERVE dwHighDateTime, uint32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ftLastAccessTime, FILETIME
+		NASMX_RESERVE dwLowDateTime, uint32_t, 1
+		NASMX_RESERVE dwHighDateTime, uint32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ftLastWriteTime, FILETIME
+		NASMX_RESERVE dwLowDateTime, uint32_t, 1
+		NASMX_RESERVE dwHighDateTime, uint32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE dwVolumeSerialNumber, uint32_t, 1
+    NASMX_RESERVE nFileSizeHigh, uint32_t, 1
+    NASMX_RESERVE nFileSizeLow, uint32_t, 1
+    NASMX_RESERVE nNumberOfLinks, uint32_t, 1
+    NASMX_RESERVE nFileIndexHigh, uint32_t, 1
+    NASMX_RESERVE nFileIndexLow, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MEMORY_BASIC_INFORMATION
+    NASMX_RESERVE BaseAddress, NX_PTR, 1
+    NASMX_RESERVE AllocationBase, NX_PTR, 1
+    NASMX_RESERVE AllocationProtect, uint32_t, 1
+    NASMX_RESERVE RegionSize, size_t, 1
+    NASMX_RESERVE State, uint32_t, 1
+    NASMX_RESERVE Protect, uint32_t, 1
+    NASMX_RESERVE lType, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EVENTLOGRECORD
+    NASMX_RESERVE iLength, uint32_t, 1
+    NASMX_RESERVE Reserved, uint32_t, 1
+    NASMX_RESERVE RecordNumber, uint32_t, 1
+    NASMX_RESERVE TimeGenerated, uint32_t, 1
+    NASMX_RESERVE TimeWritten, uint32_t, 1
+    NASMX_RESERVE EventID, uint32_t, 1
+    NASMX_RESERVE EventType, uint16_t, 1
+    NASMX_RESERVE NumStrings, uint16_t, 1
+    NASMX_RESERVE EventCategory, uint16_t, 1
+    NASMX_RESERVE ReservedFlags, uint16_t, 1
+    NASMX_RESERVE ClosingRecordNumber, uint32_t, 1
+    NASMX_RESERVE StringOffset, uint32_t, 1
+    NASMX_RESERVE UserSidiLength, uint32_t, 1
+    NASMX_RESERVE UserSidOffset, uint32_t, 1
+    NASMX_RESERVE DataiLength, uint32_t, 1
+    NASMX_RESERVE DataOffset, uint32_t, 1
+NASMX_ENDSTRUC
+
+;// TODO: verify struct var names and update type...
+
+NASMX_STRUC TOKEN_GROUPS
+    NASMX_RESERVE GroupCount, int32_t, 1
+    NASMX_RESERVE Groups, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TOKEN_PRIVILEGES
+    NASMX_RESERVE PrivilegeCount, int32_t, 1
+    NASMX_RESERVE Privileges, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FLOATING_SAVE_AREA
+    NASMX_RESERVE ControlWord, int32_t, 1
+    NASMX_RESERVE StatusWord, int32_t, 1
+    NASMX_RESERVE TagWord, int32_t, 1
+    NASMX_RESERVE ErrorOffset, int32_t, 1
+    NASMX_RESERVE ErrorSelector, int32_t, 1
+    NASMX_RESERVE DataOffset, int32_t, 1
+    NASMX_RESERVE DataSelector, int32_t, 1
+    NASMX_RESERVE RegisterArea, int8_t, 1
+    NASMX_RESERVE Cr0NpxState, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CONTEXT
+    NASMX_RESERVE ContextFlags, int32_t, 1
+    NASMX_RESERVE iDr0, int32_t, 1
+    NASMX_RESERVE iDr1, int32_t, 1
+    NASMX_RESERVE iDr2, int32_t, 1
+    NASMX_RESERVE iDr3, int32_t, 1
+    NASMX_RESERVE iDr6, int32_t, 1
+    NASMX_RESERVE iDr7, int32_t, 1
+    NASMX_RESERVE FloatSave, int32_t, 1
+    NASMX_RESERVE regGs, int32_t, 1
+    NASMX_RESERVE regFs, int32_t, 1
+    NASMX_RESERVE regEs, int32_t, 1
+    NASMX_RESERVE regDs, int32_t, 1
+    NASMX_RESERVE regEdi, int32_t, 1
+    NASMX_RESERVE regEsi, int32_t, 1
+    NASMX_RESERVE regEbx, int32_t, 1
+    NASMX_RESERVE regEdx, int32_t, 1
+    NASMX_RESERVE regEcx, int32_t, 1
+    NASMX_RESERVE regEax, int32_t, 1
+    NASMX_RESERVE regEbp, int32_t, 1
+    NASMX_RESERVE regEip, int32_t, 1
+    NASMX_RESERVE regCs, int32_t, 1
+    NASMX_RESERVE regFlag, int32_t, 1
+    NASMX_RESERVE regEsp, int32_t, 1
+    NASMX_RESERVE regSs, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EXCEPTION_POINTERS
+    NASMX_RESERVE pExceptionRecord, int32_t, 1
+    NASMX_RESERVE ContextRecord, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LDT_BYTES
+    NASMX_RESERVE BaseMid, int8_t, 1
+    NASMX_RESERVE Flags1, int8_t, 1
+    NASMX_RESERVE Flags2, int8_t, 1
+    NASMX_RESERVE BaseHi, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LDT_ENTRY
+    NASMX_RESERVE LimitLow, short_t, 1
+    NASMX_RESERVE BaseLow, short_t, 1
+    NASMX_RESERVE HiWord, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TIME_ZONE_INFORMATION
+    NASMX_RESERVE Bias, int32_t, 1
+    NASMX_RESERVE StandardName, short_t, 1
+    NASMX_RESERVE StandardDate, int32_t, 1
+    NASMX_RESERVE StandardBias, int32_t, 1
+    NASMX_RESERVE DaylightName, short_t, 1
+    NASMX_RESERVE DaylightDate, int32_t, 1
+    NASMX_RESERVE DaylightBias, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WIN32_STREAM_ID
+    NASMX_RESERVE dwStreamID, int32_t, 1
+    NASMX_RESERVE dwStreamAttributes, int32_t, 1
+    NASMX_RESERVE dwStreamSizeLow, int32_t, 1
+    NASMX_RESERVE dwStreamSizeHigh, int32_t, 1
+    NASMX_RESERVE dwStreamNameSize, int32_t, 1
+    NASMX_RESERVE cStreamName, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC STARTUPINFO
+    NASMX_RESERVE cb, int32_t, 1
+    NASMX_RESERVE lpReserved, int32_t, 1
+    NASMX_RESERVE lpDesktop, int32_t, 1
+    NASMX_RESERVE lpTitle, int32_t, 1
+    NASMX_RESERVE dwX, int32_t, 1
+    NASMX_RESERVE dwY, int32_t, 1
+    NASMX_RESERVE dwXSize, int32_t, 1
+    NASMX_RESERVE dwYSize, int32_t, 1
+    NASMX_RESERVE dwXCountChars, int32_t, 1
+    NASMX_RESERVE dwYCountChars, int32_t, 1
+    NASMX_RESERVE dwFillAttribute, int32_t, 1
+    NASMX_RESERVE dwFlags, int32_t, 1
+    NASMX_RESERVE wShowWindow, short_t, 1
+    NASMX_RESERVE cbReserved2, short_t, 1
+    NASMX_RESERVE lpReserved2, int8_t, 1
+    NASMX_RESERVE hStdInput, int32_t, 1
+    NASMX_RESERVE hStdOutput, int32_t, 1
+    NASMX_RESERVE hStdError, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WIN32_FIND_DATA
+    NASMX_RESERVE dwFileAttributes, int32_t, 1
+	NASMX_STRUC ftCreationTime, FILETIME
+		NASMX_RESERVE dwLowDateTime, uint32_t, 1
+		NASMX_RESERVE dwHighDateTime, uint32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ftLastAccessTime, FILETIME
+		NASMX_RESERVE dwLowDateTime, uint32_t, 1
+		NASMX_RESERVE dwHighDateTime, uint32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ftLastWriteTime, FILETIME
+		NASMX_RESERVE dwLowDateTime, uint32_t, 1
+		NASMX_RESERVE dwHighDateTime, uint32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE nFileSizeHigh, int32_t, 1
+    NASMX_RESERVE nFileSizeLow, int32_t, 1
+    NASMX_RESERVE dwReserved0, int32_t, 1
+    NASMX_RESERVE dwReserved1, int32_t, 1
+    NASMX_RESERVE cFileName, int8_t, MAX_PATH
+    NASMX_RESERVE cAlternate, int8_t, 14 
+NASMX_ENDSTRUC
+
+NASMX_STRUC CPINFO
+    NASMX_RESERVE MaxCharSize, int32_t, 1
+    NASMX_RESERVE DefaultChar, int8_t, 1
+    NASMX_RESERVE LeadByte, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NUMBERFMT
+    NASMX_RESERVE NumDigits, int32_t, 1
+    NASMX_RESERVE LeadingZero, int32_t, 1
+    NASMX_RESERVE Grouping, int32_t, 1
+    NASMX_RESERVE lpDecimalSep, int32_t, 1
+    NASMX_RESERVE lpThousandSep, int32_t, 1
+    NASMX_RESERVE NegativeOrder, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CURRENCYFMT
+    NASMX_RESERVE NumDigits, int32_t, 1
+    NASMX_RESERVE LeadingZero, int32_t, 1
+    NASMX_RESERVE Grouping, int32_t, 1
+    NASMX_RESERVE lpDecimalSep, int32_t, 1
+    NASMX_RESERVE lpThousandSep, int32_t, 1
+    NASMX_RESERVE NegativeOrder, int32_t, 1
+    NASMX_RESERVE PositiveOrder, int32_t, 1
+    NASMX_RESERVE lpCurrencySymbol, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC COORD
+    NASMX_RESERVE x, short_t, 1
+    NASMX_RESERVE y, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SMALL_RECT
+    NASMX_RESERVE left, short_t, 1
+    NASMX_RESERVE top, short_t, 1
+    NASMX_RESERVE right, short_t, 1
+    NASMX_RESERVE bottom, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC KEY_EVENT_RECORD
+    NASMX_RESERVE bKeyDown, int32_t, 1
+    NASMX_RESERVE wRepeatCount, short_t, 1
+    NASMX_RESERVE wVirtualKeyCode, short_t, 1
+    NASMX_RESERVE wVirtualScanCode, short_t, 1
+    NASMX_RESERVE uChar, short_t, 1
+    NASMX_RESERVE dwControlKeyState, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MOUSE_EVENT_RECORD
+    NASMX_RESERVE dwMousePosition, int32_t, 1
+    NASMX_RESERVE dwButtonState, int32_t, 1
+    NASMX_RESERVE dwControlKeyState, int32_t, 1
+    NASMX_RESERVE dwEventFlags, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WINDOW_BUFFER_SIZE_RECORD
+    NASMX_RESERVE dwSize, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MENU_EVENT_RECORD
+    NASMX_RESERVE dwCommandId, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FOCUS_EVENT_RECORD
+    NASMX_RESERVE bSetFocus, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CHAR_INFO
+    NASMX_RESERVE Char, short_t, 1
+    NASMX_RESERVE Attributes, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CONSOLE_SCREEN_BUFFER_INFO
+    NASMX_RESERVE dwSize, int32_t, 1
+    NASMX_RESERVE dwCursorPosition, int32_t, 1
+    NASMX_RESERVE wAttributes, short_t, 1
+	NASMX_STRUC srWindow, SMALL_RECT
+		NASMX_RESERVE left, short_t, 1
+		NASMX_RESERVE top, short_t, 1
+		NASMX_RESERVE right, short_t, 1
+		NASMX_RESERVE bottom, short_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE dwMaximumWindowSize, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CONSOLE_CURSOR_INFO
+    NASMX_RESERVE dwSize, int32_t, 1
+    NASMX_RESERVE bVisible, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC XFORM
+    NASMX_RESERVE eM11, int64_t,1
+    NASMX_RESERVE eM12, int64_t, 1
+    NASMX_RESERVE eM21, int64_t, 1
+    NASMX_RESERVE eM22, int64_t, 1
+    NASMX_RESERVE ex, int64_t, 1
+    NASMX_RESERVE ey, int64_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC BITMAP
+    NASMX_RESERVE bmType, int32_t, 1
+    NASMX_RESERVE bmWidth, int32_t, 1
+    NASMX_RESERVE bmHeight, int32_t, 1
+    NASMX_RESERVE bmWidthBytes, int32_t, 1
+    NASMX_RESERVE bmPlanes, short_t, 1
+    NASMX_RESERVE bmBitsPixel, short_t, 1
+    NASMX_RESERVE bmBits, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC RGBTRIPLE
+    NASMX_RESERVE rgbtBlue, int8_t, 1
+    NASMX_RESERVE rgbtGreen, int8_t, 1
+    NASMX_RESERVE rgbtRed, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC RGBQUAD
+    NASMX_RESERVE rgbBlue, int8_t, 1
+    NASMX_RESERVE rgbGreen, int8_t, 1
+    NASMX_RESERVE rgbRed, int8_t, 1
+    NASMX_RESERVE rgbReserved, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC BITMAPCOREHEADER
+    NASMX_RESERVE bcSize, int32_t, 1
+    NASMX_RESERVE bcWidth, short_t, 1
+    NASMX_RESERVE bcHeight, short_t, 1
+    NASMX_RESERVE bcPlanes, short_t, 1
+    NASMX_RESERVE bcBitCount, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC BITMAPINFOHEADER
+    NASMX_RESERVE biSize, int32_t, 1
+    NASMX_RESERVE biWidth, int32_t, 1
+    NASMX_RESERVE biHeight, int32_t, 1
+    NASMX_RESERVE biPlanes, short_t, 1
+    NASMX_RESERVE biBitCount, short_t, 1
+    NASMX_RESERVE biCompression, int32_t, 1
+    NASMX_RESERVE biSizeImage, int32_t, 1
+    NASMX_RESERVE biXPelsPerMeter, int32_t, 1
+    NASMX_RESERVE biYPelsPerMeter, int32_t, 1
+    NASMX_RESERVE biClrUsed, int32_t, 1
+    NASMX_RESERVE biClrImportant, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC BITMAPINFO
+    NASMX_RESERVE bmiHeader, int32_t, 1
+    NASMX_RESERVE bmiColors, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC BITMAPCOREINFO
+    NASMX_RESERVE bmciHeader, int32_t, 1
+    NASMX_RESERVE bmciColors, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC BITMAPFILEHEADER
+    NASMX_RESERVE bfType, short_t, 1
+    NASMX_RESERVE bfSize, int32_t, 1
+    NASMX_RESERVE bfReserved1, short_t, 1
+    NASMX_RESERVE bfReserved2, short_t, 1
+    NASMX_RESERVE bfOffBits, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC HANDLETABLE
+    NASMX_RESERVE objectHandle, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC METARECORD
+    NASMX_RESERVE rdSize, int32_t, 1
+    NASMX_RESERVE rdFunction, short_t, 1
+    NASMX_RESERVE rdParm1, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC METAFILEPICT
+    NASMX_RESERVE imm, int32_t, 1
+    NASMX_RESERVE xExt, int32_t, 1
+    NASMX_RESERVE yExt, int32_t, 1
+    NASMX_RESERVE hMF, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC METAHEADER
+    NASMX_RESERVE mtType, short_t, 1
+    NASMX_RESERVE mtHeaderSize, short_t, 1
+    NASMX_RESERVE mtVersion, short_t, 1
+    NASMX_RESERVE mtSize, int32_t, 1
+    NASMX_RESERVE mtNoObjects, short_t, 1
+    NASMX_RESERVE mtMaxRecord, int32_t, 1
+    NASMX_RESERVE mtNoParameters, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ENHMETARECORD
+    NASMX_RESERVE iType, int32_t, 1
+    NASMX_RESERVE nSize, int32_t, 1
+    NASMX_RESERVE dParm1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ENHMETAHEADER
+    NASMX_RESERVE iType, int32_t, 1
+    NASMX_RESERVE nSize, int32_t, 1
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclFrame, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE dSignature, int32_t, 1
+    NASMX_RESERVE nVersion, int32_t, 1
+    NASMX_RESERVE nBytes, int32_t, 1
+    NASMX_RESERVE nRecords, int32_t, 1
+    NASMX_RESERVE nHandles, short_t, 1
+    NASMX_RESERVE sReserved, short_t, 1
+    NASMX_RESERVE nDescription, int32_t, 1
+    NASMX_RESERVE offDescription, int32_t, 1
+    NASMX_RESERVE nPalEntries, int32_t, 1
+    NASMX_RESERVE szlDevice, int32_t, 1
+    NASMX_RESERVE szlMillimeters, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TEXTMETRIC
+    NASMX_RESERVE tmHeight, int32_t, 1
+    NASMX_RESERVE tmAscent, int32_t, 1
+    NASMX_RESERVE tmDescent, int32_t, 1
+    NASMX_RESERVE tmInternalLeading, int32_t, 1
+    NASMX_RESERVE tmExternalLeading, int32_t, 1
+    NASMX_RESERVE tmAveCharWidth, int32_t, 1
+    NASMX_RESERVE tmMaxCharWidth, int32_t, 1
+    NASMX_RESERVE tmWeight, int32_t, 1
+    NASMX_RESERVE tmOverhang, int32_t, 1
+    NASMX_RESERVE tmDigitizedAspectX, int32_t, 1
+    NASMX_RESERVE tmDigitizedAspectY, int32_t, 1
+    NASMX_RESERVE tmFirstChar, int8_t, 1
+    NASMX_RESERVE tmLastChar, int8_t, 1
+    NASMX_RESERVE tmDefaultChar, int8_t, 1
+    NASMX_RESERVE tmBreakChar, int8_t, 1
+    NASMX_RESERVE tmItalic, int8_t, 1
+    NASMX_RESERVE tmUnderlined, int8_t, 1
+    NASMX_RESERVE tmStruckOut, int8_t, 1
+    NASMX_RESERVE tmPitchAndFamily, int8_t, 1
+    NASMX_RESERVE tmCharSet, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NEWTEXTMETRIC
+    NASMX_RESERVE tmHeight, int32_t, 1
+    NASMX_RESERVE tmAscent, int32_t, 1
+    NASMX_RESERVE tmDescent, int32_t, 1
+    NASMX_RESERVE tmInternalLeading, int32_t, 1
+    NASMX_RESERVE tmExternalLeading, int32_t, 1
+    NASMX_RESERVE tmAveCharWidth, int32_t, 1
+    NASMX_RESERVE tmMaxCharWidth, int32_t, 1
+    NASMX_RESERVE tmWeight, int32_t, 1
+    NASMX_RESERVE tmOverhang, int32_t, 1
+    NASMX_RESERVE tmDigitizedAspectX, int32_t, 1
+    NASMX_RESERVE tmDigitizedAspectY, int32_t, 1
+    NASMX_RESERVE tmFirstChar, int8_t, 1
+    NASMX_RESERVE tmLastChar, int8_t, 1
+    NASMX_RESERVE tmDefaultChar, int8_t, 1
+    NASMX_RESERVE tmBreakChar, int8_t, 1
+    NASMX_RESERVE tmItalic, int8_t, 1
+    NASMX_RESERVE tmUnderlined, int8_t, 1
+    NASMX_RESERVE tmStruckOut, int8_t, 1
+    NASMX_RESERVE tmPitchAndFamily, int8_t, 1
+    NASMX_RESERVE tmCharSet, int8_t, 1
+    NASMX_RESERVE ntmFlags, int32_t, 1
+    NASMX_RESERVE ntmSizeEM, int32_t, 1
+    NASMX_RESERVE ntmCellHeight, int32_t, 1
+    NASMX_RESERVE ntmAveWidth, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PELARRAY
+    NASMX_RESERVE paXCount, int32_t, 1
+    NASMX_RESERVE paYCount, int32_t, 1
+    NASMX_RESERVE paXExt, int32_t, 1
+    NASMX_RESERVE paYExt, int32_t, 1
+    NASMX_RESERVE paRGBs, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LOGBRUSH
+    NASMX_RESERVE lbStyle, int32_t, 1
+    NASMX_RESERVE lbColor, int32_t, 1
+    NASMX_RESERVE lbHatch, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LOGPEN
+    NASMX_RESERVE lopnStyle, int32_t, 1
+    NASMX_RESERVE lopnWidth, int32_t, 1
+    NASMX_RESERVE lopnColor, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EXTLOGPEN
+    NASMX_RESERVE elpPenStyle, int32_t, 1
+    NASMX_RESERVE elpWidth, int32_t, 1
+    NASMX_RESERVE elpBrushStyle, int32_t, 1
+    NASMX_RESERVE elpColor, int32_t, 1
+    NASMX_RESERVE elpHatch, int32_t, 1
+    NASMX_RESERVE elpNumEntries, int32_t, 1
+    NASMX_RESERVE elpStyleEntry, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PALETTEENTRY
+    NASMX_RESERVE peRed, int8_t, 1
+    NASMX_RESERVE peGreen, int8_t, 1
+    NASMX_RESERVE peBlue, int8_t, 1
+    NASMX_RESERVE peFlags, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LOGPALETTE
+    NASMX_RESERVE palVersion, short_t, 1
+    NASMX_RESERVE palNumEntries, short_t, 1
+    NASMX_RESERVE palPalEntry, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LOGFONT
+    NASMX_RESERVE lfHeight, int32_t, 1
+    NASMX_RESERVE lfWidth, int32_t, 1
+    NASMX_RESERVE lfEscapement, int32_t, 1
+    NASMX_RESERVE lfOrientation, int32_t, 1
+    NASMX_RESERVE lfWeight, int32_t, 1
+    NASMX_RESERVE lfItalic, int8_t, 1
+    NASMX_RESERVE lfUnderline, int8_t, 1
+    NASMX_RESERVE lfStrikeOut, int8_t, 1
+    NASMX_RESERVE lfCharSet, int8_t, 1
+    NASMX_RESERVE lfOutPrecision, int8_t, 1
+    NASMX_RESERVE lfClipPrecision, int8_t, 1
+    NASMX_RESERVE lfQuality, int8_t, 1
+    NASMX_RESERVE lfPitchAndFamily, int8_t, 1
+    NASMX_RESERVE lfFaceName, int8_t, LF_FACESIZE
+NASMX_ENDSTRUC
+
+NASMX_STRUC NONCLIENTMETRICS
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE iBorderWidth, int32_t, 1
+    NASMX_RESERVE iScrollWidth, int32_t, 1
+    NASMX_RESERVE iScrollHeight, int32_t, 1
+    NASMX_RESERVE iCaptionWidth, int32_t, 1
+    NASMX_RESERVE iCaptionHeight, int32_t, 1
+    NASMX_RESERVE lfCaptionFont, int32_t, 1
+    NASMX_RESERVE iSMCaptionWidth, int32_t, 1
+    NASMX_RESERVE iSMCaptionHeight, int32_t, 1
+    NASMX_RESERVE lfSMCaptionFont, int32_t, 1
+    NASMX_RESERVE iMenuWidth, int32_t, 1
+    NASMX_RESERVE iMenuHeight, int32_t, 1
+    NASMX_RESERVE lfMenuFont, int32_t, 1
+    NASMX_RESERVE lfStatusFont, int32_t, 1
+    NASMX_RESERVE lfMessageFont, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ENUMLOGFONT
+    NASMX_RESERVE elfLogFont, int32_t, 1
+    NASMX_RESERVE elfFullName, int8_t, 1
+    NASMX_RESERVE elfStyle, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PANOSE
+    NASMX_RESERVE ulculture, int32_t, 1
+    NASMX_RESERVE bFamilyType, int8_t, 1
+    NASMX_RESERVE bSerifStyle, int8_t, 1
+    NASMX_RESERVE bWeight, int8_t, 1
+    NASMX_RESERVE bProportion, int8_t, 1
+    NASMX_RESERVE bContrast, int8_t, 1
+    NASMX_RESERVE bStrokeVariation, int8_t, 1
+    NASMX_RESERVE bArmStyle, int8_t, 1
+    NASMX_RESERVE bLetterform, int8_t, 1
+    NASMX_RESERVE bMidline, int8_t, 1
+    NASMX_RESERVE bXHeight, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EXTLOGFONT
+    NASMX_RESERVE elfLogFont, int32_t, 1
+    NASMX_RESERVE elfFullName, int8_t, 1
+    NASMX_RESERVE elfStyle, int8_t, 1
+    NASMX_RESERVE elfVersion, int32_t, 1
+    NASMX_RESERVE elfStyleSize, int32_t, 1
+    NASMX_RESERVE elfMatch, int32_t, 1
+    NASMX_RESERVE elfReserved, int32_t, 1
+    NASMX_RESERVE elfVendorId, int8_t, 1
+    NASMX_RESERVE elfCulture, int32_t, 1
+    NASMX_RESERVE elfPanose, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DEVMODE
+    NASMX_RESERVE dmDeviceName, int8_t, 1
+    NASMX_RESERVE dmSpecVersion, short_t, 1
+    NASMX_RESERVE dmDriverVersion, short_t, 1
+    NASMX_RESERVE dmSize, short_t, 1
+    NASMX_RESERVE dmDriverExtra, short_t, 1
+    NASMX_RESERVE dmFields, int32_t, 1
+    NASMX_RESERVE dmOrientation, short_t, 1
+    NASMX_RESERVE dmPaperSize, short_t, 1
+    NASMX_RESERVE dmPaperiLength, short_t, 1
+    NASMX_RESERVE dmPaperWidth, short_t, 1
+    NASMX_RESERVE dmScale, short_t, 1
+    NASMX_RESERVE dmCopies, short_t, 1
+    NASMX_RESERVE dmDefaultSource, short_t, 1
+    NASMX_RESERVE dmPrintQuality, short_t, 1
+    NASMX_RESERVE dmColor, short_t, 1
+    NASMX_RESERVE dmDuplex, short_t, 1
+    NASMX_RESERVE dmYResolution, short_t, 1
+    NASMX_RESERVE dmTTOption, short_t, 1
+    NASMX_RESERVE dmCollate, short_t, 1
+    NASMX_RESERVE dmFormName, int8_t, CCHFORMNAME
+    NASMX_RESERVE dmUnusedPadding, short_t, 1
+    NASMX_RESERVE dmBitsPerPel, short_t, 1
+    NASMX_RESERVE dmPelsWidth, int32_t, 1
+    NASMX_RESERVE dmPelsHeight, int32_t, 1
+    NASMX_RESERVE dmDisplayFlags, int32_t, 1
+    NASMX_RESERVE dmDisplayFrequency, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC RGNDATAHEADER
+    NASMX_RESERVE dwSize, int32_t, 1
+    NASMX_RESERVE iType, int32_t, 1
+    NASMX_RESERVE nCount, int32_t, 1
+    NASMX_RESERVE nRgnSize, int32_t, 1
+	NASMX_STRUC rcBound, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC RGNDATA
+    NASMX_RESERVE rdh, int32_t, 1
+    NASMX_RESERVE Buffer, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ABC
+    NASMX_RESERVE abcA, int32_t, 1
+    NASMX_RESERVE abcB, int32_t, 1
+    NASMX_RESERVE abcC, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ABCFLOAT
+    NASMX_RESERVE abcfA, int64_t, 1
+    NASMX_RESERVE abcfB, int64_t, 1
+    NASMX_RESERVE abcfC, int64_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC OUTLINETEXTMETRIC
+    NASMX_RESERVE otmSize, int32_t, 1
+    NASMX_RESERVE otmTextMetrics, int32_t, 1
+    NASMX_RESERVE otmFiller, int8_t, 1
+    NASMX_RESERVE otmPanoseNumber, int32_t, 1
+    NASMX_RESERVE otmfsSelection, int32_t, 1
+    NASMX_RESERVE otmfsType, int32_t, 1
+    NASMX_RESERVE otmsCharSlopeRise, int32_t, 1
+    NASMX_RESERVE otmsCharSlopeRun, int32_t, 1
+    NASMX_RESERVE otmItalicAngle, int32_t, 1
+    NASMX_RESERVE otmEMSquare, int32_t, 1
+    NASMX_RESERVE otmAscent, int32_t, 1
+    NASMX_RESERVE otmDescent, int32_t, 1
+    NASMX_RESERVE otmLineGap, int32_t, 1
+    NASMX_RESERVE otmsCapEmHeight, int32_t, 1
+    NASMX_RESERVE otmsXHeight, int32_t, 1
+	NASMX_STRUC otmrcFontBox, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+
+    NASMX_RESERVE otmMacAscent, int32_t, 1
+    NASMX_RESERVE otmMacDescent, int32_t, 1
+    NASMX_RESERVE otmMacLineGap, int32_t, 1
+    NASMX_RESERVE otmusMinimumPPEM, int32_t, 1
+    NASMX_RESERVE otmptSubscriptSize, int32_t, 1
+    NASMX_RESERVE otmptSubscriptOffset, int32_t, 1
+    NASMX_RESERVE otmptSuperscriptSize, int32_t, 1
+    NASMX_RESERVE otmptSuperscriptOffset, int32_t, 1
+    NASMX_RESERVE otmsStrikeoutSize, int32_t, 1
+    NASMX_RESERVE otmsStrikeoutPosition, int32_t, 1
+    NASMX_RESERVE otmsUnderscorePosition, int32_t, 1
+    NASMX_RESERVE otmsUnderscoreSize, int32_t, 1
+    NASMX_RESERVE otmpFamilyName, int32_t, 1
+    NASMX_RESERVE otmpFaceName, int32_t, 1
+    NASMX_RESERVE otmpStyleName, int32_t, 1
+    NASMX_RESERVE otmpFullName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC POLYTEXT
+    NASMX_RESERVE x, int32_t, 1
+    NASMX_RESERVE y, int32_t, 1
+    NASMX_RESERVE n, int32_t, 1
+    NASMX_RESERVE lpStr, int32_t, 1
+    NASMX_RESERVE uiFlags, int32_t, 1
+	NASMX_STRUC rcl, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE pdx, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FIXED
+    NASMX_RESERVE fract, short_t, 1
+    NASMX_RESERVE Value, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MAT2
+    NASMX_RESERVE eM11, int32_t, 1
+    NASMX_RESERVE eM12, int32_t, 1
+    NASMX_RESERVE eM21, int32_t, 1
+    NASMX_RESERVE eM22, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC GLYPHMETRICS
+    NASMX_RESERVE gmBlackBoxX, int32_t, 1
+    NASMX_RESERVE gmBlackBoxY, int32_t, 1
+    NASMX_RESERVE gmptGlyphOrigin, int32_t, 1
+    NASMX_RESERVE gmCellIncX, short_t, 1
+    NASMX_RESERVE gmCellIncY, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC POINTFX
+    NASMX_RESERVE x, int32_t, 1
+    NASMX_RESERVE y, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TTPOLYCURVE
+    NASMX_RESERVE wType, short_t, 1
+    NASMX_RESERVE cpfx, short_t, 1
+    NASMX_RESERVE apfx, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TTPOLYGONHEADER
+    NASMX_RESERVE cb, int32_t, 1
+    NASMX_RESERVE dwType, int32_t, 1
+    NASMX_RESERVE pfxStart, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC RASTERIZER_STATUS
+    NASMX_RESERVE nSize, short_t, 1
+    NASMX_RESERVE wFlags, short_t, 1
+    NASMX_RESERVE nLanguageID, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC COLORADJUSTMENT
+    NASMX_RESERVE caSize, short_t, 1
+    NASMX_RESERVE caFlags, short_t, 1
+    NASMX_RESERVE caIlluminantIndex, short_t, 1
+    NASMX_RESERVE caRedGamma, short_t, 1
+    NASMX_RESERVE caGreenGamma, short_t, 1
+    NASMX_RESERVE caBlueGamma, short_t, 1
+    NASMX_RESERVE caReferenceBlack, short_t, 1
+    NASMX_RESERVE caReferenceWhite, short_t, 1
+    NASMX_RESERVE caContrast, short_t, 1
+    NASMX_RESERVE caBrightness, short_t, 1
+    NASMX_RESERVE caColorfulness, short_t, 1
+    NASMX_RESERVE caRedGreenTint, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DOCINFO
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE lpszDocName, int32_t, 1
+    NASMX_RESERVE lpszOutput, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC KERNINGPAIR
+    NASMX_RESERVE wFirst, short_t, 1
+    NASMX_RESERVE wSecond, short_t, 1
+    NASMX_RESERVE iKernAmount, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC emr
+    NASMX_RESERVE iType, int32_t, 1
+    NASMX_RESERVE nSize, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC emrtext
+	NASMX_STRUC ptlReference, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE nchars, int32_t, 1
+    NASMX_RESERVE offString, int32_t, 1
+    NASMX_RESERVE fOptions, int32_t, 1
+    NASMX_RESERVE ircl, int32_t, 1
+    NASMX_RESERVE offDx, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMR
+    NASMX_RESERVE iType, int32_t, 1
+    NASMX_RESERVE nSize, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRABORTPATH
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRBEGINPATH
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRENDPATH
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRCLOSEFIGURE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRFLATTENPATH
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRWIDENPATH
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETMETARGN
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMREMRSAVEDC
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRREALIZEPALETTE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSELECTCLIPPATH
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iMode, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETBKMODE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iMode, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETMAPMODE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iMode, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETPOLYFILLMODE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iMode, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETROP2
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iMode, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETSTRETCHBLTMODE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iMode, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETTEXTALIGN
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iMode, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETMITERLIMIT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE eMiterLimit, int64_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRRESTOREDC
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iRelative, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETARCDIRECTION
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iArcDirection, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETMAPPERFLAGS
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE dwFlags, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETTEXTCOLOR
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE crColor, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETBKCOLOR
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE crColor, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSELECTOBJECT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihObject, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRDELETEOBJECT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihObject, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSELECTPALETTE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihPal, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRRESIZEPALETTE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihPal, int32_t, 1
+    NASMX_RESERVE cEntries, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETPALETTEENTRIES
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihPal, int32_t, 1
+    NASMX_RESERVE iStart, int32_t, 1
+    NASMX_RESERVE cEntries, int32_t, 1
+    NASMX_RESERVE aPalEntries, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETCOLORADJUSTMENT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ColorAdjustment, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRGDICOMMENT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cbData, int32_t, 1
+    NASMX_RESERVE xData1, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMREOF
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE nPalEntries, int32_t, 1
+    NASMX_RESERVE offPalEntries, int32_t, 1
+    NASMX_RESERVE nSizeLast, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRLINETO
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptl, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRMOVETOEX
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptl, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMROFFSETCLIPRGN
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlOffset, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRFILLPATH
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSTROKEANDFILLPATH
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSTROKEPATH
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMREXCLUDECLIPRECT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclClip, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRINTERSECTCLIPRECT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclClip, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETVIEWPORTORGEX
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlOrigin, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETWINDOWORGEX
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlOrigin, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETBRUSHORGEX
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlOrigin, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETVIEWPORTEXTEX
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE szlExtent, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETWINDOWEXTEX
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE szlExtent, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSCALEVIEWPORTEXTEX
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE xNum, int32_t, 1
+    NASMX_RESERVE xDenom, int32_t, 1
+    NASMX_RESERVE yNum, int32_t, 1
+    NASMX_RESERVE yDemon, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSCALEWINDOWEXTEX
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE xNum, int32_t, 1
+    NASMX_RESERVE xDenom, int32_t, 1
+    NASMX_RESERVE yNum, int32_t, 1
+    NASMX_RESERVE yDemon, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETWORLDTRANSFORM
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE xform, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRMODIFYWORLDTRANSFORM
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE xform, int32_t, 1
+    NASMX_RESERVE iMode, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETPIXELV
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlPixel, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE crColor, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMREXTFLOODFILL
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlStart, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE crColor, int32_t, 1
+    NASMX_RESERVE iMode, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRELLIPSE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBox, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRRECTANGLE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBox, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRROUNDRECT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBox, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE szlCorner, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRARC
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBox, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlStart, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlEnd, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRARCTO
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBox, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlStart, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlEnd, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRCHORD
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBox, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlStart, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlEnd, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPIE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBox, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlStart, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlEnd, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRANGLEARC
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptlCenter, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE nRadius, int32_t, 1
+    NASMX_RESERVE eStartAngle, int64_t, 1
+    NASMX_RESERVE eSweepAngle, int64_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYLINE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cptl, int32_t, 1
+    NASMX_RESERVE aptl1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYBEZIER
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cptl, int32_t, 1
+    NASMX_RESERVE aptl1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYGON
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cptl, int32_t, 1
+    NASMX_RESERVE aptl1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYBEZIERTO
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cptl, int32_t, 1
+    NASMX_RESERVE aptl1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYLINE16
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cpts, int32_t, 1
+    NASMX_RESERVE apts1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYBEZIER16
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cpts, int32_t, 1
+    NASMX_RESERVE apts1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYGON16
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cpts, int32_t, 1
+    NASMX_RESERVE apts1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPLOYBEZIERTO16
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cpts, int32_t, 1
+    NASMX_RESERVE apts1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYLINETO16
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cpts, int32_t, 1
+    NASMX_RESERVE apts1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYDRAW
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cptl, int32_t, 1
+    NASMX_RESERVE aptl1, int32_t, 1
+    NASMX_RESERVE abTypes1, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYDRAW16
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cpts, int32_t, 1
+    NASMX_RESERVE apts, int32_t, 1
+    NASMX_RESERVE abTypes, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYPOLYLINE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE nPolys, int32_t, 1
+    NASMX_RESERVE cptl, int32_t, 1
+    NASMX_RESERVE aPolyCounts, int32_t, 1
+    NASMX_RESERVE aptl, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYPOLYGON
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE nPolys, int32_t, 1
+    NASMX_RESERVE cptl, int32_t, 1
+    NASMX_RESERVE aPolyCounts, int32_t, 1
+    NASMX_RESERVE aptl1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYPOLYLINE16
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE nPolys, int32_t, 1
+    NASMX_RESERVE cpts, int32_t, 1
+    NASMX_RESERVE aPolyCounts, int32_t, 1
+    NASMX_RESERVE apts1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPOLYPOLYGON16
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE nPolys, int32_t, 1
+    NASMX_RESERVE cpts, int32_t, 1
+    NASMX_RESERVE aPolyCounts, int32_t, 1
+    NASMX_RESERVE apts1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRINVERTRGN
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cbRgnData, int32_t, 1
+    NASMX_RESERVE RgnData1, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPAINTRGN
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cbRgnData, int32_t, 1
+    NASMX_RESERVE RgnData1, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRFILLRGN
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cbRgnData, int32_t, 1
+    NASMX_RESERVE ihBrush, int32_t, 1
+    NASMX_RESERVE RgnData, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRFRAMERGN
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cbRgnData, int32_t, 1
+    NASMX_RESERVE ihBrush, int32_t, 1
+    NASMX_RESERVE szlStroke, int32_t, 1
+    NASMX_RESERVE RgnData1, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMREXTSELECTCLIPRGN
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cbRgnData, int32_t, 1
+    NASMX_RESERVE iMode, int32_t, 1
+    NASMX_RESERVE RgnData, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMREXTTEXTOUT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iGraphicsMode, int32_t, 1
+    NASMX_RESERVE exScale, int64_t, 1
+    NASMX_RESERVE eyScale, int64_t, 1
+    NASMX_RESERVE emrtext, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRBITBLT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE xDest, int32_t, 1
+    NASMX_RESERVE yDest, int32_t, 1
+    NASMX_RESERVE cxDest, int32_t, 1
+    NASMX_RESERVE cyDest, int32_t, 1
+    NASMX_RESERVE dwRop, int32_t, 1
+    NASMX_RESERVE xSrc, int32_t, 1
+    NASMX_RESERVE ySrc, int32_t, 1
+    NASMX_RESERVE xformSrc, int32_t, 1
+    NASMX_RESERVE crBkColorSrc, int32_t, 1
+    NASMX_RESERVE iUsageSrc, int32_t, 1
+    NASMX_RESERVE offBmiSrc, int32_t, 1
+    NASMX_RESERVE cbBmiSrc, int32_t, 1
+    NASMX_RESERVE offBitsSrc, int32_t, 1
+    NASMX_RESERVE cbBitsSrc, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSTRETCHBLT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE xDest, int32_t, 1
+    NASMX_RESERVE yDest, int32_t, 1
+    NASMX_RESERVE cxDest, int32_t, 1
+    NASMX_RESERVE cyDest, int32_t, 1
+    NASMX_RESERVE dwRop, int32_t, 1
+    NASMX_RESERVE xSrc, int32_t, 1
+    NASMX_RESERVE ySrc, int32_t, 1
+    NASMX_RESERVE xformSrc, int32_t, 1
+    NASMX_RESERVE crBkColorSrc, int32_t, 1
+    NASMX_RESERVE iUsageSrc, int32_t, 1
+    NASMX_RESERVE offBmiSrc, int32_t, 1
+    NASMX_RESERVE cbBmiSrc, int32_t, 1
+    NASMX_RESERVE offBitsSrc, int32_t, 1
+    NASMX_RESERVE cbBitsSrc, int32_t, 1
+    NASMX_RESERVE cxSrc, int32_t, 1
+    NASMX_RESERVE cySrc, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRMASKBLT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE xDest, int32_t, 1
+    NASMX_RESERVE yDest, int32_t, 1
+    NASMX_RESERVE cxDest, int32_t, 1
+    NASMX_RESERVE cyDest, int32_t, 1
+    NASMX_RESERVE dwRop, int32_t, 1
+    NASMX_RESERVE xSrc2, int32_t, 1
+    NASMX_RESERVE cyDest2, int32_t, 1
+    NASMX_RESERVE dwRop2, int32_t, 1
+    NASMX_RESERVE xSrc, int32_t, 1
+    NASMX_RESERVE ySrc, int32_t, 1
+    NASMX_RESERVE xformSrc, int32_t, 1
+    NASMX_RESERVE crBkColorSrc, int32_t, 1
+    NASMX_RESERVE iUsageSrc, int32_t, 1
+    NASMX_RESERVE offBmiSrc, int32_t, 1
+    NASMX_RESERVE cbBmiSrc, int32_t, 1
+    NASMX_RESERVE offBitsSrc, int32_t, 1
+    NASMX_RESERVE cbBitsSrc, int32_t, 1
+    NASMX_RESERVE xMask, int32_t, 1
+    NASMX_RESERVE yMask, int32_t, 1
+    NASMX_RESERVE iUsageMask, int32_t, 1
+    NASMX_RESERVE offBmiMask, int32_t, 1
+    NASMX_RESERVE cbBmiMask, int32_t, 1
+    NASMX_RESERVE offBitsMask, int32_t, 1
+    NASMX_RESERVE cbBitsMask, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRPLGBLT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE aptlDest3, int32_t, 1
+    NASMX_RESERVE xSrc, int32_t, 1
+    NASMX_RESERVE ySrc, int32_t, 1
+    NASMX_RESERVE cxSrc, int32_t, 1
+    NASMX_RESERVE cySrc, int32_t, 1
+    NASMX_RESERVE xformSrc, int32_t, 1
+    NASMX_RESERVE crBkColorSrc, int32_t, 1
+    NASMX_RESERVE iUsageSrc, int32_t, 1
+    NASMX_RESERVE offBmiSrc, int32_t, 1
+    NASMX_RESERVE cbBmiSrc, int32_t, 1
+    NASMX_RESERVE offBitsSrc, int32_t, 1
+    NASMX_RESERVE cbBitsSrc, int32_t, 1
+    NASMX_RESERVE xMask, int32_t, 1
+    NASMX_RESERVE yMask, int32_t, 1
+    NASMX_RESERVE iUsageMask, int32_t, 1
+    NASMX_RESERVE offBmiMask, int32_t, 1
+    NASMX_RESERVE cbBmiMask, int32_t, 1
+    NASMX_RESERVE offBitsMask, int32_t, 1
+    NASMX_RESERVE cbBitsMask, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSETDIBITSTODEVICE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE xDest, int32_t, 1
+    NASMX_RESERVE yDest, int32_t, 1
+    NASMX_RESERVE xSrc, int32_t, 1
+    NASMX_RESERVE ySrc, int32_t, 1
+    NASMX_RESERVE cxSrc, int32_t, 1
+    NASMX_RESERVE cySrc, int32_t, 1
+    NASMX_RESERVE offBmiSrc, int32_t, 1
+    NASMX_RESERVE cbBmiSrc, int32_t, 1
+    NASMX_RESERVE offBitsSrc, int32_t, 1
+    NASMX_RESERVE cbBitsSrc, int32_t, 1
+    NASMX_RESERVE iUsageSrc, int32_t, 1
+    NASMX_RESERVE iStartScan, int32_t, 1
+    NASMX_RESERVE cScans, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSTRETCHDIBITS
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rclBounds, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE xDest, int32_t, 1
+    NASMX_RESERVE yDest, int32_t, 1
+    NASMX_RESERVE xSrc, int32_t, 1
+    NASMX_RESERVE ySrc, int32_t, 1
+    NASMX_RESERVE cxSrc, int32_t, 1
+    NASMX_RESERVE cySrc, int32_t, 1
+    NASMX_RESERVE offBmiSrc, int32_t, 1
+    NASMX_RESERVE cbBmiSrc, int32_t, 1
+    NASMX_RESERVE offBitsSrc, int32_t, 1
+    NASMX_RESERVE cbBitsSrc, int32_t, 1
+    NASMX_RESERVE iUsageSrc, int32_t, 1
+    NASMX_RESERVE dwRop, int32_t, 1
+    NASMX_RESERVE cxDest, int32_t, 1
+    NASMX_RESERVE cyDest, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMREXTCREATEFONTINDIRECT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihFont, int32_t, 1
+    NASMX_RESERVE elfw, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRCREATEPALETTE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihPal, int32_t, 1
+    NASMX_RESERVE lgpl, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRCREATEPEN
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihPen, int32_t, 1
+    NASMX_RESERVE lopn, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMREXTCREATEPEN
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihPen, int32_t, 1
+    NASMX_RESERVE offBmi, int32_t, 1
+    NASMX_RESERVE cbBmi, int32_t, 1
+    NASMX_RESERVE offBits, int32_t, 1
+    NASMX_RESERVE cbBits, int32_t, 1
+    NASMX_RESERVE elp, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRCREATEBRUSHINDIRECT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihBrush, int32_t, 1
+    NASMX_RESERVE lb, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRCREATEMONOBRUSH
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihBrush, int32_t, 1
+    NASMX_RESERVE iUsage, int32_t, 1
+    NASMX_RESERVE offBmi, int32_t, 1
+    NASMX_RESERVE cbBmi, int32_t, 1
+    NASMX_RESERVE offBits, int32_t, 1
+    NASMX_RESERVE cbBits, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRCREATEDIBPATTERNBRUSHPT
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihBursh, int32_t, 1
+    NASMX_RESERVE iUsage, int32_t, 1
+    NASMX_RESERVE offBmi, int32_t, 1
+    NASMX_RESERVE cbBmi, int32_t, 1
+    NASMX_RESERVE offBits, int32_t, 1
+    NASMX_RESERVE cbBits, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC BITMAPV4HEADER
+    NASMX_RESERVE bV4Size, int32_t, 1
+    NASMX_RESERVE bV4Width, int32_t, 1
+    NASMX_RESERVE bV4Height, int32_t, 1
+    NASMX_RESERVE bV4Planes, short_t, 1
+    NASMX_RESERVE bV4BitCount, short_t, 1
+    NASMX_RESERVE bV4V4Compression, int32_t, 1
+    NASMX_RESERVE bV4SizeImage, int32_t, 1
+    NASMX_RESERVE bV4XPelsPerMeter, int32_t, 1
+    NASMX_RESERVE bV4YPelsPerMeter, int32_t, 1
+    NASMX_RESERVE bV4ClrUsed, int32_t, 1
+    NASMX_RESERVE bV4ClrImportant, int32_t, 1
+    NASMX_RESERVE bV4RedMask, int32_t, 1
+    NASMX_RESERVE bV4GreenMask, int32_t, 1
+    NASMX_RESERVE bV4BlueMask, int32_t, 1
+    NASMX_RESERVE bV4AlphaMask, int32_t, 1
+    NASMX_RESERVE bV4CSType, int32_t, 1
+    NASMX_RESERVE bV4Endpoints, int32_t, 1
+    NASMX_RESERVE bV4GammaRed, int32_t, 1
+    NASMX_RESERVE bV4GammaGreen, int32_t, 1
+    NASMX_RESERVE bV4GammaBlue, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FONTSIGNATURE
+    NASMX_RESERVE fsUsb4, int32_t, 1
+    NASMX_RESERVE fsCsb2, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CHARSETINFO
+    NASMX_RESERVE ciCharset, int32_t, 1
+    NASMX_RESERVE ciACP, int32_t, 1
+    NASMX_RESERVE xlfs, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LOCALESIGNATURE
+    NASMX_RESERVE lsUsb4, int32_t, 1
+    NASMX_RESERVE lsCsbDefault, int32_t, 1
+    NASMX_RESERVE lsCsbSupported, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NEWTEXTMETRICEX
+    NASMX_RESERVE ntmTm, int32_t, 1
+    NASMX_RESERVE ntmFontSig, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ENUMLOGFONTEX
+    NASMX_RESERVE elfLogFont, int32_t, 1
+    NASMX_RESERVE elfFullName, int8_t, 1
+    NASMX_RESERVE elfStyle, int8_t, 1
+    NASMX_RESERVE elfScript, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC GCP_RESULTS
+    NASMX_RESERVE lStructSize, int32_t, 1
+    NASMX_RESERVE lpOutString, int32_t, 1
+    NASMX_RESERVE lpOrder, int32_t, 1
+    NASMX_RESERVE lpDX, int32_t, 1
+    NASMX_RESERVE lpCaretPos, int32_t, 1
+    NASMX_RESERVE lpClass, int32_t, 1
+    NASMX_RESERVE lpGlyphs, int32_t, 1
+    NASMX_RESERVE nGlyphs, int32_t, 1
+    NASMX_RESERVE nMaxFit, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CIEXYZ
+    NASMX_RESERVE ciexyzX, int32_t, 1
+    NASMX_RESERVE ciexyzY, int32_t, 1
+    NASMX_RESERVE ciexyzZ, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CIEXYZTRIPLE
+    NASMX_RESERVE ciexyzRed, int32_t, 1
+    NASMX_RESERVE ciexyzGreen, int32_t, 1
+    NASMX_RESERVE ciexyBlue, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LOGCOLORSPACE
+    NASMX_RESERVE lcsSignature, int32_t, 1
+    NASMX_RESERVE lcsVersion, int32_t, 1
+    NASMX_RESERVE lcsSize, int32_t, 1
+    NASMX_RESERVE lcsCSType, int32_t, 1
+    NASMX_RESERVE lcsIntent, int32_t, 1
+    NASMX_RESERVE lcsEndPoints, int32_t, 1
+    NASMX_RESERVE lcsGammaRed, int32_t, 1
+    NASMX_RESERVE lcsGammaGreen, int32_t, 1
+    NASMX_RESERVE lcsGammaBlue, int32_t, 1
+    NASMX_RESERVE lcsFileName, int8_t, MAX_PATH
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRSELECTCOLORSPACE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihCS, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRCREATECOLORSPACE
+	NASMX_STRUC emr, EMR
+		NASMX_RESERVE iType, int32_t, 1
+		NASMX_RESERVE nSize, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE ihCS, int32_t, 1
+    NASMX_RESERVE lcs, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CBTACTIVATESTRUCT
+    NASMX_RESERVE fMouse, int32_t, 1
+    NASMX_RESERVE hWndActive, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EVENTMSG
+    NASMX_RESERVE message, int32_t, 1
+    NASMX_RESERVE paramL, int32_t, 1
+    NASMX_RESERVE paramH, int32_t, 1
+    NASMX_RESERVE time, int32_t, 1
+    NASMX_RESERVE hwnd, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CWPSTRUCT
+    NASMX_RESERVE lParam, int32_t, 1
+    NASMX_RESERVE wParam, int32_t, 1
+    NASMX_RESERVE message, int32_t, 1
+    NASMX_RESERVE hwnd, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DEBUGHOOKINFO
+    NASMX_RESERVE hModuleHook, int32_t, 1
+    NASMX_RESERVE Reserved, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+    NASMX_RESERVE wParam, int32_t, 1
+    NASMX_RESERVE code, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MOUSEHOOKSTRUCT
+	NASMX_STRUC pt, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE hwnd, int32_t, 1
+    NASMX_RESERVE wHitTestCode, int32_t, 1
+    NASMX_RESERVE dwExtraInfo, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MINMAXINFO
+	NASMX_STRUC ptReserved, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptMaxSize, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptMaxPosition, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptMinTrackSize, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptMaxTrackSize, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC COPYDATASTRUCT
+    NASMX_RESERVE dwData, int32_t, 1
+    NASMX_RESERVE cbData, int32_t, 1
+    NASMX_RESERVE lpData, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WINDOWPOS
+    NASMX_RESERVE hwnd, int32_t, 1
+    NASMX_RESERVE hWndInsertAfter, int32_t, 1
+    NASMX_RESERVE x, int32_t, 1
+    NASMX_RESERVE y, int32_t, 1
+    NASMX_RESERVE lx, int32_t, 1
+    NASMX_RESERVE ly, int32_t, 1
+    NASMX_RESERVE flags, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ACCEL
+    NASMX_RESERVE fVirt, int8_t, 1
+    NASMX_RESERVE key, short_t, 1
+    NASMX_RESERVE cmd, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PAINTSTRUCT
+    NASMX_RESERVE hdc, int32_t, 1
+    NASMX_RESERVE fErase, int32_t, 1
+	NASMX_STRUC rcPaint, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE fRestore, int32_t, 1
+    NASMX_RESERVE fIncUpdate, int32_t, 1
+    NASMX_RESERVE rgbReserved, int8_t, 32 
+NASMX_ENDSTRUC
+
+NASMX_STRUC CREATESTRUCT
+    NASMX_RESERVE lpCreateParams, int32_t, 1
+    NASMX_RESERVE hInstance, int32_t, 1
+    NASMX_RESERVE hMenu, int32_t, 1
+    NASMX_RESERVE hWndParent, int32_t, 1
+    NASMX_RESERVE ly, int32_t, 1
+    NASMX_RESERVE lx, int32_t, 1
+    NASMX_RESERVE y, int32_t, 1
+    NASMX_RESERVE x, int32_t, 1
+    NASMX_RESERVE style, int32_t, 1
+    NASMX_RESERVE lpszName, int32_t, 1
+    NASMX_RESERVE lpszClass, int32_t, 1
+    NASMX_RESERVE ExStyle, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CBT_CREATEWND
+    NASMX_RESERVE lpcs, int32_t, 1
+    NASMX_RESERVE hWndInsertAfter, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WINDOWPLACEMENT
+    NASMX_RESERVE iLength, int32_t, 1
+    NASMX_RESERVE flags, int32_t, 1
+    NASMX_RESERVE showCmd, int32_t, 1
+	NASMX_STRUC ptMinPosition, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ptMaxPosition, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rcNormalPosition, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC MEASUREITEMSTRUCT
+    NASMX_RESERVE CtlType, int32_t, 1
+    NASMX_RESERVE CtlID, int32_t, 1
+    NASMX_RESERVE itemID, int32_t, 1
+    NASMX_RESERVE itemWidth, int32_t, 1
+    NASMX_RESERVE itemHeight, int32_t, 1
+    NASMX_RESERVE itemData, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DRAWITEMSTRUCT
+    NASMX_RESERVE CtlType, int32_t, 1
+    NASMX_RESERVE CtlID, int32_t, 1
+    NASMX_RESERVE itemID, int32_t, 1
+    NASMX_RESERVE itemAction, int32_t, 1
+    NASMX_RESERVE itemState, int32_t, 1
+    NASMX_RESERVE hwndItem, int32_t, 1
+    NASMX_RESERVE hDC, int32_t, 1
+	NASMX_STRUC rcItem, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE itemData, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DELETEITEMSTRUCT
+    NASMX_RESERVE CtlType, int32_t, 1
+    NASMX_RESERVE CtlID, int32_t, 1
+    NASMX_RESERVE itemID, int32_t, 1
+    NASMX_RESERVE hwndItem, int32_t, 1
+    NASMX_RESERVE itemData, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC COMPAREITEMSTRUCT
+    NASMX_RESERVE CtlType, int32_t, 1
+    NASMX_RESERVE CtlID, int32_t, 1
+    NASMX_RESERVE hwndItem, int32_t, 1
+    NASMX_RESERVE itemID1, int32_t, 1
+    NASMX_RESERVE itemData1, int32_t, 1
+    NASMX_RESERVE itemID2, int32_t, 1
+    NASMX_RESERVE itemData2, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DLGTEMPLATE
+    NASMX_RESERVE style, int32_t, 1
+    NASMX_RESERVE dwExtendedStyle, int32_t, 1
+    NASMX_RESERVE cdit, short_t, 1
+    NASMX_RESERVE x, short_t, 1
+    NASMX_RESERVE y, short_t, 1
+    NASMX_RESERVE lx, short_t, 1
+    NASMX_RESERVE ly, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DLGITEMTEMPLATE
+    NASMX_RESERVE style, int32_t, 1
+    NASMX_RESERVE dwExtendedStyle, int32_t, 1
+    NASMX_RESERVE x, short_t, 1
+    NASMX_RESERVE y, short_t, 1
+    NASMX_RESERVE lx, short_t, 1
+    NASMX_RESERVE ly, short_t, 1
+    NASMX_RESERVE id, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MENUITEMTEMPLATEHEADER
+    NASMX_RESERVE versionNumber, short_t, 1
+    NASMX_RESERVE loffset, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MENUITEMTEMPLATE
+    NASMX_RESERVE mtOption, short_t, 1
+    NASMX_RESERVE mtID, short_t, 1
+    NASMX_RESERVE mtString, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ICONINFO
+    NASMX_RESERVE fIcon, int32_t, 1
+    NASMX_RESERVE xHotspot, int32_t, 1
+    NASMX_RESERVE yHotspot, int32_t, 1
+    NASMX_RESERVE hbmMask, int32_t, 1
+    NASMX_RESERVE hbmColor, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MDICREATESTRUCT
+    NASMX_RESERVE szClass, int32_t, 1
+    NASMX_RESERVE szTitle, int32_t, 1
+    NASMX_RESERVE hOwner, int32_t, 1
+    NASMX_RESERVE x, int32_t, 1
+    NASMX_RESERVE y, int32_t, 1
+    NASMX_RESERVE lx, int32_t, 1
+    NASMX_RESERVE ly, int32_t, 1
+    NASMX_RESERVE style, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CLIENTCREATESTRUCT
+    NASMX_RESERVE hWindowMenu, int32_t, 1
+    NASMX_RESERVE idFirstChild, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MULTIKEYHELP
+    NASMX_RESERVE mkSize, int32_t, 1
+    NASMX_RESERVE mkKeylist, int8_t, 1
+    NASMX_RESERVE szKeyphrase, int8_t, 253
+NASMX_ENDSTRUC
+
+NASMX_STRUC HELPWININFO
+    NASMX_RESERVE wStructSize, int32_t, 1
+    NASMX_RESERVE x, int32_t, 1
+    NASMX_RESERVE y, int32_t, 1
+    NASMX_RESERVE lx, int32_t, 1
+    NASMX_RESERVE ly, int32_t, 1
+    NASMX_RESERVE wMax, int32_t, 1
+    NASMX_RESERVE rgchMember, int8_t, 2
+NASMX_ENDSTRUC
+
+NASMX_STRUC DDEACK
+    NASMX_RESERVE bAppReturnCode, short_t, 1
+    NASMX_RESERVE Reserved, short_t, 1
+    NASMX_RESERVE fbusy, short_t, 1
+    NASMX_RESERVE fack, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DDEADVISE
+    NASMX_RESERVE Reserved, short_t, 1
+    NASMX_RESERVE fDeferUpd, short_t, 1
+    NASMX_RESERVE fAckReq, short_t, 1
+    NASMX_RESERVE cfFormat, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DDEDATA
+    NASMX_RESERVE unused, short_t, 1
+    NASMX_RESERVE fresponse, short_t, 1
+    NASMX_RESERVE fRelease, short_t, 1
+    NASMX_RESERVE Reserved, short_t, 1
+    NASMX_RESERVE fAckReq, short_t, 1
+    NASMX_RESERVE cfFormat, short_t, 1
+    NASMX_RESERVE Value1, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DDEPOKE
+    NASMX_RESERVE unused, short_t, 1
+    NASMX_RESERVE fRelease, short_t, 1
+    NASMX_RESERVE fReserved, short_t, 1
+    NASMX_RESERVE cfFormat, short_t, 1
+    NASMX_RESERVE Value1, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DDELN
+    NASMX_RESERVE unused, short_t, 1
+    NASMX_RESERVE fRelease, short_t, 1
+    NASMX_RESERVE fDeferUpd, short_t, 1
+    NASMX_RESERVE fAckReq, short_t, 1
+    NASMX_RESERVE cfFormat, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DDEUP
+    NASMX_RESERVE unused, short_t, 1
+    NASMX_RESERVE fAck, short_t, 1
+    NASMX_RESERVE fRelease, short_t, 1
+    NASMX_RESERVE fReserved, short_t, 1
+    NASMX_RESERVE fAckReq, short_t, 1
+    NASMX_RESERVE cfFormat, short_t, 1
+    NASMX_RESERVE xRGB1, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC HSZPAIR
+    NASMX_RESERVE hszSvc, int32_t, 1
+    NASMX_RESERVE hszTopic, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SECURITY_QUALITY_OF_SERVICE
+    NASMX_RESERVE iLength, int32_t, 1
+    NASMX_RESERVE Impersonationlevel, short_t, 1
+    NASMX_RESERVE ContextTrackingMode, short_t, 1
+    NASMX_RESERVE EffectiveOnly, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CONVCONTEXT
+    NASMX_RESERVE cb, int32_t, 1
+    NASMX_RESERVE wFlags, int32_t, 1
+    NASMX_RESERVE wCountryID, int32_t, 1
+    NASMX_RESERVE iCodePage, int32_t, 1
+    NASMX_RESERVE dwLangID, int32_t, 1
+    NASMX_RESERVE dwSecurity, int32_t, 1
+    NASMX_RESERVE qos, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CONVINFO
+    NASMX_RESERVE cb, int32_t, 1
+    NASMX_RESERVE hUser, int32_t, 1
+    NASMX_RESERVE hConvPartner, int32_t, 1
+    NASMX_RESERVE hszSvcPartner, int32_t, 1
+    NASMX_RESERVE hszServiceReq, int32_t, 1
+    NASMX_RESERVE hszTopic, int32_t, 1
+    NASMX_RESERVE hszItem, int32_t, 1
+    NASMX_RESERVE wFmt, int32_t, 1
+    NASMX_RESERVE wType, int32_t, 1
+    NASMX_RESERVE wStatus, int32_t, 1
+    NASMX_RESERVE wConvst, int32_t, 1
+    NASMX_RESERVE wLastError, int32_t, 1
+    NASMX_RESERVE hConvList, int32_t, 1
+    NASMX_RESERVE ConvCtxt, int32_t, 1
+    NASMX_RESERVE hwnd, int32_t, 1
+    NASMX_RESERVE hwndPartner, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DDEML_MSG_HOOK_DATA
+    NASMX_RESERVE uiLo, int32_t, 1
+    NASMX_RESERVE uiHi, int32_t, 1
+    NASMX_RESERVE cbData, int32_t, 1
+    NASMX_RESERVE xData, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MONMSGSTRUCT
+    NASMX_RESERVE cb, int32_t, 1
+    NASMX_RESERVE hwndTo, int32_t, 1
+    NASMX_RESERVE dwTime, int32_t, 1
+    NASMX_RESERVE htask, int32_t, 1
+    NASMX_RESERVE wMsg, int32_t, 1
+    NASMX_RESERVE wParam, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+    NASMX_RESERVE dmhd, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MONCBSTRUCT
+    NASMX_RESERVE cb, int32_t, 1
+    NASMX_RESERVE dwTime, int32_t, 1
+    NASMX_RESERVE htask, int32_t, 1
+    NASMX_RESERVE dwRet, int32_t, 1
+    NASMX_RESERVE wType, int32_t, 1
+    NASMX_RESERVE wFmt, int32_t, 1
+    NASMX_RESERVE hConv, int32_t, 1
+    NASMX_RESERVE hsz1, int32_t, 1
+    NASMX_RESERVE hsz2, int32_t, 1
+    NASMX_RESERVE hData, int32_t, 1
+    NASMX_RESERVE dwData1, int32_t, 1
+    NASMX_RESERVE dwData2, int32_t, 1
+    NASMX_RESERVE cc, int32_t, 1
+    NASMX_RESERVE cbData, int32_t, 1
+    NASMX_RESERVE xData8, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MONHSZSTRUCT
+    NASMX_RESERVE cb, int32_t, 1
+    NASMX_RESERVE fsAction, int32_t, 1
+    NASMX_RESERVE dwTime, int32_t, 1
+    NASMX_RESERVE hsz, int32_t, 1
+    NASMX_RESERVE htask, int32_t, 1
+    NASMX_RESERVE xstr, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MONERRSTRUCT
+    NASMX_RESERVE cb, int32_t, 1
+    NASMX_RESERVE wLastError, int32_t, 1
+    NASMX_RESERVE dwTime, int32_t, 1
+    NASMX_RESERVE htask, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MONLINKSTRUCT
+    NASMX_RESERVE cb, int32_t, 1
+    NASMX_RESERVE dwTime, int32_t, 1
+    NASMX_RESERVE htask, int32_t, 1
+    NASMX_RESERVE fEstablished, int32_t, 1
+    NASMX_RESERVE fNoData, int32_t, 1
+    NASMX_RESERVE hszSvc, int32_t, 1
+    NASMX_RESERVE hszTopic, int32_t, 1
+    NASMX_RESERVE hszItem, int32_t, 1
+    NASMX_RESERVE wFmt, int32_t, 1
+    NASMX_RESERVE fServer, int32_t, 1
+    NASMX_RESERVE hConvServer, int32_t, 1
+    NASMX_RESERVE hConvClient, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MONCONVSTRUCT
+    NASMX_RESERVE cb, int32_t, 1
+    NASMX_RESERVE fConnect, int32_t, 1
+    NASMX_RESERVE dwTime, int32_t, 1
+    NASMX_RESERVE htask, int32_t, 1
+    NASMX_RESERVE hszSvc, int32_t, 1
+    NASMX_RESERVE hszTopic, int32_t, 1
+    NASMX_RESERVE hConvClient, int32_t, 1
+    NASMX_RESERVE hConvServer, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC smpte
+    NASMX_RESERVE hour, int8_t, 1
+    NASMX_RESERVE minute, int8_t, 1
+    NASMX_RESERVE sec, int8_t, 1
+    NASMX_RESERVE frame, int8_t, 1
+    NASMX_RESERVE fps, int8_t, 1
+    NASMX_RESERVE dummy, int8_t, 1
+    NASMX_RESERVE pad, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC midi
+    NASMX_RESERVE songptrpos, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MMTIME
+    NASMX_RESERVE wType, int32_t, 1
+    NASMX_RESERVE u, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIDIEVENT
+    NASMX_RESERVE dwDeltaTime, int32_t, 1
+    NASMX_RESERVE dwStreamID, int32_t, 1
+    NASMX_RESERVE dwEvent, int32_t, 1
+    NASMX_RESERVE dwParms, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIDISTRMBUFFVER
+    NASMX_RESERVE dwVersion, int32_t, 1
+    NASMX_RESERVE dwMid, int32_t, 1
+    NASMX_RESERVE dwOEMVersion, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIDIPROPTIMEDIV
+    NASMX_RESERVE cbStruct, int32_t, 1
+    NASMX_RESERVE dwTimeDiv, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIDIPROPTEMPO
+    NASMX_RESERVE cbStruct, int32_t, 1
+    NASMX_RESERVE dwTempo, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIXERCAPS
+    NASMX_RESERVE wMid, short_t, 1
+    NASMX_RESERVE wPid, short_t, 1
+    NASMX_RESERVE vDriverVersion, int32_t, 1
+    NASMX_RESERVE szPname, int8_t, MAXPNAMELEN
+    NASMX_RESERVE fdwSupport, int32_t, 1
+    NASMX_RESERVE cDestinations, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC Target
+    NASMX_RESERVE dwType, int32_t, 1
+    NASMX_RESERVE dwDeviceID, int32_t, 1
+    NASMX_RESERVE wMid, short_t, 1
+    NASMX_RESERVE wPid, short_t, 1
+    NASMX_RESERVE vDriverVersion, int32_t, 1
+    NASMX_RESERVE szPname, int8_t, MAXPNAMELEN
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIXERLINECONTROLS
+    NASMX_RESERVE cbStruct, int32_t, 1
+    NASMX_RESERVE dwLineID, int32_t, 1
+    NASMX_RESERVE dwControl, int32_t, 1
+    NASMX_RESERVE cControls, int32_t, 1
+    NASMX_RESERVE cbmxctrl, int32_t, 1
+    NASMX_RESERVE pamxctrl, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIXERCONTROLDETAILS
+    NASMX_RESERVE cbStruct, int32_t, 1
+    NASMX_RESERVE dwControlID, int32_t, 1
+    NASMX_RESERVE cChannels, int32_t, 1
+    NASMX_RESERVE item, int32_t, 1
+    NASMX_RESERVE cbDetails, int32_t, 1
+    NASMX_RESERVE paDetails, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIXERCONTROLDETAILS_BOOLEAN
+    NASMX_RESERVE fValue, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIXERCONTROLDETAILS_SIGNED
+    NASMX_RESERVE lValue, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIXERCONTROLDETAILS_UNSIGNED
+    NASMX_RESERVE dwValue, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC JOYINFOEX
+    NASMX_RESERVE dwSize, int32_t, 1
+    NASMX_RESERVE dwFlags, int32_t, 1
+    NASMX_RESERVE dwXpos, int32_t, 1
+    NASMX_RESERVE dwYpos, int32_t, 1
+    NASMX_RESERVE dwZpos, int32_t, 1
+    NASMX_RESERVE dwRpos, int32_t, 1
+    NASMX_RESERVE dwUpos, int32_t, 1
+    NASMX_RESERVE dwVpos, int32_t, 1
+    NASMX_RESERVE dwButtons, int32_t, 1
+    NASMX_RESERVE dwButtonNumber, int32_t, 1
+    NASMX_RESERVE dwPOV, int32_t, 1
+    NASMX_RESERVE dwReserved1, int32_t, 1
+    NASMX_RESERVE dwReserved2, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DRVCONFIGINFO
+    NASMX_RESERVE dwDCISize, int32_t, 1
+    NASMX_RESERVE lpszDCISectionName, int32_t, 1
+    NASMX_RESERVE lpszDCIAliasName, int32_t, 1
+    NASMX_RESERVE dnDevNode, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WAVEHDR
+    NASMX_RESERVE lpData, int32_t, 1
+    NASMX_RESERVE dwBufferiLength, int32_t, 1
+    NASMX_RESERVE dwBytesRecorded, int32_t, 1
+    NASMX_RESERVE dwUser, int32_t, 1
+    NASMX_RESERVE dwFlags, int32_t, 1
+    NASMX_RESERVE dwLoops, int32_t, 1
+    NASMX_RESERVE lpNext, int32_t, 1
+    NASMX_RESERVE Reserved, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WAVEOUTCAPS
+    NASMX_RESERVE wMid, short_t, 1
+    NASMX_RESERVE wPid, short_t, 1
+    NASMX_RESERVE vDriverVersion, int32_t, 1
+    NASMX_RESERVE szPname, int8_t, MAXPNAMELEN
+    NASMX_RESERVE dwFormats, int32_t, 1
+    NASMX_RESERVE wChannels, short_t, 1
+    NASMX_RESERVE dwSupport, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WAVEINCAPS
+    NASMX_RESERVE wMid, short_t, 1
+    NASMX_RESERVE wPid, short_t, 1
+    NASMX_RESERVE vDriverVersion, int32_t, 1
+    NASMX_RESERVE szPname, int8_t, MAXPNAMELEN
+    NASMX_RESERVE dwFormats, int32_t, 1
+    NASMX_RESERVE wChannels, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WAVEFORMAT
+    NASMX_RESERVE wFormatTag, short_t, 1
+    NASMX_RESERVE nChannels, short_t, 1
+    NASMX_RESERVE nSamplesPerSec, int32_t, 1
+    NASMX_RESERVE nAvgBytesPerSec, int32_t, 1
+    NASMX_RESERVE nBlockAlign, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PCMWAVEFORMAT
+    NASMX_RESERVE wf, int32_t, 1
+    NASMX_RESERVE wBitsPerSample, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIDIOUTCAPS
+    NASMX_RESERVE wMid, short_t, 1
+    NASMX_RESERVE wPid, short_t, 1
+    NASMX_RESERVE vDriverVersion, int32_t, 1
+    NASMX_RESERVE szPname, int8_t, MAXPNAMELEN
+    NASMX_RESERVE wTechnology, short_t, 1
+    NASMX_RESERVE wVoices, short_t, 1
+    NASMX_RESERVE wNotes, short_t, 1
+    NASMX_RESERVE wChannelMask, short_t, 1
+    NASMX_RESERVE dwSupport, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIDIINCAPS
+    NASMX_RESERVE wMid, short_t, 1
+    NASMX_RESERVE wPid, short_t, 1
+    NASMX_RESERVE vDriverVersion, int32_t, 1
+    NASMX_RESERVE szPname, int8_t, MAXPNAMELEN
+NASMX_ENDSTRUC
+
+NASMX_STRUC MIDIHDR
+    NASMX_RESERVE lpData, int32_t, 1
+    NASMX_RESERVE dwBufferiLength, int32_t, 1
+    NASMX_RESERVE dwBytesRecorded, int32_t, 1
+    NASMX_RESERVE dwUser, int32_t, 1
+    NASMX_RESERVE dwFlags, int32_t, 1
+    NASMX_RESERVE lpNext, int32_t, 1
+    NASMX_RESERVE Reserved, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC AUXCAPS
+    NASMX_RESERVE wMid, short_t, 1
+    NASMX_RESERVE wPid, short_t, 1
+    NASMX_RESERVE vDriverVersion, int32_t, 1
+    NASMX_RESERVE szPname, int8_t, MAXPNAMELEN
+    NASMX_RESERVE wTechnology, short_t, 1
+    NASMX_RESERVE dwSupport, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TIMECAPS
+    NASMX_RESERVE wPeriodMin, int32_t, 1
+    NASMX_RESERVE wPeriodMax, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC JOYCAPS
+    NASMX_RESERVE wMid, short_t, 1
+    NASMX_RESERVE wPid, short_t, 1
+    NASMX_RESERVE szPname, int8_t, MAXPNAMELEN
+    NASMX_RESERVE wXmin, short_t, 1
+    NASMX_RESERVE wXmax, short_t, 1
+    NASMX_RESERVE wYmin, short_t, 1
+    NASMX_RESERVE wYmax, short_t, 1
+    NASMX_RESERVE wZmin, short_t, 1
+    NASMX_RESERVE wZmax, short_t, 1
+    NASMX_RESERVE wNumButtons, short_t, 1
+    NASMX_RESERVE wPeriodMin, short_t, 1
+    NASMX_RESERVE wPeriodMax, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC JOYINFO
+    NASMX_RESERVE wXpos, short_t, 1
+    NASMX_RESERVE wYpos, short_t, 1
+    NASMX_RESERVE wZpos, short_t, 1
+    NASMX_RESERVE wButtons, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MMIOINFO
+    NASMX_RESERVE dwFlags, int32_t, 1
+    NASMX_RESERVE fccIOProc, int32_t, 1
+    NASMX_RESERVE pIOProc, int32_t, 1
+    NASMX_RESERVE wErrorRet, int32_t, 1
+    NASMX_RESERVE htask, int32_t, 1
+    NASMX_RESERVE cchBuffer, int32_t, 1
+    NASMX_RESERVE pchBuffer, int32_t, 1
+    NASMX_RESERVE pchNext, int32_t, 1
+    NASMX_RESERVE pchEndRead, int32_t, 1
+    NASMX_RESERVE pchEndWrite, int32_t, 1
+    NASMX_RESERVE lBufOffset, int32_t, 1
+    NASMX_RESERVE lDiskOffset, int32_t, 1
+    NASMX_RESERVE adwInfo4, int32_t, 1
+    NASMX_RESERVE dwReserved1, int32_t, 1
+    NASMX_RESERVE dwReserved2, int32_t, 1
+    NASMX_RESERVE hmmio, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MMCKINFO
+    NASMX_RESERVE ckid, int32_t, 1
+    NASMX_RESERVE ckSize, int32_t, 1
+    NASMX_RESERVE fccType, int32_t, 1
+    NASMX_RESERVE dwDataOffset, int32_t, 1
+    NASMX_RESERVE dwFlags, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_GENERIC_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_OPEN_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE wDeviceID, int32_t, 1
+    NASMX_RESERVE lpstrDeviceType, int32_t, 1
+    NASMX_RESERVE lpstrElementName, int32_t, 1
+    NASMX_RESERVE lpstrAlias, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_PLAY_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwFrom, int32_t, 1
+    NASMX_RESERVE dwTo, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_SEEK_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwTo, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_STATUS_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwReturn, int32_t, 1
+    NASMX_RESERVE dwItem, int32_t, 1
+    NASMX_RESERVE dwTrack, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_INFO_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE lpstrReturn, int32_t, 1
+    NASMX_RESERVE dwRetSize, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_GETDEVCAPS_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwReturn, int32_t, 1
+    NASMX_RESERVE dwIten, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_SYSINFO_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE lpstrReturn, int32_t, 1
+    NASMX_RESERVE dwRetSize, int32_t, 1
+    NASMX_RESERVE dwNumber, int32_t, 1
+    NASMX_RESERVE wDeviceType, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_SET_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwTimeFormat, int32_t, 1
+    NASMX_RESERVE dwAudio, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_BREAK_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE nVirtKey, int32_t, 1
+    NASMX_RESERVE hwndBreak, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_SOUND_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE lpstrSoundName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_SAVE_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE lpFileName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_LOAD_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE lpFileName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_RECORD_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwFrom, int32_t, 1
+    NASMX_RESERVE dwTo, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_VD_PLAY_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwFrom, int32_t, 1
+    NASMX_RESERVE dwTo, int32_t, 1
+    NASMX_RESERVE dwSpeed, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_VD_STEP_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwFrames, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_VD_ESCAPE_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE lpstrCommand, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_WAVE_OPEN_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE wDeviceID, int32_t, 1
+    NASMX_RESERVE lpstrDeviceType, int32_t, 1
+    NASMX_RESERVE lpstrElementName, int32_t, 1
+    NASMX_RESERVE lpstrAlias, int32_t, 1
+    NASMX_RESERVE dwBufferSeconds, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_WAVE_DELETE_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwFrom, int32_t, 1
+    NASMX_RESERVE dwTo, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_WAVE_SET_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwTimeFormat, int32_t, 1
+    NASMX_RESERVE dwAudio, int32_t, 1
+    NASMX_RESERVE wInput, int32_t, 1
+    NASMX_RESERVE wOutput, int32_t, 1
+    NASMX_RESERVE wFormatTag, short_t, 1
+    NASMX_RESERVE wReserved2, short_t, 1
+    NASMX_RESERVE nChannels, short_t, 1
+    NASMX_RESERVE wReserved3, short_t, 1
+    NASMX_RESERVE nSamplesPerSec, int32_t, 1
+    NASMX_RESERVE nAvgBytesPerSec, int32_t, 1
+    NASMX_RESERVE nBlockAlign, short_t, 1
+    NASMX_RESERVE wReserved4, short_t, 1
+    NASMX_RESERVE wBitsPerSample, short_t, 1
+    NASMX_RESERVE wReserved5, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_SEQ_SET_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwTimeFormat, int32_t, 1
+    NASMX_RESERVE dwAudio, int32_t, 1
+    NASMX_RESERVE dwTempo, int32_t, 1
+    NASMX_RESERVE dwPort, int32_t, 1
+    NASMX_RESERVE dwSlave, int32_t, 1
+    NASMX_RESERVE dwMaster, int32_t, 1
+    NASMX_RESERVE dwOffset, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_ANIM_OPEN_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE wDeviceID, int32_t, 1
+    NASMX_RESERVE lpstrDeviceType, int32_t, 1
+    NASMX_RESERVE lpstrElementName, int32_t, 1
+    NASMX_RESERVE lpstrAlias, int32_t, 1
+    NASMX_RESERVE dwStyle, int32_t, 1
+    NASMX_RESERVE hWndParent, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_ANIM_PLAY_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwFrom, int32_t, 1
+    NASMX_RESERVE dwTo, int32_t, 1
+    NASMX_RESERVE dwSpeed, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_ANIM_STEP_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE dwFrames, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_ANIM_WINDOW_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE hwnd, int32_t, 1
+    NASMX_RESERVE nCmdShow, int32_t, 1
+    NASMX_RESERVE lpstrText, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_ANIM_RECT_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+	NASMX_STRUC rc, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_ANIM_UPDATE_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+	NASMX_STRUC rc, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE hDC, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_OVLY_OPEN_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE wDeviceID, int32_t, 1
+    NASMX_RESERVE lpstrDeviceType, int32_t, 1
+    NASMX_RESERVE lpstrElementName, int32_t, 1
+    NASMX_RESERVE lpstrAlias, int32_t, 1
+    NASMX_RESERVE dwStyle, int32_t, 1
+    NASMX_RESERVE hWndParent, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_OVLY_WINDOW_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE hwnd, int32_t, 1
+    NASMX_RESERVE nCmdShow, int32_t, 1
+    NASMX_RESERVE lpstrText, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_OVLY_RECT_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+	NASMX_STRUC rc, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_OVLY_SAVE_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE lpFileName, int32_t, 1
+	NASMX_STRUC rc, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC MCI_OVLY_LOAD_PARMS
+    NASMX_RESERVE dwCallback, int32_t, 1
+    NASMX_RESERVE lpFileName, int32_t, 1
+	NASMX_STRUC rc, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC PRINTER_INFO_1
+    NASMX_RESERVE flags, int32_t, 1
+    NASMX_RESERVE pDescription, int32_t, 1
+    NASMX_RESERVE pName, int32_t, 1
+    NASMX_RESERVE pComment, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PRINTER_INFO_2
+    NASMX_RESERVE pServerName, int32_t, 1
+    NASMX_RESERVE pPrinterName, int32_t, 1
+    NASMX_RESERVE pShareName, int32_t, 1
+    NASMX_RESERVE pPortName, int32_t, 1
+    NASMX_RESERVE pDriverName, int32_t, 1
+    NASMX_RESERVE pComment, int32_t, 1
+    NASMX_RESERVE pLocation, int32_t, 1
+    NASMX_RESERVE pDevMode, int32_t, 1
+    NASMX_RESERVE pSepFile, int32_t, 1
+    NASMX_RESERVE pPrintProcessor, int32_t, 1
+    NASMX_RESERVE pDatatype, int32_t, 1
+    NASMX_RESERVE pParameters, int32_t, 1
+    NASMX_RESERVE pSecurityDescriptor, int32_t, 1
+    NASMX_RESERVE Attributes, int32_t, 1
+    NASMX_RESERVE Priority, int32_t, 1
+    NASMX_RESERVE DefaultPriority, int32_t, 1
+    NASMX_RESERVE StartTime, int32_t, 1
+    NASMX_RESERVE UntilTime, int32_t, 1
+    NASMX_RESERVE Status, int32_t, 1
+    NASMX_RESERVE cJobs, int32_t, 1
+    NASMX_RESERVE AveragePPM, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PRINTER_INFO_3
+    NASMX_RESERVE pSecurityDescriptor, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC JOB_INFO_1
+    NASMX_RESERVE JobId, int32_t, 1
+    NASMX_RESERVE pPrinterName, int32_t, 1
+    NASMX_RESERVE pMachineName, int32_t, 1
+    NASMX_RESERVE pUserName, int32_t, 1
+    NASMX_RESERVE pDocument, int32_t, 1
+    NASMX_RESERVE pDatatype, int32_t, 1
+    NASMX_RESERVE pStatus, int32_t, 1
+    NASMX_RESERVE Status, int32_t, 1
+    NASMX_RESERVE Priority, int32_t, 1
+    NASMX_RESERVE Position, int32_t, 1
+    NASMX_RESERVE TotalPages, int32_t, 1
+    NASMX_RESERVE PagesPrinted, int32_t, 1
+    NASMX_RESERVE Submitted, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC JOB_INFO_2
+    NASMX_RESERVE JobId, int32_t, 1
+    NASMX_RESERVE pPrinterName, int32_t, 1
+    NASMX_RESERVE pMachineName, int32_t, 1
+    NASMX_RESERVE pUserName, int32_t, 1
+    NASMX_RESERVE pDocument, int32_t, 1
+    NASMX_RESERVE pNotifyName, int32_t, 1
+    NASMX_RESERVE pDatatype, int32_t, 1
+    NASMX_RESERVE pPrintProcessor, int32_t, 1
+    NASMX_RESERVE pParameters, int32_t, 1
+    NASMX_RESERVE pDriverName, int32_t, 1
+    NASMX_RESERVE pDevMode, int32_t, 1
+    NASMX_RESERVE pStatus, int32_t, 1
+    NASMX_RESERVE pSecurityDescriptor, int32_t, 1
+    NASMX_RESERVE Status, int32_t, 1
+    NASMX_RESERVE Priority, int32_t, 1
+    NASMX_RESERVE Position, int32_t, 1
+    NASMX_RESERVE StartTime, int32_t, 1
+    NASMX_RESERVE UntilTime, int32_t, 1
+    NASMX_RESERVE TotalPages, int32_t, 1
+    NASMX_RESERVE isize, int32_t, 1
+    NASMX_RESERVE Submitted, int32_t, 1
+    NASMX_RESERVE time, int32_t, 1
+    NASMX_RESERVE PagesPrinted, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ADDJOB_INFO_1
+    NASMX_RESERVE Path, int32_t, 1
+    NASMX_RESERVE JobId, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DRIVER_INFO_1
+    NASMX_RESERVE pName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DRIVER_INFO_2
+    NASMX_RESERVE cVersion, int32_t, 1
+    NASMX_RESERVE pName, int32_t, 1
+    NASMX_RESERVE pEnvironment, int32_t, 1
+    NASMX_RESERVE pDriverPath, int32_t, 1
+    NASMX_RESERVE pDataFile, int32_t, 1
+    NASMX_RESERVE pConfigFile, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DOC_INFO_1
+    NASMX_RESERVE pDocName, int32_t, 1
+    NASMX_RESERVE pOutputFile, int32_t, 1
+    NASMX_RESERVE pDatatype, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FORM_INFO_1
+    NASMX_RESERVE pName, int32_t, 1
+    NASMX_RESERVE isize, int32_t, 1
+    NASMX_RESERVE ImageableArea, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PRINTPROCESSOR_INFO_1
+    NASMX_RESERVE pName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PORT_INFO_1
+    NASMX_RESERVE pName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MONITOR_INFO_1
+    NASMX_RESERVE pName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MONITOR_INFO_2
+    NASMX_RESERVE pName, int32_t, 1
+    NASMX_RESERVE pEnvironment, int32_t, 1
+    NASMX_RESERVE pDLLName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DATATYPES_INFO_1
+    NASMX_RESERVE pName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PRINTER_DEFAULTS
+    NASMX_RESERVE pDatatype, int32_t, 1
+    NASMX_RESERVE pDevMode, int32_t, 1
+    NASMX_RESERVE DesiredAccess, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PRINTER_INFO_4
+    NASMX_RESERVE pPrinterName, int32_t, 1
+    NASMX_RESERVE pServerName, int32_t, 1
+    NASMX_RESERVE Attributes, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PRINTER_INFO_5
+    NASMX_RESERVE pPrinterName, int32_t, 1
+    NASMX_RESERVE pPortName, int32_t, 1
+    NASMX_RESERVE Attributes, int32_t, 1
+    NASMX_RESERVE DeviceNotSelectedTimeout, int32_t, 1
+    NASMX_RESERVE TransmissionRetryTimeout, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DRIVER_INFO_3
+    NASMX_RESERVE cVersion, int32_t, 1
+    NASMX_RESERVE pName, int32_t, 1
+    NASMX_RESERVE pEnvironment, int32_t, 1
+    NASMX_RESERVE pDriverPath, int32_t, 1
+    NASMX_RESERVE pDataFile, int32_t, 1
+    NASMX_RESERVE pConfigFile, int32_t, 1
+    NASMX_RESERVE pHelpFile, int32_t, 1
+    NASMX_RESERVE pDependentFiles, int32_t, 1
+    NASMX_RESERVE pMonitorName, int32_t, 1
+    NASMX_RESERVE pDefaultDataType, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DOC_INFO_2
+    NASMX_RESERVE pDocName, int32_t, 1
+    NASMX_RESERVE pOutputFile, int32_t, 1
+    NASMX_RESERVE pDatatype, int32_t, 1
+    NASMX_RESERVE dwMode, int32_t, 1
+    NASMX_RESERVE JobId, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PORT_INFO_2
+    NASMX_RESERVE pPortName, int32_t, 1
+    NASMX_RESERVE pMonitorName, int32_t, 1
+    NASMX_RESERVE pDescription, int32_t, 1
+    NASMX_RESERVE fPortType, int32_t, 1
+    NASMX_RESERVE Reserved, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PROVIDOR_INFO_1
+    NASMX_RESERVE pName, int32_t, 1
+    NASMX_RESERVE pEnvironment, int32_t, 1
+    NASMX_RESERVE pDLLName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NETRESOURCE
+    NASMX_RESERVE dwScope, int32_t, 1
+    NASMX_RESERVE dwType, int32_t, 1
+    NASMX_RESERVE dwDisplayType, int32_t, 1
+    NASMX_RESERVE dwUsage, int32_t, 1
+    NASMX_RESERVE lpLocalName, int32_t, 1
+    NASMX_RESERVE lpRemoteName, int32_t, 1
+    NASMX_RESERVE lpComment, int32_t, 1
+    NASMX_RESERVE lpProvider, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NCB
+    NASMX_RESERVE ncb_command, short_t, 1
+    NASMX_RESERVE ncb_retcode, short_t, 1
+    NASMX_RESERVE ncb_lsn, short_t, 1
+    NASMX_RESERVE ncb_num, short_t, 1
+    NASMX_RESERVE ncb_buffer, int32_t, 1
+    NASMX_RESERVE ncb_length, short_t, 1
+    NASMX_RESERVE ncb_callname, int8_t, NCBNAMSZ
+    NASMX_RESERVE ncb_name, int8_t, NCBNAMSZ
+    NASMX_RESERVE ncb_rto, short_t, 1
+    NASMX_RESERVE ncb_sto, short_t, 1
+    NASMX_RESERVE ncb_post, int32_t, 1
+    NASMX_RESERVE ncb_lana_num, short_t, 1
+    NASMX_RESERVE ncb_cmd_cplt, short_t, 1
+    NASMX_RESERVE ncb_reserve10, int8_t, 1
+    NASMX_RESERVE ncb_event, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ADAPTER_STATUS
+    NASMX_RESERVE adapter_address, int8_t, 6
+    NASMX_RESERVE rev_major, short_t, 1
+    NASMX_RESERVE reserved0, short_t, 1
+    NASMX_RESERVE adapter_type, short_t, 1
+    NASMX_RESERVE rev_minor, short_t, 1
+    NASMX_RESERVE duration, short_t, 1
+    NASMX_RESERVE frmr_recv, short_t, 1
+    NASMX_RESERVE frmr_xmit, short_t, 1
+    NASMX_RESERVE iframe_recv_err, short_t, 1
+    NASMX_RESERVE xmit_aborts, short_t, 1
+    NASMX_RESERVE xmit_success, int32_t, 1
+    NASMX_RESERVE recv_success, int32_t, 1
+    NASMX_RESERVE iframe_xmit_err, short_t, 1
+    NASMX_RESERVE recv_buff_unavail, short_t, 1
+    NASMX_RESERVE t1_timeouts, short_t, 1
+    NASMX_RESERVE ti_timeouts, short_t, 1
+    NASMX_RESERVE Reserved1, int32_t, 1
+    NASMX_RESERVE free_ncbs, short_t, 1
+    NASMX_RESERVE max_cfg_ncbs, short_t, 1
+    NASMX_RESERVE max_ncbs, short_t, 1
+    NASMX_RESERVE xmit_buf_unavail, short_t, 1
+    NASMX_RESERVE max_dgram_isize, short_t, 1
+    NASMX_RESERVE pending_sess, short_t, 1
+    NASMX_RESERVE max_cfg_sess, short_t, 1
+    NASMX_RESERVE max_sess, short_t, 1
+    NASMX_RESERVE max_sess_pkt_isize, short_t, 1
+    NASMX_RESERVE name_count, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NAME_BUFFER
+    NASMX_RESERVE xname, int8_t, NCBNAMSZ
+    NASMX_RESERVE name_num, short_t, 1
+    NASMX_RESERVE name_flags, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SESSION_HEADER
+    NASMX_RESERVE sess_name, short_t, 1
+    NASMX_RESERVE num_sess, short_t, 1
+    NASMX_RESERVE rcv_dg_outstanding, short_t, 1
+    NASMX_RESERVE rcv_any_outstanding, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SESSION_BUFFER
+    NASMX_RESERVE lsn, short_t, 1
+    NASMX_RESERVE State, short_t, 1
+    NASMX_RESERVE local_name, int8_t, NCBNAMSZ
+    NASMX_RESERVE remote_name, int8_t, NCBNAMSZ
+    NASMX_RESERVE rcvs_outstanding, short_t, 1
+    NASMX_RESERVE sends_outstanding, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LANA_ENUM
+    NASMX_RESERVE iLength, short_t, 1
+    NASMX_RESERVE lana, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FIND_NAME_HEADER
+    NASMX_RESERVE node_count, short_t, 1
+    NASMX_RESERVE Reserved, short_t, 1
+    NASMX_RESERVE unique_group, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FIND_NAME_BUFFER
+    NASMX_RESERVE iLength, short_t, 1
+    NASMX_RESERVE access_control, short_t, 1
+    NASMX_RESERVE frame_control, short_t, 1
+    NASMX_RESERVE destination_addr, short_t, 1
+    NASMX_RESERVE source_addr, short_t, 1
+    NASMX_RESERVE routing_info, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ACTION_HEADER
+    NASMX_RESERVE transport_id, int32_t, 1
+    NASMX_RESERVE action_code, short_t, 1
+    NASMX_RESERVE Reserved, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CRGB
+    NASMX_RESERVE bRed, int8_t, 1
+    NASMX_RESERVE bGreen, int8_t, 1
+    NASMX_RESERVE bBlue, int8_t, 1
+    NASMX_RESERVE bExtra, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SERVICE_STATUS
+    NASMX_RESERVE dwServiceType, int32_t, 1
+    NASMX_RESERVE dwCurrentState, int32_t, 1
+    NASMX_RESERVE dwControlsAccepted, int32_t, 1
+    NASMX_RESERVE dwWin32ExitCode, int32_t, 1
+    NASMX_RESERVE dwServiceSpecificExitCode, int32_t, 1
+    NASMX_RESERVE dwCheckPoint, int32_t, 1
+    NASMX_RESERVE dwWaitHint, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ENUM_SERVICE_STATUS
+    NASMX_RESERVE lpServiceName, int32_t, 1
+    NASMX_RESERVE lpDisplayName, int32_t, 1
+    NASMX_RESERVE ServiceStatus, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC QUERY_SERVICE_LOCK_STATUS
+    NASMX_RESERVE fIsLocked, int32_t, 1
+    NASMX_RESERVE lpLockOwner, int32_t, 1
+    NASMX_RESERVE dwLockDuration, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC QUERY_SERVICE_CONFIG
+    NASMX_RESERVE dwServiceType, int32_t, 1
+    NASMX_RESERVE dwStartType, int32_t, 1
+    NASMX_RESERVE dwErrorControl, int32_t, 1
+    NASMX_RESERVE lpBinaryPathName, int32_t, 1
+    NASMX_RESERVE lpLoadOrderGroup, int32_t, 1
+    NASMX_RESERVE dwTagId, int32_t, 1
+    NASMX_RESERVE lpDependencies, int32_t, 1
+    NASMX_RESERVE lpServiceStartName, int32_t, 1
+    NASMX_RESERVE lpDisplayName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SERVICE_TABLE_ENTRY
+    NASMX_RESERVE lpServiceName, int32_t, 1
+    NASMX_RESERVE lpServiceProc, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LARGE_INTEGER
+    NASMX_RESERVE lowpart, int32_t, 1
+    NASMX_RESERVE highpart, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PERF_DATA_BLOCK
+    NASMX_RESERVE Signature, int8_t, 4
+    NASMX_RESERVE LittleEndian, int32_t, 1
+    NASMX_RESERVE Version, int32_t, 1
+    NASMX_RESERVE Revision, int32_t, 1
+    NASMX_RESERVE TotalByteiLength, int32_t, 1
+    NASMX_RESERVE HeaderiLength, int32_t, 1
+    NASMX_RESERVE NumObjectTypes, int32_t, 1
+    NASMX_RESERVE DefaultObject, int32_t, 1
+    NASMX_RESERVE SystemTime, int32_t, 1
+    NASMX_RESERVE PerfTime, int32_t, 1
+    NASMX_RESERVE PerfFreq, int32_t, 1
+    NASMX_RESERVE PerTime100nSec, int32_t, 1
+    NASMX_RESERVE SystemNameiLength, int32_t, 1
+    NASMX_RESERVE SystemNameOffset, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PERF_OBJECT_TYPE
+    NASMX_RESERVE TotalByteiLength, int32_t, 1
+    NASMX_RESERVE DefinitioniLength, int32_t, 1
+    NASMX_RESERVE HeaderiLength, int32_t, 1
+    NASMX_RESERVE ObjectNameTitleIndex, int32_t, 1
+    NASMX_RESERVE ObjectNameTitle, int32_t, 1
+    NASMX_RESERVE ObjectHelpTitleIndex, int32_t, 1
+    NASMX_RESERVE ObjectHelpTitle, int32_t, 1
+    NASMX_RESERVE DetailLevel, int32_t, 1
+    NASMX_RESERVE NumCounters, int32_t, 1
+    NASMX_RESERVE DefaultCounter, int32_t, 1
+    NASMX_RESERVE NumInstances, int32_t, 1
+    NASMX_RESERVE CodePage, int32_t, 1
+    NASMX_RESERVE PerfTime, int32_t, 1
+    NASMX_RESERVE PerfFreq, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PERF_COUNTER_DEFINITION
+    NASMX_RESERVE ByteiLength, int32_t, 1
+    NASMX_RESERVE CounterNameTitleIndex, int32_t, 1
+    NASMX_RESERVE CounterNameTitle, int32_t, 1
+    NASMX_RESERVE CounterHelpTitleIndex, int32_t, 1
+    NASMX_RESERVE CounterHelpTitle, int32_t, 1
+    NASMX_RESERVE DefaultScale, int32_t, 1
+    NASMX_RESERVE DetailLevel, int32_t, 1
+    NASMX_RESERVE CounterType, int32_t, 1
+    NASMX_RESERVE CounterSize, int32_t, 1
+    NASMX_RESERVE CounterOffset, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PERF_INSTANCE_DEFINITION
+    NASMX_RESERVE ByteiLength, int32_t, 1
+    NASMX_RESERVE ParentObjectTitleIndex, int32_t, 1
+    NASMX_RESERVE ParentObjectInstance, int32_t, 1
+    NASMX_RESERVE UniqueID, int32_t, 1
+    NASMX_RESERVE NameOffset, int32_t, 1
+    NASMX_RESERVE NameiLength, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PERF_COUNTER_BLOCK
+    NASMX_RESERVE ByteiLength, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC COMPOSITIONFORM
+    NASMX_RESERVE dwStyle, int32_t, 1
+	NASMX_STRUC ptCurrentPos, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rcArea, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC CANDIDATEFORM
+    NASMX_RESERVE dwIndex, int32_t, 1
+    NASMX_RESERVE dwStyle, int32_t, 1
+    NASMX_STRUC ptCurrentPos, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rcArea, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC CANDIDATELIST
+    NASMX_RESERVE dwSize, int32_t, 1
+    NASMX_RESERVE dwStyle, int32_t, 1
+    NASMX_RESERVE dwCount, int32_t, 1
+    NASMX_RESERVE dwSelection, int32_t, 1
+    NASMX_RESERVE dwPageStart, int32_t, 1
+    NASMX_RESERVE dwPageSize, int32_t, 1
+    NASMX_RESERVE dwOffset1, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC STYLEBUF
+    NASMX_RESERVE dwStyle, int32_t, 1
+    NASMX_RESERVE szDescription, int8_t, STYLE_DESCRIPTION_SIZE
+NASMX_ENDSTRUC
+
+NASMX_STRUC MODEMDEVCAPS
+    NASMX_RESERVE dwActualSize, int32_t, 1
+    NASMX_RESERVE dwRequiredSize, int32_t, 1
+    NASMX_RESERVE dwDevSpecificOffset, int32_t, 1
+    NASMX_RESERVE dwDevSpecificSize, int32_t, 1
+    NASMX_RESERVE dwModemProviderVersion, int32_t, 1
+    NASMX_RESERVE dwModemManufacturerOffset, int32_t, 1
+    NASMX_RESERVE dwModemManufacturerSize, int32_t, 1
+    NASMX_RESERVE dwModemModelOffset, int32_t, 1
+    NASMX_RESERVE dwModemModelSize, int32_t, 1
+    NASMX_RESERVE dwModemVersionOffset, int32_t, 1
+    NASMX_RESERVE dwModemVersionSize, int32_t, 1
+    NASMX_RESERVE dwDialOptions, int32_t, 1
+    NASMX_RESERVE dwCallSetupFailTimer, int32_t, 1
+    NASMX_RESERVE dwInactivityTimeout, int32_t, 1
+    NASMX_RESERVE dwSpeakerVolume, int32_t, 1
+    NASMX_RESERVE dwSpeakerMode, int32_t, 1
+    NASMX_RESERVE dwModemOptions, int32_t, 1
+    NASMX_RESERVE dwMaxDTERate, int32_t, 1
+    NASMX_RESERVE dwMaxDCERate, int32_t, 1
+    NASMX_RESERVE abVariablePortion, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MODEMSETTINGS
+    NASMX_RESERVE dwActualSize, int32_t, 1
+    NASMX_RESERVE dwRequiredSize, int32_t, 1
+    NASMX_RESERVE dwDevSpecificOffset, int32_t, 1
+    NASMX_RESERVE dwDevSpecificSize, int32_t, 1
+    NASMX_RESERVE dwCallSetupFailTimer, int32_t, 1
+    NASMX_RESERVE dwInactivityTimeout, int32_t, 1
+    NASMX_RESERVE dwSpeakerVolume, int32_t, 1
+    NASMX_RESERVE dwSpeakerMode, int32_t, 1
+    NASMX_RESERVE dwPreferredModemOptions, int32_t, 1
+    NASMX_RESERVE dwNegotiatedModemOptions, int32_t, 1
+    NASMX_RESERVE dwNegotiatedDCERate, int32_t, 1
+    NASMX_RESERVE abVariablePortion, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DRAGINFO
+    NASMX_RESERVE uSize, int32_t, 1
+    NASMX_STRUC pt, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE fNC, int32_t, 1
+    NASMX_RESERVE lpFileList, int32_t, 1
+    NASMX_RESERVE grfKeyState, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC APPBARDATA
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE hwnd, int32_t, 1
+    NASMX_RESERVE uCallbackMessage, int32_t, 1
+    NASMX_RESERVE uEdge, int32_t, 1
+	NASMX_STRUC rc, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SHFILEOPSTRUCT
+    NASMX_RESERVE hwnd, int32_t, 1
+    NASMX_RESERVE wFunc, int32_t, 1
+    NASMX_RESERVE pFrom, int32_t, 1
+    NASMX_RESERVE pTo, int32_t, 1
+    NASMX_RESERVE fFlags, short_t, 1
+    NASMX_RESERVE fAnyOperationsAborted, int32_t, 1
+    NASMX_RESERVE hNameMappings, int32_t, 1
+    NASMX_RESERVE lpszProgressTitle, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SHNAMEMAPPING
+    NASMX_RESERVE pszOldPath, int32_t, 1
+    NASMX_RESERVE pszNewPath, int32_t, 1
+    NASMX_RESERVE cchOldPath, int32_t, 1
+    NASMX_RESERVE cchNewPath, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SHELLEXECUTEINFO
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE fMask, int32_t, 1
+    NASMX_RESERVE hwnd, int32_t, 1
+    NASMX_RESERVE lpVerb, int32_t, 1
+    NASMX_RESERVE lpFile, int32_t, 1
+    NASMX_RESERVE lpParameters, int32_t, 1
+    NASMX_RESERVE lpDirectory, int32_t, 1
+    NASMX_RESERVE nShow, int32_t, 1
+    NASMX_RESERVE hInstApp, int32_t, 1
+    NASMX_RESERVE lpIDList, int32_t, 1
+    NASMX_RESERVE lpClass, int32_t, 1
+    NASMX_RESERVE hkeyClass, int32_t, 1
+    NASMX_RESERVE dwHotKey, int32_t, 1
+    NASMX_RESERVE hIcon, int32_t, 1
+    NASMX_RESERVE hProcess, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NOTIFYICONDATA
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE hwnd, int32_t, 1
+    NASMX_RESERVE uID, int32_t, 1
+    NASMX_RESERVE uFlags, int32_t, 1
+    NASMX_RESERVE uCallbackMessage, int32_t, 1
+    NASMX_RESERVE hIcon, int32_t, 1
+    NASMX_RESERVE szTip, int8_t, 64
+NASMX_ENDSTRUC
+
+NASMX_STRUC SHFILEINFO
+    NASMX_RESERVE hIcon, int32_t, 1
+    NASMX_RESERVE iIcon, int32_t, 1
+    NASMX_RESERVE dwAttributes, int32_t, 1
+    NASMX_RESERVE szDisplayName, int8_t, 1
+    NASMX_RESERVE szTypeName, int8_t, 80 
+NASMX_ENDSTRUC
+
+NASMX_STRUC VS_FIXEDFILEINFO
+    NASMX_RESERVE dwSignature, int32_t, 1
+    NASMX_RESERVE dwStrucVersion, int32_t, 1
+    NASMX_RESERVE dwFileVersionMS, int32_t, 1
+    NASMX_RESERVE dwFileVersionLS, int32_t, 1
+    NASMX_RESERVE dwProductVersionMS, int32_t, 1
+    NASMX_RESERVE dwProductVersionLS, int32_t, 1
+    NASMX_RESERVE dwFileFlagsMask, int32_t, 1
+    NASMX_RESERVE dwFileFlags, int32_t, 1
+    NASMX_RESERVE dwFileOS, int32_t, 1
+    NASMX_RESERVE dwFileType, int32_t, 1
+    NASMX_RESERVE dwFileSubtype, int32_t, 1
+    NASMX_RESERVE dwFileDateMS, int32_t, 1
+    NASMX_RESERVE dwFileDateLS, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ICONMETRICS
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE iHorzSpacing, int32_t, 1
+    NASMX_RESERVE iVertSpacing, int32_t, 1
+    NASMX_RESERVE iTitleWrap, int32_t, 1
+    NASMX_RESERVE lfFont, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC HELPINFO
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE iContextType, int32_t, 1
+    NASMX_RESERVE iCtrlId, int32_t, 1
+    NASMX_RESERVE hItemHandle, int32_t, 1
+    NASMX_RESERVE dwContextId, int32_t, 1
+    NASMX_RESERVE MousePos, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ANIMATIONINFO
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE iMinAnimate, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MINIMIZEDMETRICS
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE iWidth, int32_t, 1
+    NASMX_RESERVE iHorzGap, int32_t, 1
+    NASMX_RESERVE iVertGap, int32_t, 1
+    NASMX_RESERVE iArrange, int32_t, 1
+    NASMX_RESERVE lfFont, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC OSVERSIONINFO
+    NASMX_RESERVE dwOSVersionInfoSize, int32_t, 1
+    NASMX_RESERVE dwMajorVersion, int32_t, 1
+    NASMX_RESERVE dwMinorVersion, int32_t, 1
+    NASMX_RESERVE dwBuildNumber, int32_t, 1
+    NASMX_RESERVE dwPlatformId, int32_t, 1
+    NASMX_RESERVE szCSDVersion, int8_t, 128
+NASMX_ENDSTRUC
+
+NASMX_STRUC SYSTEM_POWER_STATUS
+    NASMX_RESERVE ACLineStatus, int8_t, 1
+    NASMX_RESERVE BatteryFlag, int8_t, 1
+    NASMX_RESERVE BatteryLifePercent, int8_t, 1
+    NASMX_RESERVE Reserved1, int8_t, 1
+    NASMX_RESERVE BatteryLifeTime, int32_t, 1
+    NASMX_RESERVE BatteryFullLifeTime, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NMHDR
+    NASMX_RESERVE hwndFrom, int32_t, 1
+    NASMX_RESERVE idfrom, int32_t, 1
+    NASMX_RESERVE code, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DEVNAMES
+    NASMX_RESERVE wDriverOffset, short_t, 1
+    NASMX_RESERVE wDeviceOffset, short_t, 1
+    NASMX_RESERVE wOutputOffset, short_t, 1
+    NASMX_RESERVE wDefault, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PAGESETUPDLGAPI
+    NASMX_RESERVE lStructSize, int32_t, 1
+    NASMX_RESERVE hwndOwner, int32_t, 1
+    NASMX_RESERVE hDevMode, int32_t, 1
+    NASMX_RESERVE hDevNames, int32_t, 1
+    NASMX_RESERVE flags, int32_t, 1
+    NASMX_STRUC ptPaperSize, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE rtMinMargin, int32_t, 1
+    NASMX_RESERVE rtMargin, int32_t, 1
+    NASMX_RESERVE hInstance, int32_t, 1
+    NASMX_RESERVE lCustData, int32_t, 1
+    NASMX_RESERVE lpfnPageSetupHook, int32_t, 1
+    NASMX_RESERVE lpfnPagePaintHook, int32_t, 1
+    NASMX_RESERVE lpPageSetupTemplateName, int32_t, 1
+    NASMX_RESERVE hPageSetupTemplate, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC COMMCONFIG
+    NASMX_RESERVE dwSize, int32_t, 1
+    NASMX_RESERVE wVersion, short_t, 1
+    NASMX_RESERVE wReserved, short_t, 1
+    NASMX_RESERVE dcbx, int32_t, 1
+    NASMX_RESERVE dwProviderSubType, int32_t, 1
+    NASMX_RESERVE dwProviderOffset, int32_t, 1
+    NASMX_RESERVE dwProviderSize, int32_t, 1
+    NASMX_RESERVE wcProviderData, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PIXELFORMATDESCRIPTOR
+    NASMX_RESERVE nSize, short_t, 1
+    NASMX_RESERVE nVersion, short_t, 1
+    NASMX_RESERVE dwFlags, int32_t, 1
+    NASMX_RESERVE iPixelType, int8_t, 1
+    NASMX_RESERVE cColorBits, int8_t, 1
+    NASMX_RESERVE cRedBits, int8_t, 1
+    NASMX_RESERVE cRedShift, int8_t, 1
+    NASMX_RESERVE cGreenBits, int8_t, 1
+    NASMX_RESERVE cGreenShift, int8_t, 1
+    NASMX_RESERVE cBlueBits, int8_t, 1
+    NASMX_RESERVE cBlueShift, int8_t, 1
+    NASMX_RESERVE cAlphaBits, int8_t, 1
+    NASMX_RESERVE cAlphaShift, int8_t, 1
+    NASMX_RESERVE cAccumBits, int8_t, 1
+    NASMX_RESERVE cAccumRedBits, int8_t, 1
+    NASMX_RESERVE cAccumGreenBits, int8_t, 1
+    NASMX_RESERVE cAccumBlueBits, int8_t, 1
+    NASMX_RESERVE cAccumAlphaBits, int8_t, 1
+    NASMX_RESERVE cDepthBits, int8_t, 1
+    NASMX_RESERVE cStencilBits, int8_t, 1
+    NASMX_RESERVE cAuxBuffers, int8_t, 1
+    NASMX_RESERVE iLayerType, int8_t, 1
+    NASMX_RESERVE bReserved, int8_t, 1
+    NASMX_RESERVE dwLayerMask, int32_t, 1
+    NASMX_RESERVE dwVisibleMask, int32_t, 1
+    NASMX_RESERVE dwDamageMask, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DRAWTEXTPARAMS
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE iTabiLength, int32_t, 1
+    NASMX_RESERVE iLeftMargin, int32_t, 1
+    NASMX_RESERVE iRightMargin, int32_t, 1
+    NASMX_RESERVE uiiLengthDrawn, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MENUITEMINFO
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE fMask, int32_t, 1
+    NASMX_RESERVE fType, int32_t, 1
+    NASMX_RESERVE fState, int32_t, 1
+    NASMX_RESERVE wID, int32_t, 1
+    NASMX_RESERVE hSubMenu, int32_t, 1
+    NASMX_RESERVE hbmpChecked, int32_t, 1
+    NASMX_RESERVE hbmpUnchecked, int32_t, 1
+    NASMX_RESERVE dwItemData, int32_t, 1
+    NASMX_RESERVE dwTypeData, int32_t, 1
+    NASMX_RESERVE cch, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC SCROLLINFO
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE fMask, int32_t, 1
+    NASMX_RESERVE nMin, int32_t, 1
+    NASMX_RESERVE nMax, int32_t, 1
+    NASMX_RESERVE nPage, int32_t, 1
+    NASMX_RESERVE nPos, int32_t, 1
+    NASMX_RESERVE nTrackPos, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MSGBOXPARAMS
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE hwndOwner, int32_t, 1
+    NASMX_RESERVE hInstance, int32_t, 1
+    NASMX_RESERVE lpszText, int32_t, 1
+    NASMX_RESERVE lpszCaption, int32_t, 1
+    NASMX_RESERVE dwStyle, int32_t, 1
+    NASMX_RESERVE lpszIcon, int32_t, 1
+    NASMX_RESERVE dwContextHelpId, int32_t, 1
+    NASMX_RESERVE lpfnMsgBoxCallback, int32_t, 1
+    NASMX_RESERVE dwLanguageId, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DEBUG_EVENT
+    NASMX_RESERVE dwDebugEventCode, int32_t, 1
+    NASMX_RESERVE dwProcessId, int32_t, 1
+    NASMX_RESERVE dwThreadId, int32_t, 1
+    NASMX_RESERVE u, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC COLORMAP
+    NASMX_RESERVE cmFrom, int32_t, 1
+    NASMX_RESERVE cmTo, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC AuxVol
+    NASMX_RESERVE vLow, short_t, 1
+    NASMX_RESERVE vHigh, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DBGTHREAD
+    NASMX_RESERVE hThread, int32_t, 1
+    NASMX_RESERVE lpStartAddress, int32_t, 1
+    NASMX_RESERVE bfState, int32_t, 1
+    NASMX_RESERVE nNext, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DbgProcess
+    NASMX_RESERVE hDbgHeap, int32_t, 1
+    NASMX_RESERVE dwProcessID, int32_t, 1
+    NASMX_RESERVE dwThreadID, int32_t, 1
+    NASMX_RESERVE hProcess, int32_t, 1
+    NASMX_RESERVE hFile, int32_t, 1
+    NASMX_RESERVE lpImage, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC IMAGE_DATA_DIRECTORY
+    NASMX_RESERVE VirtualAddress, int32_t, 1
+    NASMX_RESERVE isize, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC IMAGE_OPTIONAL_HEADER
+    NASMX_RESERVE Magic, short_t, 1
+    NASMX_RESERVE MajorLinkerVersion, int8_t, 1
+    NASMX_RESERVE MinorLinkerVersion, int8_t, 1
+    NASMX_RESERVE SizeOfCode, int32_t, 1
+    NASMX_RESERVE SizeOfInitializedData, int32_t, 1
+    NASMX_RESERVE SizeOfUninitializedData, int32_t, 1
+    NASMX_RESERVE AddressOfEntryPoint, int32_t, 1
+    NASMX_RESERVE BaseOfCode, int32_t, 1
+    NASMX_RESERVE BaseOfData, int32_t, 1
+    NASMX_RESERVE ImageBase, int32_t, 1
+    NASMX_RESERVE SectionAlignment, int32_t, 1
+    NASMX_RESERVE FileAlignment, int32_t, 1
+    NASMX_RESERVE MajorOperatingSystemVersion, short_t, 1
+    NASMX_RESERVE MinorOperatingSystemVersion, short_t, 1
+    NASMX_RESERVE MajorImageVersion, short_t, 1
+    NASMX_RESERVE MinorImageVersion, short_t, 1
+    NASMX_RESERVE MajorSubsystemVersion, short_t, 1
+    NASMX_RESERVE MinorSubsystemVersion, short_t, 1
+    NASMX_RESERVE Reserved1, int32_t, 1
+    NASMX_RESERVE SizeOfImage, int32_t, 1
+    NASMX_RESERVE SizeOfHeaders, int32_t, 1
+    NASMX_RESERVE CheckSum, int32_t, 1
+    NASMX_RESERVE Subsystem, short_t, 1
+    NASMX_RESERVE DllCharacteristics, short_t, 1
+    NASMX_RESERVE SizeOfStackReserve, int32_t, 1
+    NASMX_RESERVE SizeOfStackCommit, int32_t, 1
+    NASMX_RESERVE SizeOfHeapReserve, int32_t, 1
+    NASMX_RESERVE SizeOfHeapCommit, int32_t, 1
+    NASMX_RESERVE LoaderFlags, int32_t, 1
+    NASMX_RESERVE NumberOfRvaAndSizes, int32_t, 1
+    NASMX_RESERVE DataDirectory, int64_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC IMAGE_FILE_HEADER
+    NASMX_RESERVE Machine, short_t, 1
+    NASMX_RESERVE NumberOfSections, short_t, 1
+    NASMX_RESERVE TimeDateStamp, int32_t, 1
+    NASMX_RESERVE PointerToSymbolTable, int32_t, 1
+    NASMX_RESERVE NumberOfSymbols, int32_t, 1
+    NASMX_RESERVE SizeOfOptionalHeader, short_t, 1
+    NASMX_RESERVE Characteristics, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC IMAGE_NT_HEADERS
+    NASMX_RESERVE Signature, int32_t, 1
+    NASMX_RESERVE FileHeader, int32_t, 1
+    NASMX_RESERVE OptionalHeader, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC IMAGE_EXPORT_DIRECTORY
+    NASMX_RESERVE Characteristics, int32_t, 1
+    NASMX_RESERVE TimeDateStamp, int32_t, 1
+    NASMX_RESERVE MajorVersion, short_t, 1
+    NASMX_RESERVE MinorVersion, short_t, 1
+    NASMX_RESERVE nName, int32_t, 1
+    NASMX_RESERVE nBase, int32_t, 1
+    NASMX_RESERVE NumberOfFunctions, int32_t, 1
+    NASMX_RESERVE NumberOfNames, int32_t, 1
+    NASMX_RESERVE AddressOfFunctions, int32_t, 1
+    NASMX_RESERVE AddressOfNames, int32_t, 1
+    NASMX_RESERVE AddressOfNameOrdinals, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC IMAGE_DOS_HEADER
+    NASMX_RESERVE e_magic, short_t, 1
+    NASMX_RESERVE e_cblp, short_t, 1
+    NASMX_RESERVE e_cp, short_t, 1
+    NASMX_RESERVE e_crlc, short_t, 1
+    NASMX_RESERVE e_cparhdr, short_t, 1
+    NASMX_RESERVE e_minalloc, short_t, 1
+    NASMX_RESERVE e_maxalloc, short_t, 1
+    NASMX_RESERVE e_ss, short_t, 1
+    NASMX_RESERVE e_sp, short_t, 1
+    NASMX_RESERVE e_csum, short_t, 1
+    NASMX_RESERVE e_ip, short_t, 1
+    NASMX_RESERVE e_cs, short_t, 1
+    NASMX_RESERVE e_lfarlc, short_t, 1
+    NASMX_RESERVE e_ovno, short_t, 1
+    NASMX_RESERVE e_res4, short_t, 1
+    NASMX_RESERVE e_oemid, short_t, 1
+    NASMX_RESERVE e_oeminfo, short_t, 1
+    NASMX_RESERVE e_res2, short_t, 1
+    NASMX_RESERVE e_lfanew, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC USER_INFO_3
+    NASMX_RESERVE uName, int32_t, 1
+    NASMX_RESERVE Password, int32_t, 1
+    NASMX_RESERVE PasswordAge, int32_t, 1
+    NASMX_RESERVE Privilege, int32_t, 1
+    NASMX_RESERVE HomeDir, int32_t, 1
+    NASMX_RESERVE Comment, int32_t, 1
+    NASMX_RESERVE Flags, int32_t, 1
+    NASMX_RESERVE ScriptPath, int32_t, 1
+    NASMX_RESERVE AuthFlags, int32_t, 1
+    NASMX_RESERVE FullName, int32_t, 1
+    NASMX_RESERVE UserComment, int32_t, 1
+    NASMX_RESERVE Parms, int32_t, 1
+    NASMX_RESERVE Workstations, int32_t, 1
+    NASMX_RESERVE LastLogon, int32_t, 1
+    NASMX_RESERVE LastLogoff, int32_t, 1
+    NASMX_RESERVE AcctExpires, int32_t, 1
+    NASMX_RESERVE MaxStorage, int32_t, 1
+    NASMX_RESERVE UnitsPerWeek, int32_t, 1
+    NASMX_RESERVE LogonHours, int32_t, 1
+    NASMX_RESERVE BadPwCount, int32_t, 1
+    NASMX_RESERVE NumLogons, int32_t, 1
+    NASMX_RESERVE LogonServer, int32_t, 1
+    NASMX_RESERVE CountryCode, int32_t, 1
+    NASMX_RESERVE CodePage, int32_t, 1
+    NASMX_RESERVE UserID, int32_t, 1
+    NASMX_RESERVE PrimaryGroupID, int32_t, 1
+    NASMX_RESERVE Profile, int32_t, 1
+    NASMX_RESERVE HomeDirDrive, int32_t, 1
+    NASMX_RESERVE PasswordExpired, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC GROUP_INFO_2
+    NASMX_RESERVE uName, int32_t, 1
+    NASMX_RESERVE Comment, int32_t, 1
+    NASMX_RESERVE GroupID, int32_t, 1
+    NASMX_RESERVE Attributes, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC INIT_COMMON_CONTROLSEX
+    NASMX_RESERVE dwSize, int32_t, 1
+    NASMX_RESERVE dwICC, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC REBARINFO
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE fMask, int32_t, 1
+    NASMX_RESERVE himl, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC REBARBANDINFO
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE fMask, int32_t, 1
+    NASMX_RESERVE fStyle, int32_t, 1
+    NASMX_RESERVE clrFore, int32_t, 1
+    NASMX_RESERVE clrBack, int32_t, 1
+    NASMX_RESERVE lpText, int32_t, 1
+    NASMX_RESERVE cch, int32_t, 1
+    NASMX_RESERVE iImage, int32_t, 1
+    NASMX_RESERVE hwndChild, int32_t, 1
+    NASMX_RESERVE cxMinChild, int32_t, 1
+    NASMX_RESERVE cyMinChild, int32_t, 1
+    NASMX_RESERVE lx, int32_t, 1
+    NASMX_RESERVE hbmBack, int32_t, 1
+    NASMX_RESERVE wID, int32_t, 1
+    NASMX_RESERVE cyChild, int32_t, 1
+    NASMX_RESERVE cyMaxChild, int32_t, 1
+    NASMX_RESERVE cyIntegral, int32_t, 1
+    NASMX_RESERVE cxIdeal, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+    NASMX_RESERVE cxHeader, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NMREBARCHILDSIZE
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE uBand, int32_t, 1
+    NASMX_RESERVE wID, int32_t, 1
+	NASMX_STRUC rcChild, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rcBand, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC NMREBAR
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE dwMask, int32_t, 1
+    NASMX_RESERVE uBand, int32_t, 1
+    NASMX_RESERVE fStyle, int32_t, 1
+    NASMX_RESERVE wID, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NMRBAUTOSIZE
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE fChanged, int32_t, 1
+	NASMX_STRUC rcTarget, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rcActual, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC RB_HITTESTINFO
+    NASMX_STRUC pt, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE flags, int32_t, 1
+    NASMX_RESERVE iBand, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC IMAGEINFO
+    NASMX_RESERVE hbmImage, int32_t, 1
+    NASMX_RESERVE hbmMask, int32_t, 1
+    NASMX_RESERVE Unused1, int32_t, 1
+    NASMX_RESERVE Unused2, int32_t, 1
+	NASMX_STRUC rcImage, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC HD_ITEM
+    NASMX_RESERVE imask, int32_t, 1
+    NASMX_RESERVE lxy, int32_t, 1
+    NASMX_RESERVE pszText, int32_t, 1
+    NASMX_RESERVE hbm, int32_t, 1
+    NASMX_RESERVE cchTextMax, int32_t, 1
+    NASMX_RESERVE fmt, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC HD_LAYOUT
+    NASMX_RESERVE prc, int32_t, 1
+    NASMX_RESERVE pwpos, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC HD_HITTESTINFO
+    NASMX_STRUC pt, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE flags, int32_t, 1
+    NASMX_RESERVE iItem, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC HD_NOTIFY
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iItem, int32_t, 1
+    NASMX_RESERVE iButton, int32_t, 1
+    NASMX_RESERVE pitem, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TBBUTTON
+    NASMX_RESERVE iBitmap, int32_t, 1
+    NASMX_RESERVE idCommand, int32_t, 1
+    NASMX_RESERVE fsState, int8_t, 1
+    NASMX_RESERVE fsStyle, int8_t, 1
+    NASMX_RESERVE dwData, int32_t, 1
+    NASMX_RESERVE iString, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ColorMap
+    NASMX_RESERVE cmFrom, int32_t, 1
+    NASMX_RESERVE cmTo, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TBADDBITMAP
+    NASMX_RESERVE hInst, int32_t, 1
+    NASMX_RESERVE nId, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TBSAVEPARAMS
+    NASMX_RESERVE hkr, int32_t, 1
+    NASMX_RESERVE pszSubKey, int32_t, 1
+    NASMX_RESERVE pszValueName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TBREPLACEBITMAP
+    NASMX_RESERVE hInstOld, int32_t, 1
+    NASMX_RESERVE nIdOld, int32_t, 1
+    NASMX_RESERVE hInstNew, int32_t, 1
+    NASMX_RESERVE nIdNew, int32_t, 1
+    NASMX_RESERVE nButtons, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TBNOTIFY
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iItem, int32_t, 1
+	NASMX_STRUC tbButton, TBBUTTON
+		NASMX_RESERVE iBitmap, int32_t, 1
+		NASMX_RESERVE idCommand, int32_t, 1
+		NASMX_RESERVE fsState, int8_t, 1
+		NASMX_RESERVE fsStyle, int8_t, 1
+		NASMX_RESERVE dwData, int32_t, 1
+		NASMX_RESERVE iString, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cchText, int32_t, 1
+    NASMX_RESERVE pszText, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TOOLINFO
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE uFlags, int32_t, 1
+    NASMX_RESERVE hWnd, int32_t, 1
+    NASMX_RESERVE uId, int32_t, 1
+	NASMX_STRUC rect, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE hInst, int32_t, 1
+    NASMX_RESERVE lpszText, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TT_HITTESTINFO
+    NASMX_RESERVE hWnd, int32_t, 1
+    NASMX_STRUC pt, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC ti, TOOLINFO
+		NASMX_RESERVE cbSize, int32_t, 1
+		NASMX_RESERVE uFlags, int32_t, 1
+		NASMX_RESERVE hWnd, int32_t, 1
+		NASMX_RESERVE uId, int32_t, 1
+		NASMX_STRUC rect, RECT
+			NASMX_RESERVE left, int32_t, 1
+			NASMX_RESERVE top, int32_t, 1
+			NASMX_RESERVE right, int32_t, 1
+			NASMX_RESERVE bottom, int32_t, 1
+		NASMX_ENDSTRUC
+		NASMX_RESERVE hInst, int32_t, 1
+		NASMX_RESERVE lpszText, int32_t, 1
+		NASMX_RESERVE lParam, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC TOOLTIPTEXT
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE lpszText, int32_t, 1
+    NASMX_RESERVE szText, int8_t, 80
+    NASMX_RESERVE hInst, int32_t, 1
+    NASMX_RESERVE uFlags, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC DRAGLISTINFO
+    NASMX_RESERVE uNotification, int32_t, 1
+    NASMX_RESERVE hWnd, int32_t, 1
+    NASMX_STRUC ptCursor, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC UDACCEL
+    NASMX_RESERVE nSec, int32_t, 1
+    NASMX_RESERVE nInc, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NM_UPDOWN
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iPos, int32_t, 1
+    NASMX_RESERVE iDelta, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LV_ITEM
+    NASMX_RESERVE imask, int32_t, 1
+    NASMX_RESERVE iItem, int32_t, 1
+    NASMX_RESERVE iSubItem, int32_t, 1
+    NASMX_RESERVE state, int32_t, 1
+    NASMX_RESERVE stateMask, int32_t, 1
+    NASMX_RESERVE pszText, int32_t, 1
+    NASMX_RESERVE cchTextMax, int32_t, 1
+    NASMX_RESERVE iImage, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LV_FINDINFO
+    NASMX_RESERVE flags, int32_t, 1
+    NASMX_RESERVE psz, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+    NASMX_STRUC pt, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE vkDirection, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LV_HITTESTINFO
+    NASMX_STRUC pt, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE flags, int32_t, 1
+    NASMX_RESERVE iItem, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LV_COLUMN
+    NASMX_RESERVE imask, int32_t, 1
+    NASMX_RESERVE fmt, int32_t, 1
+    NASMX_RESERVE lx, int32_t, 1
+    NASMX_RESERVE pszText, int32_t, 1
+    NASMX_RESERVE cchTextMax, int32_t, 1
+    NASMX_RESERVE iSubItem, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NM_LISTVIEW
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iItem, int32_t, 1
+    NASMX_RESERVE iSubItem, int32_t, 1
+    NASMX_RESERVE uNewState, int32_t, 1
+    NASMX_RESERVE uOldState, int32_t, 1
+    NASMX_RESERVE uChanged, int32_t, 1
+    NASMX_STRUC ptAction, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LV_DISPINFO
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE item, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC LV_KEYDOWN
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE wVKey, short_t, 1
+    NASMX_RESERVE flags, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TREEITEM
+    NASMX_RESERVE dummy, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TV_ITEM
+    NASMX_RESERVE imask, int32_t, 1
+    NASMX_RESERVE hItem, int32_t, 1
+    NASMX_RESERVE state, int32_t, 1
+    NASMX_RESERVE stateMask, int32_t, 1
+    NASMX_RESERVE pszText, int32_t, 1
+    NASMX_RESERVE cchTextMax, int32_t, 1
+    NASMX_RESERVE iImage, int32_t, 1
+    NASMX_RESERVE iSelectedImage, int32_t, 1
+    NASMX_RESERVE cChildren, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TV_INSERTSTRUCT
+    NASMX_RESERVE hParent, int32_t, 1
+    NASMX_RESERVE hInsertAfter, int32_t, 1
+    NASMX_RESERVE item, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TV_HITTESTINFO
+    NASMX_STRUC pt, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE flags, int32_t, 1
+    NASMX_RESERVE hItem, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TV_SORTCB
+    NASMX_RESERVE hParent, int32_t, 1
+    NASMX_RESERVE lpfnCompare, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC NM_TREEVIEW
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE action, int32_t, 1
+    NASMX_RESERVE itemOld, int32_t, 1
+    NASMX_RESERVE itemNew, int32_t, 1
+    NASMX_STRUC ptDrag, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC TV_DISPINFO
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE item, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TV_KEYDOWN
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE wVKey, short_t, 1
+    NASMX_RESERVE flags, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TC_ITEMHEADER
+    NASMX_RESERVE imask, int32_t, 1
+    NASMX_RESERVE lpReserved1, int32_t, 1
+    NASMX_RESERVE lpReserved2, int32_t, 1
+    NASMX_RESERVE pszText, int32_t, 1
+    NASMX_RESERVE cchTextMax, int32_t, 1
+    NASMX_RESERVE iImage, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TC_ITEM
+    NASMX_RESERVE imask, int32_t, 1
+    NASMX_RESERVE lpReserved1, int32_t, 1
+    NASMX_RESERVE lpReserved2, int32_t, 1
+    NASMX_RESERVE pszText, int32_t, 1
+    NASMX_RESERVE cchTextMax, int32_t, 1
+    NASMX_RESERVE iImage, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TC_HITTESTINFO
+    NASMX_STRUC pt, POINT
+		NASMX_RESERVE x, int32_t, 1
+		NASMX_RESERVE y, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE flags, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TC_KEYDOWN
+	NASMX_STRUC hdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE wVKey, short_t, 1
+    NASMX_RESERVE flags, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CHOOSECOLORAPI
+    NASMX_RESERVE lStructSize, int32_t, 1
+    NASMX_RESERVE hwndOwner, int32_t, 1
+    NASMX_RESERVE hInstance, int32_t, 1
+    NASMX_RESERVE rgbResult, int32_t, 1
+    NASMX_RESERVE lpCustColors, int32_t, 1
+    NASMX_RESERVE Flags, int32_t, 1
+    NASMX_RESERVE lCustData, int32_t, 1
+    NASMX_RESERVE lpfnHook, int32_t, 1
+    NASMX_RESERVE lpTemplateName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FINDREPLACE
+    NASMX_RESERVE lStructSize, int32_t, 1
+    NASMX_RESERVE hWndOwner, int32_t, 1
+    NASMX_RESERVE hInstance, int32_t, 1
+    NASMX_RESERVE Flags, int32_t, 1
+    NASMX_RESERVE lpstrFindWhat, int32_t, 1
+    NASMX_RESERVE lpstrReplaceWith, int32_t, 1
+    NASMX_RESERVE wFindWhatLen, short_t, 1
+    NASMX_RESERVE wReplaceWithLen, short_t, 1
+    NASMX_RESERVE lCustData, int32_t, 1
+    NASMX_RESERVE lpfnHook, int32_t, 1
+    NASMX_RESERVE lpTemplateName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CHOOSEFONTAPI
+    NASMX_RESERVE lStructSize, int32_t, 1
+    NASMX_RESERVE hWndOwner, int32_t, 1
+    NASMX_RESERVE hDC, int32_t, 1
+    NASMX_RESERVE lpLogFont, int32_t, 1
+    NASMX_RESERVE iPointSize, int32_t, 1
+    NASMX_RESERVE Flags, int32_t, 1
+    NASMX_RESERVE rgbColors, int32_t, 1
+    NASMX_RESERVE lCustData, int32_t, 1
+    NASMX_RESERVE lpfnHook, int32_t, 1
+    NASMX_RESERVE lpTemplateName, int32_t, 1
+    NASMX_RESERVE hInstance, int32_t, 1
+    NASMX_RESERVE lpszStyle, int32_t, 1
+    NASMX_RESERVE nFontType, short_t, 1
+    NASMX_RESERVE Alignment, short_t, 1
+    NASMX_RESERVE nSizeMin, int32_t, 1
+    NASMX_RESERVE nSizeMax, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PRINTDLGAPI
+    NASMX_RESERVE lStructSize, int32_t, 1
+    NASMX_RESERVE hWndOwner, int32_t, 1
+    NASMX_RESERVE hDevMode, int32_t, 1
+    NASMX_RESERVE hDevNames, int32_t, 1
+    NASMX_RESERVE hDC, int32_t, 1
+    NASMX_RESERVE Flags, int32_t, 1
+    NASMX_RESERVE nFromPage, short_t, 1
+    NASMX_RESERVE nToPage, short_t, 1
+    NASMX_RESERVE nMinPage, short_t, 1
+    NASMX_RESERVE nMaxPage, short_t, 1
+    NASMX_RESERVE nCopies, short_t, 1
+    NASMX_RESERVE hInstance, int32_t, 1
+    NASMX_RESERVE lCustData, int32_t, 1
+    NASMX_RESERVE lpfnPrintHook, int32_t, 1
+    NASMX_RESERVE lpfnSetupHook, int32_t, 1
+    NASMX_RESERVE lpPrintTemplateName, int32_t, 1
+    NASMX_RESERVE lpPrintSetupTemplateName, int32_t, 1
+    NASMX_RESERVE hPrintTemplate, int32_t, 1
+    NASMX_RESERVE hSetupTemplate, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC OPENFILENAME
+    NASMX_RESERVE lStructSize, int32_t, 1
+    NASMX_RESERVE hWndOwner, int32_t, 1
+    NASMX_RESERVE hInstance, int32_t, 1
+    NASMX_RESERVE lpstrFilter, int32_t, 1
+    NASMX_RESERVE lpstrCustomFilter, int32_t, 1
+    NASMX_RESERVE nMaxCustFilter, int32_t, 1
+    NASMX_RESERVE nFilterIndex, int32_t, 1
+    NASMX_RESERVE lpstrFile, int32_t, 1
+    NASMX_RESERVE nMaxFile, int32_t, 1
+    NASMX_RESERVE lpstrFileTitle, int32_t, 1
+    NASMX_RESERVE nMaxFileTitle, int32_t, 1
+    NASMX_RESERVE lpstrInitialDir, int32_t, 1
+    NASMX_RESERVE lpstrTitle, int32_t, 1
+    NASMX_RESERVE Flags, int32_t, 1
+    NASMX_RESERVE nFileOffset, short_t, 1
+    NASMX_RESERVE nFileExtension, short_t, 1
+    NASMX_RESERVE lpstrDefExt, int32_t, 1
+    NASMX_RESERVE lCustData, int32_t, 1
+    NASMX_RESERVE lpfnHook, int32_t, 1
+    NASMX_RESERVE lpTemplateName, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CHARFORMAT
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE dwMask, int32_t, 1
+    NASMX_RESERVE dwEffects, int32_t, 1
+    NASMX_RESERVE yHeight, int32_t, 1
+    NASMX_RESERVE yOffset, int32_t, 1
+    NASMX_RESERVE crTextColor, int32_t, 1
+    NASMX_RESERVE bCharSet, int8_t, 1
+    NASMX_RESERVE bPitchAndFamily, int8_t, 1
+    NASMX_RESERVE szFaceName, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC CHARRANGE
+    NASMX_RESERVE cpMin, int32_t, 1
+    NASMX_RESERVE cpMax, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC TEXTRANGE
+	NASMX_STRUC chrg, CHARRANGE
+		NASMX_RESERVE cpMin, int32_t, 1
+		NASMX_RESERVE cpMax, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE lpstrText, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EDITSTREAM
+    NASMX_RESERVE dwCookie, int32_t, 1
+    NASMX_RESERVE dwError, int32_t, 1
+    NASMX_RESERVE pfnCallback, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FINDTEXT
+	NASMX_STRUC chrg, CHARRANGE
+		NASMX_RESERVE cpMin, int32_t, 1
+		NASMX_RESERVE cpMax, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE lpstrText, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC FINDTEXTEX
+	NASMX_STRUC chrg, CHARRANGE
+		NASMX_RESERVE cpMin, int32_t, 1
+		NASMX_RESERVE cpMax, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE lpstrText, int32_t, 1
+	NASMX_STRUC chrgText, CHARRANGE
+		NASMX_RESERVE cpMin, int32_t, 1
+		NASMX_RESERVE cpMax, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC FORMATRANGE
+    NASMX_RESERVE hdc, int32_t, 1
+    NASMX_RESERVE hdcTarget, int32_t, 1
+	NASMX_STRUC rc, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rcPage, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC chrg, CHARRANGE
+		NASMX_RESERVE cpMin, int32_t, 1
+		NASMX_RESERVE cpMax, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC PARAFORMAT
+    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE dwMask, int32_t, 1
+    NASMX_RESERVE wNumbering, short_t, 1
+    NASMX_RESERVE wReserved, short_t, 1
+    NASMX_RESERVE dxStartIndent, int32_t, 1
+    NASMX_RESERVE dxRightIndent, int32_t, 1
+    NASMX_RESERVE dxOffset, int32_t, 1
+    NASMX_RESERVE wAlignment, short_t, 1
+    NASMX_RESERVE cTabCount, short_t, 1
+    NASMX_RESERVE rgxTabs, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC MSGFILTER
+	NASMX_STRUC nmhdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE msg, int32_t, 1
+    NASMX_RESERVE wParam, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC REQRESIZE
+	NASMX_STRUC nmhdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC rc, RECT
+		NASMX_RESERVE left, int32_t, 1
+		NASMX_RESERVE top, int32_t, 1
+		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE bottom, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC SELCHANGE
+	NASMX_STRUC nmhdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC chrg, CHARRANGE
+		NASMX_RESERVE cpMin, int32_t, 1
+		NASMX_RESERVE cpMax, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE seltyp, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ENDROPFILES
+	NASMX_STRUC nmhdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE hDrop, int32_t, 1
+    NASMX_RESERVE cp, int32_t, 1
+    NASMX_RESERVE fProtected, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ENPROTECTED
+	NASMX_STRUC nmhdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE msg, int32_t, 1
+    NASMX_RESERVE wParam, int32_t, 1
+    NASMX_RESERVE lParam, int32_t, 1
+	NASMX_STRUC chrg, CHARRANGE
+		NASMX_RESERVE cpMin, int32_t, 1
+		NASMX_RESERVE cpMax, int32_t, 1
+	NASMX_ENDSTRUC
+NASMX_ENDSTRUC
+
+NASMX_STRUC ENSAVECLIPBOARD
+	NASMX_STRUC nmhdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE cObjectCount, int32_t, 1
+    NASMX_RESERVE cch, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ENOLEOPFAILED
+	NASMX_STRUC nmhdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE iob, int32_t, 1
+    NASMX_RESERVE lOper, int32_t, 1
+    NASMX_RESERVE hr, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ENCORRECTTEXT
+	NASMX_STRUC nmhdr, NMHDR
+		NASMX_RESERVE hwndFrom, int32_t, 1
+		NASMX_RESERVE idfrom, int32_t, 1
+		NASMX_RESERVE code, int32_t, 1
+	NASMX_ENDSTRUC
+	NASMX_STRUC chrg, CHARRANGE
+		NASMX_RESERVE cpMin, int32_t, 1
+		NASMX_RESERVE cpMax, int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE seltyp, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PUNCTUATION
+    NASMX_RESERVE iSize, int32_t, 1
+    NASMX_RESERVE szPunctuation, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC COMPCOLOR
+    NASMX_RESERVE crText, int32_t, 1
+    NASMX_RESERVE crBackground, int32_t, 1
+    NASMX_RESERVE dwEffects, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC REPASTESPECIAL
+    NASMX_RESERVE dwAspect, int32_t, 1
+    NASMX_RESERVE dwParam, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC fd_setstruc
+    NASMX_RESERVE fd_count, int32_t, 1
+    NASMX_RESERVE fd_array, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC timeval
+    NASMX_RESERVE tv_sec, int32_t, 1
+    NASMX_RESERVE tv_usec, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC sockaddr_in
+    NASMX_RESERVE sin_family, short_t, 1
+    NASMX_RESERVE sin_port, short_t, 1
+    NASMX_RESERVE sin_addr, int32_t, 1
+    NASMX_RESERVE sin_zero, int8_t, 8
+NASMX_ENDSTRUC
+
+NASMX_STRUC sockaddr
+    NASMX_RESERVE sa_family, short_t, 1
+    NASMX_RESERVE sa_data, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC WSAdata
+    NASMX_RESERVE wVersion, short_t, 1
+    NASMX_RESERVE wHighVersion, short_t, 1
+    NASMX_RESERVE szDescription, int8_t, WSADESCRIPTION_LEN+1
+    NASMX_RESERVE szSystemStatus, int8_t, WSASYS_STATUS_LEN+1
+    NASMX_RESERVE iMaxSockets, short_t, 1
+    NASMX_RESERVE iMaxUdpDg, short_t, 1
+    NASMX_RESERVE lpVendorInfo, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC sockproto
+    NASMX_RESERVE sp_family, short_t, 1
+    NASMX_RESERVE sp_protocol, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC linger
+    NASMX_RESERVE l_onoff, short_t, 1
+    NASMX_RESERVE l_linger, short_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC hostentStru
+    NASMX_RESERVE h_name, int32_t, 1
+    NASMX_RESERVE h_alias, int32_t, 1
+    NASMX_RESERVE h_addr, short_t, 1
+    NASMX_RESERVE h_len, short_t, 1
+    NASMX_RESERVE h_list, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC netent
+    NASMX_RESERVE n_name, int32_t, 1
+    NASMX_RESERVE n_aliases, int32_t, 1
+    NASMX_RESERVE n_addrtype, short_t, 1
+    NASMX_RESERVE n_net, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC servent
+    NASMX_RESERVE s_name, int32_t, 1
+    NASMX_RESERVE s_aliases, int32_t, 1
+    NASMX_RESERVE s_port, short_t, 1
+    NASMX_RESERVE s_proto, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC icmp_hdr
+    NASMX_RESERVE icmp_type, int8_t, 1
+    NASMX_RESERVE icmp_code, int8_t, 1
+    NASMX_RESERVE icmp_cksum, short_t, 1
+    NASMX_RESERVE icmp_id, short_t, 1
+    NASMX_RESERVE icmp_seq, short_t, 1
+    NASMX_RESERVE icmp_data, int8_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ip_hdr
+    NASMX_RESERVE ip_hlv, int8_t, 1
+    NASMX_RESERVE ip_tos, int8_t, 1
+    NASMX_RESERVE ip_len, short_t, 1
+    NASMX_RESERVE ip_id, short_t, 1
+    NASMX_RESERVE ip_off, short_t, 1
+    NASMX_RESERVE ip_ttl, int8_t, 1
+    NASMX_RESERVE ip_p, int8_t, 1
+    NASMX_RESERVE ip_cksum, short_t, 1
+    NASMX_RESERVE ip_src, int32_t, 1
+    NASMX_RESERVE ip_dest, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ICMP_OPTIONS
+    NASMX_RESERVE Ttl, int8_t, 1
+    NASMX_RESERVE Tos, int8_t, 1
+    NASMX_RESERVE Flags, int8_t, 1
+    NASMX_RESERVE OptionsSize, int8_t, 1
+    NASMX_RESERVE OptionsData, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC ICMP_ECHO_REPLY
+    NASMX_RESERVE Address, int32_t, 1
+    NASMX_RESERVE Status, int32_t, 1
+    NASMX_RESERVE RoundTripTime, int32_t, 1
+    NASMX_RESERVE DataSize, short_t, 1
+    NASMX_RESERVE Reserved, short_t, 1
+    NASMX_RESERVE DataPointer, int32_t, 1
+    NASMX_RESERVE Options, int32_t, 1
+    NASMX_RESERVE zData, char_t, 250
+NASMX_ENDSTRUC
 
 %endif
