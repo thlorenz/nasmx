@@ -11,6 +11,7 @@
 	%define LoadIcon LoadIconW
 	%define MessageBox MessageBoxW
 	%define RegisterClassEx RegisterClassExW
+	%define SendDlgItemMessage SendDlgItemMessageW
 %else
 	%define CreateWindowEx CreateWindowExA
 	%define DefWindowProc DefWindowProcA
@@ -21,6 +22,7 @@
 	%define LoadIcon LoadIconA
 	%define MessageBox MessageBoxA
 	%define RegisterClassEx RegisterClassExA
+	%define SendDlgItemMessage SendDlgItemMessageA
 %endif
 
 %endif
