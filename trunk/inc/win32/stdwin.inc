@@ -24,7 +24,7 @@
 ; ButtonCtl szText, dwID, xpos, ypos, wwd, wht, prnt, hinst
 %macro ButtonCtl 8
 jmp %%n
-%%cls: declare(NX_CHAR) NX_TEXT("BUTTON"), 0
+%%cls: declare(NASMX_CHAR) NASMX_TEXT("BUTTON"), 0
 %%n: push dword NULL
      push dword %8
      push dword %2
@@ -43,7 +43,7 @@ jmp %%n
 ; EditCtl szText, dwID, xpos, ypos, wwd, wht, prnt, hinst
 %macro EditCtl 8
 jmp %%n
-%%cls: declare(NX_CHAR) NX_TEXT("EDIT"), 0
+%%cls: declare(NASMX_CHAR) NASMX_TEXT("EDIT"), 0
 %%n: push dword NULL
      push dword %8
      push dword %2
@@ -62,7 +62,7 @@ jmp %%n
 ; StaticCtl szText, dwID, xpos, ypos, wwd, wht, prnt, hinst
 %macro StaticCtl 8
 jmp %%n
-%%cls: declare(NX_CHAR) NX_TEXT("STATIC"), 0
+%%cls: declare(NASMX_CHAR) NASMX_TEXT("STATIC"), 0
 %%n: push dword NULL
      push dword %8
      push dword %2
@@ -81,7 +81,7 @@ jmp %%n
 ; ComboCtl szText, dwID, xpos, ypos, wwd, wht, prnt, hinst
 %macro ComboCtl 8
 jmp %%n
-%%cls: declare(NX_CHAR) NX_TEXT("COMBOBOX"), 0
+%%cls: declare(NASMX_CHAR) NASMX_TEXT("COMBOBOX"), 0
 %%n: push dword NULL
      push dword %8
      push dword %2
@@ -100,7 +100,7 @@ jmp %%n
 ; ListBoxCtl szText, dwID, xpos, ypos, wwd, wht, prnt, hinst
 %macro ListBoxCtl 8
 jmp %%n
-%%cls: declare(NX_CHAR) NX_TEXT("LISTBOX"), 0
+%%cls: declare(NASMX_CHAR) NASMX_TEXT("LISTBOX"), 0
 %%n: push dword NULL
      push dword %8
      push dword %2

@@ -25,9 +25,9 @@ entry demo2
 [section .text]
 proc    demo2
 
-    invoke   GetModuleHandle, NX_PTR NULL
+    invoke   GetModuleHandle, NASMX_PTR NULL
     mov      [hInstance], eax
-    invoke   WinMain, NX_PTR hInstance, NX_PTR NULL, NX_PTR NULL, int32_t SW_SHOWNORMAL
+    invoke   WinMain, NASMX_PTR hInstance, NASMX_PTR NULL, NASMX_PTR NULL, int32_t SW_SHOWNORMAL
     invoke   ExitProcess, uint32_t NULL
     ret
 
@@ -39,7 +39,7 @@ hpinst   argd        ; Previous instance handle
 cmdln    argd        ; Command line arguments
 dwshow   argd        ; Display style
 
-    invoke   LoadIcon, NX_PTR NULL, NX_PTR IDI_APPLICATION
+    invoke   LoadIcon, NASMX_PTR NULL, NASMX_PTR IDI_APPLICATION
     mov      edx, eax
     mov      eax, dword argv(hinst)
     mov      ebx, dword szClass
@@ -50,20 +50,20 @@ dwshow   argd        ; Display style
     mov      [wc + WNDCLASSEX.hIcon], edx
     mov      [wc + WNDCLASSEX.hIconSm], edx
 
-    invoke   RegisterClassEx, NX_PTR wc
+    invoke   RegisterClassEx, NASMX_PTR wc
 
-    invoke   CreateWindowEx, uint32_t WS_EX_TOOLWINDOW, NX_PTR szClass, NX_PTR szTitle, uint32_t WS_CAPTION + WS_SYSMENU + WS_VISIBLE, int32_t 100, int32_t 120, int32_t 200, int32_t 100, NX_PTR NULL, NX_PTR NULL, NX_PTR [wc + WNDCLASSEX.hInstance], NX_PTR NULL
+    invoke   CreateWindowEx, uint32_t WS_EX_TOOLWINDOW, NASMX_PTR szClass, NASMX_PTR szTitle, uint32_t WS_CAPTION + WS_SYSMENU + WS_VISIBLE, int32_t 100, int32_t 120, int32_t 200, int32_t 100, NASMX_PTR NULL, NASMX_PTR NULL, NASMX_PTR [wc + WNDCLASSEX.hInstance], NASMX_PTR NULL
     mov      [hWnd], eax
 
-    invoke   ShowWindow, NX_PTR hWnd, int32_t argv(dwshow)
-    invoke   UpdateWindow, NX_PTR hWnd
+    invoke   ShowWindow, NASMX_PTR hWnd, int32_t argv(dwshow)
+    invoke   UpdateWindow, NASMX_PTR hWnd
 
     .msgloop:
-        invoke   GetMessage, NX_PTR message, NX_PTR NULL, uint32_t NULL, uint32_t NULL
+        invoke   GetMessage, NASMX_PTR message, NASMX_PTR NULL, uint32_t NULL, uint32_t NULL
         cmp      eax, dword 0
         je       .exit
-        invoke   TranslateMessage, NX_PTR message
-        invoke   DispatchMessage, NX_PTR message
+        invoke   TranslateMessage, NASMX_PTR message
+        invoke   DispatchMessage, NASMX_PTR message
         jmp      .msgloop
     .exit:
 
@@ -82,8 +82,8 @@ lparam  argd        ; lParam
     cmp      argv(umsg), dword WM_CREATE
     jnz      .wm_destroy
 
-    invoke   GetClientRect, NX_PTR argv(hwnd), NX_PTR rct
-    invoke   CreateWindowEx, uint32_t NULL, NX_PTR szStatic, NX_PTR szTitle, uint32_t WS_CHILD + WS_VISIBLE + SS_CENTER, int32_t 0, int32_t 0, int32_t [rct + RECT.right], int32_t [rct + RECT.bottom], NX_PTR argv(hwnd), NX_PTR 500, NX_PTR [wc + WNDCLASSEX.hInstance], NX_PTR NULL
+    invoke   GetClientRect, NASMX_PTR argv(hwnd), NASMX_PTR rct
+    invoke   CreateWindowEx, uint32_t NULL, NASMX_PTR szStatic, NASMX_PTR szTitle, uint32_t WS_CHILD + WS_VISIBLE + SS_CENTER, int32_t 0, int32_t 0, int32_t [rct + RECT.right], int32_t [rct + RECT.bottom], NASMX_PTR argv(hwnd), NASMX_PTR 500, NASMX_PTR [wc + WNDCLASSEX.hInstance], NASMX_PTR NULL
     jmp      .wm_default
 
 .wm_destroy:
@@ -93,7 +93,7 @@ lparam  argd        ; lParam
     invoke   PostQuitMessage, dword NULL
 
 .wm_default:
-    invoke   DefWindowProc, NX_PTR argv(hwnd), uint32_t argv(umsg), size_t argv(wparam), size_t argv(lparam)
+    invoke   DefWindowProc, NASMX_PTR argv(hwnd), uint32_t argv(umsg), size_t argv(wparam), size_t argv(lparam)
     
 .exit:
     ret
@@ -101,13 +101,13 @@ lparam  argd        ; lParam
 endproc
 
 [section .bss]
-    hInstance:   reserve(NX_PTR) 1
-    hWnd:        reserve(NX_PTR) 1
+    hInstance:   reserve(NASMX_PTR) 1
+    hWnd:        reserve(NASMX_PTR) 1
 
 [section .data]
-    szStatic:   declare(NX_CHAR)  NX_TEXT("STATIC"), 0x0
-    szTitle:    declare(NX_CHAR)  NX_TEXT("Demo2"), 0x0
-    szClass:    declare(NX_CHAR)  NX_TEXT("Demo2Class"), 0x0
+    szStatic:   declare(NASMX_CHAR) NASMX_TEXT("STATIC"), 0x0
+    szTitle:    declare(NASMX_CHAR) NASMX_TEXT("Demo2"), 0x0
+    szClass:    declare(NASMX_CHAR) NASMX_TEXT("Demo2Class"), 0x0
 
     NASMX_ISTRUC wc, WNDCLASSEX
 		NASMX_AT cbSize,        sizeof(WNDCLASSEX)

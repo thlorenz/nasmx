@@ -29,7 +29,7 @@ proc    demo6
     mov      eax, msg_table
     mov      [eax + WM_COMMAND * 4], dword Wm_CommandProc
     mov      [eax + WM_DESTROY * 4], dword Wm_DestroyProc
-    invoke   DialogBoxParam, NX_PTR NULL, NX_PTR szTemplate, NX_PTR NULL, NX_PTR dlgproc, size_t NULL
+    invoke   DialogBoxParam, NASMX_PTR NULL, NASMX_PTR szTemplate, NASMX_PTR NULL, NASMX_PTR dlgproc, size_t NULL
     invoke   ExitProcess, uint32_t NULL
     ret
 
@@ -61,7 +61,7 @@ proc    Wm_DestroyProc
 .wparam argd
 .lparam argd
 
-    invoke   EndDialog, NX_PTR argv(.hwnd), size_t 1
+    invoke   EndDialog, NASMX_PTR argv(.hwnd), size_t 1
     mov      eax, 1
     ret
 
@@ -86,15 +86,15 @@ proc    Wm_CommandProc
     ret
 
 .cmd_idok:
-    invoke   EndDialog, NX_PTR argv(.hwnd), size_t 1
+    invoke   EndDialog, NASMX_PTR argv(.hwnd), size_t 1
     mov      eax, 1
     ret
 
 .cmd_idgo:
-    invoke   SendDlgItemMessage, NX_PTR argv(.hwnd), int32_t 205, uint32_t WM_GETTEXTLENGTH, size_t NULL, size_t NULL
+    invoke   SendDlgItemMessage, NASMX_PTR argv(.hwnd), int32_t 205, uint32_t WM_GETTEXTLENGTH, size_t NULL, size_t NULL
     cmp      eax, dword 0
     jne      .fine
-    invoke   MessageBox, NX_PTR argv(.hwnd), NX_PTR szContent, NX_PTR szTitle, uint32_t MB_OK | MB_ICONERROR
+    invoke   MessageBox, NASMX_PTR argv(.hwnd), NASMX_PTR szContent, NASMX_PTR szTitle, uint32_t MB_OK | MB_ICONERROR
     mov      eax, 1
     ret
 
@@ -107,20 +107,20 @@ proc    Wm_CommandProc
     invoke   HeapAlloc, eax, dword 0x000008, ecx 
     mov      [dwText], eax
     pop      eax
-    invoke   SendDlgItemMessage, NX_PTR argv(.hwnd), int32_t 205, uint32_t WM_GETTEXT, eax, size_t dwText
-    invoke   SendDlgItemMessage, NX_PTR argv(.hwnd), int32_t 206, uint32_t WM_SETTEXT, size_t 0, size_t dwText
-    invoke   HeapFree, NX_PTR dwHeap, uint32_t 0x000008, NX_PTR dwText
+    invoke   SendDlgItemMessage, NASMX_PTR argv(.hwnd), int32_t 205, uint32_t WM_GETTEXT, eax, size_t dwText
+    invoke   SendDlgItemMessage, NASMX_PTR argv(.hwnd), int32_t 206, uint32_t WM_SETTEXT, size_t 0, size_t dwText
+    invoke   HeapFree, NASMX_PTR dwHeap, uint32_t 0x000008, NASMX_PTR dwText
     mov      eax, 1
     ret
 
 endproc
 
 [section .bss]
-    dwText:     reserve(NX_PTR) 1
-    dwHeap:     reserve(NX_PTR) 1
+    dwText:     reserve(NASMX_PTR) 1
+    dwHeap:     reserve(NASMX_PTR) 1
 
 [section .data]
-    szTitle:    declare(NX_CHAR)    NX_TEXT("Demo6"), 0x0
-    szContent:  declare(NX_CHAR)    NX_TEXT("Error: you must enter text into the top edit box!"), 0x0
-    szTemplate: declare(NX_CHAR)    NX_TEXT("MyDialog"), 0x0
+    szTitle:    declare(NASMX_CHAR) NASMX_TEXT("Demo6"), 0x0
+    szContent:  declare(NASMX_CHAR) NASMX_TEXT("Error: you must enter text into the top edit box!"), 0x0
+    szTemplate: declare(NASMX_CHAR) NASMX_TEXT("MyDialog"), 0x0
     msg_table:  times 1024*4 dd wm_default
