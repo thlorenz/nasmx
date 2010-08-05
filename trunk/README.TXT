@@ -1,6 +1,6 @@
 The NASMX Project
-By: Bryant Keller and Keith Kanios
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+By: Bryant Keller, Keith Kanios, and Rob Neff
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Welcome to NASMX, a collection of macros, include files and
 examples all built around the Netwide Assembler (NASM) for

@@ -1,15 +1,32 @@
+;// DEMO5.ASM
+;//
+;// Copyright (C)2005-2010 The NASMX Project
+;//
+;// This is a fully UNICODE aware, typedefined demo that demonstrates
+;// using NASMX typedef system to make your code truly portable between
+;// 32 and 64-bit systems using either ASCII or UNICODE
+;//
+;// Contributors:
+;//    Bryant Keller
+;//    Rob Neff
+;//
 %include '..\..\..\inc\nasmx.inc'
 %include '..\..\..\inc\win32\windows.inc'
 %include '..\..\..\inc\win32\kernel32.inc'
 %include '..\..\..\inc\win32\user32.inc'
+;// You must include the following when using typedef function names
+;// for either ASCII or Unicode
+;// eg: MessageBox is an alias for MessageBoxW or MessageBoxA
+;// depending on whether UNICODE is defined or not
+%include '..\..\..\inc\win32\unicode.inc'
 
 entry    demo5
 
 [section .code]
 proc    demo5
 
-    invoke   DialogBoxParamA, byte NULL, dword szTemplate, byte NULL, dword dlgproc, byte NULL
-    invoke   ExitProcess, dword NULL
+    invoke   DialogBoxParam, NX_PTR NULL, NX_PTR szTemplate, NX_PTR NULL, NX_PTR dlgproc, size_t NULL
+    invoke   ExitProcess, uint32_t NULL
     ret
 
 endproc
@@ -45,7 +62,7 @@ proc    Wm_DestroyProc
 .wparam argd
 .lparam argd
 
-    invoke   EndDialog, dword argv(.hwnd), byte 1
+    invoke   EndDialog, NX_PTR argv(.hwnd), size_t 1
     mov      eax, 1
     ret
 
@@ -65,15 +82,15 @@ proc    Wm_CommandProc
     ret
 
 .cmd_idok:
-    invoke   EndDialog, dword argv(.hwnd), byte 1
+    invoke   EndDialog, NX_PTR argv(.hwnd), size_t 1
     mov      eax, 1
     ret
 
 .cmd_idgo:
-    invoke   SendDlgItemMessageA, dword argv(.hwnd), dword 205, dword WM_GETTEXTLENGTH, dword NULL, dword NULL
+    invoke   SendDlgItemMessage, NX_PTR argv(.hwnd), int32_t 205, uint32_t WM_GETTEXTLENGTH, size_t NULL, size_t NULL
     cmp      eax, 0
     jne      .fine
-    invoke   MessageBoxA, dword argv(.hwnd), dword szContent, dword szTitle, dword MB_OK | MB_ICONERROR
+    invoke   MessageBox, NX_PTR argv(.hwnd), NX_PTR szContent, NX_PTR szTitle, uint32_t MB_OK | MB_ICONERROR
     mov      eax, 1
     ret
 
@@ -83,22 +100,22 @@ proc    Wm_CommandProc
     push     eax
     invoke   GetProcessHeap
     mov      [dwHeap], eax
-    invoke   HeapAlloc, eax, dword 0x000008, ecx
+    invoke   HeapAlloc, eax, uint32_t 0x000008, ecx
     mov      [dwText], eax
     pop      eax
-    invoke   SendDlgItemMessageA, dword argv(.hwnd), dword 205, dword WM_GETTEXT, eax, dword dwText
-    invoke   SendDlgItemMessageA, dword argv(.hwnd), dword 206, dword WM_SETTEXT, dword 0, dword dwText
-    invoke   HeapFree, dword dwHeap, dword 0x000008, dword dwText
+    invoke   SendDlgItemMessage, NX_PTR argv(.hwnd), int32_t 205, uint32_t WM_GETTEXT, eax, size_t dwText
+    invoke   SendDlgItemMessage, NX_PTR argv(.hwnd), int32_t 206, uint32_t WM_SETTEXT, size_t 0, size_t dwText
+    invoke   HeapFree, NX_PTR dwHeap, uint32_t 0x000008, NX_PTR dwText
     mov      eax, 1
     ret
 
 endproc
 
 [section .bss]
-    dwText:     resd 1
-    dwHeap:     resd 1
+    dwText:     reserve(NX_PTR) 1
+    dwHeap:     reserve(NX_PTR) 1
 
 [section .data]
-    szTitle:    db    "Demo5", 0x0
-    szContent:  db    "Error: you must enter text into the top edit box!", 0x0
-    szTemplate: db    "MyDialog", 0x0
+    szTitle:    declare(NX_CHAR)    NX_TEXT("Demo5"), 0x0
+    szContent:  declare(NX_CHAR)    NX_TEXT("Error: you must enter text into the top edit box!"), 0x0
+    szTemplate: declare(NX_CHAR)    NX_TEXT("MyDialog"), 0x0
