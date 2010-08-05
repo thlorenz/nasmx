@@ -15,21 +15,22 @@ INC         = .inc
 LST         = .lst
 RCX         = .rc
 # rules
-DEMO7 =	demo7$(O)
+DEMO8 =	demo8$(O)
 
-all: demo7$(X)
+all: demo8$(X)
 
-demo7: demo7$(X)
+demo8: demo8$(X)
 
-demo7$(X): $(DEMO7)
-	$(LD) $(LDFLAGS) $(DEMO7) $(LIBS)
+demo8$(X): $(DEMO8)
+	$(LD) $(LDFLAGS) $(DEMO8) $(LIBS)
 
-demo7$(O): demo7$(ASM)
-	$(AS) $(AFLAGS) demo7$(ASM) -o demo7$(O) -l demo7$(LST)
+demo8$(O): demo8$(ASM)
+	$(AS) $(AFLAGS) demo8$(ASM) -o demo8$(O) -l demo8$(LST)
 
 clean:
 	-del /F demo*.obj
 	-del /F demo*.res
+	-del /F demo*.lst
 
 cleaner:
 	-del /F demo*.bak

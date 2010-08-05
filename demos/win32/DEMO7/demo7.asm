@@ -63,8 +63,8 @@ dwshow   argd        ; Display style
         invoke   GetMessage, NASMX_PTR message, NASMX_PTR NULL, uint32_t NULL, uint32_t NULL
         cmp      eax, dword 0
         je       .exit
-        invoke   TranslateMessage, dword message
-        invoke   DispatchMessage, dword message
+        invoke   TranslateMessage, NASMX_PTR message
+        invoke   DispatchMessage, NASMX_PTR message
         jmp      .msgloop
     .exit:
 
@@ -99,7 +99,7 @@ lparam  argd        ; lParam
     cmp      argv(wparam), dword 500
     jnz      near .wm_default
 
-    invoke   MessageBox, dword NULL, dword szContent, dword szTitle, dword MB_OK
+    invoke   MessageBox, NASMX_PTR NULL, NASMX_PTR szContent, NASMX_PTR szTitle, uint32_t MB_OK
     jmp      .exit
 
 .wm_destroy:

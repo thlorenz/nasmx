@@ -270,11 +270,6 @@ typedef dword, utf32_t
 			%fatal unknown arg
 		%endif
 	%endif
-	%ifnidni %{3},__NX_CTX_STRUC
-		%ifnidni %{3},__NX_CTX_UNION
-			%fatal unknown arg
-		%endif
-	%endif
 	%ifctx __NX_CTX_STRUC
 		%define %%nested 1
 	%elifctx __NX_CTX_UNION
@@ -302,7 +297,7 @@ typedef dword, utf32_t
 %endmacro
 
 %imacro NASMX_UNION 1-2.nolist
-	NASMX_STRUCT %1, __NX_ROOT __NX_CTX_UNION
+	NASMX_STRUC %1, __NX_ROOT, __NX_CTX_UNION
 %endmacro
 
 ;// usage:
@@ -373,18 +368,31 @@ typedef dword, utf32_t
 	%endif
 %endmacro
 
-%imacro NASMX_ISTRUC 2.nolist
+%imacro NASMX_ENDUNION 0.nolist
+	%ifnctx __NX_CTX_UNION
+		%fatal corrupt context
+	%endif
+	NASMX_ENDSTRUC
+%endmacro
+
+%imacro NASMX_ISTRUC 2-3.nolist __NX_CTX_STRUC
+	%ifnidni %{3},__NX_CTX_STRUC
+		%ifnidni %{3},__NX_CTX_UNION
+;			%fatal arg1 = %{1} arg2 = %{2} arg3 = %{3}
+			%fatal unknown arg
+		%endif
+	%endif
 	%ifctx __NX_CTX_ISTRUC
 		%xdefine %%__start %{$nxistrucstart}.%{1}
 		%assign %%__off %{$name}.%{1}
 		times %%__off-($-%{$nxistrucstart}) db 0
-		%push  __NX_CTX_ISTRUC
+		%push  %3
 ;		%fatal name = %%__start off = %%__off
 ;		%xdefine %$name %%__name
 ;		%xdefine %$sname %$name
 		%xdefine %$nxistrucstart %%__start
 	%else
-		%push __NX_CTX_ISTRUC
+		%push %3
 		%xdefine %$nxistrucstart %{1}
 	%endif
 	%xdefine %$name %{2}
@@ -416,11 +424,23 @@ typedef dword, utf32_t
 	%endif
 %endmacro
 
+%imacro NASMX_IUNION 2-3.nolist __NX_CTX_UNION
+	NASMX_ISTRUC %{1}, %{2}, %{3}
+%endmacro
+
 %imacro NASMX_AT 1-2+.nolist
 	NX_DECLARE_STORAGE %{$name}, %{1}, %{2}
 %endmacro
 
 %imacro NASMX_IENDSTRUC 0.nolist
+	NX_DECLARE_STORAGE %{$name}
+	%pop
+%endmacro
+
+%imacro NASMX_IENDUNION 0.nolist
+	%ifnctx __NX_CTX_UNION
+		%fatal corrupt context
+	%endif
 	NX_DECLARE_STORAGE %{$name}
 	%pop
 %endmacro

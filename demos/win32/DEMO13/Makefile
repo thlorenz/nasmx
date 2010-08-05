@@ -1,7 +1,7 @@
 ##### Makefile #####
 AS=nasm
-AFLAGS=-f win32
-#AFLAGS=-f win32 -dUNICODE=1
+#AFLAGS=-f win32
+AFLAGS=-f win32 -dUNICODE=1
 LD=GoLink
 LDFLAGS		=/entry _main
 LIBS		=kernel32.dll user32.dll
@@ -13,29 +13,28 @@ X           = .exe
 ASM         = .asm
 INC         = .inc
 LST         = .lst
-RCX         = .rc
+
 # rules
-DEMO7 =	demo7$(O)
+DEMO13 =	demo13$(O)
 
-all: demo7$(X)
+all: demo13$(X)
 
-demo7: demo7$(X)
+demo13: demo13$(X)
 
-demo7$(X): $(DEMO7)
-	$(LD) $(LDFLAGS) $(DEMO7) $(LIBS)
+demo13$(X): $(DEMO13)
+	$(LD) $(LDFLAGS) $(DEMO13) $(LIBS)
 
-demo7$(O): demo7$(ASM)
-	$(AS) $(AFLAGS) demo7$(ASM) -o demo7$(O) -l demo7$(LST)
+demo13$(O): demo13$(ASM)
+	$(AS) $(AFLAGS) demo13$(ASM) -o demo13$(O)
 
 clean:
 	-del /F demo*.obj
-	-del /F demo*.res
+	-del /F demo*.lst
 
 cleaner:
 	-del /F demo*.bak
 	-del /F demo*.lst
 	-del /F demo*.obj
-	-del /F demo*.res
 	-del /F demo*.exe
 
 ##### End Makefile #####
