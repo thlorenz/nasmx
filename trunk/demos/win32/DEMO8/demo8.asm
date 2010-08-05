@@ -1,18 +1,35 @@
+;// DEMO8.ASM
+;//
+;// Copyright (C)2005-2010 The NASMX Project
+;//
+;// This is a fully UNICODE aware, typedefined demo that demonstrates
+;// using NASMX typedef system to make your code truly portable between
+;// 32 and 64-bit systems using either ASCII or UNICODE
+;//
+;// Contributors:
+;//    Bryant Keller
+;//    Rob Neff
+;//
 %include '..\..\..\inc\nasmx.inc'
 %include '..\..\..\inc\win32\windows.inc'
 %include '..\..\..\inc\win32\kernel32.inc'
 %include '..\..\..\inc\win32\user32.inc'
 %include '..\..\..\inc\win32\stdwin.inc'
+;// You must include the following when using typedef function names
+;// for either ASCII or Unicode
+;// eg: MessageBox is an alias for MessageBoxW or MessageBoxA
+;//     depending on whether UNICODE is defined or not
+%include '..\..\..\inc\win32\unicode.inc'
 
 entry    demo8
 
 [section .text]
 proc    demo8
 
-    invoke   GetModuleHandleA, dword NULL
+    invoke   GetModuleHandle, NASMX_PTR NULL
     mov      [hInstance], eax
-    invoke   WinMain, dword hInstance, dword NULL, dword NULL, dword SW_SHOWNORMAL
-    invoke   ExitProcess, dword NULL
+    invoke   WinMain, NASMX_PTR hInstance, NASMX_PTR NULL, NASMX_PTR NULL, int32_t SW_SHOWNORMAL
+    invoke   ExitProcess, uint32_t NULL
     ret
 
 endproc
@@ -23,7 +40,7 @@ hpinst   argd        ; Previous instance handle
 cmdln    argd        ; Command line arguments
 dwshow   argd        ; Display style
 
-    invoke   LoadIconA, dword NULL, dword IDI_APPLICATION
+    invoke   LoadIcon, NASMX_PTR NULL, NASMX_PTR IDI_APPLICATION
     mov      edx, eax
     mov      eax, dword argv(hinst)
     mov      ebx, dword szClass
@@ -34,18 +51,18 @@ dwshow   argd        ; Display style
     mov      [wc + WNDCLASSEX.hIcon], edx
     mov      [wc + WNDCLASSEX.hIconSm], edx
 
-    invoke   RegisterClassExA, dword wc
+    invoke   RegisterClassEx, NASMX_PTR wc
 
     StdWindow szClass, szTitle, 100, 120, 212, 232, NULL, [wc + WNDCLASSEX.hInstance]
     mov      [hWnd], eax
 
-    invoke   ShowWindow, dword hWnd, dword argv(dwshow)
-    invoke   UpdateWindow, dword hWnd
+    invoke   ShowWindow, NASMX_PTR hWnd, int32_t argv(dwshow)
+    invoke   UpdateWindow, NASMX_PTR hWnd
 
     do
-        invoke   TranslateMessage, dword message
-        invoke   DispatchMessageA, dword message
-        invoke   GetMessageA, dword message, dword NULL, dword NULL, dword NULL
+        invoke   TranslateMessage, NASMX_PTR message
+        invoke   DispatchMessage, NASMX_PTR message
+        invoke   GetMessage, dword message, dword NULL, dword NULL, dword NULL
     while eax, !=, 0
 
 
@@ -76,15 +93,15 @@ lparam  argd        ; lParam
         jz       near .bleh
             break
         .bleh:
-        invoke   MessageBoxA, dword NULL, dword szContent, dword szTitle, dword MB_OK
+        invoke   MessageBox, NASMX_PTR NULL, NASMX_PTR szContent, NASMX_PTR szTitle, uint32_t MB_OK
 
     case dword WM_DESTROY
 
-        invoke   PostQuitMessage, dword NULL
+        invoke   PostQuitMessage, int32_t NULL
 
     default
 
-        invoke   DefWindowProcA, dword argv(hwnd), dword argv(umsg), dword argv(wparam), dword argv(lparam)
+        invoke   DefWindowProc, NASMX_PTR argv(hwnd), uint32_t argv(umsg), size_t argv(wparam), size_t argv(lparam)
 
     endswitch
     ret
@@ -92,37 +109,38 @@ lparam  argd        ; lParam
 endproc
 
 [section .bss]
-    hInstance:   resd 1
-    hWnd:        resd 1
+    hInstance:   reserve(NASMX_PTR) 1
+    hWnd:        reserve(NASMX_PTR) 1
 
 [section .data]
-    szString:   db    "Click Me!", 0x0
-    szContent:  db    "Win32Nasm Demo #8", 0x0
-    szTitle:    db    "Demo8", 0x0
-    szClass:    db    "Demo8Class", 0x0
+    szString:   declare(NASMX_CHAR) NASMX_TEXT("Click Me!"), 0x0
+    szContent:  declare(NASMX_CHAR) NASMX_TEXT("Win32Nasm Demo #8"), 0x0
+    szTitle:    declare(NASMX_CHAR) NASMX_TEXT("Demo8"), 0x0
+    szClass:    declare(NASMX_CHAR) NASMX_TEXT("Demo8Class"), 0x0
 
-    wc:
-    istruc WNDCLASSEX
-        at WNDCLASSEX.cbSize,           dd    WNDCLASSEX_size
-        at WNDCLASSEX.style,            dd    CS_VREDRAW + CS_HREDRAW
-        at WNDCLASSEX.lpfnWndProc,      dd    NULL
-        at WNDCLASSEX.cbClsExtra,       dd    NULL
-        at WNDCLASSEX.cbWndExtra,       dd    NULL
-        at WNDCLASSEX.hInstance,        dd    NULL
-        at WNDCLASSEX.hIcon,            dd    NULL
-        at WNDCLASSEX.hCursor,          dd    NULL
-        at WNDCLASSEX.hbrBackground,    dd    COLOR_BTNFACE + 1
-        at WNDCLASSEX.lpszMenuName,     dd    NULL
-        at WNDCLASSEX.lpszClassName,    dd    NULL
-        at WNDCLASSEX.hIconSm,          dd    NULL
-    iend
+    NASMX_ISTRUC wc, WNDCLASSEX
+        NASMX_AT cbSize,           WNDCLASSEX_size
+        NASMX_AT style,            CS_VREDRAW + CS_HREDRAW
+        NASMX_AT lpfnWndProc,      NULL
+        NASMX_AT cbClsExtra,       NULL
+        NASMX_AT cbWndExtra,       NULL
+        NASMX_AT hInstance,        NULL
+        NASMX_AT hIcon,            NULL
+        NASMX_AT hCursor,          NULL
+        NASMX_AT hbrBackground,    COLOR_BTNFACE + 1
+        NASMX_AT lpszMenuName,     NULL
+        NASMX_AT lpszClassName,    NULL
+        NASMX_AT hIconSm,          NULL
+    NASMX_IENDSTRUC
 
-    message:
-    istruc MSG
-        at MSG.hwnd,                    dd    NULL
-        at MSG.message,                 dd    NULL
-        at MSG.wParam,                  dd    NULL
-        at MSG.lParam,                  dd    NULL
-        at MSG.time,                    dd    NULL
-        at MSG.pt,                      dd    NULL
-    iend
+    NASMX_ISTRUC message, MSG
+        NASMX_AT hwnd,             NULL
+        NASMX_AT message,          NULL
+        NASMX_AT wParam,           NULL
+        NASMX_AT lParam,           NULL
+        NASMX_AT time,             NULL
+		NASMX_ISTRUC pt, POINT
+			NASMX_AT x,          NULL
+			NASMX_AT y,          NULL
+		NASMX_IENDSTRUC
+    NASMX_IENDSTRUC

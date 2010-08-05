@@ -1,7 +1,7 @@
 Win32 NASM Demo Applications
 Bryant Keller <bkeller@asmcommunity.net>
 Keith Kanios <keith@asmcommunity.net>
-Copyright (c) 2005-2007, Byrant Keller and Keith Kanios
+Copyright (c) 2005-2010, Byrant Keller, Keith Kanios, Rob Neff
 All rights reserved.
 
  Each of the subdirectories contain fully functional applications
@@ -27,12 +27,13 @@ All rights reserved.
            in a console mode program
   DEMO12 - Demonstrates the use of Win32 Console functions to achieve
            input, output and exiting from a console mode program
+  DEMO13 - Demonstrates the use of nested structures and unions
 
  All of these applications, as well as the NASMX.INC file, were
- completely designed by Bryant Keller and/or Keith Kanios. As such,
- all rights over these files belong to Bryant Keller and Keith Kanios.
+ completely designed by Bryant Keller, Keith Kanios, and/or Rob Neff.
+ As such, all rights over these files belong to Bryant Keller, Keith Kanios,
+ and Rob Neff
  You are permitted to use these demonstration applications and the
  NASMX.INC file as you see fit, so long as any source releases of
  your software gives us credit for our file.
  (basically, leave the NASMX.INC header alone)
-

@@ -1,10 +1,9 @@
 ##### Makefile #####
 AS=nasm
 AFLAGS=-f win32
-#AFLAGS=-f win32 -dUNICODE=1
 LD=GoLink
-LDFLAGS		=/entry _main
-LIBS		=kernel32.dll user32.dll
+LDFLAGS		=/console /entry _main
+LIBS		=kernel32.dll
 
 # [ Suffixes ]
 # Change the suffixes to match your system environment
@@ -15,17 +14,17 @@ INC         = .inc
 LST         = .lst
 RCX         = .rc
 # rules
-DEMO7 =	demo7$(O)
+DEMO12 =	demo12$(O)
 
-all: demo7$(X)
+all: demo12$(X)
 
-demo7: demo7$(X)
+demo12: demo12$(X)
 
-demo7$(X): $(DEMO7)
-	$(LD) $(LDFLAGS) $(DEMO7) $(LIBS)
+demo12$(X): $(DEMO12)
+	$(LD) $(LDFLAGS) $(DEMO12) $(LIBS)
 
-demo7$(O): demo7$(ASM)
-	$(AS) $(AFLAGS) demo7$(ASM) -o demo7$(O) -l demo7$(LST)
+demo12$(O): demo12$(ASM)
+	$(AS) $(AFLAGS) demo12$(ASM) -o demo12$(O)
 
 clean:
 	-del /F demo*.obj
