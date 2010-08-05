@@ -25,9 +25,9 @@ entry    demo1
 [section .text]
 proc     demo1
 
-    invoke    my_p, NX_PTR szContentTwo, NX_PTR szTitleTwo
-    invoke    MessageBox, NX_PTR NULL, NX_PTR szContent, NX_PTR szTitle, uint32_t MB_OK
-    invoke    ExitProcess, NX_PTR NULL
+    invoke    my_p, NASMX_PTR szContentTwo, NASMX_PTR szTitleTwo
+    invoke    MessageBox, NASMX_PTR NULL, NASMX_PTR szContent, NASMX_PTR szTitle, uint32_t MB_OK
+    invoke    ExitProcess, NASMX_PTR NULL
     ret
 
 endproc
@@ -36,13 +36,13 @@ proc     my_p
 sz_Content    argd
 sz_Title      argd
 
-    invoke    MessageBox, NX_PTR NULL, NX_PTR argv(sz_Content), NX_PTR argv(sz_Title), uint32_t MB_OK
+    invoke    MessageBox, NASMX_PTR NULL, NASMX_PTR argv(sz_Content), NASMX_PTR argv(sz_Title), uint32_t MB_OK
     ret
 
 endproc
 
 _data
-    szTitle:       declare(NX_CHAR)    NX_TEXT('Demo1'), 0x0
-    szTitleTwo:    declare(NX_CHAR)    NX_TEXT('Demo1 Procedure'), 0x0
-    szContent:     declare(NX_CHAR)    NX_TEXT('Hello from the Application!'), 0x0
-    szContentTwo:  declare(NX_CHAR)    NX_TEXT('Hello from the Procedure!'), 0x0
+    szTitle:       declare(NASMX_CHAR) NASMX_TEXT('Demo1'), 0x0
+    szTitleTwo:    declare(NASMX_CHAR) NASMX_TEXT('Demo1 Procedure'), 0x0
+    szContent:     declare(NASMX_CHAR) NASMX_TEXT('Hello from the Application!'), 0x0
+    szContentTwo:  declare(NASMX_CHAR) NASMX_TEXT('Hello from the Procedure!'), 0x0

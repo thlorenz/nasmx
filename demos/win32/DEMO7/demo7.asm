@@ -1,4 +1,4 @@
-;// DEMO6.ASM
+;// DEMO7.ASM
 ;//
 ;// Copyright (C)2005-2010 The NASMX Project
 ;//
@@ -26,9 +26,9 @@ entry    demo7
 [section .text]
 proc    demo7
 
-    invoke   GetModuleHandle, NX_PTR NULL
+    invoke   GetModuleHandle, NASMX_PTR NULL
     mov      [hInstance], eax
-    invoke   WinMain, NX_PTR hInstance, NX_PTR NULL, NX_PTR NULL, int32_t SW_SHOWNORMAL
+    invoke   WinMain, NASMX_PTR hInstance, NASMX_PTR NULL, NASMX_PTR NULL, int32_t SW_SHOWNORMAL
     invoke   ExitProcess, uint32_t NULL
     ret
 
@@ -40,7 +40,7 @@ hpinst   argd        ; Previous instance handle
 cmdln    argd        ; Command line arguments
 dwshow   argd        ; Display style
 
-    invoke   LoadIcon, NX_PTR NULL, NX_PTR IDI_APPLICATION
+    invoke   LoadIcon, NASMX_PTR NULL, NASMX_PTR IDI_APPLICATION
     mov      edx, eax
     mov      eax, dword argv(hinst)
     mov      ebx, dword szClass
@@ -51,16 +51,16 @@ dwshow   argd        ; Display style
     mov      [wc + WNDCLASSEX.hIcon], edx
     mov      [wc + WNDCLASSEX.hIconSm], edx
 
-    invoke   RegisterClassEx, NX_PTR wc
+    invoke   RegisterClassEx, NASMX_PTR wc
 
     StdWindow szClass, szTitle, 100, 120, 212, 232, NULL, [wc + WNDCLASSEX.hInstance]
     mov      [hWnd], eax
 
-    invoke   ShowWindow, NX_PTR hWnd, int32_t argv(dwshow)
-    invoke   UpdateWindow, NX_PTR  hWnd
+    invoke   ShowWindow, NASMX_PTR hWnd, int32_t argv(dwshow)
+    invoke   UpdateWindow, NASMX_PTR  hWnd
 
     .msgloop:
-        invoke   GetMessage, NX_PTR message, NX_PTR NULL, uint32_t NULL, uint32_t NULL
+        invoke   GetMessage, NASMX_PTR message, NASMX_PTR NULL, uint32_t NULL, uint32_t NULL
         cmp      eax, dword 0
         je       .exit
         invoke   TranslateMessage, dword message
@@ -109,7 +109,7 @@ lparam  argd        ; lParam
     invoke   PostQuitMessage, int32_t NULL
 
 .wm_default:
-    invoke   DefWindowProc, NX_PTR argv(hwnd), uint32_t argv(umsg), size_t argv(wparam), size_t argv(lparam)
+    invoke   DefWindowProc, NASMX_PTR argv(hwnd), uint32_t argv(umsg), size_t argv(wparam), size_t argv(lparam)
     
 .exit:
     ret
@@ -117,15 +117,15 @@ lparam  argd        ; lParam
 endproc
 
 [section .bss]
-    hInstance:   reserve(NX_PTR) 1
-    hWnd:        reserve(NX_PTR) 1
+    hInstance:   reserve(NASMX_PTR) 1
+    hWnd:        reserve(NASMX_PTR) 1
 
 [section .data]
-    szButton:   declare(NX_CHAR)    NX_TEXT("BUTTON"), 0x0
-    szString:   declare(NX_CHAR)    NX_TEXT("Click Me!"), 0x0
-    szContent:  declare(NX_CHAR)    NX_TEXT("Win32Nasm Demo #7"), 0x0
-    szTitle:    declare(NX_CHAR)    NX_TEXT("Demo7"), 0x0
-    szClass:    declare(NX_CHAR)    NX_TEXT("Demo7Class"), 0x0
+    szButton:   declare(NASMX_CHAR) NASMX_TEXT("BUTTON"), 0x0
+    szString:   declare(NASMX_CHAR) NASMX_TEXT("Click Me!"), 0x0
+    szContent:  declare(NASMX_CHAR) NASMX_TEXT("Win32Nasm Demo #7"), 0x0
+    szTitle:    declare(NASMX_CHAR) NASMX_TEXT("Demo7"), 0x0
+    szClass:    declare(NASMX_CHAR) NASMX_TEXT("Demo7Class"), 0x0
 
     NASMX_ISTRUC wc, WNDCLASSEX
         NASMX_AT cbSize,           WNDCLASSEX_size

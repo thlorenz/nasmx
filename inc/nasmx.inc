@@ -183,8 +183,8 @@ typedef oword, ulong128_t
 typedef dword, ptr32_t
 typedef qword, ptr64_t
 ;// use for 32->64 bit expansion of either int or ptr
-%ixdefine NX_PTR ptr%[__BITS__]_t
-typedef NX_PTR, size_t
+%ixdefine NASMX_PTR ptr%[__BITS__]_t
+typedef NASMX_PTR, size_t
 %assign __NASMX_ABI_BITS__ sizeof(size_t) * 8
 %ifnidn __BITS__,__NASMX_ABI_BITS__
 	%fatal unknown size_t: __BITS__
@@ -224,7 +224,7 @@ typedef dword, utf32_t
 ;//    NX_DEFINE_TAG struc_name, [ field_name, ] tag_name, tag args
 ;//
 %imacro NX_DEFINE_TAG 3-4.nolist
-	%if %0 < 3
+	%if %0 < 4
 		%xdefine %{1}_%{2} %{3}
 ;		%fatal st %{1} %{2} = %{1}_%{2} %{3}
 	%else
@@ -302,11 +302,11 @@ typedef dword, utf32_t
 %endmacro
 
 %imacro NASMX_UNION 1-2.nolist
-	NX_STRUCT %1, __NX_ROOT __NX_CTX_UNION
+	NASMX_STRUCT %1, __NX_ROOT __NX_CTX_UNION
 %endmacro
 
 ;// usage:
-;//   NASMX_RESERVE hWnd, NX_PTR, 1
+;//   NASMX_RESERVE hWnd, NASMX_PTR, 1
 %imacro NASMX_RESERVE 2-3.nolist 1
 	%ifnctx __NX_CTX_STRUC
 		%ifnctx __NX_CTX_UNION
@@ -429,84 +429,84 @@ typedef dword, utf32_t
 	NASMX_DEFINE UNDERSCORE
 	typedef dword, wchar_t
 	%ifdef UNICODE
-		%idefine NX_CHAR wchar_t
-		%idefine NX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TEXT(x)  __utf32__(x)
 	%else
-		%idefine NX_CHAR char_t
-		%idefine NX_TEXT(x) x
+		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,elf32
 	NASMX_DEFINE UNDERSCORE
 	typedef dword, wchar_t
 	%ifdef UNICODE
-		%idefine NX_CHAR wchar_t
-		%idefine NX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TEXT(x)  __utf32__(x)
 	%else
-		%idefine NX_CHAR char_t
-		%idefine NX_TEXT(x) x
+		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,elf64
 	NASMX_DEFINE UNDERSCORE
 	typedef dword, wchar_t
 	%ifdef UNICODE
-		%idefine NX_CHAR wchar_t
-		%idefine NX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TEXT(x)  __utf32__(x)
 	%else
-		%idefine NX_CHAR char_t
-		%idefine NX_TEXT(x) x
+		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,macho
 	NASMX_DEFINE UNDERSCORE
 	NASMX_DEFINE CDECL_UNDERSCORE
 	typedef dword, wchar_t
 	%ifdef UNICODE
-		%idefine NX_CHAR wchar_t
-		%idefine NX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TEXT(x)  __utf32__(x)
 	%else
-		%idefine NX_CHAR char_t
-		%idefine NX_TEXT(x) x
+		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,macho32
 	NASMX_DEFINE UNDERSCORE
 	NASMX_DEFINE CDECL_UNDERSCORE
 	typedef dword, wchar_t
 	%ifdef UNICODE
-		%idefine NX_CHAR wchar_t
-		%idefine NX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TEXT(x)  __utf32__(x)
 	%else
-		%idefine NX_CHAR char_t
-		%idefine NX_TEXT(x) x
+		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORAMT__,macho64
 	NASMX_DEFINE UNDERSCORE
 	NASMX_DEFINE CDECL_UNDERSCORE
 	typedef dword, wchar_t
 	%ifdef UNICODE
-		%idefine NX_CHAR wchar_t
-		%idefine NX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TEXT(x)  __utf32__(x)
 	%else
-		%idefine NX_CHAR char_t
-		%idefine NX_TEXT(x) x
+		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,win32
 	NASMX_DEFINE UNDERSCORE
 	typedef word, wchar_t
 	%ifdef UNICODE
-		%idefine NX_CHAR wchar_t
-		%idefine NX_TEXT(x)  __utf16__(x)
+		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TEXT(x)  __utf16__(x)
 	%else
-		%idefine NX_CHAR char_t
-		%idefine NX_TEXT(x) x
+		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,win64
 	NASMX_DEFINE UNDERSCORE
 	typedef word, wchar_t
 	%ifdef UNICODE
-		%idefine NX_CHAR wchar_t
-		%idefine NX_TEXT(x)  __utf16__(x)
+		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TEXT(x)  __utf16__(x)
 	%else
-		%idefine NX_CHAR char_t
-		%idefine NX_TEXT(x) x
+		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TEXT(x) x
 	%endif
 %else
 	NASMX_DEFINE UNDERSCORE

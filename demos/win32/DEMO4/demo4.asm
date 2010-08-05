@@ -25,7 +25,7 @@ entry    demo4
 [section .text]
 proc    demo4
 
-    invoke   DialogBoxParam, NX_PTR NULL, NX_PTR szTemplate, NX_PTR NULL, NX_PTR dlgproc, size_t NULL
+    invoke   DialogBoxParam, NASMX_PTR NULL, NASMX_PTR szTemplate, NASMX_PTR NULL, NASMX_PTR dlgproc, size_t NULL
     invoke   ExitProcess, uint32_t NULL
     ret
 
@@ -44,7 +44,7 @@ lparam  argd
     cmp      argv(wparam), dword 200
     jne      .cmd_idok
 
-    invoke   MessageBox, NX_PTR NULL, NX_PTR szContent, NX_PTR szTitle, uint32_t MB_OK
+    invoke   MessageBox, NASMX_PTR NULL, NASMX_PTR szContent, NASMX_PTR szTitle, uint32_t MB_OK
     mov      eax, 1
     jmp      .wm_default
 
@@ -57,7 +57,7 @@ lparam  argd
     jne      .wm_default
 
     .die:
-    invoke   EndDialog, NX_PTR argv(hwnd), size_t 1
+    invoke   EndDialog, NASMX_PTR argv(hwnd), size_t 1
     mov      eax, 1
     jmp      .exit
 
@@ -70,6 +70,6 @@ lparam  argd
 endproc
 
 [section .data]
-    szTemplate: declare(NX_CHAR)    NX_TEXT("MyDialog"), 0x0
-    szTitle:    declare(NX_CHAR)    NX_TEXT("Demo4"), 0x0
-    szContent:  declare(NX_CHAR)    NX_TEXT("Win32 NASM Demo #4"), 0x0
+    szTemplate: declare(NASMX_CHAR) NASMX_TEXT("MyDialog"), 0x0
+    szTitle:    declare(NASMX_CHAR) NASMX_TEXT("Demo4"), 0x0
+    szContent:  declare(NASMX_CHAR) NASMX_TEXT("Win32 NASM Demo #4"), 0x0
