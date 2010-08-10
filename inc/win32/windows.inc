@@ -3446,17 +3446,6 @@
 %define SPI_SCREENSAVERRUNNING 97
 %define SPIF_UPDATEINIFILE 1h
 %define SPIF_SENDWININICHANGE 2h
-%define WM_DDE_FIRST 3E0h
-%define WM_DDE_INITIATE WM_DDE_FIRST
-%define WM_DDE_TERMINATE WM_DDE_FIRST+1
-%define WM_DDE_ADVISE WM_DDE_FIRST+2
-%define WM_DDE_UNADVISE WM_DDE_FIRST+3
-%define WM_DDE_ACK WM_DDE_FIRST+4
-%define WM_DDE_DATA WM_DDE_FIRST+5
-%define WM_DDE_REQUEST WM_DDE_FIRST+6
-%define WM_DDE_POKE WM_DDE_FIRST+7
-%define WM_DDE_EXECUTE WM_DDE_FIRST+8
-%define WM_DDE_LAST WM_DDE_FIRST+8
 %define XST_NULL 0
 %define XST_INCOMPLETE 1
 %define XST_CONNECTED 2
@@ -3484,18 +3473,6 @@
 %define ST_INLIST 40h
 %define ST_BLOCKNEXT 80h
 %define ST_ISSELF 100h
-%define DDE_FACK 8000h
-%define DDE_FBUSY 4000h
-%define DDE_FDEFERUPD 4000h
-%define DDE_FACKREQ 8000h
-%define DDE_FRELEASE 2000h
-%define DDE_FREQUESTED 1000h
-%define DDE_FAPPSTATUS 0FFh
-%define DDE_FNOTPROCESSED 0h
-%define DDE_FACKRESERVED (-1-DDE_FACK)|DDE_FBUSY|DDE_FAPPSTATUS
-%define DDE_FADVRESERVED (-1-DDE_FACKREQ)|DDE_FDEFERUPD
-%define DDE_FDATRESERVED (-1-DDE_FACKREQ)|DDE_FRELEASE|DDE_FREQUESTED
-%define DDE_FPOKRESERVED (-1-DDE_FRELEASE)
 %define CP_WINANSI 1004
 %define CP_WINUNICODE 1200
 %define XTYPF_NOBLOCK 2h
@@ -10453,56 +10430,6 @@ NASMX_STRUC HELPWININFO
     NASMX_RESERVE rgchMember, int8_t, 2
 NASMX_ENDSTRUC
 
-NASMX_STRUC DDEACK
-    NASMX_RESERVE bAppReturnCode, short_t, 1
-    NASMX_RESERVE Reserved, short_t, 1
-    NASMX_RESERVE fbusy, short_t, 1
-    NASMX_RESERVE fack, short_t, 1
-NASMX_ENDSTRUC
-
-NASMX_STRUC DDEADVISE
-    NASMX_RESERVE Reserved, short_t, 1
-    NASMX_RESERVE fDeferUpd, short_t, 1
-    NASMX_RESERVE fAckReq, short_t, 1
-    NASMX_RESERVE cfFormat, short_t, 1
-NASMX_ENDSTRUC
-
-NASMX_STRUC DDEDATA
-    NASMX_RESERVE unused, short_t, 1
-    NASMX_RESERVE fresponse, short_t, 1
-    NASMX_RESERVE fRelease, short_t, 1
-    NASMX_RESERVE Reserved, short_t, 1
-    NASMX_RESERVE fAckReq, short_t, 1
-    NASMX_RESERVE cfFormat, short_t, 1
-    NASMX_RESERVE Value1, int8_t, 1
-NASMX_ENDSTRUC
-
-NASMX_STRUC DDEPOKE
-    NASMX_RESERVE unused, short_t, 1
-    NASMX_RESERVE fRelease, short_t, 1
-    NASMX_RESERVE fReserved, short_t, 1
-    NASMX_RESERVE cfFormat, short_t, 1
-    NASMX_RESERVE Value1, int8_t, 1
-NASMX_ENDSTRUC
-
-NASMX_STRUC DDELN
-    NASMX_RESERVE unused, short_t, 1
-    NASMX_RESERVE fRelease, short_t, 1
-    NASMX_RESERVE fDeferUpd, short_t, 1
-    NASMX_RESERVE fAckReq, short_t, 1
-    NASMX_RESERVE cfFormat, short_t, 1
-NASMX_ENDSTRUC
-
-NASMX_STRUC DDEUP
-    NASMX_RESERVE unused, short_t, 1
-    NASMX_RESERVE fAck, short_t, 1
-    NASMX_RESERVE fRelease, short_t, 1
-    NASMX_RESERVE fReserved, short_t, 1
-    NASMX_RESERVE fAckReq, short_t, 1
-    NASMX_RESERVE cfFormat, short_t, 1
-    NASMX_RESERVE xRGB1, int8_t, 1
-NASMX_ENDSTRUC
-
 NASMX_STRUC HSZPAIR
     NASMX_RESERVE hszSvc, int32_t, 1
     NASMX_RESERVE hszTopic, int32_t, 1
@@ -10542,13 +10469,6 @@ NASMX_STRUC CONVINFO
     NASMX_RESERVE ConvCtxt, int32_t, 1
     NASMX_RESERVE hwnd, int32_t, 1
     NASMX_RESERVE hwndPartner, int32_t, 1
-NASMX_ENDSTRUC
-
-NASMX_STRUC DDEML_MSG_HOOK_DATA
-    NASMX_RESERVE uiLo, int32_t, 1
-    NASMX_RESERVE uiHi, int32_t, 1
-    NASMX_RESERVE cbData, int32_t, 1
-    NASMX_RESERVE xData, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC MONMSGSTRUCT
