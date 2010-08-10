@@ -20,33 +20,52 @@
 ;// depending on whether UNICODE is defined or not
 %include '..\..\..\inc\win32\unicode.inc'
 
-;// Create our own structure definition with nested struct and union
-NASMX_STRUC BIRTHDATE
-    NASMX_RESERVE month, int8_t, 1
-    NASMX_RESERVE day,   int8_t, 1
-    NASMX_RESERVE year,  int16_t, 1
-NASMX_ENDSTRUC
-
-NASMX_UNION BD_UNION
-    NASMX_STRUC dob, BIRTHDATE
-        NASMX_RESERVE month, int8_t, 1
-        NASMX_RESERVE day,   int8_t, 1
-        NASMX_RESERVE year,  int16_t, 1
-    NASMX_ENDSTRUC
-    NASMX_RESERVE date, int32_t, 1
-NASMX_ENDUNION
-
+;/////////////////////////////////////////////
+;//
+;// Create our own structure definition with
+;// nested union and nameless struct
+;//
 NASMX_STRUC DEMO13_STRUC
     NASMX_RESERVE name, NASMX_CHAR, 512
-    NASMX_UNION un, BD_UNION
-        NASMX_STRUC dob, BIRTHDATE
-            NASMX_RESERVE month, int8_t, 1
+    NASMX_UNION dob
+        NASMX_STRUC
             NASMX_RESERVE day,   int8_t, 1
+            NASMX_RESERVE month, int8_t, 1
             NASMX_RESERVE year,  int16_t, 1
         NASMX_ENDSTRUC
         NASMX_RESERVE date, int32_t, 1
     NASMX_ENDUNION
 NASMX_ENDSTRUC
+
+;///////////////////////////////////////////////////////////
+;//
+;// The following show actual uses of the NASMX defined
+;// macros and structure variables and enable you to verify
+;// that the sizes, offsets, names, and types are valid when
+;// generating a listing file (-l demo13.lst) in order to
+;// manually verify
+;//
+;// Uncomment the following to get test case warning msgs
+
+;NASMX_DEFINE DEBUG
+
+%ifdef __NASMX_DEBUG__
+;// Test case 1 - Root structure size
+%assign s sizeof(DEMO13_STRUC)
+%warning DEMO13_STRUC size = s
+
+;// Test Case 2 - size and offset of named nested structure/union
+%assign s sizeof(DEMO13_STRUC.dob)
+%define t typeof(DEMO13_STRUC.dob)
+%assign o DEMO13_STRUC.dob.date
+%warning DEMO13_STRUC.dob size = s off = o type = t
+
+;// Test Case 3 - details of field data
+%assign s sizeof(DEMO13_STRUC.dob.date)
+%define t typeof(DEMO13_STRUC.dob.date)
+%assign o DEMO13_STRUC.dob.date
+%warning DEMO13_STRUC.dob.date size = s off = o type = t
+%endif
 
 entry    demo13
 
@@ -144,16 +163,16 @@ endproc
     hWnd:        reserve(NASMX_PTR) 1
 
 [section .data]
-    szButton:   declare(NASMX_CHAR)    NASMX_TEXT("BUTTON"), 0x0
-    szString:   declare(NASMX_CHAR)    NASMX_TEXT("Click Me!"), 0x0
-    szContent:  declare(NASMX_CHAR)    NASMX_TEXT("NASMX Demo #13"), 0x0
-    szTitle:    declare(NASMX_CHAR)    NASMX_TEXT("NASMX Demo13"), 0x0
-    szClass:    declare(NASMX_CHAR)    NASMX_TEXT("Demo13Class"), 0x0
+    szButton:   declare(NASMX_CHAR) NASMX_TEXT("BUTTON"), 0x0
+    szString:   declare(NASMX_CHAR) NASMX_TEXT("Click Me!"), 0x0
+    szContent:  declare(NASMX_CHAR) NASMX_TEXT("NASMX Demo #13"), 0x0
+    szTitle:    declare(NASMX_CHAR) NASMX_TEXT("NASMX Demo13"), 0x0
+    szClass:    declare(NASMX_CHAR) NASMX_TEXT("Demo13Class"), 0x0
 
     NASMX_ISTRUC bday, DEMO13_STRUC
         NASMX_AT name,   NASMX_TEXT("NASMX v1.0 Beta Birthday"),0
-		NASMX_IUNION un, BD_UNION
-			NASMX_ISTRUC dob, BIRTHDATE
+		NASMX_IUNION dob
+			NASMX_ISTRUC
 				NASMX_AT day,        8
 				NASMX_AT month,      1
 				NASMX_AT year,       2010

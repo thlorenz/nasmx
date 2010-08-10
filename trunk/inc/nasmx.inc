@@ -115,6 +115,7 @@ NASMX_DEFINE VERSION,"20100801"
 %idefine tword_storage DT
 %idefine oword_storage DO
 
+
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// nasmx classifcation of types
@@ -125,7 +126,8 @@ NASMX_DEFINE VERSION,"20100801"
 %idefine qword_type QWORD
 %idefine tword_type TWORD
 %idefine oword_type OWORD
-
+%idefine struc_type STRUC
+%idefine union_type UNION
 
 %define typeof(x) x %+ _type
 %define sizeof(x) x %+ _size
@@ -147,9 +149,8 @@ NASMX_DEFINE VERSION,"20100801"
 ;   %xdefine %{2}_type %{1}_type
 ;   %xdefine %{2}_reserve %{1}_reserve
 ;   %xdefine %{2}_storage %{1}_storage
-	%ixdefine %{2}_size %{1}_size
-;	%fatal size of %2 = sizeof(%{2})
-	%ixdefine %{2} %{1}
+;	%xdefine %{2}_size %{1}_size
+	%xdefine %{2} %{1}
 %endmacro
 
 
@@ -205,7 +206,6 @@ typedef qword, ulong_t
 typedef dword, float_t
 typedef qword, double_t
 
-
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// NASMX Unicode Transformation Format types
@@ -214,243 +214,12 @@ typedef byte, utf8_t
 typedef word, utf16_t
 typedef dword, utf32_t
 
-;//////////////////////////////////////////////////////////////
-;//
-;// Set a NASMX tag
-;//
-;// This macro creates a global define for structures and fields
-;//
-;// usage:
-;//    NX_DEFINE_TAG struc_name, [ field_name, ] tag_name, tag args
-;//
-%imacro NX_DEFINE_TAG 3-4.nolist
-	%if %0 < 4
-		%xdefine %{1}_%{2} %{3}
-;		%fatal st %{1} %{2} = %{1}_%{2} %{3}
-	%else
-		%xdefine %{1}.%{2}_%{3} %{4}
-;		%fatal fd %{1}.%{2} %{3} = %{1}.%{2}_%{3} %{4}
-	%endif
-%endmacro
-
-;// usage:
-;//    NX_EQUATE_OFFSET struc_name, offset [ ,field_name ]
-;//
-%imacro NX_EQUATE_OFFSET 2-3.nolist
-	%assign %%__off %2
-	%if %%__off < 0
-		%fatal invalid offset for %1 : %2
-	%endif
-	%if %0 < 3
-		%assign %{1} %2
-	%else
-		%assign %{1}.%{3} %2
-	%endif
-%endmacro
-
-;// usage:
-;//    NX_EQUATE_SIZE struc_name, size [ ,field_name ]
-;//
-%imacro NX_EQUATE_SIZE 2-3
-; we cannot use equ for variables
-	%if %0 == 2
-		%assign %{1}_size %{2}
-	%else
-		%assign %{1}.%{3}_size %{2}
-	%endif
-%endmacro
-
-;//////////////////////////////////////////////////////////////
-;//
-;// NASMX_STRUC
-;//
-%imacro NASMX_STRUC 1-*.nolist __NX_ROOT, __NX_CTX_STRUC
-	%ifnidni %3,__NX_CTX_STRUC
-		%ifnidni %3,__NX_CTX_UNION
-			%fatal unknown arg
-		%endif
-	%endif
-	%ifctx __NX_CTX_STRUC
-		%define %%nested 1
-	%elifctx __NX_CTX_UNION
-		%define %%nested 1
-	%else
-		%define %%nested 0
-	%endif
-	%if (%%nested == 0)
-		%push %3
-		%xdefine %$name %1
-		%assign %$size 0
-	%else
-		%xdefine %%tname %{$name}.%1
-		%assign %%tsize %$size
-		%push %3
-; the following fails on 2.08.02
-		%xdefine %$name %%tname
-		%assign %$size %%tsize
-	%endif
-	%assign %$osize %$size
-	%assign %$usize 0
-	;// do not define _type for structs
-	NX_DEFINE_TAG %{$name}, name, %{$name}
-	NX_DEFINE_TAG %{$name}, storage, byte_storage
-%endmacro
-
-%imacro NASMX_UNION 1-2.nolist
-	NASMX_STRUC %1, __NX_ROOT, __NX_CTX_UNION
-%endmacro
-
-;// usage:
-;//   NASMX_RESERVE hWnd, NASMX_PTR, 1
-%imacro NASMX_RESERVE 2-3.nolist 1
-	%ifnctx __NX_CTX_STRUC
-		%ifnctx __NX_CTX_UNION
-			%fatal corrupt context
-		%endif
-	%endif
-	%ifndef %{2}_size
-		%fatal unknown type for %{$name} %{1}: %{2}
-	%endif
-	%ifndef %{2}_storage
-		%fatal unknown storage tag for %{$name} %{1}
-	%endif
-
-	%assign %%_argsize %{2}_size
-	%if %%_argsize < 0
-		%fatal invalid arg size for %{$name} %{1}: %{2}
-	%endif
-	%assign %%_qty %{3}
-	%if %%_qty < 0
-		%fatal invalid arg qty  for %{$name} %{1}: %{3}
-	%endif
-	%assign %%_amt (%%_argsize * %%_qty)
-
-	NX_DEFINE_TAG %{$name}, %{1}, name, %{1}
-	NX_DEFINE_TAG %{$name}, %{1}, size, %%_amt
-	NX_DEFINE_TAG %{$name}, %{1}, storage, %{2}_storage
-	NX_EQUATE_OFFSET %{$name}, %{$size}, %{1}
-
-	%assign %$size (%$size + %%_amt)
-
-	%ifctx __NX_CTX_UNION
-		%assign %%tsize %$size-%$osize
-		%if (%%tsize > %$usize)
-			%assign %$usize %%tsize
-		%endif
-		NX_DEFINE_TAG %{$name}, %{1}, size, %%tsize
-		%assign %$size %$osize
-	%endif
-%endmacro
-
-%imacro NASMX_ENDSTRUC 0.nolist
-	%if ((%$size-%$osize) > %$usize)
-		%assign %$usize %$size-%$osize
-	%endif
-
-	NX_EQUATE_SIZE %{$name}, %{$usize}
-;	%fatal name %{$name} size = %{$usize}  %{$name}_size
-	%xdefine %%__name %{$name}
-	%assign %%__off %$osize
-	%assign %%__size %$usize
-	%pop
-	%ifctx __NX_CTX_STRUC
-;		%fatal name = %%__name off = %%__off  size = %%__size
-		%assign %$size (%$size + %%__size)
-		NX_EQUATE_OFFSET %%__name, %%__off
-;		%fatal name = %%__name off = %%__off  size = %%__size
-	%elifctx __NX_CTX_UNION
-		%assign %$size (%$size + %%__size)
-		NX_EQUATE_OFFSET %%__name, %%__off
-		%if ((%$size-%$osize) > %$usize)
-			%assign %$usize %$size-%$osize
-		%endif
-		%assign %$size %$osize
-	%endif
-%endmacro
-
-%imacro NASMX_ENDUNION 0.nolist
-	%ifnctx __NX_CTX_UNION
-		%fatal corrupt context
-	%endif
-	NASMX_ENDSTRUC
-%endmacro
-
-%imacro NASMX_ISTRUC 2-3.nolist __NX_CTX_STRUC
-	%ifnidni %{3},__NX_CTX_STRUC
-		%ifnidni %{3},__NX_CTX_UNION
-;			%fatal arg1 = %{1} arg2 = %{2} arg3 = %{3}
-			%fatal unknown arg
-		%endif
-	%endif
-	%ifctx __NX_CTX_ISTRUC
-		%xdefine %%__start %{$nxistrucstart}.%{1}
-		%assign %%__off %{$name}.%{1}
-		times %%__off-($-%{$nxistrucstart}) db 0
-		%push  %3
-;		%fatal name = %%__start off = %%__off
-;		%xdefine %$name %%__name
-;		%xdefine %$sname %$name
-		%xdefine %$nxistrucstart %%__start
-	%else
-		%push %3
-		%xdefine %$nxistrucstart %{1}
-	%endif
-	%xdefine %$name %{2}
-	%define %$sname 0
-	%{$nxistrucstart}:
-%endmacro
-
-%imacro NX_DECLARE_STORAGE 1-3+.nolist
-	%if %0 == 1
-		;// assert: finish up struc if needed
-;		%fatal %{1} _size = %{1}_size
-		%assign %%__size %{1}_size
-;		%fatal %{1} st size is %%__size
-		%assign %%__times (%%__size)-($-%$nxistrucstart)
-;		%fatal t %%__times
-		%if (%%__times > 0)
-			times (%%__size)-($-%$nxistrucstart) db 0
-		%endif
-	%else
-		%assign %%__off %{1}.%{2}
-;		%fatal off %%__off %{1} %{2} %{1}.%{2}
-		%assign %%__times (%%__off)-($-%$nxistrucstart)
-;		%fatal t %%__times
-		%if (%%__times > 0)
-			times (%%__off)-($-%$nxistrucstart) db 0
-		%endif
-		%{1}.%{2}_storage %3
-;		%fatal %{1} %{2} _storage = %{1}.%{2}_storage %{3}
-	%endif
-%endmacro
-
-%imacro NASMX_IUNION 2-3.nolist __NX_CTX_UNION
-	NASMX_ISTRUC %{1}, %{2}, %{3}
-%endmacro
-
-%imacro NASMX_AT 1-2+.nolist
-	NX_DECLARE_STORAGE %{$name}, %{1}, %{2}
-%endmacro
-
-%imacro NASMX_IENDSTRUC 0.nolist
-	NX_DECLARE_STORAGE %{$name}
-	%pop
-%endmacro
-
-%imacro NASMX_IENDUNION 0.nolist
-	%ifnctx __NX_CTX_UNION
-		%fatal corrupt context
-	%endif
-	NX_DECLARE_STORAGE %{$name}
-	%pop
-%endmacro
-
 %ifidn	 __OUTPUT_FORMAT__,elf
 	NASMX_DEFINE UNDERSCORE
 	typedef dword, wchar_t
 	%ifdef UNICODE
 		%idefine NASMX_CHAR wchar_t
-		%idefine NASMX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
 		%idefine NASMX_CHAR char_t
 		%idefine NASMX_TEXT(x) x
@@ -460,7 +229,7 @@ typedef dword, utf32_t
 	typedef dword, wchar_t
 	%ifdef UNICODE
 		%idefine NASMX_CHAR wchar_t
-		%idefine NASMX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
 		%idefine NASMX_CHAR char_t
 		%idefine NASMX_TEXT(x) x
@@ -470,7 +239,7 @@ typedef dword, utf32_t
 	typedef dword, wchar_t
 	%ifdef UNICODE
 		%idefine NASMX_CHAR wchar_t
-		%idefine NASMX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
 		%idefine NASMX_CHAR char_t
 		%idefine NASMX_TEXT(x) x
@@ -481,7 +250,7 @@ typedef dword, utf32_t
 	typedef dword, wchar_t
 	%ifdef UNICODE
 		%idefine NASMX_CHAR wchar_t
-		%idefine NASMX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
 		%idefine NASMX_CHAR char_t
 		%idefine NASMX_TEXT(x) x
@@ -492,7 +261,7 @@ typedef dword, utf32_t
 	typedef dword, wchar_t
 	%ifdef UNICODE
 		%idefine NASMX_CHAR wchar_t
-		%idefine NASMX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
 		%idefine NASMX_CHAR char_t
 		%idefine NASMX_TEXT(x) x
@@ -503,7 +272,7 @@ typedef dword, utf32_t
 	typedef dword, wchar_t
 	%ifdef UNICODE
 		%idefine NASMX_CHAR wchar_t
-		%idefine NASMX_TEXT(x)  __utf32__(x)
+		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
 		%idefine NASMX_CHAR char_t
 		%idefine NASMX_TEXT(x) x
@@ -513,7 +282,7 @@ typedef dword, utf32_t
 	typedef word, wchar_t
 	%ifdef UNICODE
 		%idefine NASMX_CHAR wchar_t
-		%idefine NASMX_TEXT(x)  __utf16__(x)
+		%idefine NASMX_TEXT(x) __utf16__(x)
 	%else
 		%idefine NASMX_CHAR char_t
 		%idefine NASMX_TEXT(x) x
@@ -523,7 +292,7 @@ typedef dword, utf32_t
 	typedef word, wchar_t
 	%ifdef UNICODE
 		%idefine NASMX_CHAR wchar_t
-		%idefine NASMX_TEXT(x)  __utf16__(x)
+		%idefine NASMX_TEXT(x) __utf16__(x)
 	%else
 		%idefine NASMX_CHAR char_t
 		%idefine NASMX_TEXT(x) x
@@ -532,7 +301,232 @@ typedef dword, utf32_t
 	NASMX_DEFINE UNDERSCORE
 	NASMX_DEFINE CDECL_UNDERSCORE
 	typedef dword, wchar_t
+	%ifdef UNICODE
+		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TEXT(x) __utf32__(x)
+	%else
+		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TEXT(x) x
+	%endif
 %endif
+
+;//////////////////////////////////////////////////////////////
+;//
+;// NASMX_STRUC
+;//
+%imacro NASMX_STRUC 0-*.nolist __NX_ROOT, __NX_ROOT, __NX_CTX_STRUC
+	%ifnidni %3,__NX_CTX_STRUC
+		%ifnidni %3,__NX_CTX_UNION
+			%fatal unknown arg: %{3}
+		%endif
+	%endif
+	%ifctx __NX_CTX_STRUC
+		%define %%__is_nested 1
+	%elifctx __NX_CTX_UNION
+		%define %%__is_nested 1
+	%else
+		%define %%__is_nested 0
+	%endif
+	%ifidni %1, __NX_ROOT
+		%define %%__is_named 0
+	%else
+		%define %%__is_named 1
+	%endif
+	%if (%%__is_nested == 0)
+		%if (%%__is_named == 0)
+			%fatal root structure or union requires name
+		%endif
+		%push %3
+		%xdefine %$__nx_name %1
+		%assign %$__nx_size 0
+	%else
+		%if (%%__is_named == 0)
+			%xdefine %%__tname %{$__nx_name}
+		%else
+			%xdefine %%__tname %{$__nx_name}.%1
+		%endif
+		;// the following 5 line sequence fails on 2.08.02
+		%assign %%__tsize %$__nx_size
+		%push %3
+		%xdefine %$__nx_name %%__tname
+		%assign %$__nx_size %%__tsize
+		%if (%%__is_named == 1)
+			%{$__nx_name} equ %$__nx_size
+		%endif
+	%endif
+	%assign %$__nx_osize %$__nx_size
+	%assign %$__nx_usize 0
+	%define %$__nx_isnamed %%__is_named
+	%if (%%__is_named == 1)
+		%ifidni %3,__NX_CTX_STRUC
+			%xdefine %{$__nx_name}_type struc_type
+		%elifidni %3,__NX_CTX_UNION
+			%xdefine %{$__nx_name}_type union_type
+		%else
+			%fatal unknown arg: %{3}
+		%endif
+		%xdefine %{$__nx_name}_reserve byte_reserve
+		%xdefine %{$__nx_name}_storage byte_storage
+	%endif
+%endmacro
+
+%imacro NASMX_UNION 0-*.nolist __NX_ROOT, __NX_ROOT, __NX_CTX_UNION
+	NASMX_STRUC %1, __NX_ROOT, __NX_CTX_UNION
+%endmacro
+
+%imacro NASMX_ALIGN 1.nolist
+	%ifnctx __NX_CTX_STRUC
+		%ifnctx __NX_CTX_UNION
+			%fatal corrupt context
+		%endif
+	%endif
+	%if (%1 > 0)
+		%assign %$__nx_size (((%$__nx_size + %1) / %1) * %1)
+	%endif
+%endmacro
+
+;// usage:
+;//   NASMX_RESERVE hWnd, NASMX_PTR, 1
+%imacro NASMX_RESERVE 2-3.nolist 1
+	%ifnctx __NX_CTX_STRUC
+		%ifnctx __NX_CTX_UNION
+			%fatal corrupt context
+		%endif
+	%endif
+
+	%ifndef %{2}_size
+		%fatal unknown size for %{$__nx_name} %{1}: %{2}
+	%endif
+	%assign %%__argsize %{2}_size
+	%if (%%__argsize < 1)
+		%fatal invalid arg size for %{$__nx_name} %{1}: %{2}
+	%endif
+
+	%ifndef %{2}_storage
+		%fatal unknown storage tag for %{$__nx_name} %{1}
+	%endif
+
+	%assign %%__qty %{3}
+	%if (%%__qty < 1)
+		%fatal invalid arg qty  for %{$__nx_name} %{1}: %{3}
+	%endif
+
+	%assign %%__amt (%%__argsize * %%__qty)
+
+	%xdefine %{$__nx_name}.%{1}_size %%__amt
+	%xdefine %{$__nx_name}.%{1}_type %{2}_type
+	%xdefine %{$__nx_name}.%{1}_reserve %{2}_reserve
+	%xdefine %{$__nx_name}.%{1}_storage %{2}_storage
+	%{$__nx_name}.%{1} equ %{$__nx_size}
+
+	%ifctx __NX_CTX_UNION
+		;// update current union size
+		%if (%%__amt > %$__nx_usize)
+			%assign %$__nx_usize %%__amt
+		%endif
+	%else
+		;// update running size
+		%assign %$__nx_size (%$__nx_size + %%__amt)
+	%endif
+%endmacro
+
+%imacro NASMX_ENDSTRUC 0.nolist
+	%ifnctx __NX_CTX_STRUC
+		%ifnctx __NX_CTX_UNION
+			%fatal corrupt context
+		%endif
+	%endif
+	%if ((%$__nx_size-%$__nx_osize) > %$__nx_usize)
+		%assign %$__nx_usize %$__nx_size-%$__nx_osize
+	%endif
+	%if (%$__nx_isnamed == 1)
+		%{$__nx_name}_size equ %$__nx_usize
+	%endif
+	%assign %%__usize %$__nx_usize
+	%pop
+	%ifctx __NX_CTX_STRUC
+		%assign %$__nx_size (%$__nx_size + %%__usize)
+	%elifctx __NX_CTX_UNION
+		%assign %$__nx_size (%$__nx_size + %%__usize)
+		%if ((%$__nx_size-%$__nx_osize) > %$__nx_usize)
+			%assign %$__nx_usize %$__nx_size-%$__nx_osize
+		%endif
+		%assign %$__nx_size %$__nx_osize
+	%endif
+%endmacro
+
+%idefine NASMX_ENDUNION NASMX_ENDSTRUC
+
+%imacro NASMX_ISTRUC 0-*.nolist __NX_ROOT, __NX_ROOT, __NX_CTX_ISTRUC
+	%ifnidni %{3},__NX_CTX_ISTRUC
+		%ifnidni %{3},__NX_CTX_IUNION
+			%fatal unknown arg: %{3}
+		%endif
+	%endif
+	%ifctx __NX_CTX_ISTRUC
+		%define %%__is_nested 1
+	%elifctx __NX_CTX_IUNION
+		%define %%__is_nested 1
+	%else
+		%define %%__is_nested 0
+	%endif
+	%ifnidni %{1},__NX_ROOT
+		%define %%__is_named 1
+	%else
+		%define %%__is_named 0
+	%endif
+	%if (%%__is_nested == 0)
+		%if (%%__is_named == 0)
+			%fatal root structure or union requires name
+		%endif
+		%ifidni %2, __NX_ROOT
+			%fatal root structure or union requires base type
+		%endif
+		%push %3
+		%xdefine %$__nx_istrucstart %{1}
+		%xdefine %$__nx_name %{2}
+		%{$__nx_istrucstart}:
+	%else
+		%if (%%__is_named == 0)
+			%xdefine %%__tname %{$__nx_name}
+		%else
+			%xdefine %%__tname %{$__nx_name}.%{1}
+			%assign %%__off %%__tname
+			%assign %%__times %%__off-($-%{$__nx_istrucstart})
+			%if (%%__times > 0)
+				times %%__times db 0
+			%endif
+		%endif
+		%push  %3
+		%xdefine %$__nx_name %%__tname
+	%endif
+	%define %$__nx_isnamed %%__is_named
+%endmacro
+
+%idefine NASMX_IUNION NASMX_ISTRUC
+
+%imacro NASMX_AT 1-2+.nolist
+	%xdefine %%__off %{$__nx_name}.%{1}
+	%assign %%__times %%__off-($-%$__nx_istrucstart)
+	%if (%%__times > 0)
+		%fatal off %%__off t %{%%__times}
+		times %%__times db 0
+	%endif
+	%{$__nx_name}.%{1}_storage %2
+%endmacro
+
+%imacro NASMX_IENDSTRUC 0.nolist
+	;// assert: finish up struc if needed
+	%if (%$__nx_isnamed == 1)
+		%assign %%__times %{$__nx_name}_size-($-%$__nx_istrucstart)
+		%if (%%__times > 0)
+			times %%__times db 0
+		%endif
+	%endif
+	%pop
+%endmacro
+
+%idefine NASMX_IENDUNION NASMX_IENDSTRUC
 
 %imacro IMPORT 1-2.nolist
 ;	%warning 'DEBUG MACRO ENTRY(import):' %0 %1 %2
