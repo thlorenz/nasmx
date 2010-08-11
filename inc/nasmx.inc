@@ -509,7 +509,6 @@ typedef dword, utf32_t
 	%xdefine %%__off %{$__nx_name}.%{1}
 	%assign %%__times %%__off-($-%$__nx_istrucstart)
 	%if (%%__times > 0)
-		%fatal off %%__off t %{%%__times}
 		times %%__times db 0
 	%endif
 	%{$__nx_name}.%{1}_storage %2
