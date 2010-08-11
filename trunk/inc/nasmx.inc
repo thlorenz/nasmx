@@ -381,7 +381,11 @@ typedef dword, utf32_t
 		%endif
 	%endif
 	%if (%1 > 0)
-		%assign %$__nx_size (((%$__nx_size + %1) / %1) * %1)
+		%assign %%__off (((%$__nx_size + %1) / %1) * %1)
+		%assign %%__tmp (%$__nx_size + %1)
+		%if (%%__off != %%__tmp)
+			%assign %$__nx_size %%__off
+		%endif
 	%endif
 %endmacro
 
