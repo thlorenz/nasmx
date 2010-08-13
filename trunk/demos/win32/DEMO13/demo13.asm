@@ -73,7 +73,11 @@ entry    demo13
 proc    demo13
 
     invoke   GetModuleHandle, NASMX_PTR NULL
+%ifidni __OUTPUT_FORMAT__,win64
+    mov      [hInstance], rax
+%else
     mov      [hInstance], eax
+%endif
     invoke   WinMain, NASMX_PTR hInstance, NASMX_PTR NULL, NASMX_PTR NULL, int32_t SW_SHOWNORMAL
     invoke   ExitProcess, uint32_t NULL
     ret
@@ -87,6 +91,17 @@ cmdln    argd        ; Command line arguments
 dwshow   argd        ; Display style
 
     invoke   LoadIcon, NASMX_PTR NULL, NASMX_PTR IDI_APPLICATION
+%ifidni __OUTPUT_FORMAT,win64
+    mov      rdx, rax
+    mov      rax, qword argv(hinst)
+    mov      rbx, qword szClass
+    mov      rcx, qword WndProc
+    mov      [wc + WNDCLASSEX.hInstance], rax
+    mov      [wc + WNDCLASSEX.lpszClassName], rbx
+    mov      [wc + WNDCLASSEX.lpfnWndProc], rcx
+    mov      [wc + WNDCLASSEX.hIcon], rdx
+    mov      [wc + WNDCLASSEX.hIconSm], rdx
+%else
     mov      edx, eax
     mov      eax, dword argv(hinst)
     mov      ebx, dword szClass
@@ -96,12 +111,15 @@ dwshow   argd        ; Display style
     mov      [wc + WNDCLASSEX.lpfnWndProc], ecx
     mov      [wc + WNDCLASSEX.hIcon], edx
     mov      [wc + WNDCLASSEX.hIconSm], edx
-
+%endif
     invoke   RegisterClassEx, NASMX_PTR wc
 
     invoke   CreateWindowEx, uint32_t WS_EX_TOOLWINDOW, NASMX_PTR szClass, NASMX_PTR szTitle, uint32_t WS_CAPTION + WS_SYSMENU + WS_VISIBLE, int32_t 100, int32_t 120, int32_t 100, int32_t 50, NASMX_PTR NULL, NASMX_PTR NULL, NASMX_PTR [wc + WNDCLASSEX.hInstance], NASMX_PTR NULL
+%ifidni __OUTPUT_FORMAT,win64
+    mov      [hWnd], rax
+%else
     mov      [hWnd], eax
-
+%endif
     invoke   ShowWindow, NASMX_PTR hWnd, int32_t argv(dwshow)
     invoke   UpdateWindow, NASMX_PTR hWnd
 
@@ -114,7 +132,11 @@ dwshow   argd        ; Display style
         jmp      .msgloop
     .exit:
 
+%ifidni __OUTPUT_FORMAT,win64
+    mov      rax, dword [message + MSG.wParam]
+%else
     mov      eax, dword [message + MSG.wParam]
+%endif
     ret
 
 endproc
