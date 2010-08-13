@@ -3,8 +3,8 @@
 ;// NASMX Preprocessor
 ;// Copyright (c) 2005-2010, The NASMX Project
 ;//
-%ifndef _NASMX_INC_
-%define _NASMX_INC_
+%ifndef __NASMX_INCLUDED__
+%define __NASMX_INCLUDED__
 
 ;//////////////////////////////////////////////////////////////
 ;//
@@ -62,7 +62,11 @@
 ;//
 ;// Define NASMX Version
 ;//
-NASMX_DEFINE VERSION,"20100801"
+NASMX_DEFINE VERSION,"1.0b4"
+NASMX_DEFINE VERSION_MAJOR, 1
+NASMX_DEFINE VERSION_MINOR, 0
+NASMX_DEFINE VERSION_REV, 4
+NASMX_DEFINE VERSION_ID, 0x01000004
 
 
 ;//////////////////////////////////////////////////////////////
@@ -397,7 +401,6 @@ typedef dword, utf32_t
 			%fatal corrupt context
 		%endif
 	%endif
-
 	%ifndef %{2}_size
 		%fatal unknown size for %{$__nx_name} %{1}: %{2}
 	%endif
@@ -405,7 +408,6 @@ typedef dword, utf32_t
 	%if (%%__argsize < 1)
 		%fatal invalid arg size for %{$__nx_name} %{1}: %{2}
 	%endif
-
 	%ifndef %{2}_storage
 		%fatal unknown storage tag for %{$__nx_name} %{1}
 	%endif
@@ -1137,4 +1139,4 @@ typedef dword, utf32_t
 %pop
 %endmacro
 
-%endif	;NASMX_INC
+%endif	; ifndef __NASMX_INCLUDED__
