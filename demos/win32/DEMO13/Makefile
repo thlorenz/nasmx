@@ -4,6 +4,7 @@ AS=nasm
 AFLAGS=-f win32 -dUNICODE=1
 LD=GoLink
 LDFLAGS		=/entry _main
+#LDFLAGS		=/entry _main -debug coff
 LIBS		=kernel32.dll user32.dll
 
 # [ Suffixes ]
