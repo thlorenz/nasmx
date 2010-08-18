@@ -512,10 +512,10 @@ typedef dword, utf32_t
 %idefine NASMX_IUNION NASMX_ISTRUC
 
 %imacro NASMX_AT 1-2+.nolist
-	%xdefine %%__off %{$__nx_name}.%{1}
-	%assign %%__times %%__off-($-%$__nx_istrucstart)
-	%if (%%__times > 0)
-		times %%__times db 0
+	%assign %%__ofs %{$__nx_name}.%{1}
+	%assign %%__count %%__ofs-($-%$__nx_istrucstart)
+	%if (%%__count > 0)
+		times %%__count db 0
 	%endif
 	%{$__nx_name}.%{1}_storage %2
 %endmacro
