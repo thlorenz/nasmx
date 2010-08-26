@@ -538,10 +538,6 @@ Chapter 2: Running NASM
 
 2.1.22 The `-O' Option: Specifying Multipass Optimization
 
-       NASM defaults to not optimizing operands which can fit into a signed
-       byte. This means that if you want the shortest possible object code,
-       you have to enable optimization.
-
        Using the `-O' option, you can tell NASM to carry out different
        levels of optimization. The syntax is:
 
@@ -1345,6 +1341,9 @@ Chapter 3: The NASM Language
        %define NaN __QNaN__ 
        
              dq    +1.5, -Inf, NaN         ; Double-precision constants
+
+       The `%use fp' standard macro package contains a set of convenience
+       macros. See section 5.3.
 
  3.4.7 Packed BCD Constants
 
@@ -2565,7 +2564,7 @@ Chapter 4: The NASM Preprocessor
        `%ifnctx', `%elifctx' and `%elifnctx' are also supported.
 
        For more details of the context stack, see section 4.7. For a sample
-       use of `%ifctx', see section 4.7.5.
+       use of `%ifctx', see section 4.7.6.
 
  4.4.4 `%if': Testing Arbitrary Numeric Expressions
 
@@ -2773,6 +2772,9 @@ Chapter 4: The NASM Preprocessor
        user systems) would typically cause all the system memory to be
        gradually used up and other applications to start crashing.
 
+       Note a maximum repeat count is limited by 62 bit number, though it
+       is hardly possible that you ever need anything bigger.
+
    4.6 Source Files and Dependencies
 
        These commands allow you to split your sources into multiple files.
@@ -2948,7 +2950,61 @@ Chapter 4: The NASM Preprocessor
        top context on the stack. Of course, after a subsequent `%push', it
        can then still be accessed by the name `%$$localmac'.
 
- 4.7.4 `%repl': Renaming a Context
+ 4.7.4 Context Fall-Through Lookup
+
+       Context fall-through lookup (automatic searching of outer contexts)
+       is a feature that was added in NASM version 0.98.03. Unfortunately,
+       this feature is unintuitive and can result in buggy code that would
+       have otherwise been prevented by NASM's error reporting. As a
+       result, this feature has been _deprecated_. NASM version 2.09 will
+       issue a warning when usage of this _deprecated_ feature is detected.
+       Starting with NASM version 2.10, usage of this _deprecated_ feature
+       will simply result in an _expression syntax error_.
+
+       An example usage of this _deprecated_ feature follows:
+
+       %macro ctxthru 0 
+       %push ctx1 
+           %assign %$external 1 
+               %push ctx2 
+                   %assign %$internal 1 
+                   mov eax, %$external 
+                   mov eax, %$internal 
+               %pop 
+       %pop 
+       %endmacro
+
+       As demonstrated, `%$external' is being defined in the `ctx1' context
+       and referenced within the `ctx2' context. With context fall-through
+       lookup, referencing an undefined context-local macro like this
+       implicitly searches through all outer contexts until a match is made
+       or isn't found in any context. As a result, `%$external' referenced
+       within the `ctx2' context would implicitly use `%$external' as
+       defined in `ctx1'. Most people would expect NASM to issue an error
+       in this situation because `%$external' was never defined within
+       `ctx2' and also isn't qualified with the proper context depth,
+       `%$$external'.
+
+       Here is a revision of the above example with proper context depth:
+
+       %macro ctxthru 0 
+       %push ctx1 
+           %assign %$external 1 
+               %push ctx2 
+                   %assign %$internal 1 
+                   mov eax, %$$external 
+                   mov eax, %$internal 
+               %pop 
+       %pop 
+       %endmacro
+
+       As demonstrated, `%$external' is still being defined in the `ctx1'
+       context and referenced within the `ctx2' context. However, the
+       reference to `%$external' within `ctx2' has been fully qualified
+       with the proper context depth, `%$$external', and thus is no longer
+       ambiguous, unintuitive or erroneous.
+
+ 4.7.5 `%repl': Renaming a Context
 
        If you need to change the name of the top context on the stack (in
        order, for example, to have it respond differently to `%ifctx'), you
@@ -2965,7 +3021,7 @@ Chapter 4: The NASM Preprocessor
 
        with the non-destructive version `%repl newname'.
 
- 4.7.5 Example Use of the Context Stack: Block IFs
+ 4.7.6 Example Use of the Context Stack: Block IFs
 
        This example makes use of almost all the context-stack features,
        including the conditional-assembly construct `%ifctx', to implement
@@ -3625,26 +3681,35 @@ Chapter 4: The NASM Preprocessor
        section's alignment characteristics are sensible for the use of
        `ALIGN' or `ALIGNB'.
 
+       Both `ALIGN' and `ALIGNB' do call `SECTALIGN' macro implicitly. See
+       section 4.11.13 for details.
+
        See also the `smartalign' standard macro package, section 5.2.
 
 4.11.13 `SECTALIGN': Section Alignment
 
        The `SECTALIGN' macros provides a way to modify alignment attribute
-       of output file section. Unlike the `align=' attribute allowed at
-       section definition only the `SECTALIGN' macro may be used any time
-       you need it.
+       of output file section. Unlike the `align=' attribute (which is
+       allowed at section definition only) the `SECTALIGN' macro may be
+       used at any time.
 
-       For example the statement
+       For example the directive
 
-       
-       SECTALIGN 16 
+       SECTALIGN 16
 
-       sets a section alignment requirement to 16 bytes. Note that once
-       increased the section alignment can not be decreased, the magnitude
-       can grow only.
+       sets the section alignment requirements to 16 bytes. Once increased
+       it can not be decreased, the magnitude may grow only.
 
-       It must be also noted that `SECTALIGN' gets called implicitly inside
-       `ALIGN' handler and as result `ALIGN' may update section alignment.
+       Note that `ALIGN' (see section 4.11.12) calls the `SECTALIGN' macro
+       implicitly so the active section alignment requirements may be
+       updated. This is by default behaviour, if for some reason you want
+       the `ALIGN' do not call `SECTALIGN' at all use the directive
+
+       SECTALIGN OFF
+
+       It is still possible to turn in on again by
+
+       SECTALIGN ON
 
 Chapter 5: Standard Macro Packages
 ----------------------------------
@@ -3720,6 +3785,25 @@ Chapter 5: Standard Macro Packages
        The macro `__ALIGNMODE__' is defined to contain the current
        alignment mode. A number of other macros beginning with `__ALIGN_'
        are used internally by this macro package.
+
+   5.3 `fp': Floating-point macros
+
+       This packages contains the following floating-point convenience
+       macros:
+
+       %define Inf             __Infinity__ 
+       %define NaN             __QNaN__ 
+       %define QNaN            __QNaN__ 
+       %define SNaN            __SNaN__ 
+        
+       %define float8(x)       __float8__(x) 
+       %define float16(x)      __float16__(x) 
+       %define float32(x)      __float32__(x) 
+       %define float64(x)      __float64__(x) 
+       %define float80m(x)     __float80m__(x) 
+       %define float80e(x)     __float80e__(x) 
+       %define float128l(x)    __float128l__(x) 
+       %define float128h(x)    __float128h__(x)
 
 Chapter 6: Assembler Directives
 -------------------------------
@@ -9352,48 +9436,72 @@ B.1.25 Intel AVX instructions
        VBLENDPD         ymmreg,ymmreg*,ymmrm256,imm8 AVX,SANDYBRIDGE 
        VBLENDPS         xmmreg,xmmreg*,xmmrm128,imm8 AVX,SANDYBRIDGE 
        VBLENDPS         ymmreg,ymmreg*,ymmrm256,imm8 AVX,SANDYBRIDGE 
-       VBLENDVPD        xmmreg,xmmreg,xmmrm128,xmmreg AVX,SANDYBRIDGE 
-       VBLENDVPD        xmmreg,xmmrm128,xmm0     AVX,SANDYBRIDGE 
-       VBLENDVPD        ymmreg,ymmreg,ymmrm256,ymmreg AVX,SANDYBRIDGE 
-       VBLENDVPD        ymmreg,ymmrm256,ymm0     AVX,SANDYBRIDGE 
-       VBLENDVPS        xmmreg,xmmreg,xmmrm128,xmmreg AVX,SANDYBRIDGE 
-       VBLENDVPS        xmmreg,xmmrm128,xmm0     AVX,SANDYBRIDGE 
-       VBLENDVPS        ymmreg,ymmreg,ymmrm256,ymmreg AVX,SANDYBRIDGE 
-       VBLENDVPD        ymmreg,ymmrm256,ymm0     AVX,SANDYBRIDGE 
+       VBLENDVPD        xmmreg,xmmreg*,xmmrm128,xmmreg AVX,SANDYBRIDGE 
+       VBLENDVPD        ymmreg,ymmreg*,ymmrm256,ymmreg AVX,SANDYBRIDGE 
+       VBLENDVPS        xmmreg,xmmreg*,xmmrm128,xmmreg AVX,SANDYBRIDGE 
+       VBLENDVPS        ymmreg,ymmreg*,ymmrm256,ymmreg AVX,SANDYBRIDGE 
        VBROADCASTSS     xmmreg,mem32             AVX,SANDYBRIDGE 
        VBROADCASTSS     ymmreg,mem32             AVX,SANDYBRIDGE 
        VBROADCASTSD     ymmreg,mem64             AVX,SANDYBRIDGE 
        VBROADCASTF128   ymmreg,mem128            AVX,SANDYBRIDGE 
+       VCMPEQ_OSPD      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPEQ_OSPD      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPEQPD         xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPEQPD         ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPLT_OSPD      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPLT_OSPD      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPLTPD         xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPLTPD         ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPLE_OSPD      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPLE_OSPD      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPLEPD         xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPLEPD         ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPUNORD_QPD    xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPUNORD_QPD    ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPUNORDPD      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPUNORDPD      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPNEQ_UQPD     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPNEQ_UQPD     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNEQPD        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNEQPD        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPNLT_USPD     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPNLT_USPD     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNLTPD        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNLTPD        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPNLE_USPD     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPNLE_USPD     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNLEPD        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNLEPD        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPORD_QPD      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPORD_QPD      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPORDPD        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPORDPD        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPEQ_UQPD      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPEQ_UQPD      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPNGE_USPD     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPNGE_USPD     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNGEPD        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNGEPD        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPNGT_USPD     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPNGT_USPD     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNGTPD        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNGTPD        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPFALSE_OQPD   xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPFALSE_OQPD   ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPFALSEPD      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPFALSEPD      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNEQ_OQPD     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNEQ_OQPD     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPGE_OSPD      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPGE_OSPD      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPGEPD         xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPGEPD         ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPGT_OSPD      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPGT_OSPD      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPGTPD         xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPGTPD         ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPTRUE_UQPD    xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPTRUE_UQPD    ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPTRUEPD       xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPTRUEPD       ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPEQ_OSPD      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
@@ -9430,36 +9538,64 @@ B.1.25 Intel AVX instructions
        VCMPTRUE_USPD    ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPPD           xmmreg,xmmreg*,xmmrm128,imm8 AVX,SANDYBRIDGE 
        VCMPPD           ymmreg,ymmreg*,ymmrm256,imm8 AVX,SANDYBRIDGE 
+       VCMPEQ_OSPS      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPEQ_OSPS      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPEQPS         xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPEQPS         ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPLT_OSPS      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPLT_OSPS      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPLTPS         xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPLTPS         ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPLE_OSPS      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPLE_OSPS      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPLEPS         xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPLEPS         ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPUNORD_QPS    xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPUNORD_QPS    ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPUNORDPS      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPUNORDPS      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPNEQ_UQPS     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPNEQ_UQPS     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNEQPS        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNEQPS        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPNLT_USPS     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPNLT_USPS     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNLTPS        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNLTPS        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPNLE_USPS     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPNLE_USPS     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNLEPS        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNLEPS        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPORD_QPS      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPORD_QPS      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPORDPS        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPORDPS        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPEQ_UQPS      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPEQ_UQPS      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPNGE_USPS     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPNGE_USPS     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNGEPS        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNGEPS        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPNGT_USPS     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPNGT_USPS     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNGTPS        xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNGTPS        ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPFALSE_OQPS   xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPFALSE_OQPS   ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPFALSEPS      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPFALSEPS      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPNEQ_OQPS     xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPNEQ_OQPS     ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPGE_OSPS      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPGE_OSPS      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPGEPS         xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPGEPS         ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPGT_OSPS      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPGT_OSPS      ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPGTPS         xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPGTPS         ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
+       VCMPTRUE_UQPS    xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
+       VCMPTRUE_UQPS    ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPTRUEPS       xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
        VCMPTRUEPS       ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPEQ_OSPS      xmmreg,xmmreg*,xmmrm128  AVX,SANDYBRIDGE 
@@ -9496,21 +9632,35 @@ B.1.25 Intel AVX instructions
        VCMPTRUE_USPS    ymmreg,ymmreg*,ymmrm256  AVX,SANDYBRIDGE 
        VCMPPS           xmmreg,xmmreg*,xmmrm128,imm8 AVX,SANDYBRIDGE 
        VCMPPS           ymmreg,ymmreg*,ymmrm256,imm8 AVX,SANDYBRIDGE 
+       VCMPEQ_OSSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPEQSD         xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPLT_OSSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPLTSD         xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPLE_OSSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPLESD         xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPUNORD_QSD    xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPUNORDSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNEQ_UQSD     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPNEQSD        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNLT_USSD     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPNLTSD        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNLE_USSD     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPNLESD        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPORD_QSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPORDSD        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPEQ_UQSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNGE_USSD     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPNGESD        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNGT_USSD     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPNGTSD        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPFALSE_OQSD   xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPFALSESD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPNEQ_OQSD     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPGE_OSSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPGESD         xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPGT_OSSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPGTSD         xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPTRUE_UQSD    xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPTRUESD       xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPEQ_OSSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPLT_OQSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
@@ -9529,39 +9679,53 @@ B.1.25 Intel AVX instructions
        VCMPGT_OQSD      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPTRUE_USSD    xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
        VCMPSD           xmmreg,xmmreg*,xmmrm64,imm8 AVX,SANDYBRIDGE 
-       VCMPEQSS         xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPLTSS         xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPLESS         xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPUNORDSS      xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNEQSS        xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNLTSS        xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNLESS        xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPORDSS        xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPEQ_UQSS      xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNGESS        xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNGTSS        xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPFALSESS      xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNEQ_OQSS     xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPGESS         xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPGTSS         xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPTRUESS       xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPEQ_OSSS      xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPLT_OQSS      xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPLE_OQSS      xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPUNORD_SSS    xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNEQ_USSS     xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNLT_UQSS     xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNLE_UQSS     xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPORD_SSS      xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPEQ_USSS      xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNGE_UQSS     xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNGT_UQSS     xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPFALSE_OSSS   xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPNEQ_OSSS     xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPGE_OQSS      xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPGT_OQSS      xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPTRUE_USSS    xmmreg,xmmreg*,xmmrm32   AVX,SANDYBRIDGE 
-       VCMPSS           xmmreg,xmmreg*,xmmrm32,imm8 AVX,SANDYBRIDGE 
+       VCMPEQ_OSSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPEQSS         xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPLT_OSSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPLTSS         xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPLE_OSSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPLESS         xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPUNORD_QSS    xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPUNORDSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNEQ_UQSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNEQSS        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNLT_USSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNLTSS        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNLE_USSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNLESS        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPORD_QSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPORDSS        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPEQ_UQSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNGE_USSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNGESS        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNGT_USSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNGTSS        xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPFALSE_OQSS   xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPFALSESS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNEQ_OQSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPGE_OSSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPGESS         xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPGT_OSSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPGTSS         xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPTRUE_UQSS    xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPTRUESS       xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPEQ_OSSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPLT_OQSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPLE_OQSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPUNORD_SSS    xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNEQ_USSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNLT_UQSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNLE_UQSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPORD_SSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPEQ_USSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNGE_UQSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNGT_UQSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPFALSE_OSSS   xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPNEQ_OSSS     xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPGE_OQSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPGT_OQSS      xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPTRUE_USSS    xmmreg,xmmreg*,xmmrm64   AVX,SANDYBRIDGE 
+       VCMPSS           xmmreg,xmmreg*,xmmrm64,imm8 AVX,SANDYBRIDGE 
        VCOMISD          xmmreg,xmmrm64           AVX,SANDYBRIDGE 
        VCOMISS          xmmreg,xmmrm32           AVX,SANDYBRIDGE 
        VCVTDQ2PD        xmmreg,xmmrm64           AVX,SANDYBRIDGE 
@@ -9625,7 +9789,6 @@ B.1.25 Intel AVX instructions
        VINSERTPS        xmmreg,xmmreg*,xmmrm32,imm8 AVX,SANDYBRIDGE 
        VLDDQU           xmmreg,mem128            AVX,SANDYBRIDGE 
        VLDQQU           ymmreg,mem256            AVX,SANDYBRIDGE 
-       VLDDQU           ymmreg,mem256            AVX,SANDYBRIDGE 
        VLDMXCSR         mem32                    AVX,SANDYBRIDGE 
        VMASKMOVDQU      xmmreg,xmmreg            AVX,SANDYBRIDGE 
        VMASKMOVPS       xmmreg,xmmreg,mem128     AVX,SANDYBRIDGE 
@@ -9656,12 +9819,12 @@ B.1.25 Intel AVX instructions
        VMOVAPS          xmmrm128,xmmreg          AVX,SANDYBRIDGE 
        VMOVAPS          ymmreg,ymmrm256          AVX,SANDYBRIDGE 
        VMOVAPS          ymmrm256,ymmreg          AVX,SANDYBRIDGE 
+       VMOVD            xmmreg,rm32              AVX,SANDYBRIDGE 
+       VMOVD            rm32,xmmreg              AVX,SANDYBRIDGE 
        VMOVQ            xmmreg,xmmrm64           AVX,SANDYBRIDGE 
        VMOVQ            xmmrm64,xmmreg           AVX,SANDYBRIDGE 
        VMOVQ            xmmreg,rm64              AVX,SANDYBRIDGE,LONG 
        VMOVQ            rm64,xmmreg              AVX,SANDYBRIDGE,LONG 
-       VMOVD            xmmreg,rm32              AVX,SANDYBRIDGE 
-       VMOVD            rm32,xmmreg              AVX,SANDYBRIDGE 
        VMOVDDUP         xmmreg,xmmrm64           AVX,SANDYBRIDGE 
        VMOVDDUP         ymmreg,ymmrm256          AVX,SANDYBRIDGE 
        VMOVDQA          xmmreg,xmmrm128          AVX,SANDYBRIDGE 
@@ -9771,42 +9934,10 @@ B.1.25 Intel AVX instructions
        VPERMILPD        ymmreg,ymmreg,ymmrm256   AVX,SANDYBRIDGE 
        VPERMILPD        xmmreg,xmmrm128,imm8     AVX,SANDYBRIDGE 
        VPERMILPD        ymmreg,ymmrm256,imm8     AVX,SANDYBRIDGE 
-       VPERMILTD2PD     xmmreg,xmmreg,xmmrm128,xmmreg AVX,SANDYBRIDGE 
-       VPERMILTD2PD     xmmreg,xmmreg,xmmreg,xmmrm128 AVX,SANDYBRIDGE 
-       VPERMILTD2PD     ymmreg,ymmreg,ymmrm256,ymmreg AVX,SANDYBRIDGE 
-       VPERMILTD2PD     ymmreg,ymmreg,ymmreg,ymmrm256 AVX,SANDYBRIDGE 
-       VPERMILMO2PD     xmmreg,xmmreg,xmmrm128,xmmreg AVX,SANDYBRIDGE 
-       VPERMILMO2PD     xmmreg,xmmreg,xmmreg,xmmrm128 AVX,SANDYBRIDGE 
-       VPERMILMO2PD     ymmreg,ymmreg,ymmrm256,ymmreg AVX,SANDYBRIDGE 
-       VPERMILMO2PD     ymmreg,ymmreg,ymmreg,ymmrm256 AVX,SANDYBRIDGE 
-       VPERMILMZ2PD     xmmreg,xmmreg,xmmrm128,xmmreg AVX,SANDYBRIDGE 
-       VPERMILMZ2PD     xmmreg,xmmreg,xmmreg,xmmrm128 AVX,SANDYBRIDGE 
-       VPERMILMZ2PD     ymmreg,ymmreg,ymmrm256,ymmreg AVX,SANDYBRIDGE 
-       VPERMILMZ2PD     ymmreg,ymmreg,ymmreg,ymmrm256 AVX,SANDYBRIDGE 
-       VPERMIL2PD       xmmreg,xmmreg,xmmrm128,xmmreg,imm8 AVX,SANDYBRIDGE 
-       VPERMIL2PD       xmmreg,xmmreg,xmmreg,xmmrm128,imm8 AVX,SANDYBRIDGE 
-       VPERMIL2PD       ymmreg,ymmreg,ymmrm256,ymmreg,imm8 AVX,SANDYBRIDGE 
-       VPERMIL2PD       ymmreg,ymmreg,ymmreg,ymmrm256,imm8 AVX,SANDYBRIDGE 
        VPERMILPS        xmmreg,xmmreg,xmmrm128   AVX,SANDYBRIDGE 
        VPERMILPS        ymmreg,ymmreg,ymmrm256   AVX,SANDYBRIDGE 
        VPERMILPS        xmmreg,xmmrm128,imm8     AVX,SANDYBRIDGE 
        VPERMILPS        ymmreg,ymmrm256,imm8     AVX,SANDYBRIDGE 
-       VPERMILTD2PS     xmmreg,xmmreg,xmmrm128,xmmreg AVX,SANDYBRIDGE 
-       VPERMILTD2PS     xmmreg,xmmreg,xmmreg,xmmrm128 AVX,SANDYBRIDGE 
-       VPERMILTD2PS     ymmreg,ymmreg,ymmrm256,ymmreg AVX,SANDYBRIDGE 
-       VPERMILTD2PS     ymmreg,ymmreg,ymmreg,ymmrm256 AVX,SANDYBRIDGE 
-       VPERMILMO2PS     xmmreg,xmmreg,xmmrm128,xmmreg AVX,SANDYBRIDGE 
-       VPERMILMO2PS     xmmreg,xmmreg,xmmreg,xmmrm128 AVX,SANDYBRIDGE 
-       VPERMILMO2PS     ymmreg,ymmreg,ymmrm256,ymmreg AVX,SANDYBRIDGE 
-       VPERMILMO2PS     ymmreg,ymmreg,ymmreg,ymmrm256 AVX,SANDYBRIDGE 
-       VPERMILMZ2PS     xmmreg,xmmreg,xmmrm128,xmmreg AVX,SANDYBRIDGE 
-       VPERMILMZ2PS     xmmreg,xmmreg,xmmreg,xmmrm128 AVX,SANDYBRIDGE 
-       VPERMILMZ2PS     ymmreg,ymmreg,ymmrm256,ymmreg AVX,SANDYBRIDGE 
-       VPERMILMZ2PS     ymmreg,ymmreg,ymmreg,ymmrm256 AVX,SANDYBRIDGE 
-       VPERMIL2PS       xmmreg,xmmreg,xmmrm128,xmmreg,imm8 AVX,SANDYBRIDGE 
-       VPERMIL2PS       xmmreg,xmmreg,xmmreg,xmmrm128,imm8 AVX,SANDYBRIDGE 
-       VPERMIL2PS       ymmreg,ymmreg,ymmrm256,ymmreg,imm8 AVX,SANDYBRIDGE 
-       VPERMIL2PS       ymmreg,ymmreg,ymmreg,ymmrm256,imm8 AVX,SANDYBRIDGE 
        VPERM2F128       ymmreg,ymmreg,ymmrm256,imm8 AVX,SANDYBRIDGE 
        VPEXTRB          reg64,xmmreg,imm8        AVX,SANDYBRIDGE,LONG 
        VPEXTRB          reg32,xmmreg,imm8        AVX,SANDYBRIDGE 
@@ -10567,6 +10698,9 @@ Appendix C: NASM Version History
 
  C.1.1 Version 2.09
 
+       (*) Fixed assignment the magnitude of `%rep' counter. It is limited
+           to 62 bits now.
+
        (*) Fixed NULL dereference if argument of `%strlen' resolves to
            whitespace. For example if nonexistent macro parameter is used.
 
@@ -10594,7 +10728,7 @@ Appendix C: NASM Version History
 
        (*) Short intersegment jumps are permitted now.
 
-       (*) An alignment more then 64 bytes are allowed for `win32', `win64'
+       (*) An alignment more than 64 bytes are allowed for `win32', `win64'
            output formats.
 
        (*) `SECTALIGN' directive introduced. See section 4.11.13.
@@ -10626,6 +10760,9 @@ Appendix C: NASM Version History
        (*) Environment variables read with `%!' or tested with `%ifenv' can
            now contain non-identifier characters if surrounded by quotes.
            See section 4.10.2.
+
+       (*) Add a new standard macro package `%use fp' for floating-point
+           convenience macros. See section 5.3.
 
  C.1.2 Version 2.08.02
 
