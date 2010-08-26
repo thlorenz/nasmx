@@ -12,9 +12,6 @@
 ;//
 %include '..\..\..\inc\nasmx.inc'
 %include '..\..\..\inc\win32\windows.inc'
-
-;%assign sz sizeof(MCI_OVLY_LOAD_PARMS)
-;%fatal size = sz
 %include '..\..\..\inc\win32\kernel32.inc'
 %include '..\..\..\inc\win32\user32.inc'
 ;// You must include the following when using typedef function names
