@@ -20,56 +20,52 @@
 ;// depending on whether UNICODE is defined or not
 %include '..\..\..\inc\win32\unicode.inc'
 
+proto    dlgproc, ptrdiff_t hwnd, dword umsg, ptrdiff_t wparam, ptrdiff_t lparam
+
 entry    demo4
 
 [section .text]
 proc    demo4
+locals none
 
-    invoke   DialogBoxParam, NASMX_PTR NULL, NASMX_PTR szTemplate, NASMX_PTR NULL, NASMX_PTR dlgproc, size_t NULL
-    invoke   ExitProcess, uint32_t NULL
+    invoke   DialogBoxParam, NULL, szTemplate, NULL, dlgproc, NULL
+    invoke   ExitProcess, NULL
     ret
 
 endproc
 
-proc    dlgproc
-hwnd    argd
-umsg    argd
-wparam  argd
-lparam  argd
+proc    dlgproc, ptrdiff_t hwnd, dword umsg, ptrdiff_t wparam, ptrdiff_t lparam
+locals none
 
 .wm_command:
-    cmp      argv(umsg), dword WM_COMMAND
+    cmp      [argv(.umsg)], dword WM_COMMAND
     jne      .wm_destroy
 
-    cmp      argv(wparam), dword 200
+    cmp      [argv(.wparam)], dword 200
     jne      .cmd_idok
 
-    invoke   MessageBox, NASMX_PTR NULL, NASMX_PTR szContent, NASMX_PTR szTitle, uint32_t MB_OK
+    invoke   MessageBox, NULL, szContent, szTitle, MB_OK
     mov      eax, 1
     jmp      .wm_default
 
 .cmd_idok:
-    cmp      argv(wparam), dword 201
+    cmp      [argv(.wparam)], dword 201
     je       .die
 
 .wm_destroy:
-    cmp      argv(umsg), dword WM_DESTROY
+    cmp      [argv(.umsg)], dword WM_DESTROY
     jne      .wm_default
 
-    .die:
-    invoke   EndDialog, NASMX_PTR argv(hwnd), size_t 1
-    mov      eax, 1
-    jmp      .exit
+.die:
+    invoke   EndDialog, [argv(.hwnd)], 1
+	return   1
 
 .wm_default:
     xor      eax, eax
     
-.exit:
-    ret
-
 endproc
 
 [section .data]
-    szTemplate: declare(NASMX_CHAR) NASMX_TEXT("MyDialog"), 0x0
-    szTitle:    declare(NASMX_CHAR) NASMX_TEXT("Demo4"), 0x0
-    szContent:  declare(NASMX_CHAR) NASMX_TEXT("Win32 NASM Demo #4"), 0x0
+    szTemplate: declare(NASMX_TCHAR) NASMX_TEXT("MyDialog"), 0x0
+    szTitle:    declare(NASMX_TCHAR) NASMX_TEXT("Demo4"), 0x0
+    szContent:  declare(NASMX_TCHAR) NASMX_TEXT("Win32 NASM Demo #4"), 0x0

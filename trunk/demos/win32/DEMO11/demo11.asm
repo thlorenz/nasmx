@@ -22,7 +22,10 @@ entry	demo11
 	age:	resd 1
 
 [section .text]
-proc	demo11
+
+proc   demo11
+locals none
+
 	invoke	printf, "First Name: "
 	invoke	scanf, "%1024s", fname
 	invoke	printf, "Last Name: "
@@ -38,5 +41,5 @@ proc	demo11
 	invoke	printf, "%c%c%c%cPress any key to exit.",13,10,13,10
 	invoke	_getch
 	xor	eax, eax
-	ret
+
 endproc

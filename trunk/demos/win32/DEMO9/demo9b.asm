@@ -1,4 +1,4 @@
-;// DEMO9B.ASM
+;// DEMO9.ASM
 ;//
 ;// Copyright (C)2005-2010 The NASMX Project
 ;//
@@ -20,18 +20,23 @@
 ;//     depending on whether UNICODE is defined or not
 %include '..\..\..\inc\win32\unicode.inc'
 
-entry	Demo9B
+entry	DllEntry
 
-import	Say
+proto   cdecl, Say, ptrdiff_t content, ptrdiff_t apptitle
 
 [section .text]
-proc	Demo9B
-	invoke	Say, NASMX_PTR szContent, NASMX_PTR szTitle
-	invoke	ExitProcess, uint32_t NULL
-	ret
-    
+
+proc   DllEntry, ptrdiff_t hinst, size_t reason, size_t reserved
+locals none
+
+	mov	eax, TRUE
+
 endproc
 
-[section .data]
-	szTitle:	declare(NASMX_CHAR) NASMX_TEXT('Demo9B'), 0x0
-	szContent:	declare(NASMX_CHAR) NASMX_TEXT('Demo9 Test, Say()'), 0x0
+proc   Say, ptrdiff_t content, ptrdiff_t apptitle
+locals none
+
+	invoke	MessageBox, NULL, [argv(.content)], [argv(.apptitle)], MB_OK + MB_ICONINFORMATION
+	xor	eax, eax
+
+endproc

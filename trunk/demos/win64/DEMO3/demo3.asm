@@ -1,4 +1,5 @@
 %include "..\..\..\inc\nasmx.inc"
+%include "..\..\..\inc\win32\COMCTL32.INC"
 %include "..\..\..\inc\win32\windows.inc"
 %include "..\..\..\inc\win32\kernel32.inc"
 

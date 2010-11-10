@@ -2,8 +2,8 @@
 ;//
 ;// Copyright (C)2005-2010 The NASMX Project
 ;//
-;// This is a fully UNICODE aware, typedefined demo that demonstrates
-;// using NASMX typedef system to make your code truly portable between
+;// This is a fully UNICODE aware, type-defined demo that demonstrates
+;// using NASMX typedef system to help make your code portable between
 ;// 32 and 64-bit systems using either ASCII or UNICODE
 ;//
 ;// Contributors:
@@ -23,26 +23,35 @@
 entry    demo1
 
 [section .text]
-proc     demo1
 
-    invoke    my_p, NASMX_PTR szContentTwo, NASMX_PTR szTitleTwo
-    invoke    MessageBox, NASMX_PTR NULL, NASMX_PTR szContent, NASMX_PTR szTitle, uint32_t MB_OK
-    invoke    ExitProcess, NASMX_PTR NULL
-    ret
+;// Define our function procedure expecting 2 arguments of ptrdiff_t size.
+;// Google size_t and ptrdiff_t to understand why these typedefs were chosen.
+;// If we wanted to make this function global we would use the PROTO macro
+;// which would also allow us to define the procedure later in the source
+;// instead of requiring it here before invoke'ing it in proc demo1
+proc   my_p, ptrdiff_t szContent, ptrdiff_t szTitle
+locals none
+
+    ;// note that even though the formal parameter names are identical to the data section names
+	;// they are referenced differently as the following line shows. Make sure you don't forget
+	;// to include the leading dot when referencing procedure parameters and local variables.
+	;// The dot notation is used to distinguish between local and global vars.
+    invoke    MessageBox, NULL, [argv(.szContent)], [argv(.szTitle)], MB_OK
+
+endproc  ;// return from procedure happens automatically here
+
+;// the start of our program as defined with the ENTRY macro
+proc   demo1
+locals none
+
+    invoke    my_p, szContentTwo, szTitleTwo
+    invoke    MessageBox, NULL, szContent, szTitle, MB_OK
+    invoke    ExitProcess, NULL
 
 endproc
 
-proc     my_p
-sz_Content    argd
-sz_Title      argd
-
-    invoke    MessageBox, NASMX_PTR NULL, NASMX_PTR argv(sz_Content), NASMX_PTR argv(sz_Title), uint32_t MB_OK
-    ret
-
-endproc
-
-_data
-    szTitle:       declare(NASMX_CHAR) NASMX_TEXT('Demo1'), 0x0
-    szTitleTwo:    declare(NASMX_CHAR) NASMX_TEXT('Demo1 Procedure'), 0x0
-    szContent:     declare(NASMX_CHAR) NASMX_TEXT('Hello from the Application!'), 0x0
-    szContentTwo:  declare(NASMX_CHAR) NASMX_TEXT('Hello from the Procedure!'), 0x0
+[section .data]
+    szTitle:      declare(NASMX_TCHAR) NASMX_TEXT('Demo1'), 0x0
+    szTitleTwo:   declare(NASMX_TCHAR) NASMX_TEXT('Demo1 Procedure'), 0x0
+    szContent:    declare(NASMX_TCHAR) NASMX_TEXT('Hello from the Application!'), 0x0
+    szContentTwo: declare(NASMX_TCHAR) NASMX_TEXT('Hello from the Procedure!'), 0x0
