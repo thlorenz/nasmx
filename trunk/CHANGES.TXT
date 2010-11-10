@@ -1,5 +1,28 @@
 NASMX Notes:
 ~~~~~~~~~~~~
+The project page is located at:
+  http://www.asmcommunity.net/projects/nasmx/
+
+The community forum can be found at:
+  http://www.asmcommunity.net/board/index.php
+
+Downloads and snapshots are available from:
+  http://sourceforge.net/projects/nasmx/
+
+Change Log
+~~~~~~~~~~
+NASMX v1.0B4: 9:25 PM 11/09/2010, by Rob Neff
+- Updated Win32 "bin" directory with latest versions
+  of developer tools:
+  NASM v2.10rc2, NDISASM v2.10rc2,
+  GoLink v0.26.14, GoRC v0.90.5
+  ResEd v2.2.0.6c
+
+- Added support for the following calling conventions:
+  C, StdCall, FastCall, Pascal
+
+- Modified demos to reflect latest use and syntax changes
+
 Current Release: 8:05 PM 1/12/2009, by Keith Kanios
 - Updated Win32 "bin" directory with latest versions
   of NASM, NDISASM, GoLink, GoRC and ResEd.
