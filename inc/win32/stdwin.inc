@@ -6,114 +6,32 @@
 
 ; StdWindow szAppClass, szTitle, xpos, ypos, wwd, wht, menu, hinst
 %macro StdWindow 8
-     push dword NULL
-     push dword %8
-     push dword %7
-     push dword NULL
-     push dword %6
-     push dword %5
-     push dword %4
-     push dword %3
-     push dword WS_OVERLAPPEDWINDOW + WS_VISIBLE
-     push dword %2
-     push dword %1
-     push dword WS_EX_OVERLAPPEDWINDOW
-     invoke CreateWindowEx
+    invoke CreateWindowEx, WS_EX_OVERLAPPEDWINDOW, %1, %2, WS_OVERLAPPEDWINDOW + WS_VISIBLE, %3, %4, %5, %6, NULL, %7, %8, NULL
 %endmacro
 
 ; ButtonCtl szText, dwID, xpos, ypos, wwd, wht, prnt, hinst
 %macro ButtonCtl 8
-jmp %%n
-%%cls: declare(NASMX_CHAR) NASMX_TEXT("BUTTON"), 0
-%%n: push dword NULL
-     push dword %8
-     push dword %2
-     push dword %7
-     push dword %6
-     push dword %5
-     push dword %4
-     push dword %3
-     push dword WS_CHILD + WS_VISIBLE
-     push dword %1
-     push dword %%cls
-     push dword NULL
-     invoke CreateWindowEx
+    invoke CreateWindowEx, NULL, 'BUTTON', %1, WS_CHILD + WS_VISIBLE, %3, %4, %5, %6, %7, %2, %8, NULL
 %endmacro
 
 ; EditCtl szText, dwID, xpos, ypos, wwd, wht, prnt, hinst
 %macro EditCtl 8
-jmp %%n
-%%cls: declare(NASMX_CHAR) NASMX_TEXT("EDIT"), 0
-%%n: push dword NULL
-     push dword %8
-     push dword %2
-     push dword %7
-     push dword %6
-     push dword %5
-     push dword %4
-     push dword %3
-     push dword WS_CHILD + WS_VISIBLE + ES_LEFT
-     push dword %1
-     push dword %%cls
-     push dword NULL
-     invoke CreateWindowEx
+    invoke CreateWindowEx, NULL, 'EDIT', %1, WS_CHILD + WS_VISIBLE + ES_LEFT, %3, %4, %5, %6, %7, %2, %8, NULL
 %endmacro
 
 ; StaticCtl szText, dwID, xpos, ypos, wwd, wht, prnt, hinst
 %macro StaticCtl 8
-jmp %%n
-%%cls: declare(NASMX_CHAR) NASMX_TEXT("STATIC"), 0
-%%n: push dword NULL
-     push dword %8
-     push dword %2
-     push dword %7
-     push dword %6
-     push dword %5
-     push dword %4
-     push dword %3
-     push dword WS_CHILD + WS_VISIBLE + SS_CENTER + SS_NOPREFIX
-     push dword %1
-     push dword %%cls
-     push dword NULL
-     invoke CreateWindowEx
+    invoke CreateWindowEx, NULL, 'STATIC', %1, WS_CHILD + WS_VISIBLE + SS_CENTER + SS_NOPREFIX, %3, %4, %5, %6, %7, %2, %8, NULL
 %endmacro
 
 ; ComboCtl szText, dwID, xpos, ypos, wwd, wht, prnt, hinst
 %macro ComboCtl 8
-jmp %%n
-%%cls: declare(NASMX_CHAR) NASMX_TEXT("COMBOBOX"), 0
-%%n: push dword NULL
-     push dword %8
-     push dword %2
-     push dword %7
-     push dword %6
-     push dword %5
-     push dword %4
-     push dword %3
-     push dword WS_CHILD + WS_VISIBLE + CBS_DROPDOWN + CBS_SORT
-     push dword %1
-     push dword %%cls
-     push dword NULL
-     invoke CreateWindowEx
+    invoke CreateWindowEx, NULL, 'COMBOBOX', %1, WS_CHILD + WS_VISIBLE + CBS_DROPDOWN + CBS_SORT, %3, %4, %5, %6, %7, %2, %8, NULL
 %endmacro
 
 ; ListBoxCtl szText, dwID, xpos, ypos, wwd, wht, prnt, hinst
 %macro ListBoxCtl 8
-jmp %%n
-%%cls: declare(NASMX_CHAR) NASMX_TEXT("LISTBOX"), 0
-%%n: push dword NULL
-     push dword %8
-     push dword %2
-     push dword %7
-     push dword %6
-     push dword %5
-     push dword %4
-     push dword %3
-     push dword WS_CHILD + WS_VISIBLE + LBS_HASSTRINGS + LBS_SORT
-     push dword %1
-     push dword %%cls
-     push dword NULL
-     invoke CreateWindowEx
+    invoke CreateWindowEx, NULL, 'LISTBOX', %1, WS_CHILD + WS_VISIBLE + LBS_HASSTRINGS + LBS_SORT, %3, %4, %5, %6, %7, %2, %8, NULL
 %endmacro
 
 %endif

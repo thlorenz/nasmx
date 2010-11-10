@@ -12,7 +12,7 @@
 ;//
 %define __nxerrmsg "NASM v2.09 or later required"
 %ifdef __NASM_VERSION_ID__
-	%if __NASM_VERSION_ID__ < 0x02086350
+	%if __NASM_VERSION_ID__ < 0x02090000
 		%fatal __nxerrmsg
 	%endif
 %else
@@ -26,9 +26,9 @@
 ;//
 %macro NASMX_DEFINE 1-2
 	%if %0 > 1
-		%ixdefine __NASMX_%1__ %2
+		%ixdefine __NASMX_%[%1]__ %[2]
 	%else
-		%ixdefine __NASMX_%1__
+		%ixdefine __NASMX_%[%1]__
 	%endif
 %endmacro
 
@@ -38,10 +38,10 @@
 ;// Get a NASMX Definition
 ;//
 %macro NASMX_GET_DEFINE 2
-	%ifdef __NASMX_%1__
-		%xdefine %2 __NASMX_%1__
+	%ifdef __NASMX_%[%1]__
+		%xdefine %[%2] __NASMX_%[%1]__
 	%elifdef %2
-		%undef %2
+		%undef %[%2]
 	%endif
 %endmacro
 
@@ -50,10 +50,10 @@
 ;// Undefine a NASMX Definition
 ;//
 %macro NASMX_UNDEF 1
-	%ifdef __NASMX_%1__
-		%undef __NASMX_%1__
+	%ifdef __NASMX_%[%1]__
+		%undef __NASMX_%[%1]__
 	%else
-		%warning NASMX Definition %1 is not defined
+		%warning NASMX Definition %[1] is not defined
 	%endif
 %endmacro
 
@@ -87,232 +87,638 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 ;//////////////////////////////////////////////////////////////
 ;//
-;// native sizes
-;//
-%idefine byte_size 1
-%idefine word_size 2
-%idefine dword_size 4
-%idefine qword_size 8
-%idefine tword_size 10
-%idefine oword_size 16
+;// native data sizes
+;// Must be defined here due to struc_size!
+%ixdefine byte_size    1
+%ixdefine word_size    2
+%ixdefine dword_size   4
+%ixdefine qword_size   8
+%ixdefine tword_size  10
+%ixdefine oword_size  16
+%ixdefine __m64_size   8
+%ixdefine __m128_size 16
+%ixdefine __m256_size 32
+%ixdefine __nxfloat_size   4
+%ixdefine __nxdouble_size  8
+;// native register sizes
+%idefine al_size  1
+%idefine bl_size  1
+%idefine cl_size  1
+%idefine dl_size  1
+%idefine ah_size  1
+%idefine bh_size  1
+%idefine ch_size  1
+%idefine dh_size  1
+%idefine ax_size  2
+%idefine bx_size  2
+%idefine cx_size  2
+%idefine dx_size  2
+%idefine di_size  2
+%idefine si_size  2
+%idefine sp_size  2
+%idefine bp_size  2
+%idefine bpl_size  1
+%idefine dil_size  1
+%idefine sil_size  1
+%idefine spl_size  1
+%idefine eax_size 4
+%idefine ebx_size 4
+%idefine ecx_size 4
+%idefine edx_size 4
+%idefine edi_size 4
+%idefine esi_size 4
+%idefine esp_size 4
+%idefine ebp_size 4
+%idefine rax_size 8
+%idefine rbx_size 8
+%idefine rcx_size 8
+%idefine rdx_size 8
+%idefine rdi_size 8
+%idefine rsi_size 8
+%idefine rsp_size 8
+%idefine rbp_size 8
+%idefine r8d_size  4
+%idefine r9d_size  4
+%idefine r10d_size 4
+%idefine r11d_size 4
+%idefine r12d_size 4
+%idefine r13d_size 4
+%idefine r14d_size 4
+%idefine r15d_size 4
+%idefine r8_size  8
+%idefine r9_size  8
+%idefine r10_size 8
+%idefine r11_size 8
+%idefine r12_size 8
+%idefine r13_size 8
+%idefine r14_size 8
+%idefine r15_size 8
+
+;// register aliases used to help with portability
+%ifidn __BITS__,64
+%ixdefine __AX rax
+%ixdefine __BX rbx
+%ixdefine __CX rcx
+%ixdefine __DX rdx
+%ixdefine __DI rdi
+%ixdefine __SI rsi
+%ixdefine __BP rbp
+%ixdefine __SP rsp
+%else
+%ixdefine __AX eax
+%ixdefine __BX ebx
+%ixdefine __CX ecx
+%ixdefine __DX edx
+%ixdefine __DI edi
+%ixdefine __SI esi
+%ixdefine __BP ebp
+%ixdefine __SP esp
+%endif
 
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// nasm storage types
 ;//
-%idefine byte_reserve RESB
-%idefine word_reserve RESW
-%idefine dword_reserve RESD
-%idefine qword_reserve RESQ
-%idefine tword_reserve REST
-%idefine oword_reserve RESO
-
+%ixdefine byte_reserve   RESB
+%ixdefine word_reserve   RESW
+%ixdefine dword_reserve  RESD
+%ixdefine qword_reserve  RESQ
+%ixdefine tword_reserve  REST
+%ixdefine oword_reserve  RESO
+%ixdefine __m64_reserve  RESQ
+%ixdefine __m128_reserve RESO
+%ixdefine __nxfloat_reserve  RESD
+%ixdefine __nxdouble_reserve RESQ
 
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// nasm storage types
 ;//
-%idefine byte_storage DB
-%idefine word_storage DW
-%idefine dword_storage DD
-%idefine qword_storage DQ
-%idefine tword_storage DT
-%idefine oword_storage DO
-
+%ixdefine byte_storage   DB
+%ixdefine word_storage   DW
+%ixdefine dword_storage  DD
+%ixdefine qword_storage  DQ
+%ixdefine tword_storage  DT
+%ixdefine oword_storage  DO
+%ixdefine __m64_storage  DQ
+%ixdefine __m128_storage DO
+%ixdefine __nxfloat_storage  DD
+%ixdefine __nxdouble_storage DQ
 
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// nasmx classifcation of types
 ;//
-%idefine byte_type BYTE
-%idefine word_type WORD
-%idefine dword_type DWORD
-%idefine qword_type QWORD
-%idefine tword_type TWORD
-%idefine oword_type OWORD
-%idefine struc_type STRUC
-%idefine union_type UNION
+;// Bits used to contain classification:
+;//  0-10 : size of type in bytes
+;//    11 : reserved (0)
+;// 12-15 : type   ( TODO: struc/union/class )
+;//         0 = int type
+;//         8 = (bit 15 set if float type, otherwise clear)
+;// 
+%ixdefine byte_type   0x0001
+%ixdefine word_type   0x0002
+%ixdefine dword_type  0x0004
+%ixdefine qword_type  0x0008
+%ixdefine tword_type  0x000A
+%ixdefine oword_type  0x0010
+%ixdefine __m64_type  0x8008
+%ixdefine __m128_type 0x8010
+%ixdefine __m256_type 0x8020
+%ixdefine __nxfloat_type  0x8004
+%ixdefine __nxdouble_type 0x8008
 
-%define typeof(x) x %+ _type
+;// NASMX int types
+%ixdefine int8_t     byte
+%ixdefine uint8_t    byte
+%ixdefine int16_t    word
+%ixdefine uint16_t   word
+%ixdefine int32_t    dword
+%ixdefine uint32_t   dword
+%ixdefine long32_t   dword
+%ixdefine ulong32_t  dword
+%ixdefine int64_t    qword
+%ixdefine uint64_t   qword
+%ixdefine int80_t    tword
+%ixdefine uint80_t   tword
+%ixdefine int128_t   oword
+%ixdefine uint128_t  oword
+%ixdefine long64_t   qword
+%ixdefine ulong64_t  qword
+%ixdefine long128_t  oword
+%ixdefine ulong128_t oword
+;// NASMX Unicode Transformation Format types
+%ixdefine utf8_t     uint8_t
+%ixdefine utf16_t    uint16_t
+%ixdefine utf32_t    uint32_t
+;// C types
+;// The classification of long_t type  must be performed
+;// during __OUTPUT_FORMAT__ check as the actual sizes
+;// are different among operating systems.
+%ixdefine char_t     int8_t
+%ixdefine uchar_t    uint8_t
+%ixdefine short_t    int16_t
+%ixdefine ushort_t   uint16_t
+%ixdefine int_t      int32_t
+%ixdefine uint_t     uint32_t
+;// float types require special handling due to
+;// nasm FLOAT directives!
+%ixdefine float_t    __nxfloat
+%ixdefine double_t   __nxdouble
+%idefine __float(v) dword __float32__(v)
+%idefine __double(v) qword __float64__(v)
+
+;// Map between native size and token.
+;// The define name was chosen as it will
+;// be displayed to the user if the macro
+;// nx_token_from_size() is called with
+;// an illegal value during assembly
+%ixdefine __nx_error_token_size_1  byte
+%ixdefine __nx_error_token_size_2  word
+%ixdefine __nx_error_token_size_4  dword
+%ixdefine __nx_error_token_size_8  qword
+%ixdefine __nx_error_token_size_10 tword
+%ixdefine __nx_error_token_size_16 xmm
+%ixdefine __nx_error_token_size_32 xmm
+
+%define typeof(x) ((x %+ _type >> 12) & 0x000F)
 %define sizeof(x) x %+ _size
 %define reserve(x) x %+ _reserve
 %define declare(x) x %+ _storage
-
-;//////////////////////////////////////////////////////////////
-;//
-;// NASMX typedef macro
-;//
-;// usage:
-;//   typedef dword, int32_t
-%imacro typedef 2.nolist
-	%ifndef %{1}_size
-			%fatal unknown size: %1
-	%endif
-
-;   %xdefine %{2}_size %{1}_size
-;   %xdefine %{2}_type %{1}_type
-;   %xdefine %{2}_reserve %{1}_reserve
-;   %xdefine %{2}_storage %{1}_storage
-;	%xdefine %{2}_size %{1}_size
-	%xdefine %{2} %{1}
-%endmacro
-
-
-;//////////////////////////////////////////////////////////////
-;//
-;// NASMX int types
-;//
-typedef tword, tbyte  ; MASM Style TBYTE
-typedef byte, int8_t
-typedef byte, uint8_t
-typedef word, int16_t
-typedef word, uint16_t
-typedef dword, int32_t
-typedef dword, uint32_t
-typedef qword, int64_t
-typedef qword, uint64_t
-typedef tbyte, int80_t
-typedef tbyte, uint80_t
-typedef oword, int128_t
-typedef oword, uint128_t
-typedef qword, long64_t
-typedef qword, ulong64_t
-typedef oword, long128_t
-typedef oword, ulong128_t
-
+%define nx_token_from_size(x) __nx_error_token_size_ %+ x
+%idefine is_typeof_float(x) ((x %+ _type >> 15) & 0x0001)
 
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// NASMX ABI size and pointer types
 ;//
-typedef dword, ptr32_t
-typedef qword, ptr64_t
-;// use for 32->64 bit expansion of either int or ptr
-%ixdefine NASMX_PTR ptr%[__BITS__]_t
-typedef NASMX_PTR, size_t
+;//                 Windows     Linux
+;//        type     32   64     32   64
+;// sizeof(int)      4    4      4    4
+;// sizeof(long)     4    4      4    8
+;// sizeof(ptr)      4    8      4    8
+;// sizeof(size_t)   4    8      4    8
+%ixdefine size32_t dword
+%ixdefine size64_t qword
+%ixdefine size_t size%[__BITS__]_t
 %assign __NASMX_ABI_BITS__ sizeof(size_t) * 8
 %ifnidn __BITS__,__NASMX_ABI_BITS__
 	%fatal unknown size_t: __BITS__
 %endif
+%ixdefine ptr32_t dword
+%ixdefine ptr64_t qword
+;// use for 32->64 bit expansion of either int or ptr
+%ixdefine ptrdiff_t ptr%[__BITS__]_t
+%ixdefine NASMX_PTR ptr%[__BITS__]_t
+;// remember: intptr's can be confusing when going
+;// from 32-bit to 64-bit as sizeof(ptr) is increased
+;// to 8 but sizeof(int) remains 4 potential allowing
+;// very large (long) ints when using intptrs as ints.
+%ixdefine intptr_t ptrdiff_t
+%ixdefine uintptr_t ptrdiff_t
 
 ;//////////////////////////////////////////////////////////////
 ;//
-;// NASMX C types
+;// Calling Convention Enumerations
+;// Used within IMPORT, PROTO, PROC, & INVOKE
 ;//
-typedef byte, char_t
-typedef byte, uchar_t
-typedef word, short_t
-typedef word, ushort_t
-typedef dword, int_t
-typedef dword, uint_t
-typedef qword, long_t
-typedef qword, ulong_t
-typedef dword, float_t
-typedef qword, double_t
+;// BIT
+;//   0-3: PREFIX - index into decorations (i.e. '_', '@', or '?' )
+;//        all bits clear if no prefix
+;//   4-7: SUFFIX - index into decorations (i.e. '@', '?', '$' )
+;//        all bits clear if no suffix
+;//  8-11: CALLCONV - calling convention enum
+;//    12: ARGROTATE - rotate direction of args pushed to stack
+;//        set if left rotation ( PASCAL = %rotate 1 ), clear if right rotation ( CDECL = %rotate -1)
+;//    13: RETPOPSARGS - stack adjustment responsibility
+;//        set if callee pops args ( PASCAL/STDCALL ), clear if caller adjusts stack ( CDECL )
+;//
+;// Notes:
+;//    You may create your own calling convention for your operating
+;//    system of choice by modifying the flags and macros.  However,
+;//    the standard calling conventions should continue to exist to
+;//    permit interfacing with system calls ( unless you're writing
+;//    an OS with a new ABI/API ;)
+;//
+%define __NASMX_DECLSPEC_CC_PREFIX_MASK__      0x0007
+%define __NASMX_DECLSPEC_CC_SUFFIX_MASK__      0x0070
+%define __NASMX_DECLSPEC_CC_ENUM_MASK__        0x0F00
+%define __NASMX_DECLSPEC_CC_ARGROTATE_MASK__   0x1000
+%define __NASMX_DECLSPEC_CC_RETPOPSARGS_MASK__ 0x2000
+
+;// universal calling conventions
+%idefine __NASMX_DECLSPEC_CALLCONV_NAKED__    0
+%idefine __NASMX_DECLSPEC_CALLCONV_PASCAL__   0x3100
+%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
+;// although currently specific to win32, the
+;// STDCALL calling convention can be useful
+%idefine __NASMX_DECLSPEC_CALLCONV_STDCALL__  0x2321
+;// The following 2 calling conventions are highly
+;// platform dependent and are defined within the
+;// OUTPUT_FORMAT check
+;// %idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x????
+;// %idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x????
+
+;// CALLCONV Enums
+;// coincidentally compatible with DotGNU
+;// System.Runtime.InteropServices.CallingConvention Enum
+%idefine __NASMX_DECLSPEC_CC_ENUM_NAKED__     0
+%idefine __NASMX_DECLSPEC_CC_ENUM_PASCAL__    1
+%idefine __NASMX_DECLSPEC_CC_ENUM_CDECL__     2
+%idefine __NASMX_DECLSPEC_CC_ENUM_STDCALL__   3
+%idefine __NASMX_DECLSPEC_CC_ENUM_THISCALL__  4
+%idefine __NASMX_DECLSPEC_CC_ENUM_FASTCALL__  5
+;// %idefine __NASMX_DECLSPEC_CALLCONV_CC_ENUM_RDFCALL__   6
+
+;// internal CALLCONV macros
+%define nx_declspec_cc_prefix(x)       (x & 0x0007)
+%define nx_declspec_cc_suffix(x)      ((x >> 4) & 0x0007)
+%define nx_declspec_cc_enum(x)        ((x >> 8) & 0x000F)
+%define nx_declspec_cc_argrotate(x)   ((x >> 12) & 0x0001)
+%define nx_declspec_cc_retpopsargs(x) ((x >> 13) & 0x0001)
+
+;// String containing chars that the prefix/suffix bits index into.
+;// If you are adding __thiscall convention for your compiler of
+;// choice make sure that the initial suffix char is present in
+;// the decorations string.
+%define __NASMX_DECLSPEC_CC_DECORATIONS__     '_@?$'
+
+;//////////////////////////////////////////////////////////////
+;// internal macro call
+;// used by IMPORT, PROC, & INVOKE
+;// usage:
+;//    nx_callconv_decorate callconv, funcname, suffix
+;// examples:
+;//    nx_callconv_decorate __NASMX_DECLSPEC_CALLCONV_STDCALL__, WinProc, 16
+;//    nx_callconv_decorate __NASMX_DECLSPEC_CALLCONV_CDECL__, printf
+;//    nx_callconv_decorate __NASMX_DECLSPEC_CALLCONV_THISCALL__, ClassName.MethodName, 'Z1yi4p8aue'
+%macro nx_callconv_decorate 2-3.nolist 0
+	%ifnum %1
+		%assign %%__pidx nx_declspec_cc_prefix(%1)
+		%assign %%__sidx nx_declspec_cc_suffix(%1)
+	%else
+		%fatal 'CALLCONV undefined:' %1
+	%endif
+	%ifnum %2
+		%fatal 'internal error'
+	%endif
+
+	%if %%__pidx > 0
+		%substr %%__sig __NASMX_DECLSPEC_CC_DECORATIONS__ %%__pidx
+		%ifnum %2
+			%fatal 'internal error'
+		%elifid %2
+			%defstr %%__func %2
+		%eliftoken %2
+			%defstr %%__func %2
+		%else
+			%define %%__func %2
+		%endif
+		%strcat %%__sig %%__sig,%%__func
+	%else
+		%ifstr %2
+			%define %%__func %2
+		%else
+			%defstr %%__sig %2
+		%endif
+	%endif
+	%if %%__sidx > 0
+		%ifnum %3
+			%defstr %%__suffix %3
+		%elifid %3
+			%defstr %%__suffix %3
+		%else
+			%ifstr %3
+				%define %%__suffix %3
+			%else
+				%defstr %%__suffix %3
+			%endif
+		%endif
+		%substr %%__stok __NASMX_DECLSPEC_CC_DECORATIONS__ %%__sidx
+		%strcat %%__sig %%__sig,%%__stok,%%__suffix
+	%endif
+
+	%deftok %$__nxtok_decorated_name %%__sig
+
+%endmacro
 
 ;//////////////////////////////////////////////////////////////
 ;//
-;// NASMX Unicode Transformation Format types
+;// Target Operating System Type definitions
 ;//
-typedef byte, utf8_t
-typedef word, utf16_t
-typedef dword, utf32_t
+%define __NASMX_DECLSPEC_SYSTYPE_LINUX__   1
+%define __NASMX_DECLSPEC_SYSTYPE_MACHOS__  2
+%define __NASMX_DECLSPEC_SYSTYPE_WINDOWS__ 3
 
+;//////////////////////////////////////////////////////////////////
+;// Macro to control NASMX default behavior
+;// example usage:
+;//    NASMX_PRAGMA WARNING, DISABLE, ALL
+;//    NASMX_PRAGMA WARNING, DISABLE, 8001[, 8002, 8003]
+;//    NASMX_PRAGMA WARNING, ENABLE, ALL
+;// The macro will eventually allow up to enable/disable
+;// warnings generated by the NASMX macro type system
+%imacro NASMX_PRAGMA 1-*.nolist
+	%ifidni WARNING,%1
+		%warning actual pragma warnings currently unimplemented
+		%ifidni ENABLE, %2
+			;// assert: warnings are enabled if undefined
+			%ifidni ALL,%3
+				%ifdef __NASMX_PRAGMA_WARNING_8001__
+					%undef __NASMX_PRAGMA_WARNING_8001__
+				%endif
+				%ifdef __NASMX_PRAGMA_WARNING_8002__
+					%undef __NASMX_PRAGMA_WARNING_8002__
+				%endif
+			%else
+				%rep %0-2
+					%rotate 1
+					%ifdef __NASMX_PRAGMA_WARNING_%1__
+						%undef __NASMX_PRAGMA_WARNING_%1__
+					%endif
+				%endrep
+			%endif
+		%elifidni DISABLE, %2
+			;// assert: warnings are disabled if defined
+			%ifidni ALL,%3
+				%ifndef __NASMX_PRAGMA_WARNING_8001__
+					%define __NASMX_PRAGMA_WARNING_8001__
+				%endif
+				%ifndef __NASMX_PRAGMA_WARNING_8002__
+					%define __NASMX_PRAGMA_WARNING_8002__
+				%endif
+			%else
+				%rep %0-2
+					%rotate 1
+					%ifndef __NASMX_PRAGMA_WARNING_%3__
+						%define __NASMX_PRAGMA_WARNING_%3__
+					%endif
+				%endrep
+			%endif
+		%else
+			%error 'syntax: nasmx_pragma warning, [enable | disable], ...'
+		%endif
+	%else
+		%error 'unknown nasmx_pragma:' %1
+	%endif
+%endmacro
+
+;//////////////////////////////////////////////////////////////////
+;// Macro to override default ABI behavior (Declare Specialization)
+;// example usage:
+;//    NASMX_DECLSPEC CALLCONV, PASCAL
+;//    NASMX_DECLSPEC CALLCONV, STDCALL, DEFAULT
+;//    NASMX_DECLSPEC SYSTYPE, LINUX
+;//
+;// notes:
+;//    Make sure you understand the effects of using this command
+;//    before making a global declaration!  Unresolved linker errors
+;//    may haunt you!
+%imacro NASMX_DECLSPEC 1-8.nolist
+	%ifidni %1,CALLCONV
+		%if %0 < 2
+			%error 'nasmx_declspec syntax'
+		%endif
+		%ifndef __NASMX_DECLSPEC_CALLCONV_%[%2]__
+			%error 'unknown declspec calltype:' %2
+		%endif
+		%if %0 == 2
+			%ixdefine __NASMX_DECLSPEC_CALLCONV_DEFAULT__ __NASMX_DECLSPEC_CALLCONV_%[%2]__
+		%else
+			%ifdef __NASMX_DECLSPEC_CALLCONV_%[%3]__
+				%warning 'declspec redefining' %1 %2 %3
+			%endif
+			%ixdefine __NASMX_DECLSPEC_CALLCONV_%[%3]__ __NASMX_DECLSPEC_CALLCONV_%[%2]__
+		%endif
+	%else
+		%ifidni %1,SYSTYPE
+			%ifndef __NASMX_DECLSPEC_SYSTYPE_%[%2]__
+				%error 'unknown declspec systype:' %2
+			%endif
+			%if %0 == 2
+				%ixdefine __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ __NASMX_DECLSPEC_SYSTYPE_%[%2]__
+			%else
+				%ifdef __NASMX_DECLSPEC_SYSTYPE_%[%3]__
+					%warning 'declspec redefining' %1 %2 %3
+				%endif
+				%ixdefine __NASMX_DECLSPEC_SYSTYPE_%[%3]__ __NASMX_DECLSPEC_SYSTYPE_%[%2]__
+			%endif
+		%else
+			%error 'unknown declspec:' %1
+		%endif
+	%endif
+%endmacro
+
+
+;//////////////////////////////////////////////////////////////////
+;// OUTPUT_FORMAT check
+;//
+;// All system specific defines are made here
+;//
 %ifidn	 __OUTPUT_FORMAT__,elf
-	NASMX_DEFINE UNDERSCORE
-	typedef dword, wchar_t
+	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
+	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
+	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
+	NASMX_DECLSPEC SYSTYPE, LINUX
+	NASMX_DECLSPEC CALLCONV, CDECL, DEFAULT
+	%idefine long_t long32_t
+	%idefine ulong_t ulong32_t
+	%idefine wchar_t dword
 	%ifdef UNICODE
-		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TCHAR wchar_t
 		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
-		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,elf32
-	NASMX_DEFINE UNDERSCORE
-	typedef dword, wchar_t
+	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
+	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
+	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
+	NASMX_DECLSPEC SYSTYPE, LINUX
+	NASMX_DECLSPEC CALLCONV, CDECL, DEFAULT
+	%idefine long_t long32_t
+	%idefine ulong_t ulong32_t
+	%idefine wchar_t dword
 	%ifdef UNICODE
-		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TCHAR wchar_t
 		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
-		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,elf64
-	NASMX_DEFINE UNDERSCORE
-	typedef dword, wchar_t
+	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
+	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    6
+	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  8
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS__ 'RDIRSIRDXRCXR8 R9 '
+	NASMX_DECLSPEC SYSTYPE, LINUX
+	NASMX_DECLSPEC CALLCONV, FASTCALL, DEFAULT
+	%idefine long_t long64_t
+	%idefine ulong_t ulong64_t
+	%idefine wchar_t dword
 	%ifdef UNICODE
-		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TCHAR wchar_t
 		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
-		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,macho
-	NASMX_DEFINE UNDERSCORE
-	NASMX_DEFINE CDECL_UNDERSCORE
-	typedef dword, wchar_t
+	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0411
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
+	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
+	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
+	NASMX_DECLSPEC SYSTYPE, MACHOS
+	NASMX_DECLSPEC CALLCONV, CDECL, DEFAULT
+	%idefine long_t long32_t
+	%idefine ulong_t ulong32_t
+	%idefine wchar_t dword
 	%ifdef UNICODE
-		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TCHAR wchar_t
 		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
-		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,macho32
-	NASMX_DEFINE UNDERSCORE
-	NASMX_DEFINE CDECL_UNDERSCORE
-	typedef dword, wchar_t
+	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0411
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
+	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
+	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
+	NASMX_DECLSPEC SYSTYPE, MACHOS
+	NASMX_DECLSPEC CALLCONV, CDECL, DEFAULT
+	%idefine long_t long32_t
+	%idefine ulong_t ulong32_t
+	%idefine wchar_t dword
 	%ifdef UNICODE
-		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TCHAR wchar_t
 		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
-		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORAMT__,macho64
-	NASMX_DEFINE UNDERSCORE
-	NASMX_DEFINE CDECL_UNDERSCORE
-	typedef dword, wchar_t
+	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0411
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
+	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    6
+	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  8
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS__ 'RDIRSIRDXRCXR8 R9 '
+	NASMX_DECLSPEC SYSTYPE, MACHOS
+	NASMX_DECLSPEC CALLCONV, FASTCALL, DEFAULT
+	%idefine long_t long64_t
+	%idefine ulong_t ulong64_t
+	%idefine wchar_t dword
 	%ifdef UNICODE
-		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TCHAR wchar_t
 		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
-		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,win32
-	NASMX_DEFINE UNDERSCORE
-	typedef word, wchar_t
+	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x2423
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2522
+	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    2
+	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS__ 'ECXEDX'
+	NASMX_DECLSPEC SYSTYPE, WINDOWS
+	NASMX_DECLSPEC CALLCONV, STDCALL, DEFAULT
+	%idefine long_t long32_t
+	%idefine ulong_t ulong32_t
+	%idefine wchar_t word
 	%ifdef UNICODE
-		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TCHAR wchar_t
 		%idefine NASMX_TEXT(x) __utf16__(x)
 	%else
-		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,win64
-	NASMX_DEFINE UNDERSCORE
-	typedef word, wchar_t
+	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x2423
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0500
+	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    4
+	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  4
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS__ 'RCXRDXR8 R9 '
+	NASMX_DECLSPEC SYSTYPE, WINDOWS
+	NASMX_DECLSPEC CALLCONV, FASTCALL, DEFAULT
+	%idefine long_t long32_t
+	%idefine ulong_t ulong32_t
+	%idefine wchar_t word
 	%ifdef UNICODE
-		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TCHAR wchar_t
 		%idefine NASMX_TEXT(x) __utf16__(x)
 	%else
-		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
 %else
-	NASMX_DEFINE UNDERSCORE
-	NASMX_DEFINE CDECL_UNDERSCORE
-	typedef dword, wchar_t
+	%define __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
+	%define __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
+	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
+	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
+	NASMX_DECLSPEC SYSTYPE, LINUX
+	NASMX_DECLSPEC CALLCONV, CDECL, DEFAULT
+	%if sizeof(size_t) == 32
+		%idefine long_t long32_t
+		%idefine ulong_t ulong32_t
+	%else
+		%idefine long_t long64_t
+		%idefine ulong_t ulong64_t
+	%endif
+	%idefine wchar_t dword
 	%ifdef UNICODE
-		%idefine NASMX_CHAR wchar_t
+		%idefine NASMX_TCHAR wchar_t
 		%idefine NASMX_TEXT(x) __utf32__(x)
 	%else
-		%idefine NASMX_CHAR char_t
+		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
 %endif
+
 
 ;//////////////////////////////////////////////////////////////
 ;//
@@ -419,11 +825,11 @@ typedef dword, utf32_t
 
 	%assign %%__amt (%%__argsize * %%__qty)
 
-	%xdefine %{$__nx_name}.%{1}_size %%__amt
-	%xdefine %{$__nx_name}.%{1}_type %{2}_type
-	%xdefine %{$__nx_name}.%{1}_reserve %{2}_reserve
-	%xdefine %{$__nx_name}.%{1}_storage %{2}_storage
-	%{$__nx_name}.%{1} equ %{$__nx_size}
+	%xdefine %[%{$__nx_name}.%{1}]_size %%__amt
+	%xdefine %[%{$__nx_name}.%{1}]_type %[%{2}]_type
+	%xdefine %[%{$__nx_name}.%{1}]_reserve %[%{2}]_reserve
+	%xdefine %[%{$__nx_name}.%{1}]_storage %[%{2}]_storage
+	%[%{$__nx_name}.%{1}] equ %[%{$__nx_size}]
 
 	%ifctx __NX_CTX_UNION
 		;// update current union size
@@ -504,6 +910,7 @@ typedef dword, utf32_t
 			%endif
 		%endif
 		%push  %3
+		%xdefine %$__nx_istrucstart %{$$__nx_istrucstart}
 		%xdefine %$__nx_name %%__tname
 	%endif
 	%define %$__nx_isnamed %%__is_named
@@ -533,386 +940,1055 @@ typedef dword, utf32_t
 
 %idefine NASMX_IENDUNION NASMX_IENDSTRUC
 
-%imacro IMPORT 1-2.nolist
-;	%warning 'DEBUG MACRO ENTRY(import):' %0 %1 %2
-	%ifndef __imp_defined_%1
-		%if %0 = 1
-			%ifdef __NASMX_CDECL_UNDERSCORE__
-				%define __cdecl_defined_%1 _%1
-				%define __imp_defined_%1 _%1
-			%else
-				%define __cdecl_defined_%1 %1
-				%define __imp_defined_%1 %1
-			%endif
+;//////////////////////////////////////////////////////////////
+;// MACRO nx_strtok
+;//
+;// Purpose
+;//    To parse a string and return delimited tokens
+;//    Functionality is similar to the C strtok function
+;//
+;// usage:                        ; After call:
+;//    nx_strtok two tokens, ' '  ; %$__nx_token = two   , %$__nx_token_len = 3
+;//    nx_strtok NULL, ' :?;'     ; %$__nx_token = tokens, %$__nx_token_len = 6
+;//    nx_strtok NULL, ' :?;'     ; %$__nx_token = ''    , %$__nx_token_len = 0
+;//
+;// notes:
+;//    The return value is stored on the context stack as
+;//    %$__nx_token thus it must only be called within a valid context.
+;;//   The length is also returned as %$__nx_token_len.  Check this value
+;//    for 0 after call this macro before processing the return value.
+;//
+;//    Call more than once to get the next token in the sequence, if any.
+;//    This function must be called at least once with a valid string
+;//    or token to parse before passing in NULL (0) in subsequent calls.
+;//
+;//    Unfortunately, a side effect of using macros is that a comma which
+;//    appears in a token actually causes the single token to split into 2
+;//    tokens making it impossible to use this macro like:
+;//         %define mytoken $32,000
+;//         nx_strtok mytoken, ','
+%imacro nx_strtok 2.nolist
+	%ifnum %1
+		%assign %%__nx_null %1
+		%if %%__nx_null == 0
+			%define %%__arg_str %$__nxtok_next
+			%assign %%__arg_len %$__nxtok_len
 		%else
-			%ifdef __NASMX_UNDERSCORE__
-				%define __imp_defined_%1 _%1@%2
-			%else
-				%define __imp_defined_%1 %1@%2
-			%endif
+			%defstr %%__arg_str %1
+			%strlen %%__arg_len %%__arg_str
 		%endif
 	%else
-		%error Import symbol %1 has already been defined
+		%ifstr %1
+			%define %%__arg_str %1
+		%else
+			%defstr %%__arg_str %1
+		%endif
+		%strlen %%__arg_len %%__arg_str
 	%endif
-;	%warning 'DEBUG MACRO EXIT(import):' %0 %1 %2
+
+	%if %%__arg_len == 0
+		%define %$__nxtok_next ''
+		%assign %$__nxtok_len 0
+		%define %$__nx_token ''
+		%assign %$__nx_token_len 0
+	%else
+		%ifstr %2
+			%define %%__sep_str %2
+		%else
+			%defstr %%__sep_str %2
+		%endif
+		%strlen %%__sep_len %%__sep_str
+
+		%assign %$__nx_token_len 0
+		%assign %%__arg_idx 1
+		%rep %%__arg_len
+			%substr %%__arg_chr %%__arg_str %%__arg_idx
+			%assign %%__sep_idx 1
+			%rep %%__sep_len
+				%substr %%__sep_chr %%__sep_str %%__sep_idx
+				%ifidn %%__arg_chr, %%__sep_chr
+					%assign %$__nx_token_len %%__arg_idx-1
+					%exitrep
+				%else
+					%assign %%__sep_idx 1+%%__sep_idx
+				%endif
+			%endrep
+			%if %$__nx_token_len != 0
+				%exitrep
+			%else
+				%assign %%__arg_idx 1+%%__arg_idx
+			%endif
+		%endrep
+		%if %$__nx_token_len == 0
+			%deftok %$__nx_token %%__arg_str
+			%assign %$__nx_token_len %%__arg_len
+			%define %$__nxtok_next ''
+			%assign %$__nxtok_len 0
+		%else
+			%substr %%__tokstr %%__arg_str 1,%$__nx_token_len
+			%deftok %$__nx_token %%__tokstr
+			%if %$__nx_token_len < %%__arg_len
+				%rep %%__arg_len - %$__nx_token_len
+					%substr %%__arg_chr %%__arg_str %%__arg_idx
+					%assign %%__nx_found 0
+					%assign %%__sep_idx 1
+					%rep %%__sep_len
+						%substr %%__sep_chr %%__sep_str %%__sep_idx
+						%ifidn %%__arg_chr, %%__sep_chr
+							%assign %%__nx_found 1
+							%exitrep
+						%else
+							%assign %%__sep_idx 1+%%__sep_idx
+						%endif
+					%endrep
+					%if %%__nx_found == 0
+						%exitrep
+					%else
+						%assign %%__arg_idx 1+%%__arg_idx
+					%endif
+				%endrep
+				%if %%__arg_idx <= %%__arg_len
+					%assign %$__nxtok_len %%__arg_len-%%__arg_idx+1
+					%substr %$__nxtok_next %%__arg_str %%__arg_idx,%$__nxtok_len
+				%else
+					%define %$__nxtok_next ''
+					%assign %$__nxtok_len 0
+				%endif
+			%else
+				%define %$__nxtok_next ''
+				%assign %$__nxtok_len 0
+			%endif
+		%endif
+	%endif
+
+%endmacro
+
+
+;// small helper macro used to parse __nxsig@@ defines
+;// note that a context is required.
+%macro nx_parse_tokens 1-100.nolist
+	%assign %$__nx_parse_count %0;
+	%define %$__nx_token_1 %1
+	%define %$__nx_token_2 %2
+	%define %$__nx_token_3 %3
+	%ifdef __nx_token_0
+		%undef __nx_token_0
+	%endif
+	%xdefine __nx_token_0 %0
+	%assign %%__ctr 1
+	%rep %0
+		%ifdef __nx_token_%[%%__ctr]
+			%undef __nx_token_%[%%__ctr]
+		%endif
+		%xdefine __nx_token_%[%%__ctr] %1
+		%assign %%__ctr 1 + %%__ctr
+		%rotate 1
+	%endrep
+%endmacro
+
+
+;//////////////////////////////////////////////////////////////
+;// MACRO IMPORT
+;//
+;// Purpose
+;//    To define the signature and required syntax for
+;//    an external function
+;//
+;// usage:
+;//    IMPORT printf
+;//    IMPORT GetSystemWindowsDirectoryA, 8
+;//    IMPORT cdecl, myfunc, ptrdiff_t, dword, float_t
+;//
+%imacro IMPORT 1-100.nolist
+	%push __NX_CTX_IMPORT__
+
+	%assign %$__bytecount 0
+	%ifndef __NASMX_DECLSPEC_CALLCONV_%[%1]__
+		%assign %$__callconv __NASMX_DECLSPEC_CALLCONV_DEFAULT__
+		%define %$__proc %1
+		%if %0 > 1
+			%ifnum %2
+				%ifidn __OUTPUT_FORMAT__,win32
+					%assign %$__bytecount %2
+				%endif
+				%assign %$__repargs 0
+			%else
+				%assign %$__repargs %0-1
+			%endif
+		%else
+			%assign %%__cc_enum nx_declspec_cc_enum(__NASMX_DECLSPEC_CALLCONV_DEFAULT__)
+			%if %%__cc_enum == __NASMX_DECLSPEC_CC_ENUM_STDCALL__
+				;// assert: no bytecount in import implies cdecl for win32
+				%assign %$__callconv __NASMX_DECLSPEC_CALLCONV_CDECL__
+			%endif
+			%assign %$__repargs 0
+		%endif
+	%else
+		%if %0 < 2
+			%fatal usage: IMPORT [CALLCONV, ] FUNCNAME [,ARG1,ARG2,...]
+		%endif
+		%assign %$__callconv __NASMX_DECLSPEC_CALLCONV_%[%1]__
+		%define %$__proc %2
+		%assign %$__repargs %0-2
+	%endif
+
+	%ifdef __nx_import_param_list
+		%undef __nx_import_param_list
+	%endif
+	%assign %%__cc_enum nx_declspec_cc_enum(%[%$__callconv])
+	%if %%__cc_enum != __NASMX_DECLSPEC_CC_ENUM_NAKED__
+		;// assert: calc byte count for sig check
+		%rep %$__repargs
+			%rotate -1
+			%ifnum %1
+				%assign %$__bytecount %1
+				%exitrep
+			%else
+				nx_strtok %1, ' '
+				%assign %%__bytecnt sizeof(%$__nx_token)
+				%if %%__bytecnt < sizeof(size_t)
+					%assign %%__bytecnt sizeof(size_t)
+				%endif
+				%assign %$__bytecount %$__bytecount + %%__bytecnt
+				%xdefine __nx_import_argtype %$__nx_token %+ _type
+				%ifndef __nx_import_param_list
+					%defstr __nx_import_param_list __nx_import_argtype
+				%else
+					%defstr __nx_import_argstr __nx_import_argtype
+					%strcat __nx_import_param_list __nx_import_argstr,',',__nx_import_param_list
+					%undef __nx_import_argstr
+				%endif
+				%undef __nx_import_argtype
+			%endif
+		%endrep
+	%endif
+	nx_callconv_decorate %$__callconv,%$__proc,%$__bytecount
+	%ifdef __nxsig@@%[%$__nxtok_decorated_name]
+		%warning redefining import symbol %$__proc as %[%$__nxtok_decorated_name]
+	%endif
+
+	%ifndef __nx_import_param_list
+		%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__callconv],%[%$__bytecount]
+	%else
+		%deftok __nx_import_params __nx_import_param_list
+		%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__callconv],%[%$__bytecount],__nx_import_params
+		%undef __nx_import_params
+		%undef __nx_import_param_list
+	%endif
+	%ifnidn %$__proc,%$__nxtok_decorated_name
+		%xdefine %[%$__proc] %[%$__nxtok_decorated_name]
+	%endif
+
+	%pop
+%endmacro
+
+
+;//////////////////////////////////////////////////////////////
+;// MACRO PROTO
+;//
+;// usage:
+;//    PROTO [CALLCONV,] FUNCNAME [,ARGS...]
+;//
+;// examples:
+;// Using default calling convention:
+;//    PROTO WndProc, ptrdiff_t, dword, size_t, size_t
+;// Specifying a calling convention
+;//    PROTO cdecl, myfunc, ptrdiff_t, dword, float_t
+;//
+;// notes:
+;//    This macro must be used when defining procedures
+;//    that will be callable from other modules via
+;//    the import macro as the function name is made
+;//    global here.
+;//
+%imacro PROTO 1-100.nolist
+	%push __NX_CTX_PROTO__
+	%ifndef __NASMX_DECLSPEC_CALLCONV_%[%1]__
+		%assign %$__callconv __NASMX_DECLSPEC_CALLCONV_DEFAULT__
+		%define %$__proc %1
+		%assign %$__repcnt %0-1
+	%else
+		%if %0 < 2
+			%fatal usage: PROTO [CALLCONV, ] FUNCNAME [,ARG1,ARG2,...]
+		%endif
+		%assign %$__callconv __NASMX_DECLSPEC_CALLCONV_%[%1]__
+		%define %$__proc %2
+		%assign %$__repcnt %0-2
+	%endif
+	%ifdef __nx_proto_param_list
+		%undef __nx_proto_param_list
+	%endif
+	%assign %$__bytecount 0
+	%assign %%__cc_enum nx_declspec_cc_enum(%$__callconv)
+	%if %%__cc_enum != __NASMX_DECLSPEC_CC_ENUM_NAKED__
+		;// assert: calc byte count for sig check during invoke 
+		%rep %$__repcnt
+			%rotate -1
+			%ifnum %1
+				%assign %$__bytecount %1
+				%exitrep
+			%else
+				nx_strtok %1, ' '
+				%assign %%__bytes %[%$__nx_token]_size
+				%if %%__bytes < sizeof(size_t)
+					%assign %%__bytes sizeof(size_t)
+				%endif
+				%assign %$__bytecount %$__bytecount + %%__bytes
+				%xdefine __nx_proto_argtype %$__nx_token %+ _type
+				%ifndef __nx_proto_param_list
+					%defstr __nx_proto_param_list __nx_proto_argtype
+				%else
+					%defstr __nx_proto_argstr __nx_proto_argtype
+					%strcat __nx_proto_param_list __nx_proto_argstr,',',__nx_proto_param_list
+					%undef __nx_proto_argstr
+				%endif
+				%undef __nx_proto_argtype
+			%endif
+		%endrep
+	%endif
+
+	%ifndef %[%$__proc]
+		%ifdef __nxsig@@%[%$__proc]
+			%fatal global symbol %[%$__proc] already defined
+		%endif
+		nx_callconv_decorate %$__callconv,%$__proc,%$__bytecount
+		%ifndef __nx_proto_param_list
+			%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__callconv],%[%$__bytecount]
+		%else
+			%deftok __nx_proto_params __nx_proto_param_list
+			%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__callconv],%[%$__bytecount],__nx_proto_params
+			%undef __nx_proto_params
+			%undef __nx_proto_param_list
+		%endif
+		%ifnidn %$__proc,%$__nxtok_decorated_name
+			%xdefine %[%$__proc] %[%$__nxtok_decorated_name]
+		%endif
+	%endif
+
+	%ifndef __nxsig_declared_%[%$__proc]
+		global %[%$__proc]
+		%xdefine __nxsig_declared_%[%$__proc] global
+	%endif
+	
+	%pop
+%endmacro
+
+
+;//////////////////////////////////////////////////////////////
+;// MACRO ENTRY
+;//
+;// usage:
+;//    ENTRY progname
+;//
+;// examples:
+;//    ENTRY Demo1
+;//
+;// notes:
+;//    program entry is assumed to be cdecl unless system default
+;//    callconv specification is pascal.
+;//    When building on Win64 or using pascal callconv you must
+;//    change the makefile by removing the leading underscore
+;//    from the linker /entry line
+%imacro ENTRY 1.nolist
+	%assign %%__cc_enum nx_declspec_cc_enum(__NASMX_DECLSPEC_CALLCONV_DEFAULT__)
+	%if %%__cc_enum > __NASMX_DECLSPEC_CC_ENUM_PASCAL__
+		%assign %%__cc_prefix nx_declspec_cc_prefix(__NASMX_DECLSPEC_CALLCONV_DEFAULT__)
+		%if %%__cc_prefix > 0
+			%xdefine %[%1] _main
+			%xdefine __nxsig@@_main  __NASMX_DECLSPEC_CALLCONV_CDECL__,0
+		%else
+			%xdefine %[%1] main
+			%xdefine __nxsig@@main  __NASMX_DECLSPEC_CALLCONV_DEFAULT__,0
+		%endif
+	%else
+		%xdefine %[%1] main
+		%xdefine __nxsig@@main  __NASMX_DECLSPEC_CALLCONV_DEFAULT__,0
+	%endif
+	%xdefine __nxsig_declared_%[%1] global
+	global %[%1]
 %endmacro
 
 
 %imacro INVOKE 1-100.nolist
-;	%warning 'DEBUG MACRO ENTRY(invoke):' %0 %1 %2
-%push invoke
-	%assign %$args 0
-	%assign %$arg_rot -1
-
-%ifdef __imp_defined_%1
-	%ifndef __imp_declared_%1
-		EXTERN	__imp_defined_%1
-		%define __imp_declared_%1 %1
+	%ifndef NASMX_ENDPROC
+		;// assert: we cannot check for context in case we are in a switch
+		;// so we use nasmx_endproc
+		%fatal 'invoke must be contained within proc/endproc directives.'
 	%endif
-	%define	__cur_import__
-	%define	_proc __imp_defined_%1
-%else
-		%define _proc %1
-%endif
+	%ifndef __NX_LOCALS_PRESENT__
+		;// require locals directive to ensure stack
+		;// frame initialized properly prior to invoke.
+		%fatal 'missing locals directive'
+	%endif
 
-%ifidn	__BITS__,64
-	%ifidn	 __OUTPUT_FORMAT__,win64
-		%ifdef __cur_import__
-			%assign %$arg_rot 1
+	%push _NX_CTX_INVOKE
+	%assign %$args 0
+
+	%assign %$__nx_bytecount (( __BITS__ / 8 ) * ( %0 - 1 ))
+	%ifdef __nxsig@@%[%1]
+		nx_parse_tokens __nxsig@@%[%1]
+		%assign %$__nx_callconv %$__nx_token_1
+		%assign %%__bytecount %$__nx_token_2
+		%if %%__bytecount > 0
+			;// assert: only perform sig check on defined funcs with 1 or more
+			;// params due to current import scheme and cdecl varargs.
+			;// TODO: revisit this code when import includes are updated
+			%if %%__bytecount != %$__nx_bytecount
+				%error 'parameter count mismatch'
+			%endif
 		%endif
 
-		push rsp
-		push QWORD[rsp]
-		and spl,BYTE 0xF0
+		%ifndef __nxsig_declared_%[%1]
+			%ifndef __nxsig_defined_%[%1]
+				EXTERN	%[%1]
+				%xdefine __nxsig_declared_%[%1] extern
+			%endif
+		%endif
+	%else
+		%warning %1 declspec unknown (PROTO/IMPORT missing), assuming __declspec(DEFAULT)
+		%assign %$__nx_callconv __NASMX_DECLSPEC_CALLCONV_DEFAULT__
+	%endif
+	%assign %%__nx_argrotate nx_declspec_cc_argrotate(%$__nx_callconv)
+	%if %%__nx_argrotate > 0
+		%assign %$__nx_argrotate 1
+	%else
+		%assign %$__nx_argrotate -1
+	%endif
+	%assign %$__nx_retpopsargs nx_declspec_cc_retpopsargs(%$__nx_callconv)
+	%assign %%__cc_enum nx_declspec_cc_enum(%$__nx_callconv)
+	%xdefine %$__nx_proc %1
 
-		%define %$arg_cur 0
-		%define %$arg_typ 0
+	%if %%__cc_enum == __NASMX_DECLSPEC_CALLCONV_FASTCALL__
+		%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+			%if %$$__nx_stack_adjust == 0
+				%if %$__nx_bytecount > 0
+					sub __SP, %$__nx_bytecount
+				%endif
+			%endif
 
-		%rep %0-1
-			%rotate %$arg_rot
-			%ifdef __cur_import__
-				%if %$args < 32
-					%if   %$args == 0
-						%define %$arg_cur cx
-						%define %$arg_typ 1
-					%elif %$args == 8
-						%define %$arg_cur dx
-						%define %$arg_typ 1
-					%elif %$args == 16
-						%define %$arg_cur r8
-						%define %$arg_typ 2
+			%assign %$args 0
+
+			%rep %0-1
+				%rotate 1
+				%if %$args < __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__ * sizeof(size_t)
+					%if __BITS__ == 64
+						%if   %$args == 0
+							%define %$arg_cur rcx
+						%elif %$args == 8
+							%define %$arg_cur rdx
+						%elif %$args == 16
+							%define %$arg_cur r8
+						%else
+							%define %$arg_cur r9
+						%endif
 					%else
-						%define %$arg_cur r9
-						%define %$arg_typ 2
+						%if   %$args == 0
+							%define %$arg_cur ecx
+						%elif %$args == 4
+							%define %$arg_cur edx
+						%endif
 					%endif
 
 					%ifnum %1
 						%if %1 == -1
-							%if %$arg_typ == 1
-								or r %+ %$arg_cur, %1
-							%else
-								or %$arg_cur, %1
-							%endif
+							or %$arg_cur, %1
 						%elif %1 == 0
-							%if %$arg_typ == 1
-								xor e %+ %$arg_cur,e %+ %$arg_cur
-							%else
-								xor %$arg_cur %+ d, %$arg_cur %+ d
-							%endif
+							xor %$arg_cur, %$arg_cur
 						%else
-							%if %1 > 2^32
-								%if %$arg_typ == 1
-									mov r %+ %$arg_cur, %1
-								%else
-									mov %$arg_cur, %1 
-								%endif
-							%else
-								%if %$arg_typ == 1
-									mov e %+ %$arg_cur, %1
-								%else
-									mov %$arg_cur %+ d, %1
-								%endif
-							%endif
+							mov %$arg_cur, %1
 						%endif
 					%else
-	        			%ifstr %1
+						%ifstr %1
 							jmp %%endstr_%$args
 							%%str_%$args: db %1, 0
 							%%endstr_%$args:
-							%if %$arg_typ == 1
-								lea r %+ %$arg_cur,[rel %%str_%$args]
-							%else
-								lea %$arg_cur,[rel %%str_%$args]
-							%endif
+							lea %$arg_cur,[rel %%str_%$args]
 						%else
 							%ifid %1
-								%if %$arg_typ == 1
-									lea r %+ %$arg_cur,[rel %1]
-								%else
-									lea %$arg_cur,[rel %1]
-								%endif
+								lea %$arg_cur,[rel %1]
 							%else
-								%if %$arg_typ == 1
-									mov r %+ %$arg_cur,%1
-								%else
-									mov %$arg_cur,%1
-								%endif
+								mov %$arg_cur,%1
 							%endif
 						%endif
 					%endif
-		    	%else
+				%else
 					%ifstr %1
 						jmp %%endstr_%$args
 						%%str_%$args: db %1, 0
 						%%endstr_%$args:
-						push QWORD %%str_%$args
+						mov [__SP + %$args], size_t %%str_%$args
 					%else
-						push QWORD %1
+						mov __AX, %1
+						mov [__SP + %$args], __AX
 					%endif
 				%endif
-			%else
-				%ifstr %1
-					jmp %%endstr_%$args
-					%%str_%$args: db %1, 0
-					%%endstr_%$args:
-					push QWORD %%str_%$args
-				%else
-					push QWORD %1
-				%endif
-			%endif
-			%assign %$args %$args+8
-		%endrep
-		sub	rsp,0x20
-		call	_proc
-		%if %$args <> 0
-			%rotate %$arg_rot
-			%ifdef %1_defined
-				add	rsp, %$args
-			%else
-				%ifdef __cur_import__
-					%if %$args > 32
-						add	rsp,(0x28 + (%$args - 32))
-					%else
-						add	rsp,0x28
-					%endif
-				%else
-					add	rsp,(0x28 + %$args)
-				%endif
-			%endif
-		%else
-			%ifndef %1_defined
-				add	rsp,0x28
-			%endif
-		%endif
-		pop	rsp
-	%else
-		%error "Unsupported 64-bit INVOKE"
-	%endif
-%else
-	%rep %0-1
-		%rotate %$arg_rot
-		%ifstr	%1
-			jmp	%%endstr_%$args
-			%%str_%$args:	db %1, 0
-			%%endstr_%$args:
-			push	dword %%str_%$args
-		%else
-			push	dword %1
-		%endif
-		%assign %$args %$args+4
-	%endrep
-	call	_proc
-	%if %$args <> 0
-		%rotate %$arg_rot
-		%ifdef __cdecl_defined_%1
-			add	esp, %$args
-		%endif
-	%endif
-%endif
-%ifdef __cur_import__
-	%undef __cur_import__
-%endif
-%undef	_proc
-%pop
-;%warning 'DEBUG MACRO EXIT(invoke):' %0 %1 %2
-%endmacro
-
-
-%imacro PROC 1-100.nolist
-;	%warning 'DEBUG MACRO ENTRY(PROC):' %0 %1 %2
-%push proc
-	%ifidn __BITS__,64
-		%assign %$arg 0x30
-	%else
-		%assign %$arg 8
-	%endif
-	%ifdef __entry_%1
-		%ifndef __PROCEDURE__
-			%ifdef __NASMX_UNDERSCORE__
-				global	_main
-				_main:
-			%else
-				global main
-				main:
-			%endif
-			%define __PROCEDURE__ _end_%1
-			%define _entry_
-			%define __leave_present__
-		%else
-			%error "missing endproc directive."
-		%endif
-	%else
-		%ifndef __PROCEDURE__
-			%1:
-			%ifidn __BITS__,64
-				push rbp
-				mov  rbp, rsp
-			%else
-				push ebp
-				mov  ebp, esp
-			%endif
-			%define __PROCEDURE__ _end_%1
-			%rep %0-1
-				%rotate 1
-				%1 argd
+				%assign %$args %$args + sizeof(size_t)
 			%endrep
+			call	%$__nx_proc
+			%if %$__nx_bytecount > 0
+				%if %$$__nx_stack_adjust == 0
+					%if %$__nx_retpopsargs == 0
+						add	__SP, %$__nx_bytecount
+					%endif
+				%endif
+			%endif
 		%else
-			%error "missing endproc directive."
+			%error 'currently unsupported 64-bit INVOKE'
+		%endif
+	%else
+		%rep %0-1
+			%rotate %$__nx_argrotate
+			%ifstr	%1
+				jmp	%%endstr_%$args
+				%%str_%$args: declare(NASMX_TCHAR) NASMX_TEXT(%{1}), 0
+				%%endstr_%$args:
+				push	size_t %%str_%$args
+			%elifnum %1
+				push size_t %1
+			%else
+				;// check for "casts"
+;				nx_strtok %1,' '
+;				%defstr %%__arg_str %1
+;				%strlen %%__arg_len %%__arg_str
+;				%defstr %%__tok_str %$__nx_token
+;				%strlen %%__tok_len %%__tok_str
+;				%assign %%__bytes sizeof(size_t)
+;				%if %%__arg_len != %%__tok_len
+;					%ifdef %[%$__nx_token]_size
+;						%assign %%__bytes %[%$__nx_token]_size
+;						%if %%__bytes > sizeof(size_t)
+;							%error invalid size: %1
+;						%endif
+;						nx_strtok 0,';'
+;					%endif
+;				%endif
+;				%if %%__bytes < sizeof(size_t)
+;					push size_t %$__nx_token
+;				%else
+;					;// assert: done this way to account for floats/doubles
+;					push nx_token_from_size(%%__bytes) %$__nx_token
+;				%endif
+				push size_t %1
+			%endif
+			%assign %$args %$args + __BITS__ / 8
+		%endrep
+		call	%$__nx_proc
+		%if %$args > 0
+			%if %$__nx_retpopsargs == 0
+				add	__SP, %$args
+			%endif
 		%endif
 	%endif
-;	%warning 'DEBUG MACRO EXIT(PROC):' %0 %1 %2
+	%pop
 %endmacro
 
 
-%imacro LOCALS 0.nolist
-	%assign %$locnt 0
-%endmacro
-
-
-%imacro LOCAL 1-2.nolist
-	%ifidni %2, qword
-		%assign %$locnt 8+%$locnt
-	%elifidni %2, dword
-		%assign %$locnt 4+%$locnt
-	%elifidni %2, word
-		%assign %$locnt 2+%$locnt
-	%elifidni %2, byte
-		%assign %$locnt 1+%$locnt
+;//////////////////////////////////////////////////////////////
+;// MACRO PROC
+;//
+;// usage:
+;//    PROC [CALLCONV,] funcname [ arg, arg, ...]
+;//
+;// examples:
+;//    Using default calling convention:
+;//       proc funcname, arg1, arg2
+;//    Specifying calling convention:
+;//       proc cdecl, fprintf
+;//
+;// notes:
+;//   The calling convention, if specified, must match either
+;//   the prototype or import specification.
+;//   Also remember that, when invoked during a fastcall, the
+;//   register parameters are not automatically spilled, only
+;//   the space assigned on the stack is allocated.
+;//   This allows the user to determine whether or not to use
+;//   the spill area if needed.
+;//
+%imacro PROC 1-100.nolist
+	%ifdef NASMX_ENDPROC
+		%fatal 'missing endproc directive.'
 	%endif
-	%1 EQU %$locnt
+	%push __NX_CTX_PROC__
+	%assign %$__nx_intargs 0
+	%assign %$__nx_floatargs 0
+	%assign %$__nx_uses_count 0
+	%assign %$__nx_argcount 0
+	%assign %$__nx_bytecount 0
+	%assign %$__nx_protobytecount -1
+	%ifndef __NASMX_DECLSPEC_CALLCONV_%[%1]__
+		;// check for prototyped func
+		%ifdef __nxsig@@%[%1]
+			nx_parse_tokens __nxsig@@%[%1]
+			%assign %$__nx_callconv %$__nx_token_1
+			%assign %$__nx_protobytecount %$__nx_token_2
+		%else
+			%assign %$__nx_callconv __NASMX_DECLSPEC_CALLCONV_DEFAULT__
+		%endif
+		%define %$__nx_proc %1
+		%assign %$__nx_repcnt %0-1
+	%else
+		%if %0 < 2
+			%fatal 'usage: PROC [CALLCONV, ] FUNCNAME [,ARG1,ARG2,...]'
+		%endif
+		%assign %$__nx_callconv __NASMX_DECLSPEC_CALLCONV_%[%1]__
+		%define %$__nx_proc %2
+		%assign %$__nx_repcnt %0-2
+		;// check for prototyped func
+		%ifdef __nxsig@@%[%2]
+			nx_parse_tokens __nxsig@@%[%2]
+			%if %$__nx_parse_count != 2
+				%fatal 'internal error'
+			%endif
+			%if %$__nx_callconv != %$__nx_token_1
+				%fatal calling convention mismatch for %$__nx_proc
+			%endif
+			%assign %$__nx_protobytecount %$__nx_token_2
+		%endif
+	%endif
+
+	%assign %$__nx_cc_enum nx_declspec_cc_enum(%[%$__nx_callconv])
+	%assign %$__nx_locnt 0
+	%assign %$__nx_arg_bias 0
+	%ifidn __BITS__,64
+		%assign %$__nx_argv 16
+		%ifnidni __OUTPUT_FORMAT__,win64
+			%if %$__nx_cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
+				;// assert: create Linux spill area based on param count.
+				;// This may result in slightly wasted stack space but is
+				;// required to avoid alignment issues for params that
+				;//  exceed allocated registers.
+				%assign %$__nx_arg_bias 8 * %$__nx_repcnt
+			%endif
+		%endif
+	%else
+		%assign %$__nx_argv 8
+	%endif
+
+	%assign %$__nx_bytecount %$__nx_repcnt * sizeof(size_t)
+	%ifndef %[%$__nx_proc]
+		%ifndef __nxsig@@%[%$__nx_proc]
+			nx_callconv_decorate %$__nx_callconv,%$__nx_proc,%$__nx_bytecount
+			%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__nx_callconv],%[%$__nx_bytecount]
+			%ifnidn %$__nx_proc,%$__nxtok_decorated_name
+				%xdefine %[%$__nx_proc] %[%$__nxtok_decorated_name]
+			%endif
+		%endif
+	%endif
+	%xdefine __nxsig_defined_%[%$__nx_proc]
+	%[%$__nx_proc]:
+
+	;// The following define can/should be used by the user to properly
+	;// return from a function ( ie: jmp NASMX_ENDPROC ) or via use of
+	;// the RETURN macro
+	%xdefine NASMX_ENDPROC __nx_endproc@@%[%$__nx_proc]
+
+	%if %$__nx_cc_enum != __NASMX_DECLSPEC_CC_ENUM_NAKED__
+		;// assert: calc byte count for sig check and argv() offsets
+		;// we must reverse arg push logic to get correct results
+		%assign %$__nx_bytecount 0
+		%assign %$__cc_argrotate nx_declspec_cc_argrotate(%[%$__nx_callconv])
+		%if %$__cc_argrotate != 0
+			%assign %$__nx_argrotate -1
+			%rotate -1
+		%else
+			%assign %$__nx_argrotate 1
+			%rep %0-%$__nx_repcnt
+				%rotate 1
+			%endrep
+		%endif
+		%rep %$__nx_repcnt
+			nx_strtok %1, ' '
+			%assign %%__type typeof(%[%$__nx_token])
+			%assign %%__bytes %[%$__nx_token]_size
+			%if %%__bytes < sizeof(size_t)
+				%assign %%__bytes sizeof(size_t)
+			%endif
+			%assign %$__nx_bytecount %$__nx_bytecount + %%__bytes
+			nx_strtok 0, ' '
+			%ifidn __BITS__,64
+				%if %%__type == 0
+					%assign %$__nx_intargs 1 + %$__nx_intargs
+				%else
+					%assign %$__nx_floatargs 1 + %$__nx_floatargs
+				%endif
+				%if %$__nx_cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
+					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+						;// assert: Windows 64-bit register spill area
+						;// located above return address, thus bias
+						;// not affected
+						.%[%$__nx_token] EQU %[%$__nx_argv]
+						%assign %$__nx_argv 8 + %$__nx_argv
+					%else
+						;// assert: Linux 64-bit register spill area
+						;// located below frame pointer thus we must
+						;// account for bias of args from frame while
+						;// accounting for param types supplied
+						%if %%__type == 0
+							%if %$__nx_intargs > __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
+								.%[%$__nx_token] EQU %[%$__nx_argv]
+								%assign %$__nx_argv 8 + %$__nx_argv
+							%else
+								.%[%$__nx_token] EQU %[%$__nx_locnt] - %[%$__nx_arg_bias]
+								%assign %$__nx_locnt 8 + %$__nx_locnt
+							%endif
+						%else
+							%if %$__nx_floatargs > __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__
+								.%[%$__nx_token] EQU %[%$__nx_argv]
+								%assign %$__nx_argv 8 + %$__nx_argv
+							%else
+								.%[%$__nx_token] EQU %[%$__nx_locnt] - %[%$__nx_arg_bias]
+								%assign %$__nx_locnt 8 + %$__nx_locnt
+							%endif
+						%endif
+					%endif
+				%else
+					.%[%$__nx_token] EQU %[%$__nx_argv]
+					%assign %$__nx_argv %$__nx_argv + %%__bytes
+				%endif
+			%else
+				.%[%$__nx_token] EQU %[%$__nx_argv]
+				%assign %$__nx_argv %$__nx_argv + %%__bytes
+			%endif
+			%rotate %$__nx_argrotate
+		%endrep
+
+		%if %$__nx_protobytecount >= 0
+			%if %$__nx_bytecount != %$__nx_protobytecount
+				;// unfortunately we must check callconv for cdecl on win32
+				;// and fastcall on win64 as currently the import files do
+				;// not contain bytecounts to verify against.
+				;// TODO: When import files are updated in the future we can
+				;// revisit this code.
+				%ifidni __OUTPUT_FORMAT__,win32
+					%if %$__nx_cc_enum != __NASMX_DECLSPEC_CC_ENUM_CDECL__
+						%warning prototype arg mismatch for %$__nx_proc
+					%endif
+				%elifidni __OUTPUT_FORMAT__,win64
+					%if %$__nx_cc_enum != __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
+						%warning prototype arg mismatch for %$__nx_proc
+					%endif
+				%else
+					%warning prototype arg mismatch for %$__nx_proc
+				%endif
+			%endif
+		%endif
+
+		%if %$__nx_bytecount > 0
+			%define __NX_PROLOGUE_PRESENT__
+			push __BP
+			mov  __BP, __SP
+		%endif
+	%endif
 %endmacro
+
+
+;//////////////////////////////////////////////////////////////
+;// MACRO USES
+;//
+;// usage:
+;//    USES reg [,reg ,reg, ...]
+;//
+;// examples:
+;//    USES rbx, r15
+;//
+;// notes:
+;//    This macro can only be used within the proc prologue
+;//    Fatals are used rather than errors as this macro is
+;//    extremely critical to proper function definition and
+;//    stack alignment if used.
+;//
+%imacro USES 1-8.nolist
+	%ifndef NASMX_ENDPROC
+		%fatal 'missing proc directive.'
+	%endif
+	%ifnctx __NX_CTX_PROC__
+		%fatal 'current context unknown.'
+	%endif
+	%ifdef __NX_LOCALS_PRESENT__
+		%fatal 'uses directive must come before locals directive.'
+	%endif
+	%ifndef __NX_USES_PRESENT__
+		%define __NX_USES_PRESENT__
+	%endif
+	%ifndef __NX_PROLOGUE_PRESENT__
+		;// assert: at this point we have absolutely no way of knowing whether
+		;// the function will contain locals or not; thus, using this macro
+		;// forces our hand and requires us to set up the function prologue
+		%define __NX_PROLOGUE_PRESENT__
+		push __BP
+		mov  __BP, __SP
+	%endif
+	%assign %%__sys_size (sizeof(size_t) * 8)
+	%rep %0
+		%ifndef %[%1]_size
+			%fatal unknown register: %1
+		%endif
+		%assign %%__reg_size %[%1]_size
+		%if %%__reg_size < sizeof(size_t)
+			%fatal extended version of register %1 required for %%__sys_size bit mode
+		%elif %%__reg_size > sizeof(size_t)
+			%fatal %1 not available in %%__sys_size bit mode
+		%endif
+		%assign %$__nx_uses_count 1 + %$__nx_uses_count
+		%xdefine __nx_uses_reg_%[%$__nx_uses_count] %[%1]
+		;// assert: use mov rather than push to defer sub rsp,xxx
+		%ifidn __BITS__,64
+			mov  qword[rbp - (%$__nx_uses_count * 8 + %$__nx_arg_bias)], %[%1]
+		%else
+			mov  dword[ebp - %$__nx_uses_count * 4], %[%1]
+		%endif
+		%rotate 1
+	%endrep
+%endmacro
+
+
+;//////////////////////////////////////////////////////////////
+;// MACRO LOCALS
+;//
+;// usage:
+;//    locals [none | xxx]
+;// where
+;//    none - allows us to avoid using stackframe if user
+;//           writing a small leaf function or will handle
+;//           function prologue separately.  Also indicates
+;//           that endlocals directive not required.
+;//     xxx - number of additional bytes to subtract from
+;//           rsp in prologue definition.  One excellent use
+;//           of this capability is optimizing outer stack
+;//           frame for win64.
+;//
+;// notes:
+;//    This macro can only be used within the proc prologue
+;//    and must precede any assembly code. Invoke checks to
+;//    verify that this macro was called to ensure that the
+;//    prologue was initialized properly.
+;//
+%imacro LOCALS 0-8.nolist
+	%ifndef NASMX_ENDPROC
+		%error 'missing proc directive.'
+	%endif
+	%ifndef __NX_LOCALS_PRESENT__
+		%define __NX_LOCALS_PRESENT__
+	%endif
+	%assign %$__nx_locnt 0
+	%assign %$__nx_stack_adjust 0
+	%rep %0
+		%ifnum %1
+			%assign %$__nx_stack_adjust %1
+		%elifidni %1,none
+			%define __NX_LOCALS_NONE__
+		%else
+			%fatal unknown locals directive: %1
+		%endif
+		%rotate 1
+	%endrep
+	%ifdef __NX_LOCALS_NONE__
+		%ifidn __BITS__,64
+			%assign %%__adjust %$__nx_stack_adjust + %$__nx_arg_bias + %$__nx_uses_count * 8
+			%if %%__adjust > 0
+				%ifndef __NX_PROLOGUE_PRESENT__
+					%define __NX_PROLOGUE_PRESENT__
+					push rbp
+					mov  rbp, rsp
+				%endif
+				sub  rsp, %%__adjust
+			%endif
+		%else
+			%assign %%__adjust %$__nx_stack_adjust + %$__nx_uses_count * 4
+			%if %%__adjust > 0
+				%ifndef __NX_PROLOGUE_PRESENT__
+					%define __NX_PROLOGUE_PRESENT__
+					push ebp
+					mov  ebp, esp
+				%endif
+				sub  esp, %%__adjust
+			%endif
+		%endif
+	%endif
+%endmacro
+
+
+%imacro LOCAL 2-3.nolist 1
+	%ifndef __NX_LOCALS_PRESENT__
+		%error 'missing locals directive.'
+	%endif
+	%ifdef __NX_LOCALS_NONE__
+		%error 'conflicts with locals directive: none'
+	%endif
+	%ifndef %[%2]_size
+		%error %1 unknown size: %2
+	%endif
+	%assign %%__size %[%2]_size
+	%assign %$__nx_locnt %$__nx_locnt + %%__size * %3
+	%assign %%__size sizeof(size_t)
+	%assign %%__off (((%$__nx_locnt + %%__size) / %%__size) * %%__size)
+	%assign %%__tmp (%$__nx_locnt + %%__size)
+	%if (%%__off != %%__tmp)
+		%assign %$_nx_locnt %%__off
+	%endif
+	%ifidn __BITS__,64
+		.%[%1] EQU %$__nx_locnt + %$__nx_arg_bias + %$__nx_uses_count * 8
+	%else
+		.%[%1] EQU %$__nx_locnt + %$__nx_uses_count * 4
+	%endif
+%endmacro
+
 
 %imacro ENDLOCALS 0.nolist
-	%ifidn __BITS__,64
-		sub rsp, %$locnt
-	%else
-		sub esp, %$locnt
+	%ifndef __NX_LOCALS_PRESENT__
+		%error 'missing locals directive.'
 	%endif
-%endmacro
-
-
-%imacro ARGD 0-1.nolist
-	%ifdef __PROCEDURE__
-		%00 equ %$arg
-		%if %0 = 1
-			%assign %$arg %1+%$arg
+	%ifndef __NX_LOCALS_NONE__
+		%ifidn __BITS__,64
+			%assign %%__adjust %$__nx_locnt + %$__nx_arg_bias + %$__nx_stack_adjust + %$__nx_uses_count * 8
+			%if %%__adjust > 0
+				%ifndef __NX_PROLOGUE_PRESENT__
+					%define __NX_PROLOGUE_PRESENT__
+					push rbp
+					mov  rbp, rsp
+				%endif
+				sub  rsp, %%__adjust
+			%endif
 		%else
-			%ifidn __BITS__,64
-				%assign %$arg 8+%$arg
-			%else
-				%assign %$arg 4+%$arg
+			%assign %%__adjust %$__nx_locnt + %$__nx_stack_adjust + %$__nx_uses_count * 4
+			%if %%__adjust > 0
+				%ifndef __NX_PROLOGUE_PRESENT__
+					%define __NX_PROLOGUE_PRESENT__
+					push ebp
+					mov  ebp, esp
+				%endif
+				sub  esp, %%__adjust
 			%endif
 		%endif
-	%else
-		%error "arguments must be defined within a proc/endproc block."
 	%endif
 %endmacro
 
 
 %ifidn __BITS__,64
-	%idefine VAR(v) [rbp-v]
-	%idefine ARGV(v) [rbp+v]	;RCX/RDX/R8/R9...
+	%idefine argv(v) rbp + v
+	%idefine  var(v) rbp - v
 %else
-	%idefine VAR(v)	[ebp-v]
-	%idefine ARGV(v) [ebp+v]
+	%idefine argv(v) ebp + v
+	%idefine  var(v) ebp - v
 %endif
-
 
 %idefine OFFSET
 
-
-%imacro ENDPROC 0.nolist
-;	%warning 'DEBUG MACRO ENTRY(ENDPROC):'
-	%ifdef __PROCEDURE__
-		__PROCEDURE__:
-		%ifndef _entry_
-			%pop
+%imacro RETURN 0-1.nolist
+	%if %0 > 0
+		%ifnum %1
+			%if %1 == -1
+				or __AX, %1
+			%elif %1 == 0
+				xor __AX, __AX
+			%else
+				mov __AX, dword %1
+			%endif
 		%else
-			%undef _entry_
+			mov __AX, %[%1]
 		%endif
-		%undef __PROCEDURE__
-	%else
-		%error "missing proc directive."
 	%endif
-;	%warning 'DEBUG MACRO ENTRY(ENDPROC):'
+	jmp  NASMX_ENDPROC
 %endmacro
 
 
 %imacro LEAVE 0.nolist
-	%ifndef __leave_present__
-		%define __leave_present__
-	%endif
-	%ifidn __BITS__,64
-		mov rsp, rbp
-		pop rbp
-	%else
-		mov esp, ebp
-		pop ebp
+	%ifndef __NX_LEAVE_PRESENT__
+		%define __NX_LEAVE_PRESENT__
+		%ifdef NASMX_ENDPROC
+			%ifdef __NX_LOCALS_PRESENT__
+				%assign %%__adjust %$__nx_locnt + %$__nx_stack_adjust
+				%if  %%__adjust > 0
+					add __SP, %%__adjust
+				%endif
+			%endif
+			%ifdef __NX_USES_PRESENT__
+				%assign %%__nx_reg %$__nx_uses_count
+				%rep %$__nx_uses_count
+					pop __nx_uses_reg_%[%%__nx_reg]
+					%undef __nx_uses_reg_%[%%__nx_reg]
+					%assign %%__nx_reg %%__nx_reg - 1
+				%endrep
+			%endif
+		%endif
+		%ifdef __NX_PROLOGUE_PRESENT__
+			mov __SP, __BP
+			pop __BP
+		%endif
 	%endif
 %endmacro
 
-
 %imacro RET 0-1.nolist
-	%ifdef __PROCEDURE__
-		%ifndef __leave_present__
-			%ifctx proc
-				leave
+	%ifdef NASMX_ENDPROC
+		%ifndef __NX_LEAVE_PRESENT__
+			leave
+		%endif
+		%define __NX_RETURN_PRESENT__
+	%endif
+
+	%if %0 == 1
+		%ifnum %1
+			%if %1 > 0
 				ret %1
-				%undef __leave_present__
 			%else
-				ret %1
+				ret
+			%endif
+		%elifid %1
+			%if %[%1] > 0
+				ret %[%1]
+			%else
+				ret
 			%endif
 		%else
-			ret %1
-			%undef __leave_present__
+			%warning 'invalid operand supplied to ret opcode'
+			ret
 		%endif
 	%else
 		ret
 	%endif
 %endmacro
 
-
-%imacro PROTO 1-2.nolist
-	%if %0 = 1
-		%ifdef __NASMX_CDECL_UNDERSCORE__
-			global _%1
-		%else
-			global %1
+%imacro ENDPROC 0.nolist
+	%ifdef NASMX_ENDPROC
+		;// provide a proc end jmp label
+		%[NASMX_ENDPROC]:
+		%ifndef __NX_RETURN_PRESENT__
+			%assign %%__cc_retpopsargs nx_declspec_cc_retpopsargs(%$__nx_callconv)
+			%if %%__cc_retpopsargs == 0
+				ret
+			%else
+				%if %$__nx_bytecount > 0
+					ret %$__nx_bytecount
+				%else
+					ret
+				%endif
+			%endif
+		%endif
+		%pop
+		%undef NASMX_ENDPROC
+		%ifdef __NX_LEAVE_PRESENT__
+			%undef __NX_LEAVE_PRESENT__
+		%endif
+		%ifdef __NX_RETURN_PRESENT__
+			%undef __NX_RETURN_PRESENT__
+		%endif
+		%ifdef __NX_USES_PRESENT__
+			%undef __NX_USES_PRESENT__
+		%endif
+		%ifdef __NX_LOCALS_PRESENT__
+			%undef __NX_LOCALS_PRESENT__
+		%endif
+		%ifdef __NX_LOCALS_NONE__
+			%undef __NX_LOCALS_NONE__
+		%endif
+		%ifdef __NX_PROLOGUE_PRESENT__
+			%undef __NX_PROLOGUE_PRESENT__
+		%endif
+		%ifdef __NASMX_ARG_BIAS__
+			%undef __NASMX_ARG_BIAS__
 		%endif
 	%else
-		%ifdef __NASMX_UNDERSCORE__
-			global _%1
-		%else
-			global %1
-		%endif
-	%endif
-%endmacro
-
-%imacro ENTRY 1.nolist
-	%ifdef __NASMX_UNDERSCORE__
-		%define __entry_%1 _main
-	%else
-		%define __entry_%1 main
+		%error 'missing proc directive.'
 	%endif
 %endmacro
 
@@ -1078,11 +2154,7 @@ typedef dword, utf32_t
 	%ifctx SWITCH
 		%$local_%$next:
 		%assign %$next 1+%$next
-		%ifidn __BITS__,64
-			cmp rdx, %1
-		%else
-			cmp edx, %1
-		%endif
+		cmp __DX, %1
 		jnz near %$local_%$next
 	%else
 		%error "CASE directive must be within a SWITCH block."
@@ -1138,5 +2210,20 @@ typedef dword, utf32_t
 	%endif
 %pop
 %endmacro
+
+;// The following is used to wrap test code when debugging
+;%define __NX_DEBUG__  ;;//// * * * BEGIN NASMX DEBUG FRAME * * * ///////////////
+%ifdef __NX_DEBUG__  
+%xdefine __NX_DEBUG_SOURCE_LINE_START__ __LINE__
+
+;;// * * PLACE TEST CODE HERE * *
+
+%xdefine __NX_DEBUG_SOURCE_LINE_END__ __LINE__
+%ifndef __NX_DEBUG_SOURCE_LINE_START__
+   %fatal NXDEBUG: BREAK line: __LINE__ section(????,__NX_DEBUG_SOURCE_LINE_END__) __NX_DEBUG_SOURCE_LINE_START__ undefined!
+%endif
+%assign __NX_DEBUG_SOURCE_LINE_COUNT__ __NX_DEBUG_SOURCE_LINE_END__ - __NX_DEBUG_SOURCE_LINE_START__
+%fatal NXDEBUG: BREAK line: __LINE__ section(__NX_DEBUG_SOURCE_LINE_START__,__NX_DEBUG_SOURCE_LINE_END__) __NX_DEBUG_SOURCE_LINE_COUNT__ lines
+%endif  ;;///////////////// * * * END NASMX DEBUG FRAME * * * /////////////////
 
 %endif	; ifndef __NASMX_INCLUDED__
