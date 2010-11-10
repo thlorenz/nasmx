@@ -6,7 +6,7 @@ if not exist %file%.asm goto errasm
 ..\..\..\bin\nasm -f win32 %file%.asm -o %file%.obj
 if errorlevel 1 goto errasm
 
-..\..\..\bin\GoLink.exe /dll /export Say /entry _main DEMO9.obj kernel32.dll user32.dll
+..\..\..\bin\GoLink.exe /entry _main DEMO9.obj DEMO9B.dll kernel32.dll user32.dll
 if errorlevel 1 goto errlink
 
 if exist %file%.obj del %file%.obj
@@ -26,6 +26,4 @@ goto TheEnd
 
 :TheEnd
 echo _
-
-
 

@@ -23,99 +23,85 @@
 entry    demo5
 
 [section .code]
-proc    demo5
 
-    invoke   DialogBoxParam, NASMX_PTR NULL, NASMX_PTR szTemplate, NASMX_PTR NULL, NASMX_PTR dlgproc, size_t NULL
-    invoke   ExitProcess, uint32_t NULL
-    ret
+proc   Wm_DestroyProc, ptrdiff_t hwnd, size_t wparam, size_t lparam
+locals none
+
+    invoke   EndDialog, [argv(.hwnd)], 1
+    mov      eax, 1
 
 endproc
 
-proc    dlgproc
-.hwnd   argd
-.umsg   argd
-.wparam argd
-.lparam argd
+proc   Wm_CommandProc, ptrdiff_t hwnd, size_t wparam, size_t lparam
+locals none
 
-    cmp      argv(.umsg), dword WM_COMMAND
+    cmp      [argv(.wparam)], dword 201
+    je       .cmd_idok
+    cmp      [argv(.wparam)], dword 200
+    je       .cmd_idgo
+	return   0
+
+.cmd_idok:
+    invoke   EndDialog, ptrdiff_t [argv(.hwnd)], size_t 1
+	return   1
+
+.cmd_idgo:
+    invoke   SendDlgItemMessage, [argv(.hwnd)], 205, WM_GETTEXTLENGTH, NULL, NULL
+    cmp      eax, 0
+    jne      .fine
+    invoke   MessageBox, [argv(.hwnd)], szContent, szTitle, MB_OK | MB_ICONERROR
+	return   1
+
+.fine:
+    inc      eax
+    push     eax
+    invoke   GetProcessHeap
+    mov      dword [dwHeap], eax
+    pop      ecx
+    invoke   HeapAlloc, eax, 0x000008, ecx
+    mov      dword [dwText], eax
+    invoke   SendDlgItemMessage, [argv(.hwnd)], 205, WM_GETTEXT, eax, dwText
+    invoke   SendDlgItemMessage, [argv(.hwnd)], 206, WM_SETTEXT, 0, dwText
+    invoke   HeapFree, dwHeap, 0x000008, dwText
+    mov      eax, 1
+
+endproc
+
+proc   dlgproc, ptrdiff_t hwnd, dword umsg, size_t wparam, size_t lparam
+locals none
+
+    cmp      [argv(.umsg)], dword WM_COMMAND
     je       .wm_command
-    cmp      argv(.umsg), dword WM_DESTROY
+    cmp      [argv(.umsg)], dword WM_DESTROY
     je       .wm_destroy
     jmp      .wm_default
 
 .wm_command:
-    invoke   Wm_CommandProc, dword argv(.hwnd), dword argv(.wparam), dword argv(.lparam)
-    ret
+    invoke  Wm_CommandProc, [argv(.hwnd)], [argv(.wparam)], [argv(.lparam)]
+	jmp     NASMX_ENDPROC
 
 .wm_destroy:
-    invoke   Wm_DestroyProc, dword argv(.hwnd), dword argv(.wparam), dword argv(.lparam)
-    ret
+    invoke  Wm_DestroyProc, [argv(.hwnd)], [argv(.wparam)], [argv(.lparam)]
+	jmp     NASMX_ENDPROC
 
 .wm_default:
     xor      eax, eax
-    ret
 
 endproc
 
-proc    Wm_DestroyProc
-.hwnd   argd
-.wparam argd
-.lparam argd
+proc   demo5
+locals none
 
-    invoke   EndDialog, NASMX_PTR argv(.hwnd), size_t 1
-    mov      eax, 1
-    ret
-
-endproc
-
-proc    Wm_CommandProc
-.hwnd    argd
-.wparam  argd
-.lparam  argd
-
-
-    cmp      argv(.wparam), dword 201
-    je       .cmd_idok
-    cmp      argv(.wparam), dword 200
-    je       .cmd_idgo
-    xor      eax, eax
-    ret
-
-.cmd_idok:
-    invoke   EndDialog, NASMX_PTR argv(.hwnd), size_t 1
-    mov      eax, 1
-    ret
-
-.cmd_idgo:
-    invoke   SendDlgItemMessage, NASMX_PTR argv(.hwnd), int32_t 205, uint32_t WM_GETTEXTLENGTH, size_t NULL, size_t NULL
-    cmp      eax, 0
-    jne      .fine
-    invoke   MessageBox, NASMX_PTR argv(.hwnd), NASMX_PTR szContent, NASMX_PTR szTitle, uint32_t MB_OK | MB_ICONERROR
-    mov      eax, 1
-    ret
-
-.fine:
-    inc      eax
-    mov      ecx, eax
-    push     eax
-    invoke   GetProcessHeap
-    mov      [dwHeap], eax
-    invoke   HeapAlloc, eax, uint32_t 0x000008, ecx
-    mov      [dwText], eax
-    pop      eax
-    invoke   SendDlgItemMessage, NASMX_PTR argv(.hwnd), int32_t 205, uint32_t WM_GETTEXT, eax, size_t dwText
-    invoke   SendDlgItemMessage, NASMX_PTR argv(.hwnd), int32_t 206, uint32_t WM_SETTEXT, size_t 0, size_t dwText
-    invoke   HeapFree, NASMX_PTR dwHeap, uint32_t 0x000008, NASMX_PTR dwText
-    mov      eax, 1
-    ret
+    invoke   DialogBoxParam, NULL, szTemplate, NULL, dlgproc, NULL
+    invoke   ExitProcess, NULL
 
 endproc
 
 [section .bss]
-    dwText:     reserve(NASMX_PTR) 1
-    dwHeap:     reserve(NASMX_PTR) 1
+    dwText:     reserve(ptrdiff_t) 1
+    dwHeap:     reserve(ptrdiff_t) 1
 
 [section .data]
-    szTitle:    declare(NASMX_CHAR) NASMX_TEXT("Demo5"), 0x0
-    szContent:  declare(NASMX_CHAR) NASMX_TEXT("Error: you must enter text into the top edit box!"), 0x0
-    szTemplate: declare(NASMX_CHAR) NASMX_TEXT("MyDialog"), 0x0
+    szTitle:    declare(NASMX_TCHAR) NASMX_TEXT("Demo5"), 0x0
+    szContent:  declare(NASMX_TCHAR) NASMX_TEXT("Error: you must enter text into the top edit box!"), 0x0
+    szTemplate: declare(NASMX_TCHAR) NASMX_TEXT("MyDialog"), 0x0

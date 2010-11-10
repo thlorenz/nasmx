@@ -1,11 +1,11 @@
 ##### Makefile #####
 AS=nasm
-#AFLAGS=-f win32
-AFLAGS=-f win32 -dUNICODE=1
+AFLAGS=-f win32
+#AFLAGS=-f win32 -dUNICODE=1
 LD=GoLink
 LDFLAGS		=/entry _main
-LDFLAGS_SO	=/dll /export Say /entry _main
-LIBS		=DEMO9.dll kernel32.dll user32.dll
+LDFLAGS_SO	=/dll /export _Say /entry _main
+LIBS		=DEMO9B.dll kernel32.dll user32.dll
 LIBS_SO		=kernel32.dll user32.dll
 
 # [ Suffixes ]
@@ -18,25 +18,26 @@ INC         = .inc
 LST         = .lst
 RCX         = .rc
 # rules
-DEMO9 =	demo9$(O)
-DEMO9B =	demo9b$(O)
+DEMO9B      = demo9b$(O)
+DEMO9       = demo9$(O)
 
-all: demo9$(SO) demo9b$(X)
+all: demo9b$(SO) demo9$(X)
 
-demo9: demo9$(SO)
-demo9b: demo9b$(X)
+demo9b: demo9b$(SO)
+demo9: demo9$(X)
 
-demo9$(SO): $(DEMO9)
-	$(LD) $(LDFLAGS_SO) $(DEMO9) $(LIBS_SO)
+demo9b$(SO): $(DEMO9B)
+	$(LD) $(LDFLAGS_SO) $(DEMO9B) $(LIBS_SO)
 
-demo9b$(X): $(DEMO9B) $(DEMO9)
-	$(LD) $(LDFLAGS) $(DEMO9B) $(LIBS)
+demo9$(X): $(DEMO9) $(DEMO9B)
+	$(LD) $(LDFLAGS) $(DEMO9) $(LIBS)
+
+demo9b$(O): demo9b$(ASM)
+	$(AS) $(AFLAGS) demo9b$(ASM) -o demo9b$(O)
 
 demo9$(O): demo9$(ASM)
 	$(AS) $(AFLAGS) demo9$(ASM) -o demo9$(O)
 
-demo9b$(O): demo9b$(ASM)
-	$(AS) $(AFLAGS) demo9b$(ASM) -o demo9b$(O)
 
 clean:
 	-del /f demo*.obj

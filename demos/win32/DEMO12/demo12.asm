@@ -21,32 +21,36 @@
 
 ; TODO: 64BIT MODS REQUIRED
 %ifidn __OUTPUT_FORMAT__, win64
-	%fatal 64bit not supported yet...
+	%warning 64bit not supported yet...
 %endif
 
 entry	demo12
 
 [section .data]
-	msg	declare(NASMX_CHAR) NASMX_TEXT('Press any key to continue...'),13,10
-	.len
+	msg	declare(NASMX_TCHAR) NASMX_TEXT('Press any key to continue...'),13,10
+	.len:
 
 [section .bss]
-	hConsole	reserve(NASMX_PTR) 1
-	hBuffer		reserve(NASMX_PTR) 1
-	hNum		RESD 1
-	hMode		RESD 1
+	hConsole	reserve(ptrdiff_t) 1
+	hBuffer		reserve(ptrdiff_t) 1
+	hNum		reserve(ptrdiff_t) 1
+	hMode		reserve(ptrdiff_t) 1
 
 [section .text]
-proc	demo12
+
+proc   demo12
+locals none
+
 	invoke	GetStdHandle, STD_OUTPUT_HANDLE
-	invoke	WriteFile, eax, NASMX_PTR msg, uint32_t msg.len-msg, NASMX_PTR hNum, NASMX_PTR 0
+	invoke	WriteFile, eax, msg, msg.len-msg, hNum, 0
 	invoke	GetStdHandle, STD_INPUT_HANDLE
-	mov	NASMX_PTR[hConsole], eax
-	invoke	GetConsoleMode, eax, NASMX_PTR hMode
-	mov	eax, NASMX_PTR[hMode]
+	mov	ptrdiff_t [hConsole], eax
+	invoke	GetConsoleMode, eax, hMode
+	mov	eax, ptrdiff_t [hMode]
 	and	al, 1
-	invoke	SetConsoleMode, NASMX_PTR[hConsole], eax
-	invoke  WaitForSingleObject, NASMX_PTR[hConsole], DWORD 0xFFFFFFFF
-	invoke	ReadFile, NASMX_PTR[hConsole], NASMX_PTR hBuffer, DWORD 1, DWORD hNum, DWORD 0
-	invoke	ExitProcess, uint32_t 0
+	invoke	SetConsoleMode, [hConsole], eax
+	invoke  WaitForSingleObject, [hConsole], 0xFFFFFFFF
+	invoke	ReadFile, [hConsole], hBuffer, 1, hNum, 0
+	invoke	ExitProcess, 0
+
 endproc

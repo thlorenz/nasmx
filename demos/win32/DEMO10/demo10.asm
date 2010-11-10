@@ -24,21 +24,46 @@
 entry    demo10
 
 [section .text]
-proc    demo10
 
-    invoke   GetModuleHandle, NASMX_PTR NULL
-    mov      [hInstance], eax
-    invoke   WinMain, NASMX_PTR hInstance, NASMX_PTR NULL, NASMX_PTR NULL, int32_t SW_SHOWNORMAL
-    invoke   ExitProcess, uint32_t NULL
-    ret
+
+proc   WndProc, ptrdiff_t hwnd, uint_t umsg, size_t wparam, size_t lparam
+locals none
+
+    switch dword [argv(.umsg)]
+    case dword WM_CREATE
+
+        ButtonCtl szStringA, 500, 0, 0, 100, 40, [argv(.hwnd)], [wc + WNDCLASSEX.hInstance]
+        ButtonCtl szStringB, 501, 100, 0, 100, 40, [argv(.hwnd)], [wc + WNDCLASSEX.hInstance]
+        StaticCtl szContent, 502, 0, 40, 200, 40, [argv(.hwnd)], [wc + WNDCLASSEX.hInstance]
+        ComboCtl szContent, 503, 0, 80, 200, 100, [argv(.hwnd)], [wc + WNDCLASSEX.hInstance]
+        ListBoxCtl szContent, 504, 0, 106, 200, 100, [argv(.hwnd)], [wc + WNDCLASSEX.hInstance]
+
+    case dword WM_COMMAND
+        if [argv(.wparam)], ==, dword 500
+            invoke   MessageBox, NULL, szMessageA, szTitle, MB_OK
+        elsif [argv(.wparam)], ==, dword 501
+            invoke	MessageBox, NULL, szMessageB, szTitle, MB_OK
+        else
+            jmp near .defwndproc
+        endif
+
+    case dword WM_DESTROY
+
+        invoke   PostQuitMessage, NULL
+
+    default
+        .defwndproc:
+        invoke   DefWindowProc, [argv(.hwnd)], [argv(.umsg)], [argv(.wparam)], [argv(.lparam)]
+
+    endswitch
 
 endproc
 
-proc    WinMain, hinst, hpinst, cmdln, dwshow
-
-    invoke   LoadIcon, NASMX_PTR NULL, NASMX_PTR IDI_APPLICATION
+proc   WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwshow
+locals none
+    invoke   LoadIcon, NULL, IDI_APPLICATION
     mov      edx, eax
-    mov      eax, dword argv(hinst)
+    mov      eax, dword [argv(.hinst)]
     mov      ebx, dword szClass
     mov      ecx, dword WndProc
     mov      [wc + WNDCLASSEX.hInstance], eax
@@ -47,72 +72,47 @@ proc    WinMain, hinst, hpinst, cmdln, dwshow
     mov      [wc + WNDCLASSEX.hIcon], edx
     mov      [wc + WNDCLASSEX.hIconSm], edx
 
-    invoke   RegisterClassEx, NASMX_PTR wc
+    invoke   RegisterClassEx, wc
 
     StdWindow szClass, szTitle, 100, 120, 212, 232, NULL, [wc + WNDCLASSEX.hInstance]
     mov      [hWnd], eax
 
-    invoke   ShowWindow, NASMX_PTR hWnd, int32_t argv(dwshow)
-    invoke   UpdateWindow, NASMX_PTR hWnd
+    invoke   ShowWindow, hWnd, [argv(.dwshow)]
+    invoke   UpdateWindow, hWnd
 
     do
-        invoke   TranslateMessage, NASMX_PTR message
-        invoke   DispatchMessage, NASMX_PTR message
-        invoke   GetMessage, NASMX_PTR message, NASMX_PTR NULL, uint32_t NULL, uint32_t NULL
+        invoke   TranslateMessage, message
+        invoke   DispatchMessage, message
+        invoke   GetMessage, message, NULL, NULL, NULL
     while eax, !=, 0
 
-
     mov      eax, dword [message + MSG.wParam]
-    ret
 
 endproc
 
-proc    WndProc, hwnd, umsg, wparam, lparam
+proc   demo10
+locals none
 
-
-    switch dword argv(umsg)
-    case dword WM_CREATE
-
-        ButtonCtl szStringA, 500, 0, 0, 100, 40, argv(hwnd), [wc + WNDCLASSEX.hInstance]
-        ButtonCtl szStringB, 501, 100, 0, 100, 40, argv(hwnd), [wc + WNDCLASSEX.hInstance]
-        StaticCtl szContent, 502, 0, 40, 200, 40, argv(hwnd), [wc + WNDCLASSEX.hInstance]
-        ComboCtl szContent, 503, 0, 80, 200, 100, argv(hwnd), [wc + WNDCLASSEX.hInstance]
-        ListBoxCtl szContent, 504, 0, 106, 200, 100, argv(hwnd), [wc + WNDCLASSEX.hInstance]
-
-    case dword WM_COMMAND
-        if argv(wparam), ==, dword 500
-            invoke   MessageBox, NASMX_PTR NULL, NASMX_PTR szMessageA, NASMX_PTR szTitle, uint32_t MB_OK
-        elsif argv(wparam), ==, dword 501
-            invoke	MessageBox, NASMX_PTR NULL, NASMX_PTR szMessageB, NASMX_PTR szTitle, uint32_t MB_OK
-        else
-            jmp near .defwndproc
-        endif
-
-    case dword WM_DESTROY
-
-        invoke   PostQuitMessage, int32_t NULL
-
-    default
-        .defwndproc:
-        invoke   DefWindowProc, NASMX_PTR argv(hwnd), uint32_t argv(umsg), size_t argv(wparam), size_t argv(lparam)
-
-    endswitch
+    invoke   GetModuleHandle, NULL
+    mov      [hInstance], eax
+    invoke   WinMain, hInstance, NULL, NULL, SW_SHOWNORMAL
+    invoke   ExitProcess, NULL
     ret
 
 endproc
 
 [section .bss]
-    hInstance:   reserve(NASMX_PTR) 1
-    hWnd:        reserve(NASMX_PTR) 1
+    hInstance:   reserve(ptrdiff_t) 1
+    hWnd:        reserve(ptrdiff_t) 1
 
 [section .data]
-    szStringA:  declare(NASMX_CHAR) NASMX_TEXT("Click Me!"), 0x0
-    szStringB:  declare(NASMX_CHAR) NASMX_TEXT("Me Too!"), 0x0
-    szContent:  declare(NASMX_CHAR) NASMX_TEXT("Win32Nasm Demo #10"), 0x0
-    szMessageA: declare(NASMX_CHAR) NASMX_TEXT("With the NasmX Library..."), 0x0
-    szMessageB: declare(NASMX_CHAR) NASMX_TEXT("Assembly is a cinche!"), 0x0
-    szTitle:    declare(NASMX_CHAR) NASMX_TEXT("Demo10"), 0x0
-    szClass:    declare(NASMX_CHAR) NASMX_TEXT("Demo10Class"), 0x0
+    szStringA:  declare(NASMX_TCHAR) NASMX_TEXT("Click Me!"), 0x0
+    szStringB:  declare(NASMX_TCHAR) NASMX_TEXT("Me Too!"), 0x0
+    szContent:  declare(NASMX_TCHAR) NASMX_TEXT("Win32Nasm Demo #10"), 0x0
+    szMessageA: declare(NASMX_TCHAR) NASMX_TEXT("With the NasmX Library..."), 0x0
+    szMessageB: declare(NASMX_TCHAR) NASMX_TEXT("Assembly is a cinche!"), 0x0
+    szTitle:    declare(NASMX_TCHAR) NASMX_TEXT("Demo10"), 0x0
+    szClass:    declare(NASMX_TCHAR) NASMX_TEXT("Demo10Class"), 0x0
 
     NASMX_ISTRUC wc, WNDCLASSEX
         NASMX_AT cbSize,           WNDCLASSEX_size

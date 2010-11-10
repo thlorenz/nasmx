@@ -23,25 +23,38 @@
 entry demo2
 
 [section .text]
-proc    demo2
 
-    invoke   GetModuleHandle, NASMX_PTR NULL
-    mov      [hInstance], eax
-    invoke   WinMain, NASMX_PTR hInstance, NASMX_PTR NULL, NASMX_PTR NULL, int32_t SW_SHOWNORMAL
-    invoke   ExitProcess, uint32_t NULL
+proc    WndProc, ptrdiff_t hwnd, dword umsg, ptrdiff_t wparam, ptrdiff_t lparam
+locals none
+
+.wm_create:
+    cmp      [argv(.umsg)], dword WM_CREATE
+    jnz      .wm_destroy
+
+    invoke   GetClientRect, [argv(.hwnd)], rct
+    invoke   CreateWindowEx, NULL, szStatic, szTitle, WS_CHILD + WS_VISIBLE + SS_CENTER, 0, 0, [rct + RECT.right], [rct + RECT.bottom], [argv(.hwnd)], 500, [wc + WNDCLASSEX.hInstance], NULL
+    jmp      .wm_default
+
+.wm_destroy:
+    cmp      [argv(.umsg)], dword WM_DESTROY
+    jnz      .wm_default
+
+    invoke   PostQuitMessage, NULL
+
+.wm_default:
+    invoke   DefWindowProc, [argv(.hwnd)], [argv(.umsg)], [argv(.wparam)], [argv(.lparam)]
+    
+.exit:
     ret
 
 endproc
 
-proc    WinMain
-hinst    argd        ; Current instance handle
-hpinst   argd        ; Previous instance handle
-cmdln    argd        ; Command line arguments
-dwshow   argd        ; Display style
+proc    WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwshow
+locals none
 
-    invoke   LoadIcon, NASMX_PTR NULL, NASMX_PTR IDI_APPLICATION
+    invoke   LoadIcon, NULL, IDI_APPLICATION
     mov      edx, eax
-    mov      eax, dword argv(hinst)
+    mov      eax, dword [argv(.hinst)]
     mov      ebx, dword szClass
     mov      ecx, dword WndProc
     mov      [wc + WNDCLASSEX.hInstance], eax
@@ -50,64 +63,48 @@ dwshow   argd        ; Display style
     mov      [wc + WNDCLASSEX.hIcon], edx
     mov      [wc + WNDCLASSEX.hIconSm], edx
 
-    invoke   RegisterClassEx, NASMX_PTR wc
+    invoke   RegisterClassEx, wc
 
-    invoke   CreateWindowEx, uint32_t WS_EX_TOOLWINDOW, NASMX_PTR szClass, NASMX_PTR szTitle, uint32_t WS_CAPTION + WS_SYSMENU + WS_VISIBLE, int32_t 100, int32_t 120, int32_t 200, int32_t 100, NASMX_PTR NULL, NASMX_PTR NULL, NASMX_PTR [wc + WNDCLASSEX.hInstance], NASMX_PTR NULL
+    invoke   CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 200, 100, NULL, NULL, [wc + WNDCLASSEX.hInstance], NULL
     mov      [hWnd], eax
 
-    invoke   ShowWindow, NASMX_PTR hWnd, int32_t argv(dwshow)
-    invoke   UpdateWindow, NASMX_PTR hWnd
+    invoke   ShowWindow, hWnd, [argv(.dwshow)]
+    invoke   UpdateWindow, hWnd
 
     .msgloop:
-        invoke   GetMessage, NASMX_PTR message, NASMX_PTR NULL, uint32_t NULL, uint32_t NULL
+        invoke   GetMessage, message, NULL, NULL, NULL
         cmp      eax, dword 0
         je       .exit
-        invoke   TranslateMessage, NASMX_PTR message
-        invoke   DispatchMessage, NASMX_PTR message
+        invoke   TranslateMessage, message
+        invoke   DispatchMessage, message
         jmp      .msgloop
-    .exit:
+
+.exit:
 
     mov      eax, dword [message + MSG.wParam]
-    ret
 
 endproc
 
-proc    WndProc
-hwnd    argd        ; Window handle
-umsg    argd        ; Window message
-wparam  argd        ; wParam
-lparam  argd        ; lParam
 
-.wm_create:
-    cmp      argv(umsg), dword WM_CREATE
-    jnz      .wm_destroy
+proc    demo2
+locals none
 
-    invoke   GetClientRect, NASMX_PTR argv(hwnd), NASMX_PTR rct
-    invoke   CreateWindowEx, uint32_t NULL, NASMX_PTR szStatic, NASMX_PTR szTitle, uint32_t WS_CHILD + WS_VISIBLE + SS_CENTER, int32_t 0, int32_t 0, int32_t [rct + RECT.right], int32_t [rct + RECT.bottom], NASMX_PTR argv(hwnd), NASMX_PTR 500, NASMX_PTR [wc + WNDCLASSEX.hInstance], NASMX_PTR NULL
-    jmp      .wm_default
-
-.wm_destroy:
-    cmp      argv(umsg), dword WM_DESTROY
-    jnz      .wm_default
-
-    invoke   PostQuitMessage, dword NULL
-
-.wm_default:
-    invoke   DefWindowProc, NASMX_PTR argv(hwnd), uint32_t argv(umsg), size_t argv(wparam), size_t argv(lparam)
-    
-.exit:
-    ret
+    invoke   GetModuleHandle, NULL
+    mov      [hInstance], eax
+    invoke   WinMain, hInstance, NULL, NULL, SW_SHOWNORMAL
+    invoke   ExitProcess, NULL
 
 endproc
+
 
 [section .bss]
-    hInstance:   reserve(NASMX_PTR) 1
-    hWnd:        reserve(NASMX_PTR) 1
+    hInstance:   reserve(ptrdiff_t) 1
+    hWnd:        reserve(ptrdiff_t) 1
 
 [section .data]
-    szStatic:   declare(NASMX_CHAR) NASMX_TEXT("STATIC"), 0x0
-    szTitle:    declare(NASMX_CHAR) NASMX_TEXT("Demo2"), 0x0
-    szClass:    declare(NASMX_CHAR) NASMX_TEXT("Demo2Class"), 0x0
+    szStatic: declare(NASMX_TCHAR) NASMX_TEXT("STATIC"), 0x0
+    szTitle:  declare(NASMX_TCHAR) NASMX_TEXT("Demo2"), 0x0
+    szClass:  declare(NASMX_TCHAR) NASMX_TEXT("Demo2Class"), 0x0
 
     NASMX_ISTRUC wc, WNDCLASSEX
 		NASMX_AT cbSize,        sizeof(WNDCLASSEX)
