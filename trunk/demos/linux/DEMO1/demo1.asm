@@ -12,12 +12,13 @@ msglen		equ	($ - msg)
 
 ;##### Program Entrypoint #####
 [section .text]
-proc	demo1
+proc   demo1
+locals none
 
 	;#### SYSCALL Write Message to the Console ####
 	syscall	write, STDOUT_FILENO, msg, msglen
 
 	;#### Exit with NULL Return Value ####
 	xor	eax,eax
-	ret
+
 endproc

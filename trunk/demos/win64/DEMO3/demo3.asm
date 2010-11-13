@@ -3,7 +3,7 @@
 %include "..\..\..\inc\win32\windows.inc"
 %include "..\..\..\inc\win32\kernel32.inc"
 
-	entry	demo12
+entry	demo3
 
 [section .data]
 	msg	DB	'Press any key to continue...',13,10
@@ -16,7 +16,10 @@
 	hMode		RESQ 1
 
 [section .text]
-proc	demo12
+
+proc   demo3
+locals none
+
 	invoke	GetStdHandle, STD_OUTPUT_HANDLE
 	invoke	WriteFile, rax,  msg,  (msg.len - msg),  hNum,  0
 	invoke	GetStdHandle, STD_INPUT_HANDLE
@@ -28,4 +31,5 @@ proc	demo12
 	invoke  WaitForSingleObject, [hConsole],  0xFFFFFFFFFFFFFFFF
 	invoke	ReadFile, [hConsole],  hBuffer,  1,  hNum,  0
 	invoke	ExitProcess,  0
+
 endproc

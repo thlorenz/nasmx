@@ -1065,12 +1065,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 
 ;// small helper macro used to parse __nxsig@@ defines
-;// note that a context is required.
 %macro nx_parse_tokens 1-100.nolist
-	%assign %$__nx_parse_count %0;
-	%define %$__nx_token_1 %1
-	%define %$__nx_token_2 %2
-	%define %$__nx_token_3 %3
 	%ifdef __nx_token_0
 		%undef __nx_token_0
 	%endif
@@ -1178,7 +1173,6 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%ifnidn %$__proc,%$__nxtok_decorated_name
 		%xdefine %[%$__proc] %[%$__nxtok_decorated_name]
 	%endif
-
 	%pop
 %endmacro
 
@@ -1269,7 +1263,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		global %[%$__proc]
 		%xdefine __nxsig_declared_%[%$__proc] global
 	%endif
-	
+
 	%pop
 %endmacro
 
@@ -1327,8 +1321,8 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%assign %$__nx_bytecount (( __BITS__ / 8 ) * ( %0 - 1 ))
 	%ifdef __nxsig@@%[%1]
 		nx_parse_tokens __nxsig@@%[%1]
-		%assign %$__nx_callconv %$__nx_token_1
-		%assign %%__bytecount %$__nx_token_2
+		%assign %$__nx_callconv __nx_token_1
+		%assign %%__bytecount __nx_token_2
 		%if %%__bytecount > 0
 			;// assert: only perform sig check on defined funcs with 1 or more
 			;// params due to current import scheme and cdecl varargs.
@@ -1362,6 +1356,9 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
 			%if %$$__nx_stack_adjust == 0
 				%if %$__nx_bytecount > 0
+					%if %$__nx_bytecount < 32
+						%assign %$__nx_bytecount 32
+					%endif
 					sub __SP, %$__nx_bytecount
 				%endif
 			%endif
@@ -1400,7 +1397,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 					%else
 						%ifstr %1
 							jmp %%endstr_%$args
-							%%str_%$args: db %1, 0
+							%%str_%$args: declare(NASMX_TCHAR) NASMX_TEXT(%1), 0
 							%%endstr_%$args:
 							lea %$arg_cur,[rel %%str_%$args]
 						%else
@@ -1414,7 +1411,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 				%else
 					%ifstr %1
 						jmp %%endstr_%$args
-						%%str_%$args: db %1, 0
+						%%str_%$args: declare(NASMX_TCHAR) NASMX_TEXT(%1), 0
 						%%endstr_%$args:
 						mov [__SP + %$args], size_t %%str_%$args
 					%else
@@ -1446,7 +1443,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%elifnum %1
 				push size_t %1
 			%else
-				;// check for "casts"
+				;// TODO: check for "casts"
 ;				nx_strtok %1,' '
 ;				%defstr %%__arg_str %1
 ;				%strlen %%__arg_len %%__arg_str
@@ -1519,8 +1516,8 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		;// check for prototyped func
 		%ifdef __nxsig@@%[%1]
 			nx_parse_tokens __nxsig@@%[%1]
-			%assign %$__nx_callconv %$__nx_token_1
-			%assign %$__nx_protobytecount %$__nx_token_2
+			%assign %$__nx_callconv __nx_token_1
+			%assign %$__nx_protobytecount __nx_token_2
 		%else
 			%assign %$__nx_callconv __NASMX_DECLSPEC_CALLCONV_DEFAULT__
 		%endif
@@ -1536,13 +1533,10 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		;// check for prototyped func
 		%ifdef __nxsig@@%[%2]
 			nx_parse_tokens __nxsig@@%[%2]
-			%if %$__nx_parse_count != 2
-				%fatal 'internal error'
-			%endif
-			%if %$__nx_callconv != %$__nx_token_1
+			%if %$__nx_callconv != __nx_token_1
 				%fatal calling convention mismatch for %$__nx_proc
 			%endif
-			%assign %$__nx_protobytecount %$__nx_token_2
+			%assign %$__nx_protobytecount __nx_token_2
 		%endif
 	%endif
 
@@ -1783,26 +1777,14 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%rotate 1
 	%endrep
 	%ifdef __NX_LOCALS_NONE__
-		%ifidn __BITS__,64
-			%assign %%__adjust %$__nx_stack_adjust + %$__nx_arg_bias + %$__nx_uses_count * 8
-			%if %%__adjust > 0
-				%ifndef __NX_PROLOGUE_PRESENT__
-					%define __NX_PROLOGUE_PRESENT__
-					push rbp
-					mov  rbp, rsp
-				%endif
-				sub  rsp, %%__adjust
+		%assign %%__adjust %$__nx_stack_adjust + %$__nx_arg_bias + (%$__nx_uses_count * (__BITS__ / 8))
+		%if %%__adjust > 0
+			%ifndef __NX_PROLOGUE_PRESENT__
+				%define __NX_PROLOGUE_PRESENT__
+				push __BP
+				mov  __BP, __SP
 			%endif
-		%else
-			%assign %%__adjust %$__nx_stack_adjust + %$__nx_uses_count * 4
-			%if %%__adjust > 0
-				%ifndef __NX_PROLOGUE_PRESENT__
-					%define __NX_PROLOGUE_PRESENT__
-					push ebp
-					mov  ebp, esp
-				%endif
-				sub  esp, %%__adjust
-			%endif
+			sub  __SP, %%__adjust
 		%endif
 	%endif
 %endmacro
@@ -1826,11 +1808,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%if (%%__off != %%__tmp)
 		%assign %$_nx_locnt %%__off
 	%endif
-	%ifidn __BITS__,64
-		.%[%1] EQU %$__nx_locnt + %$__nx_arg_bias + %$__nx_uses_count * 8
-	%else
-		.%[%1] EQU %$__nx_locnt + %$__nx_uses_count * 4
-	%endif
+	.%[%1] EQU %$__nx_locnt + %$__nx_arg_bias + (%$__nx_uses_count * (__BITS__ / 8))
 %endmacro
 
 
@@ -1839,26 +1817,14 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%error 'missing locals directive.'
 	%endif
 	%ifndef __NX_LOCALS_NONE__
-		%ifidn __BITS__,64
-			%assign %%__adjust %$__nx_locnt + %$__nx_arg_bias + %$__nx_stack_adjust + %$__nx_uses_count * 8
-			%if %%__adjust > 0
-				%ifndef __NX_PROLOGUE_PRESENT__
-					%define __NX_PROLOGUE_PRESENT__
-					push rbp
-					mov  rbp, rsp
-				%endif
-				sub  rsp, %%__adjust
+		%assign %%__adjust %$__nx_locnt + %$__nx_arg_bias + %$__nx_stack_adjust + ( %$__nx_uses_count * ( __BITS__ / 8 ))
+		%if %%__adjust > 0
+			%ifndef __NX_PROLOGUE_PRESENT__
+				%define __NX_PROLOGUE_PRESENT__
+				push __BP
+				mov  __BP, __SP
 			%endif
-		%else
-			%assign %%__adjust %$__nx_locnt + %$__nx_stack_adjust + %$__nx_uses_count * 4
-			%if %%__adjust > 0
-				%ifndef __NX_PROLOGUE_PRESENT__
-					%define __NX_PROLOGUE_PRESENT__
-					push ebp
-					mov  ebp, esp
-				%endif
-				sub  esp, %%__adjust
-			%endif
+			sub  __SP, %%__adjust
 		%endif
 	%endif
 %endmacro

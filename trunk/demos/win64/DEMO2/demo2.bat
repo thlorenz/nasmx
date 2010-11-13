@@ -6,7 +6,7 @@ if not exist %file%.asm goto errasm
 ..\..\..\bin\nasm -f win64 %file%.asm -o %file%.obj
 if errorlevel 1 goto errasm
 
-..\..\..\bin\GoLink.exe /console /entry _main DEMO2.obj msvcrt.dll
+..\..\..\bin\GoLink.exe /console /entry main DEMO2.obj msvcrt.dll
 if errorlevel 1 goto errlink
 
 if exist %file%.obj del %file%.obj
