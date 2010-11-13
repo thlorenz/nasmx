@@ -2,7 +2,7 @@
 %include "..\..\..\inc\win32\windows.inc"
 %include "..\..\..\inc\win32\msvcrt.inc"
 
-	entry	demo11
+	entry	demo2
 
 [section .bss]
 	fname:	resb 1025
@@ -10,7 +10,10 @@
 	age:	resq 1
 
 [section .text]
-proc	demo11
+
+proc   demo2
+locals none
+
 	times	10 nop
 	invoke	printf, "First Name: "
 	times	10 nop
@@ -32,5 +35,5 @@ proc	demo11
 	invoke	printf, "%c%c%c%cPress any key to exit.",13,10,13,10
 	invoke	_getch
 	xor	rax, rax
-	ret
+
 endproc

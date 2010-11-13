@@ -6,7 +6,16 @@ Welcome to NASMX, a collection of macros, include files and
 examples all built around the Netwide Assembler (NASM) for
 all to use freely.
 
-In this package, you will find 6 main directories and they
+The project page is located at:
+  http://www.asmcommunity.net/projects/nasmx/
+
+The community forum can be found at:
+  http://www.asmcommunity.net/board/index.php
+
+Downloads and snapshots are available from:
+  http://sourceforge.net/projects/nasmx/
+
+In this package, you will find 3 main directories and they
 are as follows...
 
 bin	- This directory is the primary location of all

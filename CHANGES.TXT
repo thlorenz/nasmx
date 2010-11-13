@@ -18,6 +18,8 @@ NASMX v1.0B4: 9:25 PM 11/09/2010, by Rob Neff
   GoLink v0.26.14, GoRC v0.90.5
   ResEd v2.2.0.6c
 
+- Nested structures and unions supported
+
 - Added support for the following calling conventions:
   C, StdCall, FastCall, Pascal
 
