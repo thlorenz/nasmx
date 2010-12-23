@@ -259,8 +259,8 @@ IMPORT futime
 IMPORT gcvt
 IMPORT get_osfhandle
 IMPORT get_sbh_threshold
-IMPORT getch
-IMPORT getche
+IMPORT _getch
+IMPORT _getche
 IMPORT getcwd
 IMPORT getdcwd
 IMPORT getdiskfree
@@ -545,7 +545,7 @@ IMPORT ui64tow
 IMPORT ultoa
 IMPORT ultow
 IMPORT umask
-IMPORT ungetch
+IMPORT _ungetch
 IMPORT unlink
 IMPORT unloaddll
 IMPORT unlock
