@@ -1,5 +1,5 @@
-%ifndef __odbc32_INC__
-%define __odbc32_INC__
+%ifndef __NASMX_ODBC32_INC__
+%define __NASMX_ODBC32_INC__
 
 IMPORT CloseODBCPerfData, 0
 IMPORT CollectODBCPerfData, 16
@@ -146,5 +146,84 @@ IMPORT VFreeErrors, 4
 IMPORT VRetrieveDriverErrorsRowCol, 24
 IMPORT ValidateErrorQueue, 8
 IMPORT g_hHeapMalloc
+
+%ifdef UNICODE
+%define SQLBrowseConnect SQLBrowseConnectW
+%define SQLColAttribute SQLColAttributeW
+%define SQLColAttributes SQLColAttributesW
+%define SQLColumnPrivileges SQLColumnPrivilegesW
+%define SQLColumns SQLColumnsW
+%define SQLConnect SQLConnectW
+%define SQLDataSources SQLDataSourcesW
+%define SQLDescribeCol SQLDescribeColW
+%define SQLDriverConnect SQLDriverConnectW
+%define SQLDrivers SQLDriversW
+%define SQLError SQLErrorW
+%define SQLExecDirect SQLExecDirectW
+%define SQLForeignKeys SQLForeignKeysW
+%define SQLGetConnectAttr SQLGetConnectAttrW
+%define SQLGetConnectOption SQLGetConnectOptionW
+%define SQLGetCursorName SQLGetCursorNameW
+%define SQLGetDescField SQLGetDescFieldW
+%define SQLGetDescRec SQLGetDescRecW
+%define SQLGetDiagField SQLGetDiagFieldW
+%define SQLGetDiagRec SQLGetDiagRecW
+%define SQLGetInfo SQLGetInfoW
+%define SQLGetStmtAttr SQLGetStmtAttrW
+%define SQLGetTypeInfo SQLGetTypeInfoW
+%define SQLNativeSql SQLNativeSqlW
+%define SQLPrepare SQLPrepareW
+%define SQLPrimaryKeys SQLPrimaryKeysW
+%define SQLProcedureColumns SQLProcedureColumnsW
+%define SQLProcedures SQLProceduresW
+%define SQLSetConnectAttr SQLSetConnectAttrW
+%define SQLSetConnectOption SQLSetConnectOptionW
+%define SQLSetCursorName SQLSetCursorNameW
+%define SQLSetDescField SQLSetDescFieldW
+%define SQLSetStmtAttr SQLSetStmtAttrW
+%define SQLSpecialColumns SQLSpecialColumnsW
+%define SQLStatistics SQLStatisticsW
+%define SQLTablePrivileges SQLTablePrivilegesW
+%define SQLTables SQLTablesW
+%else
+%define SQLBrowseConnect SQLBrowseConnectA
+%define SQLColAttribute SQLColAttributeA
+%define SQLColAttributes SQLColAttributesA
+%define SQLColumnPrivileges SQLColumnPrivilegesA
+%define SQLColumns SQLColumnsA
+%define SQLConnect SQLConnectA
+%define SQLDataSources SQLDataSourcesA
+%define SQLDescribeCol SQLDescribeColA
+%define SQLDriverConnect SQLDriverConnectA
+%define SQLDrivers SQLDriversA
+%define SQLError SQLErrorA
+%define SQLExecDirect SQLExecDirectA
+%define SQLForeignKeys SQLForeignKeysA
+%define SQLGetConnectAttr SQLGetConnectAttrA
+%define SQLGetConnectOption SQLGetConnectOptionA
+%define SQLGetCursorName SQLGetCursorNameA
+%define SQLGetDescField SQLGetDescFieldA
+%define SQLGetDescRec SQLGetDescRecA
+%define SQLGetDiagField SQLGetDiagFieldA
+%define SQLGetDiagRec SQLGetDiagRecA
+%define SQLGetInfo SQLGetInfoA
+%define SQLGetStmtAttr SQLGetStmtAttrA
+%define SQLGetTypeInfo SQLGetTypeInfoA
+%define SQLNativeSql SQLNativeSqlA
+%define SQLPrepare SQLPrepareA
+%define SQLPrimaryKeys SQLPrimaryKeysA
+%define SQLProcedureColumns SQLProcedureColumnsA
+%define SQLProcedures SQLProceduresA
+%define SQLSetConnectAttr SQLSetConnectAttrA
+%define SQLSetConnectOption SQLSetConnectOptionA
+%define SQLSetCursorName SQLSetCursorNameA
+%define SQLSetDescField SQLSetDescFieldA
+%define SQLSetStmtAttr SQLSetStmtAttrA
+%define SQLSpecialColumns SQLSpecialColumnsA
+%define SQLStatistics SQLStatisticsA
+%define SQLTablePrivileges SQLTablePrivilegesA
+%define SQLTables SQLTablesA
+
+%endif
 
 %endif
