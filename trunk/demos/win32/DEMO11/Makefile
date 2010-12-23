@@ -2,7 +2,7 @@
 AS=nasm
 AFLAGS=-f win32
 LD=GoLink
-LDFLAGS		=/console /entry _main
+LDFLAGS		=/console /mix /entry _main
 LIBS		=msvcrt.dll
 
 # [ Suffixes ]
