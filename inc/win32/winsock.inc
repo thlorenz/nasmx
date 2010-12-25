@@ -22,7 +22,7 @@ NASMX_STRUC FD_SET
 NASMX_ENDSTRUC
 
 NASMX_STRUC TIMEVAL
-    NASMX_RESERVE tv_sec, int32_t, 1
+    NASMX_RESERVE tv_sec,  int32_t, 1
     NASMX_RESERVE tv_usec, int32_t, 1
 NASMX_ENDSTRUC
 
@@ -43,35 +43,35 @@ NASMX_ENDSTRUC
 %define SIOCATMARK 80047307h
 
 NASMX_STRUC HOSTENT
-    NASMX_RESERVE h_name,      NASMX_PTR, 1
-    NASMX_RESERVE h_aliases,   NASMX_PTR, 1
+    NASMX_RESERVE h_name,      ptrdiff_t, 1
+    NASMX_RESERVE h_aliases,   ptrdiff_t, 1
     NASMX_RESERVE h_addrtype,  short_t, 1
     NASMX_RESERVE h_length,    short_t, 1
-    NASMX_RESERVE h_addr_list, NASMX_PTR, 1
+    NASMX_RESERVE h_addr_list, ptrdiff_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC NETENT
-    NASMX_RESERVE n_name,     NASMX_PTR, 1
-    NASMX_RESERVE n_aliases,  NASMX_PTR, 1
+    NASMX_RESERVE n_name,     ptrdiff_t, 1
+    NASMX_RESERVE n_aliases,  ptrdiff_t, 1
     NASMX_RESERVE n_addrtype, short_t, 1
     NASMX_RESERVE n_net,      uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC SERVENT
-    NASMX_RESERVE s_name,    NASMX_PTR, 1
-    NASMX_RESERVE s_aliases, NASMX_PTR, 1
+    NASMX_RESERVE s_name,    ptrdiff_t, 1
+    NASMX_RESERVE s_aliases, ptrdiff_t, 1
 %ifidni __OUTPUT_FORMAT__,win64
-    NASMX_RESERVE s_proto,   NASMX_PTR, 1
+    NASMX_RESERVE s_proto,   ptrdiff_t, 1
     NASMX_RESERVE s_port,    short_t, 1
 %else
     NASMX_RESERVE s_port,    short_t, 1
-    NASMX_RESERVE s_proto,   NASMX_PTR, 1
+    NASMX_RESERVE s_proto,   ptrdiff_t, 1
 %endif
 NASMX_ENDSTRUC
 
 NASMX_STRUC PROTOENT
-    NASMX_RESERVE p_name,    NASMX_PTR, 1
-    NASMX_RESERVE p_aliases, NASMX_PTR, 1
+    NASMX_RESERVE p_name,    ptrdiff_t, 1
+    NASMX_RESERVE p_aliases, ptrdiff_t, 1
     NASMX_RESERVE p_proto,   short_t, 1
 NASMX_ENDSTRUC
 
@@ -129,7 +129,7 @@ NASMX_STRUC IN_ADDR
             NASMX_RESERVE s_w1, uint16_t, 1
             NASMX_RESERVE s_w2, uint16_t, 1
         NASMX_ENDSTRUC
-		NASMX_RESERVE S_addr, uint32_t, 1
+		NASMX_RESERVE S_addr,   uint32_t, 1
 	NASMX_ENDUNION
 NASMX_ENDSTRUC
 %define s_addr  IN_ADDR.S_un.S_addr
@@ -170,7 +170,7 @@ NASMX_STRUC SOCKADDR_IN
                 NASMX_RESERVE s_w1, uint16_t, 1
                 NASMX_RESERVE s_w2, uint16_t, 1
             NASMX_ENDSTRUC
-		    NASMX_RESERVE S_addr, uint32_t, 1
+		    NASMX_RESERVE S_addr,   uint32_t, 1
         NASMX_ENDUNION
     NASMX_ENDSTRUC
     NASMX_RESERVE sin_zero, int8_t, 8
@@ -185,7 +185,7 @@ NASMX_STRUC WSADATA
 %ifidni __OUTPUT_FORMAT__,win64
     NASMX_RESERVE iMaxSockets,    uint16_t, 1
     NASMX_RESERVE iMaxUdpDg,      uint16_t, 1
-    NASMX_RESERVE lpVendorInfo,   NASMX_PTR, 1
+    NASMX_RESERVE lpVendorInfo,   ptrdiff_t, 1
     NASMX_RESERVE szDescription,  int8_t, WSADESCRIPTION_LEN+1
     NASMX_RESERVE szSystemStatus, int8_t, WSASYS_STATUS_LEN+1
 %else
@@ -193,7 +193,7 @@ NASMX_STRUC WSADATA
     NASMX_RESERVE szSystemStatus, int8_t, WSASYS_STATUS_LEN+1
     NASMX_RESERVE iMaxSockets,    uint16_t, 1
     NASMX_RESERVE iMaxUdpDg,      uint16_t, 1
-    NASMX_RESERVE lpVendorInfo,   NASMX_PTR, 1
+    NASMX_RESERVE lpVendorInfo,   ptrdiff_t, 1
 %endif
 NASMX_ENDSTRUC
 
@@ -224,7 +224,7 @@ NASMX_STRUC ip_mreq
                 NASMX_RESERVE s_w1, uint16_t, 1
                 NASMX_RESERVE s_w2, uint16_t, 1
             NASMX_ENDSTRUC
-		    NASMX_RESERVE S_addr, uint32_t, 1
+		    NASMX_RESERVE S_addr,   uint32_t, 1
 	    NASMX_ENDUNION
     NASMX_ENDSTRUC
     NASMX_STRUC imr_interface, IN_ADDR
@@ -239,7 +239,7 @@ NASMX_STRUC ip_mreq
                 NASMX_RESERVE s_w1, uint16_t, 1
                 NASMX_RESERVE s_w2, uint16_t, 1
             NASMX_ENDSTRUC
-		    NASMX_RESERVE S_addr, uint32_t, 1
+		    NASMX_RESERVE S_addr,   uint32_t, 1
 	    NASMX_ENDUNION
     NASMX_ENDSTRUC
 NASMX_ENDSTRUC
@@ -333,13 +333,13 @@ NASMX_ENDSTRUC
 ;// Structure used by kernel to store most addresses.
 NASMX_STRUC SOCKADDR
     NASMX_RESERVE sa_family, uint16_t, 1
-    NASMX_RESERVE sa_data, int8_t, 14
+    NASMX_RESERVE sa_data,   int8_t, 14
 NASMX_ENDSTRUC
 
 ;// Structure used by kernel to pass protocol
 ;// information in raw sockets.
 NASMX_STRUC SOCKPROTO
-    NASMX_RESERVE sp_family, uint16_t, 1
+    NASMX_RESERVE sp_family,   uint16_t, 1
     NASMX_RESERVE sp_protocol, uint16_t, 1
 NASMX_ENDSTRUC
 
@@ -473,8 +473,7 @@ NASMX_ENDSTRUC
 %define WSANO_ADDRESS  WSANO_DATA
 %define NO_ADDRESS     WSANO_ADDRESS
 
-;// WinSock error codes are also defined in winerror.h
-;// Hence the IFDEF.
+;// WinSock error codes are also defined in winerror.h, hence the IFDEF.
 %endif  ;// ifndef WSABASEERR
 
 %define EWOULDBLOCK     WSAEWOULDBLOCK
@@ -516,9 +515,9 @@ NASMX_ENDSTRUC
 %define EREMOTE         WSAEREMOTE
 
 NASMX_STRUC TRANSMIT_FILE_BUFFERS
-    NASMX_RESERVE Head,       NASMX_PTR, 1
+    NASMX_RESERVE Head,       ptrdiff_t, 1
     NASMX_RESERVE HeadLength, uint16_t, 1
-    NASMX_RESERVE Tail,       NASMX_PTR, 1
+    NASMX_RESERVE Tail,       ptrdiff_t, 1
     NASMX_RESERVE TailLength, uint16_t, 1
 NASMX_ENDSTRUC
 
@@ -530,9 +529,9 @@ NASMX_ENDSTRUC
 %define IP_FLAG_DF      02h
 
 NASMX_STRUC IP_OPTION_INFORMATION
-    NASMX_RESERVE Ttl,   uint8_t, 1
-    NASMX_RESERVE Tos,   uint8_t, 1
-    NASMX_RESERVE Flags, uint8_t, 1
+    NASMX_RESERVE Ttl,         uint8_t, 1
+    NASMX_RESERVE Tos,         uint8_t, 1
+    NASMX_RESERVE Flags,       uint8_t, 1
     NASMX_RESERVE OptionsSize, uint8_t, 1
     NASMX_RESERVE OptionsData, uint32_t, 1
 NASMX_ENDSTRUC
@@ -575,11 +574,11 @@ NASMX_STRUC ICMP_ECHO_REPLY
             NASMX_RESERVE S_addr,   uint32_t, 1
         NASMX_ENDUNION
     NASMX_ENDSTRUC
-    NASMX_RESERVE Status, uint32_t, 1
-    NASMX_RESERVE RoundTripTime, uint32_t, 1
-    NASMX_RESERVE DataSize, uint16_t, 1
-    NASMX_RESERVE Reserved, uint16_t, 1
-    NASMX_RESERVE Data, ptr32_t, 1
+    NASMX_RESERVE Status,          uint32_t, 1
+    NASMX_RESERVE RoundTripTime,   uint32_t, 1
+    NASMX_RESERVE DataSize,        uint16_t, 1
+    NASMX_RESERVE Reserved,        uint16_t, 1
+    NASMX_RESERVE Data,            ptr32_t, 1
     NASMX_STRUC Options, IP_OPTION_INFORMATION
         NASMX_RESERVE Ttl,         uint8_t, 1
         NASMX_RESERVE Tos,         uint8_t, 1
