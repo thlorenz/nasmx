@@ -29,7 +29,6 @@
 	%define CharUpperBuff CharUpperBuffW
 	%define CheckNameLegalDOS8Dot3 CheckNameLegalDOS8Dot3W
 	%define CommConfigDialog CommConfigDialogW
-	%define CompareString CompareStringW
 	%define CopyAcceleratorTable CopyAcceleratorTableW
 	%define CopyFile CopyFileW
 	%define CopyFileEx CopyFileExW
@@ -75,25 +74,15 @@
 	%define DrawText DrawTextW
 	%define DrawTextEx DrawTextExW
 	%define EndUpdateResource EndUpdateResourceW
-	%define EnumCalendarInfo EnumCalendarInfoW
-	%define EnumCalendarInfoEx EnumCalendarInfoExW
-	%define EnumDateFormats EnumDateFormatsW
-	%define EnumDateFormatsExA EnumDateFormatsExW
 	%define EnumDesktops EnumDesktopsW
 	%define EnumDisplayDevices EnumDisplayDevicesW
 	%define EnumDisplaySettings EnumDisplaySettingsW
 	%define EnumDisplaySettingsEx EnumDisplaySettingsExW
-	%define EnumLanguageGroupLocales EnumLanguageGroupLocalesW
 	%define EnumProps EnumPropsW
 	%define EnumPropsEx EnumPropsExW
 	%define EnumResourceLanguages EnumResourceLanguagesW
 	%define EnumResourceNames EnumResourceNamesW
 	%define EnumResourceTypes EnumResourceTypesW
-	%define EnumSystemCodePages EnumSystemCodePagesW
-	%define EnumSystemLanguageGroups EnumSystemLanguageGroupsW
-	%define EnumSystemLocales EnumSystemLocalesW
-	%define EnumTimeFormats EnumTimeFormatsW
-	%define EnumUILanguages EnumUILanguagesW
 	%define EnumWindowStations EnumWindowStationsW
 	%define EnumerateLocalComputerNames EnumerateLocalComputerNamesW
 	%define ExpandEnvironmentStrings ExpandEnvironmentStringsW
@@ -114,7 +103,6 @@
 	%define FindResourceEx FindResourceExW
 	%define FindWindow FindWindowW
 	%define FindWindowEx FindWindowExW
-	%define FoldString FoldStringW
 	%define FormatMessage FormatMessageW
 	%define FreeEnvironmentStrings FreeEnvironmentStringsW
 	%define GetAltTabInfo GetAltTabInfoW
@@ -124,8 +112,6 @@
 	%define GetClassInfoEx GetClassInfoExW
 	%define GetClassLong GetClassLongW
 	%define GetClipboardFormatName GetClipboardFormatNameW
-	%define GetCPInfoEx GetCPInfoExW
-	%define GetCalendarInfo GetCalendarInfoW
 	%define GetCommandLine GetCommandLineW
 	%define GetCompressedFileSize GetCompressedFileSizeW
 	%define GetComputerName GetComputerNameW
@@ -136,9 +122,7 @@
 	%define GetConsoleAliases GetConsoleAliasesW
 	%define GetConsoleAliasesLength GetConsoleAliasesLengthW
 	%define GetConsoleTitle GetConsoleTitleW
-	%define GetCurrencyFormat GetCurrencyFormatW
 	%define GetCurrentDirectory GetCurrentDirectoryW
-	%define GetDateFormat GetDateFormatW
 	%define GetDefaultCommConfig GetDefaultCommConfigW
 	%define GetDiskFreeSpace GetDiskFreeSpaceW
 	%define GetDiskFreeSpaceEx GetDiskFreeSpaceExW
@@ -151,10 +135,8 @@
 	%define GetFileAttributesEx GetFileAttributesExW
 	%define GetFirmwareEnvironmentVariable GetFirmwareEnvironmentVariableW
 	%define GetFullPathName GetFullPathNameW
-	%define GetGeoInfo GetGeoInfoW
 	%define GetKeyNameText GetKeyNameTextW
 	%define GetKeyboardLayoutName GetKeyboardLayoutNameW
-	%define GetLocaleInfo GetLocaleInfoW
 	%define GetLogicalDriveStrings GetLogicalDriveStringsW
 	%define GetLongPathName GetLongPathNameW
 	%define GetMenuItemInfo GetMenuItemInfoW
@@ -165,7 +147,6 @@
 	%define GetModuleHandleEx GetModuleHandleExW
 	%define GetMonitorInfo GetMonitorInfoW
 	%define GetNamedPipeHandleState GetNamedPipeHandleStateW
-	%define GetNumberFormat GetNumberFormatW
 	%define GetPrivateProfileInt GetPrivateProfileIntW
 	%define GetPrivateProfileSection GetPrivateProfileSectionW
 	%define GetPrivateProfileSectionNames GetPrivateProfileSectionNamesW
@@ -178,15 +159,12 @@
 	%define GetRawInputDeviceInfo GetRawInputDeviceInfoW
 	%define GetShortPathName GetShortPathNameW
 	%define GetStartupInfo GetStartupInfoW
-	%define GetStringType GetStringTypeW
-	%define GetStringTypeEx GetStringTypeExW
 	%define GetSystemDirectory GetSystemDirectoryW
 	%define GetSystemWindowsDirectory GetSystemWindowsDirectoryW
 	%define GetSystemWow64Directory GetSystemWow64DirectoryW
 	%define GetTabbedTextExtent GetTabbedTextExtentW
 	%define GetTempFileName GetTempFileNameW
 	%define GetTempPath GetTempPathW
-	%define GetTimeFormat GetTimeFormatW
 	%define GetUserObjectInformation GetUserObjectInformationW
 	%define GetVersionEx GetVersionExW
 	%define GetVolumeInformation GetVolumeInformationW
@@ -212,7 +190,6 @@
 	%define IsCharLower IsCharLowerW
 	%define IsCharUpper IsCharUpperW
 	%define IsDialogMessage IsDialogMessageW
-	%define LCMapString LCMapStringW
 	%define LoadAccelerators LoadAcceleratorsW
 	%define LoadBitmap LoadBitmapW
 	%define LoadCursor LoadCursorW
@@ -274,7 +251,6 @@
 	%define SendMessageCallback SendMessageCallbackW
 	%define SendMessageTimeout SendMessageTimeoutW
 	%define SendNotifyMessage SendNotifyMessageW
-	%define SetCalendarInfo SetCalendarInfoW
 	%define SetClassLong SetClassLongW
 	%define SetComputerName SetComputerNameW
 	%define SetComputerNameEx SetComputerNameExW
@@ -289,7 +265,6 @@
 	%define SetFileShortName SetFileShortNameW
 	%define SetFirmwareEnvironmentVariable SetFirmwareEnvironmentVariableW
 	%define SetLocalPrimaryComputerName SetLocalPrimaryComputerNameW
-	%define SetLocaleInfo SetLocaleInfoW
 	%define SetMenuItemInfo SetMenuItemInfoW
 	%define SetProp SetPropW
 	%define SetUserObjectInformation SetUserObjectInformationW
@@ -355,7 +330,6 @@
 	%define CharUpperBuff CharUpperBuffA
 	%define CheckNameLegalDOS8Dot3 CheckNameLegalDOS8Dot3A
 	%define CommConfigDialog CommConfigDialogA
-	%define CompareString CompareStringA
 	%define CopyAcceleratorTable CopyAcceleratorTableA
 	%define CopyFile CopyFileA
 	%define CopyFileEx CopyFileExA
@@ -400,25 +374,15 @@
 	%define DrawState DrawStateA
 	%define DrawText DrawTextA
 	%define DrawTextEx DrawTextExA
-	%define EnumCalendarInfo EnumCalendarInfoA
-	%define EnumCalendarInfoEx EnumCalendarInfoExA
-	%define EnumDateFormats EnumDateFormatsA
-	%define EnumDateFormatsExA EnumDateFormatsExA
 	%define EnumDesktops EnumDesktopsA
 	%define EnumDisplayDevices EnumDisplayDevicesA
 	%define EnumDisplaySettings EnumDisplaySettingsA
 	%define EnumDisplaySettingsEx EnumDisplaySettingsExA
-	%define EnumLanguageGroupLocales EnumLanguageGroupLocalesA
 	%define EnumProps EnumPropsA
 	%define EnumPropsEx EnumPropsExA
 	%define EnumResourceLanguages EnumResourceLanguagesA
 	%define EnumResourceNames EnumResourceNamesA
 	%define EnumResourceTypes EnumResourceTypesA
-	%define EnumSystemCodePages EnumSystemCodePagesA
-	%define EnumSystemLanguageGroups EnumSystemLanguageGroupsA
-	%define EnumSystemLocales EnumSystemLocalesA
-	%define EnumTimeFormats EnumTimeFormatsA
-	%define EnumUILanguages EnumUILanguagesA
 	%define EnumWindowStations EnumWindowStationsA
 	%define EnumerateLocalComputerNames EnumerateLocalComputerNamesA
 	%define ExpandEnvironmentStrings ExpandEnvironmentStringsA
@@ -437,7 +401,6 @@
 	%define FindResourceEx FindResourceExA
 	%define FindWindow FindWindowA
 	%define FindWindowEx FindWindowExA
-	%define FoldString FoldStringA
 	%define FormatMessage FormatMessageA
 	%define FreeEnvironmentStrings FreeEnvironmentStringsA
 	%define GetAltTabInfo GetAltTabInfoA
@@ -447,8 +410,6 @@
 	%define GetClassInfoEx GetClassInfoExA
 	%define GetClassLong GetClassLongA
 	%define GetClipboardFormatName GetClipboardFormatNameA
-	%define GetCPInfoEx GetCPInfoExA
-	%define GetCalendarInfo GetCalendarInfoA
 	%define GetCommandLine GetCommandLineA
 	%define GetCompressedFileSize GetCompressedFileSizeA
 	%define GetComputerName GetComputerNameA
@@ -459,9 +420,7 @@
 	%define GetConsoleAliases GetConsoleAliasesA
 	%define GetConsoleAliasesLength GetConsoleAliasesLengthA
 	%define GetConsoleTitle GetConsoleTitleA
-	%define GetCurrencyFormat GetCurrencyFormatA
 	%define GetCurrentDirectory GetCurrentDirectoryA
-	%define GetDateFormat GetDateFormatA
 	%define GetDefaultCommConfig GetDefaultCommConfigA
 	%define GetDiskFreeSpace GetDiskFreeSpaceA
 	%define GetDiskFreeSpaceEx GetDiskFreeSpaceExA
@@ -474,10 +433,8 @@
 	%define GetFileAttributesEx GetFileAttributesExA
 	%define GetFirmwareEnvironmentVariable GetFirmwareEnvironmentVariableA
 	%define GetFullPathName GetFullPathNameA
-	%define GetGeoInfo GetGeoInfoA
 	%define GetKeyNameText GetKeyNameTextA
 	%define GetKeyboardLayoutName GetKeyboardLayoutNameA
-	%define GetLocaleInfo GetLocaleInfoA
 	%define GetLogicalDriveStrings GetLogicalDriveStringsA
 	%define GetLongPathName GetLongPathNameA
 	%define GetMenuItemInfo GetMenuItemInfoA
@@ -488,7 +445,6 @@
 	%define GetModuleHandleEx GetModuleHandleExA
 	%define GetMonitorInfo GetMonitorInfoA
 	%define GetNamedPipeHandleState GetNamedPipeHandleStateA
-	%define GetNumberFormat GetNumberFormatA
 	%define GetPrivateProfileInt GetPrivateProfileIntA
 	%define GetPrivateProfileSection GetPrivateProfileSectionA
 	%define GetPrivateProfileSectionNames GetPrivateProfileSectionNamesA
@@ -501,15 +457,12 @@
 	%define GetRawInputDeviceInfo GetRawInputDeviceInfoA
 	%define GetShortPathName GetShortPathNameA
 	%define GetStartupInfo GetStartupInfoA
-	%define GetStringType GetStringTypeA
-	%define GetStringTypeEx GetStringTypeExA
 	%define GetSystemDirectory GetSystemDirectoryA
 	%define GetSystemWindowsDirectory GetSystemWindowsDirectoryA
 	%define GetSystemWow64Directory GetSystemWow64DirectoryA
 	%define GetTabbedTextExtent GetTabbedTextExtentA
 	%define GetTempFileName GetTempFileNameA
 	%define GetTempPath GetTempPathA
-	%define GetTimeFormat GetTimeFormatA
 	%define GetUserObjectInformation GetUserObjectInformationA
 	%define GetVersionEx GetVersionExA
 	%define GetVolumeInformation GetVolumeInformationA
@@ -535,7 +488,6 @@
 	%define IsCharLower IsCharLowerA
 	%define IsCharUpper IsCharUpperA
 	%define IsDialogMessage IsDialogMessageA
-	%define LCMapString LCMapStringA
 	%define LoadAccelerators LoadAcceleratorsA
 	%define LoadBitmap LoadBitmapA
 	%define LoadCursor LoadCursorA
@@ -597,7 +549,6 @@
 	%define SendMessageCallback SendMessageCallbackA
 	%define SendMessageTimeout SendMessageTimeoutA
 	%define SendNotifyMessage SendNotifyMessageA
-	%define SetCalendarInfo SetCalendarInfoA
 	%define SetClassLong SetClassLongA
 	%define SetComputerName SetComputerNameA
 	%define SetComputerNameEx SetComputerNameExA
@@ -612,7 +563,6 @@
 	%define SetFileShortName SetFileShortNameA
 	%define SetFirmwareEnvironmentVariable SetFirmwareEnvironmentVariableA
 	%define SetLocalPrimaryComputerName SetLocalPrimaryComputerNameA
-	%define SetLocaleInfo SetLocaleInfoA
 	%define SetMenuItemInfo SetMenuItemInfoA
 	%define SetProp SetPropA
 	%define SetUserObjectInformation SetUserObjectInformationA
