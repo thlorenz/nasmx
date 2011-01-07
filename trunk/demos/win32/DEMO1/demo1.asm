@@ -24,6 +24,19 @@ entry    demo1
 
 [section .text]
 
+%ifidni __OUTPUT_FORMAT__, win64
+;// This is an advanced optimization technique allowing the developer to specify
+;// amount of additional stack space, in bytes, to allocate within procedures to
+;// account for the win64 calling convention.  It should be set to a number equal
+;// to the maximum amount of parameters used by invoke * 8 within the procedure.
+;// The number of bytes specified should be a multiple of 16 and at least 32.
+;// It will eliminate all the extraneous add/sub rsp opcodes which would otherwise
+;// be generated during an invoke.  This pragma may be used multiple times within
+;// a source file.  If the number set is not large enough then the invoke macro
+;// will complain and provide a warning message.
+nasmx_pragma callstack, 32
+%endif
+
 ;// Define our function procedure expecting 2 arguments of ptrdiff_t size.
 ;// Google size_t and ptrdiff_t to understand why these typedefs were chosen.
 ;// If we wanted to make this function global we would use the PROTO macro
