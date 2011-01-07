@@ -20,6 +20,10 @@
 ;// depending on whether UNICODE is defined or not
 %include '..\..\..\inc\win32\unicode.inc'
 
+%ifidni __OUTPUT_FORMAT__,win64
+DEFAULT REL
+%endif
+
 entry demo2
 
 [section .text]
@@ -28,24 +32,23 @@ proc    WndProc, ptrdiff_t hwnd, dword umsg, ptrdiff_t wparam, ptrdiff_t lparam
 locals none
 
 .wm_create:
-    cmp      [argv(.umsg)], dword WM_CREATE
+    cmp      dword [argv(.umsg)], WM_CREATE
     jnz      .wm_destroy
 
-    invoke   GetClientRect, [argv(.hwnd)], rct
-    invoke   CreateWindowEx, NULL, szStatic, szTitle, WS_CHILD + WS_VISIBLE + SS_CENTER, 0, 0, [rct + RECT.right], [rct + RECT.bottom], [argv(.hwnd)], 500, [wc + WNDCLASSEX.hInstance], NULL
+    invoke   GetClientRect, size_t [argv(.hwnd)], rct
+    invoke   CreateWindowEx, NULL, szStatic, szTitle, WS_CHILD + WS_VISIBLE + SS_CENTER, 0, 0, dword [rct + RECT.right], dword [rct + RECT.bottom], size_t [argv(.hwnd)], 500, size_t [wc + WNDCLASSEX.hInstance], NULL
     jmp      .wm_default
 
 .wm_destroy:
-    cmp      [argv(.umsg)], dword WM_DESTROY
+    cmp      dword [argv(.umsg)], WM_DESTROY
     jnz      .wm_default
 
     invoke   PostQuitMessage, NULL
 
 .wm_default:
-    invoke   DefWindowProc, [argv(.hwnd)], [argv(.umsg)], [argv(.wparam)], [argv(.lparam)]
+    invoke   DefWindowProc, size_t [argv(.hwnd)], dword [argv(.umsg)], size_t [argv(.wparam)], size_t [argv(.lparam)]
     
 .exit:
-    ret
 
 endproc
 
@@ -53,22 +56,22 @@ proc    WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwsho
 locals none
 
     invoke   LoadIcon, NULL, IDI_APPLICATION
-    mov      edx, eax
-    mov      eax, dword [argv(.hinst)]
-    mov      ebx, dword szClass
-    mov      ecx, dword WndProc
-    mov      [wc + WNDCLASSEX.hInstance], eax
-    mov      [wc + WNDCLASSEX.lpszClassName], ebx
-    mov      [wc + WNDCLASSEX.lpfnWndProc], ecx
-    mov      [wc + WNDCLASSEX.hIcon], edx
-    mov      [wc + WNDCLASSEX.hIconSm], edx
+    mov      __DX, __AX
+    mov      __AX, size_t [argv(.hinst)]
+    mov      __BX, size_t szClass
+    mov      __CX, size_t WndProc
+    mov      size_t [wc + WNDCLASSEX.hInstance], __AX
+    mov      size_t [wc + WNDCLASSEX.lpszClassName], __BX
+    mov      size_t [wc + WNDCLASSEX.lpfnWndProc], __CX
+    mov      size_t [wc + WNDCLASSEX.hIcon], __DX
+    mov      size_t [wc + WNDCLASSEX.hIconSm], __DX
 
     invoke   RegisterClassEx, wc
 
-    invoke   CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 200, 100, NULL, NULL, [wc + WNDCLASSEX.hInstance], NULL
-    mov      [hWnd], eax
+    invoke   CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 200, 100, NULL, NULL, size_t [wc + WNDCLASSEX.hInstance], NULL
+    mov      size_t [hWnd], __AX
 
-    invoke   ShowWindow, hWnd, [argv(.dwshow)]
+    invoke   ShowWindow, hWnd, size_t [argv(.dwshow)]
     invoke   UpdateWindow, hWnd
 
     .msgloop:
@@ -90,7 +93,7 @@ proc    demo2
 locals none
 
     invoke   GetModuleHandle, NULL
-    mov      [hInstance], eax
+    mov      size_t [hInstance], __AX
     invoke   WinMain, hInstance, NULL, NULL, SW_SHOWNORMAL
     invoke   ExitProcess, NULL
 
