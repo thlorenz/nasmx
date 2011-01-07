@@ -433,7 +433,8 @@ IMPORT MapVirtualKeyW, 8
 IMPORT MapWindowPoints, 16
 IMPORT MenuItemFromPoint, 16
 IMPORT MessageBeep, 4
-IMPORT MessageBoxA, 16
+;IMPORT MessageBoxA, 16
+IMPORT MessageBoxA, ptrdiff_t hWnd, ptrdiff_t lpText, ptrdiff_t lpCaption, uint32_t uType
 IMPORT MessageBoxExA, 20
 IMPORT MessageBoxExW, 20
 IMPORT MessageBoxIndirectA, 4
@@ -441,6 +442,7 @@ IMPORT MessageBoxIndirectW, 4
 IMPORT MessageBoxTimeoutA, 24
 IMPORT MessageBoxTimeoutW, 24
 IMPORT MessageBoxW, 16
+;IMPORT MessageBoxW, ptrdiff_t hWnd, ptrdiff_t lpText, ptrdiff_t lpCaption, uint32_t uType
 IMPORT ModifyMenuA, 20
 IMPORT ModifyMenuW, 20
 IMPORT MonitorFromPoint, 12
