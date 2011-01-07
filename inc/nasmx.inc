@@ -174,6 +174,28 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 %ixdefine __BP ebp
 %ixdefine __SP esp
 %endif
+;// register names used to help with macros invoke and uses
+%ixdefine __nx_reg_eax eax
+%ixdefine __nx_reg_ebx ebx
+%ixdefine __nx_reg_ecx ecx
+%ixdefine __nx_reg_edx edx
+%ixdefine __nx_reg_edi edi
+%ixdefine __nx_reg_esi esi
+%ixdefine __nx_reg_rax rax
+%ixdefine __nx_reg_rbx rbx
+%ixdefine __nx_reg_rcx rcx
+%ixdefine __nx_reg_rdx rdx
+%ixdefine __nx_reg_rdi rdi
+%ixdefine __nx_reg_rsi rsi
+%ixdefine __nx_reg_r8  r8
+%ixdefine __nx_reg_r9  r9
+%ixdefine __nx_reg_r10 r10
+%ixdefine __nx_reg_r11 r11
+%ixdefine __nx_reg_r12 r12
+%ixdefine __nx_reg_r13 r13
+%ixdefine __nx_reg_r14 r14
+%ixdefine __nx_reg_r15 r15
+
 
 ;//////////////////////////////////////////////////////////////
 ;//
@@ -453,6 +475,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 ;//////////////////////////////////////////////////////////////////
 ;// Macro to control NASMX default behavior
 ;// example usage:
+;//    NASMX_PRAGMA CALLSTACK, 32
 ;//    NASMX_PRAGMA WARNING, DISABLE, ALL
 ;//    NASMX_PRAGMA WARNING, DISABLE, 8001[, 8002, 8003]
 ;//    NASMX_PRAGMA WARNING, ENABLE, ALL
@@ -497,6 +520,33 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%endif
 		%else
 			%error 'syntax: nasmx_pragma warning, [enable | disable], ...'
+		%endif
+	%elifidni CALLSTACK, %1
+		%ifdef NASMX_ENDPROC
+			%error %1 pragma cannot be defined within procedure definition
+		%endif
+		%ifnum %2
+			%assign %%__nx_stack_adjust %2
+			%ifidni __OUTPUT_FORMAT__, win64
+				;// assert: Win64 calling convention requires that the
+				;// call stack be aligned to 16 bytes and at least 32
+				%if %%__nx_stack_adjust < 32
+					%assign %%__nx_stack_adjust 32
+				%endif
+				%assign %%__off (((%%__nx_stack_adjust + 16) / 16) * 16)
+				%assign %%__tmp (%%__nx_stack_adjust + 16)
+				%if (%%__off != %%__tmp)
+					%assign %%__nx_stack_adjust %%__off
+				%endif
+			%endif
+			;// This must be a global define since it is used within the procedure
+			;// and during invoke and thus could be hidden by one or more user contexts
+			%ifdef __NX_CALLSTACK_ADJUST__
+				%undef __NX_CALLSTACK_ADJUST__
+			%endif
+			%xdefine __NX_CALLSTACK_ADJUST__ %%__nx_stack_adjust
+		%else
+			%error %1 pragma requires valid byte count
 		%endif
 	%else
 		%error 'unknown nasmx_pragma:' %1
@@ -594,7 +644,9 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    6
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  8
-	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS__ 'RDIRSIRDXRCXR8 R9 '
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_8__ 'RDIRSIRDXRCXR8 R9 '
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'EDIESIEDXECXR8DR9D'
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_2__ 'DI SI DX CX R8WR9W'
 	NASMX_DECLSPEC SYSTYPE, LINUX
 	NASMX_DECLSPEC CALLCONV, FASTCALL, DEFAULT
 	%idefine long_t long64_t
@@ -646,7 +698,9 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    6
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  8
-	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS__ 'RDIRSIRDXRCXR8 R9 '
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_8__ 'RDIRSIRDXRCXR8 R9 '
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'EDIESIEDXECXR8dR9d'
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_2__ 'DI SI DX CX R8wR9w'
 	NASMX_DECLSPEC SYSTYPE, MACHOS
 	NASMX_DECLSPEC CALLCONV, FASTCALL, DEFAULT
 	%idefine long_t long64_t
@@ -664,7 +718,8 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2522
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    2
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
-	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS__ 'ECXEDX'
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'ECXEDX'
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_2__ 'CX DX '
 	NASMX_DECLSPEC SYSTYPE, WINDOWS
 	NASMX_DECLSPEC CALLCONV, STDCALL, DEFAULT
 	%idefine long_t long32_t
@@ -682,7 +737,9 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    4
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  4
-	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS__ 'RCXRDXR8 R9 '
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_8__ 'RCXRDXR8 R9 '
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'ECXEDXR8DR9D'
+	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_2__ 'CX DX R8WR9W'
 	NASMX_DECLSPEC SYSTYPE, WINDOWS
 	NASMX_DECLSPEC CALLCONV, FASTCALL, DEFAULT
 	%idefine long_t long32_t
@@ -897,20 +954,20 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%push %3
 		%xdefine %$__nx_istrucstart %{1}
 		%xdefine %$__nx_name %{2}
-		%{$__nx_istrucstart}:
+		%[%$__nx_istrucstart]:
 	%else
 		%if (%%__is_named == 0)
 			%xdefine %%__tname %{$__nx_name}
 		%else
 			%xdefine %%__tname %{$__nx_name}.%{1}
 			%assign %%__off %%__tname
-			%assign %%__times %%__off-($-%{$__nx_istrucstart})
+			%assign %%__times %%__off-($-%[%$__nx_istrucstart])
 			%if (%%__times > 0)
 				times %%__times db 0
 			%endif
 		%endif
 		%push  %3
-		%xdefine %$__nx_istrucstart %{$$__nx_istrucstart}
+		%xdefine %$__nx_istrucstart %[%$$__nx_istrucstart]
 		%xdefine %$__nx_name %%__tname
 	%endif
 	%define %$__nx_isnamed %%__is_named
@@ -947,12 +1004,12 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 ;//    To parse a string and return delimited tokens
 ;//    Functionality is similar to the C strtok function
 ;//
-;// usage:                        ; After call:
+;// Usage:                        ; After call:
 ;//    nx_strtok two tokens, ' '  ; %$__nx_token = two   , %$__nx_token_len = 3
 ;//    nx_strtok NULL, ' :?;'     ; %$__nx_token = tokens, %$__nx_token_len = 6
 ;//    nx_strtok NULL, ' :?;'     ; %$__nx_token = ''    , %$__nx_token_len = 0
 ;//
-;// notes:
+;// Notes:
 ;//    The return value is stored on the context stack as
 ;//    %$__nx_token thus it must only be called within a valid context.
 ;;//   The length is also returned as %$__nx_token_len.  Check this value
@@ -1064,6 +1121,91 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 %endmacro
 
 
+;//////////////////////////////////////////////////////////////
+;// MACRO nx_strchr
+;//
+;// Purpose
+;//    This macro is designed to find position of char within string.
+;//    It will update the current context stack variable %$__nx_strchr_pos
+;//    with the index position of the chr or 0 if chr not found
+;// Usage:
+;//    nx_strchr string, chr
+;//    nx_strchr [wc + hInstance], 'x'
+;//
+%macro nx_strchr 2
+	%ifdef %$__nx_strchr_string
+		%undef %$__nx_strchr_string
+	%endif
+	%ifstr %1
+		%xdefine %$__nx_strchr_string %{1}
+	%else
+		%defstr %$__nx_strchr_string %{1}
+	%endif
+	%strlen %%__count %[%$__nx_strchr_string]
+	%assign %%__idx 0
+	%assign %%__found 0
+	%rep %%__count
+		%assign %%__idx %%__idx + 1
+		%substr %%__chr %[%$__nx_strchr_string] %%__idx
+		%ifidn %%__chr,%{2}
+			%assign %%__found %%__idx
+			%exitrep
+		%endif
+	%endrep
+	%assign %$__nx_strchr_pos %%__found
+%endmacro
+
+
+;//////////////////////////////////////////////////////////////
+;// MACRO nx_strstr
+;//
+;// Purpose
+;//    This macro is designed to find position of substr within string.
+;//    It will update the current context stack variable %$__nx_strstr_pos
+;//    with the index position of the substr or 0 if not found
+;// Usage:
+;//    nx_strstr string, substr
+;//    nx_strstr [rpb + hInstance], rbp
+;//
+%macro nx_strstr 2
+	%ifdef %$__nx_strstr_string
+		%undef %$__nx_strstr_string
+	%endif
+	%ifstr %1
+		%xdefine %$__nx_strstr_string %{1}
+	%else
+		%defstr %$__nx_strstr_string %{1}
+	%endif
+	%ifstr %2
+		%xdefine %$__nx_strstr_substring %{2}
+	%else
+		%defstr %$__nx_strstr_substring %{2}
+	%endif
+	%strlen %%__count %[%$__nx_strstr_string]
+	%substr %%__subchr %[%$__nx_strstr_substring] 1
+	%strlen %%__sublen %[%$__nx_strstr_substring]
+	%assign %%__idx 0
+	%assign %%__found 0
+	%rep %%__count
+		%assign %%__idx %%__idx + 1
+		%if ((%%__count - %%__idx + 1) < %%__sublen)
+			%exitrep
+		%endif
+		%substr %%__chr %[%$__nx_strstr_string] %%__idx
+		%ifidni %%__chr,%%__subchr
+			%substr %%__tmpstr %$__nx_strstr_string %%__idx, %%__sublen
+			%ifidni %%__tmpstr, %$__nx_strstr_substring
+				%assign %%__found %%__idx
+				%exitrep
+			%endif
+		%endif
+	%endrep
+	%assign %$__nx_strstr_pos %%__found
+	%undef %$__nx_strstr_string
+	%undef %$__nx_strstr_substring
+%endmacro
+
+
 ;// small helper macro used to parse __nxsig@@ defines
 %macro nx_parse_tokens 1-100.nolist
 	%ifdef __nx_token_0
@@ -1100,7 +1242,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%assign %$__bytecount 0
 	%ifndef __NASMX_DECLSPEC_CALLCONV_%[%1]__
 		%assign %$__callconv __NASMX_DECLSPEC_CALLCONV_DEFAULT__
-		%define %$__proc %1
+		%define %$__nx_proc %1
 		%if %0 > 1
 			%ifnum %2
 				%ifidn __OUTPUT_FORMAT__,win32
@@ -1115,6 +1257,9 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%if %%__cc_enum == __NASMX_DECLSPEC_CC_ENUM_STDCALL__
 				;// assert: no bytecount in import implies cdecl for win32
 				%assign %$__callconv __NASMX_DECLSPEC_CALLCONV_CDECL__
+;			%elif %%__cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
+;				;// assert: no bytecount in import implies cdecl for win32/win64 fastcall
+;				%assign %$__callconv __NASMX_DECLSPEC_CALLCONV_CDECL__
 			%endif
 			%assign %$__repargs 0
 		%endif
@@ -1123,7 +1268,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%fatal usage: IMPORT [CALLCONV, ] FUNCNAME [,ARG1,ARG2,...]
 		%endif
 		%assign %$__callconv __NASMX_DECLSPEC_CALLCONV_%[%1]__
-		%define %$__proc %2
+		%define %$__nx_proc %2
 		%assign %$__repargs %0-2
 	%endif
 
@@ -1157,9 +1302,9 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%endif
 		%endrep
 	%endif
-	nx_callconv_decorate %$__callconv,%$__proc,%$__bytecount
+	nx_callconv_decorate %$__callconv,%$__nx_proc,%$__bytecount
 	%ifdef __nxsig@@%[%$__nxtok_decorated_name]
-		%warning redefining import symbol %$__proc as %[%$__nxtok_decorated_name]
+		%warning redefining import symbol %$__nx_proc as %[%$__nxtok_decorated_name]
 	%endif
 
 	%ifndef __nx_import_param_list
@@ -1170,8 +1315,8 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%undef __nx_import_params
 		%undef __nx_import_param_list
 	%endif
-	%ifnidn %$__proc,%$__nxtok_decorated_name
-		%xdefine %[%$__proc] %[%$__nxtok_decorated_name]
+	%ifnidn %$__nx_proc,%$__nxtok_decorated_name
+		%xdefine %[%$__nx_proc] %[%$__nxtok_decorated_name]
 	%endif
 	%pop
 %endmacro
@@ -1317,8 +1462,10 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 	%push _NX_CTX_INVOKE
 	%assign %$args 0
+	%assign %$__nx_intargs 0           ;// init int args counter
+	%assign %$__nx_floatargs 0         ;// init float args counter
 
-	%assign %$__nx_bytecount (( __BITS__ / 8 ) * ( %0 - 1 ))
+	%assign %$__nx_bytecount (( __NASMX_ABI_BITS__ / 8 ) * ( %0 - 1 ))
 	%ifdef __nxsig@@%[%1]
 		nx_parse_tokens __nxsig@@%[%1]
 		%assign %$__nx_callconv __nx_token_1
@@ -1342,6 +1489,18 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%warning %1 declspec unknown (PROTO/IMPORT missing), assuming __declspec(DEFAULT)
 		%assign %$__nx_callconv __NASMX_DECLSPEC_CALLCONV_DEFAULT__
 	%endif
+
+	%ifndef __NX_PROLOGUE_PRESENT__
+		;// assert: leaf functions should not be making calls thus
+		;// we have to set up a proper function prologue here to prevent
+		;// a hung application.
+		;// However, the program entry function main is also handled by this code when
+		;// it is not defined using parameters and local vars as with the example code
+		%define __NX_PROLOGUE_PRESENT__
+		push __BP
+		mov  __BP, __SP
+	%endif
+
 	%assign %%__nx_argrotate nx_declspec_cc_argrotate(%$__nx_callconv)
 	%if %%__nx_argrotate > 0
 		%assign %$__nx_argrotate 1
@@ -1352,80 +1511,162 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%assign %%__cc_enum nx_declspec_cc_enum(%$__nx_callconv)
 	%xdefine %$__nx_proc %1
 
-	%if %%__cc_enum == __NASMX_DECLSPEC_CALLCONV_FASTCALL__
+	%if %%__cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
 		%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-			%if %$$__nx_stack_adjust == 0
-				%if %$__nx_bytecount > 0
-					%if %$__nx_bytecount < 32
-						%assign %$__nx_bytecount 32
-					%endif
-					sub __SP, %$__nx_bytecount
+			%assign %$__nx_stack_adjust 0
+			%assign %$__nx_invoke_stack_adjust %$__nx_bytecount
+			%ifdef __NX_CALLSTACK_ADJUST__
+				%assign %$__nx_stack_adjust __NX_CALLSTACK_ADJUST__
+				%if %$__nx_stack_adjust < %$__nx_bytecount
+					%$__nx_stack_adjust = 0
+					%warning insufficient callstack size for procedure %[%$__nx_proc], generating inefficient code...
+				%else
+					%assign %$__nx_invoke_stack_adjust 0
 				%endif
 			%endif
+			%if %$__nx_invoke_stack_adjust > 0
+				%if __BITS__ == 64
+					%if %$__nx_invoke_stack_adjust < 32
+						%assign %$__nx_invoke_stack_adjust 32
+					%endif
+				%endif
+				%assign %%__align __NASMX_ABI_BITS__ / 4
+				%assign %%__off (((%$__nx_invoke_stack_adjust + %%__align) / %%__align) * %%__align)
+				%assign %%__tmp (%$__nx_invoke_stack_adjust + %%__align)
+				%if (%%__off != %%__tmp)
+					%assign %$__nx_invoke_stack_adjust %%__off
+				%endif
+				sub __SP, %$__nx_invoke_stack_adjust
+			%endif
 
+			;// the following variable is used as a flag to catch a very bad logic state
+			;// in 64 bit code when using RAX as a paramater since RAX is used to spill
+			;// parameters to the stack, potentially causing a very tough bug to find!
+			%assign %%__reg_ax_used 0
+
+			%assign %$__param_type_ctr 2    ; arg types follow cconv,bytecount
 			%assign %$args 0
-
 			%rep %0-1
 				%rotate 1
-				%if %$args < __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__ * sizeof(size_t)
-					%if __BITS__ == 64
-						%if   %$args == 0
-							%define %$arg_cur rcx
-						%elif %$args == 8
-							%define %$arg_cur rdx
-						%elif %$args == 16
-							%define %$arg_cur r8
-						%else
-							%define %$arg_cur r9
-						%endif
-					%else
-						%if   %$args == 0
-							%define %$arg_cur ecx
-						%elif %$args == 4
-							%define %$arg_cur edx
+				%assign %$__param_type_ctr %$__param_type_ctr + 1
+				%ifdef __nx_token_%[%$__type_ctr]
+					%assign %%__type __nx_token_%[%$__param_type_ctr]
+					%assign %%__isfloat %%__type & 0x80
+					%assign %%__param_size %%__type & 0x3F
+				%else
+					%assign %%__type sizeof(size_t)
+					%assign %%__isfloat 0
+					%assign %%__param_size sizeof(size_t)
+				%endif
+
+				%assign %%__castsize sizeof(size_t)
+				nx_strchr %{1}, '['
+				%if %$__nx_strchr_pos > 0
+					%assign %%__nx_indirect 1  ;// flag indicating source is from memory
+					%if %$__nx_strchr_pos > 3
+						;// check fo cast ( eg: dword[rbp+4] )
+						%defstr %%__str %[%1]
+						%substr %%__sub %%__str 1, %$__nx_strchr_pos-1
+						%deftok %%__tok %%__sub
+						%ifdef %[%%__tok]_size
+							%assign %%__castsize %[%%__tok]_size
 						%endif
 					%endif
+				%else
+					%assign %%__nx_indirect 0
+				%endif
 
-					%ifnum %1
-						%if %1 == -1
-							or %$arg_cur, %1
-						%elif %1 == 0
-							xor %$arg_cur, %$arg_cur
-						%else
-							mov %$arg_cur, %1
-						%endif
-					%else
-						%ifstr %1
+				%if %$__nx_intargs < __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
+					;// Windows fastcall uses one index for param count which
+					;// indexes either int or float for purpose of preloading regs
+					%if %%__isfloat == 0
+						%substr %%__regstr __NASMX_DECLSPEC_FASTCALL_REGINTARGS_%[%%__castsize]__ (%$__nx_intargs * 3 + 1), 3
+						%deftok %$arg_cur %%__regstr
+						%undef %%__regstr
+						%ifnum %1
+							%if %1 == -1
+								or %$arg_cur, %1
+							%elif %1 == 0
+								xor %$arg_cur, %$arg_cur
+							%else
+								mov %$arg_cur, %1
+							%endif
+						%elifstr %1
 							jmp %%endstr_%$args
 							%%str_%$args: declare(NASMX_TCHAR) NASMX_TEXT(%1), 0
 							%%endstr_%$args:
 							lea %$arg_cur,[rel %%str_%$args]
 						%else
-							%ifid %1
-								lea %$arg_cur,[rel %1]
-							%else
-								mov %$arg_cur,%1
+							%if %%__nx_indirect > 0
+								mov  %$arg_cur, %1
+							%elifnidni %$arg_cur, %1
+								mov  %$arg_cur, %1
 							%endif
 						%endif
+					%else
+						;// assert: float param
+						;// TODO: Be smarter with floats
+						%if __BITS__ == 64
+							%if   %$args == 0
+								%xdefine %$arg_cur xmm0
+							%elif %$args == 8
+								%xdefine %$arg_cur xmm1
+							%elif %$args == 16
+								%xdefine %$arg_cur xmm2
+							%else
+								%xdefine %$arg_cur xmm3
+							%endif
+						%else
+							%xdefine %$arg_cur __AX
+							%assign %%__reg_ax_used 1
+						%endif
+						mov %$arg_cur, %1
 					%endif
+					;// Windows requires that we spill registers
+					mov [__SP + %$args], %$arg_cur
+					%undef %$arg_cur
+					%assign %$__nx_intargs 1 + %$__nx_intargs
 				%else
-					%ifstr %1
+					;// assert: exhausted available registers
+					%ifnum %1
+						mov size_t [__SP + %$args], %{1}
+					%elifstr %1
 						jmp %%endstr_%$args
 						%%str_%$args: declare(NASMX_TCHAR) NASMX_TEXT(%1), 0
 						%%endstr_%$args:
-						mov [__SP + %$args], size_t %%str_%$args
-					%else
-						mov __AX, %1
+						lea __AX,[rel %%str_%$args]
 						mov [__SP + %$args], __AX
+						%assign %%__reg_ax_used 1
+					%else
+						%if %%__nx_indirect > 0
+							%if %%__castsize < 4
+								%xdefine %$arg_cur AX
+							%elif %%__castsize < 8
+								%xdefine %$arg_cur EAX
+							%else
+								%xdefine %$arg_cur RAX
+							%endif
+							%assign %%__reg_ax_used 1
+							mov %$arg_cur, %{1}
+							mov [__SP + %$args], __AX
+							%undef %$arg_cur
+						%else
+							%ifidni %1, __AX
+								%if %%__reg_ax_used > 0
+									%warning use of _AX as arg resulted in inconsistent logic state
+								%endif
+							%endif
+							mov size_t [__SP + %$args], %{1}
+						%endif
 					%endif
 				%endif
 				%assign %$args %$args + sizeof(size_t)
 			%endrep
 			call	%$__nx_proc
 			%if %$__nx_bytecount > 0
-				%if %$$__nx_stack_adjust == 0
+				%if %$__nx_stack_adjust == 0
 					%if %$__nx_retpopsargs == 0
-						add	__SP, %$__nx_bytecount
+						add	__SP, %$__nx_invoke_stack_adjust
 					%endif
 				%endif
 			%endif
@@ -1476,6 +1717,17 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%endif
 		%endif
 	%endif
+
+	;// cleanup global arg token defs
+	%assign %%__ctr 1
+	%rep 16
+		%ifdef __nx_token_%[%%__ctr]
+			%undef __nx_token_%[%%__ctr]
+		%endif
+		%assign %%__ctr %%__ctr + 1
+	%endrep
+
+	;// restore context stack
 	%pop
 %endmacro
 
@@ -1506,11 +1758,14 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%fatal 'missing endproc directive.'
 	%endif
 	%push __NX_CTX_PROC__
-	%assign %$__nx_intargs 0
-	%assign %$__nx_floatargs 0
-	%assign %$__nx_uses_count 0
-	%assign %$__nx_argcount 0
-	%assign %$__nx_bytecount 0
+	%assign %$__nx_locnt 0             ;// init locals offset
+	%assign %$__nx_arg_bias 0          ;// init 64-bit bias
+	%assign %$__nx_uses_stack_adjust 0 ;// init regs used save area
+	%assign %$__nx_intargs 0           ;// init int args counter
+	%assign %$__nx_floatargs 0         ;// init float args counter
+	%assign %$__nx_uses_count 0        ;// init regs used counter
+	%assign %$__nx_argcount 0          ;// init proc args counter
+	%assign %$__nx_bytecount 0         ;// init total args byte count
 	%assign %$__nx_protobytecount -1
 	%ifndef __NASMX_DECLSPEC_CALLCONV_%[%1]__
 		;// check for prototyped func
@@ -1539,10 +1794,8 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%assign %$__nx_protobytecount __nx_token_2
 		%endif
 	%endif
-
+	%assign %$__nx_bytecount %$__nx_repcnt * sizeof(size_t)
 	%assign %$__nx_cc_enum nx_declspec_cc_enum(%[%$__nx_callconv])
-	%assign %$__nx_locnt 0
-	%assign %$__nx_arg_bias 0
 	%ifidn __BITS__,64
 		%assign %$__nx_argv 16
 		%ifnidni __OUTPUT_FORMAT__,win64
@@ -1558,15 +1811,50 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%assign %$__nx_argv 8
 	%endif
 
-	%assign %$__nx_bytecount %$__nx_repcnt * sizeof(size_t)
 	%ifndef %[%$__nx_proc]
+		;// assert: we must generate an appropriate label for the function call
+		;// here in order for the parameters to be equated properly
 		%ifndef __nxsig@@%[%$__nx_proc]
+			;// assert: build the parameter type list here as the procedure has
+			;// not been prototyped or imported.
+			;// The signature must be defined in full before use because once the
+			;// procedure has been defined we are not able to easily redefine it.
+			;// Thus the rep loop is required twice:
+			;//     First, to build the parameter type list
+			;//     Then, later on, to build the parameter offset equates.
+			%ifdef __nx_proto_param_list
+				%undef __nx_proto_param_list
+			%endif
+			%rep %0-%$__nx_repcnt
+				%rotate 1
+			%endrep
+			%rep %$__nx_repcnt
+				nx_strtok %1, ' '
+				%xdefine __nx_proto_argtype %$__nx_token %+ _type
+				%ifndef __nx_proto_param_list
+					%defstr __nx_proto_param_list __nx_proto_argtype
+				%else
+					%defstr __nx_proto_argstr __nx_proto_argtype
+					%strcat __nx_proto_param_list __nx_proto_param_list,',',__nx_proto_argstr
+					%undef __nx_proto_argstr
+				%endif
+				%undef __nx_proto_argtype
+				%rotate 1
+			%endrep
 			nx_callconv_decorate %$__nx_callconv,%$__nx_proc,%$__nx_bytecount
-			%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__nx_callconv],%[%$__nx_bytecount]
+			%ifdef __nx_proto_param_list
+				%deftok __nx_proto_params __nx_proto_param_list
+				%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__nx_callconv],%[%$__nx_bytecount],__nx_proto_params
+			%else
+				%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__nx_callconv],%[%$__nx_bytecount]
+			%endif
 			%ifnidn %$__nx_proc,%$__nxtok_decorated_name
 				%xdefine %[%$__nx_proc] %[%$__nxtok_decorated_name]
 			%endif
 		%endif
+	%endif
+	%ifdef __nxsig_defined_%[%$__nx_proc]
+		%fatal procedure %[%$__nx_proc] already defined
 	%endif
 	%xdefine __nxsig_defined_%[%$__nx_proc]
 	%[%$__nx_proc]:
@@ -1591,16 +1879,21 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%endrep
 		%endif
 		%rep %$__nx_repcnt
+			;// obtain param type and size and validate against current ABI
 			nx_strtok %1, ' '
-			%assign %%__type typeof(%[%$__nx_token])
+			%assign %%__isfloat is_typeof_float(%[%$__nx_token])
 			%assign %%__bytes %[%$__nx_token]_size
+			nx_strtok 0, ' '
+			%if %%__bytes > sizeof(size_t)
+				%fatal parameter %[%$__nx_token] exceeds native size of __NASMX_ABI_BITS__ bits
+			%endif
 			%if %%__bytes < sizeof(size_t)
 				%assign %%__bytes sizeof(size_t)
 			%endif
 			%assign %$__nx_bytecount %$__nx_bytecount + %%__bytes
-			nx_strtok 0, ' '
+
 			%ifidn __BITS__,64
-				%if %%__type == 0
+				%if %%__isfloat == 0
 					%assign %$__nx_intargs 1 + %$__nx_intargs
 				%else
 					%assign %$__nx_floatargs 1 + %$__nx_floatargs
@@ -1617,7 +1910,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 						;// located below frame pointer thus we must
 						;// account for bias of args from frame while
 						;// accounting for param types supplied
-						%if %%__type == 0
+						%if %%__isfloat == 0
 							%if %$__nx_intargs > __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
 								.%[%$__nx_token] EQU %[%$__nx_argv]
 								%assign %$__nx_argv 8 + %$__nx_argv
@@ -1701,9 +1994,10 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%ifdef __NX_LOCALS_PRESENT__
 		%fatal 'uses directive must come before locals directive.'
 	%endif
-	%ifndef __NX_USES_PRESENT__
-		%define __NX_USES_PRESENT__
+	%ifdef __NX_USES_PRESENT__
+		%fatal 'uses directive previously set for this procedure.'
 	%endif
+	%define __NX_USES_PRESENT__
 	%ifndef __NX_PROLOGUE_PRESENT__
 		;// assert: at this point we have absolutely no way of knowing whether
 		;// the function will contain locals or not; thus, using this macro
@@ -1713,6 +2007,15 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		mov  __BP, __SP
 	%endif
 	%assign %%__sys_size (sizeof(size_t) * 8)
+	;// keep stack aligned
+	%assign %%__align __NASMX_ABI_BITS__ / 4
+	%assign %$__nx_uses_stack_adjust (sizeof(size_t) * %0)
+	%assign %%__off (((%$__nx_uses_stack_adjust + %%__align) / %%__align) * %%__align)
+	%assign %%__tmp (%$__nx_uses_stack_adjust + %%__align)
+	%if (%%__off != %%__tmp)
+		%assign %$__nx_uses_stack_adjust %%__off
+	%endif
+
 	%rep %0
 		%ifndef %[%1]_size
 			%fatal unknown register: %1
@@ -1723,14 +2026,11 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%elif %%__reg_size > sizeof(size_t)
 			%fatal %1 not available in %%__sys_size bit mode
 		%endif
+		;// assert: use mov rather than push to defer sub rsp,xxx
+		%assign %%__off (%$__nx_uses_stack_adjust + %$__nx_arg_bias - (sizeof(size_t) * %$__nx_uses_count))
+		mov  __nx_error_token_size_%[%%__reg_size] [__BP - %%__off], %[%1]
 		%assign %$__nx_uses_count 1 + %$__nx_uses_count
 		%xdefine __nx_uses_reg_%[%$__nx_uses_count] %[%1]
-		;// assert: use mov rather than push to defer sub rsp,xxx
-		%ifidn __BITS__,64
-			mov  qword[rbp - (%$__nx_uses_count * 8 + %$__nx_arg_bias)], %[%1]
-		%else
-			mov  dword[ebp - %$__nx_uses_count * 4], %[%1]
-		%endif
 		%rotate 1
 	%endrep
 %endmacro
@@ -1764,20 +2064,21 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%ifndef __NX_LOCALS_PRESENT__
 		%define __NX_LOCALS_PRESENT__
 	%endif
-	%assign %$__nx_locnt 0
-	%assign %$__nx_stack_adjust 0
-	%rep %0
-		%ifnum %1
-			%assign %$__nx_stack_adjust %1
-		%elifidni %1,none
+	%if %0 == 1
+		%ifidni %1,none
 			%define __NX_LOCALS_NONE__
 		%else
-			%fatal unknown locals directive: %1
+			%warning unknown locals directive: %1
 		%endif
-		%rotate 1
-	%endrep
+	%endif
+	%assign %$__nx_locnt 0
+	%ifdef __NX_CALLSTACK_ADJUST__
+		%assign %$__nx_stack_adjust __NX_CALLSTACK_ADJUST__
+	%else
+		%assign %$__nx_stack_adjust 0
+	%endif
 	%ifdef __NX_LOCALS_NONE__
-		%assign %%__adjust %$__nx_stack_adjust + %$__nx_arg_bias + (%$__nx_uses_count * (__BITS__ / 8))
+		%assign %%__adjust %$__nx_stack_adjust + %$__nx_arg_bias + %$__nx_uses_stack_adjust
 		%if %%__adjust > 0
 			%ifndef __NX_PROLOGUE_PRESENT__
 				%define __NX_PROLOGUE_PRESENT__
@@ -1800,6 +2101,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%ifndef %[%2]_size
 		%error %1 unknown size: %2
 	%endif
+	;// maintain natural boundary alignment
 	%assign %%__size %[%2]_size
 	%assign %$__nx_locnt %$__nx_locnt + %%__size * %3
 	%assign %%__size sizeof(size_t)
@@ -1808,7 +2110,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%if (%%__off != %%__tmp)
 		%assign %$_nx_locnt %%__off
 	%endif
-	.%[%1] EQU %$__nx_locnt + %$__nx_arg_bias + (%$__nx_uses_count * (__BITS__ / 8))
+	.%[%1] EQU %$__nx_arg_bias + %$__nx_uses_stack_adjust + %$__nx_locnt
 %endmacro
 
 
@@ -1817,7 +2119,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%error 'missing locals directive.'
 	%endif
 	%ifndef __NX_LOCALS_NONE__
-		%assign %%__adjust %$__nx_locnt + %$__nx_arg_bias + %$__nx_stack_adjust + ( %$__nx_uses_count * ( __BITS__ / 8 ))
+		%assign %%__adjust %$__nx_arg_bias + %$__nx_uses_stack_adjust + %$__nx_locnt + %$__nx_stack_adjust
 		%if %%__adjust > 0
 			%ifndef __NX_PROLOGUE_PRESENT__
 				%define __NX_PROLOGUE_PRESENT__
@@ -1848,20 +2150,26 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%elif %1 == 0
 				xor __AX, __AX
 			%else
-				mov __AX, dword %1
+				mov __AX, %1
 			%endif
 		%else
-			mov __AX, %[%1]
+			%ifnidni %1, __AX
+				mov __AX, %[%1]
+			%endif
 		%endif
 	%endif
 	jmp  NASMX_ENDPROC
 %endmacro
 
-
 %imacro LEAVE 0.nolist
 	%ifndef __NX_LEAVE_PRESENT__
 		%define __NX_LEAVE_PRESENT__
 		%ifdef NASMX_ENDPROC
+			%ifdef __NX_CALLSTACK_ADJUST__
+				%assign %$__nx_stack_adjust __NX_CALLSTACK_ADJUST__
+			%else
+				%assign %$__nx_stack_adjust 0
+			%endif
 			%ifdef __NX_LOCALS_PRESENT__
 				%assign %%__adjust %$__nx_locnt + %$__nx_stack_adjust
 				%if  %%__adjust > 0
@@ -1869,11 +2177,11 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 				%endif
 			%endif
 			%ifdef __NX_USES_PRESENT__
-				%assign %%__nx_reg %$__nx_uses_count
+				%assign %%__nx_reg 1
 				%rep %$__nx_uses_count
 					pop __nx_uses_reg_%[%%__nx_reg]
 					%undef __nx_uses_reg_%[%%__nx_reg]
-					%assign %%__nx_reg %%__nx_reg - 1
+					%assign %%__nx_reg %%__nx_reg + 1
 				%endrep
 			%endif
 		%endif
@@ -1915,46 +2223,56 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 %endmacro
 
 %imacro ENDPROC 0.nolist
-	%ifdef NASMX_ENDPROC
-		;// provide a proc end jmp label
-		%[NASMX_ENDPROC]:
-		%ifndef __NX_RETURN_PRESENT__
-			%assign %%__cc_retpopsargs nx_declspec_cc_retpopsargs(%$__nx_callconv)
-			%if %%__cc_retpopsargs == 0
-				ret
-			%else
-				%if %$__nx_bytecount > 0
-					ret %$__nx_bytecount
-				%else
-					ret
-				%endif
-			%endif
+	%ifndef NASMX_ENDPROC
+		%fatal 'missing proc directive.'
+	%endif
+
+	;// provide a proc end jmp label
+	%[NASMX_ENDPROC]:
+
+	;// assert: we can not be certain at what context level we are at,
+	;// thus we pop all contexts until we get to __NX_CTX_PROC__
+	%rep 32
+		%ifctx __NX_CTX_PROC__
+			%exitrep
 		%endif
 		%pop
-		%undef NASMX_ENDPROC
-		%ifdef __NX_LEAVE_PRESENT__
-			%undef __NX_LEAVE_PRESENT__
+	%endrep
+
+	%ifndef __NX_RETURN_PRESENT__
+		%assign %%__cc_retpopsargs nx_declspec_cc_retpopsargs(%$__nx_callconv)
+		%if %%__cc_retpopsargs == 0
+			ret
+		%else
+			%if %$__nx_bytecount > 0
+				ret %$__nx_bytecount
+			%else
+				ret
+			%endif
 		%endif
-		%ifdef __NX_RETURN_PRESENT__
-			%undef __NX_RETURN_PRESENT__
-		%endif
-		%ifdef __NX_USES_PRESENT__
-			%undef __NX_USES_PRESENT__
-		%endif
-		%ifdef __NX_LOCALS_PRESENT__
-			%undef __NX_LOCALS_PRESENT__
-		%endif
-		%ifdef __NX_LOCALS_NONE__
-			%undef __NX_LOCALS_NONE__
-		%endif
-		%ifdef __NX_PROLOGUE_PRESENT__
-			%undef __NX_PROLOGUE_PRESENT__
-		%endif
-		%ifdef __NASMX_ARG_BIAS__
-			%undef __NASMX_ARG_BIAS__
-		%endif
-	%else
-		%error 'missing proc directive.'
+	%endif
+	%pop
+	%undef NASMX_ENDPROC
+	%ifdef __NX_LEAVE_PRESENT__
+		%undef __NX_LEAVE_PRESENT__
+	%endif
+	%ifdef __NX_RETURN_PRESENT__
+		%undef __NX_RETURN_PRESENT__
+	%endif
+	%ifdef __NX_USES_PRESENT__
+		%undef __NX_USES_PRESENT__
+	%endif
+	%ifdef __NX_LOCALS_PRESENT__
+		%undef __NX_LOCALS_PRESENT__
+	%endif
+	%ifdef __NX_LOCALS_NONE__
+		%undef __NX_LOCALS_NONE__
+	%endif
+	%ifdef __NX_PROLOGUE_PRESENT__
+		%undef __NX_PROLOGUE_PRESENT__
+	%endif
+	%ifdef __NASMX_ARG_BIAS__
+		%undef __NASMX_ARG_BIAS__
 	%endif
 %endmacro
 

@@ -47,7 +47,6 @@ IMPORT SetFpRegVal
 IMPORT SetTag
 IMPORT Strftime
 IMPORT UpdateFpCtxt
-IMPORT UpdateResult
 IMPORT XcptFilter
 IMPORT _CxxFrameHandler
 IMPORT _CxxLongjmpUnwind, 4
@@ -470,7 +469,6 @@ IMPORT statusfp
 IMPORT strcmpi
 IMPORT strdate
 IMPORT strdup
-IMPORT strerror
 IMPORT stricmp
 IMPORT stricoll
 IMPORT strlwr
@@ -536,8 +534,6 @@ IMPORT tls_end
 IMPORT tls_index
 IMPORT tls_start
 IMPORT tls_used
-IMPORT tolower
-IMPORT toupper
 IMPORT tzname
 IMPORT tzset
 IMPORT ui64toa
