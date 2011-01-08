@@ -404,6 +404,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 ;// choice make sure that the initial suffix char is present in
 ;// the decorations string.
 %define __NASMX_DECLSPEC_CC_DECORATIONS__     '_@?$'
+%define __NASMX_ALPHANUM__ '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
 ;//////////////////////////////////////////////////////////////
 ;// internal macro call
@@ -998,6 +999,37 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 %idefine NASMX_IENDUNION NASMX_IENDSTRUC
 
 ;//////////////////////////////////////////////////////////////
+;// MACRO nx_isalnum
+;//
+;// Purpose
+;//    This macro is designed to return in the current context
+;//    stack variable %$__nx_isalnum_bool if the parameter is
+;//    alphanumeric.
+;//
+;// Usage:
+;//    nx_isalnum chr
+;//    nx_isalnum 'x'
+;//
+%macro nx_isalnum 1
+	%ifstr %1
+		%define %%__arg_chr %1
+	%else
+		%defstr %%__arg_chr %1
+	%endif
+	%strlen %%__count __NASMX_ALPHANUM__
+	%assign %%__idx 0
+	%assign %$__nx_isalnum_bool 0
+	%rep %%__count
+		%assign %%__idx %%__idx + 1
+		%substr %%__chr __NASMX_ALPHANUM__ %%__idx, 1
+		%ifidn %%__chr, %%__arg_chr
+			%assign %$__nx_isalnum_bool %%__idx
+			%exitrep
+		%endif
+	%endrep
+%endmacro
+
+;//////////////////////////////////////////////////////////////
 ;// MACRO nx_strtok
 ;//
 ;// Purpose
@@ -1447,6 +1479,49 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	global %[%1]
 %endmacro
 
+;////////////////////////////////////////////////////////////////////////
+;//
+;// Internal macro used by invoke to detect argv addressing mode
+;// The context variable %$__nx_argv_mode_indirect will be set to
+;// the string index where '[' is found and is also used as a flag
+;// indicating retrieve the variable contents, not it's address.
+;// The context variable %$__nx_argv_mode_bp will be set to the
+;// the string index where the sign ( + or - ) is found and will
+;// be used as a flag indicating that argv mode is used.
+%macro nx_analyze_argv_mode 1
+	%assign %$__nx_argv_mode_bp 0
+	nx_strchr %{1}, '['
+	%assign %$__nx_argv_mode_indirect %$__nx_strchr_pos
+	%if %$__nx_argv_mode_indirect == 0
+		nx_strstr %{1}, __BP
+		%if %$__nx_strstr_pos > 0
+			;// assert: potentially loading variable address offset from reg bp
+			;// quick check to help ensure that bp is a token
+			%assign %$__nx_isalnum_bool 0
+			%defstr %%__str %[%1]
+			%if %$__nx_strstr_pos > 1
+				%substr %%__sub %%__str %$__nx_strstr_pos-1, 1
+				nx_isalnum %%__sub
+			%endif
+			%if %$__nx_isalnum_bool == 0
+				%strlen %%__len %%__str
+				%if %%__len > %$__nx_strchr_pos + 2
+					%substr %%__sub %%__str %$__nx_strstr_pos+3, 1
+					nx_isalnum %%__sub
+				%endif
+			%endif
+			%if %$__nx_isalnum_bool == 0
+				;// we must be given a positive or negative offset in order to 
+				;// generate code for local variable addressing
+				nx_strchr %{1}, '+'
+				%if %$__nx_strchr_pos == 0
+					nx_strchr %{1}, '-'
+				%endif
+				%assign %$__nx_argv_mode_bp %$__nx_strchr_pos
+			%endif
+		%endif
+	%endif
+%endmacro
 
 %imacro INVOKE 1-100.nolist
 	%ifndef NASMX_ENDPROC
@@ -1559,21 +1634,19 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 					%assign %%__param_size sizeof(size_t)
 				%endif
 
+				nx_analyze_argv_mode %1
+
+				;// check for cast ( eg: dword[rbp+4] )
 				%assign %%__castsize sizeof(size_t)
-				nx_strchr %{1}, '['
-				%if %$__nx_strchr_pos > 0
-					%assign %%__nx_indirect 1  ;// flag indicating source is from memory
-					%if %$__nx_strchr_pos > 3
-						;// check fo cast ( eg: dword[rbp+4] )
+				%if %$__nx_argv_mode_indirect > 0
+					%if %$__nx_argv_mode_indirect > 3
 						%defstr %%__str %[%1]
-						%substr %%__sub %%__str 1, %$__nx_strchr_pos-1
+						%substr %%__sub %%__str 1, %$__nx_argv_mode_indirect-1
 						%deftok %%__tok %%__sub
 						%ifdef %[%%__tok]_size
 							%assign %%__castsize %[%%__tok]_size
 						%endif
 					%endif
-				%else
-					%assign %%__nx_indirect 0
 				%endif
 
 				%if %$__nx_intargs < __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
@@ -1597,8 +1670,21 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 							%%endstr_%$args:
 							lea %$arg_cur,[rel %%str_%$args]
 						%else
-							%if %%__nx_indirect > 0
+							%if %$__nx_argv_mode_indirect > 0
 								mov  %$arg_cur, %1
+							%elif %$__nx_argv_mode_bp > 0
+								mov  %$arg_cur, __BP
+								%defstr %%__str %[%1]
+								%substr %%__sub %%__str %$__nx_argv_mode_bp, 1
+								%substr %%__off %%__str %$__nx_argv_mode_bp+1, -1
+								%deftok %%__tok %%__off
+								%ifidn %%sub, '+'
+									add %$arg_cur, %%__tok
+								%elifidn %%__sub, '-'
+									sub %$arg_cur, %%__tok
+								%else
+									%fatal Unknown addressing mode for %{1}
+								%endif
 							%elifnidni %$arg_cur, %1
 								mov  %$arg_cur, %1
 							%endif
@@ -1638,7 +1724,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 						mov [__SP + %$args], __AX
 						%assign %%__reg_ax_used 1
 					%else
-						%if %%__nx_indirect > 0
+						%if %$__nx_argv_mode_indirect > 0
 							%if %%__castsize < 4
 								%xdefine %$arg_cur AX
 							%elif %%__castsize < 8
@@ -1650,6 +1736,21 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 							mov %$arg_cur, %{1}
 							mov [__SP + %$args], __AX
 							%undef %$arg_cur
+						%elif %$__nx_argv_mode_bp > 0
+							%assign %%__reg_ax_used 1
+							mov  __AX, __BP
+							%defstr %%__str %[%1]
+							%substr %%__sign %%__str %$__nx_argv_mode_bp, 1
+							%substr %%__off %%__str %$__nx_argv_mode_bp+1, -1
+							%deftok %%__tok %%__off
+							%ifidn %%__sign, '+'
+								add __AX, %%__tok
+							%elifidn %%__sign, '-'
+								sub __AX, %%__tok
+							%else
+								%fatal Unknown addressing mode for %{1}
+							%endif
+							mov [__SP + %$args], __AX
 						%else
 							%ifidni %1, __AX
 								%if %%__reg_ax_used > 0
@@ -1676,36 +1777,58 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%else
 		%rep %0-1
 			%rotate %$__nx_argrotate
+
+			;// the following variable is used as a flag to catch a very bad logic state
+			;// in 64 bit code when using RAX as a paramater since RAX is used to spill
+			;// parameters to the stack, potentially causing a very tough bug to find!
+			%assign %%__reg_ax_used 0
+			
+			;// set up internal vars used to determine address mode if argv used
+			nx_analyze_argv_mode %{1}
+
+			;// check for cast ( eg: dword[rbp+4] )
+			%assign %%__castsize sizeof(size_t)
+			%if %$__nx_argv_mode_indirect > 0
+				%if %$__nx_argv_mode_indirect > 3
+					%defstr %%__str %[%1]
+					%substr %%__sub %%__str 1, %$__nx_argv_mode_indirect-1
+					%deftok %%__tok %%__sub
+					%ifdef %[%%__tok]_size
+						%assign %%__castsize %[%%__tok]_size
+					%endif
+				%endif
+			%endif
+
 			%ifstr	%1
 				jmp	%%endstr_%$args
 				%%str_%$args: declare(NASMX_TCHAR) NASMX_TEXT(%{1}), 0
 				%%endstr_%$args:
-				push	size_t %%str_%$args
+				push size_t %%str_%$args
 			%elifnum %1
 				push size_t %1
+			%elif %$__nx_argv_mode_indirect > 0
+				push size_t %1
+			%elif %$__nx_argv_mode_bp > 0
+				%assign %%__reg_ax_used 1
+				mov  __AX, __BP
+				%defstr %%__str %[%1]
+				%substr %%__sign %%__str %$__nx_argv_mode_bp, 1
+				%substr %%__off %%__str %$__nx_argv_mode_bp+1, -1
+				%deftok %%__tok %%__off
+				%ifidn %%__sign, '+'
+					add __AX, %%__tok
+				%elifidn %%__sign, '-'
+					sub __AX, %%__tok
+				%else
+					%fatal Unknown addressing mode for %{1}
+				%endif
+				push __AX
 			%else
-				;// TODO: check for "casts"
-;				nx_strtok %1,' '
-;				%defstr %%__arg_str %1
-;				%strlen %%__arg_len %%__arg_str
-;				%defstr %%__tok_str %$__nx_token
-;				%strlen %%__tok_len %%__tok_str
-;				%assign %%__bytes sizeof(size_t)
-;				%if %%__arg_len != %%__tok_len
-;					%ifdef %[%$__nx_token]_size
-;						%assign %%__bytes %[%$__nx_token]_size
-;						%if %%__bytes > sizeof(size_t)
-;							%error invalid size: %1
-;						%endif
-;						nx_strtok 0,';'
-;					%endif
-;				%endif
-;				%if %%__bytes < sizeof(size_t)
-;					push size_t %$__nx_token
-;				%else
-;					;// assert: done this way to account for floats/doubles
-;					push nx_token_from_size(%%__bytes) %$__nx_token
-;				%endif
+				%ifidni %1, __AX
+					%if %%__reg_ax_used > 0
+						%warning use of _AX as arg resulted in inconsistent logic state
+					%endif
+				%endif
 				push size_t %1
 			%endif
 			%assign %$args %$args + __BITS__ / 8
@@ -2046,10 +2169,6 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 ;//           writing a small leaf function or will handle
 ;//           function prologue separately.  Also indicates
 ;//           that endlocals directive not required.
-;//     xxx - number of additional bytes to subtract from
-;//           rsp in prologue definition.  One excellent use
-;//           of this capability is optimizing outer stack
-;//           frame for win64.
 ;//
 ;// notes:
 ;//    This macro can only be used within the proc prologue
@@ -2101,14 +2220,14 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%ifndef %[%2]_size
 		%error %1 unknown size: %2
 	%endif
-	;// maintain natural boundary alignment
+	;// maintain natural size_t boundary alignment
 	%assign %%__size %[%2]_size
 	%assign %$__nx_locnt %$__nx_locnt + %%__size * %3
 	%assign %%__size sizeof(size_t)
 	%assign %%__off (((%$__nx_locnt + %%__size) / %%__size) * %%__size)
 	%assign %%__tmp (%$__nx_locnt + %%__size)
 	%if (%%__off != %%__tmp)
-		%assign %$_nx_locnt %%__off
+		%assign %$__nx_locnt %%__off
 	%endif
 	.%[%1] EQU %$__nx_arg_bias + %$__nx_uses_stack_adjust + %$__nx_locnt
 %endmacro
@@ -2119,6 +2238,16 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%error 'missing locals directive.'
 	%endif
 	%ifndef __NX_LOCALS_NONE__
+		%if %$__nx_locnt > 0
+			;// keep stack aligned
+			%assign %%__align __NASMX_ABI_BITS__ / 4
+			%assign %%__off (((%$__nx_locnt + %%__align) / %%__align) * %%__align)
+			%assign %%__tmp (%$__nx_locnt + %%__align)
+			%if (%%__off != %%__tmp)
+				%assign %$__nx_locnt %%__off
+			%endif
+		%endif
+
 		%assign %%__adjust %$__nx_arg_bias + %$__nx_uses_stack_adjust + %$__nx_locnt + %$__nx_stack_adjust
 		%if %%__adjust > 0
 			%ifndef __NX_PROLOGUE_PRESENT__
@@ -2497,7 +2626,8 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 ;// The following is used to wrap test code when debugging
 ;%define __NX_DEBUG__  ;;//// * * * BEGIN NASMX DEBUG FRAME * * * ///////////////
-%ifdef __NX_DEBUG__  
+%ifdef __NX_DEBUG__
+
 %xdefine __NX_DEBUG_SOURCE_LINE_START__ __LINE__
 
 ;;// * * PLACE TEST CODE HERE * *
