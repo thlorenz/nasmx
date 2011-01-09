@@ -1,4 +1,4 @@
-;// DEMO9B.ASM
+;// DEMO9.ASM
 ;//
 ;// Copyright (C)2005-2010 The NASMX Project
 ;//

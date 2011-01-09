@@ -1,7 +1,6 @@
 ##### Makefile #####
 AS=nasm
 AFLAGS=-f win32
-#AFLAGS=-f win32 -dUNICODE=1
 LD=GoLink
 LDFLAGS		=/entry _main
 LDFLAGS_SO	=/dll /export _Say /entry _main

@@ -20,10 +20,6 @@
 ;// depending on whether UNICODE is defined or not
 %include '..\..\..\inc\win32\unicode.inc'
 
-%ifidni __OUTPUT_FORMAT__,win64
-DEFAULT REL
-%endif
-
 entry demo2
 
 [section .text]
@@ -34,42 +30,34 @@ locals none
 .wm_create:
     cmp      dword [argv(.umsg)], WM_CREATE
     jnz      .wm_destroy
-
     invoke   GetClientRect, size_t [argv(.hwnd)], rct
     invoke   CreateWindowEx, NULL, szStatic, szTitle, WS_CHILD + WS_VISIBLE + SS_CENTER, 0, 0, dword [rct + RECT.right], dword [rct + RECT.bottom], size_t [argv(.hwnd)], 500, size_t [wc + WNDCLASSEX.hInstance], NULL
-    jmp      .wm_default
+    return   0
 
 .wm_destroy:
     cmp      dword [argv(.umsg)], WM_DESTROY
     jnz      .wm_default
-
     invoke   PostQuitMessage, NULL
+    return   0
 
 .wm_default:
     invoke   DefWindowProc, size_t [argv(.hwnd)], dword [argv(.umsg)], size_t [argv(.wparam)], size_t [argv(.lparam)]
     
-.exit:
-
 endproc
 
 proc    WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwshow
 locals none
 
     invoke   LoadIcon, NULL, IDI_APPLICATION
-    mov      __DX, __AX
-    mov      __AX, size_t [argv(.hinst)]
-    mov      __BX, size_t szClass
-    mov      __CX, size_t WndProc
-    mov      size_t [wc + WNDCLASSEX.hInstance], __AX
-    mov      size_t [wc + WNDCLASSEX.lpszClassName], __BX
-    mov      size_t [wc + WNDCLASSEX.lpfnWndProc], __CX
-    mov      size_t [wc + WNDCLASSEX.hIcon], __DX
-    mov      size_t [wc + WNDCLASSEX.hIconSm], __DX
-
+    mov      ptrdiff_t [wc + WNDCLASSEX.hIcon], __AX
+    mov      ptrdiff_t [wc + WNDCLASSEX.hIconSm], __AX
+    mov      ptrdiff_t [wc + WNDCLASSEX.lpszClassName], szClass
+    mov      ptrdiff_t [wc + WNDCLASSEX.lpfnWndProc], WndProc
+    mov      __AX, ptrdiff_t [argv(.hinst)]
+    mov      ptrdiff_t [wc + WNDCLASSEX.hInstance], __AX
     invoke   RegisterClassEx, wc
-
     invoke   CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 200, 100, NULL, NULL, size_t [wc + WNDCLASSEX.hInstance], NULL
-    mov      size_t [hWnd], __AX
+    mov      ptrdiff_t [hWnd], __AX
 
     invoke   ShowWindow, hWnd, size_t [argv(.dwshow)]
     invoke   UpdateWindow, hWnd
@@ -110,18 +98,18 @@ endproc
     szClass:  declare(NASMX_TCHAR) NASMX_TEXT("Demo2Class"), 0x0
 
     NASMX_ISTRUC wc, WNDCLASSEX
-		NASMX_AT cbSize,        sizeof(WNDCLASSEX)
-		NASMX_AT style,         CS_VREDRAW + CS_HREDRAW
-		NASMX_AT lpfnWndProc,   NULL
-		NASMX_AT cbClsExtra,    NULL
-		NASMX_AT cbWndExtra,    NULL
-		NASMX_AT hInstance,     NULL
-		NASMX_AT hIcon,         NULL
-		NASMX_AT hCursor,       NULL
-		NASMX_AT hbrBackground, COLOR_BTNFACE + 1
-		NASMX_AT lpszMenuName,  NULL
-		NASMX_AT lpszClassName, NULL
-		NASMX_AT hIconSm,       NULL
+        NASMX_AT cbSize,        sizeof(WNDCLASSEX)
+        NASMX_AT style,         CS_VREDRAW + CS_HREDRAW
+        NASMX_AT lpfnWndProc,   NULL
+        NASMX_AT cbClsExtra,    NULL
+        NASMX_AT cbWndExtra,    NULL
+        NASMX_AT hInstance,     NULL
+        NASMX_AT hIcon,         NULL
+        NASMX_AT hCursor,       NULL
+        NASMX_AT hbrBackground, COLOR_BTNFACE + 1
+        NASMX_AT lpszMenuName,  NULL
+        NASMX_AT lpszClassName, NULL
+        NASMX_AT hIconSm,       NULL
     NASMX_IENDSTRUC
 
     NASMX_ISTRUC message, MSG
@@ -130,10 +118,10 @@ endproc
         NASMX_AT wParam,   NULL
         NASMX_AT lParam,   NULL
         NASMX_AT time,     NULL
-		NASMX_ISTRUC pt, POINT
-			NASMX_AT x,       NULL
-			NASMX_AT y,       NULL
-		NASMX_IENDSTRUC
+        NASMX_ISTRUC pt, POINT
+            NASMX_AT x,       NULL
+            NASMX_AT y,       NULL
+        NASMX_IENDSTRUC
     NASMX_IENDSTRUC
 
     NASMX_ISTRUC rct, RECT

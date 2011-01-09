@@ -42,86 +42,58 @@ entry    demo13
 
 [section .code]
 
-proc   WndProc, ptrdiff_t hwnd, dword umsg, size_t wparam, size_t lparam
-%ifidni __OUTPUT_FORMAT__,win64
-;// this allows us to avoid multiple stack adjustments by
-;// setting the maximum parameters bytecount used during an invoke
-locals none, 16*8
-%else
+proc   WndProc, ptrdiff_t hwnd, dword msg, size_t wparam, size_t lparam
 locals none
-%endif
 
 .wm_create:
-    cmp      [argv(.umsg)], dword WM_CREATE
+    cmp      dword [argv(.msg)], WM_CREATE
     jnz      .wm_command
 
-    invoke   GetClientRect, [argv(.hwnd)], rct
-    invoke   CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE, 0, 0, [rct + RECT.right], [rct + RECT.bottom], [argv(.hwnd)], 500, [wc + WNDCLASSEX.hInstance], NULL
+    invoke   GetClientRect, ptrdiff_t [argv(.hwnd)], rct
+    invoke   CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE, 0, 0, uint32_t [rct + RECT.right], uint32_t [rct + RECT.bottom], ptrdiff_t [argv(.hwnd)], 500, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
     jmp      .wm_default
 
 .wm_command:
-    cmp      [argv(.umsg)], dword WM_COMMAND
+    cmp      dword [argv(.msg)], WM_COMMAND
     jnz      .wm_destroy
 
-    cmp      [argv(.wparam)], dword 500
+    cmp      dword [argv(.wparam)], 500
     jne      .wm_default
 
     invoke   MessageBox, NULL, bday + DEMO13_STRUC.name, szTitle, MB_OK
     jmp      .exit
 
 .wm_destroy:
-    cmp      [argv(.umsg)], dword WM_DESTROY
+    cmp      dword[argv(.msg)], WM_DESTROY
     jnz      .wm_default
 
     invoke   PostQuitMessage, NULL
 
 .wm_default:
-    invoke   DefWindowProc, [argv(.hwnd)], [argv(.umsg)], [argv(.wparam)], [argv(.lparam)]
-    
+    invoke   DefWindowProc, ptrdiff_t [argv(.hwnd)], dword [argv(.msg)], size_t [argv(.wparam)], size_t [argv(.lparam)]
+
 .exit:
 
 endproc
 
 
 proc   WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwshow
-%ifidni __OUTPUT_FORMAT__,win64
-;// this allows us to avoid multiple stack adjustments by
-;// setting the maximum parameters used during an invoke
-locals none, 16*8
-%else
 locals none
-%endif
 
     invoke   LoadIcon, NULL, IDI_APPLICATION
-%ifidni __OUTPUT_FORMAT,win64
-    mov      rdx, rax
-    mov      rax, qword [argv(.hinst)]
-    mov      rbx, qword szClass
-    mov      rcx, qword WndProc
-    mov      [wc + WNDCLASSEX.hInstance], rax
-    mov      [wc + WNDCLASSEX.lpszClassName], rbx
-    mov      [wc + WNDCLASSEX.lpfnWndProc], rcx
-    mov      [wc + WNDCLASSEX.hIcon], rdx
-    mov      [wc + WNDCLASSEX.hIconSm], rdx
-%else
-    mov      edx, eax
-    mov      eax, dword [argv(.hinst)]
-    mov      ebx, dword szClass
-    mov      ecx, dword WndProc
-    mov      [wc + WNDCLASSEX.hInstance], eax
-    mov      [wc + WNDCLASSEX.lpszClassName], ebx
-    mov      [wc + WNDCLASSEX.lpfnWndProc], ecx
-    mov      [wc + WNDCLASSEX.hIcon], edx
-    mov      [wc + WNDCLASSEX.hIconSm], edx
-%endif
+    mov      __DX, __AX
+    mov      __AX, ptrdiff_t [argv(.hinst)]
+    mov      __BX, ptrdiff_t szClass
+    mov      __CX, ptrdiff_t WndProc
+    mov      [wc + WNDCLASSEX.hInstance], __AX
+    mov      [wc + WNDCLASSEX.lpszClassName], __BX
+    mov      [wc + WNDCLASSEX.lpfnWndProc], __CX
+    mov      [wc + WNDCLASSEX.hIcon], __DX
+    mov      [wc + WNDCLASSEX.hIconSm], __DX
     invoke   RegisterClassEx, wc
 
-    invoke   CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 100, 50, NULL, NULL, [wc + WNDCLASSEX.hInstance], NULL
-%ifidni __OUTPUT_FORMAT,win64
-    mov      [hWnd], rax
-%else
-    mov      [hWnd], eax
-%endif
+    invoke   CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 100, 50, NULL, NULL, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
+    mov      [hWnd], __AX
     invoke   ShowWindow, hWnd, [argv(.dwshow)]
     invoke   UpdateWindow, hWnd
 
@@ -134,29 +106,15 @@ locals none
         jmp      .msgloop
 .exit:
 
-%ifidni __OUTPUT_FORMAT,win64
-    mov      rax, dword [message + MSG.wParam]
-%else
-    mov      eax, dword [message + MSG.wParam]
-%endif
+    mov      __AX, size_t[message + MSG.wParam]
 
 endproc
 
 proc   demo13
-%ifidni __OUTPUT_FORMAT__,win64
-;// this allows us to avoid multiple stack adjustments by
-;// setting the maximum parameters used during an invoke
-locals none, 4*8
-%else
 locals none
-%endif
 
     invoke   GetModuleHandle, NULL
-%ifidni __OUTPUT_FORMAT__,win64
-    mov      [hInstance], rax
-%else
-    mov      [hInstance], eax
-%endif
+    mov      ptrdiff_t [hInstance], __AX
     invoke   WinMain, hInstance, NULL, NULL, SW_SHOWNORMAL
     invoke   ExitProcess, NULL
 endproc

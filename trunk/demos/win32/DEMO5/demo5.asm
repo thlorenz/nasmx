@@ -27,7 +27,7 @@ entry    demo5
 proc   Wm_DestroyProc, ptrdiff_t hwnd, size_t wparam, size_t lparam
 locals none
 
-    invoke   EndDialog, [argv(.hwnd)], 1
+    invoke   EndDialog, ptrdiff_t [argv(.hwnd)], 1
     mov      eax, 1
 
 endproc
@@ -35,9 +35,9 @@ endproc
 proc   Wm_CommandProc, ptrdiff_t hwnd, size_t wparam, size_t lparam
 locals none
 
-    cmp      [argv(.wparam)], dword 201
+    cmp      dword [argv(.wparam)], 201
     je       .cmd_idok
-    cmp      [argv(.wparam)], dword 200
+    cmp      dword [argv(.wparam)], 200
     je       .cmd_idgo
 	return   0
 
@@ -46,10 +46,10 @@ locals none
 	return   1
 
 .cmd_idgo:
-    invoke   SendDlgItemMessage, [argv(.hwnd)], 205, WM_GETTEXTLENGTH, NULL, NULL
+    invoke   SendDlgItemMessage, ptrdiff_t [argv(.hwnd)], 205, WM_GETTEXTLENGTH, NULL, NULL
     cmp      eax, 0
     jne      .fine
-    invoke   MessageBox, [argv(.hwnd)], szContent, szTitle, MB_OK | MB_ICONERROR
+    invoke   MessageBox, ptrdiff_t [argv(.hwnd)], szContent, szTitle, MB_OK | MB_ICONERROR
 	return   1
 
 .fine:
@@ -60,8 +60,8 @@ locals none
     pop      ecx
     invoke   HeapAlloc, eax, 0x000008, ecx
     mov      dword [dwText], eax
-    invoke   SendDlgItemMessage, [argv(.hwnd)], 205, WM_GETTEXT, eax, dwText
-    invoke   SendDlgItemMessage, [argv(.hwnd)], 206, WM_SETTEXT, 0, dwText
+    invoke   SendDlgItemMessage, ptrdiff_t [argv(.hwnd)], 205, WM_GETTEXT, eax, dwText
+    invoke   SendDlgItemMessage, ptrdiff_t [argv(.hwnd)], 206, WM_SETTEXT, 0, dwText
     invoke   HeapFree, dwHeap, 0x000008, dwText
     mov      eax, 1
 
@@ -70,18 +70,18 @@ endproc
 proc   dlgproc, ptrdiff_t hwnd, dword umsg, size_t wparam, size_t lparam
 locals none
 
-    cmp      [argv(.umsg)], dword WM_COMMAND
+    cmp      dword [argv(.umsg)], WM_COMMAND
     je       .wm_command
-    cmp      [argv(.umsg)], dword WM_DESTROY
+    cmp      dword [argv(.umsg)], WM_DESTROY
     je       .wm_destroy
     jmp      .wm_default
 
 .wm_command:
-    invoke  Wm_CommandProc, [argv(.hwnd)], [argv(.wparam)], [argv(.lparam)]
+    invoke  Wm_CommandProc, ptrdiff_t [argv(.hwnd)], size_t [argv(.wparam)], size_t [argv(.lparam)]
 	jmp     NASMX_ENDPROC
 
 .wm_destroy:
-    invoke  Wm_DestroyProc, [argv(.hwnd)], [argv(.wparam)], [argv(.lparam)]
+    invoke  Wm_DestroyProc, ptrdiff_t [argv(.hwnd)], size_t [argv(.wparam)], size_t [argv(.lparam)]
 	jmp     NASMX_ENDPROC
 
 .wm_default:
