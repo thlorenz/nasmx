@@ -3,7 +3,7 @@ AS=nasm
 AFLAGS=-f win32
 #AFLAGS=-f win32 -dUNICODE=1
 LD=GoLink
-LDFLAGS		=/entry _main
+LDFLAGS		=/mix /entry _main
 LIBS		=kernel32.dll user32.dll
 
 # [ Suffixes ]

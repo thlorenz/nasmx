@@ -20,52 +20,51 @@
 ;// depending on whether UNICODE is defined or not
 %include '..\..\..\inc\win32\unicode.inc'
 
-proto    dlgproc, ptrdiff_t hwnd, dword umsg, ptrdiff_t wparam, ptrdiff_t lparam
+proto  dlgproc, ptrdiff_t hwnd, dword umsg, ptrdiff_t wparam, ptrdiff_t lparam
 
-entry    demo4
+entry  demo4
 
 [section .text]
-proc    demo4
+
+proc   demo4
 locals none
 
-    invoke   DialogBoxParam, NULL, szTemplate, NULL, dlgproc, NULL
-    invoke   ExitProcess, NULL
-    ret
+    invoke DialogBoxParam, NULL, szTemplate, NULL, dlgproc, NULL
+    invoke ExitProcess, NULL
 
 endproc
 
-proc    dlgproc, ptrdiff_t hwnd, dword umsg, ptrdiff_t wparam, ptrdiff_t lparam
+proc   dlgproc, ptrdiff_t hwnd, dword msg, ptrdiff_t wparam, ptrdiff_t lparam
 locals none
 
+.wm_initdialog:
+    cmp    dword [argv(.msg)], WM_INITDIALOG
+    jne    .wm_command
+	return 0
+
 .wm_command:
-    cmp      [argv(.umsg)], dword WM_COMMAND
-    jne      .wm_destroy
+    cmp    dword [argv(.msg)], WM_COMMAND
+    jne    .wm_default
 
-    cmp      [argv(.wparam)], dword 200
-    jne      .cmd_idok
-
-    invoke   MessageBox, NULL, szContent, szTitle, MB_OK
-    mov      eax, 1
-    jmp      .wm_default
+    cmp    dword [argv(.wparam)], IDOK
+    jne    .cmd_idcancel
 
 .cmd_idok:
-    cmp      [argv(.wparam)], dword 201
-    je       .die
+    invoke MessageBox, NULL, szContent, szTitle, MB_OK
+	return 1
 
-.wm_destroy:
-    cmp      [argv(.umsg)], dword WM_DESTROY
-    jne      .wm_default
-
-.die:
-    invoke   EndDialog, [argv(.hwnd)], 1
-	return   1
+.cmd_idcancel:
+    cmp    dword [argv(.wparam)], IDCANCEL
+    jne    .wm_default
+    invoke EndDialog, ptrdiff_t [argv(.hwnd)], 1
+	return 1
 
 .wm_default:
-    xor      eax, eax
-    
+    xor    eax, eax
+
 endproc
 
 [section .data]
-    szTemplate: declare(NASMX_TCHAR) NASMX_TEXT("MyDialog"), 0x0
-    szTitle:    declare(NASMX_TCHAR) NASMX_TEXT("Demo4"), 0x0
-    szContent:  declare(NASMX_TCHAR) NASMX_TEXT("Win32 NASM Demo #4"), 0x0
+    szTemplate: declare(NASMX_TCHAR) NASMX_TEXT("MyDialog"), 0x0, 0x0
+    szTitle:    declare(NASMX_TCHAR) NASMX_TEXT("Demo4"), 0x0, 0x0
+    szContent:  declare(NASMX_TCHAR) NASMX_TEXT("NASMX 32-bit Demo #4"), 0x0, 0x0

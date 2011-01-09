@@ -24,36 +24,37 @@ entry    demo3
 
 [section .code]
 
-proc    WndProc, ptrdiff_t hwnd, dword umsg, ptrdiff_t wparam, ptrdiff_t lparam
+proc   WndProc, ptrdiff_t hwnd, size_t msg, size_t wparam, size_t lparam
 locals none
 
 .wm_create:
-    cmp      [argv(.umsg)], dword WM_CREATE
-    jnz      .wm_command
+    cmp    size_t [argv(.msg)], WM_CREATE
+    jnz    .wm_command
 
-    invoke   GetClientRect, [argv(.hwnd)], rct
-    invoke   CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE, 0, 0, [rct + RECT.right], [rct + RECT.bottom], [argv(.hwnd)], 500, [wc + WNDCLASSEX.hInstance], NULL
-    jmp      .wm_default
+    invoke GetClientRect, ptrdiff_t [argv(.hwnd)], rct
+    invoke CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE, 0, 0, uint32_t [rct + RECT.right], uint32_t [rct + RECT.bottom], ptrdiff_t [argv(.hwnd)], 500, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
+    return 0
 
 .wm_command:
-    cmp      [argv(.umsg)], dword WM_COMMAND
-    jnz      .wm_destroy
+    cmp    size_t [argv(.msg)], WM_COMMAND
+    jnz    .wm_destroy
 
-    cmp      [argv(.wparam)], dword 500
-    jne      .wm_default
+    cmp    size_t [argv(.wparam)], 500
+    jne    .wm_default
 
-    invoke   MessageBox, NULL, szContent, szTitle, MB_OK
-    jmp      .exit
+    invoke MessageBox, NULL, szContent, szTitle, MB_OK
+	return 0
 
 .wm_destroy:
-    cmp      [argv(.umsg)], dword WM_DESTROY
-    jnz      .wm_default
+    cmp    size_t [argv(.msg)], WM_DESTROY
+    jnz    .wm_default
 
-    invoke   PostQuitMessage, NULL
+    invoke PostQuitMessage, NULL
+	return 0
 
 .wm_default:
-    invoke   DefWindowProc, [argv(.hwnd)], [argv(.umsg)], [argv(.wparam)], [argv(.lparam)]
-    
+    invoke DefWindowProc, ptrdiff_t [argv(.hwnd)], size_t [argv(.msg)], size_t [argv(.wparam)], size_t [argv(.lparam)]
+
 .exit:
 
 endproc
@@ -62,35 +63,32 @@ endproc
 proc    WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwshow
 locals none
 
-    invoke   LoadIcon, NULL, IDI_APPLICATION
-    mov      edx, eax
-    mov      eax, dword [argv(.hinst)]
-    mov      ebx, dword szClass
-    mov      ecx, dword WndProc
-    mov      [wc + WNDCLASSEX.hInstance], eax
-    mov      [wc + WNDCLASSEX.lpszClassName], ebx
-    mov      [wc + WNDCLASSEX.lpfnWndProc], ecx
-    mov      [wc + WNDCLASSEX.hIcon], edx
-    mov      [wc + WNDCLASSEX.hIconSm], edx
+    invoke LoadIcon, NULL, IDI_APPLICATION
+	mov    __CX, wc
+    mov    ptrdiff_t [__CX + WNDCLASSEX.hIcon], __AX
+    mov    ptrdiff_t [__CX + WNDCLASSEX.hIconSm], __AX
+    mov    ptrdiff_t [__CX + WNDCLASSEX.lpfnWndProc], WndProc
+    mov    ptrdiff_t [__CX + WNDCLASSEX.lpszClassName], szClass
+    mov    __AX, ptrdiff_t [argv(.hinst)]
+    mov    ptrdiff_t [__CX + WNDCLASSEX.hInstance], __AX
 
-    invoke   RegisterClassEx, wc
-
-    invoke   CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 100, 50, NULL, NULL, [wc + WNDCLASSEX.hInstance], NULL
-    mov      [hWnd], eax
-
-    invoke   ShowWindow, hWnd, [argv(.dwshow)]
-    invoke   UpdateWindow, hWnd
+    invoke RegisterClassEx, __CX
+    invoke CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 100, 50, NULL, NULL, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
+    mov    ptrdiff_t [hWnd], __AX
+    invoke ShowWindow, hWnd, dword [argv(.dwshow)]
+    invoke UpdateWindow, hWnd
 
     .msgloop:
-        invoke   GetMessage, message, NULL, NULL, NULL
-        cmp      eax, dword 0
-        je       .exit
-        invoke   TranslateMessage, message
-        invoke   DispatchMessage, message
-        jmp      .msgloop
-    .exit:
+        invoke GetMessage, message, NULL, NULL, NULL
+        cmp    eax, dword 0
+        je     .exit
+        invoke TranslateMessage, message
+        invoke DispatchMessage, message
+        jmp    .msgloop
 
-    mov      eax, dword [message + MSG.wParam]
+.exit:
+
+    mov    eax, dword [message + MSG.wParam]
 
 endproc
 
@@ -98,10 +96,10 @@ endproc
 proc    demo3
 locals none
 
-    invoke   GetModuleHandle, NULL
-    mov      [hInstance], eax
-    invoke   WinMain, hInstance, NULL, NULL, SW_SHOWNORMAL
-    invoke   ExitProcess, NULL
+    invoke GetModuleHandle, NULL
+    mov    ptrdiff_t [hInstance], __AX
+    invoke WinMain, hInstance, NULL, NULL, SW_SHOWNORMAL
+    invoke ExitProcess, NULL
 
 endproc
 

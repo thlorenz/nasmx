@@ -1,11 +1,8 @@
 ##### Makefile #####
 AS=nasm
-#AFLAGS=-f win32
-AFLAGS=-f win32 -dUNICODE=1
+AFLAGS=-f win32
+#AFLAGS=-f win32 -dUNICODE=1
 LD=GoLink
-# note: the following LDFLAGS line used for Win64 builds
-# or when using the pascal callconv:
-#LDFLAGS		=/entry main
 LDFLAGS		=/entry _main
 #LDFLAGS		=/entry _main -debug coff
 LIBS		=kernel32.dll user32.dll
