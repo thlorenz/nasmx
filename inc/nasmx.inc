@@ -1488,8 +1488,12 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 ;// The context variable %$__nx_argv_mode_bp will be set to the
 ;// the string index where the sign ( + or - ) is found and will
 ;// be used as a flag indicating that argv mode is used.
+%xdefine __NX_ARGV_MODE_SIGN_ADD__ 1
+%xdefine __NX_ARGV_MODE_SIGN_SUB__ 2
 %macro nx_analyze_argv_mode 1
 	%assign %$__nx_argv_mode_bp 0
+	%assign %$__nx_argv_mode_sign 0
+	%assign %$__nx_castsize sizeof(size_t)
 	nx_strchr %{1}, '['
 	%assign %$__nx_argv_mode_indirect %$__nx_strchr_pos
 	%if %$__nx_argv_mode_indirect == 0
@@ -1516,9 +1520,24 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 				nx_strchr %{1}, '+'
 				%if %$__nx_strchr_pos == 0
 					nx_strchr %{1}, '-'
+					%if %$__nx_strchr_pos > 0
+						%assign %$__nx_argv_mode_sign __NX_ARGV_MODE_SIGN_SUB__
+					%endif
+				%else
+					%assign %$__nx_argv_mode_sign __NX_ARGV_MODE_SIGN_ADD__
 				%endif
 				%assign %$__nx_argv_mode_bp %$__nx_strchr_pos
 			%endif
+			%substr %%__off %%__str %$__nx_argv_mode_bp+1, -1
+			%deftok %$__nx_argv_mode_bp_offset %%__off
+		%endif
+	%elif %$__nx_argv_mode_indirect > 3
+		;// check for cast ( eg: dword[rbp+4] )
+		%defstr %%__str %[%1]
+		%substr %%__sub %%__str 1, %$__nx_argv_mode_indirect-1
+		%deftok %%__tok %%__sub
+		%ifdef %[%%__tok]_size
+			%assign %$__nx_castsize %[%%__tok]_size
 		%endif
 	%endif
 %endmacro
@@ -1624,7 +1643,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%rep %0-1
 				%rotate 1
 				%assign %$__param_type_ctr %$__param_type_ctr + 1
-				%ifdef __nx_token_%[%$__type_ctr]
+				%ifdef __nx_token_%[%$__param_type_ctr]
 					%assign %%__type __nx_token_%[%$__param_type_ctr]
 					%assign %%__isfloat %%__type & 0x80
 					%assign %%__param_size %%__type & 0x3F
@@ -1634,26 +1653,14 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 					%assign %%__param_size sizeof(size_t)
 				%endif
 
+				;// set up internal vars used to determine if argv address mode used
 				nx_analyze_argv_mode %1
-
-				;// check for cast ( eg: dword[rbp+4] )
-				%assign %%__castsize sizeof(size_t)
-				%if %$__nx_argv_mode_indirect > 0
-					%if %$__nx_argv_mode_indirect > 3
-						%defstr %%__str %[%1]
-						%substr %%__sub %%__str 1, %$__nx_argv_mode_indirect-1
-						%deftok %%__tok %%__sub
-						%ifdef %[%%__tok]_size
-							%assign %%__castsize %[%%__tok]_size
-						%endif
-					%endif
-				%endif
 
 				%if %$__nx_intargs < __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
 					;// Windows fastcall uses one index for param count which
 					;// indexes either int or float for purpose of preloading regs
 					%if %%__isfloat == 0
-						%substr %%__regstr __NASMX_DECLSPEC_FASTCALL_REGINTARGS_%[%%__castsize]__ (%$__nx_intargs * 3 + 1), 3
+						%substr %%__regstr __NASMX_DECLSPEC_FASTCALL_REGINTARGS_%[%$__nx_castsize]__ (%$__nx_intargs * 3 + 1), 3
 						%deftok %$arg_cur %%__regstr
 						%undef %%__regstr
 						%ifnum %1
@@ -1674,14 +1681,10 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 								mov  %$arg_cur, %1
 							%elif %$__nx_argv_mode_bp > 0
 								mov  %$arg_cur, __BP
-								%defstr %%__str %[%1]
-								%substr %%__sub %%__str %$__nx_argv_mode_bp, 1
-								%substr %%__off %%__str %$__nx_argv_mode_bp+1, -1
-								%deftok %%__tok %%__off
-								%ifidn %%sub, '+'
-									add %$arg_cur, %%__tok
-								%elifidn %%__sub, '-'
-									sub %$arg_cur, %%__tok
+								%if %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_ADD__
+									add %$arg_cur, %$__nx_argv_mode_bp_offset
+								%elif %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_SUB__
+									sub %$arg_cur, %$__nx_argv_mode_bp_offset
 								%else
 									%fatal Unknown addressing mode for %{1}
 								%endif
@@ -1725,9 +1728,9 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 						%assign %%__reg_ax_used 1
 					%else
 						%if %$__nx_argv_mode_indirect > 0
-							%if %%__castsize < 4
+							%if %$__nx_castsize < 4
 								%xdefine %$arg_cur AX
-							%elif %%__castsize < 8
+							%elif %$__nx_castsize < 8
 								%xdefine %$arg_cur EAX
 							%else
 								%xdefine %$arg_cur RAX
@@ -1739,14 +1742,10 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 						%elif %$__nx_argv_mode_bp > 0
 							%assign %%__reg_ax_used 1
 							mov  __AX, __BP
-							%defstr %%__str %[%1]
-							%substr %%__sign %%__str %$__nx_argv_mode_bp, 1
-							%substr %%__off %%__str %$__nx_argv_mode_bp+1, -1
-							%deftok %%__tok %%__off
-							%ifidn %%__sign, '+'
-								add __AX, %%__tok
-							%elifidn %%__sign, '-'
-								sub __AX, %%__tok
+							%if %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_ADD__
+								add __AX, %$__nx_argv_mode_bp_offset
+							%elif %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_SUB__
+								sub __AX, %$__nx_argv_mode_bp_offset
 							%else
 								%fatal Unknown addressing mode for %{1}
 							%endif
@@ -1775,29 +1774,34 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%error 'currently unsupported 64-bit INVOKE'
 		%endif
 	%else
+		;// assert: assembling for 32-bit mode
+		;// arg types follow cconv,bytecount when defined
+		%if %$__nx_argrotate > 0
+			%assign %$__param_type_ctr 2    
+		%else
+			%assign %$__param_type_ctr %0+1
+		%endif
+
+		;// the following variable is used as a flag to catch a very bad logic state
+		;// when using __AX as a paramater since __AX is used internally to spill certain
+		;// parameters to the stack, potentially causing a very tough bug to find!
+		%assign %%__reg_ax_used 0
+
 		%rep %0-1
 			%rotate %$__nx_argrotate
-
-			;// the following variable is used as a flag to catch a very bad logic state
-			;// in 64 bit code when using RAX as a paramater since RAX is used to spill
-			;// parameters to the stack, potentially causing a very tough bug to find!
-			%assign %%__reg_ax_used 0
-			
-			;// set up internal vars used to determine address mode if argv used
-			nx_analyze_argv_mode %{1}
-
-			;// check for cast ( eg: dword[rbp+4] )
-			%assign %%__castsize sizeof(size_t)
-			%if %$__nx_argv_mode_indirect > 0
-				%if %$__nx_argv_mode_indirect > 3
-					%defstr %%__str %[%1]
-					%substr %%__sub %%__str 1, %$__nx_argv_mode_indirect-1
-					%deftok %%__tok %%__sub
-					%ifdef %[%%__tok]_size
-						%assign %%__castsize %[%%__tok]_size
-					%endif
-				%endif
+			%assign %$__param_type_ctr %$__param_type_ctr + %$__nx_argrotate
+			%ifdef __nx_token_%[%$__param_type_ctr]
+				%assign %%__type __nx_token_%[%$__param_type_ctr]
+				%assign %%__isfloat %%__type & 0x80
+				%assign %%__param_size %%__type & 0x3F
+			%else
+				%assign %%__type sizeof(size_t)
+				%assign %%__isfloat 0
+				%assign %%__param_size sizeof(size_t)
 			%endif
+
+			;// set up internal vars used to determine if argv address mode used
+			nx_analyze_argv_mode %{1}
 
 			%ifstr	%1
 				jmp	%%endstr_%$args
@@ -1811,14 +1815,10 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%elif %$__nx_argv_mode_bp > 0
 				%assign %%__reg_ax_used 1
 				mov  __AX, __BP
-				%defstr %%__str %[%1]
-				%substr %%__sign %%__str %$__nx_argv_mode_bp, 1
-				%substr %%__off %%__str %$__nx_argv_mode_bp+1, -1
-				%deftok %%__tok %%__off
-				%ifidn %%__sign, '+'
-					add __AX, %%__tok
-				%elifidn %%__sign, '-'
-					sub __AX, %%__tok
+				%if %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_ADD__
+					add __AX, %$__nx_argv_mode_bp_offset
+				%elif %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_SUB__
+					sub __AX, %$__nx_argv_mode_bp_offset
 				%else
 					%fatal Unknown addressing mode for %{1}
 				%endif
