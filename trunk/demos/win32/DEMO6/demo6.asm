@@ -10,29 +10,20 @@
 ;//    Bryant Keller
 ;//    Rob Neff
 ;//
-%include '..\..\..\inc\nasmx.inc'
-%include '..\..\..\inc\win32\windows.inc'
-%include '..\..\..\inc\win32\kernel32.inc'
-%include '..\..\..\inc\win32\user32.inc'
-;// You must include the following when using typedef function names
-;// for either ASCII or Unicode
-;// eg: MessageBox is an alias for MessageBoxW or MessageBoxA
-;//     depending on whether UNICODE is defined or not
-%include '..\..\..\inc\win32\unicode.inc'
-
-
-entry    demo6
+%include '..\..\windemos.inc'
 
 [section .text]
 
+entry    demo6
+
 proc   dlgproc, ptrdiff_t hwnd, size_t umsg, size_t wparam, size_t lparam
 locals none
-    cmp      [argv(.umsg)], dword 1024
+    cmp      dword [argv(.umsg)], 1024
     jg       wm_default
     mov      eax, dword [argv(.umsg)]
-    push     dword [argv(.lparam)]
-    push     dword [argv(.wparam)]
-    push     dword [argv(.hwnd)]
+    push     size_t [argv(.lparam)]
+    push     size_t [argv(.wparam)]
+    push     size_t [argv(.hwnd)]
     call     [msg_table + eax * 4]
     return
 
@@ -42,7 +33,7 @@ endproc
 
 proc   Wm_DestroyProc, ptrdiff_t hwnd, size_t wparam, size_t lparam
 locals none
-    invoke   EndDialog, [argv(.hwnd)], 1
+    invoke   EndDialog, ptrdiff_t [argv(.hwnd)], 1
     return   1
 endproc
 
@@ -50,7 +41,7 @@ proc   Wm_CommandProc, ptrdiff_t hwnd, size_t wparam, size_t lparam
 uses __BX
 locals none
 
-    mov      eax, dword [argv(.wparam)]
+    mov      eax, size_t [argv(.wparam)]
     jmp      .forward
 .cmd_table:  dd .cmd_idgo, .cmd_idok
 .forward:
@@ -63,14 +54,14 @@ locals none
     return   0
 
 .cmd_idok:
-    invoke   EndDialog, [argv(.hwnd)], 1
+    invoke   EndDialog, ptrdiff_t [argv(.hwnd)], 1
 	return   1
 
 .cmd_idgo:
-    invoke   SendDlgItemMessage, [argv(.hwnd)], 205, WM_GETTEXTLENGTH, NULL, NULL
+    invoke   SendDlgItemMessage, ptrdiff_t [argv(.hwnd)], 205, WM_GETTEXTLENGTH, NULL, NULL
     cmp      eax, dword 0
     jne      .fine
-    invoke   MessageBox, [argv(.hwnd)], szContent, szTitle, MB_OK | MB_ICONERROR
+    invoke   MessageBox, ptrdiff_t [argv(.hwnd)], szContent, szTitle, MB_OK | MB_ICONERROR
     return   1
 
 .fine:
@@ -82,8 +73,8 @@ locals none
 	pop      ecx
     invoke   HeapAlloc, eax, 0x000008, ecx 
     mov      dword [dwText], eax
-    invoke   SendDlgItemMessage, [argv(.hwnd)], 205, WM_GETTEXT, eax, dwText
-    invoke   SendDlgItemMessage, [argv(.hwnd)], 206, WM_SETTEXT, 0, dwText
+    invoke   SendDlgItemMessage, ptrdiff_t [argv(.hwnd)], 205, WM_GETTEXT, eax, dwText
+    invoke   SendDlgItemMessage, ptrdiff_t [argv(.hwnd)], 206, WM_SETTEXT, 0, dwText
     invoke   HeapFree, dwHeap, 0x000008, dwText
     return   1
 

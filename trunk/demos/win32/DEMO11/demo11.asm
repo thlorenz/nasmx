@@ -10,8 +10,7 @@
 ;//    Bryant Keller
 ;//    Rob Neff
 ;//
-%include '..\..\..\inc\nasmx.inc'
-%include '..\..\..\inc\win32\windows.inc'
+%include '..\..\windemos.inc'
 %include "..\..\..\inc\win32\msvcrt.inc"
 
 entry	demo11
