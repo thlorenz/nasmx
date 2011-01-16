@@ -404,7 +404,8 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 ;// choice make sure that the initial suffix char is present in
 ;// the decorations string.
 %define __NASMX_DECLSPEC_CC_DECORATIONS__     '_@?$'
-%define __NASMX_ALPHANUM__ '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+;// The following formatted string is used by the nx_is* functions
+%define __NASMX_NUMALPHATOKEN__ '.+-0123456789EeABCDFabcdfGHIJKLMNOPQRSTUVWXYZghijklmnopqrstuvwxyz$@_'
 
 ;//////////////////////////////////////////////////////////////
 ;// internal macro call
@@ -998,6 +999,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 %idefine NASMX_IENDUNION NASMX_IENDSTRUC
 
+
 ;//////////////////////////////////////////////////////////////
 ;// MACRO nx_isalnum
 ;//
@@ -1016,18 +1018,91 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%else
 		%defstr %%__arg_chr %1
 	%endif
-	%strlen %%__count __NASMX_ALPHANUM__
-	%assign %%__idx 0
+	%assign %%__count 62
+	%assign %%__idx 3
 	%assign %$__nx_isalnum_bool 0
 	%rep %%__count
 		%assign %%__idx %%__idx + 1
-		%substr %%__chr __NASMX_ALPHANUM__ %%__idx, 1
+		%substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
 		%ifidn %%__chr, %%__arg_chr
 			%assign %$__nx_isalnum_bool %%__idx
 			%exitrep
 		%endif
 	%endrep
 %endmacro
+
+;//////////////////////////////////////////////////////////////
+;// MACRO nx_ishexchr
+;//
+;// Purpose
+;//    This macro is designed to return in the current context
+;//    stack variable %$__nx_ishexnum_bool if the parameter is
+;//    hexadecimal.
+;//
+;// Usage:
+;//    nx_ishexchr chr
+;//    nx_ishexchr 'f'
+;//
+%macro nx_ishexchr 1
+	%ifstr %1
+		%define %%__arg_chr %1
+	%else
+		%defstr %%__arg_chr %1
+	%endif
+	%assign %%__count 22
+	%assign %%__idx 3
+	%assign %$__nx_ishexchr_bool 0
+	%rep %%__count
+		%assign %%__idx %%__idx + 1
+		%substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
+		%ifidn %%__chr, %%__arg_chr
+			%assign %$__nx_ishexchr_bool %%__idx
+			%exitrep
+		%endif
+	%endrep
+%endmacro
+
+;// MACRO nx_isfloattok
+;//
+;// Purpose
+;//    This macro is designed to return in the current context
+;//    stack variable %$__nx_isfloattok_bool if the parameter is
+;//    a float token.
+;//
+;// Usage:
+;//    nx_isfloattok string
+;//    nx_isfloattok 3.14159
+;//
+%macro nx_isfloattok 1
+	%ifstr %1
+		%define %%__arg_str %1
+	%else
+		%defstr %%__arg_str %1
+	%endif
+	%strlen %%__arg_len %%__arg_str
+	%assign %$__nx_isfloattok 0
+	%assign %%__found 0
+	%assign %%__arg_idx 0
+	%rep %%__arg_len
+		%assign %%__arg_idx %%__arg_idx + 1
+		%substr %%__arg_chr %%__arg_str %%__arg_idx, 1
+		%assign %%__found 0
+		%assign %%__idx 0
+		%rep 15
+			%assign %%__idx %%__idx + 1
+			%substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
+			%ifidn %%__chr, %%__arg_chr
+				%assign %%__found %%__idx
+				%exitrep
+			%endif
+		%endrep
+		%if %%__found == 0
+			%exitrep
+		%endif
+	%endrep
+	%assign %$__nx_isfloattok_bool %%__found
+%endmacro
+
 
 ;//////////////////////////////////////////////////////////////
 ;// MACRO nx_strtok
@@ -1317,11 +1392,11 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 				%exitrep
 			%else
 				nx_strtok %1, ' '
-				%assign %%__bytecnt sizeof(%$__nx_token)
-				%if %%__bytecnt < sizeof(size_t)
-					%assign %%__bytecnt sizeof(size_t)
+				%assign %%__param_size sizeof(%$__nx_token)
+				%if %%__param_size < sizeof(size_t)
+					%assign %%__param_size sizeof(size_t)
 				%endif
-				%assign %$__bytecount %$__bytecount + %%__bytecnt
+				%assign %$__bytecount %$__bytecount + %%__param_size
 				%xdefine __nx_import_argtype %$__nx_token %+ _type
 				%ifndef __nx_import_param_list
 					%defstr __nx_import_param_list __nx_import_argtype
@@ -1400,11 +1475,11 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 				%exitrep
 			%else
 				nx_strtok %1, ' '
-				%assign %%__bytes %[%$__nx_token]_size
-				%if %%__bytes < sizeof(size_t)
-					%assign %%__bytes sizeof(size_t)
+				%assign %%__param_size %[%$__nx_token]_size
+				%if %%__param_size < sizeof(size_t)
+					%assign %%__param_size sizeof(size_t)
 				%endif
-				%assign %$__bytecount %$__bytecount + %%__bytes
+				%assign %$__bytecount %$__bytecount + %%__param_size
 				%xdefine __nx_proto_argtype %$__nx_token %+ _type
 				%ifndef __nx_proto_param_list
 					%defstr __nx_proto_param_list __nx_proto_argtype
@@ -1488,12 +1563,29 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 ;// The context variable %$__nx_argv_mode_bp will be set to the
 ;// the string index where the sign ( + or - ) is found and will
 ;// be used as a flag indicating that argv mode is used.
+;// The context variables %$__nx_argv_mode_param_type, %$__nx_argv_mode_param_isfloat,
+;// %$__nx_argv_mode_param_size, and %$__nx_argv_mode_param_castsize are set according
+;// to the parameter list index supplied as the second argument to this macro.
 %xdefine __NX_ARGV_MODE_SIGN_ADD__ 1
 %xdefine __NX_ARGV_MODE_SIGN_SUB__ 2
-%macro nx_analyze_argv_mode 1
+%macro nx_analyze_argv_mode 2
+	%ifnum %2
+		%ifdef __nx_token_%[%2]
+			%assign %$__nx_argv_mode_param_type __nx_token_%[%2]
+			%assign %$__nx_argv_mode_param_isfloat ((%$__nx_argv_mode_param_type >> 15) & 0x01)
+			%assign %$__nx_argv_mode_param_size %$__nx_argv_mode_param_type & 0x7F
+		%else
+			%assign %$__nx_argv_mode_param_type sizeof(size_t)
+			%assign %$__nx_argv_mode_param_isfloat 0
+			%assign %$__nx_argv_mode_param_size sizeof(size_t)
+		%endif
+	%else
+		%fatal internal error - unknown parameter
+	%endif
+
 	%assign %$__nx_argv_mode_bp 0
 	%assign %$__nx_argv_mode_sign 0
-	%assign %$__nx_castsize sizeof(size_t)
+	%assign %$__nx_argv_mode_castsize sizeof(size_t)
 	nx_strchr %{1}, '['
 	%assign %$__nx_argv_mode_indirect %$__nx_strchr_pos
 	%if %$__nx_argv_mode_indirect == 0
@@ -1537,7 +1629,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%substr %%__sub %%__str 1, %$__nx_argv_mode_indirect-1
 		%deftok %%__tok %%__sub
 		%ifdef %[%%__tok]_size
-			%assign %$__nx_castsize %[%%__tok]_size
+			%assign %$__nx_argv_mode_castsize %[%%__tok]_size
 		%endif
 	%endif
 %endmacro
@@ -1559,19 +1651,10 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%assign %$__nx_intargs 0           ;// init int args counter
 	%assign %$__nx_floatargs 0         ;// init float args counter
 
-	%assign %$__nx_bytecount (( __NASMX_ABI_BITS__ / 8 ) * ( %0 - 1 ))
 	%ifdef __nxsig@@%[%1]
 		nx_parse_tokens __nxsig@@%[%1]
 		%assign %$__nx_callconv __nx_token_1
-		%assign %%__bytecount __nx_token_2
-		%if %%__bytecount > 0
-			;// assert: only perform sig check on defined funcs with 1 or more
-			;// params due to current import scheme and cdecl varargs.
-			;// TODO: revisit this code when import includes are updated
-			%if %%__bytecount != %$__nx_bytecount
-				%error 'parameter count mismatch'
-			%endif
-		%endif
+		%assign %$__nx_bytecount __nx_token_2
 
 		%ifndef __nxsig_declared_%[%1]
 			%ifndef __nxsig_defined_%[%1]
@@ -1582,6 +1665,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%else
 		%warning %1 declspec unknown (PROTO/IMPORT missing), assuming __declspec(DEFAULT)
 		%assign %$__nx_callconv __NASMX_DECLSPEC_CALLCONV_DEFAULT__
+		%assign %$__nx_bytecount (( __NASMX_ABI_BITS__ / 8 ) * ( %0 - 1 ))
 	%endif
 
 	%ifndef __NX_PROLOGUE_PRESENT__
@@ -1642,25 +1726,16 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%assign %$args 0
 			%rep %0-1
 				%rotate 1
-				%assign %$__param_type_ctr %$__param_type_ctr + 1
-				%ifdef __nx_token_%[%$__param_type_ctr]
-					%assign %%__type __nx_token_%[%$__param_type_ctr]
-					%assign %%__isfloat %%__type & 0x80
-					%assign %%__param_size %%__type & 0x3F
-				%else
-					%assign %%__type sizeof(size_t)
-					%assign %%__isfloat 0
-					%assign %%__param_size sizeof(size_t)
-				%endif
 
 				;// set up internal vars used to determine if argv address mode used
-				nx_analyze_argv_mode %1
+				%assign %$__param_type_ctr %$__param_type_ctr + 1
+				nx_analyze_argv_mode %1, %$__param_type_ctr
 
 				%if %$__nx_intargs < __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
 					;// Windows fastcall uses one index for param count which
 					;// indexes either int or float for purpose of preloading regs
-					%if %%__isfloat == 0
-						%substr %%__regstr __NASMX_DECLSPEC_FASTCALL_REGINTARGS_%[%$__nx_castsize]__ (%$__nx_intargs * 3 + 1), 3
+					%if %$__nx_argv_mode_param_isfloat == 0
+						%substr %%__regstr __NASMX_DECLSPEC_FASTCALL_REGINTARGS_%[%$__nx_argv_mode_castsize]__ (%$__nx_intargs * 3 + 1), 3
 						%deftok %$arg_cur %%__regstr
 						%undef %%__regstr
 						%ifnum %1
@@ -1715,52 +1790,93 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 					mov [__SP + %$args], %$arg_cur
 					%undef %$arg_cur
 					%assign %$__nx_intargs 1 + %$__nx_intargs
+					%assign %$args %$args + sizeof(size_t)
 				%else
 					;// assert: exhausted available registers
-					%ifnum %1
-						mov size_t [__SP + %$args], %{1}
-					%elifstr %1
-						jmp %%endstr_%$args
-						%%str_%$args: declare(NASMX_TCHAR) NASMX_TEXT(%1), 0
-						%%endstr_%$args:
-						lea __AX,[rel %%str_%$args]
-						mov [__SP + %$args], __AX
-						%assign %%__reg_ax_used 1
-					%else
-						%if %$__nx_argv_mode_indirect > 0
-							%if %$__nx_castsize < 4
-								%xdefine %$arg_cur AX
-							%elif %$__nx_castsize < 8
-								%xdefine %$arg_cur EAX
-							%else
-								%xdefine %$arg_cur RAX
-							%endif
-							%assign %%__reg_ax_used 1
-							mov %$arg_cur, %{1}
+					%if %$__nx_argv_mode_param_isfloat == 0
+						%ifnum %1
+							mov size_t [__SP + %$args], %{1}
+						%elifstr %1
+							jmp %%endstr_%$args
+							%%str_%$args: declare(NASMX_TCHAR) NASMX_TEXT(%1), 0
+							%%endstr_%$args:
+							lea __AX,[rel %%str_%$args]
 							mov [__SP + %$args], __AX
-							%undef %$arg_cur
-						%elif %$__nx_argv_mode_bp > 0
 							%assign %%__reg_ax_used 1
-							mov  __AX, __BP
-							%if %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_ADD__
-								add __AX, %$__nx_argv_mode_bp_offset
-							%elif %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_SUB__
-								sub __AX, %$__nx_argv_mode_bp_offset
-							%else
-								%fatal Unknown addressing mode for %{1}
-							%endif
-							mov [__SP + %$args], __AX
 						%else
-							%ifidni %1, __AX
-								%if %%__reg_ax_used > 0
-									%warning use of _AX as arg resulted in inconsistent logic state
+							%if %$__nx_argv_mode_indirect > 0
+								%if %$__nx_argv_mode_castsize < 4
+									%xdefine %$arg_cur AX
+								%elif %$__nx_argv_mode_castsize < 8
+									%xdefine %$arg_cur EAX
+								%else
+									%xdefine %$arg_cur RAX
+								%endif
+								%assign %%__reg_ax_used 1
+								mov %$arg_cur, %{1}
+								mov [__SP + %$args], __AX
+								%undef %$arg_cur
+							%elif %$__nx_argv_mode_bp > 0
+								%assign %%__reg_ax_used 1
+								mov  __AX, __BP
+								%if %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_ADD__
+									add __AX, %$__nx_argv_mode_bp_offset
+								%elif %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_SUB__
+									sub __AX, %$__nx_argv_mode_bp_offset
+								%else
+									%fatal Unknown addressing mode for %{1}
+								%endif
+								mov [__SP + %$args], __AX
+							%else
+								%ifidni %1, __AX
+									%if %%__reg_ax_used > 0
+										%warning use of _AX as arg resulted in inconsistent logic state
+									%endif
+								%endif
+								mov size_t [__SP + %$args], %{1}
+							%endif
+						%endif
+					%else
+						;// assert: processing float param
+						%if %$__nx_argv_mode_indirect > 0
+							%if %$__nx_argv_mode_castsize > %$__nx_argv_mode_param_size
+								%warning potential loss of precision during conversion of double to float for %[%1]
+							%endif
+							fld __nx_error_token_size_%[%$__nx_argv_mode_castsize] %1
+							fstp __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP + %$args]
+						%elif %$__nx_argv_mode_bp > 0
+							fld __nx_error_token_size_%[%$__nx_argv_mode_param_size] [%1]
+							fstp __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP + %$args]
+						%else
+							nx_isfloattok %1
+							%if %$__nx_isfloattok_bool == 0
+								mov __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP + %$args], %1
+							%else
+								;// assert: arg is floating point constant
+								%if %$__nx_argv_mode_param_size == 4
+									;// assert: callee expecting float type
+									mov dword [__SP + %$args], __float(%1)
+								%else
+									;// assert: callee expecting double type
+									%assign %%__f64 __float64__(%1)
+									%ifidn __NASMX_ABI_BITS__,32
+										%assign %%__tmp (%%__f64 & 0x00000000FFFFFFFF)
+										mov dword [__SP + %$args], %%__tmp
+										%assign %%__tmp ((%%__f64 >> 32) & 0x00000000FFFFFFFF)
+										mov dword [__SP+%$args+4], %%__tmp
+									%else
+										mov qword [__SP+%$args], %%__f64
+									%endif
 								%endif
 							%endif
-							mov size_t [__SP + %$args], %{1}
 						%endif
 					%endif
+					%if %$__nx_argv_mode_param_size < sizeof(size_t)
+						%assign %$args %$args + sizeof(size_t)
+					%else
+						%assign %$args %$args + %$__nx_argv_mode_param_size
+					%endif
 				%endif
-				%assign %$args %$args + sizeof(size_t)
 			%endrep
 			call	%$__nx_proc
 			%if %$__nx_bytecount > 0
@@ -1771,15 +1887,14 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 				%endif
 			%endif
 		%else
-			%error 'currently unsupported 64-bit INVOKE'
+			%error 'fastcall invoke currently unsupported'
 		%endif
 	%else
-		;// assert: assembling for 32-bit mode
 		;// arg types follow cconv,bytecount when defined
 		%if %$__nx_argrotate > 0
 			%assign %$__param_type_ctr 2    
 		%else
-			%assign %$__param_type_ctr %0+1
+			%assign %$__param_type_ctr %0+2
 		%endif
 
 		;// the following variable is used as a flag to catch a very bad logic state
@@ -1789,49 +1904,85 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 		%rep %0-1
 			%rotate %$__nx_argrotate
-			%assign %$__param_type_ctr %$__param_type_ctr + %$__nx_argrotate
-			%ifdef __nx_token_%[%$__param_type_ctr]
-				%assign %%__type __nx_token_%[%$__param_type_ctr]
-				%assign %%__isfloat %%__type & 0x80
-				%assign %%__param_size %%__type & 0x3F
-			%else
-				%assign %%__type sizeof(size_t)
-				%assign %%__isfloat 0
-				%assign %%__param_size sizeof(size_t)
-			%endif
 
 			;// set up internal vars used to determine if argv address mode used
-			nx_analyze_argv_mode %{1}
+			%assign %$__param_type_ctr %$__param_type_ctr + %$__nx_argrotate
+			nx_analyze_argv_mode %{1}, %$__param_type_ctr
 
-			%ifstr	%1
-				jmp	%%endstr_%$args
-				%%str_%$args: declare(NASMX_TCHAR) NASMX_TEXT(%{1}), 0
-				%%endstr_%$args:
-				push size_t %%str_%$args
-			%elifnum %1
-				push size_t %1
-			%elif %$__nx_argv_mode_indirect > 0
-				push size_t %1
-			%elif %$__nx_argv_mode_bp > 0
-				%assign %%__reg_ax_used 1
-				mov  __AX, __BP
-				%if %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_ADD__
-					add __AX, %$__nx_argv_mode_bp_offset
-				%elif %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_SUB__
-					sub __AX, %$__nx_argv_mode_bp_offset
+			%if %$__nx_argv_mode_param_isfloat == 0
+				%ifstr	%1
+					jmp	%%endstr_%$args
+					%%str_%$args: declare(NASMX_TCHAR) NASMX_TEXT(%{1}), 0
+					%%endstr_%$args:
+					push size_t %%str_%$args
+				%elifnum %1
+					push size_t %1
+				%elif %$__nx_argv_mode_indirect > 0
+					push size_t %1
+				%elif %$__nx_argv_mode_bp > 0
+					%assign %%__reg_ax_used 1
+					mov  __AX, __BP
+					%if %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_ADD__
+						add __AX, %$__nx_argv_mode_bp_offset
+					%elif %$__nx_argv_mode_sign == __NX_ARGV_MODE_SIGN_SUB__
+						sub __AX, %$__nx_argv_mode_bp_offset
+					%else
+						%fatal Unknown addressing mode for %{1}
+					%endif
+					push __AX
 				%else
-					%fatal Unknown addressing mode for %{1}
+					%ifidni %1, __AX
+						%if %%__reg_ax_used > 0
+							%warning use of _AX as arg resulted in inconsistent logic state
+						%endif
+					%endif
+					push size_t %1
 				%endif
-				push __AX
+				%assign %$args %$args + __BITS__ / 8
 			%else
-				%ifidni %1, __AX
-					%if %%__reg_ax_used > 0
-						%warning use of _AX as arg resulted in inconsistent logic state
+				;// process float param
+				%if %$__nx_argv_mode_param_size < sizeof(size_t)
+					;// if passing a float in 64-bit mode
+					sub __SP, sizeof(size_t)
+					%assign %$args %$args + sizeof(size_t)
+				%else
+					;// may be passing double in 32-bit mode
+					sub  __SP, %$__nx_argv_mode_param_size
+					%assign %$args %$args + %$__nx_argv_mode_param_size
+				%endif
+				%if %$__nx_argv_mode_indirect > 0
+					%if %$__nx_argv_mode_castsize > %$__nx_argv_mode_param_size
+						%warning potential loss of precision during conversion of double to float for %[%1]
+					%endif
+					fld __nx_error_token_size_%[%$__nx_argv_mode_castsize] %1
+					fstp __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP]
+				%elif %$__nx_argv_mode_bp > 0
+					fld __nx_error_token_size_%[%$__nx_argv_mode_param_size] [%1]
+					fstp __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP]
+				%else
+					nx_isfloattok %1
+					%if %$__nx_isfloattok_bool == 0
+						mov __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP], %1
+					%else
+						;// assert: arg is floating point constant
+						%if %$__nx_argv_mode_param_size == 4
+							;// assert: callee expecting float type
+							mov dword [__SP], __float(%1)
+						%else
+							;// assert: callee expecting double type
+							%assign %%__f64 __float64__(%1)
+							%ifidn __NASMX_ABI_BITS__,32
+								%assign %%__tmp (%%__f64 & 0x00000000FFFFFFFF)
+								mov dword [__SP], %%__tmp
+								%assign %%__tmp ((%%__f64 >> 32) & 0x00000000FFFFFFFF)
+								mov dword [__SP+4], %%__tmp
+							%else
+								mov qword [__SP], %%__f64
+							%endif
+						%endif
 					%endif
 				%endif
-				push size_t %1
 			%endif
-			%assign %$args %$args + __BITS__ / 8
 		%endrep
 		call	%$__nx_proc
 		%if %$args > 0
@@ -1917,7 +2068,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%assign %$__nx_protobytecount __nx_token_2
 		%endif
 	%endif
-	%assign %$__nx_bytecount %$__nx_repcnt * sizeof(size_t)
+
 	%assign %$__nx_cc_enum nx_declspec_cc_enum(%[%$__nx_callconv])
 	%ifidn __BITS__,64
 		%assign %$__nx_argv 16
@@ -1953,7 +2104,17 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%endrep
 			%rep %$__nx_repcnt
 				nx_strtok %1, ' '
+				;// assert: calculate bytecount in this loop to account
+				;// for param types float/double rather than the simple logic of
+				;// %assign %$__nx_bytecount %$__nx_repcnt * sizeof(size_t)
 				%xdefine __nx_proto_argtype %$__nx_token %+ _type
+				%assign %%__param_type __nx_proto_argtype
+				%assign %%__param_size (%%__param_type & 0x7F)
+				%if %%__param_size < sizeof(size_t)
+					%assign %$__nx_bytecount %$__nx_bytecount + sizeof(size_t)
+				%else
+					%assign %$__nx_bytecount %$__nx_bytecount + %%__param_size
+				%endif
 				%ifndef __nx_proto_param_list
 					%defstr __nx_proto_param_list __nx_proto_argtype
 				%else
@@ -2005,17 +2166,18 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			;// obtain param type and size and validate against current ABI
 			nx_strtok %1, ' '
 			%assign %%__isfloat is_typeof_float(%[%$__nx_token])
-			%assign %%__bytes %[%$__nx_token]_size
+			%assign %%__param_size sizeof(%[%$__nx_token]) ; _size
 			nx_strtok 0, ' '
-			%if %%__bytes > sizeof(size_t)
-				%fatal parameter %[%$__nx_token] exceeds native size of __NASMX_ABI_BITS__ bits
+			;// allow exceeding due to type double in 32-bit mode
+			;// %if __param_size > sizeof(size_t)
+			;//	    %fatal parameter %[%$__nx_token] exceeds native size of __NASMX_ABI_BITS__ bits
+			;// %endif
+			%if %%__param_size < sizeof(size_t)
+				%assign %%__param_size sizeof(size_t)
 			%endif
-			%if %%__bytes < sizeof(size_t)
-				%assign %%__bytes sizeof(size_t)
-			%endif
-			%assign %$__nx_bytecount %$__nx_bytecount + %%__bytes
+			%assign %$__nx_bytecount %$__nx_bytecount + %%__param_size
 
-			%ifidn __BITS__,64
+			%ifidn __NASMX_ABI_BITS__,64
 				%if %%__isfloat == 0
 					%assign %$__nx_intargs 1 + %$__nx_intargs
 				%else
@@ -2053,11 +2215,11 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 					%endif
 				%else
 					.%[%$__nx_token] EQU %[%$__nx_argv]
-					%assign %$__nx_argv %$__nx_argv + %%__bytes
+					%assign %$__nx_argv %$__nx_argv + %%__param_size
 				%endif
 			%else
 				.%[%$__nx_token] EQU %[%$__nx_argv]
-				%assign %$__nx_argv %$__nx_argv + %%__bytes
+				%assign %$__nx_argv %$__nx_argv + %%__param_size
 			%endif
 			%rotate %$__nx_argrotate
 		%endrep
