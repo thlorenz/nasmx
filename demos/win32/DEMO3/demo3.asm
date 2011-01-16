@@ -10,15 +10,7 @@
 ;//    Bryant Keller
 ;//    Rob Neff
 ;//
-%include '..\..\..\inc\nasmx.inc'
-%include '..\..\..\inc\win32\windows.inc'
-%include '..\..\..\inc\win32\kernel32.inc'
-%include '..\..\..\inc\win32\user32.inc'
-;// You must include the following when using typedef function names
-;// for either ASCII or Unicode
-;// eg: MessageBox is an alias for MessageBoxW or MessageBoxA
-;// depending on whether UNICODE is defined or not
-%include '..\..\..\inc\win32\unicode.inc'
+%include '..\..\windemos.inc'
 
 entry    demo3
 

@@ -10,15 +10,7 @@
 ;//    Bryant Keller
 ;//    Rob Neff
 ;//
-%include '..\..\..\inc\nasmx.inc'
-%include '..\..\..\inc\win32\windows.inc'
-%include '..\..\..\inc\win32\kernel32.inc'
-%include '..\..\..\inc\win32\user32.inc'
-;// You must include the following when using typedef function names
-;// for either ASCII or Unicode
-;// eg: MessageBox is an alias for MessageBoxW or MessageBoxA
-;// depending on whether UNICODE is defined or not
-%include '..\..\..\inc\win32\unicode.inc'
+%include '..\..\windemos.inc'
 
 ;/////////////////////////////////////////////
 ;//
@@ -38,36 +30,36 @@ NASMX_STRUC DEMO13_STRUC
 NASMX_ENDSTRUC
 
 
-entry    demo13
-
 [section .code]
+
+entry    demo13
 
 proc   WndProc, ptrdiff_t hwnd, dword msg, size_t wparam, size_t lparam
 locals none
 
 .wm_create:
-    cmp      dword [argv(.msg)], WM_CREATE
-    jnz      .wm_command
+    cmp    dword [argv(.msg)], WM_CREATE
+    jnz    .wm_command
 
-    invoke   GetClientRect, ptrdiff_t [argv(.hwnd)], rct
-    invoke   CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE, 0, 0, uint32_t [rct + RECT.right], uint32_t [rct + RECT.bottom], ptrdiff_t [argv(.hwnd)], 500, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
-    jmp      .wm_default
+    invoke GetClientRect, ptrdiff_t [argv(.hwnd)], rct
+    invoke CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE, 0, 0, uint32_t [rct + RECT.right], uint32_t [rct + RECT.bottom], ptrdiff_t [argv(.hwnd)], 500, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
+    jmp    .wm_default
 
 .wm_command:
-    cmp      dword [argv(.msg)], WM_COMMAND
-    jnz      .wm_destroy
+    cmp    dword [argv(.msg)], WM_COMMAND
+    jnz    .wm_destroy
 
-    cmp      dword [argv(.wparam)], 500
-    jne      .wm_default
+    cmp    dword [argv(.wparam)], 500
+    jne    .wm_default
 
-    invoke   MessageBox, NULL, bday + DEMO13_STRUC.name, szTitle, MB_OK
-    jmp      .exit
+    invoke MessageBox, NULL, bday + DEMO13_STRUC.name, szTitle, MB_OK
+    jmp    .exit
 
 .wm_destroy:
-    cmp      dword[argv(.msg)], WM_DESTROY
-    jnz      .wm_default
+    cmp    dword[argv(.msg)], WM_DESTROY
+    jnz    .wm_default
 
-    invoke   PostQuitMessage, NULL
+    invoke PostQuitMessage, NULL
 
 .wm_default:
     invoke   DefWindowProc, ptrdiff_t [argv(.hwnd)], dword [argv(.msg)], size_t [argv(.wparam)], size_t [argv(.lparam)]
@@ -80,48 +72,49 @@ endproc
 proc   WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwshow
 locals none
 
-    invoke   LoadIcon, NULL, IDI_APPLICATION
-    mov      __DX, __AX
-    mov      __AX, ptrdiff_t [argv(.hinst)]
-    mov      __BX, ptrdiff_t szClass
-    mov      __CX, ptrdiff_t WndProc
-    mov      [wc + WNDCLASSEX.hInstance], __AX
-    mov      [wc + WNDCLASSEX.lpszClassName], __BX
-    mov      [wc + WNDCLASSEX.lpfnWndProc], __CX
-    mov      [wc + WNDCLASSEX.hIcon], __DX
-    mov      [wc + WNDCLASSEX.hIconSm], __DX
-    invoke   RegisterClassEx, wc
+    invoke LoadIcon, NULL, IDI_APPLICATION
+    mov    __DX, __AX
+    mov    __AX, ptrdiff_t [argv(.hinst)]
+    mov    __BX, ptrdiff_t szClass
+    mov    __CX, ptrdiff_t WndProc
+    mov    ptrdiff_t [wc + WNDCLASSEX.hInstance], __AX
+    mov    ptrdiff_t [wc + WNDCLASSEX.lpszClassName], __BX
+    mov    ptrdiff_t [wc + WNDCLASSEX.lpfnWndProc], __CX
+    mov    ptrdiff_t [wc + WNDCLASSEX.hIcon], __DX
+    mov    ptrdiff_t [wc + WNDCLASSEX.hIconSm], __DX
+    invoke RegisterClassEx, wc
 
-    invoke   CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 100, 50, NULL, NULL, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
-    mov      [hWnd], __AX
-    invoke   ShowWindow, hWnd, [argv(.dwshow)]
-    invoke   UpdateWindow, hWnd
+    invoke CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 100, 50, NULL, NULL, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
+    mov    size_t[hWnd], __AX
+    invoke ShowWindow, hWnd, dword[argv(.dwshow)]
+    invoke UpdateWindow, hWnd
 
-    .msgloop:
-        invoke   GetMessage, message, NULL, NULL, NULL
-        cmp      eax, dword 0
-        je       .exit
-        invoke   TranslateMessage, message
-        invoke   DispatchMessage, message
-        jmp      .msgloop
+.msgloop:
+    invoke GetMessage, message, NULL, NULL, NULL
+    cmp    eax, dword 0
+    je     .exit
+    invoke TranslateMessage, message
+    invoke DispatchMessage, message
+    jmp    .msgloop
+
 .exit:
 
-    mov      __AX, size_t[message + MSG.wParam]
+    mov __AX, size_t[message + MSG.wParam]
 
 endproc
 
 proc   demo13
 locals none
 
-    invoke   GetModuleHandle, NULL
-    mov      ptrdiff_t [hInstance], __AX
-    invoke   WinMain, hInstance, NULL, NULL, SW_SHOWNORMAL
-    invoke   ExitProcess, NULL
+    invoke GetModuleHandle, NULL
+    mov    ptrdiff_t [hInstance], __AX
+    invoke WinMain, hInstance, NULL, NULL, SW_SHOWNORMAL
+    invoke ExitProcess, NULL
 endproc
 
 [section .bss]
-    hInstance:   reserve(ptrdiff_t) 1
-    hWnd:        reserve(ptrdiff_t) 1
+    hInstance:  reserve(ptrdiff_t) 1
+    hWnd:       reserve(ptrdiff_t) 1
 
 [section .data]
     szButton:   declare(NASMX_TCHAR) NASMX_TEXT("BUTTON"), 0x0

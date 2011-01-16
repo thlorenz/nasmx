@@ -1,24 +1,21 @@
-%include '..\..\..\inc\nasmx.inc'
-%include '..\..\..\inc\win32\windows.inc'
-%include '..\..\..\inc\win32\kernel32.inc'
-%include '..\..\..\inc\win32\user32.inc'
+%include '..\..\windemos.inc'
 
 entry    demo1
 
 [section .code]
 
 proc   my_p, ptrdiff_t sz_Content, ptrdiff_t sz_Title
-locals none, 64
+locals none
 
-    invoke    MessageBoxA, NULL, [argv(.sz_Content)], [argv(.sz_Title)], MB_OK
+    invoke    MessageBox, NULL, ptrdiff_t [argv(.sz_Content)], ptrdiff_t [argv(.sz_Title)], MB_OK
 
 endproc
 
 proc   demo1
-locals none, 64
+locals none
 
     invoke    my_p, szContentTwo, szTitleTwo
-    invoke    MessageBoxA, NULL, szContent, szTitle, MB_OK
+    invoke    MessageBox, NULL, szContent, szTitle, MB_OK
     invoke    ExitProcess, NULL
 
 endproc

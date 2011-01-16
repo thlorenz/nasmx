@@ -10,15 +10,7 @@
 ;//    Bryant Keller
 ;//    Rob Neff
 ;//
-%include '..\..\..\inc\nasmx.inc'
-%include '..\..\..\inc\win32\windows.inc'
-%include '..\..\..\inc\win32\kernel32.inc'
-%include '..\..\..\inc\win32\user32.inc'
-;// You must include the following when using typedef function names
-;// for either ASCII or Unicode
-;// eg: MessageBox is an alias for MessageBoxW or MessageBoxA
-;// depending on whether UNICODE is defined or not
-%include '..\..\..\inc\win32\unicode.inc'
+%include '..\..\windemos.inc'
 
 entry    demo1
 
@@ -36,7 +28,7 @@ locals none
 	;// they are referenced differently as the following line shows. Make sure you don't forget
 	;// to include the leading dot when referencing procedure parameters and local variables.
 	;// The dot notation is used to distinguish between local and global vars.
-    invoke    MessageBox, NULL, [argv(.szContent)], [argv(.szTitle)], MB_OK
+    invoke    MessageBox, NULL, ptrdiff_t [argv(.szContent)], ptrdiff_t [argv(.szTitle)], MB_OK
 
 endproc  ;// return from procedure happens automatically here
 
