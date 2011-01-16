@@ -11,6 +11,26 @@ Downloads and snapshots are available from:
 
 Change Log
 ~~~~~~~~~~
+NASMX v1.0B5: 6:15 PM 1/16/2011, by Rob Neff
+- Updated Win32 "bin" directory with latest versions
+  of developer tools:
+  NASM v2.10rc3, NDISASM v2.10rc3
+
+- Support Stack Local Variable (SLV) addressing
+  Ex:
+    Pass contents of SLV to function:
+        invoke myproc, dword [var(.x)]
+    Pass address of SLV to function:
+        invoke myproc, var(.x)
+
+- Support float and double types
+  Ex:
+    proc myfloatproc, float_t pi
+
+- Partial support of Win64 fastcall
+
+- Speed up assembling Windows demos with use of master demo include
+
 NASMX v1.0B4: 9:25 PM 11/09/2010, by Rob Neff
 - Updated Win32 "bin" directory with latest versions
   of developer tools:
@@ -22,10 +42,12 @@ NASMX v1.0B4: 9:25 PM 11/09/2010, by Rob Neff
 
 - Added support for the following calling conventions:
   C, StdCall, FastCall, Pascal
+  Ex:
+      proto cdecl, myproc, ptrdiff_t pString
 
 - Modified demos to reflect latest use and syntax changes
 
-Current Release: 8:05 PM 1/12/2009, by Keith Kanios
+Archive Release: 8:05 PM 1/12/2009, by Keith Kanios
 - Updated Win32 "bin" directory with latest versions
   of NASM, NDISASM, GoLink, GoRC and ResEd.
 
