@@ -10,6 +10,7 @@
 ;//     %include '..\..\..\inc\win32\windows.inc'
 ;//     %include '..\..\..\inc\win32\kernel32.inc'
 ;//     %include '..\..\..\inc\win32\user32.inc'
+;//     %include '..\..\..\inc\win32\msvcrt.inc'
 
 ;/////////////////////////////////////////////////////
 ;// WINDOWS.INC DEFINITIONS
@@ -146,6 +147,8 @@ IMPORT UpdateWindow, 4
 ;// MSVCRT.INC PROTOTYPES
 ;/////////////////////////////////////////////////////
 IMPORT cdecl, printf
+IMPORT cdecl, scanf
+IMPORT cdecl, _getch
 
 
 %ifdef UNICODE
