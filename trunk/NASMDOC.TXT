@@ -277,7 +277,7 @@ Chapter 2: Running NASM
        file for you, in which addresses and generated code are listed on
        the left, and the actual source code, with expansions of multi-line
        macros (except those which specifically request no expansion in
-       source listings: see section 4.3.10) on the right. For example:
+       source listings: see section 4.3.11) on the right. For example:
 
        nasm -f elf myfile.asm -l myfile.lst
 
@@ -553,7 +553,7 @@ Chapter 2: Running NASM
        (*) `-Ox' (where `x' is the actual letter `x'): Multipass
            optimization. Minimize branch offsets and signed immediate
            bytes, overriding size specification unless the `strict' keyword
-           has been used (see section 3.7). For compatability with earlier
+           has been used (see section 3.7). For compatibility with earlier
            releases, the letter `x' may also be any number greater than
            one. This number has no effect on the actual number of passes.
 
@@ -1151,7 +1151,7 @@ Chapter 3: The NASM Language
                mov     ax,310q         ; octal 
                mov     ax,310o         ; octal again 
                mov     ax,0o310        ; octal yet again 
-               mov     ax,0q310        ; hex yet again 
+               mov     ax,0q310        ; octal yet again 
                mov     ax,11001000b    ; binary 
                mov     ax,1100_1000b   ; same binary constant 
                mov     ax,1100_1000y   ; same binary constant once more 
@@ -1764,7 +1764,7 @@ Chapter 4: The NASM Preprocessor
        have, in fact, exactly the same effect.
 
        `%[...]' concatenates to adjacent tokens in the same way that multi-
-       line macro parameters do, see section 4.3.8 for details.
+       line macro parameters do, see section 4.3.9 for details.
 
  4.1.4 Concatenating Single Line Macro Tokens: `%+'
 
@@ -2258,7 +2258,7 @@ Chapter 4: The NASM Preprocessor
 
        The maximum parameter count can be infinite, denoted by `*'. In this
        case, of course, it is impossible to provide a _full_ set of default
-       parameters. Examples of this usage are shown in section 4.3.7.
+       parameters. Examples of this usage are shown in section 4.3.8.
 
  4.3.6 `%0': Macro Parameter Counter
 
@@ -2267,9 +2267,15 @@ Chapter 4: The NASM Preprocessor
        is the last parameter. `%0' is mostly useful for macros that can
        take a variable number of parameters. It can be used as an argument
        to `%rep' (see section 4.5) in order to iterate through all the
-       parameters of a macro. Examples are given in section 4.3.7.
+       parameters of a macro. Examples are given in section 4.3.8.
 
- 4.3.7 `%rotate': Rotating Macro Parameters
+ 4.3.7 `%00': Label Preceeding Macro
+
+       `%00' will return the label preceeding the macro invocation, if any.
+       The label must be on the same line as the macro invocation, may be a
+       local label (see section 3.9), and need not end in a colon.
+
+ 4.3.8 `%rotate': Rotating Macro Parameters
 
        Unix shell programmers will be familiar with the `shift' shell
        command, which allows the arguments passed to a shell script
@@ -2337,7 +2343,7 @@ Chapter 4: The NASM Preprocessor
        second-to-last argument becomes `%1'. Thus the arguments are
        iterated through in reverse order.
 
- 4.3.8 Concatenating Macro Parameters
+ 4.3.9 Concatenating Macro Parameters
 
        NASM can concatenate macro parameters and macro indirection
        constructs on to other text surrounding them. This allows you to
@@ -2394,7 +2400,7 @@ Chapter 4: The NASM Preprocessor
 
        See also the `%+' operator, section 4.1.4.
 
- 4.3.9 Condition Codes as Macro Parameters
+4.3.10 Condition Codes as Macro Parameters
 
        NASM can give special treatment to a macro parameter which contains
        a condition code. For a start, you can refer to the macro parameter
@@ -2426,7 +2432,7 @@ Chapter 4: The NASM Preprocessor
        will report an error if passed either of these, because no inverse
        condition code exists.
 
-4.3.10 Disabling Listing Expansion
+4.3.11 Disabling Listing Expansion
 
        When NASM is generating a listing file from your program, it will
        generally expand multi-line macros by means of writing the macro
@@ -2446,7 +2452,7 @@ Chapter 4: The NASM Preprocessor
 
        %macro bar 1-5+.nolist a,b,c,d,e,f,g,h
 
-4.3.11 Undefining Multi-Line Macros: `%unmacro'
+4.3.12 Undefining Multi-Line Macros: `%unmacro'
 
        Multi-line macros can be removed with the `%unmacro' directive.
        Unlike the `%undef' directive, however, `%unmacro' takes an argument
@@ -8219,12 +8225,18 @@ Appendix B: Instruction List
        MONITOR                                   PRESCOTT 
        MONITOR          reg_eax,reg_ecx,reg_edx  PRESCOTT,ND 
        MONITOR          reg_rax,reg_ecx,reg_edx  X64,ND 
-       MOV              mem,reg_sreg             8086 
+       MOV              mem,reg_sreg             8086,SW 
        MOV              reg16,reg_sreg           8086 
        MOV              reg32,reg_sreg           386 
-       MOV              reg_sreg,mem             8086 
+       MOV              reg64,reg_sreg           X64,OPT,ND 
+       MOV              rm64,reg_sreg            X64 
+       MOV              reg_sreg,mem             8086,SW 
+       MOV              reg_sreg,reg16           8086,OPT,ND 
+       MOV              reg_sreg,reg32           386,OPT,ND 
+       MOV              reg_sreg,reg64           X64,OPT,ND 
        MOV              reg_sreg,reg16           8086 
        MOV              reg_sreg,reg32           386 
+       MOV              reg_sreg,rm64            X64 
        MOV              reg_al,mem_offs          8086 
        MOV              reg_ax,mem_offs          8086 
        MOV              reg_eax,mem_offs         386 
@@ -8262,6 +8274,8 @@ Appendix B: Instruction List
        MOV              reg8,imm                 8086 
        MOV              reg16,imm                8086 
        MOV              reg32,imm                386 
+       MOV              reg64,udword64           X64,OPT,ND 
+       MOV              reg64,sdword64           X64,OPT,ND 
        MOV              reg64,imm                X64 
        MOV              rm8,imm                  8086 
        MOV              rm16,imm                 8086 
@@ -8870,33 +8884,33 @@ Appendix B: Instruction List
 
  B.1.3 Katmai Streaming SIMD instructions (SSE -- a.k.a. KNI, XMM, MMX2)
 
-       ADDPS            xmmreg,xmmrm             KATMAI,SSE 
-       ADDSS            xmmreg,xmmrm             KATMAI,SSE,SD 
-       ANDNPS           xmmreg,xmmrm             KATMAI,SSE 
-       ANDPS            xmmreg,xmmrm             KATMAI,SSE 
-       CMPEQPS          xmmreg,xmmrm             KATMAI,SSE 
-       CMPEQSS          xmmreg,xmmrm             KATMAI,SSE 
-       CMPLEPS          xmmreg,xmmrm             KATMAI,SSE 
-       CMPLESS          xmmreg,xmmrm             KATMAI,SSE 
-       CMPLTPS          xmmreg,xmmrm             KATMAI,SSE 
-       CMPLTSS          xmmreg,xmmrm             KATMAI,SSE 
-       CMPNEQPS         xmmreg,xmmrm             KATMAI,SSE 
-       CMPNEQSS         xmmreg,xmmrm             KATMAI,SSE 
-       CMPNLEPS         xmmreg,xmmrm             KATMAI,SSE 
-       CMPNLESS         xmmreg,xmmrm             KATMAI,SSE 
-       CMPNLTPS         xmmreg,xmmrm             KATMAI,SSE 
-       CMPNLTSS         xmmreg,xmmrm             KATMAI,SSE 
-       CMPORDPS         xmmreg,xmmrm             KATMAI,SSE 
-       CMPORDSS         xmmreg,xmmrm             KATMAI,SSE 
-       CMPUNORDPS       xmmreg,xmmrm             KATMAI,SSE 
-       CMPUNORDSS       xmmreg,xmmrm             KATMAI,SSE 
+       ADDPS            xmmreg,xmmrm128          KATMAI,SSE 
+       ADDSS            xmmreg,xmmrm32           KATMAI,SSE 
+       ANDNPS           xmmreg,xmmrm128          KATMAI,SSE 
+       ANDPS            xmmreg,xmmrm128          KATMAI,SSE 
+       CMPEQPS          xmmreg,xmmrm128          KATMAI,SSE 
+       CMPEQSS          xmmreg,xmmrm32           KATMAI,SSE 
+       CMPLEPS          xmmreg,xmmrm128          KATMAI,SSE 
+       CMPLESS          xmmreg,xmmrm32           KATMAI,SSE 
+       CMPLTPS          xmmreg,xmmrm128          KATMAI,SSE 
+       CMPLTSS          xmmreg,xmmrm32           KATMAI,SSE 
+       CMPNEQPS         xmmreg,xmmrm128          KATMAI,SSE 
+       CMPNEQSS         xmmreg,xmmrm32           KATMAI,SSE 
+       CMPNLEPS         xmmreg,xmmrm128          KATMAI,SSE 
+       CMPNLESS         xmmreg,xmmrm32           KATMAI,SSE 
+       CMPNLTPS         xmmreg,xmmrm128          KATMAI,SSE 
+       CMPNLTSS         xmmreg,xmmrm32           KATMAI,SSE 
+       CMPORDPS         xmmreg,xmmrm128          KATMAI,SSE 
+       CMPORDSS         xmmreg,xmmrm32           KATMAI,SSE 
+       CMPUNORDPS       xmmreg,xmmrm128          KATMAI,SSE 
+       CMPUNORDSS       xmmreg,xmmrm32           KATMAI,SSE 
        CMPPS            xmmreg,mem,imm           KATMAI,SSE 
        CMPPS            xmmreg,xmmreg,imm        KATMAI,SSE 
        CMPSS            xmmreg,mem,imm           KATMAI,SSE 
        CMPSS            xmmreg,xmmreg,imm        KATMAI,SSE 
-       COMISS           xmmreg,xmmrm             KATMAI,SSE 
-       CVTPI2PS         xmmreg,mmxrm             KATMAI,SSE,MMX 
-       CVTPS2PI         mmxreg,xmmrm             KATMAI,SSE,MMX 
+       COMISS           xmmreg,xmmrm32           KATMAI,SSE 
+       CVTPI2PS         xmmreg,mmxrm64           KATMAI,SSE,MMX 
+       CVTPS2PI         mmxreg,xmmrm64           KATMAI,SSE,MMX 
        CVTSI2SS         xmmreg,mem               KATMAI,SSE,SD,AR1,ND 
        CVTSI2SS         xmmreg,rm32              KATMAI,SSE,SD,AR1 
        CVTSI2SS         xmmreg,rm64              X64,SSE,AR1 
@@ -8907,52 +8921,46 @@ Appendix B: Instruction List
        CVTTPS2PI        mmxreg,xmmrm             KATMAI,SSE,MMX 
        CVTTSS2SI        reg32,xmmrm              KATMAI,SSE,SD,AR1 
        CVTTSS2SI        reg64,xmmrm              X64,SSE,SD,AR1 
-       DIVPS            xmmreg,xmmrm             KATMAI,SSE 
-       DIVSS            xmmreg,xmmrm             KATMAI,SSE 
-       LDMXCSR          mem                      KATMAI,SSE,SD 
-       MAXPS            xmmreg,xmmrm             KATMAI,SSE 
-       MAXSS            xmmreg,xmmrm             KATMAI,SSE 
-       MINPS            xmmreg,xmmrm             KATMAI,SSE 
-       MINSS            xmmreg,xmmrm             KATMAI,SSE 
-       MOVAPS           xmmreg,mem               KATMAI,SSE 
-       MOVAPS           mem,xmmreg               KATMAI,SSE 
-       MOVAPS           xmmreg,xmmreg            KATMAI,SSE 
-       MOVAPS           xmmreg,xmmreg            KATMAI,SSE 
-       MOVHPS           xmmreg,mem               KATMAI,SSE 
-       MOVHPS           mem,xmmreg               KATMAI,SSE 
+       DIVPS            xmmreg,xmmrm128          KATMAI,SSE 
+       DIVSS            xmmreg,xmmrm32           KATMAI,SSE 
+       LDMXCSR          mem32                    KATMAI,SSE 
+       MAXPS            xmmreg,xmmrm128          KATMAI,SSE 
+       MAXSS            xmmreg,xmmrm32           KATMAI,SSE 
+       MINPS            xmmreg,xmmrm128          KATMAI,SSE 
+       MINSS            xmmreg,xmmrm32           KATMAI,SSE 
+       MOVAPS           xmmreg,xmmrm128          KATMAI,SSE 
+       MOVAPS           xmmrm128,xmmreg          KATMAI,SSE 
+       MOVHPS           xmmreg,mem64             KATMAI,SSE 
+       MOVHPS           mem64,xmmreg             KATMAI,SSE 
        MOVLHPS          xmmreg,xmmreg            KATMAI,SSE 
-       MOVLPS           xmmreg,mem               KATMAI,SSE 
-       MOVLPS           mem,xmmreg               KATMAI,SSE 
+       MOVLPS           xmmreg,mem64             KATMAI,SSE 
+       MOVLPS           mem64,xmmreg             KATMAI,SSE 
        MOVHLPS          xmmreg,xmmreg            KATMAI,SSE 
        MOVMSKPS         reg32,xmmreg             KATMAI,SSE 
        MOVMSKPS         reg64,xmmreg             X64,SSE 
-       MOVNTPS          mem,xmmreg               KATMAI,SSE 
-       MOVSS            xmmreg,mem               KATMAI,SSE 
-       MOVSS            mem,xmmreg               KATMAI,SSE 
+       MOVNTPS          mem128,xmmreg            KATMAI,SSE 
+       MOVSS            xmmreg,xmmrm32           KATMAI,SSE 
+       MOVSS            mem32,xmmreg             KATMAI,SSE 
        MOVSS            xmmreg,xmmreg            KATMAI,SSE 
-       MOVSS            xmmreg,xmmreg            KATMAI,SSE 
-       MOVUPS           xmmreg,mem               KATMAI,SSE 
-       MOVUPS           mem,xmmreg               KATMAI,SSE 
-       MOVUPS           xmmreg,xmmreg            KATMAI,SSE 
-       MOVUPS           xmmreg,xmmreg            KATMAI,SSE 
-       MULPS            xmmreg,xmmrm             KATMAI,SSE 
-       MULSS            xmmreg,xmmrm             KATMAI,SSE 
-       ORPS             xmmreg,xmmrm             KATMAI,SSE 
-       RCPPS            xmmreg,xmmrm             KATMAI,SSE 
-       RCPSS            xmmreg,xmmrm             KATMAI,SSE 
-       RSQRTPS          xmmreg,xmmrm             KATMAI,SSE 
-       RSQRTSS          xmmreg,xmmrm             KATMAI,SSE 
-       SHUFPS           xmmreg,mem,imm           KATMAI,SSE 
-       SHUFPS           xmmreg,xmmreg,imm        KATMAI,SSE 
-       SQRTPS           xmmreg,xmmrm             KATMAI,SSE 
-       SQRTSS           xmmreg,xmmrm             KATMAI,SSE 
-       STMXCSR          mem                      KATMAI,SSE,SD 
-       SUBPS            xmmreg,xmmrm             KATMAI,SSE 
-       SUBSS            xmmreg,xmmrm             KATMAI,SSE 
-       UCOMISS          xmmreg,xmmrm             KATMAI,SSE 
-       UNPCKHPS         xmmreg,xmmrm             KATMAI,SSE 
-       UNPCKLPS         xmmreg,xmmrm             KATMAI,SSE 
-       XORPS            xmmreg,xmmrm             KATMAI,SSE
+       MOVUPS           xmmreg,xmmrm128          KATMAI,SSE 
+       MOVUPS           xmmrm128,xmmreg          KATMAI,SSE 
+       MULPS            xmmreg,xmmrm128          KATMAI,SSE 
+       MULSS            xmmreg,xmmrm32           KATMAI,SSE 
+       ORPS             xmmreg,xmmrm128          KATMAI,SSE 
+       RCPPS            xmmreg,xmmrm128          KATMAI,SSE 
+       RCPSS            xmmreg,xmmrm32           KATMAI,SSE 
+       RSQRTPS          xmmreg,xmmrm128          KATMAI,SSE 
+       RSQRTSS          xmmreg,xmmrm32           KATMAI,SSE 
+       SHUFPS           xmmreg,xmmrm128,imm8     KATMAI,SSE 
+       SQRTPS           xmmreg,xmmrm128          KATMAI,SSE 
+       SQRTSS           xmmreg,xmmrm32           KATMAI,SSE 
+       STMXCSR          mem32                    KATMAI,SSE 
+       SUBPS            xmmreg,xmmrm128          KATMAI,SSE 
+       SUBSS            xmmreg,xmmrm32           KATMAI,SSE 
+       UCOMISS          xmmreg,xmmrm32           KATMAI,SSE 
+       UNPCKHPS         xmmreg,xmmrm128          KATMAI,SSE 
+       UNPCKLPS         xmmreg,xmmrm128          KATMAI,SSE 
+       XORPS            xmmreg,xmmrm128          KATMAI,SSE
 
  B.1.4 Introduced in Deschutes but necessary for SSE support
 
@@ -9145,8 +9153,8 @@ B.1.11 Willamette Streaming SIMD instructions (SSE2)
        CMPORDSD         xmmreg,xmmrm             WILLAMETTE,SSE2 
        CMPUNORDPD       xmmreg,xmmrm             WILLAMETTE,SSE2,SO 
        CMPUNORDSD       xmmreg,xmmrm             WILLAMETTE,SSE2 
-       CMPPD            xmmreg,xmmrm,imm         WILLAMETTE,SSE22 
-       CMPSD            xmmreg,xmmrm,imm         WILLAMETTE,SSE2 
+       CMPPD            xmmreg,xmmrm128,imm8     WILLAMETTE,SSE2 
+       CMPSD            xmmreg,xmmrm128,imm8     WILLAMETTE,SSE2 
        COMISD           xmmreg,xmmrm             WILLAMETTE,SSE2 
        CVTDQ2PD         xmmreg,xmmrm             WILLAMETTE,SSE2 
        CVTDQ2PS         xmmreg,xmmrm             WILLAMETTE,SSE2,SO 
@@ -9206,9 +9214,9 @@ B.1.11 Willamette Streaming SIMD instructions (SSE2)
        SUBPD            xmmreg,xmmrm             WILLAMETTE,SSE2,SO 
        SUBSD            xmmreg,xmmrm             WILLAMETTE,SSE2 
        UCOMISD          xmmreg,xmmrm             WILLAMETTE,SSE2 
-       UNPCKHPD         xmmreg,xmmrm             WILLAMETTE,SSE2,SO 
-       UNPCKLPD         xmmreg,xmmrm             WILLAMETTE,SSE2,SO 
-       XORPD            xmmreg,xmmrm             WILLAMETTE,SSE2,SO
+       UNPCKHPD         xmmreg,xmmrm128          WILLAMETTE,SSE2 
+       UNPCKLPD         xmmreg,xmmrm128          WILLAMETTE,SSE2 
+       XORPD            xmmreg,xmmrm128          WILLAMETTE,SSE2
 
 B.1.12 Prescott New Instructions (SSE3)
 
@@ -10696,7 +10704,64 @@ Appendix C: NASM Version History
        The NASM 2 series support x86-64, and is the production version of
        NASM since 2007.
 
- C.1.1 Version 2.09
+ C.1.1 Version 2.10
+
+       (*) When optimization is enabled, `mov r64,imm' now optimizes to the
+           shortest form possible between:
+
+            mov r32,imm32                   ;  5 bytes 
+            mov r64,imm32                   ;  7 bytes 
+            mov r64,imm64                   ; 10 bytes
+
+       To force a specific form, use the `STRICT' keyword, see section 3.7.
+
+ C.1.2 Version 2.09.04
+
+       (*) Fix incorrect labels offset for VEX intructions.
+
+       (*) Eliminate bogus warning on implicit operand size override.
+
+       (*) `%if' term could not handle 64 bit numbers.
+
+       (*) The COFF backend was limiting relocations number to 16 bits even
+           if in real there were a way more relocations.
+
+ C.1.3 Version 2.09.03
+
+       (*) Print `%macro' name inside `%rep' blocks on error.
+
+       (*) Fix preprocessor expansion behaviour. It happened sometime too
+           early and sometime simply wrong. Move behaviour back to the
+           origins (down to NASM 2.05.01).
+
+       (*) Fix unitialized data dereference on OMF output format.
+
+       (*) Issue warning on unterminated `%{' construct.
+
+       (*) Fix for documentation typo.
+
+ C.1.4 Version 2.09.02
+
+       (*) Fix reversed tokens when `%deftok' produces more than one output
+           token.
+
+       (*) Fix segmentation fault on disassembling some VEX instructions.
+
+       (*) Missing `%endif' did not always cause error.
+
+       (*) Fix typo in documentation.
+
+       (*) Compound context local preprocessor single line macro
+           identifiers were not expanded early enough and as result lead to
+           unresolved symbols.
+
+ C.1.5 Version 2.09.01
+
+       (*) Fix NULL dereference on missed %deftok second parameter.
+
+       (*) Fix NULL dereference on invalid %substr parameters.
+
+ C.1.6 Version 2.09
 
        (*) Fixed assignment the magnitude of `%rep' counter. It is limited
            to 62 bits now.
@@ -10764,16 +10829,16 @@ Appendix C: NASM Version History
        (*) Add a new standard macro package `%use fp' for floating-point
            convenience macros. See section 5.3.
 
- C.1.2 Version 2.08.02
+ C.1.7 Version 2.08.02
 
        (*) Fix crash under certain circumstances when using the `%+'
            operator.
 
- C.1.3 Version 2.08.01
+ C.1.8 Version 2.08.01
 
        (*) Fix the `%use' statement, which was broken in 2.08.
 
- C.1.4 Version 2.08
+ C.1.9 Version 2.08
 
        (*) A number of enhancements/fixes in macros area.
 
@@ -10824,7 +10889,7 @@ Appendix C: NASM Version History
 
        (*) Fix NULL dereference on too long local labels.
 
- C.1.5 Version 2.07
+C.1.10 Version 2.07
 
        (*) NASM is now under the 2-clause BSD license. See section 1.1.2.
 
@@ -10857,7 +10922,7 @@ Appendix C: NASM Version History
        (*) Fix assert failure on certain operations that involve strings
            with high-bit bytes.
 
- C.1.6 Version 2.06
+C.1.11 Version 2.06
 
        (*) This release is dedicated to the memory of Charles A. Crayne,
            long time NASM developer as well as moderator of
@@ -10893,7 +10958,7 @@ Appendix C: NASM Version History
            4.11.10.
 
        (*) Correctly handle preprocessor token concatenation (see section
-           4.3.8) involving floating-point numbers.
+           4.3.9) involving floating-point numbers.
 
        (*) The `PINSR' series of instructions have been corrected and
            rationalized.
@@ -10907,11 +10972,11 @@ Appendix C: NASM Version History
        (*) Add additional "well-known" ELF sections with default
            attributes. See section 7.9.2.
 
- C.1.7 Version 2.05.01
+C.1.12 Version 2.05.01
 
        (*) Fix the `-w'/`-W' option parsing, which was broken in NASM 2.05.
 
- C.1.8 Version 2.05
+C.1.13 Version 2.05
 
        (*) Fix redundant REX.W prefix on `JMP reg64'.
 
@@ -10942,7 +11007,7 @@ Appendix C: NASM Version History
 
        (*) Fix the SSE 4.2 `CRC32' instruction.
 
- C.1.9 Version 2.04
+C.1.14 Version 2.04
 
        (*) Sanitize macro handing in the `%error' directive.
 
@@ -10968,7 +11033,7 @@ Appendix C: NASM Version History
        (*) Correct the handling of nested `%rep's.
 
        (*) New `%unmacro' directive to undeclare a multi-line macro. See
-           section 4.3.11.
+           section 4.3.12.
 
        (*) Builtin macro `__PASS__' which expands to the current assembly
            pass. See section 4.11.9.
@@ -11010,7 +11075,7 @@ Appendix C: NASM Version History
        (*) `%push' no longer needs a context identifier; omitting the
            context identifier results in an anonymous context.
 
-C.1.10 Version 2.03.01
+C.1.15 Version 2.03.01
 
        (*) Fix buffer overflow in the listing module.
 
@@ -11020,7 +11085,7 @@ C.1.10 Version 2.03.01
 
        (*) The `-F' option now implies `-g'.
 
-C.1.11 Version 2.03
+C.1.16 Version 2.03
 
        (*) Add support for Intel AVX, CLMUL and FMA instructions, including
            YMM registers.
@@ -11067,7 +11132,7 @@ C.1.11 Version 2.03
 
        (*) Fix forward references used in `EQU' statements.
 
-C.1.12 Version 2.02
+C.1.17 Version 2.02
 
        (*) Additional fixes for MMX operands with explicit `qword', as well
            as (hopefully) SSE operands with `oword'.
@@ -11104,7 +11169,7 @@ C.1.12 Version 2.02
 
        (*) Autogenerated instruction list added to the documentation.
 
-C.1.13 Version 2.01
+C.1.18 Version 2.01
 
        (*) Fix the handling of MMX registers with explicit `qword' tags on
            memory (broken in 2.00 due to 64-bit changes.)
@@ -11122,7 +11187,7 @@ C.1.13 Version 2.01
 
        (*) Fix corrupt output when the optimizer runs out of passes.
 
-C.1.14 Version 2.00
+C.1.19 Version 2.00
 
        (*) Added c99 data-type compliance.
 
