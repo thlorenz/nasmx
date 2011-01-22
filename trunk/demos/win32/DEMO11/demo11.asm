@@ -11,7 +11,6 @@
 ;//    Rob Neff
 ;//
 %include '..\..\windemos.inc'
-%include "..\..\..\inc\win32\msvcrt.inc"
 
 entry	demo11
 
