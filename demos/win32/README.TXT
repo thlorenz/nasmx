@@ -28,6 +28,7 @@ All rights reserved.
   DEMO12 - Demonstrates the use of Win32 Console functions to achieve
            input, output and exiting from a console mode program
   DEMO13 - Demonstrates the use of nested structures and unions
+  DEMO14 - Demonstrates using floating point variables
 
  All of these applications, as well as the NASMX.INC file, were
  completely designed by Bryant Keller, Keith Kanios, and/or Rob Neff.
