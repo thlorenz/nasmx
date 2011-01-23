@@ -3,7 +3,7 @@ AS=nasm
 AFLAGS=-f win64
 #AFLAGS=-f win64 -dUNICODE=1
 LD=GoLink
-LDFLAGS		=/entry main
+LDFLAGS		=/console /entry main
 LIBS		=kernel32.dll user32.dll
 
 # [ Suffixes ]
