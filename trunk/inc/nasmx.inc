@@ -181,12 +181,16 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 %ixdefine __nx_reg_edx edx
 %ixdefine __nx_reg_edi edi
 %ixdefine __nx_reg_esi esi
+%ixdefine __nx_reg_ebp ebp
+%ixdefine __nx_reg_esp esp
 %ixdefine __nx_reg_rax rax
 %ixdefine __nx_reg_rbx rbx
 %ixdefine __nx_reg_rcx rcx
 %ixdefine __nx_reg_rdx rdx
 %ixdefine __nx_reg_rdi rdi
 %ixdefine __nx_reg_rsi rsi
+%ixdefine __nx_reg_rbp rbp
+%ixdefine __nx_reg_rsp rsp
 %ixdefine __nx_reg_r8  r8
 %ixdefine __nx_reg_r9  r9
 %ixdefine __nx_reg_r10 r10
@@ -1586,6 +1590,8 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	%assign %$__nx_argv_mode_bp 0
 	%assign %$__nx_argv_mode_sign 0
 	%assign %$__nx_argv_mode_castsize sizeof(size_t)
+	%assign %$__nx_argv_mode_fp_isnum 0
+	%assign %$__nx_argv_mode_fp_num 0
 	nx_strchr %{1}, '['
 	%assign %$__nx_argv_mode_indirect %$__nx_strchr_pos
 	%if %$__nx_argv_mode_indirect == 0
@@ -1622,6 +1628,38 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 			%endif
 			%substr %%__off %%__str %$__nx_argv_mode_bp+1, -1
 			%deftok %$__nx_argv_mode_bp_offset %%__off
+		%elif %$__nx_argv_mode_param_isfloat > 0
+			;// assert: check for float type and process
+			nx_isfloattok %1
+			%if %$__nx_isfloattok_bool != 0
+				%assign %$__nx_argv_mode_fp_isnum 1
+				%if %$__nx_argv_mode_param_size == 4
+					%assign %$__nx_argv_mode_fp_num __float32__(%1)
+				%else
+					%assign %$__nx_argv_mode_fp_num __float64__(%1)
+				%endif
+			%else
+				nx_strtok %1, ' '
+				%ifndef __nx_reg_%[%$__nx_token]
+					%iftoken %1
+						%fatal expected floating point at arg %1
+					%endif
+					;// must check for casts which indicate
+					;// __float() or __double() may have been used
+					%ifdef %[%$__nx_token]_size
+						%assign %%__size %[%$__nx_token]_size
+						nx_strtok 0, ';'
+					%else
+						%assign %%__size %$__nx_argv_mode_param_size
+						nx_strtok %1, ';'
+					%endif
+					%if %%__size > %$__nx_argv_mode_param_size
+						%warning potential loss of precision from double to float for arg %1
+					%endif
+					%assign %$__nx_argv_mode_fp_isnum 1
+					%assign %$__nx_argv_mode_fp_num %$__nx_token
+				%endif
+			%endif
 		%endif
 	%elif %$__nx_argv_mode_indirect > 3
 		;// check for cast ( eg: dword[rbp+4] )
@@ -1767,10 +1805,11 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 								mov  %$arg_cur, %1
 							%endif
 						%endif
+						;// Windows requires that we spill registers
+						mov [__SP + %$args], %$arg_cur
 					%else
-						;// assert: float param
-						;// TODO: Be smarter with floats
 						%if __BITS__ == 64
+							;// assert: 64-bit float param
 							%if   %$args == 0
 								%xdefine %$arg_cur xmm0
 							%elif %$args == 8
@@ -1780,14 +1819,57 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 							%else
 								%xdefine %$arg_cur xmm3
 							%endif
+							%if %$__nx_argv_mode_indirect > 0
+								nx_strtok %1, ' '
+								%ifdef %[%$__nx_token]_size
+									nx_strtok 0, ';'
+									movsd %$arg_cur, %$__nx_token
+								%else
+									movsd %$arg_cur, %1
+								%endif
+								movsd [__SP + %$args], %$arg_cur
+							%elif %$__nx_argv_mode_bp > 0
+								nx_strtok %1, ' '
+								%ifdef __nx_reg_%[%$__nx_token]
+									movsd %$arg_cur, [%1]
+								%elifdef %[%$__nx_token]_size
+									nx_strtok 0, ';'
+									movsd %$arg_cur, [ %[%$__nx_token] ]
+								%else
+									movsd %$arg_cur, [%1]
+								%endif
+								movsd [__SP + %$args], %$arg_cur
+							%else
+								%if %$__nx_argv_mode_fp_isnum != 0
+									mov rax, %$__nx_argv_mode_fp_num
+									mov qword [__SP + %$args], rax
+									%assign %%__reg_ax_used 1
+								%else
+									mov qword [__SP + %$args], %1
+								%endif
+								movsd %$arg_cur, [__SP + %$args]
+							%endif
 						%else
-							%xdefine %$arg_cur __AX
-							%assign %%__reg_ax_used 1
+							;// 32-bit fastcall float param
+							%if %$__nx_argv_mode_param_size > sizeof(size_t)
+								%error cannot load double to register in 32-bit fastcall
+							%endif
+							%if   %$args == 0
+								%xdefine %$arg_cur ecx
+							%elif %$args == 4
+								%xdefine %$arg_cur edx
+							%else
+								%xdefine %$arg_cur __AX
+								%assign %%__reg_ax_used 1
+							%endif
+							%if %$__nx_argv_mode_fp_isnum != 0
+								mov %$arg_cur, %$__nx_argv_mode_fp_num
+							%else
+								mov %$arg_cur, %1
+							%endif
+							mov [__SP + %$args], %$arg_cur
 						%endif
-						mov %$arg_cur, %1
 					%endif
-					;// Windows requires that we spill registers
-					mov [__SP + %$args], %$arg_cur
 					%undef %$arg_cur
 					%assign %$__nx_intargs 1 + %$__nx_intargs
 					%assign %$args %$args + sizeof(size_t)
@@ -1848,26 +1930,20 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 							fld __nx_error_token_size_%[%$__nx_argv_mode_param_size] [%1]
 							fstp __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP + %$args]
 						%else
-							nx_isfloattok %1
-							%if %$__nx_isfloattok_bool == 0
-								mov __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP + %$args], %1
-							%else
+							%if %$__nx_argv_mode_fp_isnum != 0
 								;// assert: arg is floating point constant
 								%if %$__nx_argv_mode_param_size == 4
 									;// assert: callee expecting float type
-									mov dword [__SP + %$args], __float(%1)
+									mov dword [__SP + %$args], %$__nx_argv_mode_fp_num
 								%else
 									;// assert: callee expecting double type
-									%assign %%__f64 __float64__(%1)
-									%ifidn __NASMX_ABI_BITS__,32
-										%assign %%__tmp (%%__f64 & 0x00000000FFFFFFFF)
-										mov dword [__SP + %$args], %%__tmp
-										%assign %%__tmp ((%%__f64 >> 32) & 0x00000000FFFFFFFF)
-										mov dword [__SP+%$args+4], %%__tmp
-									%else
-										mov qword [__SP+%$args], %%__f64
-									%endif
+									%assign %%__tmp (%$__nx_argv_mode_fp_num & 0x00000000FFFFFFFF)
+									mov dword [__SP + %$args], %%__tmp
+									%assign %%__tmp ((%$__nx_argv_mode_fp_num >> 32) & 0x00000000FFFFFFFF)
+									mov dword [__SP+%$args+4], %%__tmp
 								%endif
+							%else
+								mov __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP + %$args], %1
 							%endif
 						%endif
 					%endif
@@ -1960,26 +2036,19 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 					fld __nx_error_token_size_%[%$__nx_argv_mode_param_size] [%1]
 					fstp __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP]
 				%else
-					nx_isfloattok %1
-					%if %$__nx_isfloattok_bool == 0
-						mov __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP], %1
-					%else
-						;// assert: arg is floating point constant
+					%if %$__nx_argv_mode_fp_isnum != 0
 						%if %$__nx_argv_mode_param_size == 4
 							;// assert: callee expecting float type
-							mov dword [__SP], __float(%1)
+							mov dword [__SP], %$__nx_argv_mode_fp_num
 						%else
 							;// assert: callee expecting double type
-							%assign %%__f64 __float64__(%1)
-							%ifidn __NASMX_ABI_BITS__,32
-								%assign %%__tmp (%%__f64 & 0x00000000FFFFFFFF)
-								mov dword [__SP], %%__tmp
-								%assign %%__tmp ((%%__f64 >> 32) & 0x00000000FFFFFFFF)
-								mov dword [__SP+4], %%__tmp
-							%else
-								mov qword [__SP], %%__f64
-							%endif
+							%assign %%__tmp (%$__nx_argv_mode_fp_num & 0x00000000FFFFFFFF)
+							mov dword [__SP], %%__tmp
+							%assign %%__tmp ((%$__nx_argv_mode_fp_num >> 32) & 0x00000000FFFFFFFF)
+							mov dword [__SP+4], %%__tmp
 						%endif
+					%else
+						mov [__SP], %1
 					%endif
 				%endif
 			%endif
