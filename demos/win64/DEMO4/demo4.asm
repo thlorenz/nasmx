@@ -9,6 +9,9 @@ DEFAULT REL
 
 entry    demo4
 
+[section .data]
+    szStringFmt: declare(NASMX_TCHAR) 13,10,NASMX_TEXT("The area of the circle is %8.4f"), 0x0D, 0x0A, 0x0
+
 [section .code]
 
 NASMX_PRAGMA CALLSTACK, 32
@@ -17,7 +20,7 @@ NASMX_PRAGMA CALLSTACK, 32
 ; given it's radius.  It makes use of the FPU and leaves the result
 ; on the FPU stack for the function return value.
 ; Prototype:
-;     float CalculateAreaOfCircle(float radius);
+;     float CalculateAreaOfCircle(double radius);
 ;
 proc   CalculateAreaOfCircle, double_t radius
 locals
@@ -45,17 +48,18 @@ endlocals
     ; calculate the area
     mov rcx, __double(2.0)
 	mov qword [var(.area)], rcx
-    invoke CalculateAreaOfCircle, qword [var(.area)]
-; or    invoke CalculateAreaOfCircle,  __double(2.0)
-; or    invoke CalculateAreaOfCircle,  2.0
-; or    invoke CalculateAreaOfCircle,  rcx
+    invoke CalculateAreaOfCircle, rcx
+;
+;    Various ways to provide a double precision floating point for
+;    properly prototyped procedures:
+;        invoke CalculateAreaOfCircle, qword [var(.area)]
+;        invoke CalculateAreaOfCircle, __double(2.0)
+;        invoke CalculateAreaOfCircle, 2.0
 
 	; vararg functions like printf are tricky regarding floating point
-	; so we leave the result in xmm0 and copy it to rdx
+	; so we leave the result in xmm0 and copy it to rdx since rdx is
+	; the register used for parameter 2 in win64 mode
     movq rdx, xmm0
     invoke printf, szStringFmt, rdx
 
 endproc
-
-[section .data]
-    szStringFmt: declare(NASMX_TCHAR) 13,10,NASMX_TEXT("The area of the circle is %8.4f"), 0x0D, 0x0A, 0x0
