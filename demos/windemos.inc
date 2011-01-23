@@ -123,6 +123,7 @@ NASMX_ENDSTRUC
 ;/////////////////////////////////////////////////////
 IMPORT ExitProcess, 4
 IMPORT GetConsoleMode, 8
+IMPORT GetLastError, 0
 IMPORT GetProcessHeap, 0
 IMPORT GetStdHandle, 4
 IMPORT HeapAlloc, 12
@@ -146,10 +147,14 @@ IMPORT UpdateWindow, 4
 ;/////////////////////////////////////////////////////
 ;// MSVCRT.INC PROTOTYPES
 ;/////////////////////////////////////////////////////
+%ifidn __BITS__,64
+IMPORT printf
+IMPORT scanf
+%else
 IMPORT cdecl, printf
 IMPORT cdecl, scanf
 IMPORT cdecl, _getch
-
+%endif
 
 %ifdef UNICODE
 
@@ -180,6 +185,12 @@ IMPORT RegisterClassExW, 4
 %define RegisterClassEx RegisterClassExW
 IMPORT SendDlgItemMessageW, 20
 %define SendDlgItemMessage SendDlgItemMessageW
+%ifidni __OUTPUT_FORMAT__,win64
+IMPORT wsprintfW
+%else
+IMPORT cdecl, wsprintfW
+%endif
+%define wsprintf wsprintfW
 
 %else  ;// ANSI
 
@@ -210,6 +221,12 @@ IMPORT RegisterClassExA, 4
 %define RegisterClassEx RegisterClassExA
 IMPORT SendDlgItemMessageA, 20
 %define SendDlgItemMessage SendDlgItemMessageA
+%ifidni __OUTPUT_FORMAT__,win64
+IMPORT wsprintfA
+%else
+IMPORT cdecl, wsprintfA
+%endif
+%define wsprintf wsprintfA
 
 %endif  ;// UNICODE
 
