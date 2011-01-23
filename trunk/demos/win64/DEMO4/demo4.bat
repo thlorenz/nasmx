@@ -3,10 +3,10 @@ set file="DEMO4"
 if exist %file%.obj del %file%.obj
 if not exist %file%.asm goto errasm
 
-..\..\..\bin\nasm -f win32 %file%.asm -o %file%.obj
+..\..\..\bin\nasm -f win64 %file%.asm -o %file%.obj
 if errorlevel 1 goto errasm
 
-..\..\..\bin\GoLink.exe /console /mix /entry _main DEMO4.obj msvcrt.dll
+..\..\..\bin\GoLink.exe /console /entry main DEMO4.obj msvcrt.dll
 if errorlevel 1 goto errlink
 
 if exist %file%.obj del %file%.obj
