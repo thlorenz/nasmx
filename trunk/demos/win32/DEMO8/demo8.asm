@@ -28,6 +28,7 @@ locals none
         StaticCtl szContent, 501, 0, 40, 200, 40, [argv(.hwnd)], [wc + WNDCLASSEX.hInstance]
         ComboCtl szContent, 502, 0, 80, 200, 100, [argv(.hwnd)], [wc + WNDCLASSEX.hInstance]
         ListBoxCtl szContent, 502, 0, 106, 200, 100, [argv(.hwnd)], [wc + WNDCLASSEX.hInstance]
+		break
 
     case dword WM_COMMAND
 
@@ -36,10 +37,12 @@ locals none
         break
         .bleh:
         invoke   MessageBox, NULL, szContent, szTitle, MB_OK
+		break
 
     case dword WM_DESTROY
 
         invoke   PostQuitMessage, NULL
+		break
 
     default
 
