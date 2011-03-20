@@ -2730,26 +2730,37 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 %endmacro
 
 
-%imacro BREAK 0.nolist
-	jmp %$break
-%endmacro
 
+;//////////////////////////////////////////////////////////////////////////////
+;//
+;// The following macros provide a convenient way
+;// to simulate high level constructs.  They allow
+;// nesting of statements of arbitrary depth.
+;// Note that the address labels generated are dot-
+;// prepended to not break NASMX locals!
 
 %imacro IF 3.nolist
-%push IF
-	%assign %$next 1
+%push __NX_CTX_IF__
+	%ifndef __NX_OPER_LABEL_SEQ__
+		%xdefine __NX_OPER_LABEL_SEQ__ 0
+	%endif
+	%assign %$__nx_oper_label_seq %[__NX_OPER_LABEL_SEQ__] + 1
+	%undef __NX_OPER_LABEL_SEQ__
+	%xdefine __NX_OPER_LABEL_SEQ__ %[%$__nx_oper_label_seq]
+
+	%assign %$__nx_oper_label_next 1
 	cmp %1, %3
-	RJMP %2, %$local_%$next
+	RJMP %2, .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
 %endmacro
 
 
 %imacro ELSIF 3.nolist
-	%ifctx IF
-		jmp %$endif
-		%$local_%$next:
-		%assign %$next 1+%$next
+	%ifctx __NX_CTX_IF__
+		jmp .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]
+		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
+		%assign %$__nx_oper_label_next 1+%$__nx_oper_label_next
 		cmp %1, %3
-		RJMP %2, %$local_%$next
+		RJMP %2, .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
 	%else
 		%error "ELSIF directive must be within an IF block."
 	%endif
@@ -2757,12 +2768,12 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 
 %imacro ELSE 0.nolist
-	%ifndef _else_
-		%ifctx IF
-			jmp %$endif
-			%$local_%$next:
-			%assign %$next 1+%$next
-			%define _else_
+	%ifndef __NX_ELSE_PRESENT__
+		%ifctx __NX_CTX_IF__
+			jmp .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]
+			.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
+			%assign %$__nx_oper_label_next 1+%$__nx_oper_label_next
+			%define __NX_ELSE_PRESENT__
 		%else
 			%error "ELSE directive must be within an IF block."
 		%endif
@@ -2773,13 +2784,13 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 
 %imacro ENDIF 0.nolist
-	%ifctx IF
-		%ifndef _else_
-			%$local_%$next:
+	%ifctx __NX_CTX_IF__
+		%ifndef __NX_ELSE_PRESENT__
+			.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
 		%else
-			%undef _else_
+			%undef __NX_ELSE_PRESENT__
 		%endif
-		%$endif:
+		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]:
 		%pop
 	%else
 		%error "ENDIF directive must be within an IF block."
@@ -2787,19 +2798,31 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 %endmacro
 
 
+%imacro BREAK 0.nolist
+	jmp .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]
+%endmacro
+
+
 %imacro SWITCH 1.nolist
-%push SWITCH
-	mov EDX, %1
-	%assign %$next 1
+%push __NX_CTX_SWITCH__
+	%ifndef __NX_OPER_LABEL_SEQ__
+		%xdefine __NX_OPER_LABEL_SEQ__ 0
+	%endif
+	%assign %$__nx_oper_label_seq %[__NX_OPER_LABEL_SEQ__] + 1
+	%undef __NX_OPER_LABEL_SEQ__
+	%xdefine __NX_OPER_LABEL_SEQ__ %[%$__nx_oper_label_seq]
+
+	mov __DX, %1
+	%assign %$__nx_oper_label_next 1
 %endmacro
 
 
 %imacro CASE 1.nolist
-	%ifctx SWITCH
-		%$local_%$next:
-		%assign %$next 1+%$next
+	%ifctx __NX_CTX_SWITCH__
+		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
+		%assign %$__nx_oper_label_next 1+%$__nx_oper_label_next
 		cmp __DX, %1
-		jnz near %$local_%$next
+		jnz near .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
 	%else
 		%error "CASE directive must be within a SWITCH block."
 	%endif
@@ -2807,9 +2830,13 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 
 %imacro DEFAULT 0.nolist
-	%ifctx SWITCH
-		%define _default_
-		%$local_%$next:
+	%ifctx __NX_CTX_SWITCH__
+		%ifndef __NX_SWITCH_DEFAULT_PRESENT__
+			%define __NX_SWITCH_DEFAULT_PRESENT__
+			.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
+		%else
+			%error "There can only be one DEFAULT per SWITCH block."
+		%endif
 	%else
 		%error "DEFAULT directive must be within a SWITCH block."
 	%endif
@@ -2817,26 +2844,34 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 
 %imacro ENDSWITCH 0.nolist
-	%ifndef _default_
-		%$local_%$next:
+	%ifndef __NX_SWITCH_DEFAULT_PRESENT__
+		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
 	%else
-		%undef _default_
+		%undef __NX_SWITCH_DEFAULT_PRESENT__
 	%endif
-	%$break:
+	.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]:
 %pop
 %endmacro
 
+
 %imacro DO 0.nolist
-%push DO
-	%$begin:
+%push __NX_CTX_DO__
+	%ifndef __NX_OPER_LABEL_SEQ__
+		%xdefine __NX_OPER_LABEL_SEQ__ 0
+	%endif
+	%assign %$__nx_oper_label_seq %[__NX_OPER_LABEL_SEQ__] + 1
+	%undef __NX_OPER_LABEL_SEQ__
+	%xdefine __NX_OPER_LABEL_SEQ__ %[%$__nx_oper_label_seq]
+	%assign %$__nx_oper_label_next 1
+	.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
 %endmacro
 
 
 %imacro UNTIL 3.nolist
-	%ifctx DO
+	%ifctx __NX_CTX_DO__
 		cmp %1, %3
-		RJMP %2, %$begin
-		%$break:
+		RJMP %2, .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
+		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]:
 	%else
 		%error "UNTIL directive must be preceded by DO."
 	%endif
@@ -2845,10 +2880,10 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 
 %imacro WHILE 3.nolist
-	%ifctx DO
+	%ifctx __NX_CTX_DO__
 		cmp %1, %3
-		SJMP %2, %$begin
-		%$break:
+		SJMP %2, .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
+		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]:
 	%else
 		%error "WHILE directive must be preceded by DO."
 	%endif
