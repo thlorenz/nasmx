@@ -1,7 +1,7 @@
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// NASMX Preprocessor
-;// Copyright (c) 2005-2010, The NASMX Project
+;// Copyright (c) 2005-2011, The NASMX Project
 ;//
 %ifndef __NASMX_INCLUDED__
 %define __NASMX_INCLUDED__
@@ -62,11 +62,11 @@
 ;//
 ;// Define NASMX Version
 ;//
-NASMX_DEFINE VERSION,"1.0b4"
+NASMX_DEFINE VERSION,"1.0rc1"
 NASMX_DEFINE VERSION_MAJOR, 1
 NASMX_DEFINE VERSION_MINOR, 0
-NASMX_DEFINE VERSION_REV, 4
-NASMX_DEFINE VERSION_ID, 0x01000004
+NASMX_DEFINE VERSION_REV, 6
+NASMX_DEFINE VERSION_ID, 0x01000006
 
 
 ;//////////////////////////////////////////////////////////////
@@ -378,7 +378,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 ;// although currently specific to win32, the
 ;// STDCALL calling convention can be useful
 %idefine __NASMX_DECLSPEC_CALLCONV_STDCALL__  0x2321
-;// The following 2 calling conventions are highly
+;// The following 3 calling conventions are highly
 ;// platform dependent and are defined within the
 ;// OUTPUT_FORMAT check
 ;// %idefine __NASMX_DECLSPEC_CALLCONV_CDECL__ 0x????
