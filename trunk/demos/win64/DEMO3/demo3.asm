@@ -1,3 +1,16 @@
+;// DEMO3.ASM
+;//
+;// Copyright (C)2005-2011 The NASMX Project
+;//
+;// This is a fully UNICODE aware, typedefined demo that demonstrates
+;// using NASMX typedef system to make your code truly portable between
+;// 32 and 64-bit systems using either ASCII or UNICODE
+;//
+;// Contributors:
+;//    Bryant Keller
+;//    Rob Neff
+;//
+
 %include "..\..\windemos.inc"
 %include "..\..\..\inc\win32\COMCTL32.INC"
 
@@ -23,7 +36,7 @@ msg:	DB	'Press any key to continue...',13,10
 
 [section .text]
 
-proc   demo3
+proc   demo3, ptrdiff_t argcount, ptrdiff_t cmdline
 locals none
 
 	invoke	GetStdHandle, STD_OUTPUT_HANDLE

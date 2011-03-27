@@ -40,7 +40,7 @@ endlocals
 
 endproc
 
-proc   demo4
+proc   demo4, ptrdiff_t argcount, ptrdiff_t cmdline
 locals
     local area, double_t
 endlocals

@@ -136,7 +136,7 @@ locals none
 endproc
 
 
-proc   demo5
+proc   demo5, ptrdiff_t argcount, ptrdiff_t cmdline
 locals none
 
     invoke GetModuleHandle, NULL
