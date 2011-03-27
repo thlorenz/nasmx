@@ -1,6 +1,6 @@
 ;// DEMO1.ASM
 ;//
-;// Copyright (C)2005-2010 The NASMX Project
+;// Copyright (C)2005-2011 The NASMX Project
 ;//
 ;// This is a fully UNICODE aware, type-defined demo that demonstrates
 ;// using NASMX typedef system to help make your code portable between
@@ -33,7 +33,7 @@ locals none
 endproc  ;// return from procedure happens automatically here
 
 ;// the start of our program as defined with the ENTRY macro
-proc   demo1
+proc   demo1, ptrdiff_t argcount, ptrdiff_t cmdline
 locals none
 
     invoke    my_p, szContentTwo, szTitleTwo

@@ -1,6 +1,6 @@
 ;// DEMO9.ASM
 ;//
-;// Copyright (C)2005-2010 The NASMX Project
+;// Copyright (C)2005-2011 The NASMX Project
 ;//
 ;// This is a fully UNICODE aware, typedefined demo that demonstrates
 ;// using NASMX typedef system to make your code truly portable between
@@ -18,7 +18,7 @@ import cdecl, Say, ptrdiff_t content, ptrdiff_t apptitle
 
 [section .text]
 
-proc   Demo9
+proc   Demo9, ptrdiff_t argcount, ptrdiff_t cmdline
 locals none
 
 	invoke	Say, szContent, szTitle

@@ -1,6 +1,6 @@
 ;// DEMO4.ASM
 ;//
-;// Copyright (C)2005-2010 The NASMX Project
+;// Copyright (C)2005-2011 The NASMX Project
 ;//
 ;// This is a fully UNICODE aware, typedefined demo that demonstrates
 ;// using NASMX typedef system to make your code truly portable between
@@ -18,7 +18,7 @@ entry  demo4
 
 [section .text]
 
-proc   demo4
+proc   demo4, ptrdiff_t argcount, ptrdiff_t cmdline
 locals none
 
     invoke DialogBoxParam, NULL, szTemplate, NULL, dlgproc, NULL
