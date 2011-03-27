@@ -34,7 +34,7 @@ endlocals
 
 endproc
 
-proc   demo14
+proc   demo14, ptrdiff_t argcount, ptrdiff_t cmdline
 locals
     local area, float_t
     local aread, double_t
