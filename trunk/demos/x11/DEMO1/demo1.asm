@@ -1,3 +1,17 @@
+;// DEMO1.ASM
+;//
+;// Copyright (C)2005-2011 The NASMX Project
+;//
+;// Purpose:
+;//    This program demonstrates X11 programming
+;//
+;// Contributors:
+;//    Bryant Keller
+;//    Kieth Kanios
+;//    Rob Neff
+;//
+
+
 ;##### Include Files #####
 %include '../../../inc/nasmx.inc'
 %include '../../../inc/linux/libc.inc'
@@ -14,22 +28,44 @@ font.name	DB	"6x10",0
 msg	 	DB	"Event Type: %i",10,0
 
 [section .text]
+
+
+;##### Event Handler #####
+proc   EventHandle, dword event
+locals none
+
+	;#### Print "Event Type" Message to the Console ####
+	invoke	printf, DWORD msg, DWORD [argv(.event)]
+
+	cmp	DWORD [argv(.event)],0x05
+	jle	.process_input
+
+	invoke	XDrawString, DWORD[display], DWORD[window], DWORD[window.gc], DWORD 100, DWORD 150, DWORD app_text, DWORD 13
+
+.process_input:
+	invoke	XFlush, DWORD[display]
+
+endproc
+
+
+
 ;##### Program Entrypoint #####
-proc	demo1
+proc   demo1
+locals none
 
 	;#### Open Default Display ####
-	invoke	XOpenDisplay,DWORD 0
-	mov	DWORD[display],eax		;Store the Display Structure
+	invoke	XOpenDisplay, DWORD 0
+	mov	DWORD[display], eax		;Store the Display Structure
 
 	;#### Get Default Screen ####
 	invoke	XDefaultScreen, DWORD[display]
-	mov	DWORD[screen],eax
+	mov	DWORD[screen], eax
 
 	;#### Get Default Colors of the Window ####
 	invoke	XBlackPixel, DWORD[display], DWORD[screen]
-	mov	DWORD[pixel.black],eax
+	mov	DWORD[pixel.black], eax
 	invoke	XWhitePixel, DWORD[display], DWORD[screen]
-	mov	DWORD[pixel.white],eax
+	mov	DWORD[pixel.white], eax
 
 	;#### Get Root Window of the Default Display ####
 	invoke	XDefaultRootWindow, DWORD[display]
@@ -51,24 +87,24 @@ proc	demo1
 
 	;#### Setup the Window Graphics Content ####
 	invoke	XLoadQueryFont, DWORD[display], DWORD font.name
-	mov	DWORD[font.info],eax
-	mov	ebx,DWORD[eax+4]		;Load Font ID
-	mov	DWORD[gc.value+60],ebx		;Store Font ID
+	mov	DWORD[font.info], eax
+	mov	ebx, DWORD[eax+4]		;Load Font ID
+	mov	DWORD[gc.value+60], ebx		;Store Font ID
 
-	mov	DWORD[gc.value],GXcopy		;Set to GXCopy
+	mov	DWORD[gc.value], GXcopy		;Set to GXCopy
 
 	invoke	XAllPlanes
-	mov	DWORD[gc.value+4],eax
+	mov	DWORD[gc.value+4], eax
 
-	mov	eax,DWORD[pixel.black]
-	mov	DWORD[gc.value+8],eax
+	mov	eax, DWORD[pixel.black]
+	mov	DWORD[gc.value+8], eax
 
-	mov	eax,DWORD[pixel.white]
-	mov	DWORD[gc.value+12],eax
+	mov	eax, DWORD[pixel.white]
+	mov	DWORD[gc.value+12], eax
 
 	;#### Create the Window Graphics Content ####
 	invoke	XCreateGC, DWORD[display], DWORD[window], DWORD GCFunction + GCPlaneMask + GCForeground + GCBackground + GCFont, DWORD gc.value
-	mov	DWORD[window.gc],eax
+	mov	DWORD[window.gc], eax
 	invoke	XCreateFontCursor, DWORD[display], DWORD XC_trek
 	invoke	XDefineCursor, DWORD[display], DWORD[window], DWORD eax
 
@@ -90,24 +126,7 @@ proc	demo1
 
 	;#### Exit with NULL Return Value ####
 	invoke	exit, DWORD 0
-	ret
-endproc
 
-;##### Event Handler #####
-proc	EventHandle
-.event	argd
-
-	;#### Print "Event Type" Message to the Console ####
-	invoke	printf, DWORD msg, DWORD argv(.event)
-
-	cmp	DWORD argv(.event),0x05
-	jle	.process_input
-
-	invoke	XDrawString, DWORD[display], DWORD[window], DWORD[window.gc], DWORD 100, DWORD 150, DWORD app_text, DWORD 13
-
-.process_input:
-	invoke	XFlush, DWORD[display]
-	ret
 endproc
 
 ;##### Uninitialzed Data #####
