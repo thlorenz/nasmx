@@ -10,9 +10,9 @@
 ;//
 ;// Check NASM Version
 ;//
-%define __nxerrmsg "NASM v2.09 or later required"
+%define __nxerrmsg "NASM v2.09.04 or later required"
 %ifdef __NASM_VERSION_ID__
-	%if __NASM_VERSION_ID__ < 0x02090000
+	%if __NASM_VERSION_ID__ < 0x02090400
 		%fatal __nxerrmsg
 	%endif
 %else
@@ -375,13 +375,13 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 ;// universal calling conventions
 %idefine __NASMX_DECLSPEC_CALLCONV_NAKED__    0
 %idefine __NASMX_DECLSPEC_CALLCONV_PASCAL__   0x3100
-%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
 ;// although currently specific to win32, the
 ;// STDCALL calling convention can be useful
 %idefine __NASMX_DECLSPEC_CALLCONV_STDCALL__  0x2321
 ;// The following 2 calling conventions are highly
 ;// platform dependent and are defined within the
 ;// OUTPUT_FORMAT check
+;// %idefine __NASMX_DECLSPEC_CALLCONV_CDECL__ 0x????
 ;// %idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x????
 ;// %idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x????
 
@@ -612,6 +612,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 ;// All system specific defines are made here
 ;//
 %ifidn	 __OUTPUT_FORMAT__,elf
+	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0200
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
@@ -629,6 +630,9 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,elf32
+	;// gcc does NOT prepend underscores to functions
+	;// declared using cdecl
+	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0200
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
@@ -646,6 +650,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,elf64
+	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0200
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    6
@@ -666,6 +671,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,macho
+	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0411
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
@@ -683,6 +689,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,macho32
+	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0411
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
@@ -700,6 +707,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORAMT__,macho64
+	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0411
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    6
@@ -720,6 +728,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,win32
+	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x2423
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2522
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    2
@@ -739,6 +748,7 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%idefine NASMX_TEXT(x) x
 	%endif
 %elifidn __OUTPUT_FORMAT__,win64
+	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x2423
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    4
@@ -759,8 +769,9 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%idefine NASMX_TEXT(x) x
 	%endif
 %else
-	%define __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
-	%define __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
+	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
+	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
 	NASMX_DECLSPEC SYSTYPE, LINUX
@@ -1545,14 +1556,14 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 		%assign %%__cc_prefix nx_declspec_cc_prefix(__NASMX_DECLSPEC_CALLCONV_DEFAULT__)
 		%if %%__cc_prefix > 0
 			%xdefine %[%1] _main
-			%xdefine __nxsig@@_main  __NASMX_DECLSPEC_CALLCONV_CDECL__,0
+			%xdefine __nxsig@@_main  __NASMX_DECLSPEC_CALLCONV_CDECL__, __NASMX_ABI_BITS__ / 4
 		%else
 			%xdefine %[%1] main
-			%xdefine __nxsig@@main  __NASMX_DECLSPEC_CALLCONV_DEFAULT__,0
+			%xdefine __nxsig@@main  __NASMX_DECLSPEC_CALLCONV_DEFAULT__, __NASMX_ABI_BITS__ / 4
 		%endif
 	%else
 		%xdefine %[%1] main
-		%xdefine __nxsig@@main  __NASMX_DECLSPEC_CALLCONV_DEFAULT__,0
+		%xdefine __nxsig@@main  __NASMX_DECLSPEC_CALLCONV_DEFAULT__, __NASMX_ABI_BITS__ / 4
 	%endif
 	%xdefine __nxsig_declared_%[%1] global
 	global %[%1]
@@ -2593,10 +2604,14 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 	;// assert: we can not be certain at what context level we are at,
 	;// thus we pop all contexts until we get to __NX_CTX_PROC__
 	%rep 32
+		;// Bugfix:
+		;// Avoid problem with exitrep not exiting
+		;// the loop immediately.
 		%ifctx __NX_CTX_PROC__
 			%exitrep
+                %else
+			%pop
 		%endif
-		%pop
 	%endrep
 
 	%ifndef __NX_RETURN_PRESENT__
