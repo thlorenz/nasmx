@@ -2306,21 +2306,25 @@ NASMX_DEFINE VERSION_ID, 0x01000004
 
 		%if %$__nx_protobytecount >= 0
 			%if %$__nx_bytecount != %$__nx_protobytecount
-				;// unfortunately we must check callconv for cdecl on win32
-				;// and fastcall on win64 as currently the import files do
-				;// not contain bytecounts to verify against.
-				;// TODO: When import files are updated in the future we can
-				;// revisit this code.
-				%ifidni __OUTPUT_FORMAT__,win32
-					%if %$__nx_cc_enum != __NASMX_DECLSPEC_CC_ENUM_CDECL__
+				;// In the program entry main procedure the user may, or may not,
+				;// be using command line or environment params.
+				%ifnidni %$__nx_proc, main 
+					;// unfortunately we must check callconv for cdecl on win32
+					;// and fastcall on win64 as currently the import files do
+					;// not contain bytecounts to verify against.
+					;// TODO: When import files are updated in the future we can
+					;// revisit this code.
+					%ifidni __OUTPUT_FORMAT__,win32
+						%if %$__nx_cc_enum != __NASMX_DECLSPEC_CC_ENUM_CDECL__
+							%warning prototype arg mismatch for %$__nx_proc
+						%endif
+					%elifidni __OUTPUT_FORMAT__,win64
+						%if %$__nx_cc_enum != __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
+							%warning prototype arg mismatch for %$__nx_proc
+						%endif
+					%else
 						%warning prototype arg mismatch for %$__nx_proc
 					%endif
-				%elifidni __OUTPUT_FORMAT__,win64
-					%if %$__nx_cc_enum != __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
-						%warning prototype arg mismatch for %$__nx_proc
-					%endif
-				%else
-					%warning prototype arg mismatch for %$__nx_proc
 				%endif
 			%endif
 		%endif
