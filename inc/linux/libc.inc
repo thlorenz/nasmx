@@ -5,6 +5,7 @@
 %ifndef __LIBC_INC__
 %define __LIBC_INC__
 
+IMPORT puts
 IMPORT exit
 IMPORT printf
 
