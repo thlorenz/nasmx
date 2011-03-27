@@ -1,3 +1,15 @@
+;// DEMO1.ASM
+;//
+;// Copyright (C)2005-2011 The NASMX Project
+;//
+;// This is a fully UNICODE aware, typedefined demo that demonstrates
+;// using NASMX typedef system to make your code truly portable between
+;// 32 and 64-bit systems using either ASCII or UNICODE
+;//
+;// Contributors:
+;//    Bryant Keller
+;//    Rob Neff
+;//
 %include '..\..\windemos.inc'
 
 entry    demo1
@@ -11,7 +23,7 @@ locals none
 
 endproc
 
-proc   demo1
+proc   demo1, ptrdiff_t argcount, ptrdiff_t cmdline
 locals none
 
     invoke    my_p, szContentTwo, szTitleTwo
