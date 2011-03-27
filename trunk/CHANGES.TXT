@@ -11,10 +11,23 @@ Downloads and snapshots are available from:
 
 Change Log
 ~~~~~~~~~~
+
+NASMX v1.0rc1: 6:15 PM 3/27/2011, by Rob Neff
+- Updated Win32 "bin" directory with latest versions
+  of nasm tools:
+    NASM v2.10rc4, NDISASM v2.10rc4
+
+- Re-enable Linux 32-bit support
+
+- Add Linux 32-bit demos
+
+- Prevent warnings for program entry main proc
+_________________________________________________________
+
 NASMX v1.0B5: 6:15 PM 1/16/2011, by Rob Neff
 - Updated Win32 "bin" directory with latest versions
   of nasm tools:
-  NASM v2.10rc3, NDISASM v2.10rc3
+    NASM v2.10rc3, NDISASM v2.10rc3
 
 - Support Stack Local Variable (SLV) addressing
   Ex:
@@ -30,13 +43,14 @@ NASMX v1.0B5: 6:15 PM 1/16/2011, by Rob Neff
 - Partial support of Win64 fastcall
 
 - Speed up assembling Windows demos with use of master demo include
+_________________________________________________________
 
 NASMX v1.0B4: 9:25 PM 11/09/2010, by Rob Neff
 - Updated Win32 "bin" directory with latest versions
   of developer tools:
-  NASM v2.10rc2, NDISASM v2.10rc2,
-  GoLink v0.26.14, GoRC v0.90.5
-  ResEd v2.2.0.6c
+    NASM v2.10rc2, NDISASM v2.10rc2,
+    GoLink v0.26.14, GoRC v0.90.5
+    ResEd v2.2.0.6c
 
 - Nested structures and unions supported
 
@@ -46,6 +60,7 @@ NASMX v1.0B4: 9:25 PM 11/09/2010, by Rob Neff
       proto cdecl, myproc, ptrdiff_t pString
 
 - Modified demos to reflect latest use and syntax changes
+_________________________________________________________
 
 Archive Release: 8:05 PM 1/12/2009, by Keith Kanios
 - Updated Win32 "bin" directory with latest versions
@@ -56,6 +71,7 @@ Archive Release: 8:05 PM 1/12/2009, by Keith Kanios
 
 - Removed redundant .CODE, .TEXT, .DATA and .BSS macros
   from nasmx.inc due to conflict with local labels.
+_________________________________________________________
 
 Archived Release: 9:30 PM 9/30/2007, by Keith Kanios
 - Renamed project from "NASM32" to "NASMX" due to the
@@ -94,6 +110,7 @@ Archived Release: 9:30 PM 9/30/2007, by Keith Kanios
 - The "docs" directory has been deprecated and removed. All
   of the files that were in the "docs" directory have been
   placed in the root install directory.
+_________________________________________________________
 
 Archived Release: 6:30 PM 8/5/2007, by Keith Kanios
 - Added X11 DEMO1, an example of a basic X11 Window.
@@ -104,6 +121,7 @@ Archived Release: 6:30 PM 8/5/2007, by Keith Kanios
 
 - Compiled new Linux release package under the standard
   GZIP Tarball compression format.
+_________________________________________________________
 
 Archived Release: 7:03 AM 3/8/2007, by Keith Kanios
 - Switched to using a compressed installation package.
@@ -128,6 +146,7 @@ Archived Release: 7:03 AM 3/8/2007, by Keith Kanios
 
 - The Win32 and XBOX DEMO batch files have been changed
   to reflect the new layout/changes of the BIN directory.
+_________________________________________________________
 
 Archived Release: 11:51 AM 2/16/2007, by Keith Kanios
 - Added "def" directory for use with export
@@ -161,6 +180,7 @@ Archived Release: 11:51 AM 2/16/2007, by Keith Kanios
 - Added DEMO1 to the list of XBOX example applications.
   Read the "README.TXT" file in the "demos/xbox" directory
   for more information.
+_________________________________________________________
 
 Archived Release: 2:13 AM 7/9/2006, by Keith Kanios and Bryant Keller
 - Fixed string bug in INVOKE and cleaned-up
@@ -190,6 +210,7 @@ Archived Release: 2:13 AM 7/9/2006, by Keith Kanios and Bryant Keller
 
   CHANGE: GORC was removed from the package, in favor of
   PORC support for the Win32 platform.
+_________________________________________________________
 
 Archived Release: 1:26 PM 3/10/2006, by Bryant Keller
 - Added nasm32\macros\libc.mac which gives you
@@ -199,6 +220,7 @@ Archived Release: 1:26 PM 3/10/2006, by Bryant Keller
   just for use with libc. This also means that
   Nasm32 can build applications on Linux/BSD systems
   which support gcc and libc.
+_________________________________________________________
 
 Archived Release: 10:07 PM 2/13/2006, by Bryant Keller
 - Added inline argument defining, similar to
