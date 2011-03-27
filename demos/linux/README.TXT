@@ -1,11 +1,10 @@
 Linux NASM Demo Applications
-Bryant Keller <bkeller@asmcommunity.net>
-Keith Kanios <keith@asmcommunity.net>
-Rob Neff <p1ranha@javalin.org>
 Copyright (c) 2006-2011 The NASMX Project
 All rights reserved.
 Contributors:
- Byrant Keller, Keith Kanios, Rob Neff
+    Bryant Keller <bkeller@asmcommunity.net>
+    Keith Kanios <keith@asmcommunity.net>
+    Rob Neff <p1ranha@javalin.org>
 
  Each of the subdirectories contain fully functional
  applications which have been designed around NASMX.INC
@@ -19,6 +18,11 @@ Contributors:
 
   DEMO2  - Demonstrates how to access the command line and
            use the C library
+  
+  DEMO3  - Demonstrates accessing command line, environment,
+           and procedural function usage
+
+  DEMO4  - Demonstrates basic arithmetic operations
 
  All of these applications, as well as the NASMX.INC file,
  were completely developed and designed by Bryant Keller,
