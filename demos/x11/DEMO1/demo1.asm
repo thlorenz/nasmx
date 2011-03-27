@@ -35,7 +35,7 @@ proc   EventHandle, dword event
 locals none
 
 	;#### Print "Event Type" Message to the Console ####
-	invoke	printf, DWORD msg, DWORD [argv(.event)]
+	invoke	printf, msg, DWORD [argv(.event)]
 
 	cmp	DWORD [argv(.event)],0x05
 	jle	.process_input
