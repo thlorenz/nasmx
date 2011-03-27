@@ -1,12 +1,29 @@
 ##### Makefile #####
-demo1: demo1.o
-	gcc -Wall -s -o demo1 demo1.o
+NAME=demo1
+AS=nasm
+ASFLAGS=-f elf32
+LD=gcc
+LDFLAGS		=-Wall -s
+LIBS		=
 
-demo1.o: demo1.asm
-	nasm -f elf demo1.asm
+# [ Suffixes ]
+# Change the suffixes to match your system environment
+O           = .o
+ASM         = .asm
+INC         = .inc
+LST         = .lst
+
+OBJS = $(NAME)$(O)
+
+all: $(NAME)
+
+demo2: $(OBJS)
+	$(LD) $(LDFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+
+$(NAME)$(O): $(NAME)$(ASM)
+	$(AS) $(ASFLAGS) $(NAME)$(ASM) -o $(NAME)$(O)
 
 clean:
-	rm *.o ./demo1
+	rm *$(O) ./demo1
+
 ##### End Makefile #####
-
-

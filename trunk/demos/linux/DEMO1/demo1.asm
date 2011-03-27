@@ -1,3 +1,16 @@
+;// DEMO1.ASM
+;//
+;// Copyright (C)2005-2011 The NASMX Project
+;//
+;// Purpose:
+;//    This program demonstrates basic usage of the NASMX
+;//    macros and how to use the framework.
+;//
+;// Contributors:
+;//    Bryant Keller
+;//    Rob Neff
+;//
+
 ;##### Include Files #####
 %include '../../../inc/nasmx.inc'
 %include '../../../inc/linux/libc.inc'
@@ -10,9 +23,10 @@ entry	demo1
 msg		DB	"Hello, World!!!",10,0
 msglen		equ	($ - msg)
 
-;##### Program Entrypoint #####
 [section .text]
-proc   demo1
+
+;##### Program Entrypoint #####
+proc   demo1, ptrdiff_t count, ptrdiff_t cmdline
 locals none
 
 	;#### SYSCALL Write Message to the Console ####
