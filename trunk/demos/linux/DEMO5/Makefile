@@ -1,10 +1,11 @@
 ##### Makefile #####
-NAME=demo1
+NAME=demo5
 AS=nasm
 ASFLAGS=-f elf32
 LD=gcc
 LDFLAGS		=-Wall -s
-LIBS		=
+LIBS		=-lc
+INCLUDES	=
 
 # [ Suffixes ]
 # Change the suffixes to match your system environment
@@ -13,15 +14,18 @@ ASM         = .asm
 INC         = .inc
 LST         = .lst
 
-OBJS = $(NAME)$(O)
+OBJS = $(NAME)$(O) ddtostr$(O)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(LD) $(LDFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
-$(NAME)$(O): $(NAME)$(ASM)
-	$(AS) $(ASFLAGS) $(NAME)$(ASM) -o $(NAME)$(O)
+ddtostr$(O): ddtostr$(ASM) ddtostr$(INC)
+	$(AS) $(ASFLAGS) $(INCLUDES) ddtostr$(ASM) -o ddtostr$(O)
+
+$(NAME)$(O): $(NAME)$(ASM) ddtostr$(INC)
+	$(AS) $(ASFLAGS) $(INCLUDES) $(NAME)$(ASM) -o $(NAME)$(O)
 
 clean:
 	rm *$(O) ./$(NAME)

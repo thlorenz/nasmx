@@ -17,13 +17,13 @@ OBJS = $(NAME)$(O)
 
 all: $(NAME)
 
-demo2: $(OBJS)
+$(NAME): $(OBJS)
 	$(LD) $(LDFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
 $(NAME)$(O): $(NAME)$(ASM)
 	$(AS) $(ASFLAGS) $(NAME)$(ASM) -o $(NAME)$(O)
 
 clean:
-	rm *$(O) ./demo2
+	rm *$(O) ./$(NAME)
 
 ##### End Makefile #####
