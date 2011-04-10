@@ -19,10 +19,11 @@ In this package, you will find 3 main directories and they
 are as follows...
 
 bin	- This directory is the primary location of all
-          software utilized by the NASMX package. Please be
-          advised that there is no DOS version of NASM with
-          this package. The \bin\nasm.exe file is actually
-          the 32-bit Windows version.
+          software utilized by the NASMX package for
+          Windows development.  Note that the linux
+          package includes source only, not binaries.
+          Linux users need to download and install the
+          gcc and nasm packages to assemble the demos.
 
 demos	- This directory holds various applications that
           demonstrate NASMX usage, very useful for learning
@@ -39,5 +40,24 @@ inc	- This directory holds vital include files needed
           DIRECTORY!!!
 
 
+The NASMENV environment variable must be set correctly
+to assemble the demos.  A small script contained in the
+nasmx directory can be used for this purpose:
+
+    $ . setpaths.sh
+
+or you may set it from the shell command prompt:
+
+    Linux:
+        $ export NASMENV=-I/usr/local/src/nasmx/inc/
+
+    Windows:
+        C:\> set NASMENV=-IC:\Projects\nasmx\inc\
+
+It is a good idea to get in the habit of always setting this
+variable even when developing your own projects.  Refer to
+Section 2.1.16 of NASMDOC.TXT for further information.
+
 That is about it. Please utilize all README.TXT files you
 come across in this package. Enjoy :)
+
