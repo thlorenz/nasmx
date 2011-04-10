@@ -12,9 +12,9 @@
 ;//
 
 ;##### Include Files #####
-%include '../../../inc/nasmx.inc'
-%include '../../../inc/linux/libc.inc'
-%include '../../../inc/linux/syscall.inc'
+%include 'nasmx.inc'
+%include 'linux/libc.inc'
+%include 'linux/syscall.inc'
 
 entry	demo1
 

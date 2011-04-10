@@ -10,8 +10,8 @@
 ;//    Rob Neff
 ;//
 
-%include '../../../inc/nasmx.inc'
-%include '../../../inc/linux/libc.inc'
+%include 'nasmx.inc'
+%include 'linux/libc.inc'
 
 ENTRY demo4
 
