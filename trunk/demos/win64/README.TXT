@@ -1,6 +1,8 @@
 Win64 NASM Demo Applications
 Bryant Keller <bkeller@asmcommunity.net>
 Keith Kanios <keith@asmcommunity.net>
+Rob Neff <p1ranha@javalin.org>
+
 Copyright (c) 2011, Byrant Keller, Keith Kanios, Rob Neff
 All rights reserved.
 

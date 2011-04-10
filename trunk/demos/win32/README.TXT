@@ -1,7 +1,8 @@
 Win32 NASM Demo Applications
 Bryant Keller <bkeller@asmcommunity.net>
 Keith Kanios <keith@asmcommunity.net>
-Copyright (c) 2005-2010, Byrant Keller, Keith Kanios, Rob Neff
+Rob Neff <p1ranha@javalin.org>
+Copyright (c) 2005-2011, Byrant Keller, Keith Kanios, Rob Neff
 All rights reserved.
 
  Each of the subdirectories contain fully functional applications
