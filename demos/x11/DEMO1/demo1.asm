@@ -13,22 +13,46 @@
 
 
 ;##### Include Files #####
-%include '../../../inc/nasmx.inc'
-%include '../../../inc/linux/libc.inc'
-%include '../../../inc/x11/x.inc'
-%include '../../../inc/x11/cursorfont.inc'
+%include 'nasmx.inc'
+%include 'linux/libc.inc'
+%include 'x11/x.inc'
+%include 'x11/cursorfont.inc'
 
-entry	demo1
 
 ;##### Initialized Data #####
 [section .data]
 app_title	DB	"My first X11 Window!!!",0
 app_text	DB	"Hello, World.",0
-font.name	DB	"6x10",0
+font.name	DB	"*",0  ;"6x10",0
 msg	 	DB	"Event Type: %i",10,0
+dbgstr  	DB	"retval = %i",10,0
 
-[section .text]
+;#### Error messages
+szFuncMsgErr	DB	"%s returned error %i",10,0
+szXOpenDisplay	DB	"XOpenDisplay"
+szXLoadQueryFont DB	"XLoadQueryFont"
 
+
+;##### Uninitialzed Data #####
+SECTION .bss
+    display	RESB 4		;Display Pointer
+    screen	RESB 4		;Default Screen Pointer
+    root_window	RESB 4		;Root Window
+    pixel.black	RESB 4		;Default "Black" Color
+    pixel.white	RESB 4		;Default "White" Color
+    window	RESB 4		;Window Pointer
+    window.gc	RESD 24		;Window Graphics Content
+    gc.font     RESB 4		;Window Font
+    gc.value    RESD 24		;Window GC Values
+    pixmap	RESB 4		;Pixmap
+    font.info   RESB 4		;Font Info
+    event	RESD 5		;Window Event Buffer
+
+
+;##### Code #####
+SECTION .text
+
+entry	demo1
 
 ;##### Event Handler #####
 proc   EventHandle, dword event
@@ -55,6 +79,14 @@ locals none
 
 	;#### Open Default Display ####
 	invoke	XOpenDisplay, DWORD 0
+	cmp     eax, 0
+	jne	.have_display
+
+	;#### Open Display Error ####
+	invoke	printf, szFuncMsgErr, szXOpenDisplay, eax
+	return	1
+
+.have_display:
 	mov	DWORD[display], eax		;Store the Display Structure
 
 	;#### Get Default Screen ####
@@ -87,6 +119,14 @@ locals none
 
 	;#### Setup the Window Graphics Content ####
 	invoke	XLoadQueryFont, DWORD[display], DWORD font.name
+	cmp     eax, 0
+	jne     .have_font
+	
+	;#### Error querying for font ####
+	invoke	printf, szFuncMsgErr, szXLoadQueryFont, eax
+	return  1
+
+.have_font:
 	mov	DWORD[font.info], eax
 	mov	ebx, DWORD[eax+4]		;Load Font ID
 	mov	DWORD[gc.value+60], ebx		;Store Font ID
@@ -95,6 +135,7 @@ locals none
 
 	invoke	XAllPlanes
 	mov	DWORD[gc.value+4], eax
+	invoke  printf, dbgstr, eax
 
 	mov	eax, DWORD[pixel.black]
 	mov	DWORD[gc.value+8], eax
@@ -128,19 +169,4 @@ locals none
 	invoke	exit, DWORD 0
 
 endproc
-
-;##### Uninitialzed Data #####
-[section .bss]
-    display	RESB 4		;Display Pointer
-    screen	RESB 4		;Default Screen Pointer
-    root_window	RESB 4		;Root Window
-    pixel.black	RESB 4		;Default "Black" Color
-    pixel.white	RESB 4		;Default "White" Color
-    window	RESB 4		;Window Pointer
-    window.gc	RESD 24		;Window Graphics Content
-    gc.font     RESB 4		;Window Font
-    gc.value    RESD 24		;Window GC Values
-    pixmap	RESB 4		;Pixmap
-    font.info   RESB 4		;Font Info
-    event	RESD 5		;Window Event Buffer
 

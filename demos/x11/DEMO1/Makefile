@@ -1,15 +1,22 @@
 ##### Makefile #####
+
+NAME = demo1
+
+AS = nasm
+ASFLAGS =-f elf32
+LD = gcc
+LDFLAGS =-Wall -s
 X11_LIBS = -L/usr/X11R6/lib -lX11
 
 
-demo1: demo1.o
-	gcc $(X11_LIBS) -Wall -s -o demo1 demo1.o
+$(NAME): $(NAME).o
+	$(LD) $(X11_LIBS) $(LDFLAGS) -o $(NAME) $(NAME).o
 
-demo1.o: demo1.asm
-	nasm -f elf demo1.asm
+$(NAME).o: $(NAME).asm
+	$(AS) $(ASFLAGS) $(NAME).asm -o $(NAME).o
 
 clean:
-	rm *.o ./demo1
+	rm *.o ./$(NAME)
 ##### End Makefile #####
 
 
