@@ -28,6 +28,7 @@ locals
 endlocals
 
     ; xmm0 contains the radius, so square the value
+	movsd [argv(.radius)], xmm0
 	mulsd xmm0, [argv(.radius)]
 
     ; assign the float value pi to local variable,
