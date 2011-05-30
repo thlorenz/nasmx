@@ -40,6 +40,8 @@ Contributors:
            Shows how to properly use the NASMX proto/import
            macros when creating multiple assembly modules.
 
+  DEMO6  - Demonstrates a simple XWindows program
+
  All of these applications, as well as the NASMX.INC file,
  were completely developed and designed by Bryant Keller,
  Keith Kanios, and/or Rob Neff. As such, all rights over these
