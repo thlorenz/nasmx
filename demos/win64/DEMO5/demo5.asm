@@ -2,136 +2,138 @@
 ;//
 ;// Copyright (C)2005-2011 The NASMX Project
 ;//
-;// This is a fully UNICODE aware, typedefined demo that demonstrates
-;// using NASMX typedef system to make your code truly portable between
-;// 32 and 64-bit systems using either ASCII or UNICODE
-;//
 ;// Contributors:
 ;//    Bryant Keller
 ;//    Rob Neff
 ;//
 %include '..\..\windemos.inc'
 
-%ifidn __BITS__, 64
 ;// assert: set call stack for procedure prolog to max
 ;// invoke param bytes for 64-bit assembly mode
 DEFAULT REL
 NASMX_PRAGMA CALLSTACK, 96
-%endif
 
 entry    demo5
 
 [section .code]
 
-%define __NX_DEBUG__
-%ifdef __NX_DEBUG__
+;// The following two procedures are for display of runtime error messages
 
-proc nx_debug_errmsg, ptrdiff_t pszProcName
+proc nx_debug_errmsg, ptrdiff_t pszProcName, dword err
 locals
     local szBuffer, NASMX_TCHAR, 512
-    local err, uint32_t, 1
 endlocals
-    invoke GetLastError
-    mov    uint32_t [var(.err)], eax
-    invoke wsprintf, var(.szBuffer), szDebugFmt, uint32_t [var(.err)], ptrdiff_t [argv(.pszProcName)]
-    invoke MessageBox, NULL, var(.szBuffer), szDebugtitle, MB_OK
+	mov    r8, rdx    ;// get err
+	mov    r9, rcx    ;// get proc name
+    invoke wsprintf, var(.szBuffer), szDebugFmt, r8, r9
+    invoke MessageBox, NULL, var(.szBuffer), szDebugTitle, MB_OK
 endproc
-%endif
+
+proc   nx_debug_lasterr, ptrdiff_t pszProcName
+locals none
+    ;// save arg to spill area
+	mov    ptrdiff_t [argv(.pszProcName)], rcx
+    invoke GetLastError
+	;// restore arg from spill area
+	mov    rcx, ptrdiff_t [argv(.pszProcName)]
+	invoke nx_debug_errmsg, rcx, rax
+endproc
 
 
 proc   WndProc, ptrdiff_t hwnd, dword umsg, ptrdiff_t wparam, ptrdiff_t lparam
-uses   __BX, __SI
 locals none
 
-.wm_create:
-    cmp      dword [argv(.umsg)], WM_CREATE
-    jnz      .wm_command
-
-    invoke nx_debug_errmsg, szWmCreate
-    invoke   GetClientRect, ptrdiff_t [argv(.hwnd)], rct
-    mov  __BX, rct
-    mov  __SI, wc
-    invoke   CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE,\
-                            0, 0, uint32_t [__BX + RECT.right], uint32_t [__BX + RECT.bottom],\
-                            ptrdiff_t [argv(.hwnd)], 500, ptrdiff_t [__SI + WNDCLASSEX.hInstance], NULL
-    jmp      .wm_default
-
 .wm_command:
-    cmp      dword [argv(.umsg)], WM_COMMAND
-    jnz      .wm_destroy
+    cmp    edx, dword WM_COMMAND
+    jnz    .wm_destroy
 
-    cmp      ptrdiff_t [argv(.wparam)], 500
-    jne      .wm_default
+    cmp    r8d, 500    ;// wparam
+    jne    .wm_default
 
-    invoke   MessageBox, NULL, szContent, szTitle, MB_OK
-    jmp      .exit
+    invoke MessageBox, NULL, szContent, szTitle, MB_OK
+    jmp    .exit
 
 .wm_destroy:
-    cmp      dword [argv(.umsg)], WM_DESTROY
-    jnz      .wm_default
+    cmp    edx, dword WM_DESTROY
+    jnz    .wm_default
 
-    invoke   PostQuitMessage, NULL
+    invoke PostQuitMessage, NULL
+	jmp    .exit
 
 .wm_default:
-    invoke   DefWindowProc, ptrdiff_t [argv(.hwnd)], dword [argv(.umsg)], ptrdiff_t [argv(.wparam)], ptrdiff_t [argv(.lparam)]
+    invoke DefWindowProc, rcx, rdx, r8, r9
+	return    ;// DefWindowProc return code
 
 .exit:
+    xor    rax, rax
 
 endproc
 
 
 proc   WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwshow
-uses   __BX, __DI
+uses   rdi, rsi
 locals none
 
-    invoke   LoadIcon, NULL, IDI_APPLICATION
-    cmp      __AX, 0
+    ;// save args used to spill area
+	mov    ptrdiff_t [argv(.hinst)], rcx
+	mov    dword [argv(.dwshow)], r9d
+
+    invoke LoadIcon, NULL, IDI_APPLICATION
+    cmp    rax, 0
     jne    .have_hicon
-    invoke nx_debug_errmsg, szLoadIcon
+    invoke nx_debug_lasterr, szLoadIcon
     return 1
 
 .have_hicon:
-    mov      __CX, wc
-    mov      ptrdiff_t [__CX + WNDCLASSEX.hIcon], __AX
-    mov      ptrdiff_t [__CX + WNDCLASSEX.hIconSm], __AX
-    mov      __AX, ptrdiff_t [argv(.hinst)]
-    mov      ptrdiff_t [__CX + WNDCLASSEX.hInstance], __AX
-    mov      ptrdiff_t [__CX + WNDCLASSEX.lpszClassName], szClass
-    mov      ptrdiff_t [__CX + WNDCLASSEX.lpfnWndProc], WndProc
-    invoke   RegisterClassEx, __CX
-    cmp      __AX, 0
+
+    mov    rsi, wc
+    mov    ptrdiff_t [rsi + WNDCLASSEX.hIcon], rax
+    mov    ptrdiff_t [rsi + WNDCLASSEX.hIconSm], rax
+	mov    rax, WndProc
+    mov    ptrdiff_t [rsi + WNDCLASSEX.lpfnWndProc], rax
+    mov    rax, ptrdiff_t [argv(.hinst)]
+    mov    ptrdiff_t [rsi + WNDCLASSEX.hInstance], rax
+	mov    rax, szClass
+    mov    ptrdiff_t [rsi + WNDCLASSEX.lpszClassName], rax
+    invoke RegisterClassEx, rsi
+    cmp    rax, 0
     jne    .have_class
-    invoke nx_debug_errmsg, szRegisterClassEx
+    invoke nx_debug_lasterr, szRegisterClassEx
     return 1
 
 .have_class:
-    mov      __BX, wc
-    invoke   CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE,\
-                             100, 120, 100, 50, NULL, NULL, ptrdiff_t [__BX + WNDCLASSEX.hInstance], NULL
-    cmp      __AX, 0
+    invoke CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, \
+                             100, 120, 100, 50, NULL, NULL, ptrdiff_t [argv(.hinst)], NULL
+    cmp    rax, 0
     jne    .have_hwnd
-    invoke nx_debug_errmsg, szCreateWindowEx
+    invoke nx_debug_lasterr, szCreateWindowEx
     return 1
 
 .have_hwnd:
-    mov      __CX, hWnd
-    mov      ptrdiff_t [__CX], __AX
 
-    invoke   ShowWindow, __CX, ptrdiff_t [argv(.dwshow)]
-    mov      __CX, hWnd
-    invoke   UpdateWindow, __CX
+    mov    ptrdiff_t [hWnd], rax    ;// save window handle
+	mov    rdi, rct
+	mov    rsi, wc
+    invoke GetClientRect, ptrdiff_t [hWnd], rdi
+    invoke CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE,\
+                           0, 0, uint32_t [rdi + RECT.right], uint32_t [rdi + RECT.bottom],\
+                           ptrdiff_t [hWnd], 500, ptrdiff_t [rsi + WNDCLASSEX.hInstance], NULL
 
+    invoke ShowWindow, ptrdiff_t [hWnd], dword [argv(.dwshow)]
+    invoke UpdateWindow, ptrdiff_t [hWnd]
+
+	mov    rsi, message
     .msgloop:
-        invoke   GetMessage, message, NULL, NULL, NULL
+        invoke   GetMessage, rsi, NULL, NULL, NULL
         cmp      eax, dword 0
         je       .exit
-        invoke   TranslateMessage, message
-        invoke   DispatchMessage, message
+        invoke   TranslateMessage, rsi
+        invoke   DispatchMessage, rsi
         jmp      .msgloop
 
 .exit:
 
-    mov      eax, dword [message + MSG.wParam]
+    mov      eax, dword [rsi + MSG.wParam]
 
 endproc
 
@@ -140,21 +142,15 @@ proc   demo5, ptrdiff_t argcount, ptrdiff_t cmdline
 locals none
 
     invoke GetModuleHandle, NULL
-    cmp    __AX, 0
+    cmp    rax, 0
     jne    .have_hinst
-    invoke nx_debug_errmsg, szGetModuleHandle
+    invoke nx_debug_lasterr, szGetModuleHandle
     return 1
 
 .have_hinst:
-    mov    __CX, hInstance
-    mov    ptrdiff_t [__CX], __AX
-    invoke WinMain, __CX, NULL, NULL, SW_SHOWNORMAL
-    cmp    __AX, 0
-    je     .exit
-    invoke nx_debug_errmsg, szWinMain
-
-.exit:
-    invoke ExitProcess, NULL
+    mov    ptrdiff_t [hInstance], rax
+    invoke WinMain, ptrdiff_t [hInstance], NULL, NULL, SW_SHOWNORMAL
+    invoke ExitProcess, rax
 
 endproc
 
@@ -163,23 +159,6 @@ endproc
     hWnd:        reserve(ptrdiff_t) 1
 
 [section .data]
-    szDebugtitle: declare(NASMX_TCHAR) NASMX_TEXT("DEBUG Error"), 0x0
-    szDebugFmt: declare(NASMX_TCHAR) NASMX_TEXT("Error 0x%04x in %s"), 0x0
-    szGetModuleHandle:  declare(NASMX_TCHAR) NASMX_TEXT("GetModuleHandle"), 0x0
-    szWinMain:  declare(NASMX_TCHAR) NASMX_TEXT("WinMain"), 0x0
-    szLoadIcon:  declare(NASMX_TCHAR) NASMX_TEXT("LoadIcon"), 0x0
-    szRegisterClassEx: declare(NASMX_TCHAR) NASMX_TEXT("RegisterClassEx"), 0x0
-    szCreateWindowEx:  declare(NASMX_TCHAR) NASMX_TEXT("CreateWindowEx"), 0x0
-    szWmCreate:        declare(NASMX_TCHAR) NASMX_TEXT("WndProc WM_CREATE"), 0x0
-    szButton:  declare(NASMX_TCHAR) NASMX_TEXT("BUTTON"), 0x0
-    szString:  declare(NASMX_TCHAR) NASMX_TEXT("Click Me!"), 0x0
-    szContent: declare(NASMX_TCHAR) NASMX_TEXT("Win64Nasm Demo #5"), 0x0
-    szTitle:   declare(NASMX_TCHAR) NASMX_TEXT("Demo5"), 0x0
-    szClass:   declare(NASMX_TCHAR) NASMX_TEXT("Demo5Class"), 0x0
-
-%ifidni __OUTPUT_FORMAT__, win64
-ALIGN 16
-%endif
     NASMX_ISTRUC wc, WNDCLASSEX
         NASMX_AT cbSize,         WNDCLASSEX_size
         NASMX_AT style,          CS_VREDRAW + CS_HREDRAW
@@ -195,9 +174,6 @@ ALIGN 16
         NASMX_AT hIconSm,        NULL
     NASMX_IENDSTRUC
 
-%ifidni __OUTPUT_FORMAT__, win64
-ALIGN 16
-%endif
     NASMX_ISTRUC message, MSG
         NASMX_AT hwnd,       NULL
         NASMX_AT message,    NULL
@@ -210,12 +186,23 @@ ALIGN 16
         NASMX_IENDSTRUC
     NASMX_IENDSTRUC
 
-%ifidni __OUTPUT_FORMAT__, win64
-ALIGN 16
-%endif
     NASMX_ISTRUC rct, RECT
         NASMX_AT left,           NULL
         NASMX_AT top,            NULL
         NASMX_AT right,          NULL
         NASMX_AT bottom,         NULL
     NASMX_IENDSTRUC
+
+    szDebugTitle: declare(NASMX_TCHAR) NASMX_TEXT("DEBUG Error"), 0x0
+    szDebugFmt: declare(NASMX_TCHAR) NASMX_TEXT("Error 0x%04x in %s"), 0x0
+    szGetModuleHandle:  declare(NASMX_TCHAR) NASMX_TEXT("GetModuleHandle"), 0x0
+    szWinMain:  declare(NASMX_TCHAR) NASMX_TEXT("WinMain"), 0x0
+    szInstance: declare(NASMX_TCHAR) NASMX_TEXT("hInstance"), 0x0
+    szLoadIcon: declare(NASMX_TCHAR) NASMX_TEXT("LoadIcon"), 0x0
+    szRegisterClassEx: declare(NASMX_TCHAR) NASMX_TEXT("RegisterClassEx"), 0x0
+    szCreateWindowEx:  declare(NASMX_TCHAR) NASMX_TEXT("CreateWindowEx"), 0x0
+    szButton:  declare(NASMX_TCHAR) NASMX_TEXT("BUTTON"), 0x0
+    szString:  declare(NASMX_TCHAR) NASMX_TEXT("Click Me!"), 0x0
+    szContent: declare(NASMX_TCHAR) NASMX_TEXT("Win64Nasm Demo #5"), 0x0
+    szTitle:   declare(NASMX_TCHAR) NASMX_TEXT("Demo5"), 0x0
+    szClass:   declare(NASMX_TCHAR) NASMX_TEXT("Demo5Class"), 0x0
