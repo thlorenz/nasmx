@@ -147,6 +147,13 @@ IMPORT UpdateWindow, 4
 ;/////////////////////////////////////////////////////
 ;// MSVCRT.INC PROTOTYPES
 ;/////////////////////////////////////////////////////
+;//
+;// C runtime functions must be handled with care when
+;// switching between 32 and 64 bit mode since in 32 bit
+;// mode they are defined as cdecl while in 64 bit mode
+;// they are defined as default ( fastcall ).
+;// VarArg functions such as printf should never be defined
+;// ( prototyped ) to include a bytecount
 %ifidn __BITS__,64
 IMPORT printf
 IMPORT scanf
@@ -167,11 +174,20 @@ IMPORT GetModuleHandleW, 4
 ;/////////////////////////////////////////////////////
 ;// USER32.INC UNICODE PROTOTYPES
 ;/////////////////////////////////////////////////////
+;//
+;// The following shows how to properly prototype an imported
+;// windows function using NASMX syntax.
+;// TODO: This will eventually be done for all imported functions.
+;// IMPORT MessageBoxW, 16
 IMPORT MessageBoxW, ptrdiff_t hWnd, ptrdiff_t lpText, ptrdiff_t lpCaption, uint32_t uType
 %define MessageBox MessageBoxW
-IMPORT CreateWindowExW, 48
+;// IMPORT CreateWindowExW, 48
+IMPORT CreateWindowExW, uint_t dwExStyle, ptrdiff_t lpClassName, ptrdiff_t lpWindowName, uint_t dwStyle,\
+                        int_t x, int_t y, int_t nWidth, int_t nHeight,\
+                        ptrdiff_t hWndParent, ptrdiff_t hMenu, ptrdiff_t hInstance, ptrdiff_t lpParam
 %define CreateWindowEx CreateWindowExW
-IMPORT DefWindowProcW, 16
+;// IMPORT DefWindowProcW, 16
+IMPORT DefWindowProcW, ptrdiff_t hWnd, uint_t Msg, ptrdiff_t wParam, ptrdiff_t lParam
 %define DefWindowProc DefWindowProcW
 IMPORT DialogBoxParamW, 20
 %define DialogBoxParam DialogBoxParamW
@@ -203,9 +219,12 @@ IMPORT GetModuleHandleA, 4
 ;/////////////////////////////////////////////////////
 ;// USER32.INC ANSI PROTOTYPES
 ;/////////////////////////////////////////////////////
-IMPORT CreateWindowExA, 48
+IMPORT CreateWindowExA, uint_t dwExStyle, ptrdiff_t lpClassName, ptrdiff_t lpWindowName, uint_t dwStyle,\
+						int_t x, int_t y, int_t nWidth, int_t nHeight,\
+						ptrdiff_t hWndParent, ptrdiff_t hMenu, ptrdiff_t hInstance, ptrdiff_t lpParam
 %define CreateWindowEx CreateWindowExA
-IMPORT DefWindowProcA, 16
+;// IMPORT DefWindowProcA, 16
+IMPORT DefWindowProcA, ptrdiff_t hWnd, uint_t Msg, ptrdiff_t wParam, ptrdiff_t lParam
 %define DefWindowProc DefWindowProcA
 IMPORT DialogBoxParamA, 20
 %define DialogBoxParam DialogBoxParamA
