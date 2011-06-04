@@ -12,7 +12,19 @@ Downloads and snapshots are available from:
 Change Log
 ~~~~~~~~~~
 
-NASMX v1.0rc1: 6:15 PM 3/27/2011, by Rob Neff
+NASMX v1.0rc2: 30 May 2011, by Rob Neff
+
+- Added Linux x64 support
+
+- Added Linux x64 Demos
+
+- Fix fastcall alignment issues
+
+- Add 32-bit Linux X window demo 6
+
+_________________________________________________________
+
+NASMX v1.0rc1: 27 Mar 2011, by Rob Neff
 - Updated Win32 "bin" directory with latest versions
   of nasm tools:
     NASM v2.10rc4, NDISASM v2.10rc4

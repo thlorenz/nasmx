@@ -9,9 +9,9 @@
 ; SysCall Macro
 ; ---------------------------------
 
-%ifidni __NASMX_ABI_BITS__,64
+%if __NASMX_ABI_BITS__ == 64
 
-%imacro syscall 1-7
+%imacro syscall64 1-7
   %if %0 > 1
     %if %0 > 2
       %if %0 > 3
@@ -31,10 +31,10 @@
     mov rdi, %{2}
   %endif
   mov rax, SYS_ %+ %{1}
-  int 0x80
+  syscall  ; the opcode, not the macro
 %endmacro
 
-%else
+%endif
 
 ; ---------------------------------
 ; SysCall Macro
@@ -59,8 +59,6 @@
  mov eax, SYS_ %+ %{1}
  int 0x80
 %endmacro
-
-%endif
 
 ; ---------------------------------
 ; System Call Listing
@@ -341,7 +339,7 @@ SYS_fstatfs64          equ 269
 SYS_tgkill             equ 270
 SYS_utimes             equ 271
 SYS_fadvise64_64       equ 272
-SYS_vserver            equ 273         ;SYS_vserver
+SYS_vserver            equ 273
 SYS_mbind              equ 274
 SYS_get_mempolicy      equ 275
 SYS_set_mempolicy      equ 276
