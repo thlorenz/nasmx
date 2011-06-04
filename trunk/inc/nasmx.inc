@@ -1818,23 +1818,44 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 			%assign %$__nx_callstack_adjust __NX_PROLOGUE_CALLSTACK_ADJUST__
 			%if %$__nx_callstack_adjust < %$__nx_bytecount
 				%$__nx_callstack_adjust = 0
-				%warning insufficient callstack size for procedure %[%$__nx_proc], generating inefficient code...
+				%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+					;// for Windows always requires a stack adjustment
+					;// Linux only requires it when register allocation exhausted
+					%warning insufficient callstack size for procedure %[%$__nx_proc], generating inefficient code...
+				%endif
 			%else
 				%assign %$__nx_invoke_callstack_adjust 0
 			%endif
 		%endif
+		%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ != __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+			;// TODO: Account for x64 params that WILL get placed onto stack
+			%if __NASMX_ABI_BITS__ > 32
+				%assign %$__nx_invoke_callstack_adjust 0
+			%endif
+		%endif
+
+		%assign %$__align 0
 		%if %$__nx_invoke_callstack_adjust > 0
 			;// assert: callstack not defined or insufficient, build it here
 			%if __NASMX_ABI_BITS__ > 32
-				%if %$__nx_invoke_callstack_adjust < 32
-					%assign %$__nx_invoke_callstack_adjust 32
+				%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+					;// Windows requires at least 32 bytes of shadow storage
+					%if %$__nx_invoke_callstack_adjust < 32
+						%assign %$__nx_invoke_callstack_adjust 32
+					%endif
 				%endif
 			%endif
-			%assign %%__align __NASMX_ABI_BITS__ / 4
-			%assign %%__off (((%$__nx_invoke_callstack_adjust + %%__align) / %%__align) * %%__align)
-			%assign %%__tmp (%$__nx_invoke_callstack_adjust + %%__align)
+			;// first determine if an alignment adjustment is needed
+			%assign %$__align __NASMX_ABI_BITS__ / 4
+			%assign %%__off (((%$__nx_invoke_callstack_adjust + %$__align) / %$__align) * %$__align)
+			%assign %%__tmp (%$__nx_invoke_callstack_adjust + %$__align)
 			%if (%%__off != %%__tmp)
+				;// for fastcalls that retpopsargs we need to account
+				;// for the extra space when stack restored later on
+				%assign %$__align __NASMX_ABI_BITS__ / 8
 				%assign %$__nx_invoke_callstack_adjust %%__off
+			%else
+				%assign %$__align 0
 			%endif
 			sub __SP, %$__nx_invoke_callstack_adjust
 		%endif
@@ -2088,7 +2109,11 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 		%if %$__nx_bytecount > 0
 			%if %$__nx_callstack_adjust == 0
 				%if %$__nx_retpopsargs == 0
-					add	__SP, %$__nx_invoke_callstack_adjust
+					%if %$__nx_invoke_callstack_adjust > 0
+						add	__SP, %$__nx_invoke_callstack_adjust
+					%endif
+				%elif %$__align > 0
+					add	__SP, %$__align
 				%endif
 			%endif
 		%endif
@@ -2266,66 +2291,73 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 	%endif
 
 	%assign %$__nx_cc_enum nx_declspec_cc_enum(%[%$__nx_callconv])
-	%ifndef %[%$__nx_proc]
+	
+	;// v1.0rc2 - we must always calculate a true bytecount such that
+	;// the implementation of main(), or imported functions that are
+	;// defined with a 0 bytecount, are defined properly
+	%ifdef __nx_proto_param_list
+		%undef __nx_proto_param_list
+	%endif
+	%rep %0-%$__nx_repcnt
+		%rotate 1
+	%endrep
+	;// The signature must be defined in full before use because once the
+	;// procedure has been defined we are not able to easily redefine it.
+	;// Due to dependency on the X64_SPILL_OFFSET we cannot simply use one
+	;// rep loop to generate equate offsets
+	;// Thus the rep loop is required twice:
+	;//     First, to build the parameter type list and x64 spill area size
+	;//     Then, later on, to build the parameter offset equates.
+	%rep %$__nx_repcnt
+		nx_strtok %1, ' '
+		;// assert: calculate bytecount in this loop to account
+		;// for param types double/int128 rather than the simple logic of
+		;// %assign %$__nx_bytecount %$__nx_repcnt * sizeof(size_t)
+		;// Also build the parameter type list here in case the procedure
+		;// has not been prototyped or imported.
+		%xdefine __nx_proto_argtype %$__nx_token %+ _type
+		%assign %%__param_type __nx_proto_argtype
+		%assign %%__param_size (%%__param_type & 0x7F)
+		%if %%__param_size < sizeof(size_t)
+			%assign %$__nx_bytecount %$__nx_bytecount + sizeof(size_t)
+		%elif %%__param_size <= __NASMX_ABI_BITS__ / 4
+			%assign %$__nx_bytecount %$__nx_bytecount + %%__param_size
+		%else
+			%error parameter exceeds allowable size: %1
+		%endif
+		%ifndef __nx_proto_param_list
+			%defstr __nx_proto_param_list __nx_proto_argtype
+		%else
+			%defstr __nx_proto_argstr __nx_proto_argtype
+			%strcat __nx_proto_param_list __nx_proto_param_list,',',__nx_proto_argstr
+			%undef __nx_proto_argstr
+		%endif
+		%undef __nx_proto_argtype
+		%rotate 1
+	%endrep
+
+	%ifndef __nxsig@@%[%$__nx_proc]
 		;// assert: we must generate an appropriate label for the function call
 		;// here in order for the parameters to be equated properly
-		%ifndef __nxsig@@%[%$__nx_proc]
-			;// assert: build the parameter type list here as the procedure has
-			;// not been prototyped or imported.
-			;// The signature must be defined in full before use because once the
-			;// procedure has been defined we are not able to easily redefine it.
-			;// Thus the rep loop is required twice:
-			;//     First, to build the parameter type list and x64 spill area size
-			;//     Then, later on, to build the parameter offset equates.
-			%ifdef __nx_proto_param_list
-				%undef __nx_proto_param_list
-			%endif
-			%rep %0-%$__nx_repcnt
-				%rotate 1
-			%endrep
-			%rep %$__nx_repcnt
-				nx_strtok %1, ' '
-				;// assert: calculate bytecount in this loop to account
-				;// for param types double/int128 rather than the simple logic of
-				;// %assign %$__nx_bytecount %$__nx_repcnt * sizeof(size_t)
-				%xdefine __nx_proto_argtype %$__nx_token %+ _type
-				%assign %%__param_type __nx_proto_argtype
-				%assign %%__param_size (%%__param_type & 0x7F)
-				%if %%__param_size < sizeof(size_t)
-					%assign %$__nx_bytecount %$__nx_bytecount + sizeof(size_t)
-				%elif %%__param_size <= __NASMX_ABI_BITS__ / 4
-					%assign %$__nx_bytecount %$__nx_bytecount + %%__param_size
-				%else
-					%error parameter exceeds allowable size: %1
-				%endif
-				%ifndef __nx_proto_param_list
-					%defstr __nx_proto_param_list __nx_proto_argtype
-				%else
-					%defstr __nx_proto_argstr __nx_proto_argtype
-					%strcat __nx_proto_param_list __nx_proto_param_list,',',__nx_proto_argstr
-					%undef __nx_proto_argstr
-				%endif
-				%undef __nx_proto_argtype
-				%rotate 1
-			%endrep
-
-			nx_callconv_decorate %$__nx_callconv,%$__nx_proc,%$__nx_bytecount
-			%ifdef __nx_proto_param_list
-				%deftok __nx_proto_params __nx_proto_param_list
-				%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__nx_callconv],%[%$__nx_bytecount],__nx_proto_params
-			%else
-				%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__nx_callconv],%[%$__nx_bytecount]
-			%endif
-			%ifnidn %$__nx_proc,%$__nxtok_decorated_name
-				%xdefine %[%$__nx_proc] %[%$__nxtok_decorated_name]
-			%endif
+		nx_callconv_decorate %$__nx_callconv,%$__nx_proc,%$__nx_bytecount
+		%ifdef __nx_proto_param_list
+			%deftok __nx_proto_params __nx_proto_param_list
+			%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__nx_callconv],%[%$__nx_bytecount],__nx_proto_params
+		%else
+			%xdefine __nxsig@@%[%$__nxtok_decorated_name] %[%$__nx_callconv],%[%$__nx_bytecount]
+		%endif
+		%ifnidn %$__nx_proc,%$__nxtok_decorated_name
+			%xdefine %[%$__nx_proc] %[%$__nxtok_decorated_name]
 		%endif
 	%endif
+
 	%ifdef __nxsig_defined_%[%$__nx_proc]
 		%fatal procedure %[%$__nx_proc] already defined
+	%else
+		%xdefine __nxsig_defined_%[%$__nx_proc]
 	%endif
 
-	%xdefine __nxsig_defined_%[%$__nx_proc]
+	;// emit the procedure entry point
 	%[%$__nx_proc]:
 
 	;// The following define can/should be used by the user to properly
@@ -2334,8 +2366,8 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 	%xdefine NASMX_ENDPROC __nx_endproc@@%[%$__nx_proc]
 
 	%if %$__nx_cc_enum != __NASMX_DECLSPEC_CC_ENUM_NAKED__
-		%ifidn __BITS__,64
-			%assign %$__nx_argv 16
+		%assign %$__nx_argv __NASMX_ABI_BITS__ / 4
+		%if __NASMX_ABI_BITS__ > 32
 			%ifdef __NX_PROLOGUE_X64_SPILL_OFFSET__
 				%undef __NX_PROLOGUE_X64_SPILL_OFFSET__
 			%endif
@@ -2362,8 +2394,6 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 				;// assert: must always be defined for x64
 				%xdefine __NX_PROLOGUE_X64_SPILL_OFFSET__ 0
 			%endif
-		%else
-			%assign %$__nx_argv 8
 		%endif
 
 		;// assert: calc byte count for sig check and argv() offsets
@@ -2379,6 +2409,7 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 				%rotate 1
 			%endrep
 		%endif
+
 		%rep %$__nx_repcnt
 			;// obtain param type and size and validate against current ABI
 			nx_strtok %1, ' '
@@ -2813,8 +2844,10 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 		%if %%__cc_retpopsargs == 0
 			ret
 		%else
-			%if %$__nx_bytecount > 0
-				ret %$__nx_bytecount
+			;// x64 retpopcnt may be different than bytecount
+			%assign %$__nx_retpopcnt (%$__nx_argv - (__NASMX_ABI_BITS__ / 4))
+			%if %$__nx_retpopcnt > 0
+				ret %[%$__nx_retpopcnt]
 			%else
 				ret
 			%endif
