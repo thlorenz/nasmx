@@ -20,7 +20,7 @@ entry	demo1
 
 ;##### Initialized Data #####
 [section .data]
-msg		DB	"Hello, World!!!",10,0
+msg		DB	10,"Hello, World!!!",10,0
 msglen		equ	($ - msg)
 
 [section .text]
