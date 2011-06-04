@@ -53,17 +53,20 @@ locals none
     cmp    rcx, 0
     je     .done
 
+	; decrement and save count
     dec    rcx
     mov    qword [argv(.envc)], rcx
 
+	; get next envp string ptr
     mov    rdi, qword [rbx]
     or     rdi, rdi
     je     .done
 
+    invoke puts, rdi
+
     ; adjust to next ptr
     add    rbx, 8
 
-    invoke puts, rdi
     jmp    .scan_envs
 
 .done:
