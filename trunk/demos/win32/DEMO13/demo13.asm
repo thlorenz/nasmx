@@ -2,9 +2,13 @@
 ;//
 ;// Copyright (C)2005-2011 The NASMX Project
 ;//
-;// This is a fully UNICODE aware, typedefined demo that demonstrates
+;// This is a fully UNICODE aware, type-defined demo that demonstrates
 ;// using NASMX typedef system to make your code truly portable between
 ;// 32 and 64-bit systems using either ASCII or UNICODE
+;//
+;// Note that you do NOT have to use the register aliases (eg: __AX)
+;// as the example code below does; It simply demonstrates one way to
+;// lessen the impact when porting from 32-bit to 64-bit.
 ;//
 ;// Contributors:
 ;//    Bryant Keller
@@ -30,10 +34,13 @@ NASMX_STRUC DEMO13_STRUC
 NASMX_ENDSTRUC
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [section .code]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 entry    demo13
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 proc   WndProc, ptrdiff_t hwnd, dword msg, size_t wparam, size_t lparam
 locals none
 
@@ -42,7 +49,9 @@ locals none
     jnz    .wm_command
 
     invoke GetClientRect, ptrdiff_t [argv(.hwnd)], rct
-    invoke CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE, 0, 0, uint32_t [rct + RECT.right], uint32_t [rct + RECT.bottom], ptrdiff_t [argv(.hwnd)], 500, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
+    invoke CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE,\
+                           0, 0, uint32_t [rct + RECT.right], uint32_t [rct + RECT.bottom],\
+                           ptrdiff_t [argv(.hwnd)], 500, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
     jmp    .wm_default
 
 .wm_command:
@@ -68,7 +77,7 @@ locals none
 
 endproc
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 proc   WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwshow
 locals none
 
@@ -84,7 +93,8 @@ locals none
     mov    ptrdiff_t [wc + WNDCLASSEX.hIconSm], __DX
     invoke RegisterClassEx, wc
 
-    invoke CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 100, 50, NULL, NULL, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
+    invoke CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE,\
+                           100, 120, 100, 50, NULL, NULL, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
     mov    size_t[hWnd], __AX
     invoke ShowWindow, hWnd, dword[argv(.dwshow)]
     invoke UpdateWindow, hWnd
@@ -103,6 +113,7 @@ locals none
 
 endproc
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 proc   demo13, ptrdiff_t argcount, ptrdiff_t cmdline
 locals none
 
@@ -112,11 +123,15 @@ locals none
     invoke ExitProcess, NULL
 endproc
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [section .bss]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     hInstance:  reserve(ptrdiff_t) 1
     hWnd:       reserve(ptrdiff_t) 1
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [section .data]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     szButton:   declare(NASMX_TCHAR) NASMX_TEXT("BUTTON"), 0x0
     szString:   declare(NASMX_TCHAR) NASMX_TEXT("Click Me!"), 0x0
     szContent:  declare(NASMX_TCHAR) NASMX_TEXT("NASMX Demo #13"), 0x0

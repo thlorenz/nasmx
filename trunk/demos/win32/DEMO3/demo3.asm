@@ -2,9 +2,13 @@
 ;//
 ;// Copyright (C)2005-2011 The NASMX Project
 ;//
-;// This is a fully UNICODE aware, typedefined demo that demonstrates
+;// This is a fully UNICODE aware, type-defined demo that demonstrates
 ;// using NASMX typedef system to make your code truly portable between
-;// 32 and 64-bit systems using either ASCII or UNICODE
+;// 32 and 64-bit systems using either ASCII or UNICODE.
+;//
+;// Note that you do NOT have to use the register aliases (eg: __AX)
+;// as the example code below does; It simply demonstrates one way to
+;// lessen the impact when porting from 32-bit to 64-bit.
 ;//
 ;// Contributors:
 ;//    Bryant Keller
@@ -24,7 +28,9 @@ locals none
     jnz    .wm_command
 
     invoke GetClientRect, ptrdiff_t [argv(.hwnd)], rct
-    invoke CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE, 0, 0, uint32_t [rct + RECT.right], uint32_t [rct + RECT.bottom], ptrdiff_t [argv(.hwnd)], 500, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
+    invoke CreateWindowEx, NULL, szButton, szString, WS_CHILD + WS_VISIBLE, 0, 0,\
+                           uint32_t [rct + RECT.right], uint32_t [rct + RECT.bottom],\
+                           ptrdiff_t [argv(.hwnd)], 500, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
     return 0
 
 .wm_command:
@@ -52,7 +58,7 @@ locals none
 endproc
 
 
-proc    WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwshow
+proc   WinMain, ptrdiff_t hinst, ptrdiff_t hpinst, ptrdiff_t cmdln, dword dwshow
 locals none
 
     invoke LoadIcon, NULL, IDI_APPLICATION
@@ -65,7 +71,8 @@ locals none
     mov    ptrdiff_t [__CX + WNDCLASSEX.hInstance], __AX
 
     invoke RegisterClassEx, __CX
-    invoke CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE, 100, 120, 100, 50, NULL, NULL, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
+    invoke CreateWindowEx, WS_EX_TOOLWINDOW, szClass, szTitle, WS_CAPTION + WS_SYSMENU + WS_VISIBLE,\
+                           100, 120, 100, 50, NULL, NULL, ptrdiff_t [wc + WNDCLASSEX.hInstance], NULL
     mov    ptrdiff_t [hWnd], __AX
     invoke ShowWindow, hWnd, dword [argv(.dwshow)]
     invoke UpdateWindow, hWnd
