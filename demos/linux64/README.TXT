@@ -34,6 +34,9 @@ Contributors:
   DEMO3  - Demonstrates accessing command line, environment,
            and procedural function usage.
 
+  DEMO4  - Demonstrates basic double-precision floating
+           point arithmetic.
+
  All of these applications, as well as the NASMX.INC file,
  were completely developed and designed by Bryant Keller,
  Keith Kanios, and/or Rob Neff. As such, all rights over these
