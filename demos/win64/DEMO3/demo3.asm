@@ -25,7 +25,7 @@ entry	demo3
 
 [section .data]
 msg:	DB	'Press any key to continue...',13,10
-.len
+msg_len equ $-msg
 
 [section .bss]
 	hConsole   RESQ 1
@@ -41,7 +41,7 @@ locals none
 
 	invoke	GetStdHandle, STD_OUTPUT_HANDLE
 	mov qword[hStdOutput],rax
-	invoke	WriteFile, qword [hStdOutput],  msg,  (msg.len - msg),  hNum,  0
+	invoke	WriteFile, qword [hStdOutput],  msg,  msg_len,  hNum,  0
 	invoke	GetStdHandle, STD_INPUT_HANDLE
 	mov	qword[hConsole], rax
 	invoke	GetConsoleMode, qword [hConsole],  hMode
