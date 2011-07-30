@@ -20,6 +20,7 @@ All rights reserved.
            to achieve input, output and exiting from a
            console mode program
   DEMO4  - Demonstrates use of floating point with type double
+  DEMO5  - Demonstates basic windowing operations
 
  All of these applications, as well as the NASMX.INC file,
  were completely developed and designed by Bryant Keller
