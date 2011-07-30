@@ -20,7 +20,7 @@ entry	demo1
 
 ;##### Initialized Data #####
 [section .data]
-msg		DB	10,"Hello, World!!!",10,0
+msg		DB	10,"Hello, World!!!",10,10,0
 msglen		equ	($ - msg)
 
 [section .text]
@@ -29,10 +29,11 @@ msglen		equ	($ - msg)
 proc   demo1, ptrdiff_t count, ptrdiff_t cmdline
 locals none
 
-	;#### SYSCALL Write Message to the Console ####
-	syscall write, STDOUT_FILENO, msg, msglen
+    ;#### SYSCALL Write Message to the Console ####
+    syscall write, STDOUT_FILENO, msg, msglen
 
-	;#### Exit with NULL Return Value ####
-	xor	eax,eax
+    ;#### Exit with NULL Return Value ####
+    xor eax,eax
 
 endproc
+
