@@ -1,1 +1,1 @@
-set NASMENV=-IC:\Projects\nasmx\inc\
+set NASMENV=-IC:\Data\Projects\nasmx\inc\
