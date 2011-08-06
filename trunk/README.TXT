@@ -56,7 +56,7 @@ or you may set it from the shell command prompt:
 
 It is a good idea to get in the habit of always setting this
 variable even when developing your own projects.  Refer to
-Section 2.1.16 of NASMDOC.TXT for further information.
+Section 2.1.28 of NASMDOC for further information.
 
 That is about it. Please utilize all README.TXT files you
 come across in this package. Enjoy :)
