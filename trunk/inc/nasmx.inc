@@ -10,9 +10,9 @@
 ;//
 ;// Check NASM Version
 ;//
-%define __nxerrmsg "NASM v2.09.04 or later required"
+%define __nxerrmsg "NASM v2.09.08 or later required"
 %ifdef __NASM_VERSION_ID__
-	%if __NASM_VERSION_ID__ < 0x02090400
+	%if __NASM_VERSION_ID__ < 0x02090800
 		%fatal __nxerrmsg
 	%endif
 %else
@@ -62,11 +62,11 @@
 ;//
 ;// Define NASMX Version
 ;//
-NASMX_DEFINE VERSION,"1.0rc1"
+NASMX_DEFINE VERSION,"1.0"
 NASMX_DEFINE VERSION_MAJOR, 1
 NASMX_DEFINE VERSION_MINOR, 0
-NASMX_DEFINE VERSION_REV, 6
-NASMX_DEFINE VERSION_ID, 0x01000006
+NASMX_DEFINE VERSION_REV, 10
+NASMX_DEFINE VERSION_ID, 0x0100000A
 
 
 ;//////////////////////////////////////////////////////////////
@@ -1071,22 +1071,22 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 ;//    nx_isalnum 'x'
 ;//
 %macro nx_isalnum 1
-	%ifstr %1
-		%define %%__arg_chr %1
-	%else
-		%defstr %%__arg_chr %1
-	%endif
-	%assign %%__count 62
-	%assign %%__idx 3
-	%assign %$__nx_isalnum_bool 0
-	%rep %%__count
-		%assign %%__idx %%__idx + 1
-		%substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
-		%ifidn %%__chr, %%__arg_chr
-			%assign %$__nx_isalnum_bool %%__idx
-			%exitrep
-		%endif
-	%endrep
+    %ifstr %1
+        %define %%__arg_chr %1
+    %else
+        %defstr %%__arg_chr %1
+    %endif
+    %assign %%__count 62
+    %assign %%__idx 3
+    %assign %$__nx_isalnum_bool 0
+    %rep %%__count
+        %assign %%__idx %%__idx + 1
+        %substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
+        %ifidn %%__chr, %%__arg_chr
+            %assign %$__nx_isalnum_bool %%__idx
+            %exitrep
+        %endif
+    %endrep
 %endmacro
 
 ;//////////////////////////////////////////////////////////////
@@ -1102,24 +1102,25 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 ;//    nx_ishexchr 'f'
 ;//
 %macro nx_ishexchr 1
-	%ifstr %1
-		%define %%__arg_chr %1
-	%else
-		%defstr %%__arg_chr %1
-	%endif
-	%assign %%__count 22
-	%assign %%__idx 3
-	%assign %$__nx_ishexchr_bool 0
-	%rep %%__count
-		%assign %%__idx %%__idx + 1
-		%substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
-		%ifidn %%__chr, %%__arg_chr
-			%assign %$__nx_ishexchr_bool %%__idx
-			%exitrep
-		%endif
-	%endrep
+    %ifstr %1
+        %define %%__arg_chr %1
+    %else
+        %defstr %%__arg_chr %1
+    %endif
+    %assign %%__count 22
+    %assign %%__idx 3
+    %assign %$__nx_ishexchr_bool 0
+    %rep %%__count
+        %assign %%__idx %%__idx + 1
+        %substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
+        %ifidn %%__chr, %%__arg_chr
+            %assign %$__nx_ishexchr_bool %%__idx
+            %exitrep
+        %endif
+    %endrep
 %endmacro
 
+;//////////////////////////////////////////////////////////////
 ;// MACRO nx_isfloattok
 ;//
 ;// Purpose
@@ -1128,39 +1129,95 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 ;//    a float token.
 ;//
 ;// Usage:
+;//    %define PI 3.14159
+;//    nx_isfloattok PI
 ;//    nx_isfloattok string
-;//    nx_isfloattok 3.14159
 ;//
 %macro nx_isfloattok 1
-	%ifstr %1
-		%define %%__arg_str %1
-	%else
-		%defstr %%__arg_str %1
-	%endif
-	%strlen %%__arg_len %%__arg_str
-	%assign %$__nx_isfloattok 0
-	%assign %%__found 0
-	%assign %%__arg_idx 0
-	%rep %%__arg_len
-		%assign %%__arg_idx %%__arg_idx + 1
-		%substr %%__arg_chr %%__arg_str %%__arg_idx, 1
-		%assign %%__found 0
-		%assign %%__idx 0
-		%rep 15
-			%assign %%__idx %%__idx + 1
-			%substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
-			%ifidn %%__chr, %%__arg_chr
-				%assign %%__found %%__idx
-				%exitrep
-			%endif
-		%endrep
-		%if %%__found == 0
-			%exitrep
-		%endif
-	%endrep
-	%assign %$__nx_isfloattok_bool %%__found
+    %ifstr %1
+        %define %%__arg_str %1
+    %else
+	%defstr %%__arg_str %1
+    %endif
+    %strlen %%__arg_len %%__arg_str
+    %assign %$__nx_isfloattok 0
+    %assign %%__found 0
+    %assign %%__arg_idx 0
+    %rep %%__arg_len
+        %assign %%__arg_idx %%__arg_idx + 1
+        %substr %%__arg_chr %%__arg_str %%__arg_idx, 1
+        %assign %%__found 0
+        %assign %%__idx 0
+        %rep 15
+            %assign %%__idx %%__idx + 1
+            %substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
+            %ifidn %%__chr, %%__arg_chr
+              %assign %%__found %%__idx
+              %exitrep
+        %endif
+        %endrep
+        %if %%__found == 0
+            %exitrep
+        %endif
+    %endrep
+    %assign %$__nx_isfloattok_bool %%__found
 %endmacro
 
+;//////////////////////////////////////////////////////////////
+;// MACRO nx_ishextok
+;//
+;// Purpose
+;//    This macro is designed to return in the current context
+;//    stack variable %$__nx_ishextok_bool if the parameter is
+;//    a hex token.  Note that this macro also returns true if
+;//    arg is an integer making it rather useful when we need
+;//    to move the number to a register
+;//
+;// Usage:
+;//    nx_ishextok token
+;//    nx_ishextok 0xFFF0
+;//
+%macro nx_ishextok 1
+    %ifstr %1
+        %define %%__arg_str %1
+    %else
+        %defstr %%__arg_str %1
+    %endif
+    %strlen %%__arg_len %%__arg_str
+    %assign %%__arg_idx 0
+    %assign %%__has_x 0
+    %rep %%__arg_len
+        %assign %%__arg_idx %%__arg_idx + 1
+        %substr %%__arg_chr %%__arg_str %%__arg_idx, 1
+        %assign %%__found 0
+        %ifidni %%__arg_chr, 'x'
+            %if %%__has_x == 0
+                %if %%__arg_idx < %%__arg_len
+                    %assign %%__has_x 1
+                    %assign %%__found 1
+                %else
+                    %exitrep
+                %endif
+            %else
+                %exitrep
+            %endif
+        %else
+            %assign %%__idx 1
+            %rep 24
+                %assign %%__idx %%__idx + 1
+                %substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
+                %ifidn %%__chr, %%__arg_chr
+                    %assign %%__found %%__idx
+                    %exitrep
+                %endif
+            %endrep
+        %endif
+        %if %%__found == 0
+            %exitrep
+        %endif
+    %endrep
+    %assign %$__nx_ishextok_bool %%__found
+%endmacro
 
 ;//////////////////////////////////////////////////////////////
 ;// MACRO nx_strtok
@@ -1177,7 +1234,7 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 ;// Notes:
 ;//    The return value is stored on the context stack as
 ;//    %$__nx_token thus it must only be called within a valid context.
-;;//   The length is also returned as %$__nx_token_len.  Check this value
+;//    The length is also returned as %$__nx_token_len.  Check this value
 ;//    for 0 after call this macro before processing the return value.
 ;//
 ;//    Call more than once to get the next token in the sequence, if any.
@@ -1808,7 +1865,6 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 	%assign %$__nx_retpopsargs nx_declspec_cc_retpopsargs(%$__nx_callconv)
 	%assign %%__cc_enum nx_declspec_cc_enum(%$__nx_callconv)
 	%xdefine %$__nx_proc %1
-
 	%if %%__cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
 		;// for fastcall, whenever CALLSTACK optimization is enabled,
 		;// we use the stack built previously during locals/endlocals directive.
@@ -1819,8 +1875,8 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 			%if %$__nx_callstack_adjust < %$__nx_bytecount
 				%$__nx_callstack_adjust = 0
 				%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-					;// for Windows always requires a stack adjustment
-					;// Linux only requires it when register allocation exhausted
+					;// Windows: always requires a stack adjustment
+					;//   Linux: required when register allocation exhausted
 					%warning insufficient callstack size for procedure %[%$__nx_proc], generating inefficient code...
 				%endif
 			%else
@@ -1907,6 +1963,13 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 								%fatal Unknown addressing mode for %{1}
 							%endif
 						%elifnidni %$arg_cur, %1
+							;// if register parameter then guard against
+							;// invalid register to register moves
+							%ifdef __nx_reg_%[%1]
+								%if %[%1]_size != __NASMX_ABI_BITS__ / 8
+									%fatal %1 cannot be used as parameter for __NASMX_ABI_BITS__ bit mode
+								%endif
+							%endif
 							mov  %$arg_cur, %1
 						%endif
 					%endif
@@ -1925,23 +1988,32 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 				%assign %%__argtostack 0
 				%if __NASMX_ABI_BITS__ > 32
 					;// assert: use 64-bit registers
-					%if   %$args == 0
-						%xdefine %$arg_cur xmm0
-					%elif %$args == 8
-						%xdefine %$arg_cur xmm1
-					%elif %$args == 16
-						%xdefine %$arg_cur xmm2
-					%elif %$args == 24
-						%xdefine %$arg_cur xmm3
-					%endif
-					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ != __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-						%if   %$args == 32
+					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+						%if   %$args == 0
+							%xdefine %$arg_cur xmm0
+						%elif %$args == 8
+							%xdefine %$arg_cur xmm1
+						%elif %$args == 16
+							%xdefine %$arg_cur xmm2
+						%elif %$args == 24
+							%xdefine %$arg_cur xmm3
+						%endif
+					%else
+						%if   %$__nx_floatargs == 0
+							%xdefine %$arg_cur xmm0
+						%elif %$__nx_floatargs == 1
+							%xdefine %$arg_cur xmm1
+						%elif %$__nx_floatargs == 2
+							%xdefine %$arg_cur xmm2
+						%elif %$__nx_floatargs == 3
+							%xdefine %$arg_cur xmm3
+						%elif  %$__nx_floatargs == 4
 							%xdefine %$arg_cur xmm4
-						%elif %$args == 40
+						%elif %$__nx_floatargs == 5
 							%xdefine %$arg_cur xmm5
-						%elif %$args == 48
+						%elif %$__nx_floatargs == 6
 							%xdefine %$arg_cur xmm6
-						%elif %$args == 56
+						%elif %$__nx_floatargs == 7
 							%xdefine %$arg_cur xmm7
 						%endif
 					%endif
@@ -2522,7 +2594,7 @@ NASMX_DEFINE VERSION_ID, 0x01000006
 			mov   __AX, __SP
 			and   __AX, %%__nx_align
 			jz    .nx_main_aligned
-			add   __SP, (__NASMX_ABI_BITS__ / 4 )
+			sub   __SP, (__NASMX_ABI_BITS__ / 4 )
 			%if __NASMX_ABI_BITS__ > 32
 				and spl,BYTE 0xF0
 			%else
