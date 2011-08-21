@@ -12,13 +12,13 @@ Downloads and snapshots are available from:
 Change Log
 ~~~~~~~~~~
 
-NASMX v1.0: 1 Aug 2011, by Rob Neff
+NASMX v1.0: 20 Aug 2011, by Rob Neff
 
 - Official release
 
-- Updated Win32 "bin" directory with latest versions
-  of nasm tools:
-    NASM v2.10rc8, NDISASM v2.10rc8
+- Updated Win32 "bin" directory with latest release
+  versions of nasm tools:
+    NASM v2.09.10, NDISASM v2.09.10
 
 - Added convenience scripts for setting NASMENV
 
@@ -30,8 +30,8 @@ NASMX v1.0: 1 Aug 2011, by Rob Neff
 
 - Removed old Nasm .TXT file documentation
 
-- Provide Nasm documentation in Adobe .PDF
-  and Windows .CHM formats.
+- Provide Nasm documentation in Adobe .PDF for Linux
+  and .CHM format for Windows.
 _________________________________________________________
 
 NASMX v1.0rc2: 30 May 2011, by Rob Neff
