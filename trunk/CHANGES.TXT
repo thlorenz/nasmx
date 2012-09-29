@@ -12,6 +12,19 @@ Downloads and snapshots are available from:
 Change Log
 ~~~~~~~~~~
 
+NASMX v1.1: 29 Sep 2012, by Rob Neff
+
+- Refresh Win32 distribution "bin" directory with
+  latest release version of tool chain:
+  NASM v2.10.05, NDISASM v2.10.05
+  GoLink v0.27.00
+  
+- Update NASMDOC.CHM Windows help file to include
+  latest Nasm documentation changes.
+  
+- Fixed SOCKET definition in winsock.inc
+_________________________________________________________
+
 NASMX v1.0: 20 Aug 2011, by Rob Neff
 
 - Official release
