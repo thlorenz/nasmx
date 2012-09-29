@@ -10,7 +10,7 @@
 %ifndef __NASMX_WINSOCK_INCLUDED__
 %define __NASMX_WINSOCK_INCLUDED__
 
-typedef size_t, SOCKET
+%xdefine SOCKET size_t
 
 %ifndef FD_SETSIZE
 %define FD_SETSIZE 64

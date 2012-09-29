@@ -53,8 +53,8 @@ IMPORT getservbyname, 8
 IMPORT getservbyport, 8
 IMPORT getsockname, 12
 IMPORT getsockopt, 20
-IMPORT htonl, 4
-IMPORT htons, 4
+;IMPORT htonl, 4
+;IMPORT htons, 4
 IMPORT inet_addr, 4
 IMPORT inet_network, 4
 IMPORT inet_ntoa, 4
