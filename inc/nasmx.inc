@@ -1,7 +1,7 @@
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// NASMX Preprocessor
-;// Copyright (c) 2005-2011, The NASMX Project
+;// Copyright (c) 2005-2012, The NASMX Project
 ;//
 %ifndef __NASMX_INCLUDED__
 %define __NASMX_INCLUDED__
@@ -64,9 +64,9 @@
 ;//
 NASMX_DEFINE VERSION,"1.0"
 NASMX_DEFINE VERSION_MAJOR, 1
-NASMX_DEFINE VERSION_MINOR, 0
-NASMX_DEFINE VERSION_REV, 10
-NASMX_DEFINE VERSION_ID, 0x0100000A
+NASMX_DEFINE VERSION_MINOR, 2
+NASMX_DEFINE VERSION_REV, 12
+NASMX_DEFINE VERSION_ID, 0x0102000C
 
 
 ;//////////////////////////////////////////////////////////////
@@ -346,12 +346,12 @@ NASMX_DEFINE VERSION_ID, 0x0100000A
 ;//
 ;// NASMX ABI size and pointer types
 ;//
-;//                 Windows     Linux
-;//        type     32   64     32   64
-;// sizeof(int)      4    4      4    4
-;// sizeof(long)     4    4      4    8
-;// sizeof(ptr)      4    8      4    8
-;// sizeof(size_t)   4    8      4    8
+;//                 Windows     Linux       BSD
+;//        type     32   64     32   64     32   64
+;// sizeof(int)      4    4      4    4      4    4
+;// sizeof(long)     4    4      4    8      4    8
+;// sizeof(ptr)      4    8      4    8      4    8
+;// sizeof(size_t)   4    8      4    8      4    8
 %ixdefine size32_t dword
 %ixdefine size64_t qword
 %ixdefine size_t size%[__BITS__]_t
@@ -504,7 +504,8 @@ NASMX_DEFINE VERSION_ID, 0x0100000A
 ;//
 %define __NASMX_DECLSPEC_SYSTYPE_LINUX__   1
 %define __NASMX_DECLSPEC_SYSTYPE_MACHOS__  2
-%define __NASMX_DECLSPEC_SYSTYPE_WINDOWS__ 3
+%define __NASMX_DECLSPEC_SYSTYPE_BSD__     3
+%define __NASMX_DECLSPEC_SYSTYPE_WINDOWS__ 4
 
 ;//////////////////////////////////////////////////////////////////
 ;// Macro to control NASMX default behavior
@@ -658,7 +659,15 @@ NASMX_DEFINE VERSION_ID, 0x0100000A
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'ECXEDX'
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_2__ 'CX DX '
-	NASMX_DECLSPEC SYSTYPE, LINUX
+	%ifdef FREEBSD
+		NASMX_DECLSPEC SYSTYPE, BSD
+	%elifdef NETBSD
+		NASMX_DECLSPEC SYSTYPE, BSD
+	%elifdef OPENBSD
+		NASMX_DECLSPEC SYSTYPE, BSD
+	%else
+		NASMX_DECLSPEC SYSTYPE, LINUX
+	%endif
 	NASMX_DECLSPEC CALLCONV, CDECL, DEFAULT
 	%idefine long_t long32_t
 	%idefine ulong_t ulong32_t
@@ -680,7 +689,15 @@ NASMX_DEFINE VERSION_ID, 0x0100000A
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'ECXEDX'
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_2__ 'CX DX '
-	NASMX_DECLSPEC SYSTYPE, LINUX
+	%ifdef FREEBSD
+		NASMX_DECLSPEC SYSTYPE, BSD	
+	%elifdef NETBSD
+		NASMX_DECLSPEC SYSTYPE, BSD	
+	%elifdef OPENBSD
+		NASMX_DECLSPEC SYSTYPE, BSD	
+	%else
+		NASMX_DECLSPEC SYSTYPE, LINUX
+	%endif
 	NASMX_DECLSPEC CALLCONV, CDECL, DEFAULT
 	%idefine long_t long32_t
 	%idefine ulong_t ulong32_t
@@ -701,7 +718,15 @@ NASMX_DEFINE VERSION_ID, 0x0100000A
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_8__ 'RDIRSIRDXRCXR8 R9 '
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'EDIESIEDXECXR8DR9D'
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_2__ 'DI SI DX CX R8WR9W'
-	NASMX_DECLSPEC SYSTYPE, LINUX
+	%ifdef FREEBSD
+		NASMX_DECLSPEC SYSTYPE, BSD	
+	%elifdef NETBSD
+		NASMX_DECLSPEC SYSTYPE, BSD	
+	%elifdef OPENBSD
+		NASMX_DECLSPEC SYSTYPE, BSD	
+	%else
+		NASMX_DECLSPEC SYSTYPE, LINUX
+	%endif
 	NASMX_DECLSPEC CALLCONV, FASTCALL, DEFAULT
 	%idefine long_t long64_t
 	%idefine ulong_t ulong64_t
@@ -834,6 +859,19 @@ NASMX_DEFINE VERSION_ID, 0x0100000A
 		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
+%endif
+
+;// pull in appropriate syscalls
+%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_BSD__
+    %ifdef FREEBSD
+	%include 'bsd/syscalls.freebsd.inc'
+    %elifdef NETBSD
+	%include 'bsd/syscalls.netbsd.inc'
+    %elifdef OPENBSD
+	%include 'bsd/syscalls.openbsd.inc'
+    %endif
+%elif __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_LINUX__
+    %include 'linux/syscall.inc'
 %endif
 
 
