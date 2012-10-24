@@ -12,6 +12,13 @@ Downloads and snapshots are available from:
 Change Log
 ~~~~~~~~~~
 
+NASMX v1.2: 24 Oct 2012, by Rob Neff
+
+- Added BSD x86 syscall support
+- Added BSD x64 syscall support
+- Added BSD Demo1
+_________________________________________________________
+
 NASMX v1.1: 29 Sep 2012, by Rob Neff
 
 - Refresh Win32 distribution "bin" directory with
