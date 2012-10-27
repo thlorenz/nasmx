@@ -559,7 +559,7 @@
     %else
         %ifnum %{1}
             mov eax, %{1}
-	%elifnidni %{1}, rax
+        %elifnidni %{1}, rax
             mov rax, %{1}
 	%endif
     %endif
@@ -571,11 +571,26 @@
 ; SysCall Macro - BSD 32-bit
 ; ---------------------------------
 
-%imacro syscall 1-7
+%imacro syscall 1-7.nolist
     %if %0 > 1
+        ; if using pre-built callstack
+        ; warn if not large enough
+        %assign %%__ofst 0
+        %ifdef __NX_PROLOGUE_CALLSTACK_ADJUST__
+            %assign %%__ofst ( ( %0 - 1 ) * 4 )
+            %if %%__ofst > __NX_PROLOGUE_CALLSTACK_ADJUST__ - 4
+                %warning 'params exceed callstack size'
+            %endif
+        %endif
         %rep %0-1
             %rotate -1
-	    push %{1}
+            ; if using pre-built callstack
+            %ifdef __NX_PROLOGUE_CALLSTACK_ADJUST__
+                mov [esp + %%__ofst], %{1}
+                %assign %%__ofst %%__ofst - 4
+            %else
+                push %{1}
+            %endif
         %endrep
         %rotate -1
     %endif
@@ -589,14 +604,25 @@
         %endif
     %endif
     %if %0 > 1
-        push eax
+        ; if callstack not pre-built
+        ; then adjust the stack.
+        %ifndef __NX_PROLOGUE_CALLSTACK_ADJUST__
+            push eax
+        %else
+            mov [esp], eax
+        %endif
     %endif
     int 0x80
     %if %0 > 1
-        add esp, %0 * 4
+        ; if callstack not pre-built
+        ; then restore the stack
+        %ifndef __NX_PROLOGUE_CALLSTACK_ADJUST__
+            add esp, %0 * 4
+        %endif
     %endif
 %endmacro
 
 %endif
 
 %endif  ; __NASMX_SYSCALL_INC__
+
