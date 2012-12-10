@@ -11,8 +11,7 @@
 ;//
 
 %include 'DEMO15.inc'
-%include "gl.inc"
-
+%include "..\..\..\inc\opengl\gl.inc"
 
 [section .text]
 entry demo15
