@@ -67,9 +67,9 @@ theta 	declare(float_t) 	1.0e0
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 SECTION .text
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;Define the call back functions (Note the cdecl- since they are called from c libraries.
 ;;Function called to update rendering
-proc   DisplayFunc
+proc   cdecl, DisplayFunc
 locals none
 	invoke usleep, 2000  ;; Slow down!!  Delay = 2 ms
 	;;** Clear the buffer, clear the matrix **
@@ -108,13 +108,13 @@ endproc
 
 ;; **Function called when the window is created or resized**
 
-proc ReshapeFunc, dword width, dword height
+proc cdecl, ReshapeFunc, dword width, dword height
 locals none
 	invoke glViewport, 0, 0, dword [argv(.width)], dword [argv(.height)]
 endproc
 
 ;; ** Function called when a key is hit **
-proc KeyboardFunc, uchar_t key, dword x, dword y
+proc cdecl, KeyboardFunc, uchar_t key, dword x, dword y
 locals none
 	if byte [argv(.key)],==, 27  ;; Press ESC key to exit.
 		syscall exit, 0
