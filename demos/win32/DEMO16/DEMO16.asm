@@ -32,15 +32,15 @@ segment .bss
 	msgboxdiag: reserve(uint32_t) 1
 
 segment .code
-
-proc cdecl, kill_window, ptrdiff_t widget, ptrdiff_t event, ptrdiff_t data
+;;Define the call back functions.
+proc cdecl, kill_window, ptrdiff_t widget, ptrdiff_t event, ptrdiff_t data  ;; cdecl for callback function which is called from inside the c library !? 
 locals none
 
 	invoke gtk_main_quit
 	return 0
 endproc
 
-proc cdecl, button_press,ptrdiff_t widget, ptrdiff_t data
+proc cdecl, button_press,ptrdiff_t widget, ptrdiff_t data  ;;cdecl for callback function which is called from inside the c library !? 
 locals none
 
 	invoke gtk_entry_get_text,[entrydata]
@@ -55,7 +55,7 @@ locals none
 	invoke gtk_widget_destroy, [msgboxdiag]
 endproc
 
-
+;; Our Main proc.
 proc demo16
 locals none
 	invoke gtk_init,NULL,NULL

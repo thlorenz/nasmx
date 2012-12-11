@@ -76,7 +76,7 @@ locals none
 endproc
 
 ;; Our Main proc.
-proc main
+proc demo8
 locals none
 	invoke gtk_init,NULL,NULL
 	
