@@ -17,8 +17,6 @@
 ;//
 
 
-BITS 32
-
 %include 'nasmx.inc'
 
 %include "gtk/gtk.inc"
