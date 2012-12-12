@@ -15,7 +15,6 @@
 ;//
 
 
-BITS 32
 
 %include 'nasmx.inc'
 
@@ -52,14 +51,19 @@ segment .bss
 
 segment .code
 ;;Define the call back functions.
-proc cdecl, kill_window, ptrdiff_t widget, ptrdiff_t event, ptrdiff_t data  ;; cdecl for callback function which is called from inside the c library !? 
+;; cdecl for callback function which is called from inside the c library !?
+;; NOTE : cdecl is not really needed in linux
+;; By default NASMX assembles procs in linux with cdecl. (when invoked with -f elf32)
+;; cdecl is needed in windows. 
+
+proc cdecl, kill_window, ptrdiff_t widget, ptrdiff_t event, ptrdiff_t data
 locals none
 
 	invoke gtk_main_quit
 	return 0
 endproc
 
-proc cdecl, button_press,ptrdiff_t widget, ptrdiff_t data  ;;cdecl for callback function which is called from inside the c library !? 
+proc cdecl, button_press,ptrdiff_t widget, ptrdiff_t data  
 locals none
 
 	invoke gtk_entry_get_text,[entrydata]
