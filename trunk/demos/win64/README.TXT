@@ -1,10 +1,14 @@
 Win64 NASM Demo Applications
-Bryant Keller <bkeller@asmcommunity.net>
-Keith Kanios <keith@asmcommunity.net>
-Rob Neff <p1ranha@javalin.org>
 
-Copyright (c) 2011, Byrant Keller, Keith Kanios, Rob Neff
+Copyright (c) 2013 The NASMX Project
 All rights reserved.
+
+Developers:
+  Bryant Keller <bkeller@asmcommunity.net>
+  Keith Kanios <keith@asmcommunity.net>
+  Rob Neff <p1ranha@javalin.org>
+  Mathi Maaran <mathi_tuty@rediffmail.com>
+
 
  Each of the subdirectories contain fully functional
  applications which have been designed around NASMX's
@@ -21,11 +25,8 @@ All rights reserved.
            console mode program
   DEMO4  - Demonstrates use of floating point with type double
   DEMO5  - Demonstates basic windowing operations
+  DEMO6  - Bitmap and Timer example
 
- All of these applications, as well as the NASMX.INC file,
- were completely developed and designed by Bryant Keller
- Keith Kanios, and or Rob Neff. As such, all rights over these
- files belong to Bryant Keller, Keith Kanios and Rob Neff.
  You are permitted to use these demonstration applications and
  the NASMX.INC file as you see fit, so long as any source
  releases of your software gives us credit for our file.
