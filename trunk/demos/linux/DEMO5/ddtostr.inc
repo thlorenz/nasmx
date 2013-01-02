@@ -1,6 +1,6 @@
-;// DDTOSTR.INC
+;// ddtostr.inc
 ;//
-;// Copyright (C)2005-2011 The NASMX Project
+;// Copyright (C)2005-2013 The NASMX Project
 ;//
 ;// Purpose:
 ;//    This is the include file for demo5 that contains the
