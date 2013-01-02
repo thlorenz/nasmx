@@ -1,16 +1,26 @@
 %ifndef __NASMX_DEMOS_INC__
 %define __NASMX_DEMOS_INC__
 
-;// nasmx.inc should always be the first file included
-%include '..\..\..\inc\nasmx.inc'
+;// nasmx.inc should always be the first file included.
+;// If you get the following nasm error:
+;//     fatal: unable to open include file 'nasmx.inc'
+;// then you need to specify the full directory path to the NASMX
+;// include directory using either the NASMENV environment variable or the
+;// -I include switch from the command line.
+;// For reference see the setpaths.bat file in the NASMX root directory.
+%include 'nasmx.inc'
 
 ;// To speed up assembly we simply copy the values we use in our source
 ;// from the nasmx/inc/win32 include directory rather than including the
 ;// entire fileset as this really strains the preprocessor...
-;//     %include '..\..\..\inc\win32\windows.inc'
-;//     %include '..\..\..\inc\win32\kernel32.inc'
-;//     %include '..\..\..\inc\win32\user32.inc'
-;//     %include '..\..\..\inc\win32\msvcrt.inc'
+;//     %include 'win32\windows.inc'
+;//     %include 'win32\kernel32.inc'
+;//     %include 'win32\user32.inc'
+;//     %include 'win32\msvcrt.inc'
+;//
+;// If you will be using additional Windows defines and structures for
+;// your programs we recommend that you create your own include header
+;// or simply include the above mentioned files in your source code.
 
 ;/////////////////////////////////////////////////////
 ;// WINDOWS.INC DEFINITIONS
@@ -25,6 +35,14 @@
 %define IDOK 1
 %define IDCANCEL 2
 %define IDI_APPLICATION 32512
+
+%define IDC_ARROW 32512
+%define IDC_IBEAM 32513
+%define IDC_WAIT 32514
+%define IDC_CROSS 32515
+%define IDC_UPARROW 32516
+%define IDC_SIZE 32640
+%define IDC_ICON 32641
 
 %define CBS_DROPDOWN 2h
 %define CBS_SORT 100h
@@ -70,8 +88,15 @@
 %define WM_SETTEXT 0Ch
 %define WM_GETTEXT 0Dh
 %define WM_GETTEXTLENGTH 0Eh
+%define WM_CLOSE 10h
 %define WM_INITDIALOG 110h
 %define WM_COMMAND 111h
+%define WM_ERASEBKGND 14h
+%define WM_PAINT 0Fh
+%define WM_TIMER 113h
+%define WM_KEYDOWN 100h
+%define VK_ESCAPE 1Bh
+%define SRCCOPY 0CC0020h
 
 ;/////////////////////////////////////////////////////
 ;// WINDOWS.INC STRUCTURES
@@ -118,6 +143,41 @@ NASMX_STRUC RECT
     NASMX_RESERVE bottom, int32_t, 1
 NASMX_ENDSTRUC
 
+NASMX_STRUC BITMAPINFOHEADER
+    NASMX_RESERVE biSize, int32_t, 1
+    NASMX_RESERVE biWidth, int32_t, 1
+    NASMX_RESERVE biHeight, int32_t, 1
+    NASMX_RESERVE biPlanes, short_t, 1
+    NASMX_RESERVE biBitCount, short_t, 1
+    NASMX_RESERVE biCompression, int32_t, 1
+    NASMX_RESERVE biSizeImage, int32_t, 1
+    NASMX_RESERVE biXPelsPerMeter, int32_t, 1
+    NASMX_RESERVE biYPelsPerMeter, int32_t, 1
+    NASMX_RESERVE biClrUsed, int32_t, 1
+    NASMX_RESERVE biClrImportant, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PAINTSTRUCT
+    NASMX_RESERVE hdc,         ptrdiff_t, 1
+    NASMX_RESERVE fErase,      int32_t, 1
+	NASMX_STRUC rcPaint, RECT
+		NASMX_RESERVE left,    int32_t, 1
+		NASMX_RESERVE top,     int32_t, 1
+		NASMX_RESERVE right,   int32_t, 1
+		NASMX_RESERVE bottom,  int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_RESERVE fRestore,    int32_t, 1
+    NASMX_RESERVE fIncUpdate,  int32_t, 1
+    NASMX_RESERVE rgbReserved, int8_t, 32 
+NASMX_ENDSTRUC
+
+NASMX_STRUC PALETTEENTRY
+    NASMX_RESERVE peRed,   int8_t, 1
+    NASMX_RESERVE peGreen, int8_t, 1
+    NASMX_RESERVE peBlue,  int8_t, 1
+    NASMX_RESERVE peFlags, int8_t, 1
+NASMX_ENDSTRUC
+
 ;/////////////////////////////////////////////////////
 ;// KERNEL32.INC PROTOTYPES
 ;/////////////////////////////////////////////////////
@@ -136,13 +196,27 @@ IMPORT WriteFile, 20
 ;/////////////////////////////////////////////////////
 ;// USER32.INC PROTOTYPES
 ;/////////////////////////////////////////////////////
-IMPORT EndDialog, 8
-IMPORT GetClientRect, 8
-IMPORT PostQuitMessage, 4
-IMPORT ShowWindow, 8
-IMPORT TranslateMessage, 4
-IMPORT UpdateWindow, 4
+IMPORT DestroyWindow, ptrdiff_t hWnd
+IMPORT EndDialog, ptrdiff_t hDlg, size_t nResult
+IMPORT GetClientRect, ptrdiff_t hWnd, ptrdiff_t lpRect
+IMPORT PostQuitMessage, dword nExitCode
+IMPORT ShowWindow, ptrdiff_t hWnd, dword nCmdShow
+IMPORT TranslateMessage, ptrdiff_t lpMsg
+IMPORT UpdateWindow, ptrdiff_t hWnd
+IMPORT InvalidateRect, ptrdiff_t hWnd, ptrdiff_t lpRect, dword bErase
+IMPORT SetTimer, ptrdiff_t hWnd, size_t nIDEvent, dword uElapse, ptrdiff_t lpTimerFunc
+IMPORT KillTimer, ptrdiff_t hWnd, size_t nIDEvent
 
+IMPORT CreateDCA, 16
+IMPORT CreateDIBSection, 24
+IMPORT SelectObject, 8
+IMPORT DeleteObject, 4
+IMPORT DeleteDC, 4
+IMPORT CreateCompatibleDC, 4
+IMPORT BeginPaint, 8
+IMPORT BitBlt, 36
+IMPORT EndPaint, 8
+IMPORT CreateCompatibleBitmap, 12
 
 ;/////////////////////////////////////////////////////
 ;// MSVCRT.INC PROTOTYPES
@@ -178,15 +252,12 @@ IMPORT GetModuleHandleW, 4
 ;// The following shows how to properly prototype an imported
 ;// windows function using NASMX syntax.
 ;// TODO: This will eventually be done for all imported functions.
-;// IMPORT MessageBoxW, 16
 IMPORT MessageBoxW, ptrdiff_t hWnd, ptrdiff_t lpText, ptrdiff_t lpCaption, uint32_t uType
 %define MessageBox MessageBoxW
-;// IMPORT CreateWindowExW, 48
 IMPORT CreateWindowExW, uint_t dwExStyle, ptrdiff_t lpClassName, ptrdiff_t lpWindowName, uint_t dwStyle,\
                         int_t x, int_t y, int_t nWidth, int_t nHeight,\
                         ptrdiff_t hWndParent, ptrdiff_t hMenu, ptrdiff_t hInstance, ptrdiff_t lpParam
 %define CreateWindowEx CreateWindowExW
-;// IMPORT DefWindowProcW, 16
 IMPORT DefWindowProcW, ptrdiff_t hWnd, uint_t Msg, ptrdiff_t wParam, ptrdiff_t lParam
 %define DefWindowProc DefWindowProcW
 IMPORT DialogBoxParamW, 20
@@ -197,6 +268,8 @@ IMPORT GetMessageW, 16
 %define GetMessage GetMessageW
 IMPORT LoadIconW, 8
 %define LoadIcon LoadIconW
+IMPORT PostMessageW, ptrdiff_t hWnd, dword Msg, size_t wParam, size_t lParam
+%define PostMessage PostMessageW
 IMPORT RegisterClassExW, 4
 %define RegisterClassEx RegisterClassExW
 IMPORT SendDlgItemMessageW, 20
@@ -223,7 +296,6 @@ IMPORT CreateWindowExA, uint_t dwExStyle, ptrdiff_t lpClassName, ptrdiff_t lpWin
 						int_t x, int_t y, int_t nWidth, int_t nHeight,\
 						ptrdiff_t hWndParent, ptrdiff_t hMenu, ptrdiff_t hInstance, ptrdiff_t lpParam
 %define CreateWindowEx CreateWindowExA
-;// IMPORT DefWindowProcA, 16
 IMPORT DefWindowProcA, ptrdiff_t hWnd, uint_t Msg, ptrdiff_t wParam, ptrdiff_t lParam
 %define DefWindowProc DefWindowProcA
 IMPORT DialogBoxParamA, 20
@@ -236,6 +308,8 @@ IMPORT LoadIconA, 8
 %define LoadIcon LoadIconA
 IMPORT MessageBoxA, ptrdiff_t hWnd, ptrdiff_t lpText, ptrdiff_t lpCaption, uint32_t uType
 %define MessageBox MessageBoxA
+IMPORT PostMessageA, ptrdiff_t hWnd, dword Msg, size_t wParam, size_t lParam
+%define PostMessage PostMessageA
 IMPORT RegisterClassExA, 4
 %define RegisterClassEx RegisterClassExA
 IMPORT SendDlgItemMessageA, 20
