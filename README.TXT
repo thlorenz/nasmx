@@ -1,16 +1,19 @@
 The NASMX Project
-By: Bryant Keller, Keith Kanios, and Rob Neff
+
+Developers:
+  Bryant Keller
+  Keith Kanios
+  Rob Neff
+  Mathi Maaran
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Welcome to NASMX, a collection of macros, include files and
 examples all built around the Netwide Assembler (NASM) for
 all to use freely.
 
-The project page is located at:
-  http://www.asmcommunity.net/projects/nasmx/
-
 The community forum can be found at:
-  http://www.asmcommunity.net/board/index.php
+  http://forum.nasm.us
 
 Downloads and snapshots are available from:
   http://sourceforge.net/projects/nasmx/
