@@ -1,7 +1,7 @@
 ;////////////////////////////////////////////////////////////////
-;// DEMO5.ASM
+;// demo5.asm
 ;//
-;// Copyright (C)2005-2011 The NASMX Project
+;// Copyright (C)2005-2013 The NASMX Project
 ;//
 ;// Purpose:
 ;//    This program demonstrates bit manipulation and
@@ -137,4 +137,3 @@ locals none
 	invoke exit
 
 endproc
-

@@ -1,7 +1,7 @@
 ;////////////////////////////////////////////////////////////////
-;// DDTOSTR.ASM
+;// ddtostr.asm
 ;//
-;// Copyright (C)2005-2011 The NASMX Project
+;// Copyright (C)2005-2013 The NASMX Project
 ;//
 ;// Purpose:
 ;//    This routine coverts a dword value to
