@@ -1,10 +1,8 @@
 NASMX Notes:
 ~~~~~~~~~~~~
-The project page is located at:
-  http://www.asmcommunity.net/projects/nasmx/
 
 The community forum can be found at:
-  http://www.asmcommunity.net/board/index.php
+  http://forum.nasm.us
 
 Downloads and snapshots are available from:
   http://sourceforge.net/projects/nasmx/
@@ -12,11 +10,18 @@ Downloads and snapshots are available from:
 Change Log
 ~~~~~~~~~~
 
-NASMX v1.2: 24 Oct 2012, by Rob Neff
+NASMX v1.2: 2 Jan 2013
 
-- Added BSD x86 syscall support
-- Added BSD x64 syscall support
-- Added BSD Demo1
+- Added BSD x86 & x64 syscall support
+- Added BSD Demos 1-5
+- Refresh Win32 distribution "bin" directory with
+  latest release version of Nasm:
+  NASM v2.10.07, NDISASM v2.10.07
+- Added Win32 Demo 15 - OpenGL Torus example
+- Added Win32 Demo 16 - GTK example program
+- Added Win32 Demo 17 - GDI floor program
+- Added Win64 Demo 6 - GDI floor program
+
 _________________________________________________________
 
 NASMX v1.1: 29 Sep 2012, by Rob Neff
