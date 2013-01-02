@@ -4,7 +4,8 @@ AS=nasm
 ASFLAGS=-f elf32
 LD=gcc
 LDFLAGS		=-Wall -s
-LIBS		=`pkg-config --cflags --libs gtk+-2.0`
+# LIBS		=`pkg-config --cflags --libs gtk+-2.0`
+LIBS		=`pkg-config --cflags --libs gtk+-x11-2.0`
 INCLUDES	=-I../../../inc/
 
 # [ Suffixes ]
