@@ -1,10 +1,11 @@
 Linux64 NASM Demo Applications
-Copyright (c) 2006-2011 The NASMX Project
+Copyright (c) 2006-2013 The NASMX Project
 All rights reserved.
 Contributors:
     Bryant Keller <bkeller@asmcommunity.net>
     Keith Kanios <keith@asmcommunity.net>
     Rob Neff <p1ranha@javalin.org>
+    Mathi Maaran <mathi_tuty@rediffmail.com>
 
  IMPORTANT:
  To properly assemble the Linux demos make sure you set the
@@ -37,10 +38,8 @@ Contributors:
   DEMO4  - Demonstrates basic double-precision floating
            point arithmetic.
 
- All of these applications, as well as the NASMX.INC file,
- were completely developed and designed by Bryant Keller,
- Keith Kanios, and/or Rob Neff. As such, all rights over these
- files belong to Bryant Keller, Keith Kanios, and Rob Neff.
+  DEMO5  - Demonstrates using X11 Xlib library functions.
+
  You are permitted to use these demonstration applications and
  the NASMX.INC file as you see fit, so long as any source
  releases of your software gives us credit for our file.
