@@ -1,7 +1,7 @@
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// NASMX Preprocessor
-;// Copyright (c) 2005-2012, The NASMX Project
+;// Copyright (c) 2005-2013, The NASMX Project
 ;//
 %ifndef __NASMX_INCLUDED__
 %define __NASMX_INCLUDED__
@@ -3096,26 +3096,38 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 
 %imacro IF 3.nolist
 %push __NX_CTX_IF__
+	; we must obtain any outer context label sequence
+	; to enable the break macro to succeed.
 	%ifndef __NX_OPER_LABEL_SEQ__
 		%xdefine __NX_OPER_LABEL_SEQ__ 0
 	%endif
-	%assign %$__nx_oper_label_seq %[__NX_OPER_LABEL_SEQ__] + 1
-	%undef __NX_OPER_LABEL_SEQ__
-	%xdefine __NX_OPER_LABEL_SEQ__ %[%$__nx_oper_label_seq]
+	%assign %$__nx_oper_label_seq %[__NX_OPER_LABEL_SEQ__]
+	; sequence label numbers for the IF macro must be
+	; separate from looping sequence label numbers.
+	%ifndef __NX_OPER_IF_LABEL_SEQ__
+		%xdefine __NX_OPER_IF_LABEL_SEQ__ 0
+	%endif
+	%assign %$__nx_oper_if_label_seq %[__NX_OPER_IF_LABEL_SEQ__] + 1
+	%undef __NX_OPER_IF_LABEL_SEQ__
+	%xdefine __NX_OPER_IF_LABEL_SEQ__ %[%$__nx_oper_if_label_seq]
 
-	%assign %$__nx_oper_label_next 1
+	%assign %$__nx_oper_else 0
+	%assign %$__nx_oper_if_label_next 1
 	cmp %1, %3
-	RJMP %2, .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
+	RJMP %2, .__NX_OPER_IF_LABEL_%[%$__nx_oper_if_label_seq]_%[%$__nx_oper_if_label_next]
 %endmacro
 
 
 %imacro ELSIF 3.nolist
 	%ifctx __NX_CTX_IF__
-		jmp .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]
-		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
-		%assign %$__nx_oper_label_next 1+%$__nx_oper_label_next
+		%if %$__nx_oper_else > 0
+			%error "ELSIF cannot follow ELSE block."
+		%endif
+		jmp .__NX_OPER_IF_LABEL_%[%$__nx_oper_if_label_seq]
+		.__NX_OPER_IF_LABEL_%[%$__nx_oper_if_label_seq]_%[%$__nx_oper_if_label_next]:
+		%assign %$__nx_oper_if_label_next 1+%$__nx_oper_if_label_next
 		cmp %1, %3
-		RJMP %2, .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
+		RJMP %2, .__NX_OPER_IF_LABEL_%[%$__nx_oper_if_label_seq]_%[%$__nx_oper_if_label_next]
 	%else
 		%error "ELSIF directive must be within an IF block."
 	%endif
@@ -3123,29 +3135,26 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 
 
 %imacro ELSE 0.nolist
-	%ifndef __NX_ELSE_PRESENT__
-		%ifctx __NX_CTX_IF__
-			jmp .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]
-			.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
-			%assign %$__nx_oper_label_next 1+%$__nx_oper_label_next
-			%define __NX_ELSE_PRESENT__
+	%ifctx __NX_CTX_IF__
+		%if %$__nx_oper_else > 0
+			%error "There can only be one ELSE per IF block."
 		%else
-			%error "ELSE directive must be within an IF block."
+			%assign %$__nx_oper_else 1
+			jmp .__NX_OPER_IF_LABEL_%[%$__nx_oper_if_label_seq]
+			.__NX_OPER_IF_LABEL_%[%$__nx_oper_if_label_seq]_%[%$__nx_oper_if_label_next]:
+			%assign %$__nx_oper_if_label_next 1+%$__nx_oper_if_label_next
 		%endif
 	%else
-		%error "There can only be one ELSE per IF block."
+		%error "ELSE directive must be within an IF block."
 	%endif
 %endmacro
 
 
 %imacro ENDIF 0.nolist
 	%ifctx __NX_CTX_IF__
-		%ifndef __NX_ELSE_PRESENT__
-			.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
-		%else
-			%undef __NX_ELSE_PRESENT__
-		%endif
-		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]:
+		; must have a forward label in case elsif/else macros used.
+		.__NX_OPER_IF_LABEL_%[%$__nx_oper_if_label_seq]_%[%$__nx_oper_if_label_next]:
+		.__NX_OPER_IF_LABEL_%[%$__nx_oper_if_label_seq]:
 		%pop
 	%else
 		%error "ENDIF directive must be within an IF block."
@@ -3154,7 +3163,12 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 
 
 %imacro BREAK 0.nolist
-	jmp .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]
+	jmp .__NX_OPER_LABEL_EXIT_%[%$__nx_oper_label_seq]
+%endmacro
+
+
+%imacro CONTINUE 0.nolist
+	jmp .__NX_OPER_LABEL_CONTINUE_%[%$__nx_oper_label_seq]
 %endmacro
 
 
@@ -3166,17 +3180,22 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 	%assign %$__nx_oper_label_seq %[__NX_OPER_LABEL_SEQ__] + 1
 	%undef __NX_OPER_LABEL_SEQ__
 	%xdefine __NX_OPER_LABEL_SEQ__ %[%$__nx_oper_label_seq]
-
-	mov __DX, %1
+	%ifnidni __AX, %1
+		mov __AX, %1
+	%endif
 	%assign %$__nx_oper_label_next 1
+	%assign %$__nx_oper_default 0
 %endmacro
 
 
 %imacro CASE 1.nolist
 	%ifctx __NX_CTX_SWITCH__
+		%if %$__nx_oper_default > 0
+			%error "CASE must appear before DEFAULT in SWITCH block."
+		%endif
 		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
 		%assign %$__nx_oper_label_next 1+%$__nx_oper_label_next
-		cmp __DX, %1
+		cmp __AX, %1
 		jnz near .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
 	%else
 		%error "CASE directive must be within a SWITCH block."
@@ -3186,12 +3205,12 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 
 %imacro DEFAULT 0.nolist
 	%ifctx __NX_CTX_SWITCH__
-		%ifndef __NX_SWITCH_DEFAULT_PRESENT__
-			%define __NX_SWITCH_DEFAULT_PRESENT__
-			.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
-		%else
+		%if %$__nx_oper_default > 0
 			%error "There can only be one DEFAULT per SWITCH block."
 		%endif
+		%assign %$__nx_oper_default 1
+		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
+		%assign %$__nx_oper_label_next 1+%$__nx_oper_label_next
 	%else
 		%error "DEFAULT directive must be within a SWITCH block."
 	%endif
@@ -3199,13 +3218,46 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 
 
 %imacro ENDSWITCH 0.nolist
-	%ifndef __NX_SWITCH_DEFAULT_PRESENT__
+	%ifctx __NX_CTX_SWITCH__
 		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
+		.__NX_OPER_LABEL_EXIT_%[%$__nx_oper_label_seq]:
+		%pop
 	%else
-		%undef __NX_SWITCH_DEFAULT_PRESENT__
+		%error "Missing SWITCH directive."
 	%endif
-	.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]:
-%pop
+%endmacro
+
+
+%imacro REPEAT 0.nolist
+%push __NX_CTX_REPEAT__
+	%ifndef __NX_OPER_LABEL_SEQ__
+		%xdefine __NX_OPER_LABEL_SEQ__ 0
+	%endif
+	%assign %$__nx_oper_label_seq %[__NX_OPER_LABEL_SEQ__] + 1
+	%undef __NX_OPER_LABEL_SEQ__
+	%xdefine __NX_OPER_LABEL_SEQ__ %[%$__nx_oper_label_seq]
+	%assign %$__nx_oper_label_next 1
+	.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]:
+%endmacro
+
+
+%imacro UNTIL 3.nolist
+	%ifctx __NX_CTX_REPEAT__
+		.__NX_OPER_LABEL_CONTINUE_%[%$__nx_oper_label_seq]:
+		cmp %1, %3
+		RJMP %2, .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
+		.__NX_OPER_LABEL_EXIT_%[%$__nx_oper_label_seq]:
+		%pop
+	%elifctx __NX_CTX_DO__
+		%warning "DO/UNTIL combination is deprecated.  Use REPEAT/UNTIL."
+		.__NX_OPER_LABEL_CONTINUE_%[%$__nx_oper_label_seq]:
+		cmp %1, %3
+		RJMP %2, .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
+		.__NX_OPER_LABEL_EXIT_%[%$__nx_oper_label_seq]:
+		%pop
+	%else
+		%error "Missing REPEAT directive."
+	%endif
 %endmacro
 
 
@@ -3222,28 +3274,44 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 %endmacro
 
 
-%imacro UNTIL 3.nolist
-	%ifctx __NX_CTX_DO__
-		cmp %1, %3
-		RJMP %2, .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
-		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]:
-	%else
-		%error "UNTIL directive must be preceded by DO."
-	%endif
-%pop
-%endmacro
-
-
+; There is some trickery with this macro: If the DO context exists we assume
+; that this is a finishing while statement; If no DO context is found we assume
+; that the user is beginning a while loop.  This implies that you cannot use a
+; WHILE loop directly inside a DO loop without some other intervening context.
+; If your code requires this the you must use REPEAT/UNTIL for the outer loop.
 %imacro WHILE 3.nolist
 	%ifctx __NX_CTX_DO__
+		.__NX_OPER_LABEL_CONTINUE_%[%$__nx_oper_label_seq]:
 		cmp %1, %3
 		SJMP %2, .__NX_OPER_LABEL_%[%$__nx_oper_label_seq]_%[%$__nx_oper_label_next]
-		.__NX_OPER_LABEL_%[%$__nx_oper_label_seq]:
+		.__NX_OPER_LABEL_EXIT_%[%$__nx_oper_label_seq]:
+		%pop
 	%else
-		%error "WHILE directive must be preceded by DO."
+		%push __NX_CTX_WHILE__
+		%ifndef __NX_OPER_LABEL_SEQ__
+			%xdefine __NX_OPER_LABEL_SEQ__ 0
+		%endif
+		%assign %$__nx_oper_label_seq %[__NX_OPER_LABEL_SEQ__] + 1
+		%undef __NX_OPER_LABEL_SEQ__
+		%xdefine __NX_OPER_LABEL_SEQ__ %[%$__nx_oper_label_seq]
+		%assign %$__nx_oper_label_next 1
+		.__NX_OPER_LABEL_CONTINUE_%[%$__nx_oper_label_seq]:
+		cmp %1, %3
+		RJMP %2, .__NX_OPER_LABEL_EXIT_%[%$__nx_oper_label_seq]
 	%endif
-%pop
 %endmacro
+
+
+%imacro ENDWHILE 0.nolist
+	%ifctx __NX_CTX_WHILE__
+		jmp .__NX_OPER_LABEL_CONTINUE_%[%$__nx_oper_label_seq]
+		.__NX_OPER_LABEL_EXIT_%[%$__nx_oper_label_seq]:
+		%pop
+	%else
+		%error "Missing WHILE directive."
+	%endif
+%endmacro
+
 
 ;// The following is used to wrap test code when debugging
 ;%define __NX_DEBUG__  ;;//// * * * BEGIN NASMX DEBUG FRAME * * * ///////////////
