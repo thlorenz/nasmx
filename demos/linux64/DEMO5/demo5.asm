@@ -120,6 +120,4 @@ DO
 	endif
 WHILE rax,==,rax
 
-JumpOutofWhile:
-
 endproc
