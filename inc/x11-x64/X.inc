@@ -1,3 +1,8 @@
+;*****************************
+;***** The NASMX Project *****
+;*****************************
+;;Translated by Mathi 
+
 %ifndef __X_INC__
 %define __X_INC__
 

@@ -1,3 +1,8 @@
+;*****************************
+;***** The NASMX Project *****
+;*****************************
+;;Translated by Mathi 
+
 %ifndef __X11_XLIB_INC__
 %define __X11_XLIB_INC__
 
