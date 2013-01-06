@@ -28,7 +28,7 @@ else
    echo "Cannot find nasmx.inc"
 fi
 
-if [ "$(which nasm)" == "" ]
+if [ "$(which nasm)" = "" ]
 then
     echo "You do not have the Netwide Assembler installed"
 fi
