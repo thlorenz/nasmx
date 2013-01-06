@@ -10,7 +10,7 @@ Downloads and snapshots are available from:
 Change Log
 ~~~~~~~~~~
 
-NASMX v1.2: 2 Jan 2013
+NASMX v1.2: 6 Jan 2013
 
 - Added BSD x86 & x64 syscall support
 - Added BSD Demos 1-5
@@ -21,7 +21,9 @@ NASMX v1.2: 2 Jan 2013
 - Added Win32 Demo 16 - GTK example program
 - Added Win32 Demo 17 - GDI floor program
 - Added Win64 Demo 6 - GDI floor program
-
+- Added Linux64 Demo 5 - Xlib example
+- Added REPEAT, UNTIL, CONTINUE macros
+- Fixed BREAK macro bug
 _________________________________________________________
 
 NASMX v1.1: 29 Sep 2012, by Rob Neff
