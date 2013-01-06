@@ -111,11 +111,11 @@ DO
 			invoke XDrawString, [_dpy], [win], [gc], 30, 30, hellotext ;; htextlen already passed in stack  ;; TODO
 		endif
 	elsif rbx,==,ButtonPress
-		jmp JumpOutofWhile  ;; need the BREAK macro fixed !!
+		BREAK
 	elsif rbx,==,ClientMessage
 		mov rdx,[_event + XClientMessageEvent.data+0*8]
 		if rdx,==,[wmDeleteMessage]		 
-			jmp JumpOutofWhile  ;; need the BREAK macro fixed !!
+			BREAK
 		endif
 	endif
 WHILE rax,==,rax
