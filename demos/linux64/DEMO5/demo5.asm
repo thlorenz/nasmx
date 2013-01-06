@@ -113,6 +113,7 @@ DO
 	elsif rbx,==,ButtonPress
 		BREAK
 	elsif rbx,==,ClientMessage
+		;;XClientMessageEvent.data.l[0]
 		mov rdx,[_event + XClientMessageEvent.data+0*8]
 		if rdx,==,[wmDeleteMessage]		 
 			BREAK
