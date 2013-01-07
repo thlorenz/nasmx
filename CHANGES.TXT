@@ -24,6 +24,8 @@ NASMX v1.2: 6 Jan 2013
 - Added Linux64 Demo 5 - Xlib example
 - Added REPEAT, UNTIL, CONTINUE macros
 - Fixed BREAK macro bug
+- Fixed INVOKE macro bug for x64 Linux procs
+  with more than 6 arguments
 _________________________________________________________
 
 NASMX v1.1: 29 Sep 2012, by Rob Neff
