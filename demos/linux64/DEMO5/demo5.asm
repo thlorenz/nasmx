@@ -51,9 +51,15 @@ htextlen equ $-hellotext
 
 section .text
 
+;; When programming for x64 with NASMX if a procedure will invoke 2 or
+;; more function calls that have more than 6 parameters then your programs
+;; can be smaller and faster if you use the global callstack optimization.
+NASMX_PRAGMA CALLSTACK, 32
+
 PROC   demo5, ptrdiff_t count, ptrdiff_t cmdline
 locals none
 
+mov edi, 0
 invoke XOpenDisplay, 0 
 if rax,==,0
 	mov rax,-1  ;;; Error !!
@@ -71,13 +77,9 @@ DefaultColormap _dpy,scr
 mov [cmap],rax
 
 BlackPixel _dpy,scr
-push rax
 WhitePixel _dpy,scr
-push rax
-sub rsp,4         ;;
-mov dword[rsp],0  ;; push dword 0 
 
-invoke XCreateSimpleWindow, [_dpy], [rootwin], 0, 0, 200, 150 ;; rest of the variables already pushed on stack
+invoke XCreateSimpleWindow, [_dpy], [rootwin], 0, 0, 200, 150, 0, 0, 0
 mov [win],rax
 
 invoke XStoreName, [_dpy], [win], hellocap
@@ -107,8 +109,7 @@ DO
 	
 	if rbx,==,Expose
 		if rcx,<,1
-			mov dword[rsp], htextlen
-			invoke XDrawString, [_dpy], [win], [gc], 30, 30, hellotext ;; htextlen already passed in stack  ;; TODO
+			invoke XDrawString, [_dpy], [win], [gc], 30, 30, hellotext, htextlen
 		endif
 	elsif rbx,==,ButtonPress
 		BREAK
