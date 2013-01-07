@@ -654,7 +654,7 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 %ifidn	 __OUTPUT_FORMAT__,elf
 	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0200
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
-	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    2
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'ECXEDX'
@@ -684,7 +684,7 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 	;// declared using cdecl
 	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0200
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
-	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    2
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'ECXEDX'
@@ -712,7 +712,7 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 %elifidn __OUTPUT_FORMAT__,elf64
 	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0200
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
-	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    6
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  8
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_8__ 'RDIRSIRDXRCXR8 R9 '
@@ -741,7 +741,7 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 %elifidn __OUTPUT_FORMAT__,macho
 	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0411
-	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0501
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
 	NASMX_DECLSPEC SYSTYPE, MACHOS
@@ -759,7 +759,7 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 %elifidn __OUTPUT_FORMAT__,macho32
 	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0411
-	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0501
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
 	NASMX_DECLSPEC SYSTYPE, MACHOS
@@ -777,7 +777,7 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 %elifidn __OUTPUT_FORAMT__,macho64
 	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0411
-	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2501
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0501
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    6
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  8
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_8__ 'RDIRSIRDXRCXR8 R9 '
@@ -839,7 +839,7 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 %else
 	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0200
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0410
-	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x2500
+	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    0
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  0
 	NASMX_DECLSPEC SYSTYPE, LINUX
@@ -1909,22 +1909,55 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 		%assign %$__nx_callstack_adjust 0
 		%assign %$__nx_invoke_callstack_adjust %$__nx_bytecount
 		%ifdef __NX_PROLOGUE_CALLSTACK_ADJUST__
+			;// Verify that the CALLSTACK is sufficient for the
+			;// number of parameter arguments we have been given.
 			%assign %$__nx_callstack_adjust __NX_PROLOGUE_CALLSTACK_ADJUST__
-			%if %$__nx_callstack_adjust < %$__nx_bytecount
-				%$__nx_callstack_adjust = 0
-				%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-					;// Windows: always requires a stack adjustment
-					;//   Linux: required when register allocation exhausted
+			%if __NASMX_ABI_BITS__ < 64
+				%if %$__nx_callstack_adjust < %$__nx_bytecount
+					%assign %$__nx_callstack_adjust 0
 					%warning insufficient callstack size for procedure %[%$__nx_proc], generating inefficient code...
 				%endif
 			%else
-				%assign %$__nx_invoke_callstack_adjust 0
+				%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+					%if %$__nx_callstack_adjust < %$__nx_bytecount
+						;// Windows: always requires a stack adjustment
+						%assign %$__nx_callstack_adjust 0
+						%warning insufficient callstack size for procedure %[%$__nx_proc], generating inefficient code...
+					%else
+						;// A callstack defined for Win64 must be at least 32 bytes
+						%if %$__nx_callstack_adjust < 32
+							%assign %$__nx_callstack_adjust 0
+							%warning insufficient callstack size for procedure %[%$__nx_proc], generating inefficient code...
+						%else
+							%assign %$__nx_invoke_callstack_adjust 0
+						%endif
+					%endif
+				%else
+					;// Linux: required when register allocation exhausted
+					%if %%__repcnt > 6
+						%assign %$__nx_invoke_callstack_adjust (( %%__repcnt - 6 ) * ( __NASMX_ABI_BITS__ / 8 ))
+						%if %$__nx_invoke_callstack_adjust > %$__nx_callstack_adjust
+							%assign %$__nx_callstack_adjust 0
+							%warning insufficient callstack size for procedure %[%$__nx_proc], generating inefficient code...
+						%else
+							%assign %$__nx_invoke_callstack_adjust 0
+						%endif
+					%else
+						%assign %$__nx_invoke_callstack_adjust 0
+					%endif
+				%endif
 			%endif
-		%endif
-		%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ != __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-			;// TODO: Account for x64 params that WILL get placed onto stack
-			%if __NASMX_ABI_BITS__ > 32
-				%assign %$__nx_invoke_callstack_adjust 0
+		%else
+			%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ != __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+				%if __NASMX_ABI_BITS__ > 32
+					;// Make space for x64 args that could possibly get placed onto the stack
+					%if %%__repcnt > 6
+						;// TODO: Make more efficient by examining param types ( non-trivial ).
+						%assign %$__nx_invoke_callstack_adjust (( %%__repcnt - 6 ) * ( __NASMX_ABI_BITS__ / 8 ))
+					%else
+						%assign %$__nx_invoke_callstack_adjust 0
+					%endif
+				%endif
 			%endif
 		%endif
 
@@ -2017,10 +2050,17 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 						%assign %$__nx_floatargs 1 + %$__nx_floatargs
 						;// TODO: optimize register spill for when required only
 						mov [__SP + %$args], %$arg_cur
+						;// Unlike Linux/BSD x64 all current 32-bit and 64-bit versions
+						;// of Windows increase arg stack offset.
+						%assign %$args %$args + sizeof(size_t)
+					%else
+						;// increase arg stack offset only for 32-bit non-Windows systems.
+						%if __NASMX_ABI_BITS__ < 64
+							%assign %$args %$args + sizeof(size_t)
+						%endif
 					%endif
 					%assign %$__nx_intargs 1 + %$__nx_intargs
 					%undef %$arg_cur
-					%assign %$args %$args + sizeof(size_t)
 				%endif
 			%elif %$__nx_floatargs < __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__
 				%assign %%__argtostack 0
@@ -3278,7 +3318,7 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 ; that this is a finishing while statement; If no DO context is found we assume
 ; that the user is beginning a while loop.  This implies that you cannot use a
 ; WHILE loop directly inside a DO loop without some other intervening context.
-; If your code requires this the you must use REPEAT/UNTIL for the outer loop.
+; If your code requires this then you must use REPEAT/UNTIL for the outer loop.
 %imacro WHILE 3.nolist
 	%ifctx __NX_CTX_DO__
 		.__NX_OPER_LABEL_CONTINUE_%[%$__nx_oper_label_seq]:
