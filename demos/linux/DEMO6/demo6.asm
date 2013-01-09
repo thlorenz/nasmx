@@ -13,7 +13,7 @@ BITS 32
 	
 ; X11 Defines and Structures
 %include 'nasmx.inc'
-%include 'x11/x.inc' ; 05 Sep 2009 version of Keith Kanios' X.INC file
+%include 'x11/X.inc' ; 05 Sep 2009 version of Keith Kanios' X.INC file
 
 ENTRY demo6
 
