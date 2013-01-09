@@ -12,7 +12,7 @@
 
 
 %include 'nasmx.inc'
-%include 'x11-x64/Xlib.inc'
+%include 'x11/Xlib.inc'
 
 ENTRY demo5
 
@@ -77,9 +77,10 @@ DefaultColormap _dpy,scr
 mov [cmap],rax
 
 BlackPixel _dpy,scr
+mov [bpixel],rax
 WhitePixel _dpy,scr
-
-invoke XCreateSimpleWindow, [_dpy], [rootwin], 0, 0, 200, 150, 0, 0, 0
+mov [wpixel], rax
+invoke XCreateSimpleWindow, [_dpy], [rootwin], 0, 0, 200, 150, 0, [wpixel], [bpixel]
 mov [win],rax
 
 invoke XStoreName, [_dpy], [win], hellocap
