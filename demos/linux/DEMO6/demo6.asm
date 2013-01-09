@@ -13,7 +13,7 @@ BITS 32
 	
 ; X11 Defines and Structures
 %include 'nasmx.inc'
-%include 'x11/X.inc' ; 05 Sep 2009 version of Keith Kanios' X.INC file
+%include 'x11/Xlib.inc' ; 05 Sep 2009 version of Keith Kanios' X.INC file
 
 ENTRY demo6
 
@@ -95,7 +95,7 @@ endlocals
     invoke XDefaultRootWindow, dword [hdisplay]
     mov    dword [var(.hroot)], eax
 
-    invoke XCreateSimpleWindow, dword [hdisplay], dword [var(.hroot)], dword [argv(.x)], dword [argv(.y)], dword [argv(.w)], dword [argv(.y)], 5, RGB(255,0,0), RGB(255,255,0) 
+    invoke XCreateSimpleWindow, dword [hdisplay], dword [var(.hroot)], dword [argv(.x)], dword [argv(.y)], dword [argv(.w)], dword [argv(.h)], 5, RGB(255,0,0), RGB(255,255,0) 
 
     or     eax, eax
     jne    .create_ok
