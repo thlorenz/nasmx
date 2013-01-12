@@ -1,6 +1,6 @@
 ;// DEMO1.ASM
 ;//
-;// Copyright (C)2005-2011 The NASMX Project
+;// Copyright (C)2005-2013 The NASMX Project
 ;//
 ;// Purpose:
 ;//    This program demonstrates X11 programming
@@ -15,7 +15,7 @@
 ;##### Include Files #####
 %include 'nasmx.inc'
 %include 'linux/libc.inc'
-%include 'x11/x.inc'
+%include 'x11/X.inc'
 %include 'x11/cursorfont.inc'
 
 
