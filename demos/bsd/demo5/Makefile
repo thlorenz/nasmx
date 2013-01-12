@@ -1,7 +1,7 @@
 ##### Makefile #####
 NAME=demo5
 AS=nasm
-ASFLAGS=-f elf32 -fFREEBSD
+ASFLAGS=-f elf32 -dFREEBSD
 LD=gcc
 LDFLAGS		=-m32 -Wall -s
 LIBS		=-lc
