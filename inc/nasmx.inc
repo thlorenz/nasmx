@@ -65,8 +65,8 @@
 NASMX_DEFINE VERSION,"1.2"
 NASMX_DEFINE VERSION_MAJOR, 1
 NASMX_DEFINE VERSION_MINOR, 2
-NASMX_DEFINE VERSION_REV, 12
-NASMX_DEFINE VERSION_ID, 0x0102000C
+NASMX_DEFINE VERSION_REV, 13
+NASMX_DEFINE VERSION_ID, 0x0102000D
 
 
 ;//////////////////////////////////////////////////////////////
@@ -594,6 +594,22 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 		%else
 			%error %1 pragma requires valid byte count
 		%endif
+	%elifidni FASTCALL_STACK_PRELOAD, %1
+		;// This optimization is very useful with fastcall.
+		;// When disabled the fastcall register arguments will no longer
+		;// automatically spill into the register shadow space on the stack.
+		;// It is enabled by default only on Win64 to remain backward compatible.
+		%ifidni ENABLE, %2
+			%ifdef DISABLE_FASTCALL_STACK_PRELOAD
+				%undef DISABLE_FASTCALL_STACK_PRELOAD
+			%endif
+		%elifidni DISABLE, %2
+			%ifndef DISABLE_FASTCALL_STACK_PRELOAD
+				%xdefine DISABLE_FASTCALL_STACK_PRELOAD 1
+			%endif
+		%else
+			%error 'syntax: nasmx_pragma fastcall_stack_preload, [enable | disable]'
+		%endif
 	%else
 		%error 'unknown nasmx_pragma:' %1
 	%endif
@@ -774,7 +790,7 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 		%idefine NASMX_TCHAR char_t
 		%idefine NASMX_TEXT(x) x
 	%endif
-%elifidn __OUTPUT_FORAMT__,macho64
+%elifidn __OUTPUT_FORMAT__,macho64
 	%idefine __NASMX_DECLSPEC_CALLCONV_CDECL__    0x0201
 	%idefine __NASMX_DECLSPEC_CALLCONV_THISCALL__ 0x0411
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0501
@@ -2048,8 +2064,12 @@ NASMX_DEFINE VERSION_ID, 0x0102000C
 						;// Windows fastcall uses one index for param count which
 						;// indexes either int or float for purpose of preloading regs
 						%assign %$__nx_floatargs 1 + %$__nx_floatargs
-						;// TODO: optimize register spill for when required only
-						mov [__SP + %$args], %$arg_cur
+
+						;// Only spill registers if not defined
+						%ifndef DISABLE_FASTCALL_STACK_PRELOAD
+							mov [__SP + %$args], %$arg_cur
+						%endif
+
 						;// Unlike Linux/BSD x64 all current 32-bit and 64-bit versions
 						;// of Windows increase arg stack offset.
 						%assign %$args %$args + sizeof(size_t)
