@@ -102,6 +102,17 @@ pop dword %1
 ;/////////////////////////////////////////////////////
 ;// WINDOWS.INC STRUCTURES
 ;/////////////////////////////////////////////////////
+NASMX_STRUC POINT
+	NASMX_RESERVE x, int32_t, 1
+	NASMX_RESERVE y, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC RECT
+    NASMX_RESERVE left,   int32_t, 1
+    NASMX_RESERVE top,    int32_t, 1
+    NASMX_RESERVE right,  int32_t, 1
+    NASMX_RESERVE bottom, int32_t, 1
+NASMX_ENDSTRUC
 
 NASMX_STRUC WNDCLASSEX
     NASMX_RESERVE cbSize,        uint32_t, 1
@@ -137,12 +148,6 @@ NASMX_STRUC MSG
 	%endif
 NASMX_ENDSTRUC
 
-NASMX_STRUC RECT
-    NASMX_RESERVE left,   int32_t, 1
-    NASMX_RESERVE top,    int32_t, 1
-    NASMX_RESERVE right,  int32_t, 1
-    NASMX_RESERVE bottom, int32_t, 1
-NASMX_ENDSTRUC
 
 NASMX_STRUC PAINTSTRUCT
     NASMX_RESERVE hdc,         ptrdiff_t, 1

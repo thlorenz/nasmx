@@ -62,11 +62,11 @@
 ;//
 ;// Define NASMX Version
 ;//
-NASMX_DEFINE VERSION,"1.2"
+NASMX_DEFINE VERSION,"1.3"
 NASMX_DEFINE VERSION_MAJOR, 1
-NASMX_DEFINE VERSION_MINOR, 2
-NASMX_DEFINE VERSION_REV, 13
-NASMX_DEFINE VERSION_ID, 0x0102000D
+NASMX_DEFINE VERSION_MINOR, 3
+NASMX_DEFINE VERSION_REV, 14
+NASMX_DEFINE VERSION_ID, 0x0103000E
 
 
 ;//////////////////////////////////////////////////////////////
@@ -254,11 +254,14 @@ NASMX_DEFINE VERSION_ID, 0x0102000D
 ;// nasmx classifcation of types
 ;//
 ;// Bits used to contain classification:
-;//  0-10 : size of type in bytes
+;//  0-10 : size of type in bytes (not used for struc/union)
+;//         can be extended in future for class type
 ;//    11 : reserved (0)
-;// 12-15 : type   ( TODO: struc/union/class )
-;//         0 = int type
-;//         8 = (bit 15 set if float type, otherwise clear)
+;//    12 : set if struct type
+;//    13 : set if union type
+;//    14 : set if class type
+;//    15 : set if float type, otherwise clear
+
 ;// 
 %ixdefine byte_type   0x0001
 %ixdefine word_type   0x0002
@@ -277,6 +280,10 @@ NASMX_DEFINE VERSION_ID, 0x0102000D
 %ixdefine __nxfloat64_type  0x8008
 %ixdefine __nxfloat80_type  0x800A
 %ixdefine __nxfloat128_type 0x8010
+
+%ixdefine struc_type 0x1000
+%ixdefine union_type 0x2000
+%ixdefine class_type 0x4000
 
 ;// NASMX int types
 %ixdefine int8_t     byte
@@ -340,7 +347,11 @@ NASMX_DEFINE VERSION_ID, 0x0102000D
 %define reserve(x) x %+ _reserve
 %define declare(x) x %+ _storage
 %define nx_token_from_size(x) __nx_error_token_size_ %+ x
+%idefine is_typeof_struc(x) ((x %+ _type >> 12) & 0x0001)
+%idefine is_typeof_union(x) ((x %+ _type >> 13) & 0x0001)
+%idefine is_typeof_class(x) ((x %+ _type >> 14) & 0x0001)
 %idefine is_typeof_float(x) ((x %+ _type >> 15) & 0x0001)
+
 
 ;//////////////////////////////////////////////////////////////
 ;//
@@ -901,54 +912,73 @@ NASMX_DEFINE VERSION_ID, 0x0102000D
 			%fatal unknown arg: %{3}
 		%endif
 	%endif
+
+	%ifidni %1, __NX_ROOT
+		%fatal structure or union requires name
+	%endif
+
 	%ifctx __NX_CTX_STRUC
 		%define %%__is_nested 1
+		%ifidni %3, __NX_CTX_STRUC
+			%ifidni %2, __NX_ROOT
+				%fatal undefined nested struc
+			%endif
+			;// adjust the current outer struct size/inner offset
+			%ifndef %{2}_align
+				%fatal unknown struc: %{2}
+			%endif
+			%assign %%__align %{2}_align
+
+			%if ( %%__align > 1 )
+				%assign %%__off (((%$__nx_size + %%__align) / %%__align) * %%__align)
+				%assign %%__tmp (%$__nx_size + %%__align)
+				%if ( %%__off != %%__tmp )
+					%assign %$__nx_usize (%$__nx_usize + %%__off - %$__nx_size)
+					%assign %$__nx_size %%__off
+				%endif
+			%endif
+		%endif
+
+
 	%elifctx __NX_CTX_UNION
-		%define %%__is_nested 1
+		%fatal 'union supports pre-defined types only, use NASMX_RESERVE instead'
 	%else
 		%define %%__is_nested 0
 	%endif
-	%ifidni %1, __NX_ROOT
-		%define %%__is_named 0
+
+	%if ( %%__is_nested == 0 )
+		%xdefine %%__tname %1
+		%assign %%__tsize 0
 	%else
-		%define %%__is_named 1
-	%endif
-	%if (%%__is_nested == 0)
-		%if (%%__is_named == 0)
-			%fatal root structure or union requires name
-		%endif
-		%push %3
-		%xdefine %$__nx_name %1
-		%assign %$__nx_size 0
-	%else
-		%if (%%__is_named == 0)
-			%xdefine %%__tname %{$__nx_name}
-		%else
-			%xdefine %%__tname %{$__nx_name}.%1
-		%endif
-		;// the following 5 line sequence fails on 2.08.02
+		%xdefine %%__tname %{$__nx_name}.%1
 		%assign %%__tsize %$__nx_size
-		%push %3
-		%xdefine %$__nx_name %%__tname
-		%assign %$__nx_size %%__tsize
-		%if (%%__is_named == 1)
-			%{$__nx_name} equ %$__nx_size
-		%endif
 	%endif
-	%assign %$__nx_osize %$__nx_size
+
+	;// create new ctx and initialize
+	%push %3
+	%xdefine %$__nx_name %%__tname
+	%assign %$__nx_size %%__tsize
+	%define %$__nx_isnested %%__is_nested
+	%if (%%__is_nested != 0)
+		%{$__nx_name} equ %$__nx_size
+	%endif
+		
+	;// __nx_align contains the largest base type defined by a struc member
+	;// and is used to calculate union offset and final union/struc size.
+	%assign %$__nx_align 1
+
+	;// __nx_usize contains the number of bytes for the current union/struc.
 	%assign %$__nx_usize 0
-	%define %$__nx_isnamed %%__is_named
-	%if (%%__is_named == 1)
-		%ifidni %3,__NX_CTX_STRUC
-			%xdefine %{$__nx_name}_type struc_type
-		%elifidni %3,__NX_CTX_UNION
-			%xdefine %{$__nx_name}_type union_type
-		%else
-			%fatal unknown arg: %{3}
-		%endif
-		%xdefine %{$__nx_name}_reserve byte_reserve
-		%xdefine %{$__nx_name}_storage byte_storage
+
+	%ifidni %3,__NX_CTX_STRUC
+		%xdefine %{$__nx_name}_type struc_type
+	%elifidni %3,__NX_CTX_UNION
+		%xdefine %{$__nx_name}_type union_type
+	%else
+		%fatal unknown arg: %{3}
 	%endif
+	%xdefine %{$__nx_name}_reserve byte_reserve
+	%xdefine %{$__nx_name}_storage byte_storage
 %endmacro
 
 %imacro NASMX_UNION 0-*.nolist __NX_ROOT, __NX_ROOT, __NX_CTX_UNION
@@ -978,20 +1008,22 @@ NASMX_DEFINE VERSION_ID, 0x0102000D
 			%fatal corrupt context
 		%endif
 	%endif
-	%ifndef %{2}_size
-		%fatal unknown size for %{$__nx_name} %{1}: %{2}
+	%iftoken %{2}_size
+		%assign %%__argsize %{2}_size
+	%else
+		%fatal unknown size for %{$__nx_name}.%{1}: %{2}
 	%endif
-	%assign %%__argsize %{2}_size
+
 	%if (%%__argsize < 1)
-		%fatal invalid arg size for %{$__nx_name} %{1}: %{2}
+		%fatal invalid arg size for %{$__nx_name}.%{1}: %{2}
 	%endif
 	%ifndef %{2}_storage
-		%fatal unknown storage tag for %{$__nx_name} %{1}
+		%fatal unknown storage tag for %{$__nx_name}.%{1}
 	%endif
 
 	%assign %%__qty %{3}
 	%if (%%__qty < 1)
-		%fatal invalid arg qty  for %{$__nx_name} %{1}: %{3}
+		%fatal invalid arg qty  for %{$__nx_name}.%{1}: %{3}
 	%endif
 
 	%assign %%__amt (%%__argsize * %%__qty)
@@ -1000,41 +1032,127 @@ NASMX_DEFINE VERSION_ID, 0x0102000D
 	%xdefine %[%{$__nx_name}.%{1}]_type %[%{2}]_type
 	%xdefine %[%{$__nx_name}.%{1}]_reserve %[%{2}]_reserve
 	%xdefine %[%{$__nx_name}.%{1}]_storage %[%{2}]_storage
-	%[%{$__nx_name}.%{1}] equ %[%{$__nx_size}]
 
-	%ifctx __NX_CTX_UNION
+	%if ( %%__argsize > 1 )
+		;// if reserving struc/union then
+		;// obtain it's align requirement
+		%if ( is_typeof_struc( %[%{2}] ) != 0 )
+			%assign %%__argsize %{2}_align
+		%elif ( is_typeof_union( %[%{2}] ) != 0 )
+			%assign %%__argsize %{2}_align
+		%endif
+
+		;// if the size of the base type for the current
+		;// member being defined is greater than the max
+		;// alignment size then clamp to max.
+		%assign %%__align __NASMX_ABI_BITS__ / 4
+		%if ( %%__argsize > %%__align )
+			%assign %%__argsize %%__align
+		%endif
+	
+		;// if the size of the base type is the largest
+		;// observed thus far then save it for later.
+		%if ( %%__argsize > %$__nx_align )
+			%assign %$__nx_align %%__argsize
+		%endif
+	%endif
+
+	%ifctx __NX_CTX_STRUC
+		;// align struct member to natural alignment
+		%if ( %%__argsize > 1 )
+			%assign %%__align %%__argsize
+			%assign %%__off (((%$__nx_size + %%__align) / %%__align) * %%__align)
+			%assign %%__tmp (%$__nx_size + %%__align)
+			%if ( %%__off != %%__tmp )
+				%assign %$__nx_usize (%$__nx_usize + %%__off - %$__nx_size)
+				%assign %$__nx_size %%__off
+			%endif
+		%endif
+
+		;// set member offset equate
+		%[%{$__nx_name}.%{1}] equ %[%{$__nx_size}]
+
+		;// update running size and offset
+		%assign %$__nx_usize (%$__nx_usize + %%__amt)
+		%assign %$__nx_size (%$__nx_size + %%__amt)
+	%elifctx __NX_CTX_UNION
 		;// update current union size
 		%if (%%__amt > %$__nx_usize)
 			%assign %$__nx_usize %%__amt
 		%endif
-	%else
-		;// update running size
-		%assign %$__nx_size (%$__nx_size + %%__amt)
+
+		;// Due to possible align adjust we cannot calculate or set
+		;// the equate offset for any union member until after all
+		;// member definitions have been observed.  Subsequently,
+		;// we have to store member names and provide the appropriate
+		;// offset in nasmx_endunion.
+
 	%endif
 %endmacro
 
 %imacro NASMX_ENDSTRUC 0.nolist
-	%ifnctx __NX_CTX_STRUC
-		%ifnctx __NX_CTX_UNION
-			%fatal corrupt context
+	%ifctx __NX_CTX_STRUC
+		%assign %%__was_union 0
+		;// align struc size
+		%if ( %$__nx_align > 1 )
+			%assign %%__align %$__nx_align
+			%assign %%__off (((%$__nx_usize + %%__align) / %%__align) * %%__align)
+			%assign %%__tmp (%$__nx_usize + %%__align)
+			%if (%%__off != %%__tmp)
+				%assign %$__nx_usize %%__off
+			%endif
 		%endif
+	%elifctx __NX_CTX_UNION
+		%assign %%__was_union 1
+	%else
+		%fatal corrupt context
 	%endif
-	%if ((%$__nx_size-%$__nx_osize) > %$__nx_usize)
-		%assign %$__nx_usize %$__nx_size-%$__nx_osize
-	%endif
-	%if (%$__nx_isnamed == 1)
-		%{$__nx_name}_size equ %$__nx_usize
-	%endif
+
+	%xdefine %[%$__nx_name]_align %[%$__nx_align]
+	%{$__nx_name}_size equ %$__nx_usize
+
+	;// save ctx data and pop stack
+	%xdefine %%__tname %$__nx_name 
+	%assign %%__align %$__nx_align
 	%assign %%__usize %$__nx_usize
 	%pop
+
 	%ifctx __NX_CTX_STRUC
-		%assign %$__nx_size (%$__nx_size + %%__usize)
+		%assign %%__was_nested 1
 	%elifctx __NX_CTX_UNION
-		%assign %$__nx_size (%$__nx_size + %%__usize)
-		%if ((%$__nx_size-%$__nx_osize) > %$__nx_usize)
-			%assign %$__nx_usize %$__nx_size-%$__nx_osize
+		%assign %%__was_nested 1
+	%else
+		%assign %%__was_nested 0
+	%endif
+
+	%if ( %%__was_union != 0 )
+		%if ( %%__was_nested != 0 )
+			;// adjust the current struct size/offset
+			%if ( %%__align > 1 )
+				%assign %%__off (((%$__nx_size + %%__align) / %%__align) * %%__align)
+				%assign %%__tmp (%$__nx_size + %%__align)
+				%if ( %%__off != %%__tmp )
+					%assign %$__nx_usize (%$__nx_usize + %%__off - %$__nx_size)
+					%assign %$__nx_size %%__off
+				%endif
+			%endif
 		%endif
-		%assign %$__nx_size %$__nx_osize
+
+		;//
+		;// TODO: create member offset equates here
+		;//
+	%endif
+
+	;// if the popped struc/union was nested then
+	;// adjust the current struc offset and size.
+	%if ( %%__was_nested != 0 )
+		%assign %$__nx_usize (%$__nx_usize + %%__usize)
+		%assign %$__nx_size (%$__nx_size + %%__usize)
+		;// if the alignment requirement of the nested struct or union
+		;// was greater than ours then increase current alignment.
+		%if ( %%__align > %$__nx_align )
+			%assign %$__nx_align %%__align
+		%endif
 	%endif
 %endmacro
 
