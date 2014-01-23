@@ -19,16 +19,18 @@
 ;/////////////////////////////////////////////
 ;//
 ;// Create our own structure definition with
-;// nested union and nameless struct
+;// nested union and struct
 ;//
+NASMX_STRUC DDMMYY
+	NASMX_RESERVE day,   int8_t, 1
+	NASMX_RESERVE month, int8_t, 1
+	NASMX_RESERVE year,  int16_t, 1
+NASMX_ENDSTRUC
+
 NASMX_STRUC DEMO13_STRUC
     NASMX_RESERVE name, NASMX_TCHAR, 512
     NASMX_UNION dob
-        NASMX_STRUC
-            NASMX_RESERVE day,   int8_t, 1
-            NASMX_RESERVE month, int8_t, 1
-            NASMX_RESERVE year,  int16_t, 1
-        NASMX_ENDSTRUC
+        NASMX_RESERVE ddmmyy, DDMMYY
         NASMX_RESERVE date, int32_t, 1
     NASMX_ENDUNION
 NASMX_ENDSTRUC
@@ -140,13 +142,6 @@ endproc
 
     NASMX_ISTRUC bday, DEMO13_STRUC
         NASMX_AT name,   NASMX_TEXT("NASMX v1.0 Beta Birthday"),0
-		NASMX_IUNION dob
-			NASMX_ISTRUC
-				NASMX_AT day,    8
-				NASMX_AT month,  1
-				NASMX_AT year,   2010
-			NASMX_IENDSTRUC
-		NASMX_IENDUNION
     NASMX_IENDSTRUC
 
     NASMX_ISTRUC wc, WNDCLASSEX

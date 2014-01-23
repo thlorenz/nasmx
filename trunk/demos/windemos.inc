@@ -102,6 +102,25 @@
 ;// WINDOWS.INC STRUCTURES
 ;/////////////////////////////////////////////////////
 
+NASMX_STRUC POINT
+	NASMX_RESERVE x, int32_t, 1
+	NASMX_RESERVE y, int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC RECT
+	NASMX_RESERVE left,    int32_t, 1
+	NASMX_RESERVE top,     int32_t, 1
+	NASMX_RESERVE right,   int32_t, 1
+	NASMX_RESERVE bottom,  int32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC PALETTEENTRY
+    NASMX_RESERVE peRed,   int8_t, 1
+    NASMX_RESERVE peGreen, int8_t, 1
+    NASMX_RESERVE peBlue,  int8_t, 1
+    NASMX_RESERVE peFlags, int8_t, 1
+NASMX_ENDSTRUC
+
 NASMX_STRUC WNDCLASSEX
     NASMX_RESERVE cbSize,        uint32_t, 1
     NASMX_RESERVE style,         uint32_t, 1
@@ -136,13 +155,6 @@ NASMX_STRUC MSG
 	%endif
 NASMX_ENDSTRUC
 
-NASMX_STRUC RECT
-    NASMX_RESERVE left,   int32_t, 1
-    NASMX_RESERVE top,    int32_t, 1
-    NASMX_RESERVE right,  int32_t, 1
-    NASMX_RESERVE bottom, int32_t, 1
-NASMX_ENDSTRUC
-
 NASMX_STRUC BITMAPINFOHEADER
     NASMX_RESERVE biSize, int32_t, 1
     NASMX_RESERVE biWidth, int32_t, 1
@@ -171,12 +183,6 @@ NASMX_STRUC PAINTSTRUCT
     NASMX_RESERVE rgbReserved, int8_t, 32 
 NASMX_ENDSTRUC
 
-NASMX_STRUC PALETTEENTRY
-    NASMX_RESERVE peRed,   int8_t, 1
-    NASMX_RESERVE peGreen, int8_t, 1
-    NASMX_RESERVE peBlue,  int8_t, 1
-    NASMX_RESERVE peFlags, int8_t, 1
-NASMX_ENDSTRUC
 
 ;/////////////////////////////////////////////////////
 ;// KERNEL32.INC PROTOTYPES
