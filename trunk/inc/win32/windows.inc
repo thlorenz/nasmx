@@ -5596,16 +5596,18 @@ NASMX_STRUC COMMPROP
 NASMX_ENDSTRUC
 
 NASMX_STRUC COMSTAT
-    NASMX_UNION
-        NASMX_RESERVE fCtsHold,  uint32_t, 1
-        NASMX_RESERVE fDsrHold,  uint32_t, 1
-        NASMX_RESERVE fRlsdHold, uint32_t, 1
-        NASMX_RESERVE fXoffHold, uint32_t, 1
-        NASMX_RESERVE fXoffSent, uint32_t, 1
-        NASMX_RESERVE fEof,      uint32_t, 1
-        NASMX_RESERVE fTxim,     uint32_t, 1
-        NASMX_RESERVE fReserved, uint32_t, 1
-	NASMX_ENDUNION
+    NASMX_RESERVE bits,  uint32_t, 1
+
+;    NASMX_UNION bits
+;        NASMX_RESERVE fCtsHold,  uint32_t, 1
+;        NASMX_RESERVE fDsrHold,  uint32_t, 1
+;        NASMX_RESERVE fRlsdHold, uint32_t, 1
+;        NASMX_RESERVE fXoffHold, uint32_t, 1
+;        NASMX_RESERVE fXoffSent, uint32_t, 1
+;        NASMX_RESERVE fEof,      uint32_t, 1
+;        NASMX_RESERVE fTxim,     uint32_t, 1
+;        NASMX_RESERVE fReserved, uint32_t, 1
+;    NASMX_ENDUNION
     NASMX_RESERVE cbInQue,  uint32_t, 1
     NASMX_RESERVE cbOutQue, uint32_t, 1
 NASMX_ENDSTRUC
@@ -5613,22 +5615,24 @@ NASMX_ENDSTRUC
 NASMX_STRUC DCB
     NASMX_RESERVE DCBlength, int32_t, 1
     NASMX_RESERVE BaudRate,  int32_t, 1
-    NASMX_UNION
-        NASMX_RESERVE fBinary, uint32_t, 1             ;// :1  Binary Mode (skip EOF check)
-        NASMX_RESERVE fParity, uint32_t, 1             ;// :1  Enable parity checking
-        NASMX_RESERVE fOutxCtsFlow, uint32_t, 1        ;// :1  CTS handshaking on output
-        NASMX_RESERVE fOutxDsrFlow, uint32_t, 1        ;// :1  DSR handshaking on output
-        NASMX_RESERVE fDtrControl, uint32_t, 1         ;// :2  DTR Flow control
-        NASMX_RESERVE fDsrSensitivity, uint32_t, 1     ;// :1  DSR Sensitivity
-        NASMX_RESERVE fTXContinueOnXoff, uint32_t, 1   ;// :1  Continue TX when Xoff sent
-        NASMX_RESERVE fOutX, uint32_t, 1               ;// :1  Enable output X-ON/X-OFF
-        NASMX_RESERVE fInX, uint32_t, 1                ;// :1  Enable input X-ON/X-OFF
-        NASMX_RESERVE fErrorChar, uint32_t, 1          ;// :1  Enable Err Replacement
-        NASMX_RESERVE fNull, uint32_t, 1               ;// :1  Enable Null stripping
-        NASMX_RESERVE fRtsControl, uint32_t, 1         ;// :2  Rts Flow control
-        NASMX_RESERVE fAbortOnError, uint32_t, 1       ;// :1  Abort all reads and writes on Error
-        NASMX_RESERVE fDummy2, uint32_t, 1             ;// :17 Reserved
-    NASMX_ENDUNION
+
+    NASMX_RESERVE bits, int32_t, 1
+;    NASMX_UNION bits
+;        NASMX_RESERVE fBinary, uint32_t, 1             ;// :1  Binary Mode (skip EOF check)
+;        NASMX_RESERVE fParity, uint32_t, 1             ;// :1  Enable parity checking
+;        NASMX_RESERVE fOutxCtsFlow, uint32_t, 1        ;// :1  CTS handshaking on output
+;        NASMX_RESERVE fOutxDsrFlow, uint32_t, 1        ;// :1  DSR handshaking on output
+;        NASMX_RESERVE fDtrControl, uint32_t, 1         ;// :2  DTR Flow control
+;        NASMX_RESERVE fDsrSensitivity, uint32_t, 1     ;// :1  DSR Sensitivity
+;        NASMX_RESERVE fTXContinueOnXoff, uint32_t, 1   ;// :1  Continue TX when Xoff sent
+;        NASMX_RESERVE fOutX, uint32_t, 1               ;// :1  Enable output X-ON/X-OFF
+;        NASMX_RESERVE fInX, uint32_t, 1                ;// :1  Enable input X-ON/X-OFF
+;        NASMX_RESERVE fErrorChar, uint32_t, 1          ;// :1  Enable Err Replacement
+;        NASMX_RESERVE fNull, uint32_t, 1               ;// :1  Enable Null stripping
+;        NASMX_RESERVE fRtsControl, uint32_t, 1         ;// :2  Rts Flow control
+;        NASMX_RESERVE fAbortOnError, uint32_t, 1       ;// :1  Abort all reads and writes on Error
+;        NASMX_RESERVE fDummy2, uint32_t, 1             ;// :17 Reserved
+;    NASMX_ENDUNION
     NASMX_RESERVE wReserved, short_t, 1
     NASMX_RESERVE XonLim,    short_t, 1
     NASMX_RESERVE XoffLim,   short_t, 1
@@ -5650,14 +5654,16 @@ NASMX_STRUC COMMTIMEOUTS
     NASMX_RESERVE WriteTotalTimeoutConstant,   uint32_t, 1
 NASMX_ENDSTRUC
 
+NASMX_STRUC PROCESSOR_ARCH
+    NASMX_RESERVE wProcessorArchitecture, uint16_t, 1
+    NASMX_RESERVE wReserved,              uint16_t, 1
+NASMX_ENDSTRUC
+
 NASMX_STRUC SYSTEM_INFO
-    NASMX_UNION
+;    NASMX_UNION u
         NASMX_RESERVE dwOemID, uint32_t, 1
-        NASMX_STRUC
-            NASMX_RESERVE wProcessorArchitecture, uint16_t, 1
-            NASMX_RESERVE wReserved,              uint16_t, 1
-        NASMX_ENDSTRUC
-	NASMX_ENDUNION
+;        NASMX_RESERVE pa, PROCESSOR_ARCH, 1
+;    NASMX_ENDUNION
     NASMX_RESERVE dwPageSize, uint32_t, 1
     NASMX_RESERVE lpMinimumApplicationAddress, ptrdiff_t, 1
     NASMX_RESERVE lpMaximumApplicationAddress, ptrdiff_t, 1
@@ -5682,7 +5688,7 @@ NASMX_ENDSTRUC
 
 NASMX_STRUC TPMPARAMS
     NASMX_RESERVE cbSize, uint32_t, 1
-	NASMX_STRUC rcExclude
+	NASMX_STRUC rcExclude, RECT
 		NASMX_RESERVE left,   int32_t, 1
 		NASMX_RESERVE top,    int32_t, 1
 		NASMX_RESERVE right,  int32_t, 1
