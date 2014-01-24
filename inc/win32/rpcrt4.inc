@@ -1,5 +1,5 @@
-%ifndef __rpcrt4_INC__
-%define __rpcrt4_INC__
+%ifndef __NASMX_RPCRT4_INC__
+%define __NASMX_RPCRT4_INC__
 
 IMPORT CStdStubBuffer_AddRef, 4
 IMPORT CStdStubBuffer_Connect, 8
@@ -494,4 +494,84 @@ IMPORT pfnMarshallRoutines
 IMPORT pfnSizeRoutines
 IMPORT pfnUnmarshallRoutines
 
-%endif
+%ifdef UNICODE
+
+%define DceErrorInqText DceErrorInqTextW
+%define I_RpcBindingInqDynamicEndpoint I_RpcBindingInqDynamicEndpointW
+%define I_RpcNsBindingSetEntryName I_RpcNsBindingSetEntryNameW
+%define I_RpcServerUseProtseq2 I_RpcServerUseProtseq2W
+%define I_RpcServerUseProtseqEp2 I_RpcServerUseProtseqEp2W
+%define RpcBindingFromStringBinding RpcBindingFromStringBindingW
+%define RpcBindingInqAuthClient RpcBindingInqAuthClientW
+%define RpcBindingInqAuthClientEx RpcBindingInqAuthClientExW
+%define RpcBindingInqAuthInfo RpcBindingInqAuthInfoW
+%define RpcBindingInqAuthInfoEx RpcBindingInqAuthInfoExW
+%define RpcBindingSetAuthInfo RpcBindingSetAuthInfoW
+%define RpcBindingSetAuthInfoEx RpcBindingSetAuthInfoExW
+%define RpcBindingToStringBinding RpcBindingToStringBindingW
+%define RpcCertGeneratePrincipalName RpcCertGeneratePrincipalNameW
+%define RpcEpRegister RpcEpRegisterW
+%define RpcEpRegisterNoReplace RpcEpRegisterNoReplaceW
+%define RpcMgmtEpEltInqNext RpcMgmtEpEltInqNextW
+%define RpcMgmtInqServerPrincName RpcMgmtInqServerPrincNameW
+%define RpcNetworkInqProtseqs RpcNetworkInqProtseqsW
+%define RpcNetworkIsProtseqValid RpcNetworkIsProtseqValidW
+%define RpcNsBindingInqEntryName RpcNsBindingInqEntryNameW
+%define RpcProtseqVectorFree RpcProtseqVectorFreeW
+%define RpcServerInqCallAttributes RpcServerInqCallAttributesW
+%define RpcServerInqDefaultPrincName RpcServerInqDefaultPrincNameW
+%define RpcServerRegisterAuthInfo RpcServerRegisterAuthInfoW
+%define RpcServerUseProtseq RpcServerUseProtseqW
+%define RpcServerUseProtseqEp RpcServerUseProtseqEpW
+%define RpcServerUseProtseqEpEx RpcServerUseProtseqEpExW
+%define RpcServerUseProtseqEx RpcServerUseProtseqExW
+%define RpcServerUseProtseqIf RpcServerUseProtseqIfW
+%define RpcServerUseProtseqIfEx RpcServerUseProtseqIfExW
+%define RpcStringBindingCompose RpcStringBindingComposeW
+%define RpcStringBindingParse RpcStringBindingParseW
+%define RpcStringFree RpcStringFreeW
+%define UuidFromString UuidFromStringW
+%define UuidToString UuidToStringW
+
+%else  ;// ANSI
+
+%define DceErrorInqText DceErrorInqTextA
+%define I_RpcBindingInqDynamicEndpoint I_RpcBindingInqDynamicEndpointA
+%define I_RpcNsBindingSetEntryName I_RpcNsBindingSetEntryNameA
+%define I_RpcServerUseProtseq2 I_RpcServerUseProtseq2A
+%define I_RpcServerUseProtseqEp2 I_RpcServerUseProtseqEp2A
+%define RpcBindingFromStringBinding RpcBindingFromStringBindingA
+%define RpcBindingInqAuthClient RpcBindingInqAuthClientA
+%define RpcBindingInqAuthClientEx RpcBindingInqAuthClientExA
+%define RpcBindingInqAuthInfo RpcBindingInqAuthInfoA
+%define RpcBindingInqAuthInfoEx RpcBindingInqAuthInfoExA
+%define RpcBindingSetAuthInfo RpcBindingSetAuthInfoA
+%define RpcBindingSetAuthInfoEx RpcBindingSetAuthInfoExA
+%define RpcBindingToStringBinding RpcBindingToStringBindingA
+%define RpcCertGeneratePrincipalName RpcCertGeneratePrincipalNameA
+%define RpcEpRegister RpcEpRegisterA
+%define RpcEpRegisterNoReplace RpcEpRegisterNoReplaceA
+%define RpcMgmtEpEltInqNext RpcMgmtEpEltInqNextA
+%define RpcMgmtInqServerPrincName RpcMgmtInqServerPrincNameA
+%define RpcNetworkInqProtseqs RpcNetworkInqProtseqsA
+%define RpcNetworkIsProtseqValid RpcNetworkIsProtseqValidA
+%define RpcNsBindingInqEntryName RpcNsBindingInqEntryNameA
+%define RpcProtseqVectorFree RpcProtseqVectorFreeA
+%define RpcServerInqCallAttributes RpcServerInqCallAttributesA
+%define RpcServerInqDefaultPrincName RpcServerInqDefaultPrincNameA
+%define RpcServerRegisterAuthInfo RpcServerRegisterAuthInfoA
+%define RpcServerUseProtseq RpcServerUseProtseqA
+%define RpcServerUseProtseqEp RpcServerUseProtseqEpA
+%define RpcServerUseProtseqEpEx RpcServerUseProtseqEpExA
+%define RpcServerUseProtseqEx RpcServerUseProtseqExA
+%define RpcServerUseProtseqIf RpcServerUseProtseqIfA
+%define RpcServerUseProtseqIfEx RpcServerUseProtseqIfExA
+%define RpcStringBindingCompose RpcStringBindingComposeA
+%define RpcStringBindingParse RpcStringBindingParseA
+%define RpcStringFree RpcStringFreeA
+%define UuidFromString UuidFromStringA
+%define UuidToString UuidToStringA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_RPCRT4_INC__

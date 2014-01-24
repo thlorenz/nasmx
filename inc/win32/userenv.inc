@@ -119,4 +119,68 @@ IMPORT UpdateExtSessionStatus, 16
 IMPORT WaitForMachinePolicyForegroundProcessing, 0
 IMPORT WaitForUserPolicyForegroundProcessing, 0
 
+%ifdef UNICODE
+
+%define AddDesktopItem AddDesktopItemW
+%define AddItem AddItemW
+%define ApplySystemPolicy ApplySystemPolicyW
+%define CopyProfileDirectory CopyProfileDirectoryW
+%define CopyProfileDirectoryEx CopyProfileDirectoryExW
+%define CreateGroup CreateGroupW
+%define CreateGroupEx CreateGroupExW
+%define CreateLinkFile CreateLinkFileW
+%define CreateLinkFileEx CreateLinkFileExW
+%define CreateUserProfile CreateUserProfileW
+%define CreateUserProfileEx CreateUserProfileExW
+%define DeleteDesktopItem DeleteDesktopItemW
+%define DeleteGroup DeleteGroupW
+%define DeleteItem DeleteItemW
+%define DeleteLinkFile DeleteLinkFileW
+%define DeleteProfile DeleteProfileW
+%define ExpandEnvironmentStringsForUser ExpandEnvironmentStringsForUserW
+%define FreeGPOList FreeGPOListW
+%define GetAllUsersProfileDirectory GetAllUsersProfileDirectoryW
+%define GetAppliedGPOList GetAppliedGPOListW
+%define GetDefaultUserProfileDirectory GetDefaultUserProfileDirectoryW
+%define GetGPOList GetGPOListW
+%define GetProfilesDirectory GetProfilesDirectoryW
+%define GetSystemTempDirectory GetSystemTempDirectoryW
+%define GetUserAppDataPath GetUserAppDataPathW
+%define GetUserProfileDirFromSid GetUserProfileDirFromSidW
+%define GetUserProfileDirectory GetUserProfileDirectoryW
+%define LoadUserProfile LoadUserProfileW
+
+%else  ;// ANSI
+
+%define AddDesktopItem AddDesktopItemA
+%define AddItem AddItemA
+%define ApplySystemPolicy ApplySystemPolicyA
+%define CopyProfileDirectory CopyProfileDirectoryA
+%define CopyProfileDirectoryEx CopyProfileDirectoryExA
+%define CreateGroup CreateGroupA
+%define CreateGroupEx CreateGroupExA
+%define CreateLinkFile CreateLinkFileA
+%define CreateLinkFileEx CreateLinkFileExA
+%define CreateUserProfile CreateUserProfileA
+%define CreateUserProfileEx CreateUserProfileExA
+%define DeleteDesktopItem DeleteDesktopItemA
+%define DeleteGroup DeleteGroupA
+%define DeleteItem DeleteItemA
+%define DeleteLinkFile DeleteLinkFileA
+%define DeleteProfile DeleteProfileA
+%define ExpandEnvironmentStringsForUser ExpandEnvironmentStringsForUserA
+%define FreeGPOList FreeGPOListA
+%define GetAllUsersProfileDirectory GetAllUsersProfileDirectoryA
+%define GetAppliedGPOList GetAppliedGPOListA
+%define GetDefaultUserProfileDirectory GetDefaultUserProfileDirectoryA
+%define GetGPOList GetGPOListA
+%define GetProfilesDirectory GetProfilesDirectoryA
+%define GetSystemTempDirectory GetSystemTempDirectoryA
+%define GetUserAppDataPath GetUserAppDataPathA
+%define GetUserProfileDirFromSid GetUserProfileDirFromSidA
+%define GetUserProfileDirectory GetUserProfileDirectoryA
+%define LoadUserProfile LoadUserProfileA
+
+%endif  ;// UNICODE
+
 %endif

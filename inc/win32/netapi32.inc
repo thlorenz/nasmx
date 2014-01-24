@@ -1,5 +1,5 @@
-%ifndef __netapi32_INC__
-%define __netapi32_INC__
+%ifndef __NASMX_NETAPI32_INC__
+%define __NASMX_NETAPI32_INC__
 
 IMPORT DsAddressToSiteNamesA, 16
 IMPORT DsAddressToSiteNamesExA, 20
@@ -225,4 +225,34 @@ IMPORT RxNetAccessGetUserPerms, 16
 IMPORT RxNetAccessSetInfo, 20
 IMPORT RxRemoteApi
 
-%endif
+%ifdef UNICODE
+
+%define DsAddressToSiteNames DsAddressToSiteNamesW
+%define DsAddressToSiteNamesEx DsAddressToSiteNamesExW
+%define DsDeregisterDnsHostRecords DsDeregisterDnsHostRecordsW
+%define DsEnumerateDomainTrusts DsEnumerateDomainTrustsW
+%define DsGetDcName DsGetDcNameW
+%define DsGetDcNameWithAccount DsGetDcNameWithAccountW
+%define DsGetDcNext DsGetDcNextW
+%define DsGetDcOpen DsGetDcOpenW
+%define DsGetDcSiteCoverage DsGetDcSiteCoverageW
+%define DsGetSiteName DsGetSiteNameW
+%define DsValidateSubnetName DsValidateSubnetNameW
+
+%else  ;// ANSI
+
+%define DsAddressToSiteNames DsAddressToSiteNamesA
+%define DsAddressToSiteNamesEx DsAddressToSiteNamesExA
+%define DsDeregisterDnsHostRecords DsDeregisterDnsHostRecordsA
+%define DsEnumerateDomainTrusts DsEnumerateDomainTrustsA
+%define DsGetDcName DsGetDcNameA
+%define DsGetDcNameWithAccount DsGetDcNameWithAccountA
+%define DsGetDcNext DsGetDcNextA
+%define DsGetDcOpen DsGetDcOpenA
+%define DsGetDcSiteCoverage DsGetDcSiteCoverageA
+%define DsGetSiteName DsGetSiteNameA
+%define DsValidateSubnetName DsValidateSubnetNameA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_NETAPI32_INC__

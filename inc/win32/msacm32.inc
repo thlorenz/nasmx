@@ -1,5 +1,5 @@
-%ifndef __msacm32_INC__
-%define __msacm32_INC__
+%ifndef __NASMX_MSACM32_INC__
+%define __NASMX_MSACM32_INC__
 
 IMPORT XRegThunkEntry, 36
 IMPORT acmDriverAddA, 20
@@ -46,4 +46,36 @@ IMPORT acmStreamReset, 8
 IMPORT acmStreamSize, 16
 IMPORT acmStreamUnprepareHeader, 12
 
-%endif
+%ifdef UNICODE
+
+%define acmDriverAdd acmDriverAddW
+%define acmDriverDetails acmDriverDetailsW
+%define acmFilterChoose acmFilterChooseW
+%define acmFilterDetails acmFilterDetailsW
+%define acmFilterEnum acmFilterEnumW
+%define acmFilterTagDetails acmFilterTagDetailsW
+%define acmFilterTagEnum acmFilterTagEnumW
+%define acmFormatChoose acmFormatChooseW
+%define acmFormatDetails acmFormatDetailsW
+%define acmFormatEnum acmFormatEnumW
+%define acmFormatTagDetails acmFormatTagDetailsW
+%define acmFormatTagEnum acmFormatTagEnumW
+
+%else  ;// ANSI
+
+%define acmDriverAdd acmDriverAddA
+%define acmDriverDetails acmDriverDetailsA
+%define acmFilterChoose acmFilterChooseA
+%define acmFilterDetails acmFilterDetailsA
+%define acmFilterEnum acmFilterEnumA
+%define acmFilterTagDetails acmFilterTagDetailsA
+%define acmFilterTagEnum acmFilterTagEnumA
+%define acmFormatChoose acmFormatChooseA
+%define acmFormatDetails acmFormatDetailsA
+%define acmFormatEnum acmFormatEnumA
+%define acmFormatTagDetails acmFormatTagDetailsA
+%define acmFormatTagEnum acmFormatTagEnumA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_MSACM32_INC__

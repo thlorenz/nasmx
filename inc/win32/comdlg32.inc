@@ -1,5 +1,5 @@
-%ifndef __comdlg32_INC__
-%define __comdlg32_INC__
+%ifndef __NASMX_COMDLG32_INC__
+%define __NASMX_COMDLG32_INC__
 
 IMPORT ChooseColorA, 4
 IMPORT ChooseColorW, 4
@@ -29,4 +29,32 @@ IMPORT WantArrows, 16
 IMPORT dwLBSubclass, 16
 IMPORT dwOKSubclass, 16
 
-%endif
+%ifdef UNICODE
+
+%define ChooseColor ChooseColorW
+%define ChooseFont ChooseFontW
+%define FindText FindTextW
+%define GetFileTitle GetFileTitleW
+%define GetOpenFileName GetOpenFileNameW
+%define GetSaveFileName GetSaveFileNameW
+%define PageSetupDlg PageSetupDlgW
+%define PrintDlg PrintDlgW
+%define PrintDlgEx PrintDlgExW
+%define ReplaceText ReplaceTextW
+
+%else  ;// ANSI
+
+%define ChooseColor ChooseColorA
+%define ChooseFont ChooseFontA
+%define FindText FindTextA
+%define GetFileTitle GetFileTitleA
+%define GetOpenFileName GetOpenFileNameA
+%define GetSaveFileName GetSaveFileNameA
+%define PageSetupDlg PageSetupDlgA
+%define PrintDlg PrintDlgA
+%define PrintDlgEx PrintDlgExA
+%define ReplaceText ReplaceTextA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_COMDLG32_INC__

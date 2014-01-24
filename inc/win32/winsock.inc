@@ -129,8 +129,8 @@ NASMX_STRUC IN_ADDR
             NASMX_RESERVE s_w1, uint16_t, 1
             NASMX_RESERVE s_w2, uint16_t, 1
         NASMX_ENDSTRUC
-		NASMX_RESERVE S_addr,   uint32_t, 1
-	NASMX_ENDUNION
+	NASMX_RESERVE S_addr,   uint32_t, 1
+    NASMX_ENDUNION
 NASMX_ENDSTRUC
 %define s_addr  IN_ADDR.S_un.S_addr
 %define s_host  IN_ADDR.S_un.S_un_b.s_b2
@@ -170,7 +170,7 @@ NASMX_STRUC SOCKADDR_IN
                 NASMX_RESERVE s_w1, uint16_t, 1
                 NASMX_RESERVE s_w2, uint16_t, 1
             NASMX_ENDSTRUC
-		    NASMX_RESERVE S_addr,   uint32_t, 1
+	    NASMX_RESERVE S_addr,   uint32_t, 1
         NASMX_ENDUNION
     NASMX_ENDSTRUC
     NASMX_RESERVE sin_zero, int8_t, 8
@@ -224,8 +224,8 @@ NASMX_STRUC ip_mreq
                 NASMX_RESERVE s_w1, uint16_t, 1
                 NASMX_RESERVE s_w2, uint16_t, 1
             NASMX_ENDSTRUC
-		    NASMX_RESERVE S_addr,   uint32_t, 1
-	    NASMX_ENDUNION
+	    NASMX_RESERVE S_addr,   uint32_t, 1
+        NASMX_ENDUNION
     NASMX_ENDSTRUC
     NASMX_STRUC imr_interface, IN_ADDR
         NASMX_UNION S_un
@@ -239,8 +239,8 @@ NASMX_STRUC ip_mreq
                 NASMX_RESERVE s_w1, uint16_t, 1
                 NASMX_RESERVE s_w2, uint16_t, 1
             NASMX_ENDSTRUC
-		    NASMX_RESERVE S_addr,   uint32_t, 1
-	    NASMX_ENDUNION
+	    NASMX_RESERVE S_addr,   uint32_t, 1
+        NASMX_ENDUNION
     NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 

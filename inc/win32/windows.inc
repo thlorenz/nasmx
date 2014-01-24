@@ -5616,7 +5616,7 @@ NASMX_STRUC DCB
     NASMX_RESERVE DCBlength, int32_t, 1
     NASMX_RESERVE BaudRate,  int32_t, 1
 
-    NASMX_RESERVE bits, int32_t, 1
+    NASMX_RESERVE bits, uint32_t, 1
 ;    NASMX_UNION bits
 ;        NASMX_RESERVE fBinary, uint32_t, 1             ;// :1  Binary Mode (skip EOF check)
 ;        NASMX_RESERVE fParity, uint32_t, 1             ;// :1  Enable parity checking

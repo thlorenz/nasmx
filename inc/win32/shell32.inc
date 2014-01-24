@@ -1,5 +1,5 @@
-%ifndef __shell32_INC__
-%define __shell32_INC__
+%ifndef __NASMX_SHELL32_INC__
+%define __NASMX_SHELL32_INC__
 
 IMPORT CDefFolderMenu_Create2, 36
 IMPORT CDefFolderMenu_Create, 36
@@ -235,4 +235,102 @@ IMPORT WOWShellExecute, 28
 IMPORT Win32DeleteFile, 4
 IMPORT WriteCabinetState, 4
 
-%endif
+%ifdef UNICODE
+
+%define CheckEscapes CheckEscapesW
+%define DoEnvironmentSubst DoEnvironmentSubstW
+%define DragQueryFile DragQueryFileW
+%define ExtractAssociatedIcon ExtractAssociatedIconW
+%define ExtractAssociatedIconEx ExtractAssociatedIconExW
+%define ExtractIcon ExtractIconW
+%define ExtractIconEx ExtractIconExW
+%define ExtractIconResInfo ExtractIconResInfoW
+%define FindExecutable FindExecutableW
+%define ILCreateFromPath ILCreateFromPathW
+%define InternalExtractIconList InternalExtractIconListW
+%define IsLFNDrive IsLFNDriveW
+%define PathIsSlow PathIsSlowW
+%define RealShellExecute RealShellExecuteW
+%define RealShellExecuteEx RealShellExecuteExW
+%define SHBrowseForFolder SHBrowseForFolderW
+%define SHCreateDirectoryEx SHCreateDirectoryExW
+%define SHDefExtractIcon SHDefExtractIconW
+%define SHEmptyRecycleBin SHEmptyRecycleBinW
+%define SHFileOperation SHFileOperationW
+%define SHGetDataFromIDList SHGetDataFromIDListW
+%define SHGetDiskFreeSpace SHGetDiskFreeSpaceW
+%define SHGetDiskFreeSpaceExW SHGetDiskFreeSpaceExW
+%define SHGetFileInfo SHGetFileInfoW
+%define SHGetFolderPath SHGetFolderPathW
+%define SHGetFolderPathAndSubDir SHGetFolderPathAndSubDirW
+%define SHGetIconOverlayIndex SHGetIconOverlayIndexW
+%define SHGetNewLinkInfo SHGetNewLinkInfoW
+%define SHGetPathFromIDList SHGetPathFromIDListW
+%define SHGetSpecialFolderPath SHGetSpecialFolderPathW
+%define SHInvokePrinterCommand SHInvokePrinterCommandW
+%define SHPathPrepareForWrite SHPathPrepareForWriteW
+%define SHQueryRecycleBin SHQueryRecycleBinW
+%define SHUpdateImage SHUpdateImageW
+%define SheChangeDir SheChangeDirW
+%define SheChangeDirEx SheChangeDirExW
+%define SheFullPath SheFullPathW
+%define SheGetDir SheGetDirW
+%define SheRemoveQuotes SheRemoveQuotesW
+%define SheShortenPath SheShortenPathW
+%define ShellAbout ShellAboutW
+%define ShellExecute ShellExecuteW
+%define ShellExecuteEx ShellExecuteExW
+%define ShellMessageBox ShellMessageBoxW
+%define Shell_NotifyIcon Shell_NotifyIconW
+
+%else  ;// ANSI
+
+%define CheckEscapes CheckEscapesA
+%define DoEnvironmentSubst DoEnvironmentSubstA
+%define DragQueryFile DragQueryFileA
+%define ExtractAssociatedIcon ExtractAssociatedIconA
+%define ExtractAssociatedIconEx ExtractAssociatedIconExA
+%define ExtractIcon ExtractIconA
+%define ExtractIconEx ExtractIconExA
+%define ExtractIconResInfo ExtractIconResInfoA
+%define FindExecutable FindExecutableA
+%define ILCreateFromPath ILCreateFromPathA
+%define InternalExtractIconList InternalExtractIconListA
+%define IsLFNDrive IsLFNDriveA
+%define PathIsSlow PathIsSlowA
+%define RealShellExecute RealShellExecuteA
+%define RealShellExecuteEx RealShellExecuteExA
+%define SHBrowseForFolder SHBrowseForFolderA
+%define SHCreateDirectoryEx SHCreateDirectoryExA
+%define SHDefExtractIcon SHDefExtractIconA
+%define SHEmptyRecycleBin SHEmptyRecycleBinA
+%define SHFileOperation SHFileOperationA
+%define SHGetDataFromIDList SHGetDataFromIDListA
+%define SHGetDiskFreeSpace SHGetDiskFreeSpaceA
+%define SHGetDiskFreeSpaceExW SHGetDiskFreeSpaceExA
+%define SHGetFileInfo SHGetFileInfoA
+%define SHGetFolderPath SHGetFolderPathA
+%define SHGetFolderPathAndSubDir SHGetFolderPathAndSubDirA
+%define SHGetIconOverlayIndex SHGetIconOverlayIndexA
+%define SHGetNewLinkInfo SHGetNewLinkInfoA
+%define SHGetPathFromIDList SHGetPathFromIDListA
+%define SHGetSpecialFolderPath SHGetSpecialFolderPathA
+%define SHInvokePrinterCommand SHInvokePrinterCommandA
+%define SHPathPrepareForWrite SHPathPrepareForWriteA
+%define SHQueryRecycleBin SHQueryRecycleBinA
+%define SHUpdateImage SHUpdateImageA
+%define SheChangeDir SheChangeDirA
+%define SheChangeDirEx SheChangeDirExA
+%define SheFullPath SheFullPathA
+%define SheGetDir SheGetDirA
+%define SheRemoveQuotes SheRemoveQuotesA
+%define SheShortenPath SheShortenPathA
+%define ShellAbout ShellAboutA
+%define ShellExecute ShellExecuteA
+%define ShellExecuteEx ShellExecuteExA
+%define ShellMessageBox ShellMessageBoxA
+%define Shell_NotifyIcon Shell_NotifyIconA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_SHELL32_INC__

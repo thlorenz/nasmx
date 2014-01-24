@@ -1,5 +1,5 @@
-%ifndef __winfax_INC__
-%define __winfax_INC__
+%ifndef __NASMX_WINFAX_INC__
+%define __NASMX_WINFAX_INC__
 
 IMPORT FaxAbort, 8
 IMPORT FaxAccessCheck, 8
@@ -58,4 +58,58 @@ IMPORT FaxStartPrintJobA, 16
 IMPORT FaxStartPrintJobW, 16
 IMPORT FaxUnregisterServiceProviderW, 4
 
-%endif
+%ifdef UNICODE
+
+%define FaxCompleteJobParams FaxCompleteJobParamsW
+%define FaxConnectFaxServer FaxConnectFaxServerW
+%define FaxEnableRoutingMethod FaxEnableRoutingMethodW
+%define FaxEnumGlobalRoutingInfo FaxEnumGlobalRoutingInfoW
+%define FaxEnumJobs FaxEnumJobsW
+%define FaxEnumPorts FaxEnumPortsW
+%define FaxEnumRoutingMethods FaxEnumRoutingMethodsW
+%define FaxGetConfiguration FaxGetConfigurationW
+%define FaxGetDeviceStatus FaxGetDeviceStatusW
+%define FaxGetJob FaxGetJobW
+%define FaxGetLoggingCategories FaxGetLoggingCategoriesW
+%define FaxGetPort FaxGetPortW
+%define FaxGetRoutingInfo FaxGetRoutingInfoW
+%define FaxPrintCoverPage FaxPrintCoverPageW
+%define FaxSendDocument FaxSendDocumentW
+%define FaxSendDocumentForBroadcast FaxSendDocumentForBroadcastW
+%define FaxSetConfiguration FaxSetConfigurationW
+%define FaxSetGlobalRoutingInfo FaxSetGlobalRoutingInfoW
+%define FaxSetJob FaxSetJobW
+%define FaxSetLoggingCategories FaxSetLoggingCategoriesW
+%define FaxSetPort FaxSetPortW
+%define FaxSetRoutingInfo FaxSetRoutingInfoW
+%define FaxStartPrintJob FaxStartPrintJobW
+
+%else  ;// ANSI
+
+%define FaxCompleteJobParams FaxCompleteJobParamsA
+%define FaxConnectFaxServer FaxConnectFaxServerA
+%define FaxEnableRoutingMethod FaxEnableRoutingMethodA
+%define FaxEnumGlobalRoutingInfo FaxEnumGlobalRoutingInfoA
+%define FaxEnumJobs FaxEnumJobsA
+%define FaxEnumPorts FaxEnumPortsA
+%define FaxEnumRoutingMethods FaxEnumRoutingMethodsA
+%define FaxGetConfiguration FaxGetConfigurationA
+%define FaxGetDeviceStatus FaxGetDeviceStatusA
+%define FaxGetJob FaxGetJobA
+%define FaxGetLoggingCategories FaxGetLoggingCategoriesA
+%define FaxGetPort FaxGetPortA
+%define FaxGetRoutingInfo FaxGetRoutingInfoA
+%define FaxPrintCoverPage FaxPrintCoverPageA
+%define FaxSendDocument FaxSendDocumentA
+%define FaxSendDocumentForBroadcast FaxSendDocumentForBroadcastA
+%define FaxSetConfiguration FaxSetConfigurationA
+%define FaxSetGlobalRoutingInfo FaxSetGlobalRoutingInfoA
+%define FaxSetJob FaxSetJobA
+%define FaxSetLoggingCategories FaxSetLoggingCategoriesA
+%define FaxSetPort FaxSetPortA
+%define FaxSetRoutingInfo FaxSetRoutingInfoA
+%define FaxStartPrintJob FaxStartPrintJobA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_WINFAX_INC__

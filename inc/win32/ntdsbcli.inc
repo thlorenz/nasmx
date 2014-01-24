@@ -1,5 +1,5 @@
-%ifndef __ntdsbcli_INC__
-%define __ntdsbcli_INC__
+%ifndef __NASMX_NTDSBCLI_INC__
+%define __NASMX_NTDSBCLI_INC__
 
 IMPORT DsBackupClose, 4
 IMPORT DsBackupEnd, 4
@@ -30,4 +30,32 @@ IMPORT DsSetAuthIdentityW, 12
 IMPORT DsSetCurrentBackupLogA, 8
 IMPORT DsSetCurrentBackupLogW, 8
 
-%endif
+%ifdef UNICODE
+
+%define DsBackupGetBackupLogs DsBackupGetBackupLogsW
+%define DsBackupGetDatabaseNames DsBackupGetDatabaseNamesW
+%define DsBackupOpenFile DsBackupOpenFileW
+%define DsBackupPrepare DsBackupPrepareW
+%define DsIsNTDSOnline DsIsNTDSOnlineW
+%define DsRestoreGetDatabaseLocations DsRestoreGetDatabaseLocationsW
+%define DsRestorePrepare DsRestorePrepareW
+%define DsRestoreRegister DsRestoreRegisterW
+%define DsSetAuthIdentity DsSetAuthIdentityW
+%define DsSetCurrentBackupLog DsSetCurrentBackupLogW
+
+%else  ;// ANSI
+
+%define DsBackupGetBackupLogs DsBackupGetBackupLogsA
+%define DsBackupGetDatabaseNames DsBackupGetDatabaseNamesA
+%define DsBackupOpenFile DsBackupOpenFileA
+%define DsBackupPrepare DsBackupPrepareA
+%define DsIsNTDSOnline DsIsNTDSOnlineA
+%define DsRestoreGetDatabaseLocations DsRestoreGetDatabaseLocationsA
+%define DsRestorePrepare DsRestorePrepareA
+%define DsRestoreRegister DsRestoreRegisterA
+%define DsSetAuthIdentity DsSetAuthIdentityA
+%define DsSetCurrentBackupLog DsSetCurrentBackupLogA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_NTDSBCLI_INC__

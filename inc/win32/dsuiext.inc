@@ -1,5 +1,5 @@
-%ifndef __dsuiext_INC__
-%define __dsuiext_INC__
+%ifndef __NASMX_DSUIEXT_INC__
+%define __NASMX_DSUIEXT_INC__
 
 IMPORT CheckDsPolicy, 8
 IMPORT DsBrowseForContainerA, 4
@@ -35,4 +35,30 @@ IMPORT StringDPA_InsertStringA, 12
 IMPORT StringDPA_InsertStringW, 12
 IMPORT StringFromSearchColumn, 8
 
-%endif
+%ifdef UNICODE
+
+%define DsBrowseForContainer DsBrowseForContainerW
+%define GetStringElement GetStringElementW
+%define LocalAllocString LocalAllocStringW
+%define LocalAllocStringLen LocalAllocStringLenW
+%define LocalFreeString LocalFreeStringW
+%define LocalQueryString LocalQueryStringW
+%define PutStringElement PutStringElementW
+%define StringDPA_AppendString StringDPA_AppendStringW
+%define StringDPA_InsertString StringDPA_InsertStringW
+
+%else  ;// ANSI
+
+%define DsBrowseForContainer DsBrowseForContainerA
+%define GetStringElement GetStringElementA
+%define LocalAllocString LocalAllocStringA
+%define LocalAllocStringLen LocalAllocStringLenA
+%define LocalFreeString LocalFreeStringA
+%define LocalQueryString LocalQueryStringA
+%define PutStringElement PutStringElementA
+%define StringDPA_AppendString StringDPA_AppendStringA
+%define StringDPA_InsertString StringDPA_InsertStringA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_DSUIEXT_INC__

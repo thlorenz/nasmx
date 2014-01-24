@@ -1,5 +1,5 @@
-%ifndef __crypt32_INC__
-%define __crypt32_INC__
+%ifndef __NASMX_CRYPT32_INC__
+%define __NASMX_CRYPT32_INC__
 
 IMPORT CertAddCRLContextToStore, 16
 IMPORT CertAddCRLLinkToStore, 16
@@ -222,4 +222,28 @@ IMPORT PFXImportCertStore, 12
 IMPORT PFXIsPFXBlob, 4
 IMPORT PFXVerifyPassword, 12
 
-%endif
+%ifdef UNICODE
+
+%define CertAddEncodedCertificateToSystemStore CertAddEncodedCertificateToSystemStoreW
+%define CertGetNameString CertGetNameStringW
+%define CertNameToStr CertNameToStrW
+%define CertOpenSystemStore CertOpenSystemStoreW
+%define CertRDNValueToStr CertRDNValueToStrW
+%define CertStrToName CertStrToNameW
+%define CryptBinaryToString CryptBinaryToStringW
+%define CryptStringToBinary CryptStringToBinaryW
+
+%else  ;// ANSI
+
+%define CertAddEncodedCertificateToSystemStore CertAddEncodedCertificateToSystemStoreA
+%define CertGetNameString CertGetNameStringA
+%define CertNameToStr CertNameToStrA
+%define CertOpenSystemStore CertOpenSystemStoreA
+%define CertRDNValueToStr CertRDNValueToStrA
+%define CertStrToName CertStrToNameA
+%define CryptBinaryToString CryptBinaryToStringA
+%define CryptStringToBinary CryptStringToBinaryA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_CRYPT32_INC__

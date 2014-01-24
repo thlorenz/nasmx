@@ -1,5 +1,5 @@
-%ifndef __wsock32_INC__
-%define __wsock32_INC__
+%ifndef __NASMX_WSOCK32_INC__
+%define __NASMX_WSOCK32_INC__
 
 IMPORT AcceptEx, 32
 IMPORT EnumProtocolsA, 12
@@ -76,4 +76,24 @@ IMPORT setsockopt, 20
 IMPORT shutdown, 8
 IMPORT socket, 12
 
-%endif
+%ifdef UNICODE
+
+%define EnumProtocols EnumProtocolsW
+%define GetAddressByName GetAddressByNameW
+%define GetNameByType GetNameByTypeW
+%define GetService GetServiceW
+%define GetTypeByName GetTypeByNameW
+%define SetService SetServiceW
+
+%else  ;// ANSI
+
+%define EnumProtocols EnumProtocolsA
+%define GetAddressByName GetAddressByNameA
+%define GetNameByType GetNameByTypeA
+%define GetService GetServiceA
+%define GetTypeByName GetTypeByNameA
+%define SetService SetServiceA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_WSOCK32_INC__

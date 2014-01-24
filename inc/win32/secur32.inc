@@ -1,5 +1,5 @@
-%ifndef __secur32_INC__
-%define __secur32_INC__
+%ifndef __NASMX_SECUR32_INC__
+%define __NASMX_SECUR32_INC__
 
 IMPORT AcceptSecurityContext, 36
 IMPORT AcquireCredentialsHandleA, 36
@@ -72,4 +72,52 @@ IMPORT TranslateNameW, 20
 IMPORT UnsealMessage, 16
 IMPORT VerifySignature, 16
 
-%endif
+%ifdef UNICODE
+
+%define AcquireCredentialsHandle AcquireCredentialsHandleW
+%define AddCredentials AddCredentialsW
+%define AddSecurityPackage AddSecurityPackageW
+%define DeleteSecurityPackage DeleteSecurityPackageW
+%define EnumerateSecurityPackages EnumerateSecurityPackagesW
+%define GetComputerObjectName GetComputerObjectNameW
+%define GetUserNameEx GetUserNameExW
+%define ImportSecurityContext ImportSecurityContextW
+%define InitSecurityInterface InitSecurityInterfaceW
+%define InitializeSecurityContext InitializeSecurityContextW
+%define QueryContextAttributes QueryContextAttributesW
+%define QueryCredentialsAttributes QueryCredentialsAttributesW
+%define QuerySecurityPackageInfo QuerySecurityPackageInfoW
+%define SaslEnumerateProfiles SaslEnumerateProfilesW
+%define SaslGetProfilePackage SaslGetProfilePackageW
+%define SaslIdentifyPackage SaslIdentifyPackageW
+%define SaslInitializeSecurityContext SaslInitializeSecurityContextW
+%define SetContextAttributes SetContextAttributesW
+%define SetCredentialsAttributes SetCredentialsAttributesW
+%define TranslateName TranslateNameW
+
+%else  ;// ANSI
+
+%define AcquireCredentialsHandle AcquireCredentialsHandleA
+%define AddCredentials AddCredentialsA
+%define AddSecurityPackage AddSecurityPackageA
+%define DeleteSecurityPackage DeleteSecurityPackageA
+%define EnumerateSecurityPackages EnumerateSecurityPackagesA
+%define GetComputerObjectName GetComputerObjectNameA
+%define GetUserNameEx GetUserNameExA
+%define ImportSecurityContext ImportSecurityContextA
+%define InitSecurityInterface InitSecurityInterfaceA
+%define InitializeSecurityContext InitializeSecurityContextA
+%define QueryContextAttributes QueryContextAttributesA
+%define QueryCredentialsAttributes QueryCredentialsAttributesA
+%define QuerySecurityPackageInfo QuerySecurityPackageInfoA
+%define SaslEnumerateProfiles SaslEnumerateProfilesA
+%define SaslGetProfilePackage SaslGetProfilePackageA
+%define SaslIdentifyPackage SaslIdentifyPackageA
+%define SaslInitializeSecurityContext SaslInitializeSecurityContextA
+%define SetContextAttributes SetContextAttributesA
+%define SetCredentialsAttributes SetCredentialsAttributesA
+%define TranslateName TranslateNameA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_SECUR32_INC__

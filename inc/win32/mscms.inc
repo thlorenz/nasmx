@@ -1,5 +1,5 @@
-%ifndef __mscms_INC__
-%define __mscms_INC__
+%ifndef __NASMX_MSCMS_INC__
+%define __NASMX_MSCMS_INC__
 
 IMPORT AssociateColorProfileWithDeviceA, 12
 IMPORT AssociateColorProfileWithDeviceW, 12
@@ -63,4 +63,38 @@ IMPORT UninstallColorProfileW, 12
 IMPORT UnregisterCMMA, 8
 IMPORT UnregisterCMMW, 8
 
-%endif
+%ifdef UNICODE
+
+%define AssociateColorProfileWithDevice AssociateColorProfileWithDeviceW
+%define CreateColorTransform CreateColorTransformW
+%define CreateProfileFromLogColorSpace CreateProfileFromLogColorSpaceW
+%define DisassociateColorProfileFromDevice DisassociateColorProfileFromDeviceW
+%define EnumColorProfiles EnumColorProfilesW
+%define GetColorDirectory GetColorDirectoryW
+%define GetStandardColorSpaceProfile GetStandardColorSpaceProfileW
+%define InstallColorProfile InstallColorProfileW
+%define OpenColorProfile OpenColorProfileW
+%define RegisterCMM RegisterCMMW
+%define SetStandardColorSpaceProfile SetStandardColorSpaceProfileW
+%define UninstallColorProfile UninstallColorProfileW
+%define UnregisterCMM UnregisterCMMW
+
+%else  ;// ANSI
+
+%define AssociateColorProfileWithDevice AssociateColorProfileWithDeviceA
+%define CreateColorTransform CreateColorTransformA
+%define CreateProfileFromLogColorSpace CreateProfileFromLogColorSpaceA
+%define DisassociateColorProfileFromDevice DisassociateColorProfileFromDeviceA
+%define EnumColorProfiles EnumColorProfilesA
+%define GetColorDirectory GetColorDirectoryA
+%define GetStandardColorSpaceProfile GetStandardColorSpaceProfileA
+%define InstallColorProfile InstallColorProfileA
+%define OpenColorProfile OpenColorProfileA
+%define RegisterCMM RegisterCMMA
+%define SetStandardColorSpaceProfile SetStandardColorSpaceProfileA
+%define UninstallColorProfile UninstallColorProfileA
+%define UnregisterCMM UnregisterCMMA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_MSCMS_INC__

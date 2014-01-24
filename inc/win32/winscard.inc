@@ -1,5 +1,5 @@
-%ifndef __winscard_INC__
-%define __winscard_INC__
+%ifndef __NASMX_WINSCARD_INC__
+%define __NASMX_WINSCARD_INC__
 
 IMPORT SCardAccessStartedEvent, 0
 IMPORT SCardAddReaderToGroupA, 12
@@ -61,4 +61,52 @@ IMPORT g_rgSCardRawPci
 IMPORT g_rgSCardT0Pci
 IMPORT g_rgSCardT1Pci
 
-%endif
+%ifdef UNICODE
+
+%define SCardAddReaderToGroup SCardAddReaderToGroupW
+%define SCardConnect SCardConnectW
+%define SCardForgetCardType SCardForgetCardTypeW
+%define SCardForgetReader SCardForgetReaderW
+%define SCardForgetReaderGroup SCardForgetReaderGroupW
+%define SCardGetCardTypeProviderName SCardGetCardTypeProviderNameW
+%define SCardGetProviderId SCardGetProviderIdW
+%define SCardGetStatusChange SCardGetStatusChangeW
+%define SCardIntroduceCardType SCardIntroduceCardTypeW
+%define SCardIntroduceReader SCardIntroduceReaderW
+%define SCardIntroduceReaderGroup SCardIntroduceReaderGroupW
+%define SCardListCards SCardListCardsW
+%define SCardListInterfaces SCardListInterfacesW
+%define SCardListReaderGroups SCardListReaderGroupsW
+%define SCardListReaders SCardListReadersW
+%define SCardLocateCards SCardLocateCardsW
+%define SCardLocateCardsByATR SCardLocateCardsByATRW
+%define SCardRemoveReaderFromGroup SCardRemoveReaderFromGroupW
+%define SCardSetCardTypeProviderName SCardSetCardTypeProviderNameW
+%define SCardStatus SCardStatusW
+
+%else  ;// ANSI
+
+%define SCardAddReaderToGroup SCardAddReaderToGroupA
+%define SCardConnect SCardConnectA
+%define SCardForgetCardType SCardForgetCardTypeA
+%define SCardForgetReader SCardForgetReaderA
+%define SCardForgetReaderGroup SCardForgetReaderGroupA
+%define SCardGetCardTypeProviderName SCardGetCardTypeProviderNameA
+%define SCardGetProviderId SCardGetProviderIdA
+%define SCardGetStatusChange SCardGetStatusChangeA
+%define SCardIntroduceCardType SCardIntroduceCardTypeA
+%define SCardIntroduceReader SCardIntroduceReaderA
+%define SCardIntroduceReaderGroup SCardIntroduceReaderGroupA
+%define SCardListCards SCardListCardsA
+%define SCardListInterfaces SCardListInterfacesA
+%define SCardListReaderGroups SCardListReaderGroupsA
+%define SCardListReaders SCardListReadersA
+%define SCardLocateCards SCardLocateCardsA
+%define SCardLocateCardsByATR SCardLocateCardsByATRA
+%define SCardRemoveReaderFromGroup SCardRemoveReaderFromGroupA
+%define SCardSetCardTypeProviderName SCardSetCardTypeProviderNameA
+%define SCardStatus SCardStatusA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_WINSCARD_INC__

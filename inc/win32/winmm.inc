@@ -1,5 +1,5 @@
-%ifndef __winmm_INC__
-%define __winmm_INC__
+%ifndef __NASMX_WINMM_INC__
+%define __NASMX_WINMM_INC__
 
 IMPORT CloseDriver, 12
 IMPORT DefDriverProc, 20
@@ -210,4 +210,62 @@ IMPORT winmmDbgOut
 IMPORT winmmSetDebugLevel, 4
 IMPORT wod32Message, 20
 
-%endif
+%ifdef UNICODE
+
+%define PlaySound PlaySoundW
+%define auxGetDevCaps auxGetDevCapsW
+%define joyGetDevCaps joyGetDevCapsW
+%define mciGetDeviceID mciGetDeviceIDW
+%define mciGetDeviceIDFromElementID mciGetDeviceIDFromElementIDW
+%define mciGetErrorString mciGetErrorStringW
+%define mciSendCommand mciSendCommandW
+%define mciSendString mciSendStringW
+%define midiInGetDevCaps midiInGetDevCapsW
+%define midiInGetErrorText midiInGetErrorTextW
+%define midiOutGetDevCaps midiOutGetDevCapsW
+%define midiOutGetErrorText midiOutGetErrorTextW
+%define mixerGetControlDetails mixerGetControlDetailsW
+%define mixerGetDevCaps mixerGetDevCapsW
+%define mixerGetLineControls mixerGetLineControlsW
+%define mixerGetLineInfo mixerGetLineInfoW
+%define mmioInstallIOProc mmioInstallIOProcW
+%define mmioOpen mmioOpenW
+%define mmioRename mmioRenameW
+%define mmioStringToFOURCC mmioStringToFOURCCW
+%define sndPlaySound sndPlaySoundW
+%define waveInGetDevCaps waveInGetDevCapsW
+%define waveInGetErrorText waveInGetErrorTextW
+%define waveOutGetDevCaps waveOutGetDevCapsW
+%define waveOutGetErrorText waveOutGetErrorTextW
+
+%else  ;// ANSI
+
+%define PlaySound PlaySoundA
+%define auxGetDevCaps auxGetDevCapsA
+%define joyGetDevCaps joyGetDevCapsA
+%define mciGetDeviceID mciGetDeviceIDA
+%define mciGetDeviceIDFromElementID mciGetDeviceIDFromElementIDA
+%define mciGetErrorString mciGetErrorStringA
+%define mciSendCommand mciSendCommandA
+%define mciSendString mciSendStringA
+%define midiInGetDevCaps midiInGetDevCapsA
+%define midiInGetErrorText midiInGetErrorTextA
+%define midiOutGetDevCaps midiOutGetDevCapsA
+%define midiOutGetErrorText midiOutGetErrorTextA
+%define mixerGetControlDetails mixerGetControlDetailsA
+%define mixerGetDevCaps mixerGetDevCapsA
+%define mixerGetLineControls mixerGetLineControlsA
+%define mixerGetLineInfo mixerGetLineInfoA
+%define mmioInstallIOProc mmioInstallIOProcA
+%define mmioOpen mmioOpenA
+%define mmioRename mmioRenameA
+%define mmioStringToFOURCC mmioStringToFOURCCA
+%define sndPlaySound sndPlaySoundA
+%define waveInGetDevCaps waveInGetDevCapsA
+%define waveInGetErrorText waveInGetErrorTextA
+%define waveOutGetDevCaps waveOutGetDevCapsA
+%define waveOutGetErrorText waveOutGetErrorTextA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_WINMM_INC__

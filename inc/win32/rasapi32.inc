@@ -1,5 +1,5 @@
-%ifndef __rasapi32_INC__
-%define __rasapi32_INC__
+%ifndef __NASMX_RASAPI32_INC__
+%define __NASMX_RASAPI32_INC__
 
 IMPORT DDMFreePhonebookContext, 4
 IMPORT DDMGetPhonebookInfo, 44
@@ -144,4 +144,90 @@ IMPORT SharedAccessResponseListToString, 8
 IMPORT SharedAccessResponseStringToList, 12
 IMPORT UnInitializeRAS, 0
 
-%endif
+%ifdef UNICODE
+
+%define RasConnectionNotification RasConnectionNotificationW
+%define RasCreatePhonebookEntry RasCreatePhonebookEntryW
+%define RasDeleteEntry RasDeleteEntryW
+%define RasDeleteSubEntry RasDeleteSubEntryW
+%define RasDial RasDialW
+%define RasEditPhonebookEntry RasEditPhonebookEntryW
+%define RasEnumAutodialAddresses RasEnumAutodialAddressesW
+%define RasEnumConnections RasEnumConnectionsW
+%define RasEnumDevices RasEnumDevicesW
+%define RasEnumEntries RasEnumEntriesW
+%define RasFreeEapUserIdentity RasFreeEapUserIdentityW
+%define RasGetAutodialAddress RasGetAutodialAddressW
+%define RasGetAutodialEnable RasGetAutodialEnableW
+%define RasGetAutodialParam RasGetAutodialParamW
+%define RasGetConnectStatus RasGetConnectStatusW
+%define RasGetCountryInfo RasGetCountryInfoW
+%define RasGetCredentials RasGetCredentialsW
+%define RasGetCustomAuthData RasGetCustomAuthDataW
+%define RasGetEapUserData RasGetEapUserDataW
+%define RasGetEapUserIdentity RasGetEapUserIdentityW
+%define RasGetEntryDialParams RasGetEntryDialParamsW
+%define RasGetEntryHrasconn RasGetEntryHrasconnW
+%define RasGetEntryProperties RasGetEntryPropertiesW
+%define RasGetErrorString RasGetErrorStringW
+%define RasGetProjectionInfo RasGetProjectionInfoW
+%define RasGetSubEntryHandle RasGetSubEntryHandleW
+%define RasGetSubEntryProperties RasGetSubEntryPropertiesW
+%define RasHangUp RasHangUpW
+%define RasRenameEntry RasRenameEntryW
+%define RasSetAutodialAddress RasSetAutodialAddressW
+%define RasSetAutodialEnable RasSetAutodialEnableW
+%define RasSetAutodialParam RasSetAutodialParamW
+%define RasSetCredentials RasSetCredentialsW
+%define RasSetCustomAuthData RasSetCustomAuthDataW
+%define RasSetEapUserData RasSetEapUserDataW
+%define RasSetEntryDialParams RasSetEntryDialParamsW
+%define RasSetEntryProperties RasSetEntryPropertiesW
+%define RasSetSubEntryProperties RasSetSubEntryPropertiesW
+%define RasValidateEntryName RasValidateEntryNameW
+
+%else  ;// ANSI
+
+%define RasConnectionNotification RasConnectionNotificationA
+%define RasCreatePhonebookEntry RasCreatePhonebookEntryA
+%define RasDeleteEntry RasDeleteEntryA
+%define RasDeleteSubEntry RasDeleteSubEntryA
+%define RasDial RasDialA
+%define RasEditPhonebookEntry RasEditPhonebookEntryA
+%define RasEnumAutodialAddresses RasEnumAutodialAddressesA
+%define RasEnumConnections RasEnumConnectionsA
+%define RasEnumDevices RasEnumDevicesA
+%define RasEnumEntries RasEnumEntriesA
+%define RasFreeEapUserIdentity RasFreeEapUserIdentityA
+%define RasGetAutodialAddress RasGetAutodialAddressA
+%define RasGetAutodialEnable RasGetAutodialEnableA
+%define RasGetAutodialParam RasGetAutodialParamA
+%define RasGetConnectStatus RasGetConnectStatusA
+%define RasGetCountryInfo RasGetCountryInfoA
+%define RasGetCredentials RasGetCredentialsA
+%define RasGetCustomAuthData RasGetCustomAuthDataA
+%define RasGetEapUserData RasGetEapUserDataA
+%define RasGetEapUserIdentity RasGetEapUserIdentityA
+%define RasGetEntryDialParams RasGetEntryDialParamsA
+%define RasGetEntryHrasconn RasGetEntryHrasconnA
+%define RasGetEntryProperties RasGetEntryPropertiesA
+%define RasGetErrorString RasGetErrorStringA
+%define RasGetProjectionInfo RasGetProjectionInfoA
+%define RasGetSubEntryHandle RasGetSubEntryHandleA
+%define RasGetSubEntryProperties RasGetSubEntryPropertiesA
+%define RasHangUp RasHangUpA
+%define RasRenameEntry RasRenameEntryA
+%define RasSetAutodialAddress RasSetAutodialAddressA
+%define RasSetAutodialEnable RasSetAutodialEnableA
+%define RasSetAutodialParam RasSetAutodialParamA
+%define RasSetCredentials RasSetCredentialsA
+%define RasSetCustomAuthData RasSetCustomAuthDataA
+%define RasSetEapUserData RasSetEapUserDataA
+%define RasSetEntryDialParams RasSetEntryDialParamsA
+%define RasSetEntryProperties RasSetEntryPropertiesA
+%define RasSetSubEntryProperties RasSetSubEntryPropertiesA
+%define RasValidateEntryName RasValidateEntryNameA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_RASAPI32_INC__

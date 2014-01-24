@@ -1,5 +1,5 @@
-%ifndef __oleacc_INC__
-%define __oleacc_INC__
+%ifndef __NASMX_OLEACC_INC__
+%define __NASMX_OLEACC_INC__
 
 IMPORT AccessibleChildren, 20
 IMPORT AccessibleObjectFromEvent, 20
@@ -17,4 +17,18 @@ IMPORT LresultFromObject, 12
 IMPORT ObjectFromLresult, 16
 IMPORT WindowFromAccessibleObject, 8
 
-%endif
+%ifdef UNICODE
+
+%define CreateStdAccessibleProxy CreateStdAccessibleProxyW
+%define GetRoleText GetRoleTextW
+%define GetStateText GetStateTextW
+
+%else  ;// ANSI
+
+%define CreateStdAccessibleProxy CreateStdAccessibleProxyA
+%define GetRoleText GetRoleTextA
+%define GetStateText GetStateTextA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_OLEACC_INC__
