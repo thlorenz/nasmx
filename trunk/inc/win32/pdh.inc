@@ -1,5 +1,5 @@
-%ifndef __pdh_INC__
-%define __pdh_INC__
+%ifndef __NASMX_PDH_INC__
+%define __NASMX_PDH_INC__
 
 IMPORT PdhAddCounterA, 16
 IMPORT PdhAddCounterW, 16
@@ -106,4 +106,82 @@ IMPORT PdhVbUpdateLog, 8
 IMPORT PdhVerifySQLDBA, 4
 IMPORT PdhVerifySQLDBW, 4
 
-%endif
+%ifdef UNICODE
+
+%define PdhAddCounter PdhAddCounterW
+%define PdhBindInputDataSource PdhBindInputDataSourceW
+%define PdhBrowseCounters PdhBrowseCountersW
+%define PdhBrowseCountersH PdhBrowseCountersHW
+%define PdhConnectMachine PdhConnectMachineW
+%define PdhCreateSQLTables PdhCreateSQLTablesW
+%define PdhEnumLogSetNames PdhEnumLogSetNamesW
+%define PdhEnumMachines PdhEnumMachinesW
+%define PdhEnumMachinesH PdhEnumMachinesHW
+%define PdhEnumObjectItems PdhEnumObjectItemsW
+%define PdhEnumObjectItemsH PdhEnumObjectItemsHW
+%define PdhEnumObjects PdhEnumObjectsW
+%define PdhEnumObjectsH PdhEnumObjectsHW
+%define PdhExpandCounterPath PdhExpandCounterPathW
+%define PdhExpandWildCardPath PdhExpandWildCardPathW
+%define PdhExpandWildCardPathH PdhExpandWildCardPathHW
+%define PdhGetCounterInfo PdhGetCounterInfoW
+%define PdhGetDataSourceTimeRange PdhGetDataSourceTimeRangeW
+%define PdhGetDefaultPerfCounter PdhGetDefaultPerfCounterW
+%define PdhGetDefaultPerfCounterH PdhGetDefaultPerfCounterHW
+%define PdhGetDefaultPerfObject PdhGetDefaultPerfObjectW
+%define PdhGetDefaultPerfObjectH PdhGetDefaultPerfObjectHW
+%define PdhGetFormattedCounterArray PdhGetFormattedCounterArrayW
+%define PdhGetRawCounterArray PdhGetRawCounterArrayW
+%define PdhLookupPerfIndexByName PdhLookupPerfIndexByNameW
+%define PdhLookupPerfNameByIndex PdhLookupPerfNameByIndexW
+%define PdhMakeCounterPath PdhMakeCounterPathW
+%define PdhOpenLog PdhOpenLogW
+%define PdhOpenQuery PdhOpenQueryW
+%define PdhParseCounterPath PdhParseCounterPathW
+%define PdhParseInstanceName PdhParseInstanceNameW
+%define PdhSelectDataSource PdhSelectDataSourceW
+%define PdhUpdateLog PdhUpdateLogW
+%define PdhValidatePath PdhValidatePathW
+%define PdhVerifySQLDB PdhVerifySQLDBW
+
+%else  ;// ANSI
+
+%define PdhAddCounter PdhAddCounterA
+%define PdhBindInputDataSource PdhBindInputDataSourceA
+%define PdhBrowseCounters PdhBrowseCountersA
+%define PdhBrowseCountersH PdhBrowseCountersHA
+%define PdhConnectMachine PdhConnectMachineA
+%define PdhCreateSQLTables PdhCreateSQLTablesA
+%define PdhEnumLogSetNames PdhEnumLogSetNamesA
+%define PdhEnumMachines PdhEnumMachinesA
+%define PdhEnumMachinesH PdhEnumMachinesHA
+%define PdhEnumObjectItems PdhEnumObjectItemsA
+%define PdhEnumObjectItemsH PdhEnumObjectItemsHA
+%define PdhEnumObjects PdhEnumObjectsA
+%define PdhEnumObjectsH PdhEnumObjectsHA
+%define PdhExpandCounterPath PdhExpandCounterPathA
+%define PdhExpandWildCardPath PdhExpandWildCardPathA
+%define PdhExpandWildCardPathH PdhExpandWildCardPathHA
+%define PdhGetCounterInfo PdhGetCounterInfoA
+%define PdhGetDataSourceTimeRange PdhGetDataSourceTimeRangeA
+%define PdhGetDefaultPerfCounter PdhGetDefaultPerfCounterA
+%define PdhGetDefaultPerfCounterH PdhGetDefaultPerfCounterHA
+%define PdhGetDefaultPerfObject PdhGetDefaultPerfObjectA
+%define PdhGetDefaultPerfObjectH PdhGetDefaultPerfObjectHA
+%define PdhGetFormattedCounterArray PdhGetFormattedCounterArrayA
+%define PdhGetRawCounterArray PdhGetRawCounterArrayA
+%define PdhLookupPerfIndexByName PdhLookupPerfIndexByNameA
+%define PdhLookupPerfNameByIndex PdhLookupPerfNameByIndexA
+%define PdhMakeCounterPath PdhMakeCounterPathA
+%define PdhOpenLog PdhOpenLogA
+%define PdhOpenQuery PdhOpenQueryA
+%define PdhParseCounterPath PdhParseCounterPathA
+%define PdhParseInstanceName PdhParseInstanceNameA
+%define PdhSelectDataSource PdhSelectDataSourceA
+%define PdhUpdateLog PdhUpdateLogA
+%define PdhValidatePath PdhValidatePathA
+%define PdhVerifySQLDB PdhVerifySQLDBA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_PDH_INC__

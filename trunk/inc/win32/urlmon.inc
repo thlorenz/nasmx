@@ -72,4 +72,26 @@ IMPORT UrlMkGetSessionOption, 20
 IMPORT UrlMkSetSessionOption, 16
 IMPORT WriteHitLogging, 4
 
+%ifdef UNICODE
+
+%define IsLoggingEnabled IsLoggingEnabledW
+%define URLDownload URLDownloadW
+%define URLDownloadToCacheFile URLDownloadToCacheFileW
+%define URLDownloadToFile URLDownloadToFileW
+%define URLOpenBlockingStream URLOpenBlockingStreamW
+%define URLOpenPullStream URLOpenPullStreamW
+%define URLOpenStream URLOpenStreamW
+
+%else  ;// ANSI
+
+%define IsLoggingEnabled IsLoggingEnabledA
+%define URLDownload URLDownloadA
+%define URLDownloadToCacheFile URLDownloadToCacheFileA
+%define URLDownloadToFile URLDownloadToFileA
+%define URLOpenBlockingStream URLOpenBlockingStreamA
+%define URLOpenPullStream URLOpenPullStreamA
+%define URLOpenStream URLOpenStreamA
+
+%endif  ;// UNICODE
+
 %endif

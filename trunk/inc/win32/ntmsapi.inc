@@ -1,5 +1,5 @@
-%ifndef __ntmsapi_INC__
-%define __ntmsapi_INC__
+%ifndef __NASMX_NTMSAPI_INC__
+%define __NASMX_NTMSAPI_INC__
 
 IMPORT AccessNtmsLibraryDoor, 12
 IMPORT AddNtmsMediaType, 12
@@ -77,4 +77,38 @@ IMPORT UpdateNtmsOmidInfo, 20
 IMPORT WaitForNtmsNotification, 12
 IMPORT WaitForNtmsOperatorRequest, 12
 
-%endif
+%ifdef UNICODE
+
+%define CreateNtmsMedia CreateNtmsMediaW
+%define CreateNtmsMediaPool CreateNtmsMediaPoolW
+%define EjectDiskFromSADrive EjectDiskFromSADriveW
+%define GetNtmsMediaPoolName GetNtmsMediaPoolNameW
+%define GetNtmsObjectAttribute GetNtmsObjectAttributeW
+%define GetNtmsObjectInformation GetNtmsObjectInformationW
+%define GetNtmsUIOptions GetNtmsUIOptionsW
+%define GetVolumesFromDrive GetVolumesFromDriveW
+%define OpenNtmsSession OpenNtmsSessionW
+%define SetNtmsObjectAttribute SetNtmsObjectAttributeW
+%define SetNtmsObjectInformation SetNtmsObjectInformationW
+%define SetNtmsUIOptions SetNtmsUIOptionsW
+%define SubmitNtmsOperatorRequest SubmitNtmsOperatorRequestW
+
+%else  ;// ANSI
+
+%define CreateNtmsMedia CreateNtmsMediaA
+%define CreateNtmsMediaPool CreateNtmsMediaPoolA
+%define EjectDiskFromSADrive EjectDiskFromSADriveA
+%define GetNtmsMediaPoolName GetNtmsMediaPoolNameA
+%define GetNtmsObjectAttribute GetNtmsObjectAttributeA
+%define GetNtmsObjectInformation GetNtmsObjectInformationA
+%define GetNtmsUIOptions GetNtmsUIOptionsA
+%define GetVolumesFromDrive GetVolumesFromDriveA
+%define OpenNtmsSession OpenNtmsSessionA
+%define SetNtmsObjectAttribute SetNtmsObjectAttributeA
+%define SetNtmsObjectInformation SetNtmsObjectInformationA
+%define SetNtmsUIOptions SetNtmsUIOptionsA
+%define SubmitNtmsOperatorRequest SubmitNtmsOperatorRequestA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_NTMSAPI_INC__

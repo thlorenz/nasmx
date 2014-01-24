@@ -1,5 +1,5 @@
-%ifndef __winspool_INC__
-%define __winspool_INC__
+%ifndef __NASMX_WINSPOOL_INC__
+%define __NASMX_WINSPOOL_INC__
 
 IMPORT ADVANCEDSETUPDIALOG, 16
 IMPORT AbortPrinter, 4
@@ -198,4 +198,138 @@ IMPORT WaitForPrinterChange, 8
 IMPORT WritePrinter, 16
 IMPORT XcvDataW, 32
 
-%endif
+%ifdef UNICODE
+
+%define AddForm AddFormW
+%define AddJob AddJobW
+%define AddMonitor AddMonitorW
+%define AddPerMachineConnection AddPerMachineConnectionW
+%define AddPort AddPortW
+%define AddPortEx AddPortExW
+%define AddPrintProcessor AddPrintProcessorW
+%define AddPrintProvidor AddPrintProvidorW
+%define AddPrinter AddPrinterW
+%define AddPrinterConnection AddPrinterConnectionW
+%define AddPrinterDriver AddPrinterDriverW
+%define AddPrinterDriverEx AddPrinterDriverExW
+%define AdvancedDocumentProperties AdvancedDocumentPropertiesW
+%define ConfigurePort ConfigurePortW
+%define DeleteForm DeleteFormW
+%define DeleteMonitor DeleteMonitorW
+%define DeletePerMachineConnection DeletePerMachineConnectionW
+%define DeletePort DeletePortW
+%define DeletePrintProcessor DeletePrintProcessorW
+%define DeletePrintProvidor DeletePrintProvidorW
+%define DeletePrinterConnection DeletePrinterConnectionW
+%define DeletePrinterData DeletePrinterDataW
+%define DeletePrinterDataEx DeletePrinterDataExW
+%define DeletePrinterDriver DeletePrinterDriverW
+%define DeletePrinterDriverEx DeletePrinterDriverExW
+%define DeletePrinterKey DeletePrinterKeyW
+%define DeviceCapabilities DeviceCapabilitiesW
+%define DocumentProperties DocumentPropertiesW
+%define EnumForms EnumFormsW
+%define EnumJobs EnumJobsW
+%define EnumMonitors EnumMonitorsW
+%define EnumPerMachineConnections EnumPerMachineConnectionsW
+%define EnumPorts EnumPortsW
+%define EnumPrinterData EnumPrinterDataW
+%define EnumPrintProcessors EnumPrintProcessorsW
+%define EnumPrintProcessorDatatypes EnumPrintProcessorDatatypesW
+%define EnumPrinterDataEx EnumPrinterDataExW
+%define EnumPrinterDrivers EnumPrinterDriversW
+%define EnumPrinterKey EnumPrinterKeyW
+%define EnumPrinters EnumPrintersW
+%define GetDefaultPrinter GetDefaultPrinterW
+%define GetForm GetFormW
+%define GetJob GetJobW
+%define GetPrintProcessorDirectory GetPrintProcessorDirectoryW
+%define GetPrinter GetPrinterW
+%define GetPrinterData GetPrinterDataW
+%define GetPrinterDataEx GetPrinterDataExW
+%define GetPrinterDriver GetPrinterDriverW
+%define GetPrinterDriverDirectory GetPrinterDriverDirectoryW
+%define IsValidDevmode IsValidDevmodeW
+%define OpenPrinter OpenPrinterW
+%define PrinterMessageBox PrinterMessageBoxW
+%define PublishPrinter PublishPrinterW
+%define ResetPrinter ResetPrinterW
+%define SetDefaultPrinter SetDefaultPrinterW
+%define SetForm SetFormW
+%define SetJob SetJobW
+%define SetPort SetPortW
+%define SetPrinterData SetPrinterDataW
+%define SetPrinter SetPrinterW
+%define SetPrinterDataEx SetPrinterDataExW
+%define StartDocDlg StartDocDlgW
+%define StartDocPrinter StartDocPrinterW
+
+%else  ;// ANSI
+
+%define AddForm AddFormA
+%define AddJob AddJobA
+%define AddMonitor AddMonitorA
+%define AddPerMachineConnection AddPerMachineConnectionA
+%define AddPort AddPortA
+%define AddPortEx AddPortExA
+%define AddPrintProcessor AddPrintProcessorA
+%define AddPrintProvidor AddPrintProvidorA
+%define AddPrinter AddPrinterA
+%define AddPrinterConnection AddPrinterConnectionA
+%define AddPrinterDriver AddPrinterDriverA
+%define AddPrinterDriverEx AddPrinterDriverExA
+%define AdvancedDocumentProperties AdvancedDocumentPropertiesA
+%define ConfigurePort ConfigurePortA
+%define DeleteForm DeleteFormA
+%define DeleteMonitor DeleteMonitorA
+%define DeletePerMachineConnection DeletePerMachineConnectionA
+%define DeletePort DeletePortA
+%define DeletePrintProcessor DeletePrintProcessorA
+%define DeletePrintProvidor DeletePrintProvidorA
+%define DeletePrinterConnection DeletePrinterConnectionA
+%define DeletePrinterData DeletePrinterDataA
+%define DeletePrinterDataEx DeletePrinterDataExA
+%define DeletePrinterDriver DeletePrinterDriverA
+%define DeletePrinterDriverEx DeletePrinterDriverExA
+%define DeletePrinterKey DeletePrinterKeyA
+%define DeviceCapabilities DeviceCapabilitiesA
+%define DocumentProperties DocumentPropertiesA
+%define EnumForms EnumFormsA
+%define EnumJobs EnumJobsA
+%define EnumMonitors EnumMonitorsA
+%define EnumPerMachineConnections EnumPerMachineConnectionsA
+%define EnumPorts EnumPortsA
+%define EnumPrinterData EnumPrinterDataA
+%define EnumPrintProcessors EnumPrintProcessorsA
+%define EnumPrintProcessorDatatypes EnumPrintProcessorDatatypesA
+%define EnumPrinterDataEx EnumPrinterDataExA
+%define EnumPrinterDrivers EnumPrinterDriversA
+%define EnumPrinterKey EnumPrinterKeyA
+%define EnumPrinters EnumPrintersA
+%define GetDefaultPrinter GetDefaultPrinterA
+%define GetForm GetFormA
+%define GetJob GetJobA
+%define GetPrintProcessorDirectory GetPrintProcessorDirectoryA
+%define GetPrinter GetPrinterA
+%define GetPrinterData GetPrinterDataA
+%define GetPrinterDataEx GetPrinterDataExA
+%define GetPrinterDriver GetPrinterDriverA
+%define GetPrinterDriverDirectory GetPrinterDriverDirectoryA
+%define IsValidDevmode IsValidDevmodeA
+%define OpenPrinter OpenPrinterA
+%define PrinterMessageBox PrinterMessageBoxA
+%define PublishPrinter PublishPrinterA
+%define ResetPrinter ResetPrinterA
+%define SetDefaultPrinter SetDefaultPrinterA
+%define SetForm SetFormA
+%define SetJob SetJobA
+%define SetPort SetPortA
+%define SetPrinterData SetPrinterDataA
+%define SetPrinter SetPrinterA
+%define SetPrinterDataEx SetPrinterDataExA
+%define StartDocDlg StartDocDlgA
+%define StartDocPrinter StartDocPrinterA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_WINSPOOL_INC__

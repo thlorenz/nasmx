@@ -1,5 +1,5 @@
-%ifndef __msvfw32_INC__
-%define __msvfw32_INC__
+%ifndef __NASMX_MSVFW32_INC__
+%define __NASMX_MSVFW32_INC__
 
 IMPORT AVIBuildFilterA, 12
 IMPORT AVIBuildFilterW, 12
@@ -117,4 +117,42 @@ IMPORT capGetDriverDescriptionA, 20
 IMPORT capGetDriverDescriptionW, 20
 IMPORT videoThunk32, 20
 
-%endif
+%ifdef UNICODE
+
+%define AVIBuildFilter AVIBuildFilterW
+%define AVIFileCreateStream AVIFileCreateStreamW
+%define AVIFileInfo AVIFileInfoW
+%define AVIFileOpen AVIFileOpenW
+%define AVISaveV AVISaveVW
+%define AVIStreamInfo AVIStreamInfoW
+%define AVIStreamOpenFromFile AVIStreamOpenFromFileW
+%define EditStreamSetInfo EditStreamSetInfoW
+%define EditStreamSetName EditStreamSetNameW
+%define GetOpenFileNamePreview GetOpenFileNamePreviewW
+%define GetSaveFileNamePreview GetSaveFileNamePreviewW
+%define  _AVISave _AVISaveW
+%define _MCIWndCreate _MCIWndCreateW
+%define capCreateCaptureWindow capCreateCaptureWindowW
+%define capGetDriverDescription capGetDriverDescriptionW
+
+%else  ;// ANSI
+
+%define AVIBuildFilter AVIBuildFilterA
+%define AVIFileCreateStream AVIFileCreateStreamA
+%define AVIFileInfo AVIFileInfoA
+%define AVIFileOpen AVIFileOpenA
+%define AVISaveV AVISaveVA
+%define AVIStreamInfo AVIStreamInfoA
+%define AVIStreamOpenFromFile AVIStreamOpenFromFileA
+%define EditStreamSetInfo EditStreamSetInfoA
+%define EditStreamSetName EditStreamSetNameA
+%define GetOpenFileNamePreview GetOpenFileNamePreviewA
+%define GetSaveFileNamePreview GetSaveFileNamePreviewA
+%define  _AVISave _AVISaveA
+%define _MCIWndCreate _MCIWndCreateA
+%define capCreateCaptureWindow capCreateCaptureWindowA
+%define capGetDriverDescription capGetDriverDescriptionA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_MSVFW32_INC__

@@ -1,5 +1,5 @@
-%ifndef __schannel_INC__
-%define __schannel_INC__
+%ifndef __NASMX_SCHANNEL_INC__
+%define __NASMX_SCHANNEL_INC__
 
 IMPORT AcceptSecurityContext, 36
 IMPORT AcquireCredentialsHandleA, 36
@@ -24,4 +24,24 @@ IMPORT QuerySecurityPackageInfoW, 8
 IMPORT RevertSecurityContext, 4
 IMPORT VerifySignature, 16
 
-%endif
+%ifdef UNICODE
+
+%define AcquireCredentialsHandle AcquireCredentialsHandleW
+%define EnumerateSecurityPackages EnumerateSecurityPackagesW
+%define InitSecurityInterface InitSecurityInterfaceW
+%define InitializeSecurityContext InitializeSecurityContextW
+%define QueryContextAttributes QueryContextAttributesW
+%define QuerySecurityPackageInfo QuerySecurityPackageInfoW
+
+%else  ;// ANSI
+
+%define AcquireCredentialsHandle AcquireCredentialsHandleA
+%define EnumerateSecurityPackages EnumerateSecurityPackagesA
+%define InitSecurityInterface InitSecurityInterfaceA
+%define InitializeSecurityContext InitializeSecurityContextA
+%define QueryContextAttributes QueryContextAttributesA
+%define QuerySecurityPackageInfo QuerySecurityPackageInfoA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_SCHANNEL_INC__

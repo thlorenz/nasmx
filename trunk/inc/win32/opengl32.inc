@@ -1,5 +1,5 @@
-%ifndef __opengl32_INC__
-%define __opengl32_INC__
+%ifndef __NASMX_OPENGL32_INC__
+%define __NASMX_OPENGL32_INC__
 
 IMPORT GlmfBeginGlsBlock, 4
 IMPORT GlmfCloseMetaFile, 4
@@ -370,4 +370,12 @@ IMPORT wglUseFontBitmapsW, 16
 IMPORT wglUseFontOutlinesA, 32
 IMPORT wglUseFontOutlinesW, 32
 
-%endif
+%ifdef UNICODE
+%define wglUseFontBitmaps wglUseFontBitmapsW
+%define wglUseFontOutlines wglUseFontOutlinesW
+%else  ;// ANSI
+%define wglUseFontBitmaps wglUseFontBitmapsA
+%define wglUseFontOutlines wglUseFontOutlinesA
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_OPENGL32_INC__

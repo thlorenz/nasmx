@@ -1,5 +1,5 @@
-%ifndef __comctl32_INC__
-%define __comctl32_INC__
+%ifndef __NASMX_COMCTL32_INC__
+%define __NASMX_COMCTL32_INC__
 
 IMPORT AddMRUStringW, 8
 IMPORT CreateMRUListW, 4
@@ -102,4 +102,22 @@ IMPORT Str_SetPtrW, 8
 IMPORT UninitializeFlatSB, 4
 IMPORT _TrackMouseEvent, 4
 
-%endif
+%ifdef UNICODE
+
+%define CreatePropertySheetPage CreatePropertySheetPageW
+%define CreateStatusWindow CreateStatusWindowW
+%define DrawStatusText DrawStatusTextW
+%define ImageList_LoadImage ImageList_LoadImageW
+%define PropertySheet PropertySheetW
+
+%else  ;// ANSI
+
+%define CreatePropertySheetPage CreatePropertySheetPageA
+%define CreateStatusWindow CreateStatusWindowA
+%define DrawStatusText DrawStatusTextA
+%define ImageList_LoadImage ImageList_LoadImageA
+%define PropertySheet PropertySheetA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_COMCTL32_INC__

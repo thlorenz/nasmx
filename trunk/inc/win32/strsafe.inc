@@ -1,5 +1,5 @@
-%ifndef __strsafe_INC__
-%define __strsafe_INC__
+%ifndef __NASMX_STRSAFE_INC__
+%define __NASMX_STRSAFE_INC__
 
 IMPORT StringCatExWorkerA, 28
 IMPORT StringCatExWorkerW, 28
@@ -76,4 +76,86 @@ IMPORT StringVPrintfExWorkerW, 32
 IMPORT StringVPrintfWorkerA, 16
 IMPORT StringVPrintfWorkerW, 16
 
-%endif
+%ifdef UNICODE
+
+%define StringCatExWorker StringCatExWorkerW
+%define StringCatNExWorker StringCatNExWorkerW
+%define StringCatNWorker StringCatNWorkerW
+%define StringCatWorker StringCatWorkerW
+%define StringCbCatEx StringCbCatExW
+%define StringCbCatN StringCbCatNW
+%define StringCbCat StringCbCatW
+%define StringCbCatNEx StringCbCatNExW
+%define StringCbCopy StringCbCopyW
+%define StringCbCopyEx StringCbCopyExW
+%define StringCbCopyN StringCbCopyNW
+%define StringCbCopyNEx StringCbCopyNExW
+%define StringCbLength StringCbLengthW
+%define StringCbPrintf StringCbPrintfW
+%define StringCbPrintfEx StringCbPrintfExW
+%define StringCbVPrintfEx StringCbVPrintfExW
+%define StringCbVPrintf StringCbVPrintfW
+%define StringCchCat StringCchCatW
+%define StringCchCatEx StringCchCatExW
+%define StringCchCatN StringCchCatNW
+%define StringCchCatNEx StringCchCatNExW
+%define StringCchCopy StringCchCopyW
+%define StringCchCopyEx StringCchCopyExW
+%define StringCchCopyN StringCchCopyNW
+%define StringCchCopyNEx StringCchCopyNExW
+%define StringCchLength StringCchLengthW
+%define StringCchPrintf StringCchPrintfW
+%define StringCchPrintfEx StringCchPrintfExW
+%define StringCchVPrintf StringCchVPrintfW
+%define StringCchVPrintfEx StringCchVPrintfExW
+%define StringCopyExWorker StringCopyExWorkerW
+%define StringCopyNExWorker StringCopyNExWorkerW
+%define StringCopyNWorker StringCopyNWorkerW
+%define StringCopyWorker StringCopyWorkerW
+%define StringLengthWorker StringLengthWorkerW
+%define StringVPrintfExWorker StringVPrintfExWorkerW
+%define StringVPrintfWorker StringVPrintfWorkerW
+
+%else  ;// ANSI
+
+%define StringCatExWorker StringCatExWorkerA
+%define StringCatNExWorker StringCatNExWorkerA
+%define StringCatNWorker StringCatNWorkerA
+%define StringCatWorker StringCatWorkerA
+%define StringCbCatEx StringCbCatExA
+%define StringCbCatN StringCbCatNA
+%define StringCbCat StringCbCatA
+%define StringCbCatNEx StringCbCatNExA
+%define StringCbCopy StringCbCopyA
+%define StringCbCopyEx StringCbCopyExA
+%define StringCbCopyN StringCbCopyNA
+%define StringCbCopyNEx StringCbCopyNExA
+%define StringCbLength StringCbLengthA
+%define StringCbPrintf StringCbPrintfA
+%define StringCbPrintfEx StringCbPrintfExA
+%define StringCbVPrintfEx StringCbVPrintfExA
+%define StringCbVPrintf StringCbVPrintfA
+%define StringCchCat StringCchCatA
+%define StringCchCatEx StringCchCatExA
+%define StringCchCatN StringCchCatNA
+%define StringCchCatNEx StringCchCatNExA
+%define StringCchCopy StringCchCopyA
+%define StringCchCopyEx StringCchCopyExA
+%define StringCchCopyN StringCchCopyNA
+%define StringCchCopyNEx StringCchCopyNExA
+%define StringCchLength StringCchLengthA
+%define StringCchPrintf StringCchPrintfA
+%define StringCchPrintfEx StringCchPrintfExA
+%define StringCchVPrintf StringCchVPrintfA
+%define StringCchVPrintfEx StringCchVPrintfExA
+%define StringCopyExWorker StringCopyExWorkerA
+%define StringCopyNExWorker StringCopyNExWorkerA
+%define StringCopyNWorker StringCopyNWorkerA
+%define StringCopyWorker StringCopyWorkerA
+%define StringLengthWorker StringLengthWorkerA
+%define StringVPrintfExWorker StringVPrintfExWorkerA
+%define StringVPrintfWorker StringVPrintfWorkerA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_STRSAFE_INC__

@@ -1,5 +1,5 @@
-%ifndef __psapi_INC__
-%define __psapi_INC__
+%ifndef __NASMX_PSAPI_INC__
+%define __NASMX_PSAPI_INC__
 
 IMPORT EmptyWorkingSet, 4
 IMPORT EnumDeviceDrivers, 12
@@ -27,4 +27,26 @@ IMPORT InitializeProcessForWsWatch, 4
 IMPORT QueryWorkingSet, 12
 IMPORT QueryWorkingSetEx, 12
 
-%endif
+%ifdef UNICODE
+
+%define EnumPageFiles EnumPageFilesW
+%define GetDeviceDriverBaseName GetDeviceDriverBaseNameW
+%define GetDeviceDriverFileName GetDeviceDriverFileNameW
+%define GetMappedFileName GetMappedFileNameW
+%define GetModuleBaseName GetModuleBaseNameW
+%define GetModuleFileNameEx GetModuleFileNameExW
+%define GetProcessImageFileName GetProcessImageFileNameW
+
+%else  ;// ANSI
+
+%define EnumPageFiles EnumPageFilesW
+%define GetDeviceDriverBaseName GetDeviceDriverBaseNameW
+%define GetDeviceDriverFileName GetDeviceDriverFileNameW
+%define GetMappedFileName GetMappedFileNameW
+%define GetModuleBaseName GetModuleBaseNameW
+%define GetModuleFileNameEx GetModuleFileNameExW
+%define GetProcessImageFileName GetProcessImageFileNameW
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_PSAPI_INC__

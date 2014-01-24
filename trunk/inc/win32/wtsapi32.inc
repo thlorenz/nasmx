@@ -1,5 +1,5 @@
-%ifndef __wtsapi32_INC__
-%define __wtsapi32_INC__
+%ifndef __NASMX_WTSAPI32_INC__
+%define __NASMX_WTSAPI32_INC__
 
 IMPORT WTSCloseServer, 4
 IMPORT WTSDisconnectSession, 12
@@ -37,4 +37,30 @@ IMPORT WTSVirtualChannelRead, 20
 IMPORT WTSVirtualChannelWrite, 16
 IMPORT WTSWaitSystemEvent, 12
 
+%ifdef UNICODE
+
+%define WTSEnumerateProcesses WTSEnumerateProcessesW
+%define WTSEnumerateServers WTSEnumerateServersW
+%define WTSEnumerateSessions WTSEnumerateSessionsW
+%define WTSOpenServer WTSOpenServerW
+%define WTSQuerySessionInformation WTSQuerySessionInformationW
+%define WTSQueryUserConfig WTSQueryUserConfigW
+%define WTSSendMessage WTSSendMessageW
+%define WTSSetSessionInformation WTSSetSessionInformationW
+%define WTSSetUserConfig WTSSetUserConfigW
+
+%else  ;// ANSI
+
+%define WTSEnumerateProcesses WTSEnumerateProcessesA
+%define WTSEnumerateServers WTSEnumerateServersA
+%define WTSEnumerateSessions WTSEnumerateSessionsA
+%define WTSOpenServer WTSOpenServerA
+%define WTSQuerySessionInformation WTSQuerySessionInformationA
+%define WTSQueryUserConfig WTSQueryUserConfigA
+%define WTSSendMessage WTSSendMessageA
+%define WTSSetSessionInformation WTSSetSessionInformationA
+%define WTSSetUserConfig WTSSetUserConfigA
+
 %endif
+
+%endif  ;// __NASMX_WTSAPI32_INC__

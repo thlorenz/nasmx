@@ -1,5 +1,5 @@
-%ifndef __rasdlg_INC__
-%define __rasdlg_INC__
+%ifndef __NASMX_RASDLG_INC__
+%define __NASMX_RASDLG_INC__
 
 IMPORT DwTerminalDlg, 20
 IMPORT GetRasDialOutProtocols, 0
@@ -39,4 +39,26 @@ IMPORT RasWizSetEntryName, 12
 IMPORT RouterEntryDlgA, 16
 IMPORT RouterEntryDlgW, 16
 
-%endif
+%ifdef UNICODE
+
+%define RasAutodialDisableDlg RasAutodialDisableDlgW
+%define RasAutodialQueryDlg RasAutodialQueryDlgW
+%define RasDialDlg RasDialDlgW
+%define RasEntryDlg RasEntryDlgW
+%define RasMonitorDlg RasMonitorDlgW
+%define RasPhonebookDlg RasPhonebookDlgW
+%define RouterEntryDlg RouterEntryDlgW
+
+%else  ;// ANSI
+
+%define RasAutodialDisableDlg RasAutodialDisableDlgA
+%define RasAutodialQueryDlg RasAutodialQueryDlgA
+%define RasDialDlg RasDialDlgA
+%define RasEntryDlg RasEntryDlgA
+%define RasMonitorDlg RasMonitorDlgA
+%define RasPhonebookDlg RasPhonebookDlgA
+%define RouterEntryDlg RouterEntryDlgA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_RASDLG_INC__

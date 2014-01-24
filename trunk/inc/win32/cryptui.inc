@@ -1,5 +1,5 @@
-%ifndef __cryptui_INC__
-%define __cryptui_INC__
+%ifndef __NASMX_CRYPTUI_INC__
+%define __NASMX_CRYPTUI_INC__
 
 IMPORT ACUIProviderInvokeUI, 4
 IMPORT CryptUIDlgCertMgr, 4
@@ -48,4 +48,34 @@ IMPORT LocalEnrollNoDS, 92
 IMPORT RetrievePKCS7FromCA, 28
 IMPORT WizardFree, 4
 
-%endif
+%ifdef UNICODE
+
+%define CryptUIDlgSelectCertificate CryptUIDlgSelectCertificateW
+%define CryptUIDlgSelectStore CryptUIDlgSelectStoreW
+%define CryptUIDlgViewCRL CryptUIDlgViewCRLW
+%define CryptUIDlgViewCTL CryptUIDlgViewCTLW
+%define CryptUIDlgViewCertificate CryptUIDlgViewCertificateW
+%define CryptUIDlgViewCertificateProperties CryptUIDlgViewCertificatePropertiesW
+%define CryptUIDlgViewSignerInfo CryptUIDlgViewSignerInfoW
+%define CryptUIFreeCertificatePropertiesPages CryptUIFreeCertificatePropertiesPagesW
+%define CryptUIFreeViewSignaturesPages CryptUIFreeViewSignaturesPagesW
+%define CryptUIGetCertificatePropertiesPages CryptUIGetCertificatePropertiesPagesW
+%define CryptUIGetViewSignaturesPages CryptUIGetViewSignaturesPagesW
+
+%else  ;// ANSI
+
+%define CryptUIDlgSelectCertificate CryptUIDlgSelectCertificateA
+%define CryptUIDlgSelectStore CryptUIDlgSelectStoreA
+%define CryptUIDlgViewCRL CryptUIDlgViewCRLA
+%define CryptUIDlgViewCTL CryptUIDlgViewCTLA
+%define CryptUIDlgViewCertificate CryptUIDlgViewCertificateA
+%define CryptUIDlgViewCertificateProperties CryptUIDlgViewCertificatePropertiesA
+%define CryptUIDlgViewSignerInfo CryptUIDlgViewSignerInfoA
+%define CryptUIFreeCertificatePropertiesPages CryptUIFreeCertificatePropertiesPagesA
+%define CryptUIFreeViewSignaturesPages CryptUIFreeViewSignaturesPagesA
+%define CryptUIGetCertificatePropertiesPages CryptUIGetCertificatePropertiesPagesA
+%define CryptUIGetViewSignaturesPages CryptUIGetViewSignaturesPagesA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_CRYPTUI_INC__

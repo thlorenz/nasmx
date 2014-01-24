@@ -1,5 +1,5 @@
-%ifndef __ntdsapi_INC__
-%define __ntdsapi_INC__
+%ifndef __NASMX_NTDSAPI_INC__
+%define __NASMX_NTDSAPI_INC__
 
 IMPORT DsAddSidHistoryA, 32
 IMPORT DsAddSidHistoryW, 32
@@ -106,4 +106,100 @@ IMPORT DsaopExecuteScript, 24
 IMPORT DsaopPrepareScript, 16
 IMPORT DsaopUnBind, 4
 
-%endif
+%ifdef UNICODE
+
+%define DsAddSidHistory DsAddSidHistoryW
+%define DsBind DsBindW
+%define DsBindToISTG DsBindToISTGW
+%define DsBindWithCred DsBindWithCredW
+%define DsBindWithSpn DsBindWithSpnW
+%define DsBindWithSpnEx DsBindWithSpnExW
+%define DsClientMakeSpnForTargetServer DsClientMakeSpnForTargetServerW
+%define DsCrackNames DsCrackNamesW
+%define DsCrackSpn2 DsCrackSpn2W
+%define DsCrackSpn DsCrackSpnW
+%define DsCrackUnquotedMangledRdn DsCrackUnquotedMangledRdnW
+%define DsFreeDomainControllerInfo DsFreeDomainControllerInfoW
+%define DsFreeNameResult DsFreeNameResultW
+%define DsFreeSchemaGuidMap DsFreeSchemaGuidMapW
+%define DsFreeSpnArray DsFreeSpnArrayW
+%define DsGetDomainControllerInfo DsGetDomainControllerInfoW
+%define DsGetSpn DsGetSpnW
+%define DsInheritSecurityIdentity DsInheritSecurityIdentityW
+%define DsIsMangledDn DsIsMangledDnW
+%define DsIsMangledRdnValue DsIsMangledRdnValueW
+%define DsListDomainsInSite DsListDomainsInSiteW
+%define DsListInfoForServer DsListInfoForServerW
+%define DsListRoles DsListRolesW
+%define DsListServersForDomainInSite DsListServersForDomainInSiteW
+%define DsListServersInSite DsListServersInSiteW
+%define DsListSites DsListSitesW
+%define DsMakePasswordCredentials DsMakePasswordCredentialsW
+%define DsMakeSpn DsMakeSpnW
+%define DsMapSchemaGuids DsMapSchemaGuidsW
+%define DsQuerySitesByCost DsQuerySitesByCostW
+%define DsQuoteRdnValue DsQuoteRdnValueW
+%define DsRemoveDsDomain DsRemoveDsDomainW
+%define DsRemoveDsServer DsRemoveDsServerW
+%define DsReplicaAdd DsReplicaAddW
+%define DsReplicaDel DsReplicaDelW
+%define DsReplicaModify DsReplicaModifyW
+%define DsReplicaSync DsReplicaSyncW
+%define DsReplicaSyncAll DsReplicaSyncAllW
+%define DsReplicaUpdateRefs DsReplicaUpdateRefsW
+%define DsReplicaVerifyObjects DsReplicaVerifyObjectsW
+%define DsServerRegisterSpn DsServerRegisterSpnW
+%define DsUnBind DsUnBindW
+%define DsUnquoteRdnValue DsUnquoteRdnValueW
+%define DsWriteAccountSpn DsWriteAccountSpnW
+
+%else  ;// ANSI
+
+%endif  ;// UNICODE
+
+%define DsAddSidHistory DsAddSidHistoryA
+%define DsBind DsBindA
+%define DsBindToISTG DsBindToISTGA
+%define DsBindWithCred DsBindWithCredA
+%define DsBindWithSpn DsBindWithSpnA
+%define DsBindWithSpnEx DsBindWithSpnExA
+%define DsClientMakeSpnForTargetServer DsClientMakeSpnForTargetServerA
+%define DsCrackNames DsCrackNamesA
+%define DsCrackSpn2 DsCrackSpn2A
+%define DsCrackSpn DsCrackSpnA
+%define DsCrackUnquotedMangledRdn DsCrackUnquotedMangledRdnA
+%define DsFreeDomainControllerInfo DsFreeDomainControllerInfoA
+%define DsFreeNameResult DsFreeNameResultA
+%define DsFreeSchemaGuidMap DsFreeSchemaGuidMapA
+%define DsFreeSpnArray DsFreeSpnArrayA
+%define DsGetDomainControllerInfo DsGetDomainControllerInfoA
+%define DsGetSpn DsGetSpnA
+%define DsInheritSecurityIdentity DsInheritSecurityIdentityA
+%define DsIsMangledDn DsIsMangledDnA
+%define DsIsMangledRdnValue DsIsMangledRdnValueA
+%define DsListDomainsInSite DsListDomainsInSiteA
+%define DsListInfoForServer DsListInfoForServerA
+%define DsListRoles DsListRolesA
+%define DsListServersForDomainInSite DsListServersForDomainInSiteA
+%define DsListServersInSite DsListServersInSiteA
+%define DsListSites DsListSitesA
+%define DsMakePasswordCredentials DsMakePasswordCredentialsA
+%define DsMakeSpn DsMakeSpnA
+%define DsMapSchemaGuids DsMapSchemaGuidsA
+%define DsQuerySitesByCost DsQuerySitesByCostA
+%define DsQuoteRdnValue DsQuoteRdnValueA
+%define DsRemoveDsDomain DsRemoveDsDomainA
+%define DsRemoveDsServer DsRemoveDsServerA
+%define DsReplicaAdd DsReplicaAddA
+%define DsReplicaDel DsReplicaDelA
+%define DsReplicaModify DsReplicaModifyA
+%define DsReplicaSync DsReplicaSyncA
+%define DsReplicaSyncAll DsReplicaSyncAllA
+%define DsReplicaUpdateRefs DsReplicaUpdateRefsA
+%define DsReplicaVerifyObjects DsReplicaVerifyObjectsA
+%define DsServerRegisterSpn DsServerRegisterSpnA
+%define DsUnBind DsUnBindA
+%define DsUnquoteRdnValue DsUnquoteRdnValueA
+%define DsWriteAccountSpn DsWriteAccountSpnA
+
+%endif  ;// __NASMX_NTDSAPI_INC__

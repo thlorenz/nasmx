@@ -1,5 +1,5 @@
-%ifndef __tapi32_INC__
-%define __tapi32_INC__
+%ifndef __NASMX_TAPI32_INC__
+%define __NASMX_TAPI32_INC__
 
 IMPORT GetTapi16CallbackMsg, 8
 IMPORT LAddrParamsInited, 4
@@ -233,4 +233,126 @@ IMPORT tapiRequestMakeCallW, 16
 IMPORT tapiRequestMediaCallA, 40
 IMPORT tapiRequestMediaCallW, 40
 
-%endif
+%ifdef UNICODE
+
+%define lineAddProvider lineAddProviderW
+%define lineBlindTransfer lineBlindTransferW
+%define lineConfigDialog lineConfigDialogW
+%define lineConfigDialogEdit lineConfigDialogEditW
+%define lineCreateAgent lineCreateAgentW
+%define lineCreateAgentSession lineCreateAgentSessionW
+%define lineDial lineDialW
+%define lineForward lineForwardW
+%define lineGatherDigits lineGatherDigitsW
+%define lineGenerateDigits lineGenerateDigitsW
+%define lineGetAddressCaps lineGetAddressCapsW
+%define lineGetAddressID lineGetAddressIDW
+%define lineGetAddressStatus lineGetAddressStatusW
+%define lineGetAgentActivityList lineGetAgentActivityListW
+%define lineGetAgentCaps lineGetAgentCapsW
+%define lineGetAgentGroupList lineGetAgentGroupListW
+%define lineGetAgentStatus lineGetAgentStatusW
+%define lineGetAppPriority lineGetAppPriorityW
+%define lineGetCallInfo lineGetCallInfoW
+%define lineGetCountry lineGetCountryW
+%define lineGetDevCaps lineGetDevCapsW
+%define lineGetDevConfig lineGetDevConfigW
+%define lineGetGroupList lineGetGroupListW
+%define lineGetID lineGetIDW
+%define lineGetIcon lineGetIconW
+%define lineGetLineDevStatus lineGetLineDevStatusW
+%define lineGetProviderList lineGetProviderListW
+%define lineGetQueueList lineGetQueueListW
+%define lineGetRequest lineGetRequestW
+%define lineGetTranslateCaps lineGetTranslateCapsW
+%define lineHandoff lineHandoffW
+%define lineInitializeEx lineInitializeExW
+%define lineMakeCall lineMakeCallW
+%define lineOpen lineOpenW
+%define linePark lineParkW
+%define linePickup linePickupW
+%define linePrepareAddToConference linePrepareAddToConferenceW
+%define lineRedirect lineRedirectW
+%define lineSetAppPriority lineSetAppPriorityW
+%define lineSetDevConfig lineSetDevConfigW
+%define lineSetTollList lineSetTollListW
+%define lineSetupConference lineSetupConferenceW
+%define lineSetupTransfer lineSetupTransferW
+%define lineTranslateAddress lineTranslateAddressW
+%define lineTranslateDialog lineTranslateDialogW
+%define lineUnpark lineUnparkW
+%define phoneConfigDialog phoneConfigDialogW
+%define phoneGetButtonInfo phoneGetButtonInfoW
+%define phoneGetDevCaps phoneGetDevCapsW
+%define phoneGetID phoneGetIDW
+%define phoneGetIcon phoneGetIconW
+%define phoneGetStatus phoneGetStatusW
+%define phoneInitializeEx phoneInitializeExW
+%define phoneSetButtonInfo phoneSetButtonInfoW
+%define tapiGetLocationInfo tapiGetLocationInfoW
+%define tapiRequestMakeCall tapiRequestMakeCallW
+%define tapiRequestMediaCall tapiRequestMediaCallW
+
+%else  ;// ANSI
+
+%define lineAddProvider lineAddProviderA
+%define lineBlindTransfer lineBlindTransferA
+%define lineConfigDialog lineConfigDialogA
+%define lineConfigDialogEdit lineConfigDialogEditA
+%define lineCreateAgent lineCreateAgentA
+%define lineCreateAgentSession lineCreateAgentSessionA
+%define lineDial lineDialA
+%define lineForward lineForwardA
+%define lineGatherDigits lineGatherDigitsA
+%define lineGenerateDigits lineGenerateDigitsA
+%define lineGetAddressCaps lineGetAddressCapsA
+%define lineGetAddressID lineGetAddressIDA
+%define lineGetAddressStatus lineGetAddressStatusA
+%define lineGetAgentActivityList lineGetAgentActivityListA
+%define lineGetAgentCaps lineGetAgentCapsA
+%define lineGetAgentGroupList lineGetAgentGroupListA
+%define lineGetAgentStatus lineGetAgentStatusA
+%define lineGetAppPriority lineGetAppPriorityA
+%define lineGetCallInfo lineGetCallInfoA
+%define lineGetCountry lineGetCountryA
+%define lineGetDevCaps lineGetDevCapsA
+%define lineGetDevConfig lineGetDevConfigA
+%define lineGetGroupList lineGetGroupListA
+%define lineGetID lineGetIDA
+%define lineGetIcon lineGetIconA
+%define lineGetLineDevStatus lineGetLineDevStatusA
+%define lineGetProviderList lineGetProviderListA
+%define lineGetQueueList lineGetQueueListA
+%define lineGetRequest lineGetRequestA
+%define lineGetTranslateCaps lineGetTranslateCapsA
+%define lineHandoff lineHandoffA
+%define lineInitializeEx lineInitializeExA
+%define lineMakeCall lineMakeCallA
+%define lineOpen lineOpenA
+%define linePark lineParkA
+%define linePickup linePickupA
+%define linePrepareAddToConference linePrepareAddToConferenceA
+%define lineRedirect lineRedirectA
+%define lineSetAppPriority lineSetAppPriorityA
+%define lineSetDevConfig lineSetDevConfigA
+%define lineSetTollList lineSetTollListA
+%define lineSetupConference lineSetupConferenceA
+%define lineSetupTransfer lineSetupTransferA
+%define lineTranslateAddress lineTranslateAddressA
+%define lineTranslateDialog lineTranslateDialogA
+%define lineUnpark lineUnparkA
+%define phoneConfigDialog phoneConfigDialogA
+%define phoneGetButtonInfo phoneGetButtonInfoA
+%define phoneGetDevCaps phoneGetDevCapsA
+%define phoneGetID phoneGetIDA
+%define phoneGetIcon phoneGetIconA
+%define phoneGetStatus phoneGetStatusA
+%define phoneInitializeEx phoneInitializeExA
+%define phoneSetButtonInfo phoneSetButtonInfoA
+%define tapiGetLocationInfo tapiGetLocationInfoA
+%define tapiRequestMakeCall tapiRequestMakeCallA
+%define tapiRequestMediaCall tapiRequestMediaCallA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_TAPI32_INC__

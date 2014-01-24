@@ -1,5 +1,5 @@
-%ifndef __ws2_32_INC__
-%define __ws2_32_INC__
+%ifndef __NASMX_WS2_32_INC__
+%define __NASMX_WS2_32_INC__
 
 IMPORT FreeAddrInfoW, 4
 IMPORT GetAddrInfoW, 16
@@ -118,4 +118,40 @@ IMPORT setsockopt, 20
 IMPORT shutdown, 8
 IMPORT socket, 12
 
-%endif
+%ifdef UNICODE
+
+%define FreeAddrInfo FreeAddrInfoW
+%define GetNameInfo GetNameInfoW
+%define WSAAddressToString WSAAddressToStringW
+%define WSADuplicateSocket WSADuplicateSocketW
+%define WSAEnumNameSpaceProviders WSAEnumNameSpaceProvidersW
+%define WSAEnumProtocols WSAEnumProtocolsW
+%define WSAGetServiceClassInfo WSAGetServiceClassInfoW
+%define WSAGetServiceClassNameByClassId WSAGetServiceClassNameByClassIdW
+%define WSAInstallServiceClass WSAInstallServiceClassW
+%define WSALookupServiceBegin WSALookupServiceBeginW
+%define WSALookupServiceNext WSALookupServiceNextW
+%define WSASetService WSASetServiceW
+%define WSASocket WSASocketW
+%define WSAStringToAddress WSAStringToAddressW
+
+%else  ;// ANSI
+
+%define FreeAddrInfo FreeAddrInfoA
+%define GetNameInfo GetNameInfoA
+%define WSAAddressToString WSAAddressToStringA
+%define WSADuplicateSocket WSADuplicateSocketA
+%define WSAEnumNameSpaceProviders WSAEnumNameSpaceProvidersA
+%define WSAEnumProtocols WSAEnumProtocolsA
+%define WSAGetServiceClassInfo WSAGetServiceClassInfoA
+%define WSAGetServiceClassNameByClassId WSAGetServiceClassNameByClassIdA
+%define WSAInstallServiceClass WSAInstallServiceClassA
+%define WSALookupServiceBegin WSALookupServiceBeginA
+%define WSALookupServiceNext WSALookupServiceNextA
+%define WSASetService WSASetServiceA
+%define WSASocket WSASocketA
+%define WSAStringToAddress WSAStringToAddressA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_WS2_32_INC__

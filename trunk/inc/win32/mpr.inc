@@ -1,5 +1,5 @@
-%ifndef __mpr_INC__
-%define __mpr_INC__
+%ifndef __NASMX_MPR_INC__
+%define __NASMX_MPR_INC__
 
 IMPORT MultinetGetConnectionPerformanceA, 8
 IMPORT MultinetGetConnectionPerformanceW, 8
@@ -45,4 +45,52 @@ IMPORT WNetSetLastErrorW, 12
 IMPORT WNetUseConnectionA, 32
 IMPORT WNetUseConnectionW, 32
 
-%endif
+%ifdef UNICODE
+
+%define MultinetGetConnectionPerformance MultinetGetConnectionPerformanceW
+%define WNetAddConnection2 WNetAddConnection2W
+%define WNetAddConnection3 WNetAddConnection3W
+%define WNetAddConnection WNetAddConnectionW
+%define WNetCancelConnection2 WNetCancelConnection2W
+%define WNetCancelConnection WNetCancelConnectionW
+%define WNetConnectionDialog1 WNetConnectionDialog1W
+%define WNetDisconnectDialog1 WNetDisconnectDialog1W
+%define WNetEnumResource WNetEnumResourceW
+%define WNetGetConnection WNetGetConnectionW
+%define WNetGetLastError WNetGetLastErrorW
+%define WNetGetNetworkInformation WNetGetNetworkInformationW
+%define WNetGetProviderName WNetGetProviderNameW
+%define WNetGetResourceInformation WNetGetResourceInformationW
+%define WNetGetResourceParent WNetGetResourceParentW
+%define WNetGetUniversalName WNetGetUniversalNameW
+%define WNetGetUser WNetGetUserW
+%define WNetOpenEnum WNetOpenEnumW
+%define WNetSetLastError WNetSetLastErrorW
+%define WNetUseConnection WNetUseConnectionW
+
+%else  ;// ANSI
+
+%define MultinetGetConnectionPerformance MultinetGetConnectionPerformanceA
+%define WNetAddConnection2 WNetAddConnection2A
+%define WNetAddConnection3 WNetAddConnection3A
+%define WNetAddConnection WNetAddConnectionA
+%define WNetCancelConnection2 WNetCancelConnection2A
+%define WNetCancelConnection WNetCancelConnectionA
+%define WNetConnectionDialog1 WNetConnectionDialog1A
+%define WNetDisconnectDialog1 WNetDisconnectDialog1A
+%define WNetEnumResource WNetEnumResourceA
+%define WNetGetConnection WNetGetConnectionA
+%define WNetGetLastError WNetGetLastErrorA
+%define WNetGetNetworkInformation WNetGetNetworkInformationA
+%define WNetGetProviderName WNetGetProviderNameA
+%define WNetGetResourceInformation WNetGetResourceInformationA
+%define WNetGetResourceParent WNetGetResourceParentA
+%define WNetGetUniversalName WNetGetUniversalNameA
+%define WNetGetUser WNetGetUserA
+%define WNetOpenEnum WNetOpenEnumA
+%define WNetSetLastError WNetSetLastErrorA
+%define WNetUseConnection WNetUseConnectionA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_MPR_INC__

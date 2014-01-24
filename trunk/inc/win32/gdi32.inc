@@ -1,5 +1,5 @@
-%ifndef __gdi32_INC__
-%define __gdi32_INC__
+%ifndef __NASMX_GDI32_INC__
+%define __NASMX_GDI32_INC__
 
 IMPORT AbortDoc, 4
 IMPORT AbortPath, 4
@@ -373,4 +373,108 @@ IMPORT UpdateICMRegKeyW, 16
 IMPORT WidenPath, 4
 IMPORT gdiPlaySpoolStream, 24
 
-%endif
+%ifdef UNICODE
+
+%define AddFontResource AddFontResourceW
+%define AddFontResourceEx AddFontResourceExW
+%define CopyEnhMetaFile CopyEnhMetaFileW
+%define CopyMetaFile CopyMetaFileW
+%define CreateColorSpace CreateColorSpaceW
+%define CreateDC CreateDCW
+%define CreateEnhMetaFile CreateEnhMetaFileW
+%define CreateFont CreateFontW
+%define CreateFontIndirect CreateFontIndirectW
+%define CreateFontIndirectEx CreateFontIndirectExW
+%define CreateIC CreateICW
+%define CreateMetaFile CreateMetaFileW
+%define CreateScalableFontResource CreateScalableFontResourceW
+%define DeviceCapabilitiesEx DeviceCapabilitiesExW
+%define EnumFontFamilies EnumFontFamiliesW
+%define EnumFontFamiliesEx EnumFontFamiliesExW
+%define EnumFonts EnumFontsW
+%define EnumICMProfiles EnumICMProfilesW
+%define ExtTextOut ExtTextOutW
+%define GetCharABCWidths GetCharABCWidthsW
+%define GetCharABCWidthsFloat GetCharABCWidthsFloatW
+%define GetCharWidth32 GetCharWidth32W
+%define GetCharWidth GetCharWidthW
+%define GetCharWidthFloat GetCharWidthFloatW
+%define GetCharacterPlacement GetCharacterPlacementW
+%define GetEnhMetaFile GetEnhMetaFileW
+%define GetEnhMetaFileDescription GetEnhMetaFileDescriptionW
+%define GetGlyphIndices GetGlyphIndicesW
+%define GetGlyphOutline GetGlyphOutlineW
+%define GetICMProfile GetICMProfileW
+%define GetKerningPairs GetKerningPairsW
+%define GetLogColorSpace GetLogColorSpaceW
+%define GetMetaFile GetMetaFileW
+%define GetObject GetObjectW
+%define GetOutlineTextMetrics GetOutlineTextMetricsW
+%define GetTextExtentExPoint GetTextExtentExPointW
+%define GetTextExtentPoint32 GetTextExtentPoint32W
+%define GetTextExtentPoint GetTextExtentPointW
+%define GetTextFace GetTextFaceW
+%define GetTextMetrics GetTextMetricsW
+%define PolyTextOut PolyTextOutW
+%define RemoveFontResource RemoveFontResourceW
+%define RemoveFontResourceEx RemoveFontResourceExW
+%define ResetDC ResetDCW
+%define SetICMProfile SetICMProfileW
+%define StartDoc StartDocW
+%define TextOut TextOutW
+%define UpdateICMRegKey UpdateICMRegKeyW
+
+%else  ;// ANSI
+
+%define AddFontResource AddFontResourceA
+%define AddFontResourceEx AddFontResourceExA
+%define CopyEnhMetaFile CopyEnhMetaFileA
+%define CopyMetaFile CopyMetaFileA
+%define CreateColorSpace CreateColorSpaceA
+%define CreateDC CreateDCA
+%define CreateEnhMetaFile CreateEnhMetaFileA
+%define CreateFont CreateFontA
+%define CreateFontIndirect CreateFontIndirectA
+%define CreateFontIndirectEx CreateFontIndirectExA
+%define CreateIC CreateICA
+%define CreateMetaFile CreateMetaFileA
+%define CreateScalableFontResource CreateScalableFontResourceA
+%define DeviceCapabilitiesEx DeviceCapabilitiesExA
+%define EnumFontFamilies EnumFontFamiliesA
+%define EnumFontFamiliesEx EnumFontFamiliesExA
+%define EnumFonts EnumFontsA
+%define EnumICMProfiles EnumICMProfilesA
+%define ExtTextOut ExtTextOutA
+%define GetCharABCWidths GetCharABCWidthsA
+%define GetCharABCWidthsFloat GetCharABCWidthsFloatA
+%define GetCharWidth32 GetCharWidth32A
+%define GetCharWidth GetCharWidthA
+%define GetCharWidthFloat GetCharWidthFloatA
+%define GetCharacterPlacement GetCharacterPlacementA
+%define GetEnhMetaFile GetEnhMetaFileA
+%define GetEnhMetaFileDescription GetEnhMetaFileDescriptionA
+%define GetGlyphIndices GetGlyphIndicesA
+%define GetGlyphOutline GetGlyphOutlineA
+%define GetICMProfile GetICMProfileA
+%define GetKerningPairs GetKerningPairsA
+%define GetLogColorSpace GetLogColorSpaceA
+%define GetMetaFile GetMetaFileA
+%define GetObject GetObjectA
+%define GetOutlineTextMetrics GetOutlineTextMetricsA
+%define GetTextExtentExPoint GetTextExtentExPointA
+%define GetTextExtentPoint32 GetTextExtentPoint32A
+%define GetTextExtentPoint GetTextExtentPointA
+%define GetTextFace GetTextFaceA
+%define GetTextMetrics GetTextMetricsA
+%define PolyTextOut PolyTextOutA
+%define RemoveFontResource RemoveFontResourceA
+%define RemoveFontResourceEx RemoveFontResourceExA
+%define ResetDC ResetDCA
+%define SetICMProfile SetICMProfileA
+%define StartDoc StartDocA
+%define TextOut TextOutA
+%define UpdateICMRegKey UpdateICMRegKeyA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_GDI32_INC__

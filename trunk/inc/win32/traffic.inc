@@ -1,5 +1,5 @@
-%ifndef __traffic_INC__
-%define __traffic_INC__
+%ifndef __NASMX_TRAFFIC_INC__
+%define __NASMX_TRAFFIC_INC__
 
 IMPORT TcAddFilter, 12
 IMPORT TcAddFlow, 20
@@ -22,4 +22,20 @@ IMPORT TcSetFlowA, 16
 IMPORT TcSetFlowW, 16
 IMPORT TcSetInterface, 16
 
-%endif
+%ifdef UNICODE
+
+%define TcGetFlowName TcGetFlowNameW
+%define TcOpenInterface TcOpenInterfaceW
+%define TcQueryFlow TcQueryFlowW
+%define TcSetFlow TcSetFlowW
+
+%else  ;// ANSI
+
+%define TcGetFlowName TcGetFlowNameA
+%define TcOpenInterface TcOpenInterfaceA
+%define TcQueryFlow TcQueryFlowA
+%define TcSetFlow TcSetFlowA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_TRAFFIC_INC__

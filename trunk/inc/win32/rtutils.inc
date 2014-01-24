@@ -1,5 +1,5 @@
-%ifndef __rtutils_INC__
-%define __rtutils_INC__
+%ifndef __NASMX_RTUTILS_INC__
+%define __NASMX_RTUTILS_INC__
 
 IMPORT LogErrorA, 16
 IMPORT LogErrorW, 16
@@ -45,4 +45,50 @@ IMPORT TraceRegisterExW, 8
 IMPORT TraceVprintfExA, 16
 IMPORT TraceVprintfExW, 16
 
-%endif
+%ifdef UNICODE
+
+%define LogError LogErrorW
+%define LogEvent LogEventW
+%define RouterGetErrorString RouterGetErrorStringW
+%define RouterLogDeregister RouterLogDeregisterW
+%define RouterLogEvent RouterLogEventW
+%define RouterLogEventData RouterLogEventDataW
+%define RouterLogEventEx RouterLogEventExW
+%define RouterLogEventString RouterLogEventStringW
+%define RouterLogEventValistEx RouterLogEventValistExW
+%define RouterLogRegister RouterLogRegisterW
+%define TraceDeregister TraceDeregisterW
+%define TraceDeregisterEx TraceDeregisterExW
+%define TraceDumpEx TraceDumpExW
+%define TraceGetConsole TraceGetConsoleW
+%define TracePrintfEx TracePrintfExW
+%define TracePrintf TracePrintfW
+%define TracePutsEx TracePutsExW
+%define TraceRegisterEx TraceRegisterExW
+%define TraceVprintfEx TraceVprintfExW
+
+%else  ;// ANSI
+
+%define LogError LogError
+%define LogEvent LogEventA
+%define RouterGetErrorString RouterGetErrorStringA
+%define RouterLogDeregister RouterLogDeregisterA
+%define RouterLogEvent RouterLogEventA
+%define RouterLogEventData RouterLogEventDataA
+%define RouterLogEventEx RouterLogEventExA
+%define RouterLogEventString RouterLogEventStringA
+%define RouterLogEventValistEx RouterLogEventValistExA
+%define RouterLogRegister RouterLogRegisterA
+%define TraceDeregister TraceDeregisterA
+%define TraceDeregisterEx TraceDeregisterExA
+%define TraceDumpEx TraceDumpExA
+%define TraceGetConsole TraceGetConsoleA
+%define TracePrintfEx TracePrintfExA
+%define TracePrintf TracePrintfA
+%define TracePutsEx TracePutsExA
+%define TraceRegisterEx TraceRegisterExA
+%define TraceVprintfEx TraceVprintfExA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_RTUTILS_INC__

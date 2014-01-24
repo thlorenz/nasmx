@@ -1,5 +1,5 @@
-%ifndef __webpost_INC__
-%define __webpost_INC__
+%ifndef __NASMX_WEBPOST_INC__
+%define __NASMX_WEBPOST_INC__
 
 IMPORT WpBindToSiteA, 24
 IMPORT WpBindToSiteW, 24
@@ -18,4 +18,28 @@ IMPORT WpListSitesW, 12
 IMPORT WpPostA, 32
 IMPORT WpPostW, 32
 
-%endif
+%ifdef UNICODE
+
+%define WpBindToSite WpBindToSiteW
+%define WpCreateSite WpCreateSiteW
+%define WpDeleteSite WpDeleteSiteW
+%define WpDoesSiteExist WpDoesSiteExistW
+%define WpEnumProviders WpEnumProvidersW
+%define WpGetErrorString WpGetErrorStringW
+%define WpListSites WpListSitesW
+%define WpPost WpPostW
+
+%else  ;// ANSI
+
+%define WpBindToSite WpBindToSiteA
+%define WpCreateSite WpCreateSiteA
+%define WpDeleteSite WpDeleteSiteA
+%define WpDoesSiteExist WpDoesSiteExistA
+%define WpEnumProviders WpEnumProvidersA
+%define WpGetErrorString WpGetErrorStringA
+%define WpListSites WpListSitesA
+%define WpPost WpPostA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_WEBPOST_INC__

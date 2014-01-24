@@ -1,5 +1,5 @@
-%ifndef __sfc_INC__
-%define __sfc_INC__
+%ifndef __NASMX_SFC_INC__
+%define __NASMX_SFC_INC__
 
 IMPORT SRSetRestorePointA, 8
 IMPORT SRSetRestorePointW, 8
@@ -18,4 +18,10 @@ IMPORT SfpDeleteCatalog, 8
 IMPORT SfpInstallCatalog, 12
 IMPORT SfpVerifyFile, 12
 
-%endif
+%ifdef UNICODE
+%define SRSetRestorePoint SRSetRestorePointW
+%else  ;// ANSI
+%define SRSetRestorePoint SRSetRestorePointA
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_SFC_INC__

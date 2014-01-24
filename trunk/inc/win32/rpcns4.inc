@@ -1,5 +1,5 @@
-%ifndef __rpcns4_INC__
-%define __rpcns4_INC__
+%ifndef __NASMX_RPCNS4_INC__
+%define __NASMX_RPCNS4_INC__
 
 IMPORT I_GetDefaultEntrySyntax, 0
 IMPORT I_RpcNsGetBuffer, 4
@@ -65,4 +65,56 @@ IMPORT RpcNsProfileEltInqNextW, 20
 IMPORT RpcNsProfileEltRemoveA, 20
 IMPORT RpcNsProfileEltRemoveW, 20
 
-%endif
+%ifdef UNICODE
+
+%define RpcNsBindingExport RpcNsBindingExportW
+%define RpcNsBindingExportPnP RpcNsBindingExportPnPW
+%define RpcNsBindingImportBegin RpcNsBindingImportBeginW
+%define RpcNsBindingLookupBegin RpcNsBindingLookupBeginW
+%define RpcNsBindingUnexport RpcNsBindingUnexportW
+%define RpcNsBindingUnexportPnP RpcNsBindingUnexportPnPW
+%define RpcNsEntryExpandName RpcNsEntryExpandNameW
+%define RpcNsEntryObjectInqBegin RpcNsEntryObjectInqBeginW
+%define RpcNsGroupDelete RpcNsGroupDeleteW
+%define RpcNsGroupMbrAdd RpcNsGroupMbrAddW
+%define RpcNsGroupMbrInqBegin RpcNsGroupMbrInqBeginW
+%define RpcNsGroupMbrInqNext RpcNsGroupMbrInqNextW
+%define RpcNsGroupMbrRemove RpcNsGroupMbrRemoveW
+%define RpcNsMgmtBindingUnexport RpcNsMgmtBindingUnexportW
+%define RpcNsMgmtEntryCreate RpcNsMgmtEntryCreateW
+%define RpcNsMgmtEntryDelete RpcNsMgmtEntryDeleteW
+%define RpcNsMgmtEntryInqIfIds RpcNsMgmtEntryInqIfIdsW
+%define RpcNsProfileDelete RpcNsProfileDeleteW
+%define RpcNsProfileEltAdd RpcNsProfileEltAddW
+%define RpcNsProfileEltInqBegin RpcNsProfileEltInqBeginW
+%define RpcNsProfileEltInqNext RpcNsProfileEltInqNextW
+%define RpcNsProfileEltRemove RpcNsProfileEltRemoveW
+
+%else  ;// ANSI
+
+%define RpcNsBindingExport RpcNsBindingExportA
+%define RpcNsBindingExportPnP RpcNsBindingExportPnPA
+%define RpcNsBindingImportBegin RpcNsBindingImportBeginA
+%define RpcNsBindingLookupBegin RpcNsBindingLookupBeginA
+%define RpcNsBindingUnexport RpcNsBindingUnexportA
+%define RpcNsBindingUnexportPnP RpcNsBindingUnexportPnPA
+%define RpcNsEntryExpandName RpcNsEntryExpandNameA
+%define RpcNsEntryObjectInqBegin RpcNsEntryObjectInqBeginA
+%define RpcNsGroupDelete RpcNsGroupDeleteA
+%define RpcNsGroupMbrAdd RpcNsGroupMbrAddA
+%define RpcNsGroupMbrInqBegin RpcNsGroupMbrInqBeginA
+%define RpcNsGroupMbrInqNext RpcNsGroupMbrInqNextA
+%define RpcNsGroupMbrRemove RpcNsGroupMbrRemoveA
+%define RpcNsMgmtBindingUnexport RpcNsMgmtBindingUnexportA
+%define RpcNsMgmtEntryCreate RpcNsMgmtEntryCreateA
+%define RpcNsMgmtEntryDelete RpcNsMgmtEntryDeleteA
+%define RpcNsMgmtEntryInqIfIds RpcNsMgmtEntryInqIfIdsA
+%define RpcNsProfileDelete RpcNsProfileDeleteA
+%define RpcNsProfileEltAdd RpcNsProfileEltAddA
+%define RpcNsProfileEltInqBegin RpcNsProfileEltInqBeginA
+%define RpcNsProfileEltInqNext RpcNsProfileEltInqNextA
+%define RpcNsProfileEltRemove RpcNsProfileEltRemoveA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_RPCNS4_INC__

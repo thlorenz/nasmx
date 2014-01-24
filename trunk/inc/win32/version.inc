@@ -1,5 +1,5 @@
-%ifndef __version_INC__
-%define __version_INC__
+%ifndef __NASMX_VERSION_INC__
+%define __NASMX_VERSION_INC__
 
 IMPORT GetFileVersionInfoA, 16
 IMPORT GetFileVersionInfoSizeA, 8
@@ -14,4 +14,24 @@ IMPORT VerQueryValueIndexA, 24
 IMPORT VerQueryValueIndexW, 24
 IMPORT VerQueryValueW, 16
 
-%endif
+%ifdef UNICODE
+
+%define GetFileVersionInfo GetFileVersionInfoW
+%define GetFileVersionInfoSize GetFileVersionInfoSizeW
+%define VerFindFile VerFindFileW
+%define VerInstallFile VerInstallFileW
+%define VerQueryValue VerQueryValueW
+%define VerQueryValueIndex VerQueryValueIndexW
+
+%else  ;// ANSI
+
+%define GetFileVersionInfo GetFileVersionInfoA
+%define GetFileVersionInfoSize GetFileVersionInfoSizeA
+%define VerFindFile VerFindFileA
+%define VerInstallFile VerInstallFileA
+%define VerQueryValue VerQueryValueA
+%define VerQueryValueIndex VerQueryValueIndexA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_VERSION_INC__
