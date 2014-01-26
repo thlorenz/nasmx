@@ -1,6 +1,6 @@
 ;// DEMO13.ASM
 ;//
-;// Copyright (C)2005-2011 The NASMX Project
+;// Copyright (C)2005-2014 The NASMX Project
 ;//
 ;// This is a fully UNICODE aware, type-defined demo that demonstrates
 ;// using NASMX typedef system to make your code truly portable between
@@ -18,21 +18,24 @@
 
 ;/////////////////////////////////////////////
 ;//
-;// Create our own structure definition with
-;// nested union and struct
-;//
-NASMX_STRUC DDMMYY
-	NASMX_RESERVE day,   int8_t, 1
-	NASMX_RESERVE month, int8_t, 1
+;// Create our own structure definition
+NASMX_STRUC YYYYMMDD
 	NASMX_RESERVE year,  int16_t, 1
+	NASMX_RESERVE month, int8_t, 1
+	NASMX_RESERVE day,   int8_t, 1
 NASMX_ENDSTRUC
 
+;// Another struc with nested union containing struc label
+;// and array of strucs.
 NASMX_STRUC DEMO13_STRUC
     NASMX_RESERVE name, NASMX_TCHAR, 512
     NASMX_UNION dob
-        NASMX_RESERVE ddmmyy, DDMMYY
+        NASMX_RESERVE pt, YYYYMMDD, 1	;// requires double-offset syntax, eg:
+					;//   mov eax, dword[esi + DEMO13_STRUC.dob.pt + YYYYMMDD.month]
         NASMX_RESERVE date, int32_t, 1
     NASMX_ENDUNION
+    NASMX_RESERVE array, DDMMYY1, 8	;// Array of structures!!
+					;// requires double-offset syntax!!
 NASMX_ENDSTRUC
 
 
@@ -160,20 +163,20 @@ endproc
     NASMX_IENDSTRUC
 
     NASMX_ISTRUC message, MSG
-        NASMX_AT hwnd,       NULL
-        NASMX_AT message,    NULL
-        NASMX_AT wParam,     NULL
-        NASMX_AT lParam,     NULL
-        NASMX_AT time,       NULL
-		NASMX_ISTRUC pt, POINT
-			NASMX_AT x,          NULL
-			NASMX_AT y,          NULL
-		NASMX_IENDSTRUC
+        NASMX_AT hwnd,    NULL
+        NASMX_AT message, NULL
+        NASMX_AT wParam,  NULL
+        NASMX_AT lParam,  NULL
+        NASMX_AT time,    NULL
+	NASMX_ISTRUC pt, POINT
+		NASMX_AT x, NULL
+		NASMX_AT y, NULL
+	NASMX_IENDSTRUC
     NASMX_IENDSTRUC
 
     NASMX_ISTRUC rct, RECT
-        NASMX_AT left,           NULL
-        NASMX_AT top,            NULL
-        NASMX_AT right,          NULL
-        NASMX_AT bottom,         NULL
+        NASMX_AT left,   NULL
+        NASMX_AT top,    NULL
+        NASMX_AT right,  NULL
+        NASMX_AT bottom, NULL
     NASMX_IENDSTRUC
