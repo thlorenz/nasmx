@@ -454,6 +454,37 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 %define __NASMX_NUMALPHATOKEN__ '.+-0123456789EeABCDFabcdfGHIJKLMNOPQRSTUVWXYZghijklmnopqrstuvwxyz$@_'
 
 ;//////////////////////////////////////////////////////////////
+;// internal macro calls
+;// usage:
+;//    __nx_stack_push STACKNAME, VALUE
+;//    __nx_stack_pop STACKNAME
+;//
+%macro __nx_stack_push 2.nolist
+	%ifdef __NX_STACK_IDX_%[%1]
+		%assign %%idx __NX_STACK_IDX_%[%1]
+		%assign %%idx ( %%idx + 1 )
+		%ixdefine __NX_STACK_IDX_%[%1] %%idx
+		%ixdefine __NX_STACK_%[%1]_%[%%idx] %2
+	%else
+		%ixdefine __NX_STACK_IDX_%[%1] 1
+		%ixdefine __NX_STACK_%[%1]_1 %2
+	%endif
+%endmacro
+
+%macro __nx_stack_pop 1.nolist
+	%ifdef __NX_STACK_IDX_%[%1]
+		%assign %%idx __NX_STACK_IDX_%[%1]
+		%undef __NX_STACK_%[%1]_%[%%idx]
+		%assign %%idx ( %%idx - 1 )
+		%if ( %%idx != 0 )
+			%xdefine __NX_STACK_IDX_%[%1] %%idx
+		%else
+			%undef __NX_STACK_IDX_%[%1]
+		%endif
+	%endif
+%endmacro
+
+;//////////////////////////////////////////////////////////////
 ;// internal macro call
 ;// used by IMPORT, PROC, & INVOKE
 ;// usage:
@@ -524,6 +555,8 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 ;//////////////////////////////////////////////////////////////////
 ;// Macro to control NASMX default behavior
 ;// example usage:
+;//    NASMX_PRAGMA PACK, PUSH, 2
+;//    NASMX_PRAGMA PACK, POP
 ;//    NASMX_PRAGMA CALLSTACK, 32 ; Enable callstack optimization
 ;//    NASMX_PRAGMA CALLSTACK, 0  ; Disable callstack optimization
 ;//    NASMX_PRAGMA WARNING, DISABLE, ALL
@@ -623,6 +656,35 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 			%endif
 		%else
 			%error 'syntax: nasmx_pragma fastcall_stack_preload, [enable | disable]'
+		%endif
+	%elifidni PACK, %1
+		%ifidni PUSH, %2
+			%assign %%maxsize ( __BITS__ / 2 )
+			%if ( %0 < 3 )
+				%fatal missing packing alignment value
+			%elif ( %3 > %%maxsize )
+				%error cannot align larger than %%maxsize
+			%elif ( %3 > 1 )
+				%assign %%exp 0
+				%assign %%align %3
+				%rep %3
+					%if ((%%align & 0x0001) == 0 )
+						%assign %%exp ( %%exp + 1 )
+						%assign %%align ( %%align >> 1 )
+					%else
+						%exitrep
+					%endif
+				%endrep
+				%if ( %%align != 1 )
+					%fatal alignment must be a small power of 2
+				%endif
+			%endif
+			
+			__nx_stack_push pack, %3
+		%elifidni POP, %2
+			__nx_stack_pop pack
+		%else
+			%error unknown packing directive
 		%endif
 	%else
 		%error 'unknown nasmx_pragma:' %1
@@ -978,10 +1040,18 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 				%assign %%__align ( %%__type & 0x00FF )
 			%endif
 
-			;// If the alignment requirement of the base type for
-			;// the current member being defined is greater than the
-			;// max alignment byte size then clamp to max.
-			%if ( %%__align > %%__max_align )
+			;// If the alignment requirement for the current 
+			;// member being defined is greater than the max
+			;// alignment size then clamp to max.
+			%ifdef __NX_STACK_IDX_PACK
+				%assign %%idx __NX_STACK_IDX_PACK
+				%assign %%__pack __NX_STACK_PACK_%[%%idx]
+				;// if the alignment of the member exceeds the
+				;// packing alignment then use packing.
+				%if ( %%__align > %%__pack )
+					%assign %%__align %%__pack
+				%endif
+			%elif ( %%__align > %%__max_align )
 				%assign %%__align %%__max_align
 			%endif
 
@@ -1007,7 +1077,6 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 					%endif
 				%endif
 			%endif
-
 
 		%endif  ;// if __NX_CTX_POP
 
@@ -1148,10 +1217,14 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 	%endif
 
 	%if ( nx_is_typeof_container(%[%{2}]) != 0 )
+		;// support array of strucs
 		%assign %%size sizeof(%{2})
 		%assign %%__amt (%%size * %%__qty)
 		%xdefine %[%{$__nx_name}.%{1}]_size %%__amt
-		%xdefine %[%{$__nx_name}.%{1}]_type byte_type
+		;// use struc alignment as type
+		%assign %%typ %[%{2}_type]
+		%assign %%__align (0x0001 << (%%typ & 0x000F))
+		%xdefine %[%{$__nx_name}.%{1}]_type %%__align
 		%xdefine %[%{$__nx_name}.%{1}]_reserve byte_reserve
 		%xdefine %[%{$__nx_name}.%{1}]_storage byte_storage
 	%else
@@ -1185,6 +1258,22 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 		%assign %%__align %%__argsize
 	%endif
 
+	%ifdef __NX_STACK_IDX_PACK
+		%assign %%idx __NX_STACK_IDX_PACK
+		%assign %%__pack __NX_STACK_PACK_%[%%idx]
+		;// if the alignment of the member exceeds the
+		;// packing alignment then use packing.
+		%if ( %%__align > %%__pack )
+			%assign %%__align %%__pack
+		%endif
+	%endif
+
+	;// if the alignment requirement for this member is the
+	;// largest observed thus far then save it for later.
+	%if ( %%__align > %$__nx_align )
+		%assign %$__nx_align %%__align
+	%endif
+
 	%ifctx __NX_CTX_UNION
 		;// update current union size
 		%if (%%__amt > %$__nx_usize)
@@ -1206,11 +1295,6 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 		%assign %$__nx_offset (%$__nx_offset + %%__amt)
 	%endif
 
-	;// if the alignment requirement for this member is the
-	;// largest observed thus far then save it for later.
-	%if ( %%__align > %$__nx_align )
-		%assign %$__nx_align %%__align
-	%endif
 %endmacro
 
 %imacro NASMX_ENDSTRUC 0.nolist
@@ -1221,6 +1305,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 			%endif
 		%endif
 	%endif
+
 	;// adjust size of container using largest alignment value observed
 	%if ( %$__nx_align > 1 )
 		%assign %%__align %$__nx_align
@@ -1230,8 +1315,9 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 			%assign %$__nx_usize (%$__nx_usize + %%__off - %$__nx_usize)
 		%endif
 	%endif
+
 	;// Create the container size tag
-	%xdefine %[%{$__nx_name}]_size %[%$__nx_usize]
+	%[%{$__nx_name}]_size EQU %$__nx_usize
 
 	;// Create the container type tag
 	%assign %%exp 0
@@ -2280,8 +2366,11 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 
 		%assign %$__param_type_ctr 2    ; arg types follow cconv,bytecount
 		%assign %$args 0
+		%assign %%targ 1
 		%rep %%__repcnt
 			%rotate 1
+			%warning arg %%targ: %1
+			%assign %%targ (%%targ + 1)
 
 			;// set up internal vars used to determine if argv address mode used
 			%assign %$__param_type_ctr %$__param_type_ctr + 1
