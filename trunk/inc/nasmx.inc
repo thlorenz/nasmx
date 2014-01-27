@@ -2369,7 +2369,6 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 		%assign %%targ 1
 		%rep %%__repcnt
 			%rotate 1
-			%warning arg %%targ: %1
 			%assign %%targ (%%targ + 1)
 
 			;// set up internal vars used to determine if argv address mode used
