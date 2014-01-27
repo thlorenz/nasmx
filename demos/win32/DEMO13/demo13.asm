@@ -19,10 +19,10 @@
 ;/////////////////////////////////////////////
 ;//
 ;// Create our own structure definition
-NASMX_STRUC YYYYMMDD
-	NASMX_RESERVE year,  int16_t, 1
-	NASMX_RESERVE month, int8_t, 1
+NASMX_STRUC YYMMDD
 	NASMX_RESERVE day,   int8_t, 1
+	NASMX_RESERVE month, int8_t, 1
+	NASMX_RESERVE year,  int16_t, 1
 NASMX_ENDSTRUC
 
 ;// Another struc with nested union containing struc label
@@ -30,11 +30,11 @@ NASMX_ENDSTRUC
 NASMX_STRUC DEMO13_STRUC
     NASMX_RESERVE name, NASMX_TCHAR, 512
     NASMX_UNION dob
-        NASMX_RESERVE pt, YYYYMMDD, 1	;// requires double-offset syntax, eg:
-					;//   mov eax, dword[esi + DEMO13_STRUC.dob.pt + YYYYMMDD.month]
+        NASMX_RESERVE yymmdd, YYMMDD, 1	;// requires double-offset syntax, eg:
+					;//   mov eax, dword[esi + DEMO13_STRUC.dob.pt + YYMMDD.month]
         NASMX_RESERVE date, int32_t, 1
     NASMX_ENDUNION
-    NASMX_RESERVE array, DDMMYY1, 8	;// Array of structures!!
+    NASMX_RESERVE array, YYMMDD, 8	;// Array of structures!!
 					;// requires double-offset syntax!!
 NASMX_ENDSTRUC
 
