@@ -1,0 +1,1725 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 1: Introduction">
+		<param name="Local" value="html\nasmdoc1.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.1: What Is NASM?">
+			<param name="Local" value="html\nasmdoc1.html#section-1.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.1.1: Why Yet Another Assembler?">
+			<param name="Local" value="html\nasmdoc1.html#section-1.1.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.1.2: License Conditions">
+			<param name="Local" value="html\nasmdoc1.html#section-1.1.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.2: Contact Information">
+			<param name="Local" value="html\nasmdoc1.html#section-1.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.3: Installation">
+			<param name="Local" value="html\nasmdoc1.html#section-1.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.3.1: Installing NASM under MS-DOS or Windows">
+			<param name="Local" value="html\nasmdoc1.html#section-1.3.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.3.2: Installing NASM under Unix">
+			<param name="Local" value="html\nasmdoc1.html#section-1.3.2">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 2: Running NASM">
+		<param name="Local" value="html\nasmdoc2.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.1: NASM Command-Line Syntax">
+			<param name="Local" value="html\nasmdoc2.html#section-2.1">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.1: The -o Option: Specifying the Output File Name">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.2: The -f Option: Specifying the Output File Format">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.3: The -l Option: Generating a Listing File">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.4: The -M Option: Generate Makefile Dependencies">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.5: The -MG Option: Generate Makefile Dependencies">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.6: The -MF Option: Set Makefile Dependency File">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.7: The -MD Option: Assemble and Generate Dependencies">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.7">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.8: The -MT Option: Dependency Target Name">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.8">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.9: The -MQ Option: Dependency Target Name (Quoted)">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.9">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.10: The -MP Option: Emit phony targets">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.10">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.11: The -F Option: Selecting a Debug Information Format">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.12: The -g Option: Enabling Debug Information.">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.12">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.13: The -X Option: Selecting an Error Reporting Format">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.13">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.14: The -Z Option: Send Errors to a File">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.14">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.15: The -s Option: Send Errors to stdout">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.15">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.16: The -i Option: Include File Search Directories">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.16">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.17: The -p Option: Pre-Include a File">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.17">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.18: The -d Option: Pre-Define a Macro">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.18">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.19: The -u Option: Undefine a Macro">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.19">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.20: The -E Option: Preprocess Only">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.20">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.21: The -a Option: Don't Preprocess At All">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.21">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.22: The -O Option: Specifying Multipass Optimization">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.22">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.23: The -t Option: Enable TASM Compatibility Mode">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.23">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.24: The -w and -W Options: Enable or Disable Assembly Warnings">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.24">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.25: The -v Option: Display Version Info">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.25">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.26: The -y Option: Display Available Debug Info Formats">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.26">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.27: The --prefix and --postfix Options.">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.27">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.1.28: The NASMENV Environment Variable">
+				<param name="Local" value="html\nasmdoc2.html#section-2.1.28">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.2: Quick Start for MASM Users">
+			<param name="Local" value="html\nasmdoc2.html#section-2.2">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.2.1: NASM Is Case-Sensitive">
+				<param name="Local" value="html\nasmdoc2.html#section-2.2.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.2.2: NASM Requires Square Brackets For Memory References">
+				<param name="Local" value="html\nasmdoc2.html#section-2.2.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.2.3: NASM Doesn't Store Variable Types">
+				<param name="Local" value="html\nasmdoc2.html#section-2.2.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.2.4: NASM Doesn't ASSUME">
+				<param name="Local" value="html\nasmdoc2.html#section-2.2.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.2.5: NASM Doesn't Support Memory Models">
+				<param name="Local" value="html\nasmdoc2.html#section-2.2.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.2.6: Floating-Point Differences">
+				<param name="Local" value="html\nasmdoc2.html#section-2.2.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="2.2.7: Other Differences">
+				<param name="Local" value="html\nasmdoc2.html#section-2.2.7">
+				</OBJECT>
+			</UL>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 3: The NASM Language">
+		<param name="Local" value="html\nasmdoc3.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.1: Layout of a NASM Source Line">
+			<param name="Local" value="html\nasmdoc3.html#section-3.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.2: Pseudo-Instructions">
+			<param name="Local" value="html\nasmdoc3.html#section-3.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.2.1: DB and Friends: Declaring Initialized Data">
+			<param name="Local" value="html\nasmdoc3.html#section-3.2.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.2.2: RESB and Friends: Declaring Uninitialized Data">
+			<param name="Local" value="html\nasmdoc3.html#section-3.2.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.2.3: INCBIN: Including External Binary Files">
+			<param name="Local" value="html\nasmdoc3.html#section-3.2.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.2.4: EQU: Defining Constants">
+			<param name="Local" value="html\nasmdoc3.html#section-3.2.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.2.5: TIMES: Repeating Instructions or Data">
+			<param name="Local" value="html\nasmdoc3.html#section-3.2.5">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.3: Effective Addresses">
+			<param name="Local" value="html\nasmdoc3.html#section-3.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.4: Constants">
+			<param name="Local" value="html\nasmdoc3.html#section-3.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.4.1: Numeric Constants">
+			<param name="Local" value="html\nasmdoc3.html#section-3.4.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.4.2: Character Strings">
+			<param name="Local" value="html\nasmdoc3.html#section-3.4.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.4.3: Character Constants">
+			<param name="Local" value="html\nasmdoc3.html#section-3.4.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.4.4: String Constants">
+			<param name="Local" value="html\nasmdoc3.html#section-3.4.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.4.5: Unicode Strings">
+			<param name="Local" value="html\nasmdoc3.html#section-3.4.5">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.4.6: Floating-Point Constants">
+			<param name="Local" value="html\nasmdoc3.html#section-3.4.6">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.4.7: Packed BCD Constants">
+			<param name="Local" value="html\nasmdoc3.html#section-3.4.7">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.5: Expressions">
+			<param name="Local" value="html\nasmdoc3.html#section-3.5">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.5.1: |: Bitwise OR Operator">
+			<param name="Local" value="html\nasmdoc3.html#section-3.5.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.5.2: ^: Bitwise XOR Operator">
+			<param name="Local" value="html\nasmdoc3.html#section-3.5.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.5.3: &amp;: Bitwise AND Operator">
+			<param name="Local" value="html\nasmdoc3.html#section-3.5.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.5.4: &lt;&lt; and &gt;&gt;: Bit Shift Operators">
+			<param name="Local" value="html\nasmdoc3.html#section-3.5.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.5.5: + and -: Addition and Subtraction Operators">
+			<param name="Local" value="html\nasmdoc3.html#section-3.5.5">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.5.6: *, /, //, % and %%: Multiplication and Division">
+			<param name="Local" value="html\nasmdoc3.html#section-3.5.6">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.5.7: Unary Operators: +, -, ~, ! and SEG">
+			<param name="Local" value="html\nasmdoc3.html#section-3.5.7">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.6: SEG and WRT">
+			<param name="Local" value="html\nasmdoc3.html#section-3.6">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.7: STRICT: Inhibiting Optimization">
+			<param name="Local" value="html\nasmdoc3.html#section-3.7">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.8: Critical Expressions">
+			<param name="Local" value="html\nasmdoc3.html#section-3.8">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="3.9: Local Labels">
+			<param name="Local" value="html\nasmdoc3.html#section-3.9">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 4: The NASM Preprocessor">
+		<param name="Local" value="html\nasmdoc4.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.1: Single-Line Macros">
+			<param name="Local" value="html\nasmdoc4.html#section-4.1">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.1.1: The Normal Way: %define">
+				<param name="Local" value="html\nasmdoc4.html#section-4.1.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.1.2: Resolving %define: %xdefine">
+				<param name="Local" value="html\nasmdoc4.html#section-4.1.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.1.3: Macro Indirection: %[...]">
+				<param name="Local" value="html\nasmdoc4.html#section-4.1.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.1.4: Concatenating Single Line Macro Tokens: %+">
+				<param name="Local" value="html\nasmdoc4.html#section-4.1.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.1.5: The Macro Name Itself: %? and %??">
+				<param name="Local" value="html\nasmdoc4.html#section-4.1.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.1.6: Undefining Single-Line Macros: %undef">
+				<param name="Local" value="html\nasmdoc4.html#section-4.1.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.1.7: Preprocessor Variables: %assign">
+				<param name="Local" value="html\nasmdoc4.html#section-4.1.7">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.1.8: Defining Strings: %defstr">
+				<param name="Local" value="html\nasmdoc4.html#section-4.1.8">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.1.9: Defining Tokens: %deftok">
+				<param name="Local" value="html\nasmdoc4.html#section-4.1.9">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.2: String Manipulation in Macros">
+			<param name="Local" value="html\nasmdoc4.html#section-4.2">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.2.1: Concatenating Strings: %strcat">
+				<param name="Local" value="html\nasmdoc4.html#section-4.2.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.2.2: String Length: %strlen">
+				<param name="Local" value="html\nasmdoc4.html#section-4.2.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.2.3: Extracting Substrings: %substr">
+				<param name="Local" value="html\nasmdoc4.html#section-4.2.3">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.3: Multi-Line Macros: %macro">
+			<param name="Local" value="html\nasmdoc4.html#section-4.3">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.1 Overloading Multi-Line Macros">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.2: Macro-Local Labels">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.3: Greedy Macro Parameters">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.4: Macro Parameters Range">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.5: Default Macro Parameters">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.6: %0: Macro Parameter Counter">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.7: %00: Label Preceeding Macro">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.7">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.8: %rotate: Rotating Macro Parameters">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.8">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.9: Concatenating Macro Parameters">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.9">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.10: Condition Codes as Macro Parameters">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.10">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.11: Disabling Listing Expansion">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.3.12: Undefining Multi-Line Macros: %unmacro">
+				<param name="Local" value="html\nasmdoc4.html#section-4.3.12">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.4: Conditional Assembly">
+			<param name="Local" value="html\nasmdoc4.html#section-4.4">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.4.1: %ifdef: Testing Single-Line Macro Existence">
+				<param name="Local" value="html\nasmdoc4.html#section-4.4.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.4.2: %ifmacro: Testing Multi-Line Macro Existence">
+				<param name="Local" value="html\nasmdoc4.html#section-4.4.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.4.3: %ifctx: Testing the Context Stack">
+				<param name="Local" value="html\nasmdoc4.html#section-4.4.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.4.4: %if: Testing Arbitrary Numeric Expressions">
+				<param name="Local" value="html\nasmdoc4.html#section-4.4.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.4.5: %ifidn and %ifidni: Testing Exact Text Identity">
+				<param name="Local" value="html\nasmdoc4.html#section-4.4.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.4.6: %ifid, %ifnum, %ifstr: Testing Token Types">
+				<param name="Local" value="html\nasmdoc4.html#section-4.4.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.4.7: %iftoken: Test for a Single Token">
+				<param name="Local" value="html\nasmdoc4.html#section-4.4.7">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.4.8: %ifempty: Test for Empty Expansion">
+				<param name="Local" value="html\nasmdoc4.html#section-4.4.8">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.4.9: %ifenv: Test If Environment Variable Exists">
+				<param name="Local" value="html\nasmdoc4.html#section-4.4.9">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.5: Preprocessor Loops: %rep">
+			<param name="Local" value="html\nasmdoc4.html#section-4.5">
+			</OBJECT>
+
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.6 Source Files and Dependencies">
+			<param name="Local" value="html\nasmdoc4.html#section-4.6">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.6.1: %include: Including Other Files">
+				<param name="Local" value="html\nasmdoc4.html#section-4.6.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.6.2: %pathsearch: Search the Include Path">
+				<param name="Local" value="html\nasmdoc4.html#section-4.6.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.6.3: %depend: Add Dependent Files">
+				<param name="Local" value="html\nasmdoc4.html#section-4.6.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.6.4: %use: Include Standard Macro Package">
+				<param name="Local" value="html\nasmdoc4.html#section-4.6.4">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.7: The Context Stack">
+			<param name="Local" value="html\nasmdoc4.html#section-4.7">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.7.1: %push and %pop: Creating and Removing Contexts">
+				<param name="Local" value="html\nasmdoc4.html#section-4.7.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.7.2: Context-Local Labels">
+				<param name="Local" value="html\nasmdoc4.html#section-4.7.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.7.3: Context-Local Single-Line Macros">
+				<param name="Local" value="html\nasmdoc4.html#section-4.7.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.7.4: Context Fall-Through Lookup">
+				<param name="Local" value="html\nasmdoc4.html#section-4.7.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.7.5: %repl: Renaming a Context">
+				<param name="Local" value="html\nasmdoc4.html#section-4.7.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.7.6: Example Use of the Context Stack: Block IFs">
+				<param name="Local" value="html\nasmdoc4.html#section-4.7.6">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.8: Stack Relative Preprocessor Directives">
+			<param name="Local" value="html\nasmdoc4.html#section-4.8">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.8.1: %arg Directive">
+				<param name="Local" value="html\nasmdoc4.html#section-4.8.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.8.2: %stacksize Directive">
+				<param name="Local" value="html\nasmdoc4.html#section-4.8.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.8.3: %local Directive">
+				<param name="Local" value="html\nasmdoc4.html#section-4.8.3">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.9: Reporting User-Defined Errors: %error, %warning, %fatal">
+			<param name="Local" value="html\nasmdoc4.html#section-4.9">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.10: Other Preprocessor Directives">
+			<param name="Local" value="html\nasmdoc4.html#section-4.10">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.10.1: %line Directive">
+				<param name="Local" value="html\nasmdoc4.html#section-4.10.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.10.2: %!&lt;env&gt;: Read an environment variable.">
+				<param name="Local" value="html\nasmdoc4.html#section-4.10.2">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.11: Comment Blocks: %comment">
+			<param name="Local" value="html\nasmdoc4.html#section-4.11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="4.12: Standard Macros">
+			<param name="Local" value="html\nasmdoc4.html#section-4.12">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.1: NASM Version Macros">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.2: __NASM_VERSION_ID__: NASM Version ID">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.3: __NASM_VER__: NASM Version string">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.4: __FILE__ and __LINE__: File Name and Line Number">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.5: __BITS__: Current BITS Mode">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.6: __OUTPUT_FORMAT__: Current Output Format">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.7: Assembly Date and Time Macros">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.7">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.8: __USE_package__: Package Include Test">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.8">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.9: __PASS__: Assembly Pass">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.9">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.10: STRUC and ENDSTRUC: Declaring Structure Data Types">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.10">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.11: ISTRUC, AT and IEND: Declaring Instances of Structures">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.12: ALIGN and ALIGNB: Data Alignment">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.12">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="4.12.13: SECTALIGN: Section Alignment">
+				<param name="Local" value="html\nasmdoc4.html#section-4.12.13">
+				</OBJECT>
+			</UL>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 5: Standard Macro Packages">
+		<param name="Local" value="html\nasmdoc5.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="5.1: altreg: Alternate Register Names">
+			<param name="Local" value="html\nasmdoc5.html#section-5.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="5.2: smartalign: Smart ALIGN Macro">
+			<param name="Local" value="html\nasmdoc5.html#section-5.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="5.3: fp: Floating-point macros">
+			<param name="Local" value="html\nasmdoc5.html#section-5.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="5.4: ifunc: Integer functions">
+			<param name="Local" value="html\nasmdoc5.html#section-5.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="5.4.1: Integer logarithms">
+			<param name="Local" value="html\nasmdoc5.html#section-5.4.1">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 6: Assembler Directives">
+		<param name="Local" value="html\nasmdoc6.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.1: BITS: Specifying Target Processor Mode">
+			<param name="Local" value="html\nasmdoc6.html#section-6.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.1.1: USE16 &amp; USE32: Aliases for BITS">
+			<param name="Local" value="html\nasmdoc6.html#section-6.1.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.2: DEFAULT: Change the assembler defaults">
+			<param name="Local" value="html\nasmdoc6.html#section-6.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.3: SECTION or SEGMENT: Changing and Defining Sections">
+			<param name="Local" value="html\nasmdoc6.html#section-6.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.3.1: The __SECT__ Macro">
+			<param name="Local" value="html\nasmdoc6.html#section-6.3.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.4: ABSOLUTE: Defining Absolute Labels">
+			<param name="Local" value="html\nasmdoc6.html#section-6.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.5: EXTERN: Importing Symbols from Other Modules">
+			<param name="Local" value="html\nasmdoc6.html#section-6.5">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.6: GLOBAL: Exporting Symbols to Other Modules">
+			<param name="Local" value="html\nasmdoc6.html#section-6.6">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.7: COMMON: Defining Common Data Areas">
+			<param name="Local" value="html\nasmdoc6.html#section-6.7">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.8: CPU: Defining CPU Dependencies">
+			<param name="Local" value="html\nasmdoc6.html#section-6.8">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="6.9: FLOAT: Handling of floating-point constants">
+			<param name="Local" value="html\nasmdoc6.html#section-6.9">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 7: Output Formats">
+		<param name="Local" value="html\nasmdoc7.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.1: bin: Flat-Form Binary Output">
+			<param name="Local" value="html\nasmdoc7.html#section-7.1">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.1.1: ORG: Binary File Program Origin">
+				<param name="Local" value="html\nasmdoc7.html#section-7.1.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.1.2: bin Extensions to the SECTION Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.1.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.1.3: Multisection Support for the bin Format">
+				<param name="Local" value="html\nasmdoc7.html#section-7.1.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.1.4: Map Files">
+				<param name="Local" value="html\nasmdoc7.html#section-7.1.4">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.2: ith: Intel Hex Output">
+			<param name="Local" value="html\nasmdoc7.html#section-7.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.3: srec: Motorola S-Records Output">
+			<param name="Local" value="html\nasmdoc7.html#section-7.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.4: obj: Microsoft OMF Object Files">
+			<param name="Local" value="html\nasmdoc7.html#section-7.4">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.4.1: obj Extensions to the SEGMENT Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.4.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.4.2: GROUP: Defining Groups of Segments">
+				<param name="Local" value="html\nasmdoc7.html#section-7.4.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.4.3: UPPERCASE: Disabling Case Sensitivity in Output">
+				<param name="Local" value="html\nasmdoc7.html#section-7.4.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.4.4: IMPORT: Importing DLL Symbols">
+				<param name="Local" value="html\nasmdoc7.html#section-7.4.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.4.5: EXPORT: Exporting DLL Symbols">
+				<param name="Local" value="html\nasmdoc7.html#section-7.4.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.4.6: ..start: Defining the Program Entry Point">
+				<param name="Local" value="html\nasmdoc7.html#section-7.4.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.4.7: obj Extensions to the EXTERN Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.4.7">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.4.8: obj Extensions to the COMMON Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.4.8">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.5: win32: Microsoft Win32 Object Files">
+			<param name="Local" value="html\nasmdoc7.html#section-7.5">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.5.1: win32 Extensions to the SECTION Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.5.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.5.2: win32: Safe Structured Exception Handling">
+				<param name="Local" value="html\nasmdoc7.html#section-7.5.2">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.6: win64: Microsoft Win64 Object Files">
+			<param name="Local" value="html\nasmdoc7.html#section-7.6">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.6.1: win64: Writing Position-Independent Code">
+				<param name="Local" value="html\nasmdoc7.html#section-7.6.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.6.2: win64: Structured Exception Handling">
+				<param name="Local" value="html\nasmdoc7.html#section-7.6.2">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.7: coff: Common Object File Format">
+			<param name="Local" value="html\nasmdoc7.html#section-7.7">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.8: macho32 and macho64: Mach Object File Format">
+			<param name="Local" value="html\nasmdoc7.html#section-7.8">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.9: elf32 and elf64: Executable and Linkable Format Object Files">
+			<param name="Local" value="html\nasmdoc7.html#section-7.9">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.9.1: ELF specific directive osabi">
+				<param name="Local" value="html\nasmdoc7.html#section-7.9.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.9.2: elf Extensions to the SECTION Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.9.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.9.3: Position-Independent Code: elf Special Symbols and WRT">
+				<param name="Local" value="html\nasmdoc7.html#section-7.9.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.9.4: Thread Local Storage: elf Special Symbols and WRT">
+				<param name="Local" value="html\nasmdoc7.html#section-7.9.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.9.5: elf Extensions to the GLOBAL Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.9.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.9.6: elf Extensions to the COMMON Directive ">
+				<param name="Local" value="html\nasmdoc7.html#section-7.9.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.9.7: 16-bit code and ELF ">
+				<param name="Local" value="html\nasmdoc7.html#section-7.9.7">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.9.8: Debug formats and ELF ">
+				<param name="Local" value="html\nasmdoc7.html#section-7.9.8">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.10: aout: Linux a.out Object Files">
+			<param name="Local" value="html\nasmdoc7.html#section-7.10">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.11: aoutb: NetBSD/FreeBSD/OpenBSD a.out Object Files">
+			<param name="Local" value="html\nasmdoc7.html#section-7.11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.12: as86: Minix/Linux as86 Object Files">
+			<param name="Local" value="html\nasmdoc7.html#section-7.12">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.13: rdf: Relocatable Dynamic Object File Format">
+			<param name="Local" value="html\nasmdoc7.html#section-7.13">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.13.1: Requiring a Library: The LIBRARY Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.13.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.13.2: Specifying a Module Name: The MODULE Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.13.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.13.3: rdf Extensions to the GLOBAL Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.13.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="7.13.4: rdf Extensions to the EXTERN Directive">
+				<param name="Local" value="html\nasmdoc7.html#section-7.13.4">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="7.14: dbg: Debugging Format">
+			<param name="Local" value="html\nasmdoc7.html#section-7.14">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 8: Writing 16-bit Code (DOS, Windows 3/3.1)">
+		<param name="Local" value="html\nasmdoc8.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="8.1: Producing .EXE Files">
+			<param name="Local" value="html\nasmdoc8.html#section-8.1">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.1.1: Using the obj Format To Generate .EXE Files">
+				<param name="Local" value="html\nasmdoc8.html#section-8.1.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.1.2: Using the bin Format To Generate .EXE Files">
+				<param name="Local" value="html\nasmdoc8.html#section-8.1.2">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="8.2: Producing .COM Files">
+			<param name="Local" value="html\nasmdoc8.html#section-8.2">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.2.1: Using the bin Format To Generate .COM Files">
+				<param name="Local" value="html\nasmdoc8.html#section-8.2.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.2.2: Using the obj Format To Generate .COM Files">
+				<param name="Local" value="html\nasmdoc8.html#section-8.2.2">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="8.3: Producing .SYS Files">
+			<param name="Local" value="html\nasmdoc8.html#section-8.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="8.4: Interfacing to 16-bit C Programs">
+			<param name="Local" value="html\nasmdoc8.html#section-8.4">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.4.1: External Symbol Names">
+				<param name="Local" value="html\nasmdoc8.html#section-8.4.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.4.2: Memory Models">
+				<param name="Local" value="html\nasmdoc8.html#section-8.4.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.4.3: Function Definitions and Function Calls">
+				<param name="Local" value="html\nasmdoc8.html#section-8.4.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.4.4: Accessing Data Items">
+				<param name="Local" value="html\nasmdoc8.html#section-8.4.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.4.5: c16.mac: Helper Macros for the 16-bit C Interface">
+				<param name="Local" value="html\nasmdoc8.html#section-8.4.5">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="8.5: Interfacing to Borland Pascal Programs">
+			<param name="Local" value="html\nasmdoc8.html#section-8.5">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.5.1: The Pascal Calling Convention">
+				<param name="Local" value="html\nasmdoc8.html#section-8.5.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.5.2: Borland Pascal Segment Name Restrictions">
+				<param name="Local" value="html\nasmdoc8.html#section-8.5.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="8.5.3: Using c16.mac With Pascal Programs">
+				<param name="Local" value="html\nasmdoc8.html#section-8.5.3">
+				</OBJECT>
+			</UL>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 9: Writing 32-bit Code (Unix, Win32, DJGPP)">
+		<param name="Local" value="html\nasmdoc9.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="9.1: Interfacing to 32-bit C Programs">
+			<param name="Local" value="html\nasmdoc9.html#section-9.1">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="9.1.1: External Symbol Names">
+				<param name="Local" value="html\nasmdoc9.html#section-9.1.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="9.1.2: Function Definitions and Function Calls">
+				<param name="Local" value="html\nasmdoc9.html#section-9.1.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="9.1.3: Accessing Data Items">
+				<param name="Local" value="html\nasmdoc9.html#section-9.1.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="9.1.4: c32.mac: Helper Macros for the 32-bit C Interface">
+				<param name="Local" value="html\nasmdoc9.html#section-9.1.4">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="9.2: Writing NetBSD/FreeBSD/OpenBSD and Linux/ELF Shared Libraries">
+			<param name="Local" value="html\nasmdoc9.html#section-9.2">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="9.2.1: Obtaining the Address of the GOT">
+				<param name="Local" value="html\nasmdoc9.html#section-9.2.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="9.2.2: Finding Your Local Data Items">
+				<param name="Local" value="html\nasmdoc9.html#section-9.2.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="9.2.3: Finding External and Common Data Items">
+				<param name="Local" value="html\nasmdoc9.html#section-9.2.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="9.2.4: Exporting Symbols to the Library User">
+				<param name="Local" value="html\nasmdoc9.html#section-9.2.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="9.2.5: Calling Procedures Outside the Library">
+				<param name="Local" value="html\nasmdoc9.html#section-9.2.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="9.2.6: Generating the Library File">
+				<param name="Local" value="html\nasmdoc9.html#section-9.2.6">
+				</OBJECT>
+			</UL>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 10: Mixing 16 and 32 Bit Code">
+		<param name="Local" value="html\nasmdo10.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="10.1: Mixed-Size Jumps">
+			<param name="Local" value="html\nasmdo10.html#section-10.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="10.2: Addressing Between Different-Size Segments">
+			<param name="Local" value="html\nasmdo10.html#section-10.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="10.3: Other Mixed-Size Instructions">
+			<param name="Local" value="html\nasmdo10.html#section-10.3">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 11: Writing 64-bit Code (Unix, Win64)">
+		<param name="Local" value="html\nasmdo11.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="11.1: Register Names in 64-bit Mode">
+			<param name="Local" value="html\nasmdo11.html#section-11.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="11.2: Immediates and Displacements in 64-bit Mode">
+			<param name="Local" value="html\nasmdo11.html#section-11.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="11.3: Interfacing to 64-bit C Programs (Unix)">
+			<param name="Local" value="html\nasmdo11.html#section-11.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="11.4: Interfacing to 64-bit C Programs (Win64)">
+			<param name="Local" value="html\nasmdo11.html#section-11.4">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 12: Troubleshooting">
+		<param name="Local" value="html\nasmdo12.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="12.1: Common Problems">
+			<param name="Local" value="html\nasmdo12.html#section-12.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="12.1.1: NASM Generates Inefficient Code">
+			<param name="Local" value="html\nasmdo12.html#section-12.1.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="12.1.2: My Jumps are Out of Range">
+			<param name="Local" value="html\nasmdo12.html#section-12.1.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="12.1.3: ORG Doesn't Work">
+			<param name="Local" value="html\nasmdo12.html#section-12.1.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="12.1.4: TIMES Doesn't Work">
+			<param name="Local" value="html\nasmdo12.html#section-12.1.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="12.2: Bugs">
+			<param name="Local" value="html\nasmdo12.html#section-12.2">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Appendix A: Ndisasm">
+		<param name="Local" value="html\nasmdoca.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="A.1: Introduction">
+			<param name="Local" value="html\nasmdoca.html#section-A.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="A.2: Getting Started: Installation">
+			<param name="Local" value="html\nasmdoca.html#section-A.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="A.3: Running NDISASM">
+			<param name="Local" value="html\nasmdoca.html#section-A.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="A.3.1: COM Files: Specifying an Origin">
+			<param name="Local" value="html\nasmdoca.html#section-A.3.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="A.3.2: Code Following Data: Synchronisation">
+			<param name="Local" value="html\nasmdoca.html#section-A.3.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="A.3.3: Mixed Code and Data: Automatic (Intelligent) Synchronisation">
+			<param name="Local" value="html\nasmdoca.html#section-A.3.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="A.3.4: Other Options">
+			<param name="Local" value="html\nasmdoca.html#section-A.3.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="A.4: Bugs and Improvements">
+			<param name="Local" value="html\nasmdoca.html#section-A.4">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Appendix B: Instruction List">
+		<param name="Local" value="html\nasmdocb.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1: Introduction">
+			<param name="Local" value="html\nasmdocb.html#section-B.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.1: Special instructions...">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.2: Conventional instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.3: Katmai Streaming SIMD instructions (SSE -- a.k.a. KNI, XMM, MMX2)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.4: Introduced in Deschutes but necessary for SSE support">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.5: XSAVE group (AVX and extended state)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.5">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.6: Generic memory operations">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.6">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.7: New MMX instructions introduced in Katmai">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.7">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.8: AMD Enhanced 3DNow! (Athlon) instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.8">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.9: Willamette SSE2 Cacheability Instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.9">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.10: Willamette MMX instructions (SSE2 SIMD Integer Instructions)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.10">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.11: Willamette Streaming SIMD instructions (SSE2)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.12: Prescott New Instructions (SSE3)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.12">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.13: VMX Instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.13">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.14: Extended Page Tables VMX instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.14">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.15: Tejas New Instructions (SSSE3)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.15">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.16: AMD SSE4A">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.16">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.17: New instructions in Barcelona">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.17">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.18: Penryn New Instructions (SSE4.1)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.18">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.19: Nehalem New Instructions (SSE4.2)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.19">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.20: Intel SMX">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.20">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.21: Geode (Cyrix) 3DNow! additions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.21">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.22: Intel new instructions in ???">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.22">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.23: Intel AES instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.23">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.24: Intel AVX AES instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.24">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.25: Intel AVX instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.25">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.26: Intel Carry-Less Multiplication instructions (CLMUL)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.26">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.27: Intel AVX Carry-Less Multiplication instructions (CLMUL)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.27">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.28: Intel Fused Multiply-Add instructions (FMA)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.28">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.29: Intel post-32 nm processor instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.29">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.30: VIA (Centaur) security instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.30">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.31: AMD Lightweight Profiling (LWP) instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.31">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.32: AMD XOP and FMA4 instructions (SSE5)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.32">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.33: Intel AVX2 instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.33">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.34 Transactional Synchronization Extensions (TSX)">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.34">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.35 Intel BMI1 and BMI2 instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.35">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.36 B.1.36 Intel AVX-512 instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.36">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="B.1.37 Systematic names for the hinting nop instructions">
+			<param name="Local" value="html\nasmdocb.html#section-B.1.37">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Appendix C: NASM Version History">
+		<param name="Local" value="html\nasmdocc.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="C.1: NASM 2 Series">
+			<param name="Local" value="html\nasmdocc.html#section-C.1">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.1 Version 2.11">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.2 Version 2.10.09">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.3 Version 2.10.08">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.4: Version 2.10.07">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.5: Version 2.10.06">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.6: Version 2.10.05">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.7: Version 2.10.04">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.7">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.8: Version 2.10.03">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.8">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.9: Version 2.10.02">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.9">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.10: Version 2.10.01">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.10">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.11: Version 2.10">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.12: Version 2.09.10">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.12">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.13: Version 2.09.09">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.13">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.14: Version 2.09.08">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.14">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.15: Version 2.09.07">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.15">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.16: Version 2.09.06">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.16">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.17: Version 2.09.05">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.17">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.18: Version 2.09.04">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.18">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.19: Version 2.09.03">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.19">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.20: Version 2.09.02">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.20">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.21: Version 2.09.01">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.21">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.22: Version 2.09">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.22">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.23: Version 2.08.02">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.23">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.24: Version 2.08.01">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.24">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.25: Version 2.08">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.25">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.26: Version 2.07">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.26">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.27: Version 2.06">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.27">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.28: Version 2.05.01">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.28">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.29: Version 2.05">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.29">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.30: Version 2.04">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.30">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.31: Version 2.03.01">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.31">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.32: Version 2.03">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.32">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.33: Version 2.02">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.33">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.34: Version 2.01">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.34">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.1.35: Version 2.00">
+				<param name="Local" value="html\nasmdocc.html#section-C.1.35">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="C.2: NASM 0.98 Series">
+			<param name="Local" value="html\nasmdocc.html#section-C.2">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.1: Version 0.98.39">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.2: Version 0.98.38">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.3: Version 0.98.37">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.4: Version 0.98.36">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.5: Version 0.98.35">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.6: Version 0.98.34">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.7: Version 0.98.33">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.7">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.8: Version 0.98.32">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.8">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.9: Version 0.98.31">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.9">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.10: Version 0.98.30">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.10">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.11: Version 0.98.28">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.12: Version 0.98.26">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.12">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.13: Version 0.98.25alt">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.13">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.14: Version 0.98.25">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.14">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.15: Version 0.98.24p1">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.15">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.16: Version 0.98.24">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.16">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.17: Version 0.98.23">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.17">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.18: Version 0.98.22">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.18">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.19: Version 0.98.21">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.19">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.20: Version 0.98.20">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.20">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.21: Version 0.98.19">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.21">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.22: Version 0.98.18">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.22">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.23: Version 0.98.17">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.23">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.24: Version 0.98.16">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.24">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.25: Version 0.98.15">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.25">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.26: Version 0.98.14">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.26">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.27: Version 0.98.13">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.27">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.28: Version 0.98.12">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.28">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.29: Version 0.98.11">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.29">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.30: Version 0.98.10">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.30">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.31: Version 0.98.09">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.31">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.32: Version 0.98.08">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.32">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.33: Version 0.98.09b with John Coffman patches released 28-Oct-2001">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.33">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.34: Version 0.98.07 released 01/28/01">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.34">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.35: Version 0.98.06f released 01/18/01">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.35">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.36: Version 0.98.06e released 01/09/01">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.36">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.37: Version 0.98p1">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.37">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.38: Version 0.98bf (bug-fixed)">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.38">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.39: Version 0.98.03 with John Coffman's changes released 27-Jul-2000">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.39">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.40: Version 0.98.03">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.40">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.41: Version 0.98">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.41">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.42: Version 0.98p9">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.42">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.43: Version 0.98p8">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.43">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.44: Version 0.98p7">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.44">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.45: Version 0.98p6">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.45">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.46: Version 0.98p3.7">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.46">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.47: Version 0.98p3.6">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.47">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.48: Version 0.98p3.5">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.48">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.49: Version 0.98p3.4">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.49">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.50: Version 0.98p3.3">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.50">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.51: Version 0.98p3.2">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.51">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.52: Version 0.98p3-hpa">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.52">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.53: Version 0.98 pre-release 3">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.53">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.54: Version 0.98 pre-release 2">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.54">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.2.55: Version 0.98 pre-release 1">
+				<param name="Local" value="html\nasmdocc.html#section-C.2.55">
+				</OBJECT>
+			</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="C.3: NASM 0.9 Series">
+			<param name="Local" value="html\nasmdocc.html#section-C.3">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.3.1: Version 0.97 released December 1997">
+				<param name="Local" value="html\nasmdocc.html#section-C.3.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.3.2: Version 0.96 released November 1997">
+				<param name="Local" value="html\nasmdocc.html#section-C.3.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.3.3: Version 0.95 released July 1997">
+				<param name="Local" value="html\nasmdocc.html#section-C.3.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.3.4: Version 0.94 released April 1997">
+				<param name="Local" value="html\nasmdocc.html#section-C.3.4">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.3.5: Version 0.93 released January 1997">
+				<param name="Local" value="html\nasmdocc.html#section-C.3.5">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.3.6: Version 0.92 released January 1997">
+				<param name="Local" value="html\nasmdocc.html#section-C.3.6">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.3.7: Version 0.91 released November 1996">
+				<param name="Local" value="html\nasmdocc.html#section-C.3.7">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="C.3.8: Version 0.90 released October 1996">
+				<param name="Local" value="html\nasmdocc.html#section-C.3.8">
+				</OBJECT>
+			</UL>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Index">
+		<param name="Local" value="html\nasmdoci.html">
+		</OBJECT>
+</UL>
+</BODY>
+</HTML>
