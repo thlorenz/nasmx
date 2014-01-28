@@ -1,0 +1,163 @@
+<html><head><title>NASM-X Manual</title></head>
+<body><h1 align=center>NASM-X</h1>
+
+<p align=center>
+<a href="nasmxa.html">Previous Chapter</a> |
+<a href="nasmx0.html">Contents</a> |
+<a href="nasmxi.html">Index</a>
+<h2><a name="appendix-E">Appendix E: NASM-X Examples</a></h2>
+<h3><a name="section-E.1">EX. 1 : Hello, World!</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp Displays a simple message to the console.
+<h4>Code:</h4>
+<pre>
+    %include 'nasmx.inc'
+
+    IMPORT cdecl, printf
+
+    ENTRY my_main
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .text]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    PROC my_main
+    LOCALS NONE
+        INVOKE printf, message
+    ENDPROC
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .data]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    message: declare(NASMX_TCHAR) NASMX_TEXT('Hello, World!'),13,10,0
+
+</pre><br>
+
+<h3><a name="section-E.2">EX. 2 : Odd or Even</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp  Displays the odd or even status of a number.
+<h4>Code:</h4>
+<pre>
+    %include 'nasmx.inc'
+
+    IMPORT cdecl,printf
+
+    ENTRY my_main
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .text]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    %define ODD_OR_EVEN 8
+
+    PROC my_main
+    LOCALS NONE
+        mov eax, ODD_OR_EVEN
+        and eax,1
+        IF eax,==,1
+            INVOKE printf, msgOdd 
+        ELSE
+            INVOKE printf, msgEven
+        ENDIF
+    ENDPROC
+
+    [section .data]
+
+    message: declare(NASMX_TCHAR) NASMX_TEXT('%d is an %s number.'),13,10,0
+    msgOdd: declare(NASMX_TCHAR) NASMX_TEXT('ODD'),0
+    msgEven: declare(NASMX_TCHAR) NASMX_TEXT('EVEN'),0
+
+</pre><br>
+
+<h3><a name="section-E.3">EX. 3 : Printing odd numbers</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp Displays odd numbers to the screen.  This is a good start towards prime number factoring.
+<h4>Code:</h4>
+<pre>
+    %include 'nasmx.inc'
+
+    IMPORT cdecl,printf
+
+    ENTRY my_main
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .text]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    %define LIMIT 100
+
+    PROC my_main
+    USES ebx
+    LOCALS NONE
+        mov ebx, LIMIT
+        WHILE ebx,!=, 0
+            mov ecx, ebx
+            mov eax, ebx
+            dec ebx
+            and eax,1
+            IF eax,==,0
+                CONTINUE
+            ENDIF
+           INVOKE printf, message, ecx
+        ENDWHILE
+    ENDPROC
+
+    [section .data]
+
+    message: declare(NASMX_TCHAR) NASMX_TEXT('%d is odd.'),13,10,0
+
+</pre><br>
+
+<h3><a name="section-E.4">EX. 4 : Exponent</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp  Displays the result of the number 2 raised to the power of X.
+<h4>Code:</h4>
+<pre>
+    %include 'nasmx.inc'
+
+    IMPORT cdecl,printf
+
+    PROTO my_pow2, uint32_t exp
+
+    ENTRY my_main
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .text]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    %define EXPONENT 8
+
+    PROC my_pow2, uint32_t exp
+    LOCALS NONE
+        mov eax, 1
+        mov ecx, uint32_t [argv(.exp)]
+        WHILE ecx,!=,0
+            shl eax, 1
+            dec ecx
+        ENDWHILE
+    ENDPROC
+
+    PROC my_main
+    LOCALS
+        LOCAL result, unint32_t, 1
+    ENDLOCALS
+        INVOKE my_pow2, EXPONENT
+	mov uint32_t [var(.result)], eax
+        INVOKE printf, message, EXPONENT, uint32_t [var(.result)]
+    ENDPROC
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .data]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    message: declare(NASMX_TCHAR) NASMX_TEXT('The power of 2 to %d = %d'),13,10,0
+
+</pre><br>
+
+
+<p align=center>
+<a href="nasmxa.html">Previous Chapter</a> |
+<a href="nasmx0.html">Contents</a> |
+<a href="nasmxi.html">Index</a>
+</body></html>
