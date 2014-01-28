@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 1: Introduction">
+		<param name="Local" value=html\nasmx1.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.1: What Is NASM-X?">
+			<param name="Local" value=html\nasmx1.html#section-1.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.2: License Conditions">
+			<param name="Local" value=html\nasmx1.html#section-1.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.3: Contact Information">
+			<param name="Local" value=html\nasmx1.html#section-1.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.4: Installation">
+			<param name="Local" value=html\nasmx1.html#section-1.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.4.1: Installing NASM-X under MS-DOS or Windows">
+			<param name="Local" value=html\nasmx1.html#section-1.4.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="1.4.2: Installing NASM-X under Unix">
+			<param name="Local" value=html\nasmx1.html#section-1.4.2">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chapter 2: The NASM-X Language">
+		<param name="Local" value=html\nasmx2.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.1: BREAK: looping">
+			<param name="Local" value=html\nasmx2.html#section-2.1">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.2: CONTINUE: looping">
+			<param name="Local" value=html\nasmx2.html#section-2.2">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.3: ENTRY: Specifying program starting point">
+			<param name="Local" value=html\nasmx2.html#section-2.3">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.4: IF: Conditional branching">
+			<param name="Local" value=html\nasmx2.html#section-2.4">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.5: IMPORT: Importing Symbols from Other Modules">
+			<param name="Local" value=html\nasmx2.html#section-2.5">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.6: INVOKE: Calling a procedure">
+			<param name="Local" value=html\nasmx2.html#section-2.6">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.7: PRAGMA: Defining pragmas">
+			<param name="Local" value=html\nasmx2.html#section-2.7">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.8: PROC: Defining a procedure">
+			<param name="Local" value=html\nasmx2.html#section-2.8">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.9: PROTO: Exporting Symbols to Other Modules">
+			<param name="Local" value=html\nasmx2.html#section-2.9">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.10: REPEAT: looping">
+			<param name="Local" value=html\nasmx2.html#section-2.10">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.11: STRUC: Structure definitions">
+			<param name="Local" value=html\nasmx2.html#section-2.11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.12: UNION: Structure definitions">
+			<param name="Local" value=html\nasmx2.html#section-2.12">
+			</OBJECT>			
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.13: UNTIL: looping">
+			<param name="Local" value=html\nasmx2.html#section-2.13">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.14: USES: Saving registers to the stack">
+			<param name="Local" value=html\nasmx2.html#section-2.14">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2.15: WHILE: looping">
+			<param name="Local" value=html\nasmx2.html#section-2.15">
+			</OBJECT>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Appendix A: NASM-X Version History">
+		<param name="Local" value=html\nasmxa.html">
+		</OBJECT>
+		<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="A.1: NASM-X 1 Series">
+			<param name="Local" value=html\nasmxa.html#section-A.1">
+			</OBJECT>
+			<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="A.1.1 NASMX v1.3: XX Feb 2014">
+				<param name="Local" value=html\nasmxa.html#section-A.1.1">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="A.1.2 NASMX v1.2: 12 Jan 2013">
+				<param name="Local" value=html\nasmxa.html#section-A.1.2">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="A.1.3 NASMX v1.1: 29 Sep 2012">
+				<param name="Local" value=html\nasmxa.html#section-A.1.3">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="A.1.4 NASMX v1.0: 20 Aug 2011">
+				<param name="Local" value=html\nasmxa.html#section-A.1.4">
+				</OBJECT>
+			</UL>
+		</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Index">
+		<param name="Local" value=html\nasmxi.html">
+		</OBJECT>
+</UL>
+</BODY>
+</HTML>
