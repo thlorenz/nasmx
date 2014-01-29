@@ -284,9 +284,9 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 %ixdefine __nxfloat80_type  0x800A
 %ixdefine __nxfloat128_type 0x8010
 
-%ixdefine struc_type 0x1000
-%ixdefine union_type 0x2000
-%ixdefine class_type 0x4000
+%xdefine __NX_STRUC_TYPE 0x1000
+%xdefine __NX_UNION_TYPE 0x2000
+%xdefine __NX_CLASS_TYPE 0x4000
 
 ;// NASMX int types
 %ixdefine int8_t     byte
@@ -355,6 +355,22 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 %idefine is_typeof_class(x) ((x %+ _type >> 14) & 0x0001)
 %idefine is_typeof_float(x) ((x %+ _type >> 15) & 0x0001)
 %idefine nx_is_typeof_container(x) ((x %+ _type >> 12) & 0x0007)
+
+;// class and member access specifiers
+%ixdefine __nx_class_static    0x0100
+%ixdefine __nx_class_abstract  0x0200
+%ixdefine __nx_class_virtual   0x0400
+%ixdefine __nx_class_private   0x1000
+%ixdefine __nx_class_protected 0x2000
+%ixdefine __nx_class_public    0x4000
+
+;// class and member tests - returns 0 if false, otherwise non-zero
+%idefine is_class_typeof_static(x) ((x %+ _class_type) & __nx_class_static)
+%idefine is_class_typeof_abstract(x) ((x %+ _class_type) & __nx_class_abstract)
+%idefine is_class_typeof_virtual(x) ((x %+ _class_type) & __nx_class_virtual)
+%idefine is_class_typeof_private(x) ((x %+ _class_type) & __nx_class_private)
+%idefine is_class_typeof_protected(x) ((x %+ _class_type) & __nx_class_protected)
+%idefine is_class_typeof_public(x) ((x %+ _class_type) & __nx_class_public)
 
 ;//////////////////////////////////////////////////////////////
 ;//
@@ -1332,11 +1348,11 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 		%endif
 	%endrep
 	%ifctx __NX_CTX_STRUC
-		%assign %%type 0x1000
+		%assign %%type __NX_STRUC_TYPE
 	%elifctx __NX_CTX_UNION
-		%assign %%type 0x2000
+		%assign %%type __NX_UNION_TYPE
 	%else
-		%assign %%type 0x3000
+		%assign %%type __NX_CLASS_TYPE
 	%endif
 	%assign %%type (%%type | %%exp)
 
