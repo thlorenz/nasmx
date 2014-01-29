@@ -7,42 +7,144 @@
 <BODY>
 <UL>
 	<LI><OBJECT type="text/sitemap">
-	<param name="Name" value="Entry">
-	<param name="Local" value="html\nasmx2.html#section-2.4.4">
+	<param name="Name" value="BREAK">
+	<param name="Local" value="html\nasmx2.html#section-2.1">
 	</OBJECT>
 
 	<LI><OBJECT type="text/sitemap">
-	<param name="Name" value="Import">
-	<param name="Local" value="html\nasmx2.html#section-2.4.4">
+	<param name="Name" value="CONTINUE">
+	<param name="Local" value="html\nasmx2.html#section-2.2">
 	</OBJECT>
 
 	<LI><OBJECT type="text/sitemap">
-	<param name="Name" value="Invoke">
-	<param name="Local" value="html\nasmx2.html#section-2.4.4">
+	<param name="Name" value="DO">
+	<param name="Local" value="html\nasmx2.html#section-2.3">
 	</OBJECT>
 
 	<LI><OBJECT type="text/sitemap">
-	<param name="Name" value="Proc">
-	<param name="Local" value="html\nasmx2.html#section-2.4.4">
+	<param name="Name" value="ELSE">
+	<param name="Local" value="html\nasmx2.html#section-2.4">
 	</OBJECT>
 
 	<LI><OBJECT type="text/sitemap">
-	<param name="Name" value="Struc">
-	<param name="Local" value="html\nasmx2.html#section-2.4.4">
+	<param name="Name" value="ENTRY">
+	<param name="Local" value="html\nasmx2.html#section-2.5">
 	</OBJECT>
 
 	<LI><OBJECT type="text/sitemap">
-	<param name="Name" value="Union">
-	<param name="Local" value="html\nasmx2.html#section-2.4.4">
+	<param name="Name" value="ENDIF">
+	<param name="Local" value="html\nasmx2.html#section-2.6">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="ENDPROC">
+	<param name="Local" value="html\nasmx2.html#section-2.7">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="ENDLOCALS">
+	<param name="Local" value="html\nasmx2.html#section-2.8">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="ENDWHILE">
+	<param name="Local" value="html\nasmx2.html#section-2.9">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="IF">
+	<param name="Local" value="html\nasmx2.html#section-2.10">
 	</OBJECT>
 
 	<LI><OBJECT type="text/sitemap">
 	<param name="Name" value="IMPORT">
-	<param name="Local" value="html\nasmx2.html#section-2.4.4">
+	<param name="Local" value="html\nasmx2.html#section-2.11">
 	</OBJECT>
 
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="INVOKE">
+	<param name="Local" value="html\nasmx2.html#section-2.12">
+	</OBJECT>
 
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="LOCAL">
+	<param name="Local" value="html\nasmx2.html#section-2.13">
+	</OBJECT>
 
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="LOCALS">
+	<param name="Local" value="html\nasmx2.html#section-2.14">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="NASMX_ENDSTRUC">
+	<param name="Local" value="html\nasmx2.html#section-2.15">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="NASMX_ENDUNION">
+	<param name="Local" value="html\nasmx2.html#section-2.16">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="NASMX_PRAGMA">
+	<param name="Local" value="html\nasmx2.html#section-2.17">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="NASMX_RESERVE">
+	<param name="Local" value="html\nasmx2.html#section-2.18">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="NASMX_STRUC">
+	<param name="Local" value="html\nasmx2.html#section-2.19">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="NASMX_TCHAR">
+	<param name="Local" value="html\nasmx2.html#section-2.20">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="NASMX_TEXT">
+	<param name="Local" value="html\nasmx2.html#section-2.21">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="NASMX_UNION">
+	<param name="Local" value="html\nasmx2.html#section-2.22">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="PROC">
+	<param name="Local" value="html\nasmx2.html#section-2.23">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="PROTO">
+	<param name="Local" value="html\nasmx2.html#section-2.24">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="REPEAT">
+	<param name="Local" value="html\nasmx2.html#section-2.25">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="UNTIL">
+	<param name="Local" value="html\nasmx2.html#section-2.26">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="USES">
+	<param name="Local" value="html\nasmx2.html#section-2.27">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="WHILE">
+	<param name="Local" value="html\nasmx2.html#section-2.28">
+	</OBJECT>
 </UL>
 </BODY>
 </HTML>
