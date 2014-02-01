@@ -636,136 +636,136 @@
 ;;structure definitions
 
 NASMX_STRUC GTimeVal
-	NASMX_RESERVE tv_sec, 		uint32_t, 1
-	NASMX_RESERVE tv_usec, 		uint32_t, 1
+	NASMX_RESERVE tv_sec,	uint32_t, 1
+	NASMX_RESERVE tv_usec,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC _GArray
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE len, 		uint32_t, 1
+	NASMX_RESERVE data,	uint32_t, 1
+	NASMX_RESERVE len,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GByteArray
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE len, 		uint32_t, 1
+	NASMX_RESERVE data,	uint32_t, 1
+	NASMX_RESERVE len,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GPtrArray
-	NASMX_RESERVE pdata, 		uint32_t, 1
-	NASMX_RESERVE len, 		uint32_t, 1
+	NASMX_RESERVE pdata,	uint32_t, 1
+	NASMX_RESERVE len,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GError
-	NASMX_RESERVE domain, 		uint32_t, 1
-	NASMX_RESERVE code, 		uint32_t, 1
-	NASMX_RESERVE message, 		uint32_t, 1
+	NASMX_RESERVE domain,	uint32_t, 1
+	NASMX_RESERVE code,	uint32_t, 1
+	NASMX_RESERVE message,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDebugKey
-	NASMX_RESERVE key, 		uint32_t, 1
-	NASMX_RESERVE value, 		uint32_t, 1
+	NASMX_RESERVE key,	uint32_t, 1
+	NASMX_RESERVE value,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTrashStack
-	NASMX_RESERVE next, 		uint32_t, 1
+	NASMX_RESERVE next,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GThread
-	NASMX_RESERVE func, 		uint32_t, 1
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE joinable, 		uint32_t, 1
-	NASMX_RESERVE priority, 		uint32_t, 1
+	NASMX_RESERVE func,	uint32_t, 1
+	NASMX_RESERVE data,	uint32_t, 1
+	NASMX_RESERVE joinable, 	uint32_t, 1
+	NASMX_RESERVE priority, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GThreadFunctions
-	NASMX_RESERVE mutex_new, 		uint32_t, 1
-	NASMX_RESERVE mutex_lock, 		uint32_t, 1
-	NASMX_RESERVE mutex_trylock, 		uint32_t, 1
-	NASMX_RESERVE mutex_unlock, 		uint32_t, 1
-	NASMX_RESERVE mutex_free, 		uint32_t, 1
-	NASMX_RESERVE cond_new, 		uint32_t, 1
-	NASMX_RESERVE cond_signal, 		uint32_t, 1
-	NASMX_RESERVE cond_broadcast, 		uint32_t, 1
-	NASMX_RESERVE cond_wait, 		uint32_t, 1
-	NASMX_RESERVE cond_timed_wait, 		uint32_t, 1
-	NASMX_RESERVE cond_free, 		uint32_t, 1
-	NASMX_RESERVE private_new, 		uint32_t, 1
-	NASMX_RESERVE private_get, 		uint32_t, 1
-	NASMX_RESERVE private_set, 		uint32_t, 1
-	NASMX_RESERVE thread_create, 		uint32_t, 1
-	NASMX_RESERVE thread_yield, 		uint32_t, 1
-	NASMX_RESERVE thread_join, 		uint32_t, 1
-	NASMX_RESERVE thread_exit, 		uint32_t, 1
-	NASMX_RESERVE thread_set_priority, 		uint32_t, 1
-	NASMX_RESERVE thread_self, 		uint32_t, 1
-	NASMX_RESERVE thread_equal, 		uint32_t, 1
+	NASMX_RESERVE mutex_new, 	uint32_t, 1
+	NASMX_RESERVE mutex_lock, 	uint32_t, 1
+	NASMX_RESERVE mutex_trylock, 	uint32_t, 1
+	NASMX_RESERVE mutex_unlock, 	uint32_t, 1
+	NASMX_RESERVE mutex_free, 	uint32_t, 1
+	NASMX_RESERVE cond_new, 	uint32_t, 1
+	NASMX_RESERVE cond_signal, 	uint32_t, 1
+	NASMX_RESERVE cond_broadcast, 	uint32_t, 1
+	NASMX_RESERVE cond_wait, 	uint32_t, 1
+	NASMX_RESERVE cond_timed_wait, 	uint32_t, 1
+	NASMX_RESERVE cond_free, 	uint32_t, 1
+	NASMX_RESERVE private_new, 	uint32_t, 1
+	NASMX_RESERVE private_get, 	uint32_t, 1
+	NASMX_RESERVE private_set, 	uint32_t, 1
+	NASMX_RESERVE thread_create, 	uint32_t, 1
+	NASMX_RESERVE thread_yield, 	uint32_t, 1
+	NASMX_RESERVE thread_join, 	uint32_t, 1
+	NASMX_RESERVE thread_exit, 	uint32_t, 1
+	NASMX_RESERVE thread_set_priority, 	uint32_t, 1
+	NASMX_RESERVE thread_self, 	uint32_t, 1
+	NASMX_RESERVE thread_equal, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GStaticPrivate
-	NASMX_RESERVE index, 		uint32_t, 1
+	NASMX_RESERVE index,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GStaticRecMutex
-	NASMX_RESERVE mutex, 		uint32_t, 1
-	NASMX_RESERVE depth, 		uint32_t, 1
-	NASMX_RESERVE owner, 		int8_t,  4; GSystemThread_size
+	NASMX_RESERVE mutex,	uint32_t, 1
+	NASMX_RESERVE depth,	uint32_t, 1
+	NASMX_RESERVE owner,	int8_t, 4 ; GSystemThread_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GStaticRWLock
-	NASMX_RESERVE mutex, 		uint32_t, 1
-	NASMX_RESERVE read_cond, 		uint32_t, 1
-	NASMX_RESERVE write_cond, 		uint32_t, 1
-	NASMX_RESERVE read_counter, 		uint32_t, 1
-	NASMX_RESERVE have_writer, 		uint32_t, 1
-	NASMX_RESERVE want_to_read, 		uint32_t, 1
-	NASMX_RESERVE want_to_write, 		uint32_t, 1
+	NASMX_RESERVE mutex,	uint32_t, 1
+	NASMX_RESERVE read_cond, 	uint32_t, 1
+	NASMX_RESERVE write_cond, 	uint32_t, 1
+	NASMX_RESERVE read_counter, 	uint32_t, 1
+	NASMX_RESERVE have_writer, 	uint32_t, 1
+	NASMX_RESERVE want_to_read, 	uint32_t, 1
+	NASMX_RESERVE want_to_write, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GOnce
-	NASMX_RESERVE status, 		uint32_t, 1
-	NASMX_RESERVE retval, 		uint32_t, 1
+	NASMX_RESERVE status,	uint32_t, 1
+	NASMX_RESERVE retval,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GList
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE next, 		uint32_t, 1
-	NASMX_RESERVE prev, 		uint32_t, 1
+	NASMX_RESERVE data,	uint32_t, 1
+	NASMX_RESERVE next,	uint32_t, 1
+	NASMX_RESERVE prev,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GCompletion
-	NASMX_RESERVE items, 		uint32_t, 1
-	NASMX_RESERVE func, 		uint32_t, 1
-	NASMX_RESERVE prefix, 		uint32_t, 1
-	NASMX_RESERVE cache, 		uint32_t, 1
-	NASMX_RESERVE strncmp_func, 		uint32_t, 1
+	NASMX_RESERVE items,	uint32_t, 1
+	NASMX_RESERVE func,	uint32_t, 1
+	NASMX_RESERVE prefix,	uint32_t, 1
+	NASMX_RESERVE cache,	uint32_t, 1
+	NASMX_RESERVE strncmp_func, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDate
-	NASMX_RESERVE julian_days, 		uint32_t, 1
-	NASMX_RESERVE julian, 		uint32_t, 1
-	NASMX_RESERVE dmy, 		uint32_t, 1
-	NASMX_RESERVE day, 		uint32_t, 1
-	NASMX_RESERVE month, 		uint32_t, 1
-	NASMX_RESERVE year, 		uint32_t, 1
+	NASMX_RESERVE julian_days, 	uint32_t, 1
+	NASMX_RESERVE julian,	uint32_t, 1
+	NASMX_RESERVE dmy,	uint32_t, 1
+	NASMX_RESERVE day,	uint32_t, 1
+	NASMX_RESERVE month,	uint32_t, 1
+	NASMX_RESERVE year,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GHashTableIter
-	NASMX_RESERVE dummy1, 		uint32_t, 1
-	NASMX_RESERVE dummy2, 		uint32_t, 1
-	NASMX_RESERVE dummy3, 		uint32_t, 1
-	NASMX_RESERVE dummy4, 		uint32_t, 1
-	NASMX_RESERVE dummy5, 		uint32_t, 1
-	NASMX_RESERVE dummy6, 		uint32_t, 1
+	NASMX_RESERVE dummy1,	uint32_t, 1
+	NASMX_RESERVE dummy2,	uint32_t, 1
+	NASMX_RESERVE dummy3,	uint32_t, 1
+	NASMX_RESERVE dummy4,	uint32_t, 1
+	NASMX_RESERVE dummy5,	uint32_t, 1
+	NASMX_RESERVE dummy6,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GHookList
-	NASMX_RESERVE seq_id, 		uint32_t, 1
-	NASMX_RESERVE hook_size, 		uint32_t, 1
+	NASMX_RESERVE seq_id,	uint32_t, 1
+	NASMX_RESERVE hook_size, 	uint32_t, 1
 ;;;;.is_setup:		RESD 1
-	NASMX_RESERVE hooks, 		uint32_t, 1
-	NASMX_RESERVE dummy3, 		uint32_t, 1
-	NASMX_RESERVE finalize_hook, 		uint32_t, 1
-	NASMX_RESERVE dummy, 		uint32_t, 2
+	NASMX_RESERVE hooks,	uint32_t, 1
+	NASMX_RESERVE dummy3,	uint32_t, 1
+	NASMX_RESERVE finalize_hook, 	uint32_t, 1
+	NASMX_RESERVE dummy,	uint32_t, 2
 NASMX_ENDSTRUC
 
 %macro  GHookList.hook_size__DATA__ 1
@@ -777,311 +777,311 @@ NASMX_ENDSTRUC
 
 
 NASMX_STRUC GHook
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE next, 		uint32_t, 1
-	NASMX_RESERVE prev, 		uint32_t, 1
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE hook_id, 		uint32_t, 1
-	NASMX_RESERVE flags, 		uint32_t, 1
-	NASMX_RESERVE func, 		uint32_t, 1
-	NASMX_RESERVE destroy, 		uint32_t, 1
+	NASMX_RESERVE data,	uint32_t, 1
+	NASMX_RESERVE next,	uint32_t, 1
+	NASMX_RESERVE prev,	uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE hook_id,	uint32_t, 1
+	NASMX_RESERVE flags,	uint32_t, 1
+	NASMX_RESERVE func,	uint32_t, 1
+	NASMX_RESERVE destroy,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GPollFD
-	NASMX_RESERVE fd, 		uint32_t, 1
-	NASMX_RESERVE events, 		uint16_t, 1
-	NASMX_RESERVE revents, 		uint16_t, 1
+	NASMX_RESERVE fd,	uint32_t, 1
+	NASMX_RESERVE events,	uint16_t, 1
+	NASMX_RESERVE revents,	uint16_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSList
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE next, 		uint32_t, 1
+	NASMX_RESERVE data,	uint32_t, 1
+	NASMX_RESERVE next,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC _GSource
-	NASMX_RESERVE callback_data, 		uint32_t, 1
-	NASMX_RESERVE callback_funcs, 		uint32_t, 1
-	NASMX_RESERVE source_funcs, 		uint32_t, 1
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE context, 		uint32_t, 1
-	NASMX_RESERVE priority, 		uint32_t, 1
-	NASMX_RESERVE flags, 		uint32_t, 1
-	NASMX_RESERVE source_id, 		uint32_t, 1
-	NASMX_RESERVE poll_fds, 		uint32_t, 1
-	NASMX_RESERVE prev, 		uint32_t, 1
-	NASMX_RESERVE next, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE callback_data, 	uint32_t, 1
+	NASMX_RESERVE callback_funcs, 	uint32_t, 1
+	NASMX_RESERVE source_funcs, 	uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE context,	uint32_t, 1
+	NASMX_RESERVE priority, 	uint32_t, 1
+	NASMX_RESERVE flags,	uint32_t, 1
+	NASMX_RESERVE source_id, 	uint32_t, 1
+	NASMX_RESERVE poll_fds, 	uint32_t, 1
+	NASMX_RESERVE prev,	uint32_t, 1
+	NASMX_RESERVE next,	uint32_t, 1
+	NASMX_RESERVE name,	uint32_t, 1
+	NASMX_RESERVE priv,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC _GSourceCallbackFuncs
-	NASMX_RESERVE ref, 		uint32_t, 1
-	NASMX_RESERVE unref, 		uint32_t, 1
-	NASMX_RESERVE get, 		uint32_t, 1
+	NASMX_RESERVE ref,	uint32_t, 1
+	NASMX_RESERVE unref,	uint32_t, 1
+	NASMX_RESERVE get,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC _GSourceFuncs
-	NASMX_RESERVE prepare, 		uint32_t, 1
-	NASMX_RESERVE check, 		uint32_t, 1
-	NASMX_RESERVE dispatch, 		uint32_t, 1
-	NASMX_RESERVE finalize, 		uint32_t, 1
-	NASMX_RESERVE closure_callback, 		uint32_t, 1
-	NASMX_RESERVE closure_marshal, 		uint32_t, 1
+	NASMX_RESERVE prepare,	uint32_t, 1
+	NASMX_RESERVE check,	uint32_t, 1
+	NASMX_RESERVE dispatch, 	uint32_t, 1
+	NASMX_RESERVE finalize, 	uint32_t, 1
+	NASMX_RESERVE closure_callback, uint32_t, 1
+	NASMX_RESERVE closure_marshal, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GString
-	NASMX_RESERVE str, 		uint32_t, 1
-	NASMX_RESERVE len, 		uint32_t, 1
-	NASMX_RESERVE allocated_len, 		uint32_t, 1
+	NASMX_RESERVE str,	uint32_t, 1
+	NASMX_RESERVE len,	uint32_t, 1
+	NASMX_RESERVE allocated_len, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GIOChannel
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE funcs, 		uint32_t, 1
-	NASMX_RESERVE encoding, 		uint32_t, 1
-	NASMX_RESERVE read_cd, 		uint32_t, 1
-	NASMX_RESERVE write_cd, 		uint32_t, 1
-	NASMX_RESERVE line_term, 		uint32_t, 1
-	NASMX_RESERVE line_term_len, 		uint32_t, 1
-	NASMX_RESERVE buf_size, 		uint32_t, 1
-	NASMX_RESERVE read_buf, 		uint32_t, 1
-	NASMX_RESERVE encoded_read_buf, 		uint32_t, 1
-	NASMX_RESERVE write_buf, 		uint32_t, 1
-	NASMX_RESERVE partial_write_buf, 		int8_t, 6
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
-	NASMX_RESERVE use_buffer, 		uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE funcs,	uint32_t, 1
+	NASMX_RESERVE encoding, 	uint32_t, 1
+	NASMX_RESERVE read_cd,	uint32_t, 1
+	NASMX_RESERVE write_cd, 	uint32_t, 1
+	NASMX_RESERVE line_term, 	uint32_t, 1
+	NASMX_RESERVE line_term_len, 	uint32_t, 1
+	NASMX_RESERVE buf_size, 	uint32_t, 1
+	NASMX_RESERVE read_buf, 	uint32_t, 1
+	NASMX_RESERVE encoded_read_buf, uint32_t, 1
+	NASMX_RESERVE write_buf, 	uint32_t, 1
+	NASMX_RESERVE partial_write_buf, 	int8_t, 6
+	NASMX_RESERVE __PADDING1__, 	int8_t, 2
+	NASMX_RESERVE use_buffer, 	uint32_t, 1
 ;;.do_encode:		RESD 1
-;;.close_on_unref:		RESD 1
+;;.close_on_unref:	RESD 1
 ;;.is_readable:		RESD 1
-;;.is_writeable:		RESD 1
+;;.is_writeable:	RESD 1
 ;;.is_seekable:		RESD 1
-	NASMX_RESERVE reserved1, 		uint32_t, 1
-	NASMX_RESERVE reserved2, 		uint32_t, 1
+	NASMX_RESERVE reserved1, 	uint32_t, 1
+	NASMX_RESERVE reserved2, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GIOFuncs
-	NASMX_RESERVE io_read, 		uint32_t, 1
-	NASMX_RESERVE io_write, 		uint32_t, 1
-	NASMX_RESERVE io_seek, 		uint32_t, 1
-	NASMX_RESERVE io_close, 		uint32_t, 1
-	NASMX_RESERVE io_create_watch, 		uint32_t, 1
-	NASMX_RESERVE io_free, 		uint32_t, 1
-	NASMX_RESERVE io_set_flags, 		uint32_t, 1
-	NASMX_RESERVE io_get_flags, 		uint32_t, 1
+	NASMX_RESERVE io_read,	uint32_t, 1
+	NASMX_RESERVE io_write, 	uint32_t, 1
+	NASMX_RESERVE io_seek,	uint32_t, 1
+	NASMX_RESERVE io_close, 	uint32_t, 1
+	NASMX_RESERVE io_create_watch, 	uint32_t, 1
+	NASMX_RESERVE io_free,	uint32_t, 1
+	NASMX_RESERVE io_set_flags, 	uint32_t, 1
+	NASMX_RESERVE io_get_flags, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GMarkupParser
-	NASMX_RESERVE start_element, 		uint32_t, 1
-	NASMX_RESERVE end_element, 		uint32_t, 1
-	NASMX_RESERVE text, 		uint32_t, 1
-	NASMX_RESERVE passthrough, 		uint32_t, 1
-	NASMX_RESERVE error, 		uint32_t, 1
+	NASMX_RESERVE start_element, 	uint32_t, 1
+	NASMX_RESERVE end_element, 	uint32_t, 1
+	NASMX_RESERVE text,	uint32_t, 1
+	NASMX_RESERVE passthrough, 	uint32_t, 1
+	NASMX_RESERVE error,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GNode
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE next, 		uint32_t, 1
-	NASMX_RESERVE prev, 		uint32_t, 1
-	NASMX_RESERVE parent, 		uint32_t, 1
-	NASMX_RESERVE children, 		uint32_t, 1
+	NASMX_RESERVE data,	uint32_t, 1
+	NASMX_RESERVE next,	uint32_t, 1
+	NASMX_RESERVE prev,	uint32_t, 1
+	NASMX_RESERVE parent,	uint32_t, 1
+	NASMX_RESERVE children, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GOptionEntry
-	NASMX_RESERVE long_name, 		uint32_t, 1
-	NASMX_RESERVE short_name, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE flags, 		uint32_t, 1
-	NASMX_RESERVE arg, 		uint32_t, 1
-	NASMX_RESERVE arg_data, 		uint32_t, 1
-	NASMX_RESERVE description, 		uint32_t, 1
-	NASMX_RESERVE arg_description, 		uint32_t, 1
+	NASMX_RESERVE long_name, 	uint32_t, 1
+	NASMX_RESERVE short_name, 	int8_t, 1
+	NASMX_RESERVE __PADDING1__, 	int8_t, 3
+	NASMX_RESERVE flags,	uint32_t, 1
+	NASMX_RESERVE arg,	uint32_t, 1
+	NASMX_RESERVE arg_data, 	uint32_t, 1
+	NASMX_RESERVE description, 	uint32_t, 1
+	NASMX_RESERVE arg_description, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GQueue
-	NASMX_RESERVE head, 		uint32_t, 1
-	NASMX_RESERVE tail, 		uint32_t, 1
-	NASMX_RESERVE length, 		uint32_t, 1
+	NASMX_RESERVE head,	uint32_t, 1
+	NASMX_RESERVE tail,	uint32_t, 1
+	NASMX_RESERVE length,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTuples
-	NASMX_RESERVE len, 		uint32_t, 1
+	NASMX_RESERVE len,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GScannerConfig
-	NASMX_RESERVE cset_skip_characters, 		uint32_t, 1
-	NASMX_RESERVE cset_identifier_first, 		uint32_t, 1
-	NASMX_RESERVE cset_identifier_nth, 		uint32_t, 1
-	NASMX_RESERVE cpair_comment_single, 		uint32_t, 1
-	NASMX_RESERVE case_sensitive, 		uint32_t, 1
+	NASMX_RESERVE cset_skip_characters, 	uint32_t, 1
+	NASMX_RESERVE cset_identifier_first, 	uint32_t, 1
+	NASMX_RESERVE cset_identifier_nth, 	uint32_t, 1
+	NASMX_RESERVE cpair_comment_single, 	uint32_t, 1
+	NASMX_RESERVE case_sensitive,	uint32_t, 1
 ;.skip_comment_multi:		RESD 1
 ;.skip_comment_single:		RESD 1
 ;.scan_comment_multi:		RESD 1
 ;.scan_identifier:		RESD 1
-;.scan_identifier_1char:		RESD 1
+;.scan_identifier_1char:	RESD 1
 ;.scan_identifier_NULL:		RESD 1
-;.scan_symbols:		RESD 1
-;.scan_binary:		RESD 1
-;.scan_octal:		RESD 1
-;.scan_float:		RESD 1
-;.scan_hex:		RESD 1
+;.scan_symbols:			RESD 1
+;.scan_binary:			RESD 1
+;.scan_octal:			RESD 1
+;.scan_float:			RESD 1
+;.scan_hex:			RESD 1
 ;.scan_hex_dollar:		RESD 1
 ;.scan_string_sq:		RESD 1
 ;.scan_string_dq:		RESD 1
 ;.numbers_2_int:		RESD 1
-;.int_2_float:		RESD 1
+;.int_2_float:			RESD 1
 ;.identifier_2_string:		RESD 1
-;.char_2_token:		RESD 1
+;.char_2_token:			RESD 1
 ;.symbol_2_token:		RESD 1
 ;.scope_0_fallback:		RESD 1
-;.store_int64:		RESD 1
-	NASMX_RESERVE padding_dummy, 		uint32_t, 1
+;.store_int64:			RESD 1
+	NASMX_RESERVE padding_dummy, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GScanner
-	NASMX_RESERVE user_data, 		uint32_t, 1
-	NASMX_RESERVE max_parse_errors, 		uint32_t, 1
-	NASMX_RESERVE parse_errors, 		uint32_t, 1
-	NASMX_RESERVE input_name, 		uint32_t, 1
-	NASMX_RESERVE qdata, 		uint32_t, 1
-	NASMX_RESERVE config, 		uint32_t, 1
-	NASMX_RESERVE token, 		uint32_t, 1
-	NASMX_RESERVE value, 		int8_t,  4; GTokenValue_size
-	NASMX_RESERVE line, 		uint32_t, 1
-	NASMX_RESERVE position, 		uint32_t, 1
-	NASMX_RESERVE next_token, 		uint32_t, 1
-	NASMX_RESERVE next_value, 		int8_t, 4 ; GTokenValue_size
-	NASMX_RESERVE next_line, 		uint32_t, 1
-	NASMX_RESERVE next_position, 		uint32_t, 1
-	NASMX_RESERVE symbol_table, 		uint32_t, 1
-	NASMX_RESERVE input_fd, 		uint32_t, 1
-	NASMX_RESERVE text, 		uint32_t, 1
-	NASMX_RESERVE text_end, 		uint32_t, 1
-	NASMX_RESERVE buffer, 		uint32_t, 1
-	NASMX_RESERVE scope_id, 		uint32_t, 1
-	NASMX_RESERVE msg_handler, 		uint32_t, 1
+	NASMX_RESERVE user_data, 	uint32_t, 1
+	NASMX_RESERVE max_parse_errors, uint32_t, 1
+	NASMX_RESERVE parse_errors, 	uint32_t, 1
+	NASMX_RESERVE input_name, 	uint32_t, 1
+	NASMX_RESERVE qdata,	uint32_t, 1
+	NASMX_RESERVE config,	uint32_t, 1
+	NASMX_RESERVE token,	uint32_t, 1
+	NASMX_RESERVE value,	int8_t,  4 ; GTokenValue_size
+	NASMX_RESERVE line,	uint32_t, 1
+	NASMX_RESERVE position, 	uint32_t, 1
+	NASMX_RESERVE next_token, 	uint32_t, 1
+	NASMX_RESERVE next_value, 	int8_t, 4 ; GTokenValue_size
+	NASMX_RESERVE next_line, 	uint32_t, 1
+	NASMX_RESERVE next_position, 	uint32_t, 1
+	NASMX_RESERVE symbol_table, 	uint32_t, 1
+	NASMX_RESERVE input_fd, 	uint32_t, 1
+	NASMX_RESERVE text,	uint32_t, 1
+	NASMX_RESERVE text_end, 	uint32_t, 1
+	NASMX_RESERVE buffer,	uint32_t, 1
+	NASMX_RESERVE scope_id, 	uint32_t, 1
+	NASMX_RESERVE msg_handler, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GThreadPool
-	NASMX_RESERVE func, 		uint32_t, 1
-	NASMX_RESERVE user_data, 		uint32_t, 1
-	NASMX_RESERVE exclusive, 		uint32_t, 1
+	NASMX_RESERVE func,		uint32_t, 1
+	NASMX_RESERVE user_data, 	uint32_t, 1
+	NASMX_RESERVE exclusive, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTypeClass
-	NASMX_RESERVE g_type, 		uint32_t, 1
+	NASMX_RESERVE g_type,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTypeInstance
-	NASMX_RESERVE g_class, 		uint32_t, 1
+	NASMX_RESERVE g_class,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTypeInterface
-	NASMX_RESERVE g_type, 		uint32_t, 1
-	NASMX_RESERVE g_instance_type, 		uint32_t, 1
+	NASMX_RESERVE g_type,		uint32_t, 1
+	NASMX_RESERVE g_instance_type, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTypeQuery
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE type_name, 		uint32_t, 1
-	NASMX_RESERVE class_size, 		uint32_t, 1
-	NASMX_RESERVE instance_size, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE type_name, 	uint32_t, 1
+	NASMX_RESERVE class_size, 	uint32_t, 1
+	NASMX_RESERVE instance_size, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTypeInfo
-	NASMX_RESERVE class_size, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
-	NASMX_RESERVE base_init, 		uint32_t, 1
-	NASMX_RESERVE base_finalize, 		uint32_t, 1
-	NASMX_RESERVE class_init, 		uint32_t, 1
-	NASMX_RESERVE class_finalize, 		uint32_t, 1
-	NASMX_RESERVE class_data, 		uint32_t, 1
-	NASMX_RESERVE instance_size, 		uint16_t, 1
-	NASMX_RESERVE n_preallocs, 		uint16_t, 1
-	NASMX_RESERVE instance_init, 		uint32_t, 1
-	NASMX_RESERVE value_table, 		uint32_t, 1
+	NASMX_RESERVE class_size, 	uint16_t, 1
+	NASMX_RESERVE __PADDING1__, 	int8_t, 2
+	NASMX_RESERVE base_init, 	uint32_t, 1
+	NASMX_RESERVE base_finalize, 	uint32_t, 1
+	NASMX_RESERVE class_init, 	uint32_t, 1
+	NASMX_RESERVE class_finalize, 	uint32_t, 1
+	NASMX_RESERVE class_data, 	uint32_t, 1
+	NASMX_RESERVE instance_size, 	uint16_t, 1
+	NASMX_RESERVE n_preallocs, 	uint16_t, 1
+	NASMX_RESERVE instance_init, 	uint32_t, 1
+	NASMX_RESERVE value_table, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTypeFundamentalInfo
-	NASMX_RESERVE type_flags, 		uint32_t, 1
+	NASMX_RESERVE type_flags, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GInterfaceInfo
-	NASMX_RESERVE interface_init, 		uint32_t, 1
-	NASMX_RESERVE interface_finalize, 		uint32_t, 1
-	NASMX_RESERVE interface_data, 		uint32_t, 1
+	NASMX_RESERVE interface_init, 	uint32_t, 1
+	NASMX_RESERVE interface_finalize, 	uint32_t, 1
+	NASMX_RESERVE interface_data, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTypeValueTable
-	NASMX_RESERVE value_init, 		uint32_t, 1
-	NASMX_RESERVE value_free, 		uint32_t, 1
-	NASMX_RESERVE value_copy, 		uint32_t, 1
-	NASMX_RESERVE value_peek_pointer, 		uint32_t, 1
-	NASMX_RESERVE collect_format, 		uint32_t, 1
-	NASMX_RESERVE collect_value, 		uint32_t, 1
-	NASMX_RESERVE lcopy_format, 		uint32_t, 1
-	NASMX_RESERVE lcopy_value, 		uint32_t, 1
+	NASMX_RESERVE value_init, 	uint32_t, 1
+	NASMX_RESERVE value_free, 	uint32_t, 1
+	NASMX_RESERVE value_copy, 	uint32_t, 1
+	NASMX_RESERVE value_peek_pointer, 	uint32_t, 1
+	NASMX_RESERVE collect_format, 	uint32_t, 1
+	NASMX_RESERVE collect_value, 	uint32_t, 1
+	NASMX_RESERVE lcopy_format, 	uint32_t, 1
+	NASMX_RESERVE lcopy_value, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GValue
-	NASMX_RESERVE g_type, 		uint32_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 4
+	NASMX_RESERVE g_type,	uint32_t, 1
+	NASMX_RESERVE __PADDING1__, 	int8_t, 4
 ;;;;;UNION conversion
 ;;.v_int:		RESD 1
 ;;.v_uint:		RESD 1
 ;;.v_long:		RESD 1
 ;;.v_ulong:		RESD 1
 ;;.v_int64:		RESQ 1
-	NASMX_RESERVE v_uint64_data, 		uint64_t, 2
+	NASMX_RESERVE v_uint64_data, 	uint64_t, 2
 ;;.v_float:		RESD 1
 ;;.v_double:		RESD 1
 ;;.v_pointer:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpec
-	NASMX_RESERVE g_type_instance, 		int8_t, GTypeInstance_size
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE flags, 		uint32_t, 1
-	NASMX_RESERVE value_type, 		uint32_t, 1
-	NASMX_RESERVE owner_type, 		uint32_t, 1
-	NASMX_RESERVE _nick, 		uint32_t, 1
-	NASMX_RESERVE _blurb, 		uint32_t, 1
-	NASMX_RESERVE qdata, 		uint32_t, 1
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE param_id, 		uint32_t, 1
+	NASMX_RESERVE g_type_instance, 	int8_t, GTypeInstance_size
+	NASMX_RESERVE name,	uint32_t, 1
+	NASMX_RESERVE flags,	uint32_t, 1
+	NASMX_RESERVE value_type, 	uint32_t, 1
+	NASMX_RESERVE owner_type, 	uint32_t, 1
+	NASMX_RESERVE _nick,	uint32_t, 1
+	NASMX_RESERVE _blurb,	uint32_t, 1
+	NASMX_RESERVE qdata,	uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE param_id, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecClass
-	NASMX_RESERVE g_type_class, 		int8_t, GTypeClass_size
-	NASMX_RESERVE value_type, 		uint32_t, 1
-	NASMX_RESERVE finalize, 		uint32_t, 1
-	NASMX_RESERVE value_set_default, 		uint32_t, 1
-	NASMX_RESERVE value_validate, 		uint32_t, 1
-	NASMX_RESERVE values_cmp, 		uint32_t, 1
+	NASMX_RESERVE g_type_class, 	int8_t, GTypeClass_size
+	NASMX_RESERVE value_type, 	uint32_t, 1
+	NASMX_RESERVE finalize, 	uint32_t, 1
+	NASMX_RESERVE value_set_default, 	uint32_t, 1
+	NASMX_RESERVE value_validate, 	uint32_t, 1
+	NASMX_RESERVE values_cmp, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParameter
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE value, 		int8_t, GValue_size
+	NASMX_RESERVE name,	uint32_t, 1
+	NASMX_RESERVE value,	int8_t, GValue_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecTypeInfo
-	NASMX_RESERVE instance_size, 		uint16_t, 1
-	NASMX_RESERVE n_preallocs, 		uint16_t, 1
-	NASMX_RESERVE instance_init, 		uint32_t, 1
-	NASMX_RESERVE value_type, 		uint32_t, 1
-	NASMX_RESERVE finalize, 		uint32_t, 1
-	NASMX_RESERVE value_set_default, 		uint32_t, 1
-	NASMX_RESERVE value_validate, 		uint32_t, 1
-	NASMX_RESERVE values_cmp, 		uint32_t, 1
+	NASMX_RESERVE instance_size, 	uint16_t, 1
+	NASMX_RESERVE n_preallocs, 	uint16_t, 1
+	NASMX_RESERVE instance_init, 	uint32_t, 1
+	NASMX_RESERVE value_type, 	uint32_t, 1
+	NASMX_RESERVE finalize, 	uint32_t, 1
+	NASMX_RESERVE value_set_default, 	uint32_t, 1
+	NASMX_RESERVE value_validate, 	uint32_t, 1
+	NASMX_RESERVE values_cmp, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GClosureNotifyData
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE notify, 		uint32_t, 1
+	NASMX_RESERVE data,	uint32_t, 1
+	NASMX_RESERVE notify,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GClosure
-	NASMX_RESERVE ref_count, 		uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
 ;.meta_marshal:		RESD 1
 ;.n_guards:		RESD 1
 ;.n_fnotifiers:		RESD 1
@@ -1091,2229 +1091,2228 @@ NASMX_STRUC GClosure
 ;.derivative_flag:		RESD 1
 ;.in_marshal:		RESD 1
 ;.is_invalid:		RESD 1
-	NASMX_RESERVE marshal, 		uint32_t, 1
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE notifiers, 		uint32_t, 1
+	NASMX_RESERVE marshal,	uint32_t, 1
+	NASMX_RESERVE data,	uint32_t, 1
+	NASMX_RESERVE notifiers, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GCClosure
-	NASMX_RESERVE closure, 		int8_t, GClosure_size
-	NASMX_RESERVE callback, 		uint32_t, 1
+	NASMX_RESERVE closure,	int8_t, GClosure_size
+	NASMX_RESERVE callback, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSignalInvocationHint
-	NASMX_RESERVE signal_id, 		uint32_t, 1
-	NASMX_RESERVE detail, 		uint32_t, 1
-	NASMX_RESERVE run_type, 		uint32_t, 1
+	NASMX_RESERVE signal_id, 	uint32_t, 1
+	NASMX_RESERVE detail,	uint32_t, 1
+	NASMX_RESERVE run_type, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSignalQuery
-	NASMX_RESERVE signal_id, 		uint32_t, 1
-	NASMX_RESERVE signal_name, 		uint32_t, 1
-	NASMX_RESERVE itype, 		uint32_t, 1
-	NASMX_RESERVE signal_flags, 		uint32_t, 1
-	NASMX_RESERVE return_type, 		uint32_t, 1
-	NASMX_RESERVE n_params, 		uint32_t, 1
-	NASMX_RESERVE param_types, 		uint32_t, 1
+	NASMX_RESERVE signal_id, 	uint32_t, 1
+	NASMX_RESERVE signal_name, 	uint32_t, 1
+	NASMX_RESERVE itype,	uint32_t, 1
+	NASMX_RESERVE signal_flags, 	uint32_t, 1
+	NASMX_RESERVE return_type, 	uint32_t, 1
+	NASMX_RESERVE n_params, 	uint32_t, 1
+	NASMX_RESERVE param_types, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GObject
-	NASMX_RESERVE g_type_instance, 		int8_t, GTypeInstance_size
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE qdata, 		uint32_t, 1
+	NASMX_RESERVE g_type_instance, 	int8_t, GTypeInstance_size
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE qdata,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GObjectClass
-	NASMX_RESERVE g_type_class, 		int8_t, GTypeClass_size
-	NASMX_RESERVE construct_properties, 		uint32_t, 1
-	NASMX_RESERVE constructor, 		uint32_t, 1
-	NASMX_RESERVE set_property, 		uint32_t, 1
-	NASMX_RESERVE get_property, 		uint32_t, 1
-	NASMX_RESERVE dispose, 		uint32_t, 1
-	NASMX_RESERVE finalize, 		uint32_t, 1
-	NASMX_RESERVE dispatch_properties_changed, 		uint32_t, 1
-	NASMX_RESERVE notify, 		uint32_t, 1
-	NASMX_RESERVE constructed, 		uint32_t, 1
-	NASMX_RESERVE flags, 		uint32_t, 1
-	NASMX_RESERVE pdummy, 		uint32_t, 6
+	NASMX_RESERVE g_type_class, 	int8_t, GTypeClass_size
+	NASMX_RESERVE construct_properties, 	uint32_t, 1
+	NASMX_RESERVE constructor, 	uint32_t, 1
+	NASMX_RESERVE set_property, 	uint32_t, 1
+	NASMX_RESERVE get_property, 	uint32_t, 1
+	NASMX_RESERVE dispose,	uint32_t, 1
+	NASMX_RESERVE finalize, 	uint32_t, 1
+	NASMX_RESERVE dispatch_properties_changed, 	uint32_t, 1
+	NASMX_RESERVE notify,	uint32_t, 1
+	NASMX_RESERVE constructed, 	uint32_t, 1
+	NASMX_RESERVE flags,	uint32_t, 1
+	NASMX_RESERVE pdummy,	uint32_t, 6
 NASMX_ENDSTRUC
 
 NASMX_STRUC GObjectConstructParam
-	NASMX_RESERVE pspec, 		uint32_t, 1
-	NASMX_RESERVE value, 		uint32_t, 1
+	NASMX_RESERVE pspec,	uint32_t, 1
+	NASMX_RESERVE value,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GEnumClass
-	NASMX_RESERVE g_type_class, 		int8_t, GTypeClass_size
-	NASMX_RESERVE minimum, 		uint32_t, 1
-	NASMX_RESERVE maximum, 		uint32_t, 1
-	NASMX_RESERVE n_values, 		uint32_t, 1
-	NASMX_RESERVE values, 		uint32_t, 1
+	NASMX_RESERVE g_type_class, 	int8_t, GTypeClass_size
+	NASMX_RESERVE minimum,	uint32_t, 1
+	NASMX_RESERVE maximum,	uint32_t, 1
+	NASMX_RESERVE n_values, 	uint32_t, 1
+	NASMX_RESERVE values,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFlagsClass
-	NASMX_RESERVE g_type_class, 		int8_t, GTypeClass_size
-	NASMX_RESERVE mask, 		uint32_t, 1
-	NASMX_RESERVE n_values, 		uint32_t, 1
-	NASMX_RESERVE values, 		uint32_t, 1
+	NASMX_RESERVE g_type_class, 	int8_t, GTypeClass_size
+	NASMX_RESERVE mask,	uint32_t, 1
+	NASMX_RESERVE n_values, 	uint32_t, 1
+	NASMX_RESERVE values,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GEnumValue
-	NASMX_RESERVE value, 		uint32_t, 1
-	NASMX_RESERVE value_name, 		uint32_t, 1
-	NASMX_RESERVE value_nick, 		uint32_t, 1
+	NASMX_RESERVE value,	uint32_t, 1
+	NASMX_RESERVE value_name, 	uint32_t, 1
+	NASMX_RESERVE value_nick, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFlagsValue
-	NASMX_RESERVE value, 		uint32_t, 1
-	NASMX_RESERVE value_name, 		uint32_t, 1
-	NASMX_RESERVE value_nick, 		uint32_t, 1
+	NASMX_RESERVE value,	uint32_t, 1
+	NASMX_RESERVE value_name, 	uint32_t, 1
+	NASMX_RESERVE value_nick, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecChar
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE minimum, 		int8_t, 1
-	NASMX_RESERVE maximum, 		int8_t, 1
-	NASMX_RESERVE default_value, 		int8_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE minimum,	int8_t, 1
+	NASMX_RESERVE maximum,	int8_t, 1
+	NASMX_RESERVE default_value, 	int8_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecUChar
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE minimum, 		int8_t, 1
-	NASMX_RESERVE maximum, 		int8_t, 1
-	NASMX_RESERVE default_value, 		int8_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE minimum,	int8_t, 1
+	NASMX_RESERVE maximum,	int8_t, 1
+	NASMX_RESERVE default_value, 	int8_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecBoolean
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE default_value, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE default_value, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecInt
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE minimum, 		uint32_t, 1
-	NASMX_RESERVE maximum, 		uint32_t, 1
-	NASMX_RESERVE default_value, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE minimum,	uint32_t, 1
+	NASMX_RESERVE maximum,	uint32_t, 1
+	NASMX_RESERVE default_value, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecUInt
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE minimum, 		uint32_t, 1
-	NASMX_RESERVE maximum, 		uint32_t, 1
-	NASMX_RESERVE default_value, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE minimum,	uint32_t, 1
+	NASMX_RESERVE maximum,	uint32_t, 1
+	NASMX_RESERVE default_value, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecLong
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE minimum, 		uint32_t, 1
-	NASMX_RESERVE maximum, 		uint32_t, 1
-	NASMX_RESERVE default_value, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE minimum,	uint32_t, 1
+	NASMX_RESERVE maximum,	uint32_t, 1
+	NASMX_RESERVE default_value, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecULong
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE minimum, 		uint32_t, 1
-	NASMX_RESERVE maximum, 		uint32_t, 1
-	NASMX_RESERVE default_value, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE minimum,	uint32_t, 1
+	NASMX_RESERVE maximum,	uint32_t, 1
+	NASMX_RESERVE default_value, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecInt64
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE minimum, 		uint64_t, 1
-	NASMX_RESERVE maximum, 		uint64_t, 1
-	NASMX_RESERVE default_value, 		uint64_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE minimum,	uint64_t, 1
+	NASMX_RESERVE maximum,	uint64_t, 1
+	NASMX_RESERVE default_value, 	uint64_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecUInt64
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE minimum, 		uint64_t, 1
-	NASMX_RESERVE maximum, 		uint64_t, 1
-	NASMX_RESERVE default_value, 		uint64_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE minimum,	uint64_t, 1
+	NASMX_RESERVE maximum,	uint64_t, 1
+	NASMX_RESERVE default_value, 	uint64_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecUnichar
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE default_value, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE default_value, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecEnum
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE enum_class, 		uint32_t, 1
-	NASMX_RESERVE default_value, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE enum_class, 	uint32_t, 1
+	NASMX_RESERVE default_value, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecFlags
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE flags_class, 		uint32_t, 1
-	NASMX_RESERVE default_value, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE flags_class, 	uint32_t, 1
+	NASMX_RESERVE default_value, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecFloat
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE minimum, 		uint32_t, 1
-	NASMX_RESERVE maximum, 		uint32_t, 1
-	NASMX_RESERVE default_value, 		uint32_t, 1
-	NASMX_RESERVE epsilon, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE minimum,	uint32_t, 1
+	NASMX_RESERVE maximum,	uint32_t, 1
+	NASMX_RESERVE default_value, 	uint32_t, 1
+	NASMX_RESERVE epsilon,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecDouble
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE minimum, 		uint32_t, 1
-	NASMX_RESERVE maximum, 		uint32_t, 1
-	NASMX_RESERVE default_value, 		uint32_t, 1
-	NASMX_RESERVE epsilon, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE minimum,	uint32_t, 1
+	NASMX_RESERVE maximum,	uint32_t, 1
+	NASMX_RESERVE default_value, 	uint32_t, 1
+	NASMX_RESERVE epsilon,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecString
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE default_value, 		uint32_t, 1
-	NASMX_RESERVE cset_first, 		uint32_t, 1
-	NASMX_RESERVE cset_nth, 		uint32_t, 1
-	NASMX_RESERVE substitutor, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE null_fold_if_empty, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE default_value, 	uint32_t, 1
+	NASMX_RESERVE cset_first, 	uint32_t, 1
+	NASMX_RESERVE cset_nth, 	uint32_t, 1
+	NASMX_RESERVE substitutor, 	int8_t, 1
+	NASMX_RESERVE __PADDING1__, 	int8_t, 3
+	NASMX_RESERVE null_fold_if_empty, 	uint32_t, 1
 ;.ensure_non_null:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecParam
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecBoxed
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecPointer
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecValueArray
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE element_spec, 		uint32_t, 1
-	NASMX_RESERVE fixed_n_elements, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE element_spec, 	uint32_t, 1
+	NASMX_RESERVE fixed_n_elements, uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecObject
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecOverride
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE overridden, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE overridden, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecGType
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE is_a_type, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE is_a_type, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GParamSpecVariant
-	NASMX_RESERVE parent_instance, 		int8_t, GParamSpec_size
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE default_value, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GParamSpec_size
+	NASMX_RESERVE type,	uint32_t, 1
+	NASMX_RESERVE default_value, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTypeModule
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE use_count, 		uint32_t, 1
-	NASMX_RESERVE type_infos, 		uint32_t, 1
-	NASMX_RESERVE interface_infos, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE use_count, 	uint32_t, 1
+	NASMX_RESERVE type_infos, 	uint32_t, 1
+	NASMX_RESERVE interface_infos, 	uint32_t, 1
+	NASMX_RESERVE name,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTypeModuleClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE load, 		uint32_t, 1
-	NASMX_RESERVE unload, 		uint32_t, 1
-	NASMX_RESERVE reserved1, 		uint32_t, 1
-	NASMX_RESERVE reserved2, 		uint32_t, 1
-	NASMX_RESERVE reserved3, 		uint32_t, 1
-	NASMX_RESERVE reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE load,	uint32_t, 1
+	NASMX_RESERVE unload,	uint32_t, 1
+	NASMX_RESERVE reserved1, 	uint32_t, 1
+	NASMX_RESERVE reserved2, 	uint32_t, 1
+	NASMX_RESERVE reserved3, 	uint32_t, 1
+	NASMX_RESERVE reserved4, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTypePluginClass
-	NASMX_RESERVE base_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE use_plugin, 		uint32_t, 1
-	NASMX_RESERVE unuse_plugin, 		uint32_t, 1
-	NASMX_RESERVE complete_type_info, 		uint32_t, 1
-	NASMX_RESERVE complete_interface_info, 		uint32_t, 1
+	NASMX_RESERVE base_iface, 	int8_t, GTypeInterface_size
+	NASMX_RESERVE use_plugin, 	uint32_t, 1
+	NASMX_RESERVE unuse_plugin, 	uint32_t, 1
+	NASMX_RESERVE complete_type_info, 	uint32_t, 1
+	NASMX_RESERVE complete_interface_info, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GValueArray
-	NASMX_RESERVE n_values, 		uint32_t, 1
-	NASMX_RESERVE values, 		uint32_t, 1
-	NASMX_RESERVE n_prealloced, 		uint32_t, 1
+	NASMX_RESERVE n_values, 	uint32_t, 1
+	NASMX_RESERVE values,		uint32_t, 1
+	NASMX_RESERVE n_prealloced, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GAppInfoIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE dup, 		uint32_t, 1
-	NASMX_RESERVE equal, 		uint32_t, 1
-	NASMX_RESERVE get_id, 		uint32_t, 1
-	NASMX_RESERVE get_name, 		uint32_t, 1
-	NASMX_RESERVE get_description, 		uint32_t, 1
-	NASMX_RESERVE get_executable, 		uint32_t, 1
-	NASMX_RESERVE get_icon, 		uint32_t, 1
-	NASMX_RESERVE launch, 		uint32_t, 1
-	NASMX_RESERVE supports_uris, 		uint32_t, 1
-	NASMX_RESERVE supports_files, 		uint32_t, 1
-	NASMX_RESERVE launch_uris, 		uint32_t, 1
-	NASMX_RESERVE should_show, 		uint32_t, 1
-	NASMX_RESERVE set_as_default_for_type, 		uint32_t, 1
-	NASMX_RESERVE set_as_default_for_extension, 		uint32_t, 1
-	NASMX_RESERVE add_supports_type, 		uint32_t, 1
-	NASMX_RESERVE can_remove_supports_type, 		uint32_t, 1
-	NASMX_RESERVE remove_supports_type, 		uint32_t, 1
-	NASMX_RESERVE can_delete, 		uint32_t, 1
-	NASMX_RESERVE do_delete, 		uint32_t, 1
-	NASMX_RESERVE get_commandline, 		uint32_t, 1
-	NASMX_RESERVE get_display_name, 		uint32_t, 1
-	NASMX_RESERVE set_as_last_used_for_type, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE dup,		uint32_t, 1
+	NASMX_RESERVE equal,		uint32_t, 1
+	NASMX_RESERVE get_id,		uint32_t, 1
+	NASMX_RESERVE get_name, 	uint32_t, 1
+	NASMX_RESERVE get_description, 	uint32_t, 1
+	NASMX_RESERVE get_executable, 	uint32_t, 1
+	NASMX_RESERVE get_icon, 	uint32_t, 1
+	NASMX_RESERVE launch,		uint32_t, 1
+	NASMX_RESERVE supports_uris, 	uint32_t, 1
+	NASMX_RESERVE supports_files, 	uint32_t, 1
+	NASMX_RESERVE launch_uris, 	uint32_t, 1
+	NASMX_RESERVE should_show, 	uint32_t, 1
+	NASMX_RESERVE set_as_default_for_type, uint32_t, 1
+	NASMX_RESERVE set_as_default_for_extension, uint32_t, 1
+	NASMX_RESERVE add_supports_type, 	uint32_t, 1
+	NASMX_RESERVE can_remove_supports_type, uint32_t, 1
+	NASMX_RESERVE remove_supports_type, 	uint32_t, 1
+	NASMX_RESERVE can_delete, 	uint32_t, 1
+	NASMX_RESERVE do_delete, 	uint32_t, 1
+	NASMX_RESERVE get_commandline, 	uint32_t, 1
+	NASMX_RESERVE get_display_name, uint32_t, 1
+	NASMX_RESERVE set_as_last_used_for_type, uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GAppLaunchContext
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GAppLaunchContextClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE get_display, 		uint32_t, 1
-	NASMX_RESERVE get_startup_notify_id, 		uint32_t, 1
-	NASMX_RESERVE launch_failed, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE get_display, 	uint32_t, 1
+	NASMX_RESERVE get_startup_notify_id,	uint32_t, 1
+	NASMX_RESERVE launch_failed, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GActionInterface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE get_name, 		uint32_t, 1
-	NASMX_RESERVE get_parameter_type, 		uint32_t, 1
-	NASMX_RESERVE get_state_type, 		uint32_t, 1
-	NASMX_RESERVE get_state_hint, 		uint32_t, 1
-	NASMX_RESERVE get_enabled, 		uint32_t, 1
-	NASMX_RESERVE get_state, 		uint32_t, 1
-	NASMX_RESERVE set_state, 		uint32_t, 1
-	NASMX_RESERVE activate, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE get_name, 	uint32_t, 1
+	NASMX_RESERVE get_parameter_type, 	uint32_t, 1
+	NASMX_RESERVE get_state_type, 	uint32_t, 1
+	NASMX_RESERVE get_state_hint, 	uint32_t, 1
+	NASMX_RESERVE get_enabled, 	uint32_t, 1
+	NASMX_RESERVE get_state, 	uint32_t, 1
+	NASMX_RESERVE set_state, 	uint32_t, 1
+	NASMX_RESERVE activate, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSimpleAction
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSimpleActionClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE activate, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE activate, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GActionGroupInterface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE has_action, 		uint32_t, 1
-	NASMX_RESERVE list_actions, 		uint32_t, 1
-	NASMX_RESERVE get_action_enabled, 		uint32_t, 1
-	NASMX_RESERVE get_action_parameter_type, 		uint32_t, 1
-	NASMX_RESERVE get_action_state_type, 		uint32_t, 1
-	NASMX_RESERVE get_action_state_hint, 		uint32_t, 1
-	NASMX_RESERVE get_action_state, 		uint32_t, 1
-	NASMX_RESERVE change_action_state, 		uint32_t, 1
-	NASMX_RESERVE activate_action, 		uint32_t, 1
-	NASMX_RESERVE action_added, 		uint32_t, 1
-	NASMX_RESERVE action_removed, 		uint32_t, 1
-	NASMX_RESERVE action_enabled_changed, 		uint32_t, 1
-	NASMX_RESERVE action_state_changed, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE has_action, 	uint32_t, 1
+	NASMX_RESERVE list_actions, 	uint32_t, 1
+	NASMX_RESERVE get_action_enabled, 	uint32_t, 1
+	NASMX_RESERVE get_action_parameter_type,	uint32_t, 1
+	NASMX_RESERVE get_action_state_type,	uint32_t, 1
+	NASMX_RESERVE get_action_state_hint,	uint32_t, 1
+	NASMX_RESERVE get_action_state,	uint32_t, 1
+	NASMX_RESERVE change_action_state,	uint32_t, 1
+	NASMX_RESERVE activate_action, 	uint32_t, 1
+	NASMX_RESERVE action_added, 	uint32_t, 1
+	NASMX_RESERVE action_removed, 	uint32_t, 1
+	NASMX_RESERVE action_enabled_changed,	uint32_t, 1
+	NASMX_RESERVE action_state_changed, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSimpleActionGroup
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSimpleActionGroupClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GApplication
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE priv,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GApplicationClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE startup, 		uint32_t, 1
-	NASMX_RESERVE activate, 		uint32_t, 1
-	NASMX_RESERVE open, 		uint32_t, 1
-	NASMX_RESERVE command_line, 		uint32_t, 1
-	NASMX_RESERVE local_command_line, 		uint32_t, 1
-	NASMX_RESERVE before_emit, 		uint32_t, 1
-	NASMX_RESERVE after_emit, 		uint32_t, 1
-	NASMX_RESERVE add_platform_data, 		uint32_t, 1
-	NASMX_RESERVE quit_mainloop, 		uint32_t, 1
-	NASMX_RESERVE run_mainloop, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE startup,		uint32_t, 1
+	NASMX_RESERVE activate,		uint32_t, 1
+	NASMX_RESERVE open,		uint32_t, 1
+	NASMX_RESERVE command_line, 	uint32_t, 1
+	NASMX_RESERVE local_command_line,	uint32_t, 1
+	NASMX_RESERVE before_emit, 	uint32_t, 1
+	NASMX_RESERVE after_emit, 	uint32_t, 1
+	NASMX_RESERVE add_platform_data, 	uint32_t, 1
+	NASMX_RESERVE quit_mainloop, 	uint32_t, 1
+	NASMX_RESERVE run_mainloop, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GApplicationCommandLine
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GApplicationCommandLineClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE print_literal, 		uint32_t, 1
-	NASMX_RESERVE printerr_literal, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE print_literal, 	uint32_t, 1
+	NASMX_RESERVE printerr_literal,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GInitableIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE init, 		uint32_t, 1
+	NASMX_RESERVE g_iface,	int8_t, GTypeInterface_size
+	NASMX_RESERVE init,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GAsyncInitableIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE init_async, 		uint32_t, 1
-	NASMX_RESERVE init_finish, 		uint32_t, 1
+	NASMX_RESERVE g_iface,	int8_t, GTypeInterface_size
+	NASMX_RESERVE init_async, 	uint32_t, 1
+	NASMX_RESERVE init_finish, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GAsyncResultIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE get_user_data, 		uint32_t, 1
-	NASMX_RESERVE get_source_object, 		uint32_t, 1
+	NASMX_RESERVE g_iface,	int8_t, GTypeInterface_size
+	NASMX_RESERVE get_user_data, 	uint32_t, 1
+	NASMX_RESERVE get_source_object,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GInputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GInputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE read_fn, 		uint32_t, 1
-	NASMX_RESERVE skip, 		uint32_t, 1
-	NASMX_RESERVE close_fn, 		uint32_t, 1
-	NASMX_RESERVE read_async, 		uint32_t, 1
-	NASMX_RESERVE read_finish, 		uint32_t, 1
-	NASMX_RESERVE skip_async, 		uint32_t, 1
-	NASMX_RESERVE skip_finish, 		uint32_t, 1
-	NASMX_RESERVE close_async, 		uint32_t, 1
-	NASMX_RESERVE close_finish, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE read_fn,		uint32_t, 1
+	NASMX_RESERVE skip,		uint32_t, 1
+	NASMX_RESERVE close_fn, 	uint32_t, 1
+	NASMX_RESERVE read_async, 	uint32_t, 1
+	NASMX_RESERVE read_finish, 	uint32_t, 1
+	NASMX_RESERVE skip_async, 	uint32_t, 1
+	NASMX_RESERVE skip_finish, 	uint32_t, 1
+	NASMX_RESERVE close_async, 	uint32_t, 1
+	NASMX_RESERVE close_finish, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFilterInputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GInputStream_size
-	NASMX_RESERVE base_stream, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GInputStream_size
+	NASMX_RESERVE base_stream, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFilterInputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GInputStreamClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GInputStreamClass_size
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GBufferedInputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GFilterInputStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GFilterInputStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GBufferedInputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GFilterInputStreamClass_size
-	NASMX_RESERVE fill, 		uint32_t, 1
-	NASMX_RESERVE fill_async, 		uint32_t, 1
-	NASMX_RESERVE fill_finish, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GFilterInputStreamClass_size
+	NASMX_RESERVE fill,		uint32_t, 1
+	NASMX_RESERVE fill_async, 	uint32_t, 1
+	NASMX_RESERVE fill_finish, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GOutputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GOutputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE write_fn, 		uint32_t, 1
-	NASMX_RESERVE splice, 		uint32_t, 1
-	NASMX_RESERVE flush, 		uint32_t, 1
-	NASMX_RESERVE close_fn, 		uint32_t, 1
-	NASMX_RESERVE write_async, 		uint32_t, 1
-	NASMX_RESERVE write_finish, 		uint32_t, 1
-	NASMX_RESERVE splice_async, 		uint32_t, 1
-	NASMX_RESERVE splice_finish, 		uint32_t, 1
-	NASMX_RESERVE flush_async, 		uint32_t, 1
-	NASMX_RESERVE flush_finish, 		uint32_t, 1
-	NASMX_RESERVE close_async, 		uint32_t, 1
-	NASMX_RESERVE close_finish, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved7, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved8, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE write_fn, 	uint32_t, 1
+	NASMX_RESERVE splice,		uint32_t, 1
+	NASMX_RESERVE flush,		uint32_t, 1
+	NASMX_RESERVE close_fn, 	uint32_t, 1
+	NASMX_RESERVE write_async, 	uint32_t, 1
+	NASMX_RESERVE write_finish, 	uint32_t, 1
+	NASMX_RESERVE splice_async, 	uint32_t, 1
+	NASMX_RESERVE splice_finish, 	uint32_t, 1
+	NASMX_RESERVE flush_async, 	uint32_t, 1
+	NASMX_RESERVE flush_finish, 	uint32_t, 1
+	NASMX_RESERVE close_async, 	uint32_t, 1
+	NASMX_RESERVE close_finish, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved6, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved7, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved8, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFilterOutputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GOutputStream_size
-	NASMX_RESERVE base_stream, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GOutputStream_size
+	NASMX_RESERVE base_stream, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFilterOutputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GOutputStreamClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GOutputStreamClass_size
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GBufferedOutputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GFilterOutputStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GFilterOutputStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GBufferedOutputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GFilterOutputStreamClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GFilterOutputStreamClass_size
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GCancellable
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GCancellableClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE cancelled, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE cancelled, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GConverterIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE convert, 		uint32_t, 1
-	NASMX_RESERVE reset, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE convert,		uint32_t, 1
+	NASMX_RESERVE reset,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GCharsetConverterClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
 
 
 NASMX_ENDSTRUC
 
 NASMX_STRUC GConverterInputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GFilterInputStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GFilterInputStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GConverterInputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GFilterInputStreamClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GFilterInputStreamClass_size
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GConverterOutputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GFilterOutputStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GFilterOutputStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GConverterOutputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GFilterOutputStreamClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GFilterOutputStreamClass_size
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDataInputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GBufferedInputStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GBufferedInputStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDataInputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GBufferedInputStreamClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GBufferedInputStreamClass_size
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDataOutputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GFilterOutputStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GFilterOutputStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDataOutputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GFilterOutputStreamClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GFilterOutputStreamClass_size
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusInterfaceVTable
-	NASMX_RESERVE method_call, 		uint32_t, 1
-	NASMX_RESERVE get_property, 		uint32_t, 1
-	NASMX_RESERVE set_property, 		uint32_t, 1
+	NASMX_RESERVE method_call, 	uint32_t, 1
+	NASMX_RESERVE get_property, 	uint32_t, 1
+	NASMX_RESERVE set_property, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusSubtreeVTable
-	NASMX_RESERVE enumerate, 		uint32_t, 1
-	NASMX_RESERVE introspect, 		uint32_t, 1
-	NASMX_RESERVE dispatch, 		uint32_t, 1
+	NASMX_RESERVE enumerate, 	uint32_t, 1
+	NASMX_RESERVE introspect, 	uint32_t, 1
+	NASMX_RESERVE dispatch, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusErrorEntry
-	NASMX_RESERVE error_code, 		uint32_t, 1
-	NASMX_RESERVE dbus_error_name, 		uint32_t, 1
+	NASMX_RESERVE error_code, 	uint32_t, 1
+	NASMX_RESERVE dbus_error_name, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusAnnotationInfo
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE key, 		uint32_t, 1
-	NASMX_RESERVE value, 		uint32_t, 1
-	NASMX_RESERVE annotations, 		uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE key,		uint32_t, 1
+	NASMX_RESERVE value,		uint32_t, 1
+	NASMX_RESERVE annotations, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusArgInfo
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE signature, 		uint32_t, 1
-	NASMX_RESERVE annotations, 		uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE signature, 	uint32_t, 1
+	NASMX_RESERVE annotations, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusMethodInfo
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE in_args, 		uint32_t, 1
-	NASMX_RESERVE out_args, 		uint32_t, 1
-	NASMX_RESERVE annotations, 		uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE in_args,		uint32_t, 1
+	NASMX_RESERVE out_args, 	uint32_t, 1
+	NASMX_RESERVE annotations, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusSignalInfo
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE args, 		uint32_t, 1
-	NASMX_RESERVE annotations, 		uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE args,		uint32_t, 1
+	NASMX_RESERVE annotations, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusPropertyInfo
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE signature, 		uint32_t, 1
-	NASMX_RESERVE flags, 		uint32_t, 1
-	NASMX_RESERVE annotations, 		uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE signature, 	uint32_t, 1
+	NASMX_RESERVE flags,		uint32_t, 1
+	NASMX_RESERVE annotations, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusInterfaceInfo
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE methods, 		uint32_t, 1
-	NASMX_RESERVE signals, 		uint32_t, 1
-	NASMX_RESERVE properties, 		uint32_t, 1
-	NASMX_RESERVE annotations, 		uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE methods,		uint32_t, 1
+	NASMX_RESERVE signals,		uint32_t, 1
+	NASMX_RESERVE properties, 	uint32_t, 1
+	NASMX_RESERVE annotations, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusNodeInfo
-	NASMX_RESERVE ref_count, 		uint32_t, 1
-	NASMX_RESERVE path, 		uint32_t, 1
-	NASMX_RESERVE interfaces, 		uint32_t, 1
-	NASMX_RESERVE nodes, 		uint32_t, 1
-	NASMX_RESERVE annotations, 		uint32_t, 1
+	NASMX_RESERVE ref_count, 	uint32_t, 1
+	NASMX_RESERVE path,		uint32_t, 1
+	NASMX_RESERVE interfaces, 	uint32_t, 1
+	NASMX_RESERVE nodes,		uint32_t, 1
+	NASMX_RESERVE annotations, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusProxy
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDBusProxyClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE g_properties_changed, 		uint32_t, 1
-	NASMX_RESERVE g_signal, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE g_properties_changed, 	uint32_t, 1
+	NASMX_RESERVE g_signal, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GDriveIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE disconnected, 		uint32_t, 1
-	NASMX_RESERVE eject_button, 		uint32_t, 1
-	NASMX_RESERVE get_name, 		uint32_t, 1
-	NASMX_RESERVE get_icon, 		uint32_t, 1
-	NASMX_RESERVE has_volumes, 		uint32_t, 1
-	NASMX_RESERVE get_volumes, 		uint32_t, 1
-	NASMX_RESERVE is_media_removable, 		uint32_t, 1
-	NASMX_RESERVE has_media, 		uint32_t, 1
-	NASMX_RESERVE is_media_check_automatic, 		uint32_t, 1
-	NASMX_RESERVE can_eject, 		uint32_t, 1
-	NASMX_RESERVE can_poll_for_media, 		uint32_t, 1
-	NASMX_RESERVE eject, 		uint32_t, 1
-	NASMX_RESERVE eject_finish, 		uint32_t, 1
-	NASMX_RESERVE poll_for_media, 		uint32_t, 1
-	NASMX_RESERVE poll_for_media_finish, 		uint32_t, 1
-	NASMX_RESERVE get_identifier, 		uint32_t, 1
-	NASMX_RESERVE enumerate_identifiers, 		uint32_t, 1
-	NASMX_RESERVE get_start_stop_type, 		uint32_t, 1
-	NASMX_RESERVE can_start, 		uint32_t, 1
-	NASMX_RESERVE can_start_degraded, 		uint32_t, 1
-	NASMX_RESERVE start, 		uint32_t, 1
-	NASMX_RESERVE start_finish, 		uint32_t, 1
-	NASMX_RESERVE can_stop, 		uint32_t, 1
-	NASMX_RESERVE stop, 		uint32_t, 1
-	NASMX_RESERVE stop_finish, 		uint32_t, 1
-	NASMX_RESERVE stop_button, 		uint32_t, 1
-	NASMX_RESERVE eject_with_operation, 		uint32_t, 1
-	NASMX_RESERVE eject_with_operation_finish, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE disconnected, 	uint32_t, 1
+	NASMX_RESERVE eject_button, 	uint32_t, 1
+	NASMX_RESERVE get_name, 	uint32_t, 1
+	NASMX_RESERVE get_icon, 	uint32_t, 1
+	NASMX_RESERVE has_volumes, 	uint32_t, 1
+	NASMX_RESERVE get_volumes, 	uint32_t, 1
+	NASMX_RESERVE is_media_removable, 	uint32_t, 1
+	NASMX_RESERVE has_media, 	uint32_t, 1
+	NASMX_RESERVE is_media_check_automatic, 	uint32_t, 1
+	NASMX_RESERVE can_eject, 	uint32_t, 1
+	NASMX_RESERVE can_poll_for_media, 	uint32_t, 1
+	NASMX_RESERVE eject,		uint32_t, 1
+	NASMX_RESERVE eject_finish, 	uint32_t, 1
+	NASMX_RESERVE poll_for_media, 	uint32_t, 1
+	NASMX_RESERVE poll_for_media_finish, 	uint32_t, 1
+	NASMX_RESERVE get_identifier, 	uint32_t, 1
+	NASMX_RESERVE enumerate_identifiers, 	uint32_t, 1
+	NASMX_RESERVE get_start_stop_type, 	uint32_t, 1
+	NASMX_RESERVE can_start, 	uint32_t, 1
+	NASMX_RESERVE can_start_degraded, 	uint32_t, 1
+	NASMX_RESERVE start,		uint32_t, 1
+	NASMX_RESERVE start_finish, 	uint32_t, 1
+	NASMX_RESERVE can_stop, 	uint32_t, 1
+	NASMX_RESERVE stop,		uint32_t, 1
+	NASMX_RESERVE stop_finish, 	uint32_t, 1
+	NASMX_RESERVE stop_button, 	uint32_t, 1
+	NASMX_RESERVE eject_with_operation,	uint32_t, 1
+	NASMX_RESERVE eject_with_operation_finish, uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GIconIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE hash, 		uint32_t, 1
-	NASMX_RESERVE equal, 		uint32_t, 1
-	NASMX_RESERVE to_tokens, 		uint32_t, 1
-	NASMX_RESERVE from_tokens, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE hash,		uint32_t, 1
+	NASMX_RESERVE equal,		uint32_t, 1
+	NASMX_RESERVE to_tokens, 	uint32_t, 1
+	NASMX_RESERVE from_tokens, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GEmblemedIcon
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GEmblemedIconClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileAttributeInfo
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE flags, 		uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE flags,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileAttributeInfoList
-	NASMX_RESERVE infos, 		uint32_t, 1
-	NASMX_RESERVE n_infos, 		uint32_t, 1
+	NASMX_RESERVE infos,		uint32_t, 1
+	NASMX_RESERVE n_infos,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileEnumerator
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileEnumeratorClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE next_file, 		uint32_t, 1
-	NASMX_RESERVE close_fn, 		uint32_t, 1
-	NASMX_RESERVE next_files_async, 		uint32_t, 1
-	NASMX_RESERVE next_files_finish, 		uint32_t, 1
-	NASMX_RESERVE close_async, 		uint32_t, 1
-	NASMX_RESERVE close_finish, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved7, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE next_file, 	uint32_t, 1
+	NASMX_RESERVE close_fn, 	uint32_t, 1
+	NASMX_RESERVE next_files_async, uint32_t, 1
+	NASMX_RESERVE next_files_finish, uint32_t, 1
+	NASMX_RESERVE close_async, 	uint32_t, 1
+	NASMX_RESERVE close_finish, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved6, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved7, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE dup, 		uint32_t, 1
-	NASMX_RESERVE hash, 		uint32_t, 1
-	NASMX_RESERVE equal, 		uint32_t, 1
-	NASMX_RESERVE is_native, 		uint32_t, 1
-	NASMX_RESERVE has_uri_scheme, 		uint32_t, 1
-	NASMX_RESERVE get_uri_scheme, 		uint32_t, 1
-	NASMX_RESERVE get_basename, 		uint32_t, 1
-	NASMX_RESERVE get_path, 		uint32_t, 1
-	NASMX_RESERVE get_uri, 		uint32_t, 1
-	NASMX_RESERVE get_parse_name, 		uint32_t, 1
-	NASMX_RESERVE get_parent, 		uint32_t, 1
-	NASMX_RESERVE prefix_matches, 		uint32_t, 1
-	NASMX_RESERVE get_relative_path, 		uint32_t, 1
-	NASMX_RESERVE resolve_relative_path, 		uint32_t, 1
-	NASMX_RESERVE get_child_for_display_name, 		uint32_t, 1
-	NASMX_RESERVE enumerate_children, 		uint32_t, 1
-	NASMX_RESERVE enumerate_children_async, 		uint32_t, 1
-	NASMX_RESERVE enumerate_children_finish, 		uint32_t, 1
-	NASMX_RESERVE query_info, 		uint32_t, 1
-	NASMX_RESERVE query_info_async, 		uint32_t, 1
-	NASMX_RESERVE query_info_finish, 		uint32_t, 1
-	NASMX_RESERVE query_filesystem_info, 		uint32_t, 1
-	NASMX_RESERVE query_filesystem_info_async, 		uint32_t, 1
-	NASMX_RESERVE query_filesystem_info_finish, 		uint32_t, 1
-	NASMX_RESERVE find_enclosing_mount, 		uint32_t, 1
-	NASMX_RESERVE find_enclosing_mount_async, 		uint32_t, 1
-	NASMX_RESERVE find_enclosing_mount_finish, 		uint32_t, 1
-	NASMX_RESERVE set_display_name, 		uint32_t, 1
-	NASMX_RESERVE set_display_name_async, 		uint32_t, 1
-	NASMX_RESERVE set_display_name_finish, 		uint32_t, 1
-	NASMX_RESERVE query_settable_attributes, 		uint32_t, 1
-	NASMX_RESERVE _query_settable_attributes_async, 		uint32_t, 1
-	NASMX_RESERVE _query_settable_attributes_finish, 		uint32_t, 1
-	NASMX_RESERVE query_writable_namespaces, 		uint32_t, 1
-	NASMX_RESERVE _query_writable_namespaces_async, 		uint32_t, 1
-	NASMX_RESERVE _query_writable_namespaces_finish, 		uint32_t, 1
-	NASMX_RESERVE set_attribute, 		uint32_t, 1
-	NASMX_RESERVE set_attributes_from_info, 		uint32_t, 1
-	NASMX_RESERVE set_attributes_async, 		uint32_t, 1
-	NASMX_RESERVE set_attributes_finish, 		uint32_t, 1
-	NASMX_RESERVE read_fn, 		uint32_t, 1
-	NASMX_RESERVE read_async, 		uint32_t, 1
-	NASMX_RESERVE read_finish, 		uint32_t, 1
-	NASMX_RESERVE append_to, 		uint32_t, 1
-	NASMX_RESERVE append_to_async, 		uint32_t, 1
-	NASMX_RESERVE append_to_finish, 		uint32_t, 1
-	NASMX_RESERVE create, 		uint32_t, 1
-	NASMX_RESERVE create_async, 		uint32_t, 1
-	NASMX_RESERVE create_finish, 		uint32_t, 1
-	NASMX_RESERVE replace, 		uint32_t, 1
-	NASMX_RESERVE replace_async, 		uint32_t, 1
-	NASMX_RESERVE replace_finish, 		uint32_t, 1
-	NASMX_RESERVE delete_file, 		uint32_t, 1
-	NASMX_RESERVE _delete_file_async, 		uint32_t, 1
-	NASMX_RESERVE _delete_file_finish, 		uint32_t, 1
-	NASMX_RESERVE trash, 		uint32_t, 1
-	NASMX_RESERVE _trash_async, 		uint32_t, 1
-	NASMX_RESERVE _trash_finish, 		uint32_t, 1
-	NASMX_RESERVE make_directory, 		uint32_t, 1
-	NASMX_RESERVE _make_directory_async, 		uint32_t, 1
-	NASMX_RESERVE _make_directory_finish, 		uint32_t, 1
-	NASMX_RESERVE make_symbolic_link, 		uint32_t, 1
-	NASMX_RESERVE _make_symbolic_link_async, 		uint32_t, 1
-	NASMX_RESERVE _make_symbolic_link_finish, 		uint32_t, 1
-	NASMX_RESERVE copy, 		uint32_t, 1
-	NASMX_RESERVE copy_async, 		uint32_t, 1
-	NASMX_RESERVE copy_finish, 		uint32_t, 1
-	NASMX_RESERVE move, 		uint32_t, 1
-	NASMX_RESERVE _move_async, 		uint32_t, 1
-	NASMX_RESERVE _move_finish, 		uint32_t, 1
-	NASMX_RESERVE mount_mountable, 		uint32_t, 1
-	NASMX_RESERVE mount_mountable_finish, 		uint32_t, 1
-	NASMX_RESERVE unmount_mountable, 		uint32_t, 1
-	NASMX_RESERVE unmount_mountable_finish, 		uint32_t, 1
-	NASMX_RESERVE eject_mountable, 		uint32_t, 1
-	NASMX_RESERVE eject_mountable_finish, 		uint32_t, 1
-	NASMX_RESERVE mount_enclosing_volume, 		uint32_t, 1
-	NASMX_RESERVE mount_enclosing_volume_finish, 		uint32_t, 1
-	NASMX_RESERVE monitor_dir, 		uint32_t, 1
-	NASMX_RESERVE monitor_file, 		uint32_t, 1
-	NASMX_RESERVE open_readwrite, 		uint32_t, 1
-	NASMX_RESERVE open_readwrite_async, 		uint32_t, 1
-	NASMX_RESERVE open_readwrite_finish, 		uint32_t, 1
-	NASMX_RESERVE create_readwrite, 		uint32_t, 1
-	NASMX_RESERVE create_readwrite_async, 		uint32_t, 1
-	NASMX_RESERVE create_readwrite_finish, 		uint32_t, 1
-	NASMX_RESERVE replace_readwrite, 		uint32_t, 1
-	NASMX_RESERVE replace_readwrite_async, 		uint32_t, 1
-	NASMX_RESERVE replace_readwrite_finish, 		uint32_t, 1
-	NASMX_RESERVE start_mountable, 		uint32_t, 1
-	NASMX_RESERVE start_mountable_finish, 		uint32_t, 1
-	NASMX_RESERVE stop_mountable, 		uint32_t, 1
-	NASMX_RESERVE stop_mountable_finish, 		uint32_t, 1
-	NASMX_RESERVE supports_thread_contexts, 		uint32_t, 1
-	NASMX_RESERVE unmount_mountable_with_operation, 		uint32_t, 1
-	NASMX_RESERVE unmount_mountable_with_operation_finish, 		uint32_t, 1
-	NASMX_RESERVE eject_mountable_with_operation, 		uint32_t, 1
-	NASMX_RESERVE eject_mountable_with_operation_finish, 		uint32_t, 1
-	NASMX_RESERVE poll_mountable, 		uint32_t, 1
-	NASMX_RESERVE poll_mountable_finish, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE dup,		uint32_t, 1
+	NASMX_RESERVE hash,		uint32_t, 1
+	NASMX_RESERVE equal,		uint32_t, 1
+	NASMX_RESERVE is_native, 	uint32_t, 1
+	NASMX_RESERVE has_uri_scheme, 	uint32_t, 1
+	NASMX_RESERVE get_uri_scheme, 	uint32_t, 1
+	NASMX_RESERVE get_basename, 	uint32_t, 1
+	NASMX_RESERVE get_path, 	uint32_t, 1
+	NASMX_RESERVE get_uri,		uint32_t, 1
+	NASMX_RESERVE get_parse_name, 	uint32_t, 1
+	NASMX_RESERVE get_parent, 	uint32_t, 1
+	NASMX_RESERVE prefix_matches, 	uint32_t, 1
+	NASMX_RESERVE get_relative_path, 	uint32_t, 1
+	NASMX_RESERVE resolve_relative_path, 	uint32_t, 1
+	NASMX_RESERVE get_child_for_display_name, 	uint32_t, 1
+	NASMX_RESERVE enumerate_children,	uint32_t, 1
+	NASMX_RESERVE enumerate_children_async, 	uint32_t, 1
+	NASMX_RESERVE enumerate_children_finish, 	uint32_t, 1
+	NASMX_RESERVE query_info,	uint32_t, 1
+	NASMX_RESERVE query_info_async,	uint32_t, 1
+	NASMX_RESERVE query_info_finish,	uint32_t, 1
+	NASMX_RESERVE query_filesystem_info,	uint32_t, 1
+	NASMX_RESERVE query_filesystem_info_async, 	uint32_t, 1
+	NASMX_RESERVE query_filesystem_info_finish, 	uint32_t, 1
+	NASMX_RESERVE find_enclosing_mount,	uint32_t, 1
+	NASMX_RESERVE find_enclosing_mount_async, 	uint32_t, 1
+	NASMX_RESERVE find_enclosing_mount_finish, 	uint32_t, 1
+	NASMX_RESERVE set_display_name,	uint32_t, 1
+	NASMX_RESERVE set_display_name_async,	uint32_t, 1
+	NASMX_RESERVE set_display_name_finish,	uint32_t, 1
+	NASMX_RESERVE query_settable_attributes, 	uint32_t, 1
+	NASMX_RESERVE _query_settable_attributes_async, 	uint32_t, 1
+	NASMX_RESERVE _query_settable_attributes_finish, 	uint32_t, 1
+	NASMX_RESERVE query_writable_namespaces,	uint32_t, 1
+	NASMX_RESERVE _query_writable_namespaces_async, 	uint32_t, 1
+	NASMX_RESERVE _query_writable_namespaces_finish, 	uint32_t, 1
+	NASMX_RESERVE set_attribute,	uint32_t, 1
+	NASMX_RESERVE set_attributes_from_info, uint32_t, 1
+	NASMX_RESERVE set_attributes_async, 	uint32_t, 1
+	NASMX_RESERVE set_attributes_finish, 	uint32_t, 1
+	NASMX_RESERVE read_fn,		uint32_t, 1
+	NASMX_RESERVE read_async,	uint32_t, 1
+	NASMX_RESERVE read_finish,	uint32_t, 1
+	NASMX_RESERVE append_to,	uint32_t, 1
+	NASMX_RESERVE append_to_async,	uint32_t, 1
+	NASMX_RESERVE append_to_finish, 	uint32_t, 1
+	NASMX_RESERVE create,		uint32_t, 1
+	NASMX_RESERVE create_async,	uint32_t, 1
+	NASMX_RESERVE create_finish,	uint32_t, 1
+	NASMX_RESERVE replace,		uint32_t, 1
+	NASMX_RESERVE replace_async,	uint32_t, 1
+	NASMX_RESERVE replace_finish,	uint32_t, 1
+	NASMX_RESERVE delete_file,	uint32_t, 1
+	NASMX_RESERVE _delete_file_async, 	uint32_t, 1
+	NASMX_RESERVE _delete_file_finish, 	uint32_t, 1
+	NASMX_RESERVE trash,		uint32_t, 1
+	NASMX_RESERVE _trash_async,	uint32_t, 1
+	NASMX_RESERVE _trash_finish,	uint32_t, 1
+	NASMX_RESERVE make_directory,	uint32_t, 1
+	NASMX_RESERVE _make_directory_async, 	uint32_t, 1
+	NASMX_RESERVE _make_directory_finish, 	uint32_t, 1
+	NASMX_RESERVE make_symbolic_link, 	uint32_t, 1
+	NASMX_RESERVE _make_symbolic_link_async, uint32_t, 1
+	NASMX_RESERVE _make_symbolic_link_finish, uint32_t, 1
+	NASMX_RESERVE copy,		uint32_t, 1
+	NASMX_RESERVE copy_async, 	uint32_t, 1
+	NASMX_RESERVE copy_finish, 	uint32_t, 1
+	NASMX_RESERVE move,		uint32_t, 1
+	NASMX_RESERVE _move_async, 	uint32_t, 1
+	NASMX_RESERVE _move_finish, 	uint32_t, 1
+	NASMX_RESERVE mount_mountable, 	uint32_t, 1
+	NASMX_RESERVE mount_mountable_finish,	uint32_t, 1
+	NASMX_RESERVE unmount_mountable,	uint32_t, 1
+	NASMX_RESERVE unmount_mountable_finish,	uint32_t, 1
+	NASMX_RESERVE eject_mountable,	uint32_t, 1
+	NASMX_RESERVE eject_mountable_finish, 	uint32_t, 1
+	NASMX_RESERVE mount_enclosing_volume, 	uint32_t, 1
+	NASMX_RESERVE mount_enclosing_volume_finish, uint32_t, 1
+	NASMX_RESERVE monitor_dir,	uint32_t, 1
+	NASMX_RESERVE monitor_file,	uint32_t, 1
+	NASMX_RESERVE open_readwrite,	uint32_t, 1
+	NASMX_RESERVE open_readwrite_async, 	uint32_t, 1
+	NASMX_RESERVE open_readwrite_finish, 	uint32_t, 1
+	NASMX_RESERVE create_readwrite, 	uint32_t, 1
+	NASMX_RESERVE create_readwrite_async, 	uint32_t, 1
+	NASMX_RESERVE create_readwrite_finish, 	uint32_t, 1
+	NASMX_RESERVE replace_readwrite, 	uint32_t, 1
+	NASMX_RESERVE replace_readwrite_async, 	uint32_t, 1
+	NASMX_RESERVE replace_readwrite_finish,	uint32_t, 1
+	NASMX_RESERVE start_mountable,	uint32_t, 1
+	NASMX_RESERVE start_mountable_finish, 	uint32_t, 1
+	NASMX_RESERVE stop_mountable,	uint32_t, 1
+	NASMX_RESERVE stop_mountable_finish, 	uint32_t, 1
+	NASMX_RESERVE supports_thread_contexts, uint32_t, 1
+	NASMX_RESERVE unmount_mountable_with_operation,	uint32_t, 1
+	NASMX_RESERVE unmount_mountable_with_operation_finish,	uint32_t, 1
+	NASMX_RESERVE eject_mountable_with_operation,		uint32_t, 1
+	NASMX_RESERVE eject_mountable_with_operation_finish,	uint32_t, 1
+	NASMX_RESERVE poll_mountable,	uint32_t, 1
+	NASMX_RESERVE poll_mountable_finish,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileInputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GInputStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance, 	int8_t, GInputStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileInputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GInputStreamClass_size
-	NASMX_RESERVE tell, 		uint32_t, 1
-	NASMX_RESERVE can_seek, 		uint32_t, 1
-	NASMX_RESERVE seek, 		uint32_t, 1
-	NASMX_RESERVE query_info, 		uint32_t, 1
-	NASMX_RESERVE query_info_async, 		uint32_t, 1
-	NASMX_RESERVE query_info_finish, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GInputStreamClass_size
+	NASMX_RESERVE tell,		uint32_t, 1
+	NASMX_RESERVE can_seek, 	uint32_t, 1
+	NASMX_RESERVE seek,		uint32_t, 1
+	NASMX_RESERVE query_info, 	uint32_t, 1
+	NASMX_RESERVE query_info_async, uint32_t, 1
+	NASMX_RESERVE query_info_finish,	uint32_t, 1
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GIOStream
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GIOStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE get_input_stream, 		uint32_t, 1
-	NASMX_RESERVE get_output_stream, 		uint32_t, 1
-	NASMX_RESERVE close_fn, 		uint32_t, 1
-	NASMX_RESERVE close_async, 		uint32_t, 1
-	NASMX_RESERVE close_finish, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved7, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved8, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved9, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved10, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE get_input_stream,	uint32_t, 1
+	NASMX_RESERVE get_output_stream,	uint32_t, 1
+	NASMX_RESERVE close_fn,		uint32_t, 1
+	NASMX_RESERVE close_async, 	uint32_t, 1
+	NASMX_RESERVE close_finish, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved1, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved2, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved4, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved5, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved6, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved7, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved8, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved9, 	uint32_t, 1
+	NASMX_RESERVE _g_reserved10, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileIOStream
-	NASMX_RESERVE parent_instance, 		int8_t, GIOStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GIOStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileIOStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GIOStreamClass_size
-	NASMX_RESERVE tell, 		uint32_t, 1
-	NASMX_RESERVE can_seek, 		uint32_t, 1
-	NASMX_RESERVE seek, 		uint32_t, 1
-	NASMX_RESERVE can_truncate, 		uint32_t, 1
-	NASMX_RESERVE truncate_fn, 		uint32_t, 1
-	NASMX_RESERVE query_info, 		uint32_t, 1
-	NASMX_RESERVE query_info_async, 		uint32_t, 1
-	NASMX_RESERVE query_info_finish, 		uint32_t, 1
-	NASMX_RESERVE get_etag, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GIOStreamClass_size
+	NASMX_RESERVE tell,		uint32_t, 1
+	NASMX_RESERVE can_seek,		uint32_t, 1
+	NASMX_RESERVE seek,		uint32_t, 1
+	NASMX_RESERVE can_truncate,	uint32_t, 1
+	NASMX_RESERVE truncate_fn,	uint32_t, 1
+	NASMX_RESERVE query_info, 	uint32_t, 1
+	NASMX_RESERVE query_info_async,	uint32_t, 1
+	NASMX_RESERVE query_info_finish,	uint32_t, 1
+	NASMX_RESERVE get_etag,		uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileMonitor
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileMonitorClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE cancel, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE cancel,		uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFilenameCompleterClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE got_completion_data, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE got_completion_data,	uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3, 	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileOutputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GOutputStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GOutputStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GFileOutputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GOutputStreamClass_size
-	NASMX_RESERVE tell, 		uint32_t, 1
-	NASMX_RESERVE can_seek, 		uint32_t, 1
-	NASMX_RESERVE seek, 		uint32_t, 1
-	NASMX_RESERVE can_truncate, 		uint32_t, 1
-	NASMX_RESERVE truncate_fn, 		uint32_t, 1
-	NASMX_RESERVE query_info, 		uint32_t, 1
-	NASMX_RESERVE query_info_async, 		uint32_t, 1
-	NASMX_RESERVE query_info_finish, 		uint32_t, 1
-	NASMX_RESERVE get_etag, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GOutputStreamClass_size
+	NASMX_RESERVE tell,		uint32_t, 1
+	NASMX_RESERVE can_seek,		uint32_t, 1
+	NASMX_RESERVE seek,		uint32_t, 1
+	NASMX_RESERVE can_truncate,	uint32_t, 1
+	NASMX_RESERVE truncate_fn,	uint32_t, 1
+	NASMX_RESERVE query_info,	uint32_t, 1
+	NASMX_RESERVE query_info_async, uint32_t, 1
+	NASMX_RESERVE query_info_finish, uint32_t, 1
+	NASMX_RESERVE get_etag,		uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GInetAddress
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GInetAddressClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE to_string, 		uint32_t, 1
-	NASMX_RESERVE to_bytes, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE to_string,	uint32_t, 1
+	NASMX_RESERVE to_bytes,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketAddress
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketAddressClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE get_family, 		uint32_t, 1
-	NASMX_RESERVE get_native_size, 		uint32_t, 1
-	NASMX_RESERVE to_native, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GObjectClass_size
+	NASMX_RESERVE get_family,	uint32_t, 1
+	NASMX_RESERVE get_native_size,	uint32_t, 1
+	NASMX_RESERVE to_native,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GInetSocketAddress
-	NASMX_RESERVE parent_instance, 		int8_t, GSocketAddress_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GSocketAddress_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GInetSocketAddressClass
-	NASMX_RESERVE parent_class, 		int8_t, GSocketAddressClass_size
+	NASMX_RESERVE parent_class,	int8_t, GSocketAddressClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GLoadableIconIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE load, 		uint32_t, 1
-	NASMX_RESERVE load_async, 		uint32_t, 1
-	NASMX_RESERVE load_finish, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE load,		uint32_t, 1
+	NASMX_RESERVE load_async,	uint32_t, 1
+	NASMX_RESERVE load_finish,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GMemoryInputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GInputStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GInputStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GMemoryInputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GInputStreamClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GInputStreamClass_size
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GMemoryOutputStream
-	NASMX_RESERVE parent_instance, 		int8_t, GOutputStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GOutputStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GMemoryOutputStreamClass
-	NASMX_RESERVE parent_class, 		int8_t, GOutputStreamClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GOutputStreamClass_size
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GMountIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE unmounted, 		uint32_t, 1
-	NASMX_RESERVE get_root, 		uint32_t, 1
-	NASMX_RESERVE get_name, 		uint32_t, 1
-	NASMX_RESERVE get_icon, 		uint32_t, 1
-	NASMX_RESERVE get_uuid, 		uint32_t, 1
-	NASMX_RESERVE get_volume, 		uint32_t, 1
-	NASMX_RESERVE get_drive, 		uint32_t, 1
-	NASMX_RESERVE can_unmount, 		uint32_t, 1
-	NASMX_RESERVE can_eject, 		uint32_t, 1
-	NASMX_RESERVE unmount, 		uint32_t, 1
-	NASMX_RESERVE unmount_finish, 		uint32_t, 1
-	NASMX_RESERVE eject, 		uint32_t, 1
-	NASMX_RESERVE eject_finish, 		uint32_t, 1
-	NASMX_RESERVE remount, 		uint32_t, 1
-	NASMX_RESERVE remount_finish, 		uint32_t, 1
-	NASMX_RESERVE guess_content_type, 		uint32_t, 1
-	NASMX_RESERVE guess_content_type_finish, 		uint32_t, 1
-	NASMX_RESERVE guess_content_type_sync, 		uint32_t, 1
-	NASMX_RESERVE pre_unmount, 		uint32_t, 1
-	NASMX_RESERVE unmount_with_operation, 		uint32_t, 1
-	NASMX_RESERVE unmount_with_operation_finish, 		uint32_t, 1
-	NASMX_RESERVE eject_with_operation, 		uint32_t, 1
-	NASMX_RESERVE eject_with_operation_finish, 		uint32_t, 1
-	NASMX_RESERVE get_default_location, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE unmounted,	uint32_t, 1
+	NASMX_RESERVE get_root,		uint32_t, 1
+	NASMX_RESERVE get_name,		uint32_t, 1
+	NASMX_RESERVE get_icon,		uint32_t, 1
+	NASMX_RESERVE get_uuid,		uint32_t, 1
+	NASMX_RESERVE get_volume,	uint32_t, 1
+	NASMX_RESERVE get_drive, 	uint32_t, 1
+	NASMX_RESERVE can_unmount,	uint32_t, 1
+	NASMX_RESERVE can_eject,	uint32_t, 1
+	NASMX_RESERVE unmount,		uint32_t, 1
+	NASMX_RESERVE unmount_finish,	uint32_t, 1
+	NASMX_RESERVE eject,		uint32_t, 1
+	NASMX_RESERVE eject_finish,	uint32_t, 1
+	NASMX_RESERVE remount,		uint32_t, 1
+	NASMX_RESERVE remount_finish,	uint32_t, 1
+	NASMX_RESERVE guess_content_type,	uint32_t, 1
+	NASMX_RESERVE guess_content_type_finish,	uint32_t, 1
+	NASMX_RESERVE guess_content_type_sync,	uint32_t, 1
+	NASMX_RESERVE pre_unmount,			uint32_t, 1
+	NASMX_RESERVE unmount_with_operation,	uint32_t, 1
+	NASMX_RESERVE unmount_with_operation_finish,	uint32_t, 1
+	NASMX_RESERVE eject_with_operation,	uint32_t, 1
+	NASMX_RESERVE eject_with_operation_finish,	uint32_t, 1
+	NASMX_RESERVE get_default_location,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GMountOperation
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GMountOperationClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE ask_password, 		uint32_t, 1
-	NASMX_RESERVE ask_question, 		uint32_t, 1
-	NASMX_RESERVE reply, 		uint32_t, 1
-	NASMX_RESERVE aborted, 		uint32_t, 1
-	NASMX_RESERVE show_processes, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved7, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved8, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved9, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved10, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE ask_password,	uint32_t, 1
+	NASMX_RESERVE ask_question,	uint32_t, 1
+	NASMX_RESERVE reply,		uint32_t, 1
+	NASMX_RESERVE aborted,		uint32_t, 1
+	NASMX_RESERVE show_processes,	uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
+	NASMX_RESERVE _g_reserved6,	uint32_t, 1
+	NASMX_RESERVE _g_reserved7,	uint32_t, 1
+	NASMX_RESERVE _g_reserved8,	uint32_t, 1
+	NASMX_RESERVE _g_reserved9,	uint32_t, 1
+	NASMX_RESERVE _g_reserved10,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GVolumeMonitor
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GVolumeMonitorClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE volume_added, 		uint32_t, 1
-	NASMX_RESERVE volume_removed, 		uint32_t, 1
-	NASMX_RESERVE volume_changed, 		uint32_t, 1
-	NASMX_RESERVE mount_added, 		uint32_t, 1
-	NASMX_RESERVE mount_removed, 		uint32_t, 1
-	NASMX_RESERVE mount_pre_unmount, 		uint32_t, 1
-	NASMX_RESERVE mount_changed, 		uint32_t, 1
-	NASMX_RESERVE drive_connected, 		uint32_t, 1
-	NASMX_RESERVE drive_disconnected, 		uint32_t, 1
-	NASMX_RESERVE drive_changed, 		uint32_t, 1
-	NASMX_RESERVE is_supported, 		uint32_t, 1
-	NASMX_RESERVE get_connected_drives, 		uint32_t, 1
-	NASMX_RESERVE get_volumes, 		uint32_t, 1
-	NASMX_RESERVE get_mounts, 		uint32_t, 1
-	NASMX_RESERVE get_volume_for_uuid, 		uint32_t, 1
-	NASMX_RESERVE get_mount_for_uuid, 		uint32_t, 1
-	NASMX_RESERVE adopt_orphan_mount, 		uint32_t, 1
-	NASMX_RESERVE drive_eject_button, 		uint32_t, 1
-	NASMX_RESERVE drive_stop_button, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE volume_added,	uint32_t, 1
+	NASMX_RESERVE volume_removed,	uint32_t, 1
+	NASMX_RESERVE volume_changed,	uint32_t, 1
+	NASMX_RESERVE mount_added,	uint32_t, 1
+	NASMX_RESERVE mount_removed,	uint32_t, 1
+	NASMX_RESERVE mount_pre_unmount,	uint32_t, 1
+	NASMX_RESERVE mount_changed,	uint32_t, 1
+	NASMX_RESERVE drive_connected,	uint32_t, 1
+	NASMX_RESERVE drive_disconnected,	uint32_t, 1
+	NASMX_RESERVE drive_changed,	uint32_t, 1
+	NASMX_RESERVE is_supported,	uint32_t, 1
+	NASMX_RESERVE get_connected_drives,	uint32_t, 1
+	NASMX_RESERVE get_volumes,	uint32_t, 1
+	NASMX_RESERVE get_mounts,	uint32_t, 1
+	NASMX_RESERVE get_volume_for_uuid,	uint32_t, 1
+	NASMX_RESERVE get_mount_for_uuid,	uint32_t, 1
+	NASMX_RESERVE adopt_orphan_mount,	uint32_t, 1
+	NASMX_RESERVE drive_eject_button,	uint32_t, 1
+	NASMX_RESERVE drive_stop_button,	uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
+	NASMX_RESERVE _g_reserved6,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GNativeVolumeMonitor
-	NASMX_RESERVE parent_instance, 		int8_t, GVolumeMonitor_size
+	NASMX_RESERVE parent_instance,	int8_t, GVolumeMonitor_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GNativeVolumeMonitorClass
-	NASMX_RESERVE parent_class, 		int8_t, GVolumeMonitorClass_size
-	NASMX_RESERVE get_mount_for_mount_path, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GVolumeMonitorClass_size
+	NASMX_RESERVE get_mount_for_mount_path,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GNetworkAddress
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GNetworkAddressClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GNetworkService
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GNetworkServiceClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GPermission
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GPollableInputStreamInterface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE can_poll, 		uint32_t, 1
-	NASMX_RESERVE is_readable, 		uint32_t, 1
-	NASMX_RESERVE create_source, 		uint32_t, 1
-	NASMX_RESERVE read_nonblocking, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE can_poll,		uint32_t, 1
+	NASMX_RESERVE is_readable,	uint32_t, 1
+	NASMX_RESERVE create_source,	uint32_t, 1
+	NASMX_RESERVE read_nonblocking,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GPollableOutputStreamInterface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE can_poll, 		uint32_t, 1
-	NASMX_RESERVE is_writable, 		uint32_t, 1
-	NASMX_RESERVE create_source, 		uint32_t, 1
-	NASMX_RESERVE write_nonblocking, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE can_poll,		uint32_t, 1
+	NASMX_RESERVE is_writable,	uint32_t, 1
+	NASMX_RESERVE create_source,	uint32_t, 1
+	NASMX_RESERVE write_nonblocking,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GProxyInterface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE connect, 		uint32_t, 1
-	NASMX_RESERVE connect_async, 		uint32_t, 1
-	NASMX_RESERVE connect_finish, 		uint32_t, 1
-	NASMX_RESERVE supports_hostname, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE connect,		uint32_t, 1
+	NASMX_RESERVE connect_async,	uint32_t, 1
+	NASMX_RESERVE connect_finish,	uint32_t, 1
+	NASMX_RESERVE supports_hostname,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GProxyAddress
-	NASMX_RESERVE parent_instance, 		int8_t, GInetSocketAddress_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GInetSocketAddress_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GProxyAddressClass
-	NASMX_RESERVE parent_class, 		int8_t, GInetSocketAddressClass_size
+	NASMX_RESERVE parent_class,	int8_t, GInetSocketAddressClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketAddressEnumerator
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketAddressEnumeratorClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE next, 		uint32_t, 1
-	NASMX_RESERVE next_async, 		uint32_t, 1
-	NASMX_RESERVE next_finish, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE next,		uint32_t, 1
+	NASMX_RESERVE next_async,	uint32_t, 1
+	NASMX_RESERVE next_finish,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GProxyAddressEnumerator
-	NASMX_RESERVE parent_instance, 		int8_t, GSocketAddressEnumerator_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GSocketAddressEnumerator_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GProxyAddressEnumeratorClass
-	NASMX_RESERVE parent_class, 		int8_t, GSocketAddressEnumeratorClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved7, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GSocketAddressEnumeratorClass_size
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
+	NASMX_RESERVE _g_reserved6,	uint32_t, 1
+	NASMX_RESERVE _g_reserved7,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSeekableIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE tell, 		uint32_t, 1
-	NASMX_RESERVE can_seek, 		uint32_t, 1
-	NASMX_RESERVE seek, 		uint32_t, 1
-	NASMX_RESERVE can_truncate, 		uint32_t, 1
-	NASMX_RESERVE truncate_fn, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE tell,		uint32_t, 1
+	NASMX_RESERVE can_seek,		uint32_t, 1
+	NASMX_RESERVE seek,		uint32_t, 1
+	NASMX_RESERVE can_truncate,	uint32_t, 1
+	NASMX_RESERVE truncate_fn,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSettingsClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE writable_changed, 		uint32_t, 1
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE writable_change_event, 		uint32_t, 1
-	NASMX_RESERVE change_event, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE writable_changed,	uint32_t, 1
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE writable_change_event,	uint32_t, 1
+	NASMX_RESERVE change_event,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSettings
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketClientClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketClient
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketConnectableIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE enumerate, 		uint32_t, 1
-	NASMX_RESERVE proxy_enumerate, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE enumerate,	uint32_t, 1
+	NASMX_RESERVE proxy_enumerate,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved7, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved8, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved9, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved10, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
+	NASMX_RESERVE _g_reserved6,	uint32_t, 1
+	NASMX_RESERVE _g_reserved7,	uint32_t, 1
+	NASMX_RESERVE _g_reserved8,	uint32_t, 1
+	NASMX_RESERVE _g_reserved9,	uint32_t, 1
+	NASMX_RESERVE _g_reserved10,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocket
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketConnectionClass
-	NASMX_RESERVE parent_class, 		int8_t, GIOStreamClass_size
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GIOStreamClass_size
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
+	NASMX_RESERVE _g_reserved6,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketConnection
-	NASMX_RESERVE parent_instance, 		int8_t, GIOStream_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GIOStream_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketControlMessageClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE get_size, 		uint32_t, 1
-	NASMX_RESERVE get_level, 		uint32_t, 1
-	NASMX_RESERVE get_type, 		uint32_t, 1
-	NASMX_RESERVE serialize, 		uint32_t, 1
-	NASMX_RESERVE deserialize, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE get_size,		uint32_t, 1
+	NASMX_RESERVE get_level,	uint32_t, 1
+	NASMX_RESERVE get_type,		uint32_t, 1
+	NASMX_RESERVE serialize,	uint32_t, 1
+	NASMX_RESERVE deserialize,	uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketControlMessage
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketListenerClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
+	NASMX_RESERVE _g_reserved6,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketListener
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketServiceClass
-	NASMX_RESERVE parent_class, 		int8_t, GSocketListenerClass_size
-	NASMX_RESERVE incoming, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GSocketListenerClass_size
+	NASMX_RESERVE incoming,		uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
+	NASMX_RESERVE _g_reserved6,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GSocketService
-	NASMX_RESERVE parent_instance, 		int8_t, GSocketListener_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GSocketListener_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTcpConnectionClass
-	NASMX_RESERVE parent_class, 		int8_t, GSocketConnectionClass_size
+	NASMX_RESERVE parent_class,	int8_t, GSocketConnectionClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTcpConnection
-	NASMX_RESERVE parent_instance, 		int8_t, GSocketConnection_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GSocketConnection_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTcpWrapperConnectionClass
-	NASMX_RESERVE parent_class, 		int8_t, GTcpConnectionClass_size
+	NASMX_RESERVE parent_class,	int8_t, GTcpConnectionClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTcpWrapperConnection
-	NASMX_RESERVE parent_instance, 		int8_t, GTcpConnection_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GTcpConnection_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GThreadedSocketServiceClass
-	NASMX_RESERVE parent_class, 		int8_t, GSocketServiceClass_size
-	NASMX_RESERVE run, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GSocketServiceClass_size
+	NASMX_RESERVE run,		uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GThreadedSocketService
-	NASMX_RESERVE parent_instance, 		int8_t, GSocketService_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GSocketService_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTlsBackendInterface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE supports_tls, 		uint32_t, 1
-	NASMX_RESERVE get_certificate_type, 		uint32_t, 1
-	NASMX_RESERVE get_client_connection_type, 		uint32_t, 1
-	NASMX_RESERVE get_server_connection_type, 		uint32_t, 1
+	NASMX_RESERVE g_iface,			int8_t, GTypeInterface_size
+	NASMX_RESERVE supports_tls,		uint32_t, 1
+	NASMX_RESERVE get_certificate_type,	uint32_t, 1
+	NASMX_RESERVE get_client_connection_type,	uint32_t, 1
+	NASMX_RESERVE get_server_connection_type,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTlsCertificateClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE verify, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE verify,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTlsConnectionClass
-	NASMX_RESERVE parent_class, 		int8_t, GIOStreamClass_size
-	NASMX_RESERVE accept_certificate, 		uint32_t, 1
-	NASMX_RESERVE handshake, 		uint32_t, 1
-	NASMX_RESERVE handshake_async, 		uint32_t, 1
-	NASMX_RESERVE handshake_finish, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GIOStreamClass_size
+	NASMX_RESERVE accept_certificate,	uint32_t, 1
+	NASMX_RESERVE handshake,	uint32_t, 1
+	NASMX_RESERVE handshake_async,	uint32_t, 1
+	NASMX_RESERVE handshake_finish,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTlsClientConnectionInterface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GTlsServerConnectionInterface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GVfs
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GVfsClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE is_active, 		uint32_t, 1
-	NASMX_RESERVE get_file_for_path, 		uint32_t, 1
-	NASMX_RESERVE get_file_for_uri, 		uint32_t, 1
-	NASMX_RESERVE get_supported_uri_schemes, 		uint32_t, 1
-	NASMX_RESERVE parse_name, 		uint32_t, 1
-	NASMX_RESERVE local_file_add_info, 		uint32_t, 1
-	NASMX_RESERVE add_writable_namespaces, 		uint32_t, 1
-	NASMX_RESERVE local_file_set_attributes, 		uint32_t, 1
-	NASMX_RESERVE local_file_removed, 		uint32_t, 1
-	NASMX_RESERVE local_file_moved, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _g_reserved7, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE is_active,	uint32_t, 1
+	NASMX_RESERVE get_file_for_path,	uint32_t, 1
+	NASMX_RESERVE get_file_for_uri,		uint32_t, 1
+	NASMX_RESERVE get_supported_uri_schemes,	uint32_t, 1
+	NASMX_RESERVE parse_name,	uint32_t, 1
+	NASMX_RESERVE local_file_add_info,	uint32_t, 1
+	NASMX_RESERVE add_writable_namespaces,	uint32_t, 1
+	NASMX_RESERVE local_file_set_attributes,	uint32_t, 1
+	NASMX_RESERVE local_file_removed,	uint32_t, 1
+	NASMX_RESERVE local_file_moved,	uint32_t, 1
+	NASMX_RESERVE _g_reserved1,	uint32_t, 1
+	NASMX_RESERVE _g_reserved2,	uint32_t, 1
+	NASMX_RESERVE _g_reserved3,	uint32_t, 1
+	NASMX_RESERVE _g_reserved4,	uint32_t, 1
+	NASMX_RESERVE _g_reserved5,	uint32_t, 1
+	NASMX_RESERVE _g_reserved6,	uint32_t, 1
+	NASMX_RESERVE _g_reserved7,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GVolumeIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE removed, 		uint32_t, 1
-	NASMX_RESERVE get_name, 		uint32_t, 1
-	NASMX_RESERVE get_icon, 		uint32_t, 1
-	NASMX_RESERVE get_uuid, 		uint32_t, 1
-	NASMX_RESERVE get_drive, 		uint32_t, 1
-	NASMX_RESERVE get_mount, 		uint32_t, 1
-	NASMX_RESERVE can_mount, 		uint32_t, 1
-	NASMX_RESERVE can_eject, 		uint32_t, 1
-	NASMX_RESERVE mount_fn, 		uint32_t, 1
-	NASMX_RESERVE mount_finish, 		uint32_t, 1
-	NASMX_RESERVE eject, 		uint32_t, 1
-	NASMX_RESERVE eject_finish, 		uint32_t, 1
-	NASMX_RESERVE get_identifier, 		uint32_t, 1
-	NASMX_RESERVE enumerate_identifiers, 		uint32_t, 1
-	NASMX_RESERVE should_automount, 		uint32_t, 1
-	NASMX_RESERVE get_activation_root, 		uint32_t, 1
-	NASMX_RESERVE eject_with_operation, 		uint32_t, 1
-	NASMX_RESERVE eject_with_operation_finish, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE removed,		uint32_t, 1
+	NASMX_RESERVE get_name,		uint32_t, 1
+	NASMX_RESERVE get_icon,		uint32_t, 1
+	NASMX_RESERVE get_uuid,		uint32_t, 1
+	NASMX_RESERVE get_drive,	uint32_t, 1
+	NASMX_RESERVE get_mount,	uint32_t, 1
+	NASMX_RESERVE can_mount,	uint32_t, 1
+	NASMX_RESERVE can_eject,	uint32_t, 1
+	NASMX_RESERVE mount_fn,		uint32_t, 1
+	NASMX_RESERVE mount_finish,	uint32_t, 1
+	NASMX_RESERVE eject,		uint32_t, 1
+	NASMX_RESERVE eject_finish,	uint32_t, 1
+	NASMX_RESERVE get_identifier,	uint32_t, 1
+	NASMX_RESERVE enumerate_identifiers,	uint32_t, 1
+	NASMX_RESERVE should_automount,		uint32_t, 1
+	NASMX_RESERVE get_activation_root,	uint32_t, 1
+	NASMX_RESERVE eject_with_operation,	uint32_t, 1
+	NASMX_RESERVE eject_with_operation_finish,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GZlibCompressorClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GZlibDecompressorClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoRectangle
-	NASMX_RESERVE x, 		uint32_t, 1
-	NASMX_RESERVE y, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
+	NASMX_RESERVE x,	uint32_t, 1
+	NASMX_RESERVE y,	uint32_t, 1
+	NASMX_RESERVE width,	uint32_t, 1
+	NASMX_RESERVE height,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoMatrix
-	NASMX_RESERVE xx, 		uint32_t, 1
-	NASMX_RESERVE xy, 		uint32_t, 1
-	NASMX_RESERVE yx, 		uint32_t, 1
-	NASMX_RESERVE yy, 		uint32_t, 1
-	NASMX_RESERVE x0, 		uint32_t, 1
-	NASMX_RESERVE y0, 		uint32_t, 1
+	NASMX_RESERVE xx,	uint32_t, 1
+	NASMX_RESERVE xy,	uint32_t, 1
+	NASMX_RESERVE yx,	uint32_t, 1
+	NASMX_RESERVE yy,	uint32_t, 1
+	NASMX_RESERVE x0,	uint32_t, 1
+	NASMX_RESERVE y0,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoColor
-	NASMX_RESERVE red, 		uint16_t, 1
-	NASMX_RESERVE green, 		uint16_t, 1
-	NASMX_RESERVE blue, 		uint16_t, 1
+	NASMX_RESERVE red,	uint16_t, 1
+	NASMX_RESERVE green,	uint16_t, 1
+	NASMX_RESERVE blue,	uint16_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAttribute
-	NASMX_RESERVE klass, 		uint32_t, 1
-	NASMX_RESERVE start_index, 		uint32_t, 1
-	NASMX_RESERVE end_index, 		uint32_t, 1
+	NASMX_RESERVE klass,		uint32_t, 1
+	NASMX_RESERVE start_index,	uint32_t, 1
+	NASMX_RESERVE end_index,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAttrClass
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE copy, 		uint32_t, 1
-	NASMX_RESERVE destroy, 		uint32_t, 1
-	NASMX_RESERVE equal, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE copy,		uint32_t, 1
+	NASMX_RESERVE destroy,		uint32_t, 1
+	NASMX_RESERVE equal,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAttrString
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE value, 		uint32_t, 1
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE value,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAttrLanguage
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE value, 		uint32_t, 1
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE value,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAttrInt
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE value, 		uint32_t, 1
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE value,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAttrFloat
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE value, 		uint32_t, 1
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE value,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAttrColor
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE color, 		int8_t, PangoColor_size
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE color,		int8_t, PangoColor_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAttrSize
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE size, 		uint32_t, 1
-	NASMX_RESERVE absolute, 		uint32_t, 1
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE size,		uint32_t, 1
+	NASMX_RESERVE absolute,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAttrShape
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE ink_rect, 		int8_t, PangoRectangle_size
-	NASMX_RESERVE logical_rect, 		int8_t, PangoRectangle_size
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE copy_func, 		uint32_t, 1
-	NASMX_RESERVE destroy_func, 		uint32_t, 1
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE ink_rect,		int8_t, PangoRectangle_size
+	NASMX_RESERVE logical_rect,	int8_t, PangoRectangle_size
+	NASMX_RESERVE data,		uint32_t, 1
+	NASMX_RESERVE copy_func,	uint32_t, 1
+	NASMX_RESERVE destroy_func,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAttrFontDesc
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE desc, 		uint32_t, 1
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE desc,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoAnalysis
-	NASMX_RESERVE shape_engine, 		uint32_t, 1
-	NASMX_RESERVE lang_engine, 		uint32_t, 1
-	NASMX_RESERVE font, 		uint32_t, 1
-	NASMX_RESERVE level, 		int8_t, 1
-	NASMX_RESERVE gravity, 		int8_t, 1
-	NASMX_RESERVE flags, 		int8_t, 1
-	NASMX_RESERVE script, 		int8_t, 1
-	NASMX_RESERVE language, 		uint32_t, 1
-	NASMX_RESERVE extra_attrs, 		uint32_t, 1
+	NASMX_RESERVE shape_engine,	uint32_t, 1
+	NASMX_RESERVE lang_engine,	uint32_t, 1
+	NASMX_RESERVE font,		uint32_t, 1
+	NASMX_RESERVE level,		int8_t, 1
+	NASMX_RESERVE gravity,		int8_t, 1
+	NASMX_RESERVE flags,		int8_t, 1
+	NASMX_RESERVE script,		int8_t, 1
+	NASMX_RESERVE language,		uint32_t, 1
+	NASMX_RESERVE extra_attrs,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoItem
-	NASMX_RESERVE offset, 		uint32_t, 1
-	NASMX_RESERVE length, 		uint32_t, 1
-	NASMX_RESERVE num_chars, 		uint32_t, 1
-	NASMX_RESERVE analysis, 		int8_t, PangoAnalysis_size
+	NASMX_RESERVE offset,		uint32_t, 1
+	NASMX_RESERVE length,		uint32_t, 1
+	NASMX_RESERVE num_chars,	uint32_t, 1
+	NASMX_RESERVE analysis,		int8_t, PangoAnalysis_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoLogAttr
-	NASMX_RESERVE is_line_break, 		uint32_t, 1
-;.is_mandatory_break:		RESD 1
-;.is_char_break:		RESD 1
+	NASMX_RESERVE is_line_break,	uint32_t, 1
+;.is_mandatory_break:	RESD 1
+;.is_char_break:	RESD 1
 ;.is_white:		RESD 1
-;.is_cursor_position:		RESD 1
-;.is_word_start:		RESD 1
+;.is_cursor_position:	RESD 1
+;.is_word_start:	RESD 1
 ;.is_word_end:		RESD 1
-;.is_sentence_boundary:		RESD 1
-	NASMX_RESERVE is_sentence_start, 		uint32_t, 1
-;.is_sentence_end:		RESD 1
-;.backspace_deletes_character:		RESD 1
-;.is_expandable_space:		RESD 1
-;.is_word_boundary:		RESD 1
+;.is_sentence_boundary:	RESD 1
+	NASMX_RESERVE is_sentence_start, uint32_t, 1
+;.is_sentence_end:	RESD 1
+;.backspace_deletes_character:	RESD 1
+;.is_expandable_space:	RESD 1
+;.is_word_boundary:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoGlyphGeometry
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE x_offset, 		uint32_t, 1
-	NASMX_RESERVE y_offset, 		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE x_offset,		uint32_t, 1
+	NASMX_RESERVE y_offset,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoGlyphVisAttr
-	NASMX_RESERVE is_cluster_start, 		uint32_t, 1
+	NASMX_RESERVE is_cluster_start,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoGlyphInfo
-	NASMX_RESERVE glyph, 		uint32_t, 1
-	NASMX_RESERVE geometry, 		int8_t, PangoGlyphGeometry_size
-	NASMX_RESERVE attr, 		int8_t, PangoGlyphVisAttr_size
+	NASMX_RESERVE glyph,		uint32_t, 1
+	NASMX_RESERVE geometry,		int8_t, PangoGlyphGeometry_size
+	NASMX_RESERVE attr,		int8_t, PangoGlyphVisAttr_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoGlyphItem
-	NASMX_RESERVE item, 		uint32_t, 1
-	NASMX_RESERVE glyphs, 		uint32_t, 1
+	NASMX_RESERVE item,		uint32_t, 1
+	NASMX_RESERVE glyphs,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoGlyphItemIter
-	NASMX_RESERVE glyph_item, 		uint32_t, 1
-	NASMX_RESERVE text, 		uint32_t, 1
-	NASMX_RESERVE start_glyph, 		uint32_t, 1
-	NASMX_RESERVE start_index, 		uint32_t, 1
-	NASMX_RESERVE start_char, 		uint32_t, 1
-	NASMX_RESERVE end_glyph, 		uint32_t, 1
-	NASMX_RESERVE end_index, 		uint32_t, 1
-	NASMX_RESERVE end_char, 		uint32_t, 1
+	NASMX_RESERVE glyph_item,	uint32_t, 1
+	NASMX_RESERVE text,		uint32_t, 1
+	NASMX_RESERVE start_glyph,	uint32_t, 1
+	NASMX_RESERVE start_index,	uint32_t, 1
+	NASMX_RESERVE start_char,	uint32_t, 1
+	NASMX_RESERVE end_glyph,	uint32_t, 1
+	NASMX_RESERVE end_index,	uint32_t, 1
+	NASMX_RESERVE end_char,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoLayoutLine
-	NASMX_RESERVE layout, 		uint32_t, 1
-	NASMX_RESERVE start_index, 		uint32_t, 1
-	NASMX_RESERVE length, 		uint32_t, 1
-	NASMX_RESERVE runs, 		uint32_t, 1
-	NASMX_RESERVE is_paragraph_start, 		uint32_t, 1
+	NASMX_RESERVE layout,		uint32_t, 1
+	NASMX_RESERVE start_index,	uint32_t, 1
+	NASMX_RESERVE length,		uint32_t, 1
+	NASMX_RESERVE runs,		uint32_t, 1
+	NASMX_RESERVE is_paragraph_start,	uint32_t, 1
 ;.resolved_dir:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoRenderer
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE underline, 		uint32_t, 1
-	NASMX_RESERVE strikethrough, 		uint32_t, 1
-	NASMX_RESERVE active_count, 		uint32_t, 1
-	NASMX_RESERVE matrix, 		uint32_t, 1
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE underline,	uint32_t, 1
+	NASMX_RESERVE strikethrough,	uint32_t, 1
+	NASMX_RESERVE active_count,	uint32_t, 1
+	NASMX_RESERVE matrix,		uint32_t, 1
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PangoRendererClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE draw_glyphs, 		uint32_t, 1
-	NASMX_RESERVE draw_rectangle, 		uint32_t, 1
-	NASMX_RESERVE draw_error_underline, 		uint32_t, 1
-	NASMX_RESERVE draw_shape, 		uint32_t, 1
-	NASMX_RESERVE draw_trapezoid, 		uint32_t, 1
-	NASMX_RESERVE draw_glyph, 		uint32_t, 1
-	NASMX_RESERVE part_changed, 		uint32_t, 1
-	NASMX_RESERVE begin, 		uint32_t, 1
-	NASMX_RESERVE end, 		uint32_t, 1
-	NASMX_RESERVE prepare_run, 		uint32_t, 1
-	NASMX_RESERVE draw_glyph_item, 		uint32_t, 1
-	NASMX_RESERVE _pango_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _pango_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _pango_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE draw_glyphs,	uint32_t, 1
+	NASMX_RESERVE draw_rectangle,	uint32_t, 1
+	NASMX_RESERVE draw_error_underline,	uint32_t, 1
+	NASMX_RESERVE draw_shape,	uint32_t, 1
+	NASMX_RESERVE draw_trapezoid,	uint32_t, 1
+	NASMX_RESERVE draw_glyph,	uint32_t, 1
+	NASMX_RESERVE part_changed,	uint32_t, 1
+	NASMX_RESERVE begin,		uint32_t, 1
+	NASMX_RESERVE end,		uint32_t, 1
+	NASMX_RESERVE prepare_run,	uint32_t, 1
+	NASMX_RESERVE draw_glyph_item,	uint32_t, 1
+	NASMX_RESERVE _pango_reserved2,	uint32_t, 1
+	NASMX_RESERVE _pango_reserved3,	uint32_t, 1
+	NASMX_RESERVE _pango_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPoint
-	NASMX_RESERVE x, 		uint32_t, 1
-	NASMX_RESERVE y, 		uint32_t, 1
+	NASMX_RESERVE x,		uint32_t, 1
+	NASMX_RESERVE y,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkRectangle
-	NASMX_RESERVE x, 		uint32_t, 1
-	NASMX_RESERVE y, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
+	NASMX_RESERVE x,		uint32_t, 1
+	NASMX_RESERVE y,		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkSegment
-	NASMX_RESERVE x1, 		uint32_t, 1
-	NASMX_RESERVE y1, 		uint32_t, 1
-	NASMX_RESERVE x2, 		uint32_t, 1
-	NASMX_RESERVE y2, 		uint32_t, 1
+	NASMX_RESERVE x1,		uint32_t, 1
+	NASMX_RESERVE y1,		uint32_t, 1
+	NASMX_RESERVE x2,		uint32_t, 1
+	NASMX_RESERVE y2,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkSpan
-	NASMX_RESERVE x, 		uint32_t, 1
-	NASMX_RESERVE y, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
+	NASMX_RESERVE x,		uint32_t, 1
+	NASMX_RESERVE y,		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkColor
-	NASMX_RESERVE pixel, 		uint32_t, 1
-	NASMX_RESERVE red, 		uint16_t, 1
-	NASMX_RESERVE green, 		uint16_t, 1
-	NASMX_RESERVE blue, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
+	NASMX_RESERVE pixel,		uint32_t, 1
+	NASMX_RESERVE red,		uint16_t, 1
+	NASMX_RESERVE green,		uint16_t, 1
+	NASMX_RESERVE blue,		uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkColormap
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE size, 		uint32_t, 1
-	NASMX_RESERVE colors, 		uint32_t, 1
-	NASMX_RESERVE visual, 		uint32_t, 1
-	NASMX_RESERVE windowing_data, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE size,		uint32_t, 1
+	NASMX_RESERVE colors,		uint32_t, 1
+	NASMX_RESERVE visual,		uint32_t, 1
+	NASMX_RESERVE windowing_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkColormapClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkDeviceKey
-	NASMX_RESERVE keyval, 		uint32_t, 1
-	NASMX_RESERVE modifiers, 		uint32_t, 1
+	NASMX_RESERVE keyval,		uint32_t, 1
+	NASMX_RESERVE modifiers,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkDeviceAxis
-	NASMX_RESERVE use, 		uint32_t, 1
-	NASMX_RESERVE min, 		uint32_t, 1
-	NASMX_RESERVE max, 		uint32_t, 1
+	NASMX_RESERVE use,		uint32_t, 1
+	NASMX_RESERVE min,		uint32_t, 1
+	NASMX_RESERVE max,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkDevice
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE source, 		uint32_t, 1
-	NASMX_RESERVE mode, 		uint32_t, 1
-	NASMX_RESERVE has_cursor, 		uint32_t, 1
-	NASMX_RESERVE num_axes, 		uint32_t, 1
-	NASMX_RESERVE axes, 		uint32_t, 1
-	NASMX_RESERVE num_keys, 		uint32_t, 1
-	NASMX_RESERVE keys, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE source,		uint32_t, 1
+	NASMX_RESERVE mode,		uint32_t, 1
+	NASMX_RESERVE has_cursor,	uint32_t, 1
+	NASMX_RESERVE num_axes,		uint32_t, 1
+	NASMX_RESERVE axes,		uint32_t, 1
+	NASMX_RESERVE num_keys,		uint32_t, 1
+	NASMX_RESERVE keys,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkTimeCoord
-	NASMX_RESERVE time, 		uint32_t, 1
+	NASMX_RESERVE time,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventAny
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventExpose
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE area, 		int8_t, GdkRectangle_size
-	NASMX_RESERVE region, 		uint32_t, 1
-	NASMX_RESERVE count, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE area,		int8_t, GdkRectangle_size
+	NASMX_RESERVE region,		uint32_t, 1
+	NASMX_RESERVE count,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventNoExpose
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventVisibility
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE state, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE state,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventMotion
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE time, 		uint32_t, 1
-	NASMX_RESERVE x, 		uint64_t, 1
-	NASMX_RESERVE y, 		uint64_t, 1
-	NASMX_RESERVE axes, 		uint32_t, 1
-	NASMX_RESERVE state, 		uint32_t, 1
-	NASMX_RESERVE is_hint, 		uint16_t, 1
-	NASMX_RESERVE __PADDING2__, 		int8_t, 2
-	NASMX_RESERVE device, 		uint32_t, 1
-	NASMX_RESERVE x_root, 		uint64_t, 1
-	NASMX_RESERVE y_root, 		uint64_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE time,		uint32_t, 1
+	NASMX_RESERVE x,		uint64_t, 1
+	NASMX_RESERVE y,		uint64_t, 1
+	NASMX_RESERVE axes,		uint32_t, 1
+	NASMX_RESERVE state,		uint32_t, 1
+	NASMX_RESERVE is_hint,		uint16_t, 1
+	NASMX_RESERVE __PADDING2__,	int8_t, 2
+	NASMX_RESERVE device,		uint32_t, 1
+	NASMX_RESERVE x_root,		uint64_t, 1
+	NASMX_RESERVE y_root,		uint64_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventButton
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE time, 		uint32_t, 1
-	NASMX_RESERVE x, 		uint64_t, 1
-	NASMX_RESERVE y, 		uint64_t, 1
-	NASMX_RESERVE axes, 		uint32_t, 1
-	NASMX_RESERVE state, 		uint32_t, 1
-	NASMX_RESERVE button, 		uint32_t, 1
-	NASMX_RESERVE device, 		uint32_t, 1
-	NASMX_RESERVE x_root, 		uint64_t, 1
-	NASMX_RESERVE y_root, 		uint64_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE time,		uint32_t, 1
+	NASMX_RESERVE x,		uint64_t, 1
+	NASMX_RESERVE y,		uint64_t, 1
+	NASMX_RESERVE axes,		uint32_t, 1
+	NASMX_RESERVE state,		uint32_t, 1
+	NASMX_RESERVE button,		uint32_t, 1
+	NASMX_RESERVE device,		uint32_t, 1
+	NASMX_RESERVE x_root,		uint64_t, 1
+	NASMX_RESERVE y_root,		uint64_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventScroll
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE time, 		uint32_t, 1
-	NASMX_RESERVE x, 		uint64_t, 1
-	NASMX_RESERVE y, 		uint64_t, 1
-	NASMX_RESERVE state, 		uint32_t, 1
-	NASMX_RESERVE direction, 		uint32_t, 1
-	NASMX_RESERVE device, 		uint32_t, 1
-	NASMX_RESERVE __PADDING2__, 		int8_t, 4
-	NASMX_RESERVE x_root, 		uint64_t, 1
-	NASMX_RESERVE y_root, 		uint64_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE time,		uint32_t, 1
+	NASMX_RESERVE x,		uint64_t, 1
+	NASMX_RESERVE y,		uint64_t, 1
+	NASMX_RESERVE state,		uint32_t, 1
+	NASMX_RESERVE direction,	uint32_t, 1
+	NASMX_RESERVE device,		uint32_t, 1
+	NASMX_RESERVE __PADDING2__,	int8_t, 4
+	NASMX_RESERVE x_root,		uint64_t, 1
+	NASMX_RESERVE y_root,		uint64_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventKey
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE time, 		uint32_t, 1
-	NASMX_RESERVE state, 		uint32_t, 1
-	NASMX_RESERVE keyval, 		uint32_t, 1
-	NASMX_RESERVE length, 		uint32_t, 1
-	NASMX_RESERVE string, 		uint32_t, 1
-	NASMX_RESERVE hardware_keycode, 		uint16_t, 1
-	NASMX_RESERVE group, 		int8_t, 1
-	NASMX_RESERVE __PADDING2__, 		int8_t, 1
-	NASMX_RESERVE is_modifier, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE time,		uint32_t, 1
+	NASMX_RESERVE state,		uint32_t, 1
+	NASMX_RESERVE keyval,		uint32_t, 1
+	NASMX_RESERVE length,		uint32_t, 1
+	NASMX_RESERVE string,		uint32_t, 1
+	NASMX_RESERVE hardware_keycode,	uint16_t, 1
+	NASMX_RESERVE group,		int8_t, 1
+	NASMX_RESERVE __PADDING2__,	int8_t, 1
+	NASMX_RESERVE is_modifier,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventCrossing
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE subwindow, 		uint32_t, 1
-	NASMX_RESERVE time, 		uint32_t, 1
-	NASMX_RESERVE __PADDING2__, 		int8_t, 4
-	NASMX_RESERVE x, 		uint64_t, 1
-	NASMX_RESERVE y, 		uint64_t, 1
-	NASMX_RESERVE x_root, 		uint64_t, 1
-	NASMX_RESERVE y_root, 		uint64_t, 1
-	NASMX_RESERVE mode, 		uint32_t, 1
-	NASMX_RESERVE detail, 		uint32_t, 1
-	NASMX_RESERVE focus, 		uint32_t, 1
-	NASMX_RESERVE state, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE subwindow,	uint32_t, 1
+	NASMX_RESERVE time,		uint32_t, 1
+	NASMX_RESERVE __PADDING2__,	int8_t, 4
+	NASMX_RESERVE x,		uint64_t, 1
+	NASMX_RESERVE y,		uint64_t, 1
+	NASMX_RESERVE x_root,		uint64_t, 1
+	NASMX_RESERVE y_root,		uint64_t, 1
+	NASMX_RESERVE mode,		uint32_t, 1
+	NASMX_RESERVE detail,		uint32_t, 1
+	NASMX_RESERVE focus,		uint32_t, 1
+	NASMX_RESERVE state,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventFocus
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 1
-	NASMX_RESERVE in, 		uint16_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 1
+	NASMX_RESERVE in,		uint16_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventConfigure
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE x, 		uint32_t, 1
-	NASMX_RESERVE y, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE x,		uint32_t, 1
+	NASMX_RESERVE y,		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventProperty
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE atom, 		uint32_t, 1
-	NASMX_RESERVE time, 		uint32_t, 1
-	NASMX_RESERVE state, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE atom,		uint32_t, 1
+	NASMX_RESERVE time,		uint32_t, 1
+	NASMX_RESERVE state,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventSelection
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE selection, 		uint32_t, 1
-	NASMX_RESERVE target, 		uint32_t, 1
-	NASMX_RESERVE property, 		uint32_t, 1
-	NASMX_RESERVE time, 		uint32_t, 1
-	NASMX_RESERVE requestor, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE selection,	uint32_t, 1
+	NASMX_RESERVE target,		uint32_t, 1
+	NASMX_RESERVE property,		uint32_t, 1
+	NASMX_RESERVE time,		uint32_t, 1
+	NASMX_RESERVE requestor,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventOwnerChange
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE owner, 		uint32_t, 1
-	NASMX_RESERVE reason, 		uint32_t, 1
-	NASMX_RESERVE selection, 		uint32_t, 1
-	NASMX_RESERVE time, 		uint32_t, 1
-	NASMX_RESERVE selection_time, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE owner,		uint32_t, 1
+	NASMX_RESERVE reason,		uint32_t, 1
+	NASMX_RESERVE selection,	uint32_t, 1
+	NASMX_RESERVE time,		uint32_t, 1
+	NASMX_RESERVE selection_time,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventProximity
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE time, 		uint32_t, 1
-	NASMX_RESERVE device, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE time,		uint32_t, 1
+	NASMX_RESERVE device,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventClient
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE message_type, 		uint32_t, 1
-	NASMX_RESERVE data_format, 		uint16_t, 1
-	NASMX_RESERVE __PADDING2__, 		int8_t, 2
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE message_type,	uint32_t, 1
+	NASMX_RESERVE data_format,	uint16_t, 1
+	NASMX_RESERVE __PADDING2__,	int8_t, 2
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventSetting
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE action, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE action,		uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkEventWindowState
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE send_event, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE changed_mask, 		uint32_t, 1
-	NASMX_RESERVE new_window_state, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE send_event,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE changed_mask,	uint32_t, 1
+	NASMX_RESERVE new_window_state,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkDisplay
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE queued_events, 		uint32_t, 1
-	NASMX_RESERVE queued_tail, 		uint32_t, 1
-	NASMX_RESERVE button_click_time, 		uint32_t, 2
-	NASMX_RESERVE button_window, 		uint32_t, 2
-	NASMX_RESERVE button_number, 		uint32_t, 2
-	NASMX_RESERVE double_click_time, 		uint32_t, 1
-	NASMX_RESERVE core_pointer, 		uint32_t, 1
-	NASMX_RESERVE pointer_hooks, 		uint32_t, 1
-	NASMX_RESERVE closed, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE queued_events,	uint32_t, 1
+	NASMX_RESERVE queued_tail,	uint32_t, 1
+	NASMX_RESERVE button_click_time,	uint32_t, 2
+	NASMX_RESERVE button_window,	uint32_t, 2
+	NASMX_RESERVE button_number,	uint32_t, 2
+	NASMX_RESERVE double_click_time,	uint32_t, 1
+	NASMX_RESERVE core_pointer,	uint32_t, 1
+	NASMX_RESERVE pointer_hooks,	uint32_t, 1
+	NASMX_RESERVE closed,		uint32_t, 1
 ;.ignore_core_events:		RESD 1
-	NASMX_RESERVE double_click_distance, 		uint32_t, 1
-	NASMX_RESERVE button_x, 		uint32_t, 2
-	NASMX_RESERVE button_y, 		uint32_t, 2
-	NASMX_RESERVE pointer_grabs, 		uint32_t, 1
-	NASMX_RESERVE keyboard_grab, 		uint32_t, 1
-	NASMX_RESERVE pointer_info, 		uint32_t, 1
-	NASMX_RESERVE last_event_time, 		uint32_t, 1
+	NASMX_RESERVE double_click_distance,	uint32_t, 1
+	NASMX_RESERVE button_x,		uint32_t, 2
+	NASMX_RESERVE button_y,		uint32_t, 2
+	NASMX_RESERVE pointer_grabs,	uint32_t, 1
+	NASMX_RESERVE keyboard_grab,	uint32_t, 1
+	NASMX_RESERVE pointer_info,	uint32_t, 1
+	NASMX_RESERVE last_event_time,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkDisplayClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE get_display_name, 		uint32_t, 1
-	NASMX_RESERVE get_n_screens, 		uint32_t, 1
-	NASMX_RESERVE get_screen, 		uint32_t, 1
-	NASMX_RESERVE get_default_screen, 		uint32_t, 1
-	NASMX_RESERVE closed, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE get_display_name,	uint32_t, 1
+	NASMX_RESERVE get_n_screens,	uint32_t, 1
+	NASMX_RESERVE get_screen,	uint32_t, 1
+	NASMX_RESERVE get_default_screen,	uint32_t, 1
+	NASMX_RESERVE closed,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkDisplayPointerHooks
-	NASMX_RESERVE get_pointer, 		uint32_t, 1
-	NASMX_RESERVE window_get_pointer, 		uint32_t, 1
-	NASMX_RESERVE window_at_pointer, 		uint32_t, 1
+	NASMX_RESERVE get_pointer,	uint32_t, 1
+	NASMX_RESERVE window_get_pointer,	uint32_t, 1
+	NASMX_RESERVE window_at_pointer,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkScreen
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE closed, 		uint32_t, 1
-	NASMX_RESERVE normal_gcs, 		uint32_t, 32
-	NASMX_RESERVE exposure_gcs, 		uint32_t, 32
-	NASMX_RESERVE subwindow_gcs, 		uint32_t, 32
-	NASMX_RESERVE font_options, 		uint32_t, 1
-	NASMX_RESERVE resolution, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE closed,		uint32_t, 1
+	NASMX_RESERVE normal_gcs,	uint32_t, 32
+	NASMX_RESERVE exposure_gcs,	uint32_t, 32
+	NASMX_RESERVE subwindow_gcs,	uint32_t, 32
+	NASMX_RESERVE font_options,	uint32_t, 1
+	NASMX_RESERVE resolution,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkScreenClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE size_changed, 		uint32_t, 1
-	NASMX_RESERVE composited_changed, 		uint32_t, 1
-	NASMX_RESERVE monitors_changed, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE size_changed,	uint32_t, 1
+	NASMX_RESERVE composited_changed,	uint32_t, 1
+	NASMX_RESERVE monitors_changed,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkAppLaunchContext
-	NASMX_RESERVE parent_instance, 		int8_t, GAppLaunchContext_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GAppLaunchContext_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkAppLaunchContextClass
-	NASMX_RESERVE parent_class, 		int8_t, GAppLaunchContextClass_size
+	NASMX_RESERVE parent_class,	int8_t, GAppLaunchContextClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPixbufLoader
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPixbufLoaderClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE size_prepared, 		uint32_t, 1
-	NASMX_RESERVE area_prepared, 		uint32_t, 1
-	NASMX_RESERVE area_updated, 		uint32_t, 1
-	NASMX_RESERVE closed, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE size_prepared,	uint32_t, 1
+	NASMX_RESERVE area_prepared,	uint32_t, 1
+	NASMX_RESERVE area_updated,	uint32_t, 1
+	NASMX_RESERVE closed,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkCursor
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE ref_count, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE ref_count,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkDisplayManagerClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE display_opened, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE display_opened,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkGCValues
-	NASMX_RESERVE foreground, 		int8_t, GdkColor_size
-	NASMX_RESERVE background, 		int8_t, GdkColor_size
-	NASMX_RESERVE font, 		uint32_t, 1
-	NASMX_RESERVE function, 		uint32_t, 1
-	NASMX_RESERVE fill, 		uint32_t, 1
-	NASMX_RESERVE tile, 		uint32_t, 1
-	NASMX_RESERVE stipple, 		uint32_t, 1
-	NASMX_RESERVE clip_mask, 		uint32_t, 1
-	NASMX_RESERVE subwindow_mode, 		uint32_t, 1
-	NASMX_RESERVE ts_x_origin, 		uint32_t, 1
-	NASMX_RESERVE ts_y_origin, 		uint32_t, 1
-	NASMX_RESERVE clip_x_origin, 		uint32_t, 1
-	NASMX_RESERVE clip_y_origin, 		uint32_t, 1
-	NASMX_RESERVE graphics_exposures, 		uint32_t, 1
-	NASMX_RESERVE line_width, 		uint32_t, 1
-	NASMX_RESERVE line_style, 		uint32_t, 1
-	NASMX_RESERVE cap_style, 		uint32_t, 1
-	NASMX_RESERVE join_style, 		uint32_t, 1
+	NASMX_RESERVE foreground,	int8_t, GdkColor_size
+	NASMX_RESERVE background,	int8_t, GdkColor_size
+	NASMX_RESERVE font,		uint32_t, 1
+	NASMX_RESERVE function,		uint32_t, 1
+	NASMX_RESERVE fill,		uint32_t, 1
+	NASMX_RESERVE tile,		uint32_t, 1
+	NASMX_RESERVE stipple,		uint32_t, 1
+	NASMX_RESERVE clip_mask,	uint32_t, 1
+	NASMX_RESERVE subwindow_mode,	uint32_t, 1
+	NASMX_RESERVE ts_x_origin,	uint32_t, 1
+	NASMX_RESERVE ts_y_origin,	uint32_t, 1
+	NASMX_RESERVE clip_x_origin,	uint32_t, 1
+	NASMX_RESERVE clip_y_origin,	uint32_t, 1
+	NASMX_RESERVE graphics_exposures,	uint32_t, 1
+	NASMX_RESERVE line_width,	uint32_t, 1
+	NASMX_RESERVE line_style,	uint32_t, 1
+	NASMX_RESERVE cap_style,	uint32_t, 1
+	NASMX_RESERVE join_style,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkGC
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE clip_x_origin, 		uint32_t, 1
-	NASMX_RESERVE clip_y_origin, 		uint32_t, 1
-	NASMX_RESERVE ts_x_origin, 		uint32_t, 1
-	NASMX_RESERVE ts_y_origin, 		uint32_t, 1
-	NASMX_RESERVE colormap, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE clip_x_origin,	uint32_t, 1
+	NASMX_RESERVE clip_y_origin,	uint32_t, 1
+	NASMX_RESERVE ts_x_origin,	uint32_t, 1
+	NASMX_RESERVE ts_y_origin,	uint32_t, 1
+	NASMX_RESERVE colormap,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkGCClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE get_values, 		uint32_t, 1
-	NASMX_RESERVE set_values, 		uint32_t, 1
-	NASMX_RESERVE set_dashes, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE get_values,	uint32_t, 1
+	NASMX_RESERVE set_values,	uint32_t, 1
+	NASMX_RESERVE set_dashes,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkDrawable
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkDrawableClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE create_gc, 		uint32_t, 1
-	NASMX_RESERVE draw_rectangle, 		uint32_t, 1
-	NASMX_RESERVE draw_arc, 		uint32_t, 1
-	NASMX_RESERVE draw_polygon, 		uint32_t, 1
-	NASMX_RESERVE draw_text, 		uint32_t, 1
-	NASMX_RESERVE draw_text_wc, 		uint32_t, 1
-	NASMX_RESERVE draw_drawable, 		uint32_t, 1
-	NASMX_RESERVE draw_points, 		uint32_t, 1
-	NASMX_RESERVE draw_segments, 		uint32_t, 1
-	NASMX_RESERVE draw_lines, 		uint32_t, 1
-	NASMX_RESERVE draw_glyphs, 		uint32_t, 1
-	NASMX_RESERVE draw_image, 		uint32_t, 1
-	NASMX_RESERVE get_depth, 		uint32_t, 1
-	NASMX_RESERVE get_size, 		uint32_t, 1
-	NASMX_RESERVE set_colormap, 		uint32_t, 1
-	NASMX_RESERVE get_colormap, 		uint32_t, 1
-	NASMX_RESERVE get_visual, 		uint32_t, 1
-	NASMX_RESERVE get_screen, 		uint32_t, 1
-	NASMX_RESERVE get_image, 		uint32_t, 1
-	NASMX_RESERVE get_clip_region, 		uint32_t, 1
-	NASMX_RESERVE get_visible_region, 		uint32_t, 1
-	NASMX_RESERVE get_composite_drawable, 		uint32_t, 1
-	NASMX_RESERVE draw_pixbuf, 		uint32_t, 1
-	NASMX_RESERVE _copy_to_image, 		uint32_t, 1
-	NASMX_RESERVE draw_glyphs_transformed, 		uint32_t, 1
-	NASMX_RESERVE draw_trapezoids, 		uint32_t, 1
-	NASMX_RESERVE ref_cairo_surface, 		uint32_t, 1
-	NASMX_RESERVE get_source_drawable, 		uint32_t, 1
-	NASMX_RESERVE set_cairo_clip, 		uint32_t, 1
-	NASMX_RESERVE create_cairo_surface, 		uint32_t, 1
-	NASMX_RESERVE draw_drawable_with_src, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved7, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved9, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved10, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved11, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved12, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved13, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved14, 		uint32_t, 1
-	NASMX_RESERVE _gdk_reserved15, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE create_gc,	uint32_t, 1
+	NASMX_RESERVE draw_rectangle,	uint32_t, 1
+	NASMX_RESERVE draw_arc,		uint32_t, 1
+	NASMX_RESERVE draw_polygon,	uint32_t, 1
+	NASMX_RESERVE draw_text,	uint32_t, 1
+	NASMX_RESERVE draw_text_wc,	uint32_t, 1
+	NASMX_RESERVE draw_drawable,	uint32_t, 1
+	NASMX_RESERVE draw_points,	uint32_t, 1
+	NASMX_RESERVE draw_segments,	uint32_t, 1
+	NASMX_RESERVE draw_lines,	uint32_t, 1
+	NASMX_RESERVE draw_glyphs,	uint32_t, 1
+	NASMX_RESERVE draw_image,	uint32_t, 1
+	NASMX_RESERVE get_depth,	uint32_t, 1
+	NASMX_RESERVE get_size,		uint32_t, 1
+	NASMX_RESERVE set_colormap,	uint32_t, 1
+	NASMX_RESERVE get_colormap,	uint32_t, 1
+	NASMX_RESERVE get_visual,	uint32_t, 1
+	NASMX_RESERVE get_screen,	uint32_t, 1
+	NASMX_RESERVE get_image,	uint32_t, 1
+	NASMX_RESERVE get_clip_region,	uint32_t, 1
+	NASMX_RESERVE get_visible_region,	uint32_t, 1
+	NASMX_RESERVE get_composite_drawable,	uint32_t, 1
+	NASMX_RESERVE draw_pixbuf,	uint32_t, 1
+	NASMX_RESERVE _copy_to_image,	uint32_t, 1
+	NASMX_RESERVE draw_glyphs_transformed,	uint32_t, 1
+	NASMX_RESERVE draw_trapezoids,	uint32_t, 1
+	NASMX_RESERVE ref_cairo_surface,	uint32_t, 1
+	NASMX_RESERVE get_source_drawable,	uint32_t, 1
+	NASMX_RESERVE set_cairo_clip,	uint32_t, 1
+	NASMX_RESERVE create_cairo_surface,	uint32_t, 1
+	NASMX_RESERVE draw_drawable_with_src,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved7,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved9,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved10,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved11,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved12,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved13,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved14,	uint32_t, 1
+	NASMX_RESERVE _gdk_reserved15,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkTrapezoid
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkFont
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE ascent, 		uint32_t, 1
-	NASMX_RESERVE descent, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE ascent,		uint32_t, 1
+	NASMX_RESERVE descent,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkImage
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE visual, 		uint32_t, 1
-	NASMX_RESERVE byte_order, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
-	NASMX_RESERVE depth, 		uint16_t, 1
-	NASMX_RESERVE bpp, 		uint16_t, 1
-	NASMX_RESERVE bpl, 		uint16_t, 1
-	NASMX_RESERVE bits_per_pixel, 		uint16_t, 1
-	NASMX_RESERVE mem, 		uint32_t, 1
-	NASMX_RESERVE colormap, 		uint32_t, 1
-	NASMX_RESERVE windowing_data, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE visual,		uint32_t, 1
+	NASMX_RESERVE byte_order,	uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
+	NASMX_RESERVE depth,		uint16_t, 1
+	NASMX_RESERVE bpp,		uint16_t, 1
+	NASMX_RESERVE bpl,		uint16_t, 1
+	NASMX_RESERVE bits_per_pixel,	uint16_t, 1
+	NASMX_RESERVE mem,		uint32_t, 1
+	NASMX_RESERVE colormap,		uint32_t, 1
+	NASMX_RESERVE windowing_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkImageClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkKeymapKey
-	NASMX_RESERVE keycode, 		uint32_t, 1
-	NASMX_RESERVE group, 		uint32_t, 1
-	NASMX_RESERVE level, 		uint32_t, 1
+	NASMX_RESERVE keycode,		uint32_t, 1
+	NASMX_RESERVE group,		uint32_t, 1
+	NASMX_RESERVE level,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkKeymap
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE display, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE display,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkKeymapClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE direction_changed, 		uint32_t, 1
-	NASMX_RESERVE keys_changed, 		uint32_t, 1
-	NASMX_RESERVE state_changed, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE direction_changed,	uint32_t, 1
+	NASMX_RESERVE keys_changed,	uint32_t, 1
+	NASMX_RESERVE state_changed,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPangoRenderer
-	NASMX_RESERVE parent_instance, 		int8_t, PangoRenderer_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, PangoRenderer_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPangoRendererClass
-	NASMX_RESERVE parent_class, 		int8_t, PangoRendererClass_size
+	NASMX_RESERVE parent_class,	int8_t, PangoRendererClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPangoAttrStipple
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE stipple, 		uint32_t, 1
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE stipple,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPangoAttrEmbossed
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE embossed, 		uint32_t, 1
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE embossed,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPangoAttrEmbossColor
-	NASMX_RESERVE attr, 		int8_t, PangoAttribute_size
-	NASMX_RESERVE color, 		int8_t, PangoColor_size
+	NASMX_RESERVE attr,		int8_t, PangoAttribute_size
+	NASMX_RESERVE color,		int8_t, PangoColor_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPixmapObject
-	NASMX_RESERVE parent_instance, 		int8_t, GdkDrawable_size
-	NASMX_RESERVE impl, 		uint32_t, 1
-	NASMX_RESERVE depth, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GdkDrawable_size
+	NASMX_RESERVE impl,		uint32_t, 1
+	NASMX_RESERVE depth,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPixmapObjectClass
-	NASMX_RESERVE parent_class, 		int8_t, GdkDrawableClass_size
+	NASMX_RESERVE parent_class,	int8_t, GdkDrawableClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkWindowAttr
-	NASMX_RESERVE title, 		uint32_t, 1
-	NASMX_RESERVE event_mask, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
-	NASMX_RESERVE wclass, 		uint32_t, 1
-	NASMX_RESERVE visual, 		uint32_t, 1
-	NASMX_RESERVE colormap, 		uint32_t, 1
-	NASMX_RESERVE window_type, 		uint32_t, 1
-	NASMX_RESERVE cursor, 		uint32_t, 1
-	NASMX_RESERVE wmclass_name, 		uint32_t, 1
-	NASMX_RESERVE wmclass_class, 		uint32_t, 1
-	NASMX_RESERVE override_redirect, 		uint32_t, 1
-	NASMX_RESERVE type_hint, 		uint32_t, 1
+	NASMX_RESERVE title,		uint32_t, 1
+	NASMX_RESERVE event_mask,	uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
+	NASMX_RESERVE wclass,		uint32_t, 1
+	NASMX_RESERVE visual,		uint32_t, 1
+	NASMX_RESERVE colormap,		uint32_t, 1
+	NASMX_RESERVE window_type,	uint32_t, 1
+	NASMX_RESERVE cursor,		uint32_t, 1
+	NASMX_RESERVE wmclass_name,	uint32_t, 1
+	NASMX_RESERVE wmclass_class,	uint32_t, 1
+	NASMX_RESERVE override_redirect,	uint32_t, 1
+	NASMX_RESERVE type_hint,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkGeometry
-	NASMX_RESERVE min_width, 		uint32_t, 1
-	NASMX_RESERVE min_height, 		uint32_t, 1
-	NASMX_RESERVE max_width, 		uint32_t, 1
-	NASMX_RESERVE max_height, 		uint32_t, 1
-	NASMX_RESERVE base_width, 		uint32_t, 1
-	NASMX_RESERVE base_height, 		uint32_t, 1
-	NASMX_RESERVE width_inc, 		uint32_t, 1
-	NASMX_RESERVE height_inc, 		uint32_t, 1
-	NASMX_RESERVE min_aspect, 		uint32_t, 1
-	NASMX_RESERVE max_aspect, 		uint32_t, 1
-	NASMX_RESERVE win_gravity, 		uint32_t, 1
+	NASMX_RESERVE min_width,	uint32_t, 1
+	NASMX_RESERVE min_height,	uint32_t, 1
+	NASMX_RESERVE max_width,	uint32_t, 1
+	NASMX_RESERVE max_height,	uint32_t, 1
+	NASMX_RESERVE base_width,	uint32_t, 1
+	NASMX_RESERVE base_height,	uint32_t, 1
+	NASMX_RESERVE width_inc,	uint32_t, 1
+	NASMX_RESERVE height_inc,	uint32_t, 1
+	NASMX_RESERVE min_aspect,	uint32_t, 1
+	NASMX_RESERVE max_aspect,	uint32_t, 1
+	NASMX_RESERVE win_gravity,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkPointerHooks
-	NASMX_RESERVE get_pointer, 		uint32_t, 1
-	NASMX_RESERVE window_at_pointer, 		uint32_t, 1
+	NASMX_RESERVE get_pointer,	uint32_t, 1
+	NASMX_RESERVE window_at_pointer,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkWindowObject
-	NASMX_RESERVE parent_instance, 		int8_t, GdkDrawable_size
-	NASMX_RESERVE impl, 		uint32_t, 1
-	NASMX_RESERVE parent, 		uint32_t, 1
-	NASMX_RESERVE user_data, 		uint32_t, 1
-	NASMX_RESERVE x, 		uint32_t, 1
-	NASMX_RESERVE y, 		uint32_t, 1
-	NASMX_RESERVE extension_events, 		uint32_t, 1
-	NASMX_RESERVE filters, 		uint32_t, 1
-	NASMX_RESERVE children, 		uint32_t, 1
-	NASMX_RESERVE bg_color, 		int8_t, GdkColor_size
-	NASMX_RESERVE bg_pixmap, 		uint32_t, 1
-	NASMX_RESERVE paint_stack, 		uint32_t, 1
-	NASMX_RESERVE update_area, 		uint32_t, 1
-	NASMX_RESERVE update_freeze_count, 		uint32_t, 1
-	NASMX_RESERVE window_type, 		int8_t, 1
-	NASMX_RESERVE depth, 		int8_t, 1
-	NASMX_RESERVE resize_count, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 1
-	NASMX_RESERVE state, 		uint32_t, 1
-	NASMX_RESERVE guffaw_gravity, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GdkDrawable_size
+	NASMX_RESERVE impl,		uint32_t, 1
+	NASMX_RESERVE parent,		uint32_t, 1
+	NASMX_RESERVE user_data,	uint32_t, 1
+	NASMX_RESERVE x,		uint32_t, 1
+	NASMX_RESERVE y,		uint32_t, 1
+	NASMX_RESERVE extension_events,	uint32_t, 1
+	NASMX_RESERVE filters,		uint32_t, 1
+	NASMX_RESERVE children,		uint32_t, 1
+	NASMX_RESERVE bg_color,		int8_t, GdkColor_size
+	NASMX_RESERVE bg_pixmap,	uint32_t, 1
+	NASMX_RESERVE paint_stack,	uint32_t, 1
+	NASMX_RESERVE update_area,	uint32_t, 1
+	NASMX_RESERVE update_freeze_count,	uint32_t, 1
+	NASMX_RESERVE window_type,	int8_t, 1
+	NASMX_RESERVE depth,		int8_t, 1
+	NASMX_RESERVE resize_count,	int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 1
+	NASMX_RESERVE state,		uint32_t, 1
+	NASMX_RESERVE guffaw_gravity,	uint32_t, 1
 ;.input_only:		RESD 1
 ;.modal_hint:		RESD 1
 ;.composited:		RESD 1
@@ -3321,66 +3320,66 @@ NASMX_STRUC GdkWindowObject
 ;.accept_focus:		RESD 1
 ;.focus_on_map:		RESD 1
 ;.shaped:		RESD 1
-	NASMX_RESERVE event_mask, 		uint32_t, 1
-	NASMX_RESERVE update_and_descendants_freeze_count, 		uint32_t, 1
-	NASMX_RESERVE redirect, 		uint32_t, 1
+	NASMX_RESERVE event_mask,	uint32_t, 1
+	NASMX_RESERVE update_and_descendants_freeze_count,	uint32_t, 1
+	NASMX_RESERVE redirect,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkWindowObjectClass
-	NASMX_RESERVE parent_class, 		int8_t, GdkDrawableClass_size
+	NASMX_RESERVE parent_class,	int8_t, GdkDrawableClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GdkVisual
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE depth, 		uint32_t, 1
-	NASMX_RESERVE byte_order, 		uint32_t, 1
-	NASMX_RESERVE colormap_size, 		uint32_t, 1
-	NASMX_RESERVE bits_per_rgb, 		uint32_t, 1
-	NASMX_RESERVE red_mask, 		uint32_t, 1
-	NASMX_RESERVE red_shift, 		uint32_t, 1
-	NASMX_RESERVE red_prec, 		uint32_t, 1
-	NASMX_RESERVE green_mask, 		uint32_t, 1
-	NASMX_RESERVE green_shift, 		uint32_t, 1
-	NASMX_RESERVE green_prec, 		uint32_t, 1
-	NASMX_RESERVE blue_mask, 		uint32_t, 1
-	NASMX_RESERVE blue_shift, 		uint32_t, 1
-	NASMX_RESERVE blue_prec, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE depth,		uint32_t, 1
+	NASMX_RESERVE byte_order,	uint32_t, 1
+	NASMX_RESERVE colormap_size,	uint32_t, 1
+	NASMX_RESERVE bits_per_rgb,	uint32_t, 1
+	NASMX_RESERVE red_mask,		uint32_t, 1
+	NASMX_RESERVE red_shift,	uint32_t, 1
+	NASMX_RESERVE red_prec,		uint32_t, 1
+	NASMX_RESERVE green_mask,	uint32_t, 1
+	NASMX_RESERVE green_shift,	uint32_t, 1
+	NASMX_RESERVE green_prec,	uint32_t, 1
+	NASMX_RESERVE blue_mask,	uint32_t, 1
+	NASMX_RESERVE blue_shift,	uint32_t, 1
+	NASMX_RESERVE blue_prec,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAccelGroup
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE lock_count, 		uint32_t, 1
-	NASMX_RESERVE modifier_mask, 		uint32_t, 1
-	NASMX_RESERVE acceleratables, 		uint32_t, 1
-	NASMX_RESERVE n_accels, 		uint32_t, 1
-	NASMX_RESERVE priv_accels, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE lock_count,	uint32_t, 1
+	NASMX_RESERVE modifier_mask,	uint32_t, 1
+	NASMX_RESERVE acceleratables,	uint32_t, 1
+	NASMX_RESERVE n_accels,		uint32_t, 1
+	NASMX_RESERVE priv_accels,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAccelGroupClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE accel_changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE accel_changed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAccelKey
-	NASMX_RESERVE accel_key, 		uint32_t, 1
-	NASMX_RESERVE accel_mods, 		uint32_t, 1
-	NASMX_RESERVE accel_flags, 		uint32_t, 1
+	NASMX_RESERVE accel_key,	uint32_t, 1
+	NASMX_RESERVE accel_mods,	uint32_t, 1
+	NASMX_RESERVE accel_flags,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAccelGroupEntry
-	NASMX_RESERVE key, 		int8_t, GtkAccelKey_size
-	NASMX_RESERVE closure, 		uint32_t, 1
-	NASMX_RESERVE accel_path_quark, 		uint32_t, 1
+	NASMX_RESERVE key,		int8_t, GtkAccelKey_size
+	NASMX_RESERVE closure,		uint32_t, 1
+	NASMX_RESERVE accel_path_quark,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkArg
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
 ;;.char_data:		RESB 1
 ;;.uchar_data:		RESB 1
 ;;.bool_data:		RESD 1
@@ -3392,1771 +3391,1771 @@ NASMX_STRUC GtkArg
 ;;.double_data:		RESD 1
 ;;.string_data:		RESD 1
 ;;.object_data:		RESD 1
-;;.pointer_data:		RESD 1
+;;.pointer_data:	RESD 1
 ;;.f:		RESD 1
-	NASMX_RESERVE d_union, 		uint32_t, 2
+	NASMX_RESERVE d_union,		uint32_t, 2
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTypeInfo
-	NASMX_RESERVE type_name, 		uint32_t, 1
-	NASMX_RESERVE object_size, 		uint32_t, 1
-	NASMX_RESERVE class_size, 		uint32_t, 1
-	NASMX_RESERVE class_init_func, 		int8_t, 4 ; GtkClassInitFunc_size
-	NASMX_RESERVE object_init_func, 		int8_t, 4 ; GtkObjectInitFunc_size
-	NASMX_RESERVE reserved_1, 		uint32_t, 1
-	NASMX_RESERVE reserved_2, 		uint32_t, 1
-	NASMX_RESERVE base_class_init_func, 		int8_t, 4 ; GtkClassInitFunc_size
+	NASMX_RESERVE type_name,	uint32_t, 1
+	NASMX_RESERVE object_size,	uint32_t, 1
+	NASMX_RESERVE class_size,	uint32_t, 1
+	NASMX_RESERVE class_init_func,	int8_t, 4 ; GtkClassInitFunc_size
+	NASMX_RESERVE object_init_func,	int8_t, 4 ; GtkObjectInitFunc_size
+	NASMX_RESERVE reserved_1,	uint32_t, 1
+	NASMX_RESERVE reserved_2,	uint32_t, 1
+	NASMX_RESERVE base_class_init_func,	int8_t, 4 ; GtkClassInitFunc_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkObject
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE flags, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE flags,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkObjectClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE set_arg, 		uint32_t, 1
-	NASMX_RESERVE get_arg, 		uint32_t, 1
-	NASMX_RESERVE destroy, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE set_arg,		uint32_t, 1
+	NASMX_RESERVE get_arg,		uint32_t, 1
+	NASMX_RESERVE destroy,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAdjustment
-	NASMX_RESERVE parent_instance, 		int8_t, GtkObject_size
-	NASMX_RESERVE lower, 		uint32_t, 1
-	NASMX_RESERVE upper, 		uint32_t, 1
-	NASMX_RESERVE value, 		uint32_t, 1
-	NASMX_RESERVE step_increment, 		uint32_t, 1
-	NASMX_RESERVE page_increment, 		uint32_t, 1
-	NASMX_RESERVE page_size, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkObject_size
+	NASMX_RESERVE lower,		uint32_t, 1
+	NASMX_RESERVE upper,		uint32_t, 1
+	NASMX_RESERVE value,		uint32_t, 1
+	NASMX_RESERVE step_increment,	uint32_t, 1
+	NASMX_RESERVE page_increment,	uint32_t, 1
+	NASMX_RESERVE page_size,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAdjustmentClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkObjectClass_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE value_changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkObjectClass_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE value_changed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkStyle
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE black, 		int8_t, GdkColor_size
-	NASMX_RESERVE white, 		int8_t, GdkColor_size
-	NASMX_RESERVE font_desc, 		uint32_t, 1
-	NASMX_RESERVE xthickness, 		uint32_t, 1
-	NASMX_RESERVE ythickness, 		uint32_t, 1
-	NASMX_RESERVE fg_gc, 		uint32_t, 1
-	NASMX_RESERVE bg_gc, 		uint32_t, 1
-	NASMX_RESERVE light_gc, 		uint32_t, 1
-	NASMX_RESERVE dark_gc, 		uint32_t, 1
-	NASMX_RESERVE mid_gc, 		uint32_t, 1
-	NASMX_RESERVE text_gc, 		uint32_t, 1
-	NASMX_RESERVE base_gc, 		uint32_t, 1
-	NASMX_RESERVE text_aa_gc, 		uint32_t, 1
-	NASMX_RESERVE black_gc, 		uint32_t, 1
-	NASMX_RESERVE white_gc, 		uint32_t, 1
-	NASMX_RESERVE bg_pixmap, 		uint32_t, 1
-	NASMX_RESERVE attach_count, 		uint32_t, 1
-	NASMX_RESERVE depth, 		uint32_t, 1
-	NASMX_RESERVE colormap, 		uint32_t, 1
-	NASMX_RESERVE private_font, 		uint32_t, 1
-	NASMX_RESERVE private_font_desc, 		uint32_t, 1
-	NASMX_RESERVE rc_style, 		uint32_t, 1
-	NASMX_RESERVE styles, 		uint32_t, 1
-	NASMX_RESERVE property_cache, 		uint32_t, 1
-	NASMX_RESERVE icon_factories, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE black,		int8_t, GdkColor_size
+	NASMX_RESERVE white,		int8_t, GdkColor_size
+	NASMX_RESERVE font_desc,	uint32_t, 1
+	NASMX_RESERVE xthickness,	uint32_t, 1
+	NASMX_RESERVE ythickness,	uint32_t, 1
+	NASMX_RESERVE fg_gc,		uint32_t, 1
+	NASMX_RESERVE bg_gc,		uint32_t, 1
+	NASMX_RESERVE light_gc,		uint32_t, 1
+	NASMX_RESERVE dark_gc,		uint32_t, 1
+	NASMX_RESERVE mid_gc,		uint32_t, 1
+	NASMX_RESERVE text_gc,		uint32_t, 1
+	NASMX_RESERVE base_gc,		uint32_t, 1
+	NASMX_RESERVE text_aa_gc,	uint32_t, 1
+	NASMX_RESERVE black_gc,		uint32_t, 1
+	NASMX_RESERVE white_gc,		uint32_t, 1
+	NASMX_RESERVE bg_pixmap,	uint32_t, 1
+	NASMX_RESERVE attach_count,	uint32_t, 1
+	NASMX_RESERVE depth,		uint32_t, 1
+	NASMX_RESERVE colormap,		uint32_t, 1
+	NASMX_RESERVE private_font,	uint32_t, 1
+	NASMX_RESERVE private_font_desc,	uint32_t, 1
+	NASMX_RESERVE rc_style,		uint32_t, 1
+	NASMX_RESERVE styles,		uint32_t, 1
+	NASMX_RESERVE property_cache,	uint32_t, 1
+	NASMX_RESERVE icon_factories,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkStyleClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE realize, 		uint32_t, 1
-	NASMX_RESERVE unrealize, 		uint32_t, 1
-	NASMX_RESERVE copy, 		uint32_t, 1
-	NASMX_RESERVE clone, 		uint32_t, 1
-	NASMX_RESERVE init_from_rc, 		uint32_t, 1
-	NASMX_RESERVE set_background, 		uint32_t, 1
-	NASMX_RESERVE render_icon, 		uint32_t, 1
-	NASMX_RESERVE draw_hline, 		uint32_t, 1
-	NASMX_RESERVE draw_vline, 		uint32_t, 1
-	NASMX_RESERVE draw_shadow, 		uint32_t, 1
-	NASMX_RESERVE draw_polygon, 		uint32_t, 1
-	NASMX_RESERVE draw_arrow, 		uint32_t, 1
-	NASMX_RESERVE draw_diamond, 		uint32_t, 1
-	NASMX_RESERVE draw_string, 		uint32_t, 1
-	NASMX_RESERVE draw_box, 		uint32_t, 1
-	NASMX_RESERVE draw_flat_box, 		uint32_t, 1
-	NASMX_RESERVE draw_check, 		uint32_t, 1
-	NASMX_RESERVE draw_option, 		uint32_t, 1
-	NASMX_RESERVE draw_tab, 		uint32_t, 1
-	NASMX_RESERVE draw_shadow_gap, 		uint32_t, 1
-	NASMX_RESERVE draw_box_gap, 		uint32_t, 1
-	NASMX_RESERVE draw_extension, 		uint32_t, 1
-	NASMX_RESERVE draw_focus, 		uint32_t, 1
-	NASMX_RESERVE draw_slider, 		uint32_t, 1
-	NASMX_RESERVE draw_handle, 		uint32_t, 1
-	NASMX_RESERVE draw_expander, 		uint32_t, 1
-	NASMX_RESERVE draw_layout, 		uint32_t, 1
-	NASMX_RESERVE draw_resize_grip, 		uint32_t, 1
-	NASMX_RESERVE draw_spinner, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved7, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved8, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved9, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved10, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved11, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE realize,		uint32_t, 1
+	NASMX_RESERVE unrealize,	uint32_t, 1
+	NASMX_RESERVE copy,		uint32_t, 1
+	NASMX_RESERVE clone,		uint32_t, 1
+	NASMX_RESERVE init_from_rc,	uint32_t, 1
+	NASMX_RESERVE set_background,	uint32_t, 1
+	NASMX_RESERVE render_icon,	uint32_t, 1
+	NASMX_RESERVE draw_hline,	uint32_t, 1
+	NASMX_RESERVE draw_vline,	uint32_t, 1
+	NASMX_RESERVE draw_shadow,	uint32_t, 1
+	NASMX_RESERVE draw_polygon,	uint32_t, 1
+	NASMX_RESERVE draw_arrow,	uint32_t, 1
+	NASMX_RESERVE draw_diamond,	uint32_t, 1
+	NASMX_RESERVE draw_string,	uint32_t, 1
+	NASMX_RESERVE draw_box,		uint32_t, 1
+	NASMX_RESERVE draw_flat_box,	uint32_t, 1
+	NASMX_RESERVE draw_check,	uint32_t, 1
+	NASMX_RESERVE draw_option,	uint32_t, 1
+	NASMX_RESERVE draw_tab,		uint32_t, 1
+	NASMX_RESERVE draw_shadow_gap,	uint32_t, 1
+	NASMX_RESERVE draw_box_gap,	uint32_t, 1
+	NASMX_RESERVE draw_extension,	uint32_t, 1
+	NASMX_RESERVE draw_focus,	uint32_t, 1
+	NASMX_RESERVE draw_slider,	uint32_t, 1
+	NASMX_RESERVE draw_handle,	uint32_t, 1
+	NASMX_RESERVE draw_expander,	uint32_t, 1
+	NASMX_RESERVE draw_layout,	uint32_t, 1
+	NASMX_RESERVE draw_resize_grip,	uint32_t, 1
+	NASMX_RESERVE draw_spinner,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved6,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved7,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved8,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved9,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved10,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved11,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBorder
-	NASMX_RESERVE left, 		uint32_t, 1
-	NASMX_RESERVE right, 		uint32_t, 1
-	NASMX_RESERVE top, 		uint32_t, 1
-	NASMX_RESERVE bottom, 		uint32_t, 1
+	NASMX_RESERVE left,		uint32_t, 1
+	NASMX_RESERVE right,		uint32_t, 1
+	NASMX_RESERVE top,		uint32_t, 1
+	NASMX_RESERVE bottom,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRcStyle
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE bg_pixmap_name, 		uint32_t, 1
-	NASMX_RESERVE font_desc, 		uint32_t, 1
-	NASMX_RESERVE xthickness, 		uint32_t, 1
-	NASMX_RESERVE ythickness, 		uint32_t, 1
-	NASMX_RESERVE rc_properties, 		uint32_t, 1
-	NASMX_RESERVE rc_style_lists, 		uint32_t, 1
-	NASMX_RESERVE icon_factories, 		uint32_t, 1
-	NASMX_RESERVE engine_specified, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE bg_pixmap_name,	uint32_t, 1
+	NASMX_RESERVE font_desc,	uint32_t, 1
+	NASMX_RESERVE xthickness,	uint32_t, 1
+	NASMX_RESERVE ythickness,	uint32_t, 1
+	NASMX_RESERVE rc_properties,	uint32_t, 1
+	NASMX_RESERVE rc_style_lists,	uint32_t, 1
+	NASMX_RESERVE icon_factories,	uint32_t, 1
+	NASMX_RESERVE engine_specified,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRcStyleClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE create_rc_style, 		uint32_t, 1
-	NASMX_RESERVE parse, 		uint32_t, 1
-	NASMX_RESERVE merge, 		uint32_t, 1
-	NASMX_RESERVE create_style, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE create_rc_style,	uint32_t, 1
+	NASMX_RESERVE parse,		uint32_t, 1
+	NASMX_RESERVE merge,		uint32_t, 1
+	NASMX_RESERVE create_style,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRcProperty
-	NASMX_RESERVE type_name, 		uint32_t, 1
-	NASMX_RESERVE property_name, 		uint32_t, 1
-	NASMX_RESERVE origin, 		uint32_t, 1
-	NASMX_RESERVE value, 		int8_t, GValue_size
+	NASMX_RESERVE type_name,	uint32_t, 1
+	NASMX_RESERVE property_name,	uint32_t, 1
+	NASMX_RESERVE origin,		uint32_t, 1
+	NASMX_RESERVE value,		int8_t, GValue_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSettings
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE queued_settings, 		uint32_t, 1
-	NASMX_RESERVE property_values, 		uint32_t, 1
-	NASMX_RESERVE rc_context, 		uint32_t, 1
-	NASMX_RESERVE screen, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE queued_settings,	uint32_t, 1
+	NASMX_RESERVE property_values,	uint32_t, 1
+	NASMX_RESERVE rc_context,	uint32_t, 1
+	NASMX_RESERVE screen,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSettingsClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSettingsValue
-	NASMX_RESERVE origin, 		uint32_t, 1
-	NASMX_RESERVE value, 		int8_t, GValue_size
+	NASMX_RESERVE origin,		uint32_t, 1
+	NASMX_RESERVE value,		int8_t, GValue_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkPropertyValues
-	NASMX_RESERVE property_name, 		uint32_t, 1
-	NASMX_RESERVE old_value, 		int8_t, GValue_size
-	NASMX_RESERVE new_value, 		int8_t, GValue_size
+	NASMX_RESERVE property_name,	uint32_t, 1
+	NASMX_RESERVE old_value,	int8_t, GValue_size
+	NASMX_RESERVE new_value,	int8_t, GValue_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkObject
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE description, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE accessible_parent, 		uint32_t, 1
-	NASMX_RESERVE role, 		uint32_t, 1
-	NASMX_RESERVE relation_set, 		uint32_t, 1
-	NASMX_RESERVE layer, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE description,	uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE accessible_parent,	uint32_t, 1
+	NASMX_RESERVE role,		uint32_t, 1
+	NASMX_RESERVE relation_set,	uint32_t, 1
+	NASMX_RESERVE layer,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkObjectClass
-	NASMX_RESERVE parent, 		int8_t, GObjectClass_size
-	NASMX_RESERVE get_name, 		uint32_t, 1
-	NASMX_RESERVE get_description, 		uint32_t, 1
-	NASMX_RESERVE get_parent, 		uint32_t, 1
-	NASMX_RESERVE get_n_children, 		uint32_t, 1
-	NASMX_RESERVE ref_child, 		uint32_t, 1
-	NASMX_RESERVE get_index_in_parent, 		uint32_t, 1
-	NASMX_RESERVE ref_relation_set, 		uint32_t, 1
-	NASMX_RESERVE get_role, 		uint32_t, 1
-	NASMX_RESERVE get_layer, 		uint32_t, 1
-	NASMX_RESERVE get_mdi_zorder, 		uint32_t, 1
-	NASMX_RESERVE ref_state_set, 		uint32_t, 1
-	NASMX_RESERVE set_name, 		uint32_t, 1
-	NASMX_RESERVE set_description, 		uint32_t, 1
-	NASMX_RESERVE set_parent, 		uint32_t, 1
-	NASMX_RESERVE set_role, 		uint32_t, 1
-	NASMX_RESERVE connect_property_change_handler, 		uint32_t, 1
-	NASMX_RESERVE remove_property_change_handler, 		uint32_t, 1
-	NASMX_RESERVE initialize, 		uint32_t, 1
-	NASMX_RESERVE children_changed, 		uint32_t, 1
-	NASMX_RESERVE focus_event, 		uint32_t, 1
-	NASMX_RESERVE property_change, 		uint32_t, 1
-	NASMX_RESERVE state_change, 		uint32_t, 1
-	NASMX_RESERVE visible_data_changed, 		uint32_t, 1
-	NASMX_RESERVE active_descendant_changed, 		uint32_t, 1
-	NASMX_RESERVE get_attributes, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObjectClass_size
+	NASMX_RESERVE get_name,		uint32_t, 1
+	NASMX_RESERVE get_description,	uint32_t, 1
+	NASMX_RESERVE get_parent,	uint32_t, 1
+	NASMX_RESERVE get_n_children,	uint32_t, 1
+	NASMX_RESERVE ref_child,	uint32_t, 1
+	NASMX_RESERVE get_index_in_parent,	uint32_t, 1
+	NASMX_RESERVE ref_relation_set,	uint32_t, 1
+	NASMX_RESERVE get_role,		uint32_t, 1
+	NASMX_RESERVE get_layer,	uint32_t, 1
+	NASMX_RESERVE get_mdi_zorder,	uint32_t, 1
+	NASMX_RESERVE ref_state_set,	uint32_t, 1
+	NASMX_RESERVE set_name,		uint32_t, 1
+	NASMX_RESERVE set_description,	uint32_t, 1
+	NASMX_RESERVE set_parent,	uint32_t, 1
+	NASMX_RESERVE set_role,		uint32_t, 1
+	NASMX_RESERVE connect_property_change_handler,	uint32_t, 1
+	NASMX_RESERVE remove_property_change_handler,	uint32_t, 1
+	NASMX_RESERVE initialize,	uint32_t, 1
+	NASMX_RESERVE children_changed,	uint32_t, 1
+	NASMX_RESERVE focus_event,	uint32_t, 1
+	NASMX_RESERVE property_change,	uint32_t, 1
+	NASMX_RESERVE state_change,	uint32_t, 1
+	NASMX_RESERVE visible_data_changed,	uint32_t, 1
+	NASMX_RESERVE active_descendant_changed,	uint32_t, 1
+	NASMX_RESERVE get_attributes,	uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkImplementorIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE ref_accessible, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE ref_accessible,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkActionIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE do_action, 		uint32_t, 1
-	NASMX_RESERVE get_n_actions, 		uint32_t, 1
-	NASMX_RESERVE get_description, 		uint32_t, 1
-	NASMX_RESERVE get_name, 		uint32_t, 1
-	NASMX_RESERVE get_keybinding, 		uint32_t, 1
-	NASMX_RESERVE set_description, 		uint32_t, 1
-	NASMX_RESERVE get_localized_name, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE do_action,	uint32_t, 1
+	NASMX_RESERVE get_n_actions,	uint32_t, 1
+	NASMX_RESERVE get_description,	uint32_t, 1
+	NASMX_RESERVE get_name,		uint32_t, 1
+	NASMX_RESERVE get_keybinding,	uint32_t, 1
+	NASMX_RESERVE set_description,	uint32_t, 1
+	NASMX_RESERVE get_localized_name,	uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkUtil
-	NASMX_RESERVE parent, 		int8_t, GObject_size
+	NASMX_RESERVE parent,		int8_t, GObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkUtilClass
-	NASMX_RESERVE parent, 		int8_t, GObjectClass_size
-	NASMX_RESERVE add_global_event_listener, 		uint32_t, 1
-	NASMX_RESERVE remove_global_event_listener, 		uint32_t, 1
-	NASMX_RESERVE add_key_event_listener, 		uint32_t, 1
-	NASMX_RESERVE remove_key_event_listener, 		uint32_t, 1
-	NASMX_RESERVE get_root, 		uint32_t, 1
-	NASMX_RESERVE get_toolkit_name, 		uint32_t, 1
-	NASMX_RESERVE get_toolkit_version, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObjectClass_size
+	NASMX_RESERVE add_global_event_listener,	uint32_t, 1
+	NASMX_RESERVE remove_global_event_listener,	uint32_t, 1
+	NASMX_RESERVE add_key_event_listener,	uint32_t, 1
+	NASMX_RESERVE remove_key_event_listener,	uint32_t, 1
+	NASMX_RESERVE get_root,		uint32_t, 1
+	NASMX_RESERVE get_toolkit_name,	uint32_t, 1
+	NASMX_RESERVE get_toolkit_version,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkRectangle
-	NASMX_RESERVE x, 		uint32_t, 1
-	NASMX_RESERVE y, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
+	NASMX_RESERVE x,		uint32_t, 1
+	NASMX_RESERVE y,		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkComponentIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE add_focus_handler, 		uint32_t, 1
-	NASMX_RESERVE contains, 		uint32_t, 1
-	NASMX_RESERVE ref_accessible_at_point, 		uint32_t, 1
-	NASMX_RESERVE get_extents, 		uint32_t, 1
-	NASMX_RESERVE get_position, 		uint32_t, 1
-	NASMX_RESERVE get_size, 		uint32_t, 1
-	NASMX_RESERVE grab_focus, 		uint32_t, 1
-	NASMX_RESERVE remove_focus_handler, 		uint32_t, 1
-	NASMX_RESERVE set_extents, 		uint32_t, 1
-	NASMX_RESERVE set_position, 		uint32_t, 1
-	NASMX_RESERVE set_size, 		uint32_t, 1
-	NASMX_RESERVE get_layer, 		uint32_t, 1
-	NASMX_RESERVE get_mdi_zorder, 		uint32_t, 1
-	NASMX_RESERVE bounds_changed, 		uint32_t, 1
-	NASMX_RESERVE get_alpha, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE add_focus_handler,	uint32_t, 1
+	NASMX_RESERVE contains,		uint32_t, 1
+	NASMX_RESERVE ref_accessible_at_point,	uint32_t, 1
+	NASMX_RESERVE get_extents,	uint32_t, 1
+	NASMX_RESERVE get_position,	uint32_t, 1
+	NASMX_RESERVE get_size,		uint32_t, 1
+	NASMX_RESERVE grab_focus,	uint32_t, 1
+	NASMX_RESERVE remove_focus_handler,	uint32_t, 1
+	NASMX_RESERVE set_extents,	uint32_t, 1
+	NASMX_RESERVE set_position,	uint32_t, 1
+	NASMX_RESERVE set_size,		uint32_t, 1
+	NASMX_RESERVE get_layer,	uint32_t, 1
+	NASMX_RESERVE get_mdi_zorder,	uint32_t, 1
+	NASMX_RESERVE bounds_changed,	uint32_t, 1
+	NASMX_RESERVE get_alpha,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkDocumentIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE get_document_type, 		uint32_t, 1
-	NASMX_RESERVE get_document, 		uint32_t, 1
-	NASMX_RESERVE get_document_locale, 		uint32_t, 1
-	NASMX_RESERVE get_document_attributes, 		uint32_t, 1
-	NASMX_RESERVE get_document_attribute_value, 		uint32_t, 1
-	NASMX_RESERVE set_document_attribute, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
-	NASMX_RESERVE pad3, 		uint32_t, 1
-	NASMX_RESERVE pad4, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE get_document_type,	uint32_t, 1
+	NASMX_RESERVE get_document,	uint32_t, 1
+	NASMX_RESERVE get_document_locale,	uint32_t, 1
+	NASMX_RESERVE get_document_attributes,	uint32_t, 1
+	NASMX_RESERVE get_document_attribute_value,	uint32_t, 1
+	NASMX_RESERVE set_document_attribute,	uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
+	NASMX_RESERVE pad3,		uint32_t, 1
+	NASMX_RESERVE pad4,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkTextIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE get_text, 		uint32_t, 1
-	NASMX_RESERVE get_text_after_offset, 		uint32_t, 1
-	NASMX_RESERVE get_text_at_offset, 		uint32_t, 1
-	NASMX_RESERVE get_character_at_offset, 		uint32_t, 1
-	NASMX_RESERVE get_text_before_offset, 		uint32_t, 1
-	NASMX_RESERVE get_caret_offset, 		uint32_t, 1
-	NASMX_RESERVE get_run_attributes, 		uint32_t, 1
-	NASMX_RESERVE get_default_attributes, 		uint32_t, 1
-	NASMX_RESERVE get_character_extents, 		uint32_t, 1
-	NASMX_RESERVE get_character_count, 		uint32_t, 1
-	NASMX_RESERVE get_offset_at_point, 		uint32_t, 1
-	NASMX_RESERVE get_n_selections, 		uint32_t, 1
-	NASMX_RESERVE get_selection, 		uint32_t, 1
-	NASMX_RESERVE add_selection, 		uint32_t, 1
-	NASMX_RESERVE remove_selection, 		uint32_t, 1
-	NASMX_RESERVE set_selection, 		uint32_t, 1
-	NASMX_RESERVE set_caret_offset, 		uint32_t, 1
-	NASMX_RESERVE text_changed, 		uint32_t, 1
-	NASMX_RESERVE text_caret_moved, 		uint32_t, 1
-	NASMX_RESERVE text_selection_changed, 		uint32_t, 1
-	NASMX_RESERVE text_attributes_changed, 		uint32_t, 1
-	NASMX_RESERVE get_range_extents, 		uint32_t, 1
-	NASMX_RESERVE get_bounded_ranges, 		uint32_t, 1
-	NASMX_RESERVE pad4, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE get_text,		uint32_t, 1
+	NASMX_RESERVE get_text_after_offset,	uint32_t, 1
+	NASMX_RESERVE get_text_at_offset,	uint32_t, 1
+	NASMX_RESERVE get_character_at_offset,	uint32_t, 1
+	NASMX_RESERVE get_text_before_offset,	uint32_t, 1
+	NASMX_RESERVE get_caret_offset,	uint32_t, 1
+	NASMX_RESERVE get_run_attributes,	uint32_t, 1
+	NASMX_RESERVE get_default_attributes,	uint32_t, 1
+	NASMX_RESERVE get_character_extents,	uint32_t, 1
+	NASMX_RESERVE get_character_count,	uint32_t, 1
+	NASMX_RESERVE get_offset_at_point,	uint32_t, 1
+	NASMX_RESERVE get_n_selections,	uint32_t, 1
+	NASMX_RESERVE get_selection,	uint32_t, 1
+	NASMX_RESERVE add_selection,	uint32_t, 1
+	NASMX_RESERVE remove_selection,	uint32_t, 1
+	NASMX_RESERVE set_selection,	uint32_t, 1
+	NASMX_RESERVE set_caret_offset,	uint32_t, 1
+	NASMX_RESERVE text_changed,	uint32_t, 1
+	NASMX_RESERVE text_caret_moved,	uint32_t, 1
+	NASMX_RESERVE text_selection_changed,	uint32_t, 1
+	NASMX_RESERVE text_attributes_changed,	uint32_t, 1
+	NASMX_RESERVE get_range_extents,	uint32_t, 1
+	NASMX_RESERVE get_bounded_ranges,	uint32_t, 1
+	NASMX_RESERVE pad4,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkEditableTextIface
-	NASMX_RESERVE parent_interface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE set_run_attributes, 		uint32_t, 1
-	NASMX_RESERVE set_text_contents, 		uint32_t, 1
-	NASMX_RESERVE insert_text, 		uint32_t, 1
-	NASMX_RESERVE copy_text, 		uint32_t, 1
-	NASMX_RESERVE cut_text, 		uint32_t, 1
-	NASMX_RESERVE delete_text, 		uint32_t, 1
-	NASMX_RESERVE paste_text, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
+	NASMX_RESERVE parent_interface,	int8_t, GTypeInterface_size
+	NASMX_RESERVE set_run_attributes,	uint32_t, 1
+	NASMX_RESERVE set_text_contents,	uint32_t, 1
+	NASMX_RESERVE insert_text,	uint32_t, 1
+	NASMX_RESERVE copy_text,	uint32_t, 1
+	NASMX_RESERVE cut_text,		uint32_t, 1
+	NASMX_RESERVE delete_text,	uint32_t, 1
+	NASMX_RESERVE paste_text,	uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkGObjectAccessible
-	NASMX_RESERVE parent, 		int8_t, AtkObject_size
+	NASMX_RESERVE parent,		int8_t, AtkObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkGObjectAccessibleClass
-	NASMX_RESERVE parent_class, 		int8_t, AtkObjectClass_size
-	NASMX_RESERVE pad1, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, AtkObjectClass_size
+	NASMX_RESERVE pad1,		uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkHyperlink
-	NASMX_RESERVE parent, 		int8_t, GObject_size
+	NASMX_RESERVE parent,		int8_t, GObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkHyperlinkClass
-	NASMX_RESERVE parent, 		int8_t, GObjectClass_size
-	NASMX_RESERVE get_uri, 		uint32_t, 1
-	NASMX_RESERVE get_object, 		uint32_t, 1
-	NASMX_RESERVE get_end_index, 		uint32_t, 1
-	NASMX_RESERVE get_start_index, 		uint32_t, 1
-	NASMX_RESERVE is_valid, 		uint32_t, 1
-	NASMX_RESERVE get_n_anchors, 		uint32_t, 1
-	NASMX_RESERVE link_state, 		uint32_t, 1
-	NASMX_RESERVE is_selected_link, 		uint32_t, 1
-	NASMX_RESERVE link_activated, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObjectClass_size
+	NASMX_RESERVE get_uri,		uint32_t, 1
+	NASMX_RESERVE get_object,	uint32_t, 1
+	NASMX_RESERVE get_end_index,	uint32_t, 1
+	NASMX_RESERVE get_start_index,	uint32_t, 1
+	NASMX_RESERVE is_valid,		uint32_t, 1
+	NASMX_RESERVE get_n_anchors,	uint32_t, 1
+	NASMX_RESERVE link_state,	uint32_t, 1
+	NASMX_RESERVE is_selected_link,	uint32_t, 1
+	NASMX_RESERVE link_activated,	uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkHyperlinkImplIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE get_hyperlink, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE get_hyperlink,	uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkHypertextIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE get_link, 		uint32_t, 1
-	NASMX_RESERVE get_n_links, 		uint32_t, 1
-	NASMX_RESERVE get_link_index, 		uint32_t, 1
-	NASMX_RESERVE link_selected, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
-	NASMX_RESERVE pad3, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE get_link,		uint32_t, 1
+	NASMX_RESERVE get_n_links,	uint32_t, 1
+	NASMX_RESERVE get_link_index,	uint32_t, 1
+	NASMX_RESERVE link_selected,	uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
+	NASMX_RESERVE pad3,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkImageIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE get_image_position, 		uint32_t, 1
-	NASMX_RESERVE get_image_description, 		uint32_t, 1
-	NASMX_RESERVE get_image_size, 		uint32_t, 1
-	NASMX_RESERVE set_image_description, 		uint32_t, 1
-	NASMX_RESERVE get_image_locale, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE get_image_position,	uint32_t, 1
+	NASMX_RESERVE get_image_description,	uint32_t, 1
+	NASMX_RESERVE get_image_size,	uint32_t, 1
+	NASMX_RESERVE set_image_description,	uint32_t, 1
+	NASMX_RESERVE get_image_locale,		uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkNoOpObject
-	NASMX_RESERVE parent, 		int8_t, AtkObject_size
+	NASMX_RESERVE parent,		int8_t, AtkObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkNoOpObjectClass
-	NASMX_RESERVE parent_class, 		int8_t, AtkObjectClass_size
+	NASMX_RESERVE parent_class,	int8_t, AtkObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkObjectFactory
-	NASMX_RESERVE parent, 		int8_t, GObject_size
+	NASMX_RESERVE parent,		int8_t, GObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkObjectFactoryClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE create_accessible, 		uint32_t, 1
-	NASMX_RESERVE invalidate, 		uint32_t, 1
-	NASMX_RESERVE get_accessible_type, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE create_accessible,	uint32_t, 1
+	NASMX_RESERVE invalidate,	uint32_t, 1
+	NASMX_RESERVE get_accessible_type,	uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkNoOpObjectFactory
-	NASMX_RESERVE parent, 		int8_t, AtkObjectFactory_size
+	NASMX_RESERVE parent,		int8_t, AtkObjectFactory_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkNoOpObjectFactoryClass
-	NASMX_RESERVE parent_class, 		int8_t, AtkObjectFactoryClass_size
+	NASMX_RESERVE parent_class,	int8_t, AtkObjectFactoryClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkPlug
-	NASMX_RESERVE parent, 		int8_t, AtkObject_size
+	NASMX_RESERVE parent,		int8_t, AtkObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkPlugClass
-	NASMX_RESERVE parent_class, 		int8_t, AtkObjectClass_size
-	NASMX_RESERVE get_object_id, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, AtkObjectClass_size
+	NASMX_RESERVE get_object_id,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkRegistry
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE factory_type_registry, 		uint32_t, 1
-	NASMX_RESERVE factory_singleton_cache, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE factory_type_registry,	uint32_t, 1
+	NASMX_RESERVE factory_singleton_cache,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkRegistryClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkRelation
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE target, 		uint32_t, 1
-	NASMX_RESERVE relationship, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE target,		uint32_t, 1
+	NASMX_RESERVE relationship,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkRelationClass
-	NASMX_RESERVE parent, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent,		int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkRelationSet
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE relations, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE relations,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkRelationSetClass
-	NASMX_RESERVE parent, 		int8_t, GObjectClass_size
-	NASMX_RESERVE pad1, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObjectClass_size
+	NASMX_RESERVE pad1,		uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkSelectionIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE add_selection, 		uint32_t, 1
-	NASMX_RESERVE clear_selection, 		uint32_t, 1
-	NASMX_RESERVE ref_selection, 		uint32_t, 1
-	NASMX_RESERVE get_selection_count, 		uint32_t, 1
-	NASMX_RESERVE is_child_selected, 		uint32_t, 1
-	NASMX_RESERVE remove_selection, 		uint32_t, 1
-	NASMX_RESERVE select_all_selection, 		uint32_t, 1
-	NASMX_RESERVE selection_changed, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE add_selection,	uint32_t, 1
+	NASMX_RESERVE clear_selection,	uint32_t, 1
+	NASMX_RESERVE ref_selection,	uint32_t, 1
+	NASMX_RESERVE get_selection_count,	uint32_t, 1
+	NASMX_RESERVE is_child_selected,	uint32_t, 1
+	NASMX_RESERVE remove_selection,		uint32_t, 1
+	NASMX_RESERVE select_all_selection,	uint32_t, 1
+	NASMX_RESERVE selection_changed,	uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkSocket
-	NASMX_RESERVE parent, 		int8_t, AtkObject_size
-	NASMX_RESERVE embedded_plug_id, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, AtkObject_size
+	NASMX_RESERVE embedded_plug_id,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkSocketClass
-	NASMX_RESERVE parent_class, 		int8_t, AtkObjectClass_size
-	NASMX_RESERVE embed, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, AtkObjectClass_size
+	NASMX_RESERVE embed,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkStateSet
-	NASMX_RESERVE parent, 		int8_t, GObject_size
+	NASMX_RESERVE parent,		int8_t, GObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkStateSetClass
-	NASMX_RESERVE parent, 		int8_t, GObjectClass_size
+	NASMX_RESERVE parent,		int8_t, GObjectClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkStreamableContentIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE get_n_mime_types, 		uint32_t, 1
-	NASMX_RESERVE get_mime_type, 		uint32_t, 1
-	NASMX_RESERVE get_stream, 		uint32_t, 1
-	NASMX_RESERVE get_uri, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
-	NASMX_RESERVE pad3, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE get_n_mime_types,	uint32_t, 1
+	NASMX_RESERVE get_mime_type,	uint32_t, 1
+	NASMX_RESERVE get_stream,	uint32_t, 1
+	NASMX_RESERVE get_uri,		uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
+	NASMX_RESERVE pad3,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkTableIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE ref_at, 		uint32_t, 1
-	NASMX_RESERVE get_index_at, 		uint32_t, 1
-	NASMX_RESERVE get_column_at_index, 		uint32_t, 1
-	NASMX_RESERVE get_row_at_index, 		uint32_t, 1
-	NASMX_RESERVE get_n_columns, 		uint32_t, 1
-	NASMX_RESERVE get_n_rows, 		uint32_t, 1
-	NASMX_RESERVE get_column_extent_at, 		uint32_t, 1
-	NASMX_RESERVE get_row_extent_at, 		uint32_t, 1
-	NASMX_RESERVE get_caption, 		uint32_t, 1
-	NASMX_RESERVE get_column_description, 		uint32_t, 1
-	NASMX_RESERVE get_column_header, 		uint32_t, 1
-	NASMX_RESERVE get_row_description, 		uint32_t, 1
-	NASMX_RESERVE get_row_header, 		uint32_t, 1
-	NASMX_RESERVE get_summary, 		uint32_t, 1
-	NASMX_RESERVE set_caption, 		uint32_t, 1
-	NASMX_RESERVE set_column_description, 		uint32_t, 1
-	NASMX_RESERVE set_column_header, 		uint32_t, 1
-	NASMX_RESERVE set_row_description, 		uint32_t, 1
-	NASMX_RESERVE set_row_header, 		uint32_t, 1
-	NASMX_RESERVE set_summary, 		uint32_t, 1
-	NASMX_RESERVE get_selected_columns, 		uint32_t, 1
-	NASMX_RESERVE get_selected_rows, 		uint32_t, 1
-	NASMX_RESERVE is_column_selected, 		uint32_t, 1
-	NASMX_RESERVE is_row_selected, 		uint32_t, 1
-	NASMX_RESERVE is_selected, 		uint32_t, 1
-	NASMX_RESERVE add_row_selection, 		uint32_t, 1
-	NASMX_RESERVE remove_row_selection, 		uint32_t, 1
-	NASMX_RESERVE add_column_selection, 		uint32_t, 1
-	NASMX_RESERVE remove_column_selection, 		uint32_t, 1
-	NASMX_RESERVE row_inserted, 		uint32_t, 1
-	NASMX_RESERVE column_inserted, 		uint32_t, 1
-	NASMX_RESERVE row_deleted, 		uint32_t, 1
-	NASMX_RESERVE column_deleted, 		uint32_t, 1
-	NASMX_RESERVE row_reordered, 		uint32_t, 1
-	NASMX_RESERVE column_reordered, 		uint32_t, 1
-	NASMX_RESERVE model_changed, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
-	NASMX_RESERVE pad2, 		uint32_t, 1
-	NASMX_RESERVE pad3, 		uint32_t, 1
-	NASMX_RESERVE pad4, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE ref_at,		uint32_t, 1
+	NASMX_RESERVE get_index_at,	uint32_t, 1
+	NASMX_RESERVE get_column_at_index,	uint32_t, 1
+	NASMX_RESERVE get_row_at_index,	uint32_t, 1
+	NASMX_RESERVE get_n_columns,	uint32_t, 1
+	NASMX_RESERVE get_n_rows,	uint32_t, 1
+	NASMX_RESERVE get_column_extent_at,	uint32_t, 1
+	NASMX_RESERVE get_row_extent_at,	uint32_t, 1
+	NASMX_RESERVE get_caption,		uint32_t, 1
+	NASMX_RESERVE get_column_description,	uint32_t, 1
+	NASMX_RESERVE get_column_header,	uint32_t, 1
+	NASMX_RESERVE get_row_description,	uint32_t, 1
+	NASMX_RESERVE get_row_header,	uint32_t, 1
+	NASMX_RESERVE get_summary,	uint32_t, 1
+	NASMX_RESERVE set_caption,	uint32_t, 1
+	NASMX_RESERVE set_column_description,	uint32_t, 1
+	NASMX_RESERVE set_column_header,	uint32_t, 1
+	NASMX_RESERVE set_row_description,	uint32_t, 1
+	NASMX_RESERVE set_row_header,	uint32_t, 1
+	NASMX_RESERVE set_summary,	uint32_t, 1
+	NASMX_RESERVE get_selected_columns,	uint32_t, 1
+	NASMX_RESERVE get_selected_rows,	uint32_t, 1
+	NASMX_RESERVE is_column_selected,	uint32_t, 1
+	NASMX_RESERVE is_row_selected,	uint32_t, 1
+	NASMX_RESERVE is_selected,	uint32_t, 1
+	NASMX_RESERVE add_row_selection,	uint32_t, 1
+	NASMX_RESERVE remove_row_selection,	uint32_t, 1
+	NASMX_RESERVE add_column_selection,	uint32_t, 1
+	NASMX_RESERVE remove_column_selection,	uint32_t, 1
+	NASMX_RESERVE row_inserted,	uint32_t, 1
+	NASMX_RESERVE column_inserted,	uint32_t, 1
+	NASMX_RESERVE row_deleted,	uint32_t, 1
+	NASMX_RESERVE column_deleted,	uint32_t, 1
+	NASMX_RESERVE row_reordered,	uint32_t, 1
+	NASMX_RESERVE column_reordered,		uint32_t, 1
+	NASMX_RESERVE model_changed,	uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
+	NASMX_RESERVE pad2,		uint32_t, 1
+	NASMX_RESERVE pad3,		uint32_t, 1
+	NASMX_RESERVE pad4,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkMisc
-	NASMX_RESERVE parent, 		int8_t, GObject_size
+	NASMX_RESERVE parent,		int8_t, GObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkMiscClass
-	NASMX_RESERVE parent, 		int8_t, GObjectClass_size
-	NASMX_RESERVE threads_enter, 		uint32_t, 1
-	NASMX_RESERVE threads_leave, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObjectClass_size
+	NASMX_RESERVE threads_enter,	uint32_t, 1
+	NASMX_RESERVE threads_leave,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC AtkValueIface
-	NASMX_RESERVE parent, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE get_current_value, 		uint32_t, 1
-	NASMX_RESERVE get_maximum_value, 		uint32_t, 1
-	NASMX_RESERVE get_minimum_value, 		uint32_t, 1
-	NASMX_RESERVE set_current_value, 		uint32_t, 1
-	NASMX_RESERVE get_minimum_increment, 		uint32_t, 1
-	NASMX_RESERVE pad1, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GTypeInterface_size
+	NASMX_RESERVE get_current_value,	uint32_t, 1
+	NASMX_RESERVE get_maximum_value,	uint32_t, 1
+	NASMX_RESERVE get_minimum_value,	uint32_t, 1
+	NASMX_RESERVE set_current_value,	uint32_t, 1
+	NASMX_RESERVE get_minimum_increment,	uint32_t, 1
+	NASMX_RESERVE pad1,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRequisition
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkWidget
-	NASMX_RESERVE object, 		int8_t, GtkObject_size
-	NASMX_RESERVE private_flags, 		uint16_t, 1
-	NASMX_RESERVE state, 		int8_t, 1
-	NASMX_RESERVE saved_state, 		int8_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE style, 		uint32_t, 1
-	NASMX_RESERVE requisition, 		int8_t, GtkRequisition_size
-	NASMX_RESERVE allocation, 		int8_t, GdkRectangle_size
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE parent, 		uint32_t, 1
+	NASMX_RESERVE object,		int8_t, GtkObject_size
+	NASMX_RESERVE private_flags,	uint16_t, 1
+	NASMX_RESERVE state,		int8_t, 1
+	NASMX_RESERVE saved_state,	int8_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE style,		uint32_t, 1
+	NASMX_RESERVE requisition,	int8_t, GtkRequisition_size
+	NASMX_RESERVE allocation,	int8_t, GdkRectangle_size
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE parent,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkWidgetClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkObjectClass_size
-	NASMX_RESERVE activate_signal, 		uint32_t, 1
-	NASMX_RESERVE set_scroll_adjustments_signal, 		uint32_t, 1
-	NASMX_RESERVE dispatch_child_properties_changed, 		uint32_t, 1
-	NASMX_RESERVE show, 		uint32_t, 1
-	NASMX_RESERVE show_all, 		uint32_t, 1
-	NASMX_RESERVE hide, 		uint32_t, 1
-	NASMX_RESERVE hide_all, 		uint32_t, 1
-	NASMX_RESERVE map, 		uint32_t, 1
-	NASMX_RESERVE unmap, 		uint32_t, 1
-	NASMX_RESERVE realize, 		uint32_t, 1
-	NASMX_RESERVE unrealize, 		uint32_t, 1
-	NASMX_RESERVE size_request, 		uint32_t, 1
-	NASMX_RESERVE size_allocate, 		uint32_t, 1
-	NASMX_RESERVE state_changed, 		uint32_t, 1
-	NASMX_RESERVE parent_set, 		uint32_t, 1
-	NASMX_RESERVE hierarchy_changed, 		uint32_t, 1
-	NASMX_RESERVE style_set, 		uint32_t, 1
-	NASMX_RESERVE direction_changed, 		uint32_t, 1
-	NASMX_RESERVE grab_notify, 		uint32_t, 1
-	NASMX_RESERVE child_notify, 		uint32_t, 1
-	NASMX_RESERVE mnemonic_activate, 		uint32_t, 1
-	NASMX_RESERVE grab_focus, 		uint32_t, 1
-	NASMX_RESERVE focus, 		uint32_t, 1
-	NASMX_RESERVE event, 		uint32_t, 1
-	NASMX_RESERVE button_press_event, 		uint32_t, 1
-	NASMX_RESERVE button_release_event, 		uint32_t, 1
-	NASMX_RESERVE scroll_event, 		uint32_t, 1
-	NASMX_RESERVE motion_notify_event, 		uint32_t, 1
-	NASMX_RESERVE delete_event, 		uint32_t, 1
-	NASMX_RESERVE destroy_event, 		uint32_t, 1
-	NASMX_RESERVE expose_event, 		uint32_t, 1
-	NASMX_RESERVE key_press_event, 		uint32_t, 1
-	NASMX_RESERVE key_release_event, 		uint32_t, 1
-	NASMX_RESERVE enter_notify_event, 		uint32_t, 1
-	NASMX_RESERVE leave_notify_event, 		uint32_t, 1
-	NASMX_RESERVE configure_event, 		uint32_t, 1
-	NASMX_RESERVE focus_in_event, 		uint32_t, 1
-	NASMX_RESERVE focus_out_event, 		uint32_t, 1
-	NASMX_RESERVE map_event, 		uint32_t, 1
-	NASMX_RESERVE unmap_event, 		uint32_t, 1
-	NASMX_RESERVE property_notify_event, 		uint32_t, 1
-	NASMX_RESERVE selection_clear_event, 		uint32_t, 1
-	NASMX_RESERVE selection_request_event, 		uint32_t, 1
-	NASMX_RESERVE selection_notify_event, 		uint32_t, 1
-	NASMX_RESERVE proximity_in_event, 		uint32_t, 1
-	NASMX_RESERVE proximity_out_event, 		uint32_t, 1
-	NASMX_RESERVE visibility_notify_event, 		uint32_t, 1
-	NASMX_RESERVE client_event, 		uint32_t, 1
-	NASMX_RESERVE no_expose_event, 		uint32_t, 1
-	NASMX_RESERVE window_state_event, 		uint32_t, 1
-	NASMX_RESERVE selection_get, 		uint32_t, 1
-	NASMX_RESERVE selection_received, 		uint32_t, 1
-	NASMX_RESERVE drag_begin, 		uint32_t, 1
-	NASMX_RESERVE drag_end, 		uint32_t, 1
-	NASMX_RESERVE drag_data_get, 		uint32_t, 1
-	NASMX_RESERVE drag_data_delete, 		uint32_t, 1
-	NASMX_RESERVE drag_leave, 		uint32_t, 1
-	NASMX_RESERVE drag_motion, 		uint32_t, 1
-	NASMX_RESERVE drag_drop, 		uint32_t, 1
-	NASMX_RESERVE drag_data_received, 		uint32_t, 1
-	NASMX_RESERVE popup_menu, 		uint32_t, 1
-	NASMX_RESERVE show_help, 		uint32_t, 1
-	NASMX_RESERVE get_accessible, 		uint32_t, 1
-	NASMX_RESERVE screen_changed, 		uint32_t, 1
-	NASMX_RESERVE can_activate_accel, 		uint32_t, 1
-	NASMX_RESERVE grab_broken_event, 		uint32_t, 1
-	NASMX_RESERVE composited_changed, 		uint32_t, 1
-	NASMX_RESERVE query_tooltip, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved7, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkObjectClass_size
+	NASMX_RESERVE activate_signal,	uint32_t, 1
+	NASMX_RESERVE set_scroll_adjustments_signal,		uint32_t, 1
+	NASMX_RESERVE dispatch_child_properties_changed,	uint32_t, 1
+	NASMX_RESERVE show,		uint32_t, 1
+	NASMX_RESERVE show_all,		uint32_t, 1
+	NASMX_RESERVE hide,		uint32_t, 1
+	NASMX_RESERVE hide_all,		uint32_t, 1
+	NASMX_RESERVE map,		uint32_t, 1
+	NASMX_RESERVE unmap,		uint32_t, 1
+	NASMX_RESERVE realize,		uint32_t, 1
+	NASMX_RESERVE unrealize,	uint32_t, 1
+	NASMX_RESERVE size_request,	uint32_t, 1
+	NASMX_RESERVE size_allocate,	uint32_t, 1
+	NASMX_RESERVE state_changed,	uint32_t, 1
+	NASMX_RESERVE parent_set,	uint32_t, 1
+	NASMX_RESERVE hierarchy_changed,	uint32_t, 1
+	NASMX_RESERVE style_set,	uint32_t, 1
+	NASMX_RESERVE direction_changed,	uint32_t, 1
+	NASMX_RESERVE grab_notify,	uint32_t, 1
+	NASMX_RESERVE child_notify,	uint32_t, 1
+	NASMX_RESERVE mnemonic_activate,	uint32_t, 1
+	NASMX_RESERVE grab_focus,	uint32_t, 1
+	NASMX_RESERVE focus,			uint32_t, 1
+	NASMX_RESERVE event,	 		uint32_t, 1
+	NASMX_RESERVE button_press_event,	uint32_t, 1
+	NASMX_RESERVE button_release_event,	uint32_t, 1
+	NASMX_RESERVE scroll_event,	uint32_t, 1
+	NASMX_RESERVE motion_notify_event,	uint32_t, 1
+	NASMX_RESERVE delete_event,	uint32_t, 1
+	NASMX_RESERVE destroy_event,	uint32_t, 1
+	NASMX_RESERVE expose_event,	uint32_t, 1
+	NASMX_RESERVE key_press_event,	uint32_t, 1
+	NASMX_RESERVE key_release_event,	uint32_t, 1
+	NASMX_RESERVE enter_notify_event,	uint32_t, 1
+	NASMX_RESERVE leave_notify_event,	uint32_t, 1
+	NASMX_RESERVE configure_event,	uint32_t, 1
+	NASMX_RESERVE focus_in_event,	uint32_t, 1
+	NASMX_RESERVE focus_out_event,	uint32_t, 1
+	NASMX_RESERVE map_event,	uint32_t, 1
+	NASMX_RESERVE unmap_event,	uint32_t, 1
+	NASMX_RESERVE property_notify_event,	uint32_t, 1
+	NASMX_RESERVE selection_clear_event,	uint32_t, 1
+	NASMX_RESERVE selection_request_event,	uint32_t, 1
+	NASMX_RESERVE selection_notify_event,	uint32_t, 1
+	NASMX_RESERVE proximity_in_event,	uint32_t, 1
+	NASMX_RESERVE proximity_out_event,	uint32_t, 1
+	NASMX_RESERVE visibility_notify_event,	uint32_t, 1
+	NASMX_RESERVE client_event,	uint32_t, 1
+	NASMX_RESERVE no_expose_event,	uint32_t, 1
+	NASMX_RESERVE window_state_event,	uint32_t, 1
+	NASMX_RESERVE selection_get,	uint32_t, 1
+	NASMX_RESERVE selection_received,	uint32_t, 1
+	NASMX_RESERVE drag_begin,	uint32_t, 1
+	NASMX_RESERVE drag_end,	uint32_t, 1
+	NASMX_RESERVE drag_data_get,	uint32_t, 1
+	NASMX_RESERVE drag_data_delete,		uint32_t, 1
+	NASMX_RESERVE drag_leave,	uint32_t, 1
+	NASMX_RESERVE drag_motion,	uint32_t, 1
+	NASMX_RESERVE drag_drop,	uint32_t, 1
+	NASMX_RESERVE drag_data_received,	uint32_t, 1
+	NASMX_RESERVE popup_menu,	uint32_t, 1
+	NASMX_RESERVE show_help,	uint32_t, 1
+	NASMX_RESERVE get_accessible,	uint32_t, 1
+	NASMX_RESERVE screen_changed,	uint32_t, 1
+	NASMX_RESERVE can_activate_accel,	uint32_t, 1
+	NASMX_RESERVE grab_broken_event,	uint32_t, 1
+	NASMX_RESERVE composited_changed,	uint32_t, 1
+	NASMX_RESERVE query_tooltip,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved6,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved7,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkWidgetAuxInfo
-	NASMX_RESERVE x, 		uint32_t, 1
-	NASMX_RESERVE y, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
-	NASMX_RESERVE x_set, 		uint32_t, 1
+	NASMX_RESERVE x,		uint32_t, 1
+	NASMX_RESERVE y,		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
+	NASMX_RESERVE x_set,		uint32_t, 1
 ;.y_set:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkWidgetShapeInfo
-	NASMX_RESERVE offset_x, 		uint16_t, 1
-	NASMX_RESERVE offset_y, 		uint16_t, 1
-	NASMX_RESERVE shape_mask, 		uint32_t, 1
+	NASMX_RESERVE offset_x,		uint16_t, 1
+	NASMX_RESERVE offset_y,		uint16_t, 1
+	NASMX_RESERVE shape_mask,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkContainer
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE focus_child, 		uint32_t, 1
-	NASMX_RESERVE border_width, 		uint32_t, 1
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
+	NASMX_RESERVE focus_child,	uint32_t, 1
+	NASMX_RESERVE border_width,	uint32_t, 1
 ;.need_resize:		RESD 1
 ;.resize_mode:		RESD 1
-;.reallocate_redraws:		RESD 1
-;.has_focus_chain:		RESD 1
+;.reallocate_redraws:	RESD 1
+;.has_focus_chain:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkContainerClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE add, 		uint32_t, 1
-	NASMX_RESERVE remove, 		uint32_t, 1
-	NASMX_RESERVE check_resize, 		uint32_t, 1
-	NASMX_RESERVE forall, 		uint32_t, 1
-	NASMX_RESERVE set_focus_child, 		uint32_t, 1
-	NASMX_RESERVE child_type, 		uint32_t, 1
-	NASMX_RESERVE composite_name, 		uint32_t, 1
-	NASMX_RESERVE set_child_property, 		uint32_t, 1
-	NASMX_RESERVE get_child_property, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE add,		uint32_t, 1
+	NASMX_RESERVE remove,		uint32_t, 1
+	NASMX_RESERVE check_resize,	uint32_t, 1
+	NASMX_RESERVE forall,		uint32_t, 1
+	NASMX_RESERVE set_focus_child,	uint32_t, 1
+	NASMX_RESERVE child_type,	uint32_t, 1
+	NASMX_RESERVE composite_name,	uint32_t, 1
+	NASMX_RESERVE set_child_property,	uint32_t, 1
+	NASMX_RESERVE get_child_property,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBin
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE child, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE child,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBinClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkWindow
-	NASMX_RESERVE bin, 		int8_t, GtkBin_size
-	NASMX_RESERVE title, 		uint32_t, 1
-	NASMX_RESERVE wmclass_name, 		uint32_t, 1
-	NASMX_RESERVE wmclass_class, 		uint32_t, 1
-	NASMX_RESERVE wm_role, 		uint32_t, 1
-	NASMX_RESERVE focus_widget, 		uint32_t, 1
-	NASMX_RESERVE default_widget, 		uint32_t, 1
-	NASMX_RESERVE transient_parent, 		uint32_t, 1
-	NASMX_RESERVE geometry_info, 		uint32_t, 1
-	NASMX_RESERVE frame, 		uint32_t, 1
-	NASMX_RESERVE group, 		uint32_t, 1
-	NASMX_RESERVE configure_request_count, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
-	NASMX_RESERVE allow_shrink, 		uint32_t, 1
+	NASMX_RESERVE bin,		int8_t, GtkBin_size
+	NASMX_RESERVE title,		uint32_t, 1
+	NASMX_RESERVE wmclass_name,	uint32_t, 1
+	NASMX_RESERVE wmclass_class,	uint32_t, 1
+	NASMX_RESERVE wm_role,		uint32_t, 1
+	NASMX_RESERVE focus_widget,	uint32_t, 1
+	NASMX_RESERVE default_widget,	uint32_t, 1
+	NASMX_RESERVE transient_parent,	uint32_t, 1
+	NASMX_RESERVE geometry_info,	uint32_t, 1
+	NASMX_RESERVE frame,		uint32_t, 1
+	NASMX_RESERVE group,		uint32_t, 1
+	NASMX_RESERVE configure_request_count,	uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
+	NASMX_RESERVE allow_shrink,	uint32_t, 1
 ;.allow_grow:		RESD 1
-;.configure_notify_received:		RESD 1
-;.need_default_position:		RESD 1
-;.need_default_size:		RESD 1
+;.configure_notify_received:	RESD 1
+;.need_default_position:	RESD 1
+;.need_default_size:	RESD 1
 ;.position:		RESD 1
 ;.type:		RESD 1
-;.has_user_ref_count:		RESD 1
+;.has_user_ref_count:	RESD 1
 ;.has_focus:		RESD 1
 ;.modal:		RESD 1
-;.destroy_with_parent:		RESD 1
+;.destroy_with_parent:	RESD 1
 ;.has_frame:		RESD 1
-;.iconify_initially:		RESD 1
-;.stick_initially:		RESD 1
-;.maximize_initially:		RESD 1
+;.iconify_initially:	RESD 1
+;.stick_initially:	RESD 1
+;.maximize_initially:	RESD 1
 ;.decorated:		RESD 1
 ;.type_hint:		RESD 1
 ;.gravity:		RESD 1
 ;.is_active:		RESD 1
-;.has_toplevel_focus:		RESD 1
-	NASMX_RESERVE frame_left, 		uint32_t, 1
-	NASMX_RESERVE frame_top, 		uint32_t, 1
-	NASMX_RESERVE frame_right, 		uint32_t, 1
-	NASMX_RESERVE frame_bottom, 		uint32_t, 1
-	NASMX_RESERVE keys_changed_handler, 		uint32_t, 1
-	NASMX_RESERVE mnemonic_modifier, 		uint32_t, 1
-	NASMX_RESERVE screen, 		uint32_t, 1
+;.has_toplevel_focus:	RESD 1
+	NASMX_RESERVE frame_left,	uint32_t, 1
+	NASMX_RESERVE frame_top,	uint32_t, 1
+	NASMX_RESERVE frame_right,	uint32_t, 1
+	NASMX_RESERVE frame_bottom,	uint32_t, 1
+	NASMX_RESERVE keys_changed_handler,	uint32_t, 1
+	NASMX_RESERVE mnemonic_modifier,	uint32_t, 1
+	NASMX_RESERVE screen,		uint32_t, 1
 
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkWindowClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
-	NASMX_RESERVE set_focus, 		uint32_t, 1
-	NASMX_RESERVE frame_event, 		uint32_t, 1
-	NASMX_RESERVE activate_focus, 		uint32_t, 1
-	NASMX_RESERVE activate_default, 		uint32_t, 1
-	NASMX_RESERVE move_focus, 		uint32_t, 1
-	NASMX_RESERVE keys_changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
+	NASMX_RESERVE set_focus,	uint32_t, 1
+	NASMX_RESERVE frame_event,	uint32_t, 1
+	NASMX_RESERVE activate_focus,	uint32_t, 1
+	NASMX_RESERVE activate_default,		uint32_t, 1
+	NASMX_RESERVE move_focus,	uint32_t, 1
+	NASMX_RESERVE keys_changed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkWindowGroup
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE grabs, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE grabs,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkWindowGroupClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkDialog
-	NASMX_RESERVE window, 		int8_t, GtkWindow_size
-	NASMX_RESERVE vbox, 		uint32_t, 1
-	NASMX_RESERVE action_area, 		uint32_t, 1
-	NASMX_RESERVE separator, 		uint32_t, 1
+	NASMX_RESERVE window,		int8_t, GtkWindow_size
+	NASMX_RESERVE vbox,		uint32_t, 1
+	NASMX_RESERVE action_area,	uint32_t, 1
+	NASMX_RESERVE separator,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkDialogClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWindowClass_size
-	NASMX_RESERVE response, 		uint32_t, 1
-	NASMX_RESERVE close, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWindowClass_size
+	NASMX_RESERVE response,		uint32_t, 1
+	NASMX_RESERVE close,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAboutDialog
-	NASMX_RESERVE parent_instance, 		int8_t, GtkDialog_size
-	NASMX_RESERVE private_data, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkDialog_size
+	NASMX_RESERVE private_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAboutDialogClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkDialogClass_size
-	NASMX_RESERVE activate_link, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkDialogClass_size
+	NASMX_RESERVE activate_link,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMisc
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE xalign, 		uint32_t, 1
-	NASMX_RESERVE yalign, 		uint32_t, 1
-	NASMX_RESERVE xpad, 		uint16_t, 1
-	NASMX_RESERVE ypad, 		uint16_t, 1
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
+	NASMX_RESERVE xalign,		uint32_t, 1
+	NASMX_RESERVE yalign,		uint32_t, 1
+	NASMX_RESERVE xpad,		uint16_t, 1
+	NASMX_RESERVE ypad,		uint16_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMiscClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMenuShell
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE children, 		uint32_t, 1
-	NASMX_RESERVE active_menu_item, 		uint32_t, 1
-	NASMX_RESERVE parent_menu_shell, 		uint32_t, 1
-	NASMX_RESERVE button, 		uint32_t, 1
-	NASMX_RESERVE activate_time, 		uint32_t, 1
-	NASMX_RESERVE active, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE children,		uint32_t, 1
+	NASMX_RESERVE active_menu_item,	uint32_t, 1
+	NASMX_RESERVE parent_menu_shell,	uint32_t, 1
+	NASMX_RESERVE button,		uint32_t, 1
+	NASMX_RESERVE activate_time,	uint32_t, 1
+	NASMX_RESERVE active,		uint32_t, 1
 ;.have_grab:		RESD 1
 ;.have_xgrab:		RESD 1
 ;.ignore_leave:		RESD 1
 ;.menu_flag:		RESD 1
 ;.ignore_enter:		RESD 1
-;.keyboard_mode:		RESD 1
+;.keyboard_mode:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMenuShellClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE submenu_placement, 		uint32_t, 1
-	NASMX_RESERVE deactivate, 		uint32_t, 1
-	NASMX_RESERVE selection_done, 		uint32_t, 1
-	NASMX_RESERVE move_current, 		uint32_t, 1
-	NASMX_RESERVE activate_current, 		uint32_t, 1
-	NASMX_RESERVE cancel, 		uint32_t, 1
-	NASMX_RESERVE select_item, 		uint32_t, 1
-	NASMX_RESERVE insert, 		uint32_t, 1
-	NASMX_RESERVE get_popup_delay, 		uint32_t, 1
-	NASMX_RESERVE move_selected, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE submenu_placement,	uint32_t, 1
+	NASMX_RESERVE deactivate,	uint32_t, 1
+	NASMX_RESERVE selection_done,	uint32_t, 1
+	NASMX_RESERVE move_current,	uint32_t, 1
+	NASMX_RESERVE activate_current,	uint32_t, 1
+	NASMX_RESERVE cancel,		uint32_t, 1
+	NASMX_RESERVE select_item,	uint32_t, 1
+	NASMX_RESERVE insert,		uint32_t, 1
+	NASMX_RESERVE get_popup_delay,	uint32_t, 1
+	NASMX_RESERVE move_selected,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMenu
-	NASMX_RESERVE menu_shell, 		int8_t, GtkMenuShell_size
-	NASMX_RESERVE parent_menu_item, 		uint32_t, 1
-	NASMX_RESERVE old_active_menu_item, 		uint32_t, 1
-	NASMX_RESERVE accel_group, 		uint32_t, 1
-	NASMX_RESERVE accel_path, 		uint32_t, 1
-	NASMX_RESERVE position_func, 		uint32_t, 1
-	NASMX_RESERVE position_func_data, 		uint32_t, 1
-	NASMX_RESERVE toggle_size, 		uint32_t, 1
-	NASMX_RESERVE toplevel, 		uint32_t, 1
-	NASMX_RESERVE tearoff_window, 		uint32_t, 1
-	NASMX_RESERVE tearoff_hbox, 		uint32_t, 1
-	NASMX_RESERVE tearoff_scrollbar, 		uint32_t, 1
-	NASMX_RESERVE tearoff_adjustment, 		uint32_t, 1
-	NASMX_RESERVE view_window, 		uint32_t, 1
-	NASMX_RESERVE bin_window, 		uint32_t, 1
-	NASMX_RESERVE scroll_offset, 		uint32_t, 1
-	NASMX_RESERVE saved_scroll_offset, 		uint32_t, 1
-	NASMX_RESERVE scroll_step, 		uint32_t, 1
-	NASMX_RESERVE timeout_id, 		uint32_t, 1
-	NASMX_RESERVE navigation_region, 		uint32_t, 1
-	NASMX_RESERVE navigation_timeout, 		uint32_t, 1
-	NASMX_RESERVE needs_destruction_ref_count, 		uint32_t, 1
+	NASMX_RESERVE menu_shell,	int8_t, GtkMenuShell_size
+	NASMX_RESERVE parent_menu_item,	uint32_t, 1
+	NASMX_RESERVE old_active_menu_item,	uint32_t, 1
+	NASMX_RESERVE accel_group,	uint32_t, 1
+	NASMX_RESERVE accel_path,	uint32_t, 1
+	NASMX_RESERVE position_func,	uint32_t, 1
+	NASMX_RESERVE position_func_data,	uint32_t, 1
+	NASMX_RESERVE toggle_size,	uint32_t, 1
+	NASMX_RESERVE toplevel,		uint32_t, 1
+	NASMX_RESERVE tearoff_window,	uint32_t, 1
+	NASMX_RESERVE tearoff_hbox,	uint32_t, 1
+	NASMX_RESERVE tearoff_scrollbar,	uint32_t, 1
+	NASMX_RESERVE tearoff_adjustment,	uint32_t, 1
+	NASMX_RESERVE view_window,	uint32_t, 1
+	NASMX_RESERVE bin_window,	uint32_t, 1
+	NASMX_RESERVE scroll_offset,	uint32_t, 1
+	NASMX_RESERVE saved_scroll_offset,	uint32_t, 1
+	NASMX_RESERVE scroll_step,	uint32_t, 1
+	NASMX_RESERVE timeout_id,	uint32_t, 1
+	NASMX_RESERVE navigation_region,	uint32_t, 1
+	NASMX_RESERVE navigation_timeout,	uint32_t, 1
+	NASMX_RESERVE needs_destruction_ref_count,	uint32_t, 1
 ;.torn_off:		RESD 1
-;.tearoff_active:		RESD 1
+;.tearoff_active:	RESD 1
 ;.scroll_fast:		RESD 1
-;.upper_arrow_visible:		RESD 1
-;.lower_arrow_visible:		RESD 1
-;.upper_arrow_prelight:		RESD 1
-;.lower_arrow_prelight:		RESD 1
+;.upper_arrow_visible:	RESD 1
+;.lower_arrow_visible:	RESD 1
+;.upper_arrow_prelight:	RESD 1
+;.lower_arrow_prelight:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMenuClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMenuShellClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkMenuShellClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkLabel
-	NASMX_RESERVE misc, 		int8_t, GtkMisc_size
-	NASMX_RESERVE label, 		uint32_t, 1
-	NASMX_RESERVE jtype, 		uint32_t, 1
+	NASMX_RESERVE misc,		int8_t, GtkMisc_size
+	NASMX_RESERVE label,		uint32_t, 1
+	NASMX_RESERVE jtype,		uint32_t, 1
 ;.wrap:		RESD 1
-;.use_underline:		RESD 1
+;.use_underline:	RESD 1
 ;.use_markup:		RESD 1
 ;.ellipsize:		RESD 1
-;.single_line_mode:		RESD 1
-;.have_transform:		RESD 1
+;.single_line_mode:	RESD 1
+;.have_transform:	RESD 1
 ;.in_click:		RESD 1
 ;.wrap_mode:		RESD 1
 ;.pattern_set:		RESD 1
 ;.track_links:		RESD 1
-	NASMX_RESERVE mnemonic_keyval, 		uint32_t, 1
-	NASMX_RESERVE text, 		uint32_t, 1
-	NASMX_RESERVE attrs, 		uint32_t, 1
-	NASMX_RESERVE effective_attrs, 		uint32_t, 1
-	NASMX_RESERVE layout, 		uint32_t, 1
-	NASMX_RESERVE mnemonic_widget, 		uint32_t, 1
-	NASMX_RESERVE mnemonic_window, 		uint32_t, 1
-	NASMX_RESERVE select_info, 		uint32_t, 1
+	NASMX_RESERVE mnemonic_keyval,	uint32_t, 1
+	NASMX_RESERVE text,		uint32_t, 1
+	NASMX_RESERVE attrs,		uint32_t, 1
+	NASMX_RESERVE effective_attrs,	uint32_t, 1
+	NASMX_RESERVE layout,		uint32_t, 1
+	NASMX_RESERVE mnemonic_widget,	uint32_t, 1
+	NASMX_RESERVE mnemonic_window,	uint32_t, 1
+	NASMX_RESERVE select_info,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkLabelClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMiscClass_size
-	NASMX_RESERVE move_cursor, 		uint32_t, 1
-	NASMX_RESERVE copy_clipboard, 		uint32_t, 1
-	NASMX_RESERVE populate_popup, 		uint32_t, 1
-	NASMX_RESERVE activate_link, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkMiscClass_size
+	NASMX_RESERVE move_cursor,	uint32_t, 1
+	NASMX_RESERVE copy_clipboard,	uint32_t, 1
+	NASMX_RESERVE populate_popup,	uint32_t, 1
+	NASMX_RESERVE activate_link,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAccelLabel
-	NASMX_RESERVE label, 		int8_t, GtkLabel_size
-	NASMX_RESERVE gtk_reserved, 		uint32_t, 1
-	NASMX_RESERVE accel_padding, 		uint32_t, 1
-	NASMX_RESERVE accel_widget, 		uint32_t, 1
-	NASMX_RESERVE accel_closure, 		uint32_t, 1
-	NASMX_RESERVE accel_group, 		uint32_t, 1
-	NASMX_RESERVE accel_string, 		uint32_t, 1
-	NASMX_RESERVE accel_string_width, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
+	NASMX_RESERVE label,		int8_t, GtkLabel_size
+	NASMX_RESERVE gtk_reserved,	uint32_t, 1
+	NASMX_RESERVE accel_padding,	uint32_t, 1
+	NASMX_RESERVE accel_widget,	uint32_t, 1
+	NASMX_RESERVE accel_closure,	uint32_t, 1
+	NASMX_RESERVE accel_group,	uint32_t, 1
+	NASMX_RESERVE accel_string,	uint32_t, 1
+	NASMX_RESERVE accel_string_width,	uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAccelLabelClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkLabelClass_size
-	NASMX_RESERVE signal_quote1, 		uint32_t, 1
-	NASMX_RESERVE signal_quote2, 		uint32_t, 1
-	NASMX_RESERVE mod_name_shift, 		uint32_t, 1
-	NASMX_RESERVE mod_name_control, 		uint32_t, 1
-	NASMX_RESERVE mod_name_alt, 		uint32_t, 1
-	NASMX_RESERVE mod_separator, 		uint32_t, 1
-	NASMX_RESERVE accel_seperator, 		uint32_t, 1
-	NASMX_RESERVE latin1_to_char, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkLabelClass_size
+	NASMX_RESERVE signal_quote1,	uint32_t, 1
+	NASMX_RESERVE signal_quote2,	uint32_t, 1
+	NASMX_RESERVE mod_name_shift,	uint32_t, 1
+	NASMX_RESERVE mod_name_control,	uint32_t, 1
+	NASMX_RESERVE mod_name_alt,	uint32_t, 1
+	NASMX_RESERVE mod_separator,	uint32_t, 1
+	NASMX_RESERVE accel_seperator,	uint32_t, 1
+	NASMX_RESERVE latin1_to_char,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAccessible
-	NASMX_RESERVE parent, 		int8_t, AtkObject_size
-	NASMX_RESERVE widget, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, AtkObject_size
+	NASMX_RESERVE widget,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAccessibleClass
-	NASMX_RESERVE parent_class, 		int8_t, AtkObjectClass_size
-	NASMX_RESERVE connect_widget_destroyed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, AtkObjectClass_size
+	NASMX_RESERVE connect_widget_destroyed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAction
-	NASMX_RESERVE object, 		int8_t, GObject_size
-	NASMX_RESERVE private_data, 		uint32_t, 1
+	NASMX_RESERVE object,		int8_t, GObject_size
+	NASMX_RESERVE private_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkActionClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE activate, 		uint32_t, 1
-	NASMX_RESERVE menu_item_type, 		uint32_t, 1
-	NASMX_RESERVE toolbar_item_type, 		uint32_t, 1
-	NASMX_RESERVE create_menu_item, 		uint32_t, 1
-	NASMX_RESERVE create_tool_item, 		uint32_t, 1
-	NASMX_RESERVE connect_proxy, 		uint32_t, 1
-	NASMX_RESERVE disconnect_proxy, 		uint32_t, 1
-	NASMX_RESERVE create_menu, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE activate,		uint32_t, 1
+	NASMX_RESERVE menu_item_type,	uint32_t, 1
+	NASMX_RESERVE toolbar_item_type,	uint32_t, 1
+	NASMX_RESERVE create_menu_item,		uint32_t, 1
+	NASMX_RESERVE create_tool_item,		uint32_t, 1
+	NASMX_RESERVE connect_proxy,	uint32_t, 1
+	NASMX_RESERVE disconnect_proxy,		uint32_t, 1
+	NASMX_RESERVE create_menu,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkActionGroup
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE private_data, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE private_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkActionGroupClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE get_action, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE get_action,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkActionEntry
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE stock_id, 		uint32_t, 1
-	NASMX_RESERVE label, 		uint32_t, 1
-	NASMX_RESERVE accelerator, 		uint32_t, 1
-	NASMX_RESERVE tooltip, 		uint32_t, 1
-	NASMX_RESERVE callback, 		uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE stock_id,		uint32_t, 1
+	NASMX_RESERVE label,		uint32_t, 1
+	NASMX_RESERVE accelerator,	uint32_t, 1
+	NASMX_RESERVE tooltip,		uint32_t, 1
+	NASMX_RESERVE callback,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToggleActionEntry
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE stock_id, 		uint32_t, 1
-	NASMX_RESERVE label, 		uint32_t, 1
-	NASMX_RESERVE accelerator, 		uint32_t, 1
-	NASMX_RESERVE tooltip, 		uint32_t, 1
-	NASMX_RESERVE callback, 		uint32_t, 1
-	NASMX_RESERVE is_active, 		uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE stock_id,		uint32_t, 1
+	NASMX_RESERVE label,		uint32_t, 1
+	NASMX_RESERVE accelerator,	uint32_t, 1
+	NASMX_RESERVE tooltip,		uint32_t, 1
+	NASMX_RESERVE callback,		uint32_t, 1
+	NASMX_RESERVE is_active,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRadioActionEntry
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE stock_id, 		uint32_t, 1
-	NASMX_RESERVE label, 		uint32_t, 1
-	NASMX_RESERVE accelerator, 		uint32_t, 1
-	NASMX_RESERVE tooltip, 		uint32_t, 1
-	NASMX_RESERVE value, 		uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE stock_id,		uint32_t, 1
+	NASMX_RESERVE label,		uint32_t, 1
+	NASMX_RESERVE accelerator,	uint32_t, 1
+	NASMX_RESERVE tooltip,		uint32_t, 1
+	NASMX_RESERVE value,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkActivatableIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE update, 		uint32_t, 1
-	NASMX_RESERVE sync_action_properties, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE update,		uint32_t, 1
+	NASMX_RESERVE sync_action_properties,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAlignment
-	NASMX_RESERVE bin, 		int8_t, GtkBin_size
-	NASMX_RESERVE xalign, 		uint32_t, 1
-	NASMX_RESERVE yalign, 		uint32_t, 1
-	NASMX_RESERVE xscale, 		uint32_t, 1
-	NASMX_RESERVE yscale, 		uint32_t, 1
+	NASMX_RESERVE bin,		int8_t, GtkBin_size
+	NASMX_RESERVE xalign,		uint32_t, 1
+	NASMX_RESERVE yalign,		uint32_t, 1
+	NASMX_RESERVE xscale,		uint32_t, 1
+	NASMX_RESERVE yscale,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAlignmentClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkArrow
-	NASMX_RESERVE misc, 		int8_t, GtkMisc_size
-	NASMX_RESERVE arrow_type, 		uint16_t, 1
-	NASMX_RESERVE shadow_type, 		uint16_t, 1
+	NASMX_RESERVE misc,		int8_t, GtkMisc_size
+	NASMX_RESERVE arrow_type,	uint16_t, 1
+	NASMX_RESERVE shadow_type,	uint16_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkArrowClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMiscClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkMiscClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFrame
-	NASMX_RESERVE bin, 		int8_t, GtkBin_size
-	NASMX_RESERVE label_widget, 		uint32_t, 1
-	NASMX_RESERVE shadow_type, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
-	NASMX_RESERVE label_xalign, 		uint32_t, 1
-	NASMX_RESERVE label_yalign, 		uint32_t, 1
-	NASMX_RESERVE child_allocation, 		int8_t, GdkRectangle_size
+	NASMX_RESERVE bin,		int8_t, GtkBin_size
+	NASMX_RESERVE label_widget,	uint32_t, 1
+	NASMX_RESERVE shadow_type,	uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
+	NASMX_RESERVE label_xalign,	uint32_t, 1
+	NASMX_RESERVE label_yalign,	uint32_t, 1
+	NASMX_RESERVE child_allocation,	int8_t, GdkRectangle_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFrameClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
-	NASMX_RESERVE compute_child_allocation, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
+	NASMX_RESERVE compute_child_allocation,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAspectFrame
-	NASMX_RESERVE frame, 		int8_t, GtkFrame_size
-	NASMX_RESERVE xalign, 		uint32_t, 1
-	NASMX_RESERVE yalign, 		uint32_t, 1
-	NASMX_RESERVE ratio, 		uint32_t, 1
-	NASMX_RESERVE obey_child, 		uint32_t, 1
-	NASMX_RESERVE center_allocation, 		int8_t, GdkRectangle_size
+	NASMX_RESERVE frame,		int8_t, GtkFrame_size
+	NASMX_RESERVE xalign,		uint32_t, 1
+	NASMX_RESERVE yalign,		uint32_t, 1
+	NASMX_RESERVE ratio,		uint32_t, 1
+	NASMX_RESERVE obey_child,	uint32_t, 1
+	NASMX_RESERVE center_allocation,	int8_t, GdkRectangle_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAspectFrameClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkFrameClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkFrameClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAssistant
-	NASMX_RESERVE parent, 		int8_t, GtkWindow_size
-	NASMX_RESERVE cancel, 		uint32_t, 1
-	NASMX_RESERVE forward, 		uint32_t, 1
-	NASMX_RESERVE back, 		uint32_t, 1
-	NASMX_RESERVE apply, 		uint32_t, 1
-	NASMX_RESERVE close, 		uint32_t, 1
-	NASMX_RESERVE last, 		uint32_t, 1
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkWindow_size
+	NASMX_RESERVE cancel,		uint32_t, 1
+	NASMX_RESERVE forward,		uint32_t, 1
+	NASMX_RESERVE back,		uint32_t, 1
+	NASMX_RESERVE apply,		uint32_t, 1
+	NASMX_RESERVE close,		uint32_t, 1
+	NASMX_RESERVE last,		uint32_t, 1
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkAssistantClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWindowClass_size
-	NASMX_RESERVE prepare, 		uint32_t, 1
-	NASMX_RESERVE apply, 		uint32_t, 1
-	NASMX_RESERVE close, 		uint32_t, 1
-	NASMX_RESERVE cancel, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWindowClass_size
+	NASMX_RESERVE prepare,		uint32_t, 1
+	NASMX_RESERVE apply,		uint32_t, 1
+	NASMX_RESERVE close,		uint32_t, 1
+	NASMX_RESERVE cancel,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBox
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE children, 		uint32_t, 1
-	NASMX_RESERVE spacing, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
-	NASMX_RESERVE homogeneous, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE children,		uint32_t, 1
+	NASMX_RESERVE spacing,		uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
+	NASMX_RESERVE homogeneous,	uint32_t, 1
 
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBoxClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBoxChild
-	NASMX_RESERVE widget, 		uint32_t, 1
-	NASMX_RESERVE padding, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
-	NASMX_RESERVE expand, 		uint32_t, 1
+	NASMX_RESERVE widget,		uint32_t, 1
+	NASMX_RESERVE padding,		uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
+	NASMX_RESERVE expand,		uint32_t, 1
 ;.fill:		RESD 1
 ;.pack:		RESD 1
 ;.is_secondary:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkButtonBox
-	NASMX_RESERVE box, 		int8_t, GtkBox_size
-	NASMX_RESERVE child_min_width, 		uint32_t, 1
-	NASMX_RESERVE child_min_height, 		uint32_t, 1
-	NASMX_RESERVE child_ipad_x, 		uint32_t, 1
-	NASMX_RESERVE child_ipad_y, 		uint32_t, 1
-	NASMX_RESERVE layout_style, 		uint32_t, 1
+	NASMX_RESERVE box,		int8_t, GtkBox_size
+	NASMX_RESERVE child_min_width,	uint32_t, 1
+	NASMX_RESERVE child_min_height,	uint32_t, 1
+	NASMX_RESERVE child_ipad_x,	uint32_t, 1
+	NASMX_RESERVE child_ipad_y,	uint32_t, 1
+	NASMX_RESERVE layout_style,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkButtonBoxClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBoxClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkBoxClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBindingSet
-	NASMX_RESERVE set_name, 		uint32_t, 1
-	NASMX_RESERVE priority, 		uint32_t, 1
-	NASMX_RESERVE widget_path_pspecs, 		uint32_t, 1
-	NASMX_RESERVE widget_class_pspecs, 		uint32_t, 1
-	NASMX_RESERVE class_branch_pspecs, 		uint32_t, 1
-	NASMX_RESERVE entries, 		uint32_t, 1
-	NASMX_RESERVE current, 		uint32_t, 1
-	NASMX_RESERVE parsed, 		uint32_t, 1
+	NASMX_RESERVE set_name,		uint32_t, 1
+	NASMX_RESERVE priority,		uint32_t, 1
+	NASMX_RESERVE widget_path_pspecs,	uint32_t, 1
+	NASMX_RESERVE widget_class_pspecs,	uint32_t, 1
+	NASMX_RESERVE class_branch_pspecs,	uint32_t, 1
+	NASMX_RESERVE entries,		uint32_t, 1
+	NASMX_RESERVE current,		uint32_t, 1
+	NASMX_RESERVE parsed,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBindingEntry
-	NASMX_RESERVE keyval, 		uint32_t, 1
-	NASMX_RESERVE modifiers, 		uint32_t, 1
-	NASMX_RESERVE binding_set, 		uint32_t, 1
-	NASMX_RESERVE destroyed, 		uint32_t, 1
+	NASMX_RESERVE keyval,		uint32_t, 1
+	NASMX_RESERVE modifiers,	uint32_t, 1
+	NASMX_RESERVE binding_set,	uint32_t, 1
+	NASMX_RESERVE destroyed,	uint32_t, 1
 ;.in_emission:		RESD 1
-;.marks_unbound:		RESD 1
-	NASMX_RESERVE set_next, 		uint32_t, 1
-	NASMX_RESERVE hash_next, 		uint32_t, 1
-	NASMX_RESERVE signals, 		uint32_t, 1
+;.marks_unbound:	RESD 1
+	NASMX_RESERVE set_next,		uint32_t, 1
+	NASMX_RESERVE hash_next,	uint32_t, 1
+	NASMX_RESERVE signals,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBindingArg
-	NASMX_RESERVE arg_type, 		uint32_t, 1
-	NASMX_RESERVE long_data, 		uint32_t, 1
-	NASMX_RESERVE double_data, 		uint32_t, 1
-	NASMX_RESERVE string_data, 		uint32_t, 1
+	NASMX_RESERVE arg_type,		uint32_t, 1
+	NASMX_RESERVE long_data,	uint32_t, 1
+	NASMX_RESERVE double_data,	uint32_t, 1
+	NASMX_RESERVE string_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBindingSignal
-	NASMX_RESERVE next, 		uint32_t, 1
-	NASMX_RESERVE signal_name, 		uint32_t, 1
-	NASMX_RESERVE n_args, 		uint32_t, 1
-	NASMX_RESERVE args, 		uint32_t, 1
+	NASMX_RESERVE next,		uint32_t, 1
+	NASMX_RESERVE signal_name,	uint32_t, 1
+	NASMX_RESERVE n_args,		uint32_t, 1
+	NASMX_RESERVE args,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBuilder
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBuilderClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE get_type_from_name, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved7, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved8, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE get_type_from_name,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved6,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved7,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved8,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkBuildableIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE set_name, 		uint32_t, 1
-	NASMX_RESERVE get_name, 		uint32_t, 1
-	NASMX_RESERVE add_child, 		uint32_t, 1
-	NASMX_RESERVE set_buildable_property, 		uint32_t, 1
-	NASMX_RESERVE construct_child, 		uint32_t, 1
-	NASMX_RESERVE custom_tag_start, 		uint32_t, 1
-	NASMX_RESERVE custom_tag_end, 		uint32_t, 1
-	NASMX_RESERVE custom_finished, 		uint32_t, 1
-	NASMX_RESERVE parser_finished, 		uint32_t, 1
-	NASMX_RESERVE get_internal_child, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE set_name,		uint32_t, 1
+	NASMX_RESERVE get_name,		uint32_t, 1
+	NASMX_RESERVE add_child,	uint32_t, 1
+	NASMX_RESERVE set_buildable_property,	uint32_t, 1
+	NASMX_RESERVE construct_child,	uint32_t, 1
+	NASMX_RESERVE custom_tag_start,	uint32_t, 1
+	NASMX_RESERVE custom_tag_end,	uint32_t, 1
+	NASMX_RESERVE custom_finished,	uint32_t, 1
+	NASMX_RESERVE parser_finished,	uint32_t, 1
+	NASMX_RESERVE get_internal_child,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImagePixmapData
-	NASMX_RESERVE pixmap, 		uint32_t, 1
+	NASMX_RESERVE pixmap,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImageImageData
-	NASMX_RESERVE image, 		uint32_t, 1
+	NASMX_RESERVE image,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImagePixbufData
-	NASMX_RESERVE pixbuf, 		uint32_t, 1
+	NASMX_RESERVE pixbuf,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImageStockData
-	NASMX_RESERVE stock_id, 		uint32_t, 1
+	NASMX_RESERVE stock_id,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImageIconSetData
-	NASMX_RESERVE icon_set, 		uint32_t, 1
+	NASMX_RESERVE icon_set,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImageAnimationData
-	NASMX_RESERVE anim, 		uint32_t, 1
-	NASMX_RESERVE iter, 		uint32_t, 1
-	NASMX_RESERVE frame_timeout, 		uint32_t, 1
+	NASMX_RESERVE anim,		uint32_t, 1
+	NASMX_RESERVE iter,		uint32_t, 1
+	NASMX_RESERVE frame_timeout,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImageIconNameData
-	NASMX_RESERVE icon_name, 		uint32_t, 1
-	NASMX_RESERVE pixbuf, 		uint32_t, 1
-	NASMX_RESERVE theme_change_id, 		uint32_t, 1
+	NASMX_RESERVE icon_name,	uint32_t, 1
+	NASMX_RESERVE pixbuf,		uint32_t, 1
+	NASMX_RESERVE theme_change_id,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImageGIconData
-	NASMX_RESERVE icon, 		uint32_t, 1
-	NASMX_RESERVE pixbuf, 		uint32_t, 1
-	NASMX_RESERVE theme_change_id, 		uint32_t, 1
+	NASMX_RESERVE icon,		uint32_t, 1
+	NASMX_RESERVE pixbuf,		uint32_t, 1
+	NASMX_RESERVE theme_change_id,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImage
-	NASMX_RESERVE misc, 		int8_t, GtkMisc_size
-	NASMX_RESERVE storage_type, 		uint32_t, 1
-	NASMX_RESERVE pixmap, 		int8_t, GtkImagePixmapData_size
-	NASMX_RESERVE image, 		int8_t, GtkImageImageData_size
-	NASMX_RESERVE pixbuf, 		int8_t, GtkImagePixbufData_size
-	NASMX_RESERVE stock, 		int8_t, GtkImageStockData_size
-	NASMX_RESERVE icon_set, 		int8_t, GtkImageIconSetData_size
-	NASMX_RESERVE anim, 		int8_t, GtkImageAnimationData_size
-	NASMX_RESERVE name, 		int8_t, GtkImageIconNameData_size
-	NASMX_RESERVE gicon, 		int8_t, GtkImageGIconData_size
-	NASMX_RESERVE mask, 		uint32_t, 1
-	NASMX_RESERVE icon_size, 		uint32_t, 1
+	NASMX_RESERVE misc,		int8_t, GtkMisc_size
+	NASMX_RESERVE storage_type,	uint32_t, 1
+	NASMX_RESERVE pixmap,		int8_t, GtkImagePixmapData_size
+	NASMX_RESERVE image,		int8_t, GtkImageImageData_size
+	NASMX_RESERVE pixbuf,		int8_t, GtkImagePixbufData_size
+	NASMX_RESERVE stock,		int8_t, GtkImageStockData_size
+	NASMX_RESERVE icon_set,		int8_t, GtkImageIconSetData_size
+	NASMX_RESERVE anim,		int8_t, GtkImageAnimationData_size
+	NASMX_RESERVE name,		int8_t, GtkImageIconNameData_size
+	NASMX_RESERVE gicon,		int8_t, GtkImageGIconData_size
+	NASMX_RESERVE mask,		uint32_t, 1
+	NASMX_RESERVE icon_size,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImageClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMiscClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkMiscClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkButton
-	NASMX_RESERVE bin, 		int8_t, GtkBin_size
-	NASMX_RESERVE event_window, 		uint32_t, 1
-	NASMX_RESERVE label_text, 		uint32_t, 1
-	NASMX_RESERVE activate_timeout, 		uint32_t, 1
-	NASMX_RESERVE ructed, 		uint32_t, 1
+	NASMX_RESERVE bin,		int8_t, GtkBin_size
+	NASMX_RESERVE event_window,	uint32_t, 1
+	NASMX_RESERVE label_text,	uint32_t, 1
+	NASMX_RESERVE activate_timeout,	uint32_t, 1
+	NASMX_RESERVE ructed,		uint32_t, 1
 ;.in_button:		RESD 1
 ;.button_down:		RESD 1
 ;.relief:		RESD 1
-;.use_underline:		RESD 1
+;.use_underline:	RESD 1
 ;.use_stock:		RESD 1
 ;.depressed:		RESD 1
-;.depress_on_activate:		RESD 1
-	NASMX_RESERVE focus_on_click, 		uint32_t, 1
+;.depress_on_activate:	RESD 1
+	NASMX_RESERVE focus_on_click,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
-	NASMX_RESERVE pressed, 		uint32_t, 1
-	NASMX_RESERVE released, 		uint32_t, 1
-	NASMX_RESERVE clicked, 		uint32_t, 1
-	NASMX_RESERVE enter, 		uint32_t, 1
-	NASMX_RESERVE leave, 		uint32_t, 1
-	NASMX_RESERVE activate, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
+	NASMX_RESERVE pressed,		uint32_t, 1
+	NASMX_RESERVE released,		uint32_t, 1
+	NASMX_RESERVE clicked,		uint32_t, 1
+	NASMX_RESERVE enter,		uint32_t, 1
+	NASMX_RESERVE leave,		uint32_t, 1
+	NASMX_RESERVE activate,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCalendar
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE header_style, 		uint32_t, 1
-	NASMX_RESERVE label_style, 		uint32_t, 1
-	NASMX_RESERVE month, 		uint32_t, 1
-	NASMX_RESERVE year, 		uint32_t, 1
-	NASMX_RESERVE selected_day, 		uint32_t, 1
-	NASMX_RESERVE num_marked_dates, 		uint32_t, 1
-	NASMX_RESERVE display_flags, 		uint32_t, 1
-	NASMX_RESERVE gc, 		uint32_t, 1
-	NASMX_RESERVE xor_gc, 		uint32_t, 1
-	NASMX_RESERVE focus_row, 		uint32_t, 1
-	NASMX_RESERVE focus_col, 		uint32_t, 1
-	NASMX_RESERVE highlight_row, 		uint32_t, 1
-	NASMX_RESERVE highlight_col, 		uint32_t, 1
-	NASMX_RESERVE priv, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
+	NASMX_RESERVE header_style,	uint32_t, 1
+	NASMX_RESERVE label_style,	uint32_t, 1
+	NASMX_RESERVE month,		uint32_t, 1
+	NASMX_RESERVE year,		uint32_t, 1
+	NASMX_RESERVE selected_day,	uint32_t, 1
+	NASMX_RESERVE num_marked_dates,	uint32_t, 1
+	NASMX_RESERVE display_flags,	uint32_t, 1
+	NASMX_RESERVE gc,		uint32_t, 1
+	NASMX_RESERVE xor_gc,		uint32_t, 1
+	NASMX_RESERVE focus_row,	uint32_t, 1
+	NASMX_RESERVE focus_col,	uint32_t, 1
+	NASMX_RESERVE highlight_row,	uint32_t, 1
+	NASMX_RESERVE highlight_col,	uint32_t, 1
+	NASMX_RESERVE priv,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCalendarClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE month_changed, 		uint32_t, 1
-	NASMX_RESERVE day_selected, 		uint32_t, 1
-	NASMX_RESERVE day_selected_double_click, 		uint32_t, 1
-	NASMX_RESERVE prev_month, 		uint32_t, 1
-	NASMX_RESERVE next_month, 		uint32_t, 1
-	NASMX_RESERVE prev_year, 		uint32_t, 1
-	NASMX_RESERVE next_year, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE month_changed,	uint32_t, 1
+	NASMX_RESERVE day_selected,	uint32_t, 1
+	NASMX_RESERVE day_selected_double_click,	uint32_t, 1
+	NASMX_RESERVE prev_month,	uint32_t, 1
+	NASMX_RESERVE next_month,	uint32_t, 1
+	NASMX_RESERVE prev_year,	uint32_t, 1
+	NASMX_RESERVE next_year,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellEditableIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE editing_done, 		uint32_t, 1
-	NASMX_RESERVE remove_widget, 		uint32_t, 1
-	NASMX_RESERVE start_editing, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE editing_done,	uint32_t, 1
+	NASMX_RESERVE remove_widget,	uint32_t, 1
+	NASMX_RESERVE start_editing,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRenderer
-	NASMX_RESERVE parent, 		int8_t, GtkObject_size
-	NASMX_RESERVE xalign, 		uint32_t, 1
-	NASMX_RESERVE yalign, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
-	NASMX_RESERVE xpad, 		uint16_t, 1
-	NASMX_RESERVE ypad, 		uint16_t, 1
-	NASMX_RESERVE mode, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkObject_size
+	NASMX_RESERVE xalign,		uint32_t, 1
+	NASMX_RESERVE yalign,		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
+	NASMX_RESERVE xpad,		uint16_t, 1
+	NASMX_RESERVE ypad,		uint16_t, 1
+	NASMX_RESERVE mode,		uint32_t, 1
 ;.visible:		RESD 1
 ;.is_expander:		RESD 1
 ;.is_expanded:		RESD 1
-;.cell_background_set:		RESD 1
+;.cell_background_set:	RESD 1
 ;.sensitive:		RESD 1
 ;.editing:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkObjectClass_size
-	NASMX_RESERVE get_size, 		uint32_t, 1
-	NASMX_RESERVE render, 		uint32_t, 1
-	NASMX_RESERVE activate, 		uint32_t, 1
-	NASMX_RESERVE start_editing, 		uint32_t, 1
-	NASMX_RESERVE editing_canceled, 		uint32_t, 1
-	NASMX_RESERVE editing_started, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkObjectClass_size
+	NASMX_RESERVE get_size,		uint32_t, 1
+	NASMX_RESERVE render,		uint32_t, 1
+	NASMX_RESERVE activate,		uint32_t, 1
+	NASMX_RESERVE start_editing,	uint32_t, 1
+	NASMX_RESERVE editing_canceled,	uint32_t, 1
+	NASMX_RESERVE editing_started,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeIter
-	NASMX_RESERVE stamp, 		uint32_t, 1
-	NASMX_RESERVE user_data, 		uint32_t, 1
-	NASMX_RESERVE user_data2, 		uint32_t, 1
-	NASMX_RESERVE user_data3, 		uint32_t, 1
+	NASMX_RESERVE stamp,		uint32_t, 1
+	NASMX_RESERVE user_data,	uint32_t, 1
+	NASMX_RESERVE user_data2,	uint32_t, 1
+	NASMX_RESERVE user_data3,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeModelIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE row_changed, 		uint32_t, 1
-	NASMX_RESERVE row_inserted, 		uint32_t, 1
-	NASMX_RESERVE row_has_child_toggled, 		uint32_t, 1
-	NASMX_RESERVE row_deleted, 		uint32_t, 1
-	NASMX_RESERVE rows_reordered, 		uint32_t, 1
-	NASMX_RESERVE get_flags, 		uint32_t, 1
-	NASMX_RESERVE get_n_columns, 		uint32_t, 1
-	NASMX_RESERVE get_column_type, 		uint32_t, 1
-	NASMX_RESERVE get_iter, 		uint32_t, 1
-	NASMX_RESERVE get_path, 		uint32_t, 1
-	NASMX_RESERVE get_value, 		uint32_t, 1
-	NASMX_RESERVE iter_next, 		uint32_t, 1
-	NASMX_RESERVE iter_children, 		uint32_t, 1
-	NASMX_RESERVE iter_has_child, 		uint32_t, 1
-	NASMX_RESERVE iter_n_children, 		uint32_t, 1
-	NASMX_RESERVE iter_nth_child, 		uint32_t, 1
-	NASMX_RESERVE iter_parent, 		uint32_t, 1
-	NASMX_RESERVE ref_node, 		uint32_t, 1
-	NASMX_RESERVE unref_node, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE row_changed,	uint32_t, 1
+	NASMX_RESERVE row_inserted,	uint32_t, 1
+	NASMX_RESERVE row_has_child_toggled,	uint32_t, 1
+	NASMX_RESERVE row_deleted,	uint32_t, 1
+	NASMX_RESERVE rows_reordered,	uint32_t, 1
+	NASMX_RESERVE get_flags,	uint32_t, 1
+	NASMX_RESERVE get_n_columns,	uint32_t, 1
+	NASMX_RESERVE get_column_type,	uint32_t, 1
+	NASMX_RESERVE get_iter,		uint32_t, 1
+	NASMX_RESERVE get_path,		uint32_t, 1
+	NASMX_RESERVE get_value,	uint32_t, 1
+	NASMX_RESERVE iter_next,	uint32_t, 1
+	NASMX_RESERVE iter_children,	uint32_t, 1
+	NASMX_RESERVE iter_has_child,	uint32_t, 1
+	NASMX_RESERVE iter_n_children,	uint32_t, 1
+	NASMX_RESERVE iter_nth_child,	uint32_t, 1
+	NASMX_RESERVE iter_parent,	uint32_t, 1
+	NASMX_RESERVE ref_node,		uint32_t, 1
+	NASMX_RESERVE unref_node,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeSortableIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE sort_column_changed, 		uint32_t, 1
-	NASMX_RESERVE get_sort_column_id, 		uint32_t, 1
-	NASMX_RESERVE set_sort_column_id, 		uint32_t, 1
-	NASMX_RESERVE set_sort_func, 		uint32_t, 1
-	NASMX_RESERVE set_default_sort_func, 		uint32_t, 1
-	NASMX_RESERVE has_default_sort_func, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE sort_column_changed,	uint32_t, 1
+	NASMX_RESERVE get_sort_column_id,	uint32_t, 1
+	NASMX_RESERVE set_sort_column_id,	uint32_t, 1
+	NASMX_RESERVE set_sort_func,	uint32_t, 1
+	NASMX_RESERVE set_default_sort_func,	uint32_t, 1
+	NASMX_RESERVE has_default_sort_func,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeViewColumn
-	NASMX_RESERVE parent, 		int8_t, GtkObject_size
-	NASMX_RESERVE tree_view, 		uint32_t, 1
-	NASMX_RESERVE button, 		uint32_t, 1
-	NASMX_RESERVE child, 		uint32_t, 1
-	NASMX_RESERVE arrow, 		uint32_t, 1
-	NASMX_RESERVE alignment, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE editable_widget, 		uint32_t, 1
-	NASMX_RESERVE xalign, 		uint32_t, 1
-	NASMX_RESERVE property_changed_signal, 		uint32_t, 1
-	NASMX_RESERVE spacing, 		uint32_t, 1
-	NASMX_RESERVE column_type, 		uint32_t, 1
-	NASMX_RESERVE requested_width, 		uint32_t, 1
-	NASMX_RESERVE button_request, 		uint32_t, 1
-	NASMX_RESERVE resized_width, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE fixed_width, 		uint32_t, 1
-	NASMX_RESERVE min_width, 		uint32_t, 1
-	NASMX_RESERVE max_width, 		uint32_t, 1
-	NASMX_RESERVE drag_x, 		uint32_t, 1
-	NASMX_RESERVE drag_y, 		uint32_t, 1
-	NASMX_RESERVE title, 		uint32_t, 1
-	NASMX_RESERVE cell_list, 		uint32_t, 1
-	NASMX_RESERVE sort_clicked_signal, 		uint32_t, 1
-	NASMX_RESERVE sort_column_changed_signal, 		uint32_t, 1
-	NASMX_RESERVE sort_column_id, 		uint32_t, 1
-	NASMX_RESERVE sort_order, 		uint32_t, 1
-	NASMX_RESERVE visible, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkObject_size
+	NASMX_RESERVE tree_view,	uint32_t, 1
+	NASMX_RESERVE button,		uint32_t, 1
+	NASMX_RESERVE child,		uint32_t, 1
+	NASMX_RESERVE arrow,		uint32_t, 1
+	NASMX_RESERVE alignment,	uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE editable_widget,	uint32_t, 1
+	NASMX_RESERVE xalign,		uint32_t, 1
+	NASMX_RESERVE property_changed_signal,	uint32_t, 1
+	NASMX_RESERVE spacing,		uint32_t, 1
+	NASMX_RESERVE column_type,	uint32_t, 1
+	NASMX_RESERVE requested_width,	uint32_t, 1
+	NASMX_RESERVE button_request,	uint32_t, 1
+	NASMX_RESERVE resized_width,	uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE fixed_width,	uint32_t, 1
+	NASMX_RESERVE min_width,	uint32_t, 1
+	NASMX_RESERVE max_width,	uint32_t, 1
+	NASMX_RESERVE drag_x,		uint32_t, 1
+	NASMX_RESERVE drag_y,		uint32_t, 1
+	NASMX_RESERVE title,		uint32_t, 1
+	NASMX_RESERVE cell_list,	uint32_t, 1
+	NASMX_RESERVE sort_clicked_signal,	uint32_t, 1
+	NASMX_RESERVE sort_column_changed_signal,	uint32_t, 1
+	NASMX_RESERVE sort_column_id,	uint32_t, 1
+	NASMX_RESERVE sort_order,	uint32_t, 1
+	NASMX_RESERVE visible,		uint32_t, 1
 ;.resizable:		RESD 1
 ;.clickable:		RESD 1
 ;.dirty:		RESD 1
-;.show_sort_indicator:		RESD 1
-;.maybe_reordered:		RESD 1
+;.show_sort_indicator:	RESD 1
+;.maybe_reordered:	RESD 1
 ;.reorderable:		RESD 1
-;.use_resized_width:		RESD 1
+;.use_resized_width:	RESD 1
 ;.expand:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeViewColumnClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkObjectClass_size
-	NASMX_RESERVE clicked, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkObjectClass_size
+	NASMX_RESERVE clicked,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellLayoutIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE pack_start, 		uint32_t, 1
-	NASMX_RESERVE pack_end, 		uint32_t, 1
-	NASMX_RESERVE clear, 		uint32_t, 1
-	NASMX_RESERVE add_attribute, 		uint32_t, 1
-	NASMX_RESERVE set_cell_data_func, 		uint32_t, 1
-	NASMX_RESERVE clear_attributes, 		uint32_t, 1
-	NASMX_RESERVE reorder, 		uint32_t, 1
-	NASMX_RESERVE get_cells, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE pack_start,	uint32_t, 1
+	NASMX_RESERVE pack_end,		uint32_t, 1
+	NASMX_RESERVE clear,		uint32_t, 1
+	NASMX_RESERVE add_attribute,	uint32_t, 1
+	NASMX_RESERVE set_cell_data_func,	uint32_t, 1
+	NASMX_RESERVE clear_attributes,	uint32_t, 1
+	NASMX_RESERVE reorder,		uint32_t, 1
+	NASMX_RESERVE get_cells,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererText
-	NASMX_RESERVE parent, 		int8_t, GtkCellRenderer_size
-	NASMX_RESERVE text, 		uint32_t, 1
-	NASMX_RESERVE font, 		uint32_t, 1
-	NASMX_RESERVE font_scale, 		uint32_t, 1
-	NASMX_RESERVE foreground, 		int8_t, PangoColor_size
-	NASMX_RESERVE background, 		int8_t, PangoColor_size
-	NASMX_RESERVE extra_attrs, 		uint32_t, 1
-	NASMX_RESERVE underline_style, 		uint32_t, 1
-	NASMX_RESERVE rise, 		uint32_t, 1
-	NASMX_RESERVE fixed_height_rows, 		uint32_t, 1
-	NASMX_RESERVE strikethrough, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkCellRenderer_size
+	NASMX_RESERVE text,		uint32_t, 1
+	NASMX_RESERVE font,		uint32_t, 1
+	NASMX_RESERVE font_scale,	uint32_t, 1
+	NASMX_RESERVE foreground,	int8_t, PangoColor_size
+	NASMX_RESERVE background,	int8_t, PangoColor_size
+	NASMX_RESERVE extra_attrs,	uint32_t, 1
+	NASMX_RESERVE underline_style,	uint32_t, 1
+	NASMX_RESERVE rise,		uint32_t, 1
+	NASMX_RESERVE fixed_height_rows,	uint32_t, 1
+	NASMX_RESERVE strikethrough,	uint32_t, 1
 ;.editable:		RESD 1
 ;.scale_set:		RESD 1
-;.foreground_set:		RESD 1
-;.background_set:		RESD 1
-;.underline_set:		RESD 1
+;.foreground_set:	RESD 1
+;.background_set:	RESD 1
+;.underline_set:	RESD 1
 ;.rise_set:		RESD 1
-;.strikethrough_set:		RESD 1
+;.strikethrough_set:	RESD 1
 ;.editable_set:		RESD 1
-;.calc_fixed_height:		RESD 1
+;.calc_fixed_height:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererTextClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkCellRendererClass_size
-	NASMX_RESERVE edited, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkCellRendererClass_size
+	NASMX_RESERVE edited,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererAccel
-	NASMX_RESERVE parent, 		int8_t, GtkCellRendererText_size
-	NASMX_RESERVE accel_key, 		uint32_t, 1
-	NASMX_RESERVE accel_mods, 		uint32_t, 1
-	NASMX_RESERVE keycode, 		uint32_t, 1
-	NASMX_RESERVE accel_mode, 		uint32_t, 1
-	NASMX_RESERVE edit_widget, 		uint32_t, 1
-	NASMX_RESERVE grab_widget, 		uint32_t, 1
-	NASMX_RESERVE sizing_label, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkCellRendererText_size
+	NASMX_RESERVE accel_key,	uint32_t, 1
+	NASMX_RESERVE accel_mods,	uint32_t, 1
+	NASMX_RESERVE keycode,		uint32_t, 1
+	NASMX_RESERVE accel_mode,	uint32_t, 1
+	NASMX_RESERVE edit_widget,	uint32_t, 1
+	NASMX_RESERVE grab_widget,	uint32_t, 1
+	NASMX_RESERVE sizing_label,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererAccelClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkCellRendererTextClass_size
-	NASMX_RESERVE accel_edited, 		uint32_t, 1
-	NASMX_RESERVE accel_cleared, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved0, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkCellRendererTextClass_size
+	NASMX_RESERVE accel_edited,	uint32_t, 1
+	NASMX_RESERVE accel_cleared,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved0,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererCombo
-	NASMX_RESERVE parent, 		int8_t, GtkCellRendererText_size
-	NASMX_RESERVE model, 		uint32_t, 1
-	NASMX_RESERVE text_column, 		uint32_t, 1
-	NASMX_RESERVE has_entry, 		uint32_t, 1
-	NASMX_RESERVE focus_out_id, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkCellRendererText_size
+	NASMX_RESERVE model,		uint32_t, 1
+	NASMX_RESERVE text_column,	uint32_t, 1
+	NASMX_RESERVE has_entry,	uint32_t, 1
+	NASMX_RESERVE focus_out_id,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererComboClass
-	NASMX_RESERVE parent, 		int8_t, GtkCellRendererTextClass_size
+	NASMX_RESERVE parent,		int8_t, GtkCellRendererTextClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererPixbuf
-	NASMX_RESERVE parent, 		int8_t, GtkCellRenderer_size
-	NASMX_RESERVE pixbuf, 		uint32_t, 1
-	NASMX_RESERVE pixbuf_expander_open, 		uint32_t, 1
-	NASMX_RESERVE pixbuf_expander_closed, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkCellRenderer_size
+	NASMX_RESERVE pixbuf,		uint32_t, 1
+	NASMX_RESERVE pixbuf_expander_open,	uint32_t, 1
+	NASMX_RESERVE pixbuf_expander_closed,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererPixbufClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkCellRendererClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkCellRendererClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererProgress
-	NASMX_RESERVE parent_instance, 		int8_t, GtkCellRenderer_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkCellRenderer_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererProgressClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkCellRendererClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkCellRendererClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererSpin
-	NASMX_RESERVE parent, 		int8_t, GtkCellRendererText_size
+	NASMX_RESERVE parent,		int8_t, GtkCellRendererText_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererSpinClass
-	NASMX_RESERVE parent, 		int8_t, GtkCellRendererTextClass_size
+	NASMX_RESERVE parent,		int8_t, GtkCellRendererTextClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererSpinner
-	NASMX_RESERVE parent, 		int8_t, GtkCellRenderer_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkCellRenderer_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererSpinnerClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkCellRendererClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkCellRendererClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererToggle
-	NASMX_RESERVE parent, 		int8_t, GtkCellRenderer_size
-	NASMX_RESERVE active, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkCellRenderer_size
+	NASMX_RESERVE active,		uint32_t, 1
 ;.activatable:		RESD 1
 ;.radio:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellRendererToggleClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkCellRendererClass_size
-	NASMX_RESERVE toggled, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkCellRendererClass_size
+	NASMX_RESERVE toggled,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellView
-	NASMX_RESERVE parent_instance, 		int8_t, GtkWidget_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkWidget_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellViewClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToggleButton
-	NASMX_RESERVE button, 		int8_t, GtkButton_size
-	NASMX_RESERVE active, 		uint32_t, 1
-;.draw_indicator:		RESD 1
+	NASMX_RESERVE button,		int8_t, GtkButton_size
+	NASMX_RESERVE active,		uint32_t, 1
+;.draw_indicator:	RESD 1
 ;.inconsistent:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToggleButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkButtonClass_size
-	NASMX_RESERVE toggled, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkButtonClass_size
+	NASMX_RESERVE toggled,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCheckButton
-	NASMX_RESERVE toggle_button, 		int8_t, GtkToggleButton_size
+	NASMX_RESERVE toggle_button,	int8_t, GtkToggleButton_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCheckButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkToggleButtonClass_size
-	NASMX_RESERVE draw_indicator, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkToggleButtonClass_size
+	NASMX_RESERVE draw_indicator,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkItem
-	NASMX_RESERVE bin, 		int8_t, GtkBin_size
+	NASMX_RESERVE bin,		int8_t, GtkBin_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkItemClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
-	NASMX_RESERVE select, 		uint32_t, 1
-	NASMX_RESERVE deselect, 		uint32_t, 1
-	NASMX_RESERVE toggle, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
+	NASMX_RESERVE select,		uint32_t, 1
+	NASMX_RESERVE deselect,		uint32_t, 1
+	NASMX_RESERVE toggle,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMenuItem
-	NASMX_RESERVE item, 		int8_t, GtkItem_size
-	NASMX_RESERVE submenu, 		uint32_t, 1
-	NASMX_RESERVE event_window, 		uint32_t, 1
-	NASMX_RESERVE toggle_size, 		uint16_t, 1
-	NASMX_RESERVE accelerator_width, 		uint16_t, 1
-	NASMX_RESERVE accel_path, 		uint32_t, 1
-	NASMX_RESERVE show_submenu_indicator, 		uint32_t, 1
-;.submenu_placement:		RESD 1
-;.submenu_direction:		RESD 1
-;.right_justify:		RESD 1
-;.timer_from_keypress:		RESD 1
+	NASMX_RESERVE item,		int8_t, GtkItem_size
+	NASMX_RESERVE submenu,		uint32_t, 1
+	NASMX_RESERVE event_window,	uint32_t, 1
+	NASMX_RESERVE toggle_size,	uint16_t, 1
+	NASMX_RESERVE accelerator_width,	uint16_t, 1
+	NASMX_RESERVE accel_path,	uint32_t, 1
+	NASMX_RESERVE show_submenu_indicator,	uint32_t, 1
+;.submenu_placement:	RESD 1
+;.submenu_direction:	RESD 1
+;.right_justify:	RESD 1
+;.timer_from_keypress:	RESD 1
 ;.from_menubar:		RESD 1
-	NASMX_RESERVE timer, 		uint32_t, 1
+	NASMX_RESERVE timer,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMenuItemClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkItemClass_size
-	NASMX_RESERVE hide_on_activate, 		uint32_t, 1
-	NASMX_RESERVE activate, 		uint32_t, 1
-	NASMX_RESERVE activate_item, 		uint32_t, 1
-	NASMX_RESERVE toggle_size_request, 		uint32_t, 1
-	NASMX_RESERVE toggle_size_allocate, 		uint32_t, 1
-	NASMX_RESERVE set_label, 		uint32_t, 1
-	NASMX_RESERVE get_label, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkItemClass_size
+	NASMX_RESERVE hide_on_activate,	uint32_t, 1
+	NASMX_RESERVE activate,		uint32_t, 1
+	NASMX_RESERVE activate_item,	uint32_t, 1
+	NASMX_RESERVE toggle_size_request,	uint32_t, 1
+	NASMX_RESERVE toggle_size_allocate,	uint32_t, 1
+	NASMX_RESERVE set_label,	uint32_t, 1
+	NASMX_RESERVE get_label,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCheckMenuItem
-	NASMX_RESERVE menu_item, 		int8_t, GtkMenuItem_size
-	NASMX_RESERVE active, 		uint32_t, 1
-;.always_show_toggle:		RESD 1
+	NASMX_RESERVE menu_item,	int8_t, GtkMenuItem_size
+	NASMX_RESERVE active,		uint32_t, 1
+;.always_show_toggle:	RESD 1
 ;.inconsistent:		RESD 1
-;.draw_as_radio:		RESD 1
+;.draw_as_radio:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCheckMenuItemClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMenuItemClass_size
-	NASMX_RESERVE toggled, 		uint32_t, 1
-	NASMX_RESERVE draw_indicator, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkMenuItemClass_size
+	NASMX_RESERVE toggled,		uint32_t, 1
+	NASMX_RESERVE draw_indicator,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextTag
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE table, 		uint32_t, 1
-	NASMX_RESERVE name, 		uint32_t, 1
-	NASMX_RESERVE priority, 		uint32_t, 1
-	NASMX_RESERVE values, 		uint32_t, 1
-	NASMX_RESERVE bg_color_set, 		uint32_t, 1
-;.bg_stipple_set:		RESD 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE table,		uint32_t, 1
+	NASMX_RESERVE name,		uint32_t, 1
+	NASMX_RESERVE priority,		uint32_t, 1
+	NASMX_RESERVE values,		uint32_t, 1
+	NASMX_RESERVE bg_color_set,	uint32_t, 1
+;.bg_stipple_set:	RESD 1
 ;.fg_color_set:		RESD 1
 ;.scale_set:		RESD 1
-;.fg_stipple_set:		RESD 1
-;.justification_set:		RESD 1
+;.fg_stipple_set:	RESD 1
+;.justification_set:	RESD 1
 
-;.left_margin_set:		RESD 1
+;.left_margin_set:	RESD 1
 ;.indent_set:		RESD 1
 ;.rise_set:		RESD 1
-;.strikethrough_set:		RESD 1
-;.right_margin_set:		RESD 1
-;.pixels_above_lines_set:		RESD 1
-;.pixels_below_lines_set:		RESD 1
-;.pixels_inside_wrap_set:		RESD 1
+;.strikethrough_set:	RESD 1
+;.right_margin_set:	RESD 1
+;.pixels_above_lines_set:	RESD 1
+;.pixels_below_lines_set:	RESD 1
+;.pixels_inside_wrap_set:	RESD 1
 ;.tabs_set:		RESD 1
-;.underline_set:		RESD 1
-;.wrap_mode_set:		RESD 1
-;.bg_full_height_set:		RESD 1
-;.invisible_set:		RESD 1
+;.underline_set:	RESD 1
+;.wrap_mode_set:	RESD 1
+;.bg_full_height_set:	RESD 1
+;.invisible_set:	RESD 1
 ;.editable_set:		RESD 1
 ;.language_set:		RESD 1
-;.pg_bg_color_set:		RESD 1
-;.accumulative_margin:		RESD 1
+;.pg_bg_color_set:	RESD 1
+;.accumulative_margin:	RESD 1
 ;.pad1:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextTagClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE event, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE event,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextAppearance
-	NASMX_RESERVE bg_color, 		int8_t, GdkColor_size
-	NASMX_RESERVE fg_color, 		int8_t, GdkColor_size
-	NASMX_RESERVE bg_stipple, 		uint32_t, 1
-	NASMX_RESERVE fg_stipple, 		uint32_t, 1
-	NASMX_RESERVE rise, 		uint32_t, 1
-	NASMX_RESERVE padding1, 		uint32_t, 1
-	NASMX_RESERVE underline, 		uint32_t, 1
-;.strikethrough:		RESD 1
+	NASMX_RESERVE bg_color,		int8_t, GdkColor_size
+	NASMX_RESERVE fg_color,		int8_t, GdkColor_size
+	NASMX_RESERVE bg_stipple,	uint32_t, 1
+	NASMX_RESERVE fg_stipple,	uint32_t, 1
+	NASMX_RESERVE rise,		uint32_t, 1
+	NASMX_RESERVE padding1,		uint32_t, 1
+	NASMX_RESERVE underline,	uint32_t, 1
+;.strikethrough:	RESD 1
 ;.draw_bg:		RESD 1
-;.inside_selection:		RESD 1
+;.inside_selection:	RESD 1
 ;.is_text:		RESD 1
 ;.pad1:		RESD 1
 ;.pad2:		RESD 1
@@ -5165,24 +5164,24 @@ NASMX_STRUC GtkTextAppearance
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextAttributes
-	NASMX_RESERVE refcount, 		uint32_t, 1
-	NASMX_RESERVE appearance, 		int8_t, GtkTextAppearance_size
-	NASMX_RESERVE justification, 		uint32_t, 1
-	NASMX_RESERVE direction, 		uint32_t, 1
-	NASMX_RESERVE font, 		uint32_t, 1
-	NASMX_RESERVE font_scale, 		uint32_t, 1
-	NASMX_RESERVE left_margin, 		uint32_t, 1
-	NASMX_RESERVE indent, 		uint32_t, 1
-	NASMX_RESERVE right_margin, 		uint32_t, 1
-	NASMX_RESERVE pixels_above_lines, 		uint32_t, 1
-	NASMX_RESERVE pixels_below_lines, 		uint32_t, 1
-	NASMX_RESERVE pixels_inside_wrap, 		uint32_t, 1
-	NASMX_RESERVE tabs, 		uint32_t, 1
-	NASMX_RESERVE wrap_mode, 		uint32_t, 1
-	NASMX_RESERVE language, 		uint32_t, 1
-	NASMX_RESERVE pg_bg_color, 		uint32_t, 1
-	NASMX_RESERVE invisible, 		uint32_t, 1
-;.bg_full_height:		RESD 1
+	NASMX_RESERVE refcount,		uint32_t, 1
+	NASMX_RESERVE appearance,	int8_t, GtkTextAppearance_size
+	NASMX_RESERVE justification,	uint32_t, 1
+	NASMX_RESERVE direction,	uint32_t, 1
+	NASMX_RESERVE font,		uint32_t, 1
+	NASMX_RESERVE font_scale,	uint32_t, 1
+	NASMX_RESERVE left_margin,	uint32_t, 1
+	NASMX_RESERVE indent,		uint32_t, 1
+	NASMX_RESERVE right_margin,	uint32_t, 1
+	NASMX_RESERVE pixels_above_lines,	uint32_t, 1
+	NASMX_RESERVE pixels_below_lines,	uint32_t, 1
+	NASMX_RESERVE pixels_inside_wrap,	uint32_t, 1
+	NASMX_RESERVE tabs,		uint32_t, 1
+	NASMX_RESERVE wrap_mode,	uint32_t, 1
+	NASMX_RESERVE language,		uint32_t, 1
+	NASMX_RESERVE pg_bg_color,	uint32_t, 1
+	NASMX_RESERVE invisible,	uint32_t, 1
+;.bg_full_height:	RESD 1
 ;.editable:		RESD 1
 ;.realized:		RESD 1
 ;.pad1:		RESD 1
@@ -5192,293 +5191,293 @@ NASMX_STRUC GtkTextAttributes
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextChildAnchor
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE segment, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE segment,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextChildAnchorClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSelectionData
-	NASMX_RESERVE selection, 		uint32_t, 1
-	NASMX_RESERVE target, 		uint32_t, 1
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE format, 		uint32_t, 1
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE length, 		uint32_t, 1
-	NASMX_RESERVE display, 		uint32_t, 1
+	NASMX_RESERVE selection,	uint32_t, 1
+	NASMX_RESERVE target,		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE format,		uint32_t, 1
+	NASMX_RESERVE data,		uint32_t, 1
+	NASMX_RESERVE length,		uint32_t, 1
+	NASMX_RESERVE display,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVBox
-	NASMX_RESERVE box, 		int8_t, GtkBox_size
+	NASMX_RESERVE box,		int8_t, GtkBox_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVBoxClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBoxClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkBoxClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkColorSelection
-	NASMX_RESERVE parent_instance, 		int8_t, GtkVBox_size
-	NASMX_RESERVE private_data, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkVBox_size
+	NASMX_RESERVE private_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkColorSelectionClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkVBoxClass_size
-	NASMX_RESERVE color_changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkVBoxClass_size
+	NASMX_RESERVE color_changed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkColorSelectionDialog
-	NASMX_RESERVE parent_instance, 		int8_t, GtkDialog_size
-	NASMX_RESERVE colorsel, 		uint32_t, 1
-	NASMX_RESERVE ok_button, 		uint32_t, 1
-	NASMX_RESERVE cancel_button, 		uint32_t, 1
-	NASMX_RESERVE help_button, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkDialog_size
+	NASMX_RESERVE colorsel,		uint32_t, 1
+	NASMX_RESERVE ok_button,	uint32_t, 1
+	NASMX_RESERVE cancel_button,	uint32_t, 1
+	NASMX_RESERVE help_button,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkColorSelectionDialogClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkDialogClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkDialogClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkEditableClass
-	NASMX_RESERVE base_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE insert_text, 		uint32_t, 1
-	NASMX_RESERVE delete_text, 		uint32_t, 1
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE do_insert_text, 		uint32_t, 1
-	NASMX_RESERVE do_delete_text, 		uint32_t, 1
-	NASMX_RESERVE get_chars, 		uint32_t, 1
-	NASMX_RESERVE set_selection_bounds, 		uint32_t, 1
-	NASMX_RESERVE get_selection_bounds, 		uint32_t, 1
-	NASMX_RESERVE set_position, 		uint32_t, 1
-	NASMX_RESERVE get_position, 		uint32_t, 1
+	NASMX_RESERVE base_iface,	int8_t, GTypeInterface_size
+	NASMX_RESERVE insert_text,	uint32_t, 1
+	NASMX_RESERVE delete_text,	uint32_t, 1
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE do_insert_text,	uint32_t, 1
+	NASMX_RESERVE do_delete_text,	uint32_t, 1
+	NASMX_RESERVE get_chars,	uint32_t, 1
+	NASMX_RESERVE set_selection_bounds,	uint32_t, 1
+	NASMX_RESERVE get_selection_bounds,	uint32_t, 1
+	NASMX_RESERVE set_position,	uint32_t, 1
+	NASMX_RESERVE get_position,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIMContext
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIMContextClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkObjectClass_size
-	NASMX_RESERVE preedit_start, 		uint32_t, 1
-	NASMX_RESERVE preedit_end, 		uint32_t, 1
-	NASMX_RESERVE preedit_changed, 		uint32_t, 1
-	NASMX_RESERVE commit, 		uint32_t, 1
-	NASMX_RESERVE retrieve_surrounding, 		uint32_t, 1
-	NASMX_RESERVE delete_surrounding, 		uint32_t, 1
-	NASMX_RESERVE set_client_window, 		uint32_t, 1
-	NASMX_RESERVE get_preedit_string, 		uint32_t, 1
-	NASMX_RESERVE filter_keypress, 		uint32_t, 1
-	NASMX_RESERVE focus_in, 		uint32_t, 1
-	NASMX_RESERVE focus_out, 		uint32_t, 1
-	NASMX_RESERVE reset, 		uint32_t, 1
-	NASMX_RESERVE set_cursor_location, 		uint32_t, 1
-	NASMX_RESERVE set_use_preedit, 		uint32_t, 1
-	NASMX_RESERVE set_surrounding, 		uint32_t, 1
-	NASMX_RESERVE get_surrounding, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved6, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkObjectClass_size
+	NASMX_RESERVE preedit_start,	uint32_t, 1
+	NASMX_RESERVE preedit_end,	uint32_t, 1
+	NASMX_RESERVE preedit_changed,	uint32_t, 1
+	NASMX_RESERVE commit,		uint32_t, 1
+	NASMX_RESERVE retrieve_surrounding,	uint32_t, 1
+	NASMX_RESERVE delete_surrounding,	uint32_t, 1
+	NASMX_RESERVE set_client_window,	uint32_t, 1
+	NASMX_RESERVE get_preedit_string,	uint32_t, 1
+	NASMX_RESERVE filter_keypress,	uint32_t, 1
+	NASMX_RESERVE focus_in,		uint32_t, 1
+	NASMX_RESERVE focus_out,	uint32_t, 1
+	NASMX_RESERVE reset,		uint32_t, 1
+	NASMX_RESERVE set_cursor_location,	uint32_t, 1
+	NASMX_RESERVE set_use_preedit,	uint32_t, 1
+	NASMX_RESERVE set_surrounding,	uint32_t, 1
+	NASMX_RESERVE get_surrounding,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved6,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkEntryBuffer
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkEntryBufferClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE inserted_text, 		uint32_t, 1
-	NASMX_RESERVE deleted_text, 		uint32_t, 1
-	NASMX_RESERVE get_text, 		uint32_t, 1
-	NASMX_RESERVE get_length, 		uint32_t, 1
-	NASMX_RESERVE insert_text, 		uint32_t, 1
-	NASMX_RESERVE delete_text, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved0, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE inserted_text,	uint32_t, 1
+	NASMX_RESERVE deleted_text,	uint32_t, 1
+	NASMX_RESERVE get_text,		uint32_t, 1
+	NASMX_RESERVE get_length,	uint32_t, 1
+	NASMX_RESERVE insert_text,	uint32_t, 1
+	NASMX_RESERVE delete_text,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved0,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkListStore
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE stamp, 		uint32_t, 1
-	NASMX_RESERVE seq, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE sort_list, 		uint32_t, 1
-	NASMX_RESERVE n_columns, 		uint32_t, 1
-	NASMX_RESERVE sort_column_id, 		uint32_t, 1
-	NASMX_RESERVE order, 		uint32_t, 1
-	NASMX_RESERVE column_headers, 		uint32_t, 1
-	NASMX_RESERVE length, 		uint32_t, 1
-	NASMX_RESERVE default_sort_func, 		uint32_t, 1
-	NASMX_RESERVE default_sort_data, 		uint32_t, 1
-	NASMX_RESERVE default_sort_destroy, 		uint32_t, 1
-	NASMX_RESERVE columns_dirty, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE stamp,		uint32_t, 1
+	NASMX_RESERVE seq,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE sort_list,	uint32_t, 1
+	NASMX_RESERVE n_columns,	uint32_t, 1
+	NASMX_RESERVE sort_column_id,	uint32_t, 1
+	NASMX_RESERVE order,		uint32_t, 1
+	NASMX_RESERVE column_headers,	uint32_t, 1
+	NASMX_RESERVE length,		uint32_t, 1
+	NASMX_RESERVE default_sort_func,	uint32_t, 1
+	NASMX_RESERVE default_sort_data,	uint32_t, 1
+	NASMX_RESERVE default_sort_destroy,	uint32_t, 1
+	NASMX_RESERVE columns_dirty,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkListStoreClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeModelFilter
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeModelFilterClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _gtk_reserved0, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _gtk_reserved0,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkEntryCompletion
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkEntryCompletionClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE match_selected, 		uint32_t, 1
-	NASMX_RESERVE action_activated, 		uint32_t, 1
-	NASMX_RESERVE insert_prefix, 		uint32_t, 1
-	NASMX_RESERVE cursor_on_match, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved0, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE match_selected,	uint32_t, 1
+	NASMX_RESERVE action_activated,	uint32_t, 1
+	NASMX_RESERVE insert_prefix,	uint32_t, 1
+	NASMX_RESERVE cursor_on_match,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved0,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkEntry
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE text, 		uint32_t, 1
-	NASMX_RESERVE editable, 		uint32_t, 1
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
+	NASMX_RESERVE text,		uint32_t, 1
+	NASMX_RESERVE editable,		uint32_t, 1
 ;.visible:		RESD 1
-;.overwrite_mode:		RESD 1
+;.overwrite_mode:	RESD 1
 ;.in_drag:		RESD 1
-	NASMX_RESERVE text_length, 		uint16_t, 1
-	NASMX_RESERVE text_max_length, 		uint16_t, 1
-	NASMX_RESERVE text_area, 		uint32_t, 1
-	NASMX_RESERVE im_context, 		uint32_t, 1
-	NASMX_RESERVE popup_menu, 		uint32_t, 1
-	NASMX_RESERVE current_pos, 		uint32_t, 1
-	NASMX_RESERVE selection_bound, 		uint32_t, 1
-	NASMX_RESERVE cached_layout, 		uint32_t, 1
-	NASMX_RESERVE cache_includes_preedit, 		uint32_t, 1
-;.need_im_reset:		RESD 1
+	NASMX_RESERVE text_length,	uint16_t, 1
+	NASMX_RESERVE text_max_length,	uint16_t, 1
+	NASMX_RESERVE text_area,	uint32_t, 1
+	NASMX_RESERVE im_context,	uint32_t, 1
+	NASMX_RESERVE popup_menu,	uint32_t, 1
+	NASMX_RESERVE current_pos,	uint32_t, 1
+	NASMX_RESERVE selection_bound,	uint32_t, 1
+	NASMX_RESERVE cached_layout,	uint32_t, 1
+	NASMX_RESERVE cache_includes_preedit,	uint32_t, 1
+;.need_im_reset:	RESD 1
 ;.has_frame:		RESD 1
-;.activates_default:		RESD 1
-;.cursor_visible:		RESD 1
+;.activates_default:	RESD 1
+;.cursor_visible:	RESD 1
 ;.in_click:		RESD 1
-;.is_cell_renderer:		RESD 1
-;.editing_canceled:		RESD 1
-;.mouse_cursor_obscured:		RESD 1
+;.is_cell_renderer:	RESD 1
+;.editing_canceled:	RESD 1
+;.mouse_cursor_obscured:	RESD 1
 ;.select_words:		RESD 1
 ;.select_lines:		RESD 1
 ;.resolved_dir:		RESD 1
-;.truncate_multiline:		RESD 1
-	NASMX_RESERVE button, 		uint32_t, 1
-	NASMX_RESERVE blink_timeout, 		uint32_t, 1
-	NASMX_RESERVE recompute_idle, 		uint32_t, 1
-	NASMX_RESERVE scroll_offset, 		uint32_t, 1
-	NASMX_RESERVE ascent, 		uint32_t, 1
-	NASMX_RESERVE descent, 		uint32_t, 1
-	NASMX_RESERVE x_text_size, 		uint16_t, 1
-	NASMX_RESERVE x_n_bytes, 		uint16_t, 1
-	NASMX_RESERVE preedit_length, 		uint16_t, 1
-	NASMX_RESERVE preedit_cursor, 		uint16_t, 1
-	NASMX_RESERVE dnd_position, 		uint32_t, 1
-	NASMX_RESERVE drag_start_x, 		uint32_t, 1
-	NASMX_RESERVE drag_start_y, 		uint32_t, 1
-	NASMX_RESERVE invisible_char, 		uint32_t, 1
-	NASMX_RESERVE width_chars, 		uint32_t, 1
+;.truncate_multiline:	RESD 1
+	NASMX_RESERVE button,		uint32_t, 1
+	NASMX_RESERVE blink_timeout,	uint32_t, 1
+	NASMX_RESERVE recompute_idle,	uint32_t, 1
+	NASMX_RESERVE scroll_offset,	uint32_t, 1
+	NASMX_RESERVE ascent,		uint32_t, 1
+	NASMX_RESERVE descent,		uint32_t, 1
+	NASMX_RESERVE x_text_size,	uint16_t, 1
+	NASMX_RESERVE x_n_bytes,	uint16_t, 1
+	NASMX_RESERVE preedit_length,	uint16_t, 1
+	NASMX_RESERVE preedit_cursor,	uint16_t, 1
+	NASMX_RESERVE dnd_position,	uint32_t, 1
+	NASMX_RESERVE drag_start_x,	uint32_t, 1
+	NASMX_RESERVE drag_start_y,	uint32_t, 1
+	NASMX_RESERVE invisible_char,	uint32_t, 1
+	NASMX_RESERVE width_chars,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkEntryClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE populate_popup, 		uint32_t, 1
-	NASMX_RESERVE activate, 		uint32_t, 1
-	NASMX_RESERVE move_cursor, 		uint32_t, 1
-	NASMX_RESERVE insert_at_cursor, 		uint32_t, 1
-	NASMX_RESERVE delete_from_cursor, 		uint32_t, 1
-	NASMX_RESERVE backspace, 		uint32_t, 1
-	NASMX_RESERVE cut_clipboard, 		uint32_t, 1
-	NASMX_RESERVE copy_clipboard, 		uint32_t, 1
-	NASMX_RESERVE paste_clipboard, 		uint32_t, 1
-	NASMX_RESERVE toggle_overwrite, 		uint32_t, 1
-	NASMX_RESERVE get_text_area_size, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE populate_popup,	uint32_t, 1
+	NASMX_RESERVE activate,		uint32_t, 1
+	NASMX_RESERVE move_cursor,	uint32_t, 1
+	NASMX_RESERVE insert_at_cursor,	uint32_t, 1
+	NASMX_RESERVE delete_from_cursor,	uint32_t, 1
+	NASMX_RESERVE backspace,	uint32_t, 1
+	NASMX_RESERVE cut_clipboard,	uint32_t, 1
+	NASMX_RESERVE copy_clipboard,	uint32_t, 1
+	NASMX_RESERVE paste_clipboard,	uint32_t, 1
+	NASMX_RESERVE toggle_overwrite,	uint32_t, 1
+	NASMX_RESERVE get_text_area_size,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeView
-	NASMX_RESERVE parent, 		int8_t, GtkContainer_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkContainer_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeViewClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE set_scroll_adjustments, 		uint32_t, 1
-	NASMX_RESERVE row_activated, 		uint32_t, 1
-	NASMX_RESERVE test_expand_row, 		uint32_t, 1
-	NASMX_RESERVE test_collapse_row, 		uint32_t, 1
-	NASMX_RESERVE row_expanded, 		uint32_t, 1
-	NASMX_RESERVE row_collapsed, 		uint32_t, 1
-	NASMX_RESERVE columns_changed, 		uint32_t, 1
-	NASMX_RESERVE cursor_changed, 		uint32_t, 1
-	NASMX_RESERVE move_cursor, 		uint32_t, 1
-	NASMX_RESERVE select_all, 		uint32_t, 1
-	NASMX_RESERVE unselect_all, 		uint32_t, 1
-	NASMX_RESERVE select_cursor_row, 		uint32_t, 1
-	NASMX_RESERVE toggle_cursor_row, 		uint32_t, 1
-	NASMX_RESERVE expand_collapse_cursor_row, 		uint32_t, 1
-	NASMX_RESERVE select_cursor_parent, 		uint32_t, 1
-	NASMX_RESERVE start_interactive_search, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved0, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE set_scroll_adjustments,	uint32_t, 1
+	NASMX_RESERVE row_activated,	uint32_t, 1
+	NASMX_RESERVE test_expand_row,	uint32_t, 1
+	NASMX_RESERVE test_collapse_row,	uint32_t, 1
+	NASMX_RESERVE row_expanded,	uint32_t, 1
+	NASMX_RESERVE row_collapsed,	uint32_t, 1
+	NASMX_RESERVE columns_changed,	uint32_t, 1
+	NASMX_RESERVE cursor_changed,	uint32_t, 1
+	NASMX_RESERVE move_cursor,	uint32_t, 1
+	NASMX_RESERVE select_all,	uint32_t, 1
+	NASMX_RESERVE unselect_all,	uint32_t, 1
+	NASMX_RESERVE select_cursor_row,	uint32_t, 1
+	NASMX_RESERVE toggle_cursor_row,	uint32_t, 1
+	NASMX_RESERVE expand_collapse_cursor_row,	uint32_t, 1
+	NASMX_RESERVE select_cursor_parent,	uint32_t, 1
+	NASMX_RESERVE start_interactive_search, uint32_t, 1
+	NASMX_RESERVE _gtk_reserved0,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkComboBox
-	NASMX_RESERVE parent_instance, 		int8_t, GtkBin_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkBin_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkComboBoxClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE get_active_text, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved0, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
+	NASMX_RESERVE changed,	uint32_t, 1
+	NASMX_RESERVE get_active_text,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved0,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkComboBoxEntry
-	NASMX_RESERVE parent_instance, 		int8_t, GtkComboBox_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkComboBox_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 ;;struct _GtkCombo {
@@ -5509,701 +5508,700 @@ NASMX_ENDSTRUC
 
 
 NASMX_STRUC GtkComboBoxEntryClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkComboBoxClass_size
-	NASMX_RESERVE _gtk_reserved0, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkComboBoxClass_size
+	NASMX_RESERVE _gtk_reserved0,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkComboBoxText
-	NASMX_RESERVE parent_instance, 		int8_t, GtkComboBox_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkComboBox_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkComboBoxTextClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkComboBoxClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkComboBoxClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkDrawingArea
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE draw_data, 		uint32_t, 1
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
+	NASMX_RESERVE draw_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkDrawingAreaClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkEventBox
-	NASMX_RESERVE bin, 		int8_t, GtkBin_size
+	NASMX_RESERVE bin,		int8_t, GtkBin_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkEventBoxClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkExpander
-	NASMX_RESERVE bin, 		int8_t, GtkBin_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE bin,		int8_t, GtkBin_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkExpanderClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
-	NASMX_RESERVE activate, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
+	NASMX_RESERVE activate,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFixed
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE children, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE children,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFixedClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFixedChild
-	NASMX_RESERVE widget, 		uint32_t, 1
-	NASMX_RESERVE x, 		uint32_t, 1
-	NASMX_RESERVE y, 		uint32_t, 1
+	NASMX_RESERVE widget,		uint32_t, 1
+	NASMX_RESERVE x,		uint32_t, 1
+	NASMX_RESERVE y,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFileFilterInfo
-	NASMX_RESERVE contains, 		uint32_t, 1
-	NASMX_RESERVE filename, 		uint32_t, 1
-	NASMX_RESERVE uri, 		uint32_t, 1
-	NASMX_RESERVE display_name, 		uint32_t, 1
-	NASMX_RESERVE mime_type, 		uint32_t, 1
+	NASMX_RESERVE contains,		uint32_t, 1
+	NASMX_RESERVE filename,		uint32_t, 1
+	NASMX_RESERVE uri,		uint32_t, 1
+	NASMX_RESERVE display_name,	uint32_t, 1
+	NASMX_RESERVE mime_type,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHBox
-	NASMX_RESERVE box, 		int8_t, GtkBox_size
+	NASMX_RESERVE box,		int8_t, GtkBox_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHBoxClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBoxClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkBoxClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFileChooserButton
-	NASMX_RESERVE parent, 		int8_t, GtkHBox_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkHBox_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFileChooserButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkHBoxClass_size
-	NASMX_RESERVE file_set, 		uint32_t, 1
-	NASMX_RESERVE __gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE __gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE __gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE __gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE __gtk_reserved5, 		uint32_t, 1
-	NASMX_RESERVE __gtk_reserved6, 		uint32_t, 1
-	NASMX_RESERVE __gtk_reserved7, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkHBoxClass_size
+	NASMX_RESERVE file_set,		uint32_t, 1
+	NASMX_RESERVE __gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE __gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE __gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE __gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE __gtk_reserved5,	uint32_t, 1
+	NASMX_RESERVE __gtk_reserved6,	uint32_t, 1
+	NASMX_RESERVE __gtk_reserved7,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFileChooserDialog
-	NASMX_RESERVE parent_instance, 		int8_t, GtkDialog_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkDialog_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFileChooserDialogClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkDialogClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkDialogClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFileChooserWidget
-	NASMX_RESERVE parent_instance, 		int8_t, GtkVBox_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkVBox_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFileChooserWidgetClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkVBoxClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkVBoxClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFontSelection
-	NASMX_RESERVE parent_instance, 		int8_t, GtkVBox_size
-	NASMX_RESERVE font_entry, 		uint32_t, 1
-	NASMX_RESERVE family_list, 		uint32_t, 1
-	NASMX_RESERVE font_style_entry, 		uint32_t, 1
-	NASMX_RESERVE face_list, 		uint32_t, 1
-	NASMX_RESERVE size_entry, 		uint32_t, 1
-	NASMX_RESERVE size_list, 		uint32_t, 1
-	NASMX_RESERVE pixels_button, 		uint32_t, 1
-	NASMX_RESERVE points_button, 		uint32_t, 1
-	NASMX_RESERVE filter_button, 		uint32_t, 1
-	NASMX_RESERVE preview_entry, 		uint32_t, 1
-	NASMX_RESERVE family, 		uint32_t, 1
-	NASMX_RESERVE face, 		uint32_t, 1
-	NASMX_RESERVE size, 		uint32_t, 1
-	NASMX_RESERVE font, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkVBox_size
+	NASMX_RESERVE font_entry,	uint32_t, 1
+	NASMX_RESERVE family_list,	uint32_t, 1
+	NASMX_RESERVE font_style_entry,	uint32_t, 1
+	NASMX_RESERVE face_list,	uint32_t, 1
+	NASMX_RESERVE size_entry,	uint32_t, 1
+	NASMX_RESERVE size_list,	uint32_t, 1
+	NASMX_RESERVE pixels_button,	uint32_t, 1
+	NASMX_RESERVE points_button,	uint32_t, 1
+	NASMX_RESERVE filter_button,	uint32_t, 1
+	NASMX_RESERVE preview_entry,	uint32_t, 1
+	NASMX_RESERVE family,		uint32_t, 1
+	NASMX_RESERVE face,		uint32_t, 1
+	NASMX_RESERVE size,		uint32_t, 1
+	NASMX_RESERVE font,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFontSelectionClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkVBoxClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkVBoxClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFontSelectionDialog
-	NASMX_RESERVE parent_instance, 		int8_t, GtkDialog_size
-	NASMX_RESERVE fontsel, 		uint32_t, 1
-	NASMX_RESERVE main_vbox, 		uint32_t, 1
-	NASMX_RESERVE action_area, 		uint32_t, 1
-	NASMX_RESERVE ok_button, 		uint32_t, 1
-	NASMX_RESERVE apply_button, 		uint32_t, 1
-	NASMX_RESERVE cancel_button, 		uint32_t, 1
-	NASMX_RESERVE dialog_width, 		uint32_t, 1
-	NASMX_RESERVE auto_resize, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkDialog_size
+	NASMX_RESERVE fontsel,		uint32_t, 1
+	NASMX_RESERVE main_vbox,	uint32_t, 1
+	NASMX_RESERVE action_area,	uint32_t, 1
+	NASMX_RESERVE ok_button,	uint32_t, 1
+	NASMX_RESERVE apply_button,	uint32_t, 1
+	NASMX_RESERVE cancel_button,	uint32_t, 1
+	NASMX_RESERVE dialog_width,	uint32_t, 1
+	NASMX_RESERVE auto_resize,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFontSelectionDialogClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkDialogClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkDialogClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHandleBox
-	NASMX_RESERVE bin, 		int8_t, GtkBin_size
-	NASMX_RESERVE bin_window, 		uint32_t, 1
-	NASMX_RESERVE float_window, 		uint32_t, 1
-	NASMX_RESERVE shadow_type, 		uint32_t, 1
-	NASMX_RESERVE handle_position, 		uint32_t, 1
-;.float_window_mapped:		RESD 1
-;.child_detached:		RESD 1
+	NASMX_RESERVE bin,		int8_t, GtkBin_size
+	NASMX_RESERVE bin_window,	uint32_t, 1
+	NASMX_RESERVE float_window,	uint32_t, 1
+	NASMX_RESERVE shadow_type,	uint32_t, 1
+	NASMX_RESERVE handle_position,	uint32_t, 1
+;.float_window_mapped:	RESD 1
+;.child_detached:	RESD 1
 ;.in_drag:		RESD 1
-;.shrink_on_detach:		RESD 1
+;.shrink_on_detach:	RESD 1
 ;.snap_edge 		RESD 1
-	NASMX_RESERVE deskoff_x, 		uint32_t, 1
-	NASMX_RESERVE deskoff_y, 		uint32_t, 1
-	NASMX_RESERVE attach_allocation, 		int8_t, GdkRectangle_size
-	NASMX_RESERVE float_allocation, 		int8_t, GdkRectangle_size
+	NASMX_RESERVE deskoff_x,	uint32_t, 1
+	NASMX_RESERVE deskoff_y,	uint32_t, 1
+	NASMX_RESERVE attach_allocation,	int8_t, GdkRectangle_size
+	NASMX_RESERVE float_allocation,		int8_t, GdkRectangle_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHandleBoxClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
-	NASMX_RESERVE child_attached, 		uint32_t, 1
-	NASMX_RESERVE child_detached, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
+	NASMX_RESERVE child_attached,	uint32_t, 1
+	NASMX_RESERVE child_detached,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHButtonBox
-	NASMX_RESERVE button_box, 		int8_t, GtkButtonBox_size
+	NASMX_RESERVE button_box,	int8_t, GtkButtonBox_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHButtonBoxClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkButtonBoxClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkButtonBoxClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPaned
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE child1, 		uint32_t, 1
-	NASMX_RESERVE child2, 		uint32_t, 1
-	NASMX_RESERVE handle, 		uint32_t, 1
-	NASMX_RESERVE xor_gc, 		uint32_t, 1
-	NASMX_RESERVE cursor_type, 		uint32_t, 1
-	NASMX_RESERVE handle_pos, 		int8_t, GdkRectangle_size
-	NASMX_RESERVE child1_siz, 		uint32_t, 1
-	NASMX_RESERVE last_allocation, 		uint32_t, 1
-	NASMX_RESERVE min_position, 		uint32_t, 1
-	NASMX_RESERVE max_position, 		uint32_t, 1
-	NASMX_RESERVE position_set, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE child1,		uint32_t, 1
+	NASMX_RESERVE child2,		uint32_t, 1
+	NASMX_RESERVE handle,		uint32_t, 1
+	NASMX_RESERVE xor_gc,		uint32_t, 1
+	NASMX_RESERVE cursor_type,	uint32_t, 1
+	NASMX_RESERVE handle_pos,	int8_t, GdkRectangle_size
+	NASMX_RESERVE child1_siz, 	uint32_t, 1
+	NASMX_RESERVE last_allocation,	uint32_t, 1
+	NASMX_RESERVE min_position,	uint32_t, 1
+	NASMX_RESERVE max_position,	uint32_t, 1
+	NASMX_RESERVE position_set,	uint32_t, 1
 ;.in_drag:		RESD 1
-;.child1_shrink:		RESD 1
-;.child1_resize:		RESD 1
-;.child2_shrink:		RESD 1
-;.child2_resize:		RESD 1
+;.child1_shrink:	RESD 1
+;.child1_resize:	RESD 1
+;.child2_shrink:	RESD 1
+;.child2_resize:	RESD 1
 ;.orientation:		RESD 1
 ;.in_recursion:		RESD 1
-;.handle_prelit:		RESD 1
-	NASMX_RESERVE last_child1_focus, 		uint32_t, 1
-	NASMX_RESERVE last_child2_focus, 		uint32_t, 1
-	NASMX_RESERVE priv, 		uint32_t, 1
-	NASMX_RESERVE drag_pos, 		uint32_t, 1
-	NASMX_RESERVE original_position, 		uint32_t, 1
+;.handle_prelit:	RESD 1
+	NASMX_RESERVE last_child1_focus,	uint32_t, 1
+	NASMX_RESERVE last_child2_focus,	uint32_t, 1
+	NASMX_RESERVE priv,		uint32_t, 1
+	NASMX_RESERVE drag_pos,		uint32_t, 1
+	NASMX_RESERVE original_position,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPanedClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE cycle_child_focus, 		uint32_t, 1
-	NASMX_RESERVE toggle_handle_focus, 		uint32_t, 1
-	NASMX_RESERVE move_handle, 		uint32_t, 1
-	NASMX_RESERVE cycle_handle_focus, 		uint32_t, 1
-	NASMX_RESERVE accept_position, 		uint32_t, 1
-	NASMX_RESERVE cancel_position, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE cycle_child_focus,	uint32_t, 1
+	NASMX_RESERVE toggle_handle_focus,	uint32_t, 1
+	NASMX_RESERVE move_handle,	uint32_t, 1
+	NASMX_RESERVE cycle_handle_focus,	uint32_t, 1
+	NASMX_RESERVE accept_position,	uint32_t, 1
+	NASMX_RESERVE cancel_position,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHPaned
-	NASMX_RESERVE paned, 		int8_t, GtkPaned_size
+	NASMX_RESERVE paned,		int8_t, GtkPaned_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHPanedClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkPanedClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkPanedClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRuler
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE backing_store, 		uint32_t, 1
-	NASMX_RESERVE non_gr_exp_gc, 		uint32_t, 1
-	NASMX_RESERVE metric, 		uint32_t, 1
-	NASMX_RESERVE xsrc, 		uint32_t, 1
-	NASMX_RESERVE ysrc, 		uint32_t, 1
-	NASMX_RESERVE slider_size, 		uint32_t, 1
-	NASMX_RESERVE lower, 		uint32_t, 1
-	NASMX_RESERVE upper, 		uint32_t, 1
-	NASMX_RESERVE position, 		uint32_t, 1
-	NASMX_RESERVE max_size, 		uint32_t, 1
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
+	NASMX_RESERVE backing_store,	uint32_t, 1
+	NASMX_RESERVE non_gr_exp_gc,	uint32_t, 1
+	NASMX_RESERVE metric,		uint32_t, 1
+	NASMX_RESERVE xsrc,		uint32_t, 1
+	NASMX_RESERVE ysrc,		uint32_t, 1
+	NASMX_RESERVE slider_size,	uint32_t, 1
+	NASMX_RESERVE lower,		uint32_t, 1
+	NASMX_RESERVE upper,		uint32_t, 1
+	NASMX_RESERVE position,		uint32_t, 1
+	NASMX_RESERVE max_size,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRulerClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE draw_ticks, 		uint32_t, 1
-	NASMX_RESERVE draw_pos, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE draw_ticks,	uint32_t, 1
+	NASMX_RESERVE draw_pos,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRulerMetric
-	NASMX_RESERVE metric_name, 		uint32_t, 1
-	NASMX_RESERVE abbrev, 		uint32_t, 1
-	NASMX_RESERVE pixels_per_unit, 		uint32_t, 1
+	NASMX_RESERVE metric_name,	uint32_t, 1
+	NASMX_RESERVE abbrev,		uint32_t, 1
+	NASMX_RESERVE pixels_per_unit,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHRuler
-	NASMX_RESERVE ruler, 		int8_t, GtkRuler_size
+	NASMX_RESERVE ruler,		int8_t, GtkRuler_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHRulerClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkRulerClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkRulerClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRange
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE adjustment, 		uint32_t, 1
-	NASMX_RESERVE update_policy, 		uint32_t, 1
-	NASMX_RESERVE inverted, 		uint32_t, 1
+	NASMX_RESERVE widget,	int8_t, GtkWidget_size
+	NASMX_RESERVE adjustment,	uint32_t, 1
+	NASMX_RESERVE update_policy,	uint32_t, 1
+	NASMX_RESERVE inverted,		uint32_t, 1
 ;.flippable:		RESD 1
-;.has_stepper_a:		RESD 1
-;.has_stepper_b:		RESD 1
-;.has_stepper_c:		RESD 1
-;.has_stepper_d:		RESD 1
+;.has_stepper_a:	RESD 1
+;.has_stepper_b:	RESD 1
+;.has_stepper_c:	RESD 1
+;.has_stepper_d:	RESD 1
 ;.need_recalc:		RESD 1
-;.slider_size_fixed:		RESD 1
-	NASMX_RESERVE min_slider_size, 		uint32_t, 1
-	NASMX_RESERVE orientation, 		uint32_t, 1
-	NASMX_RESERVE range_rect, 		int8_t, GdkRectangle_size
-	NASMX_RESERVE slider_start, 		uint32_t, 1
-	NASMX_RESERVE slider_end, 		uint32_t, 1
-	NASMX_RESERVE round_digits, 		uint32_t, 1
-	NASMX_RESERVE trough_click_forward, 		uint32_t, 1
-	NASMX_RESERVE update_pending, 		uint32_t, 1
-	NASMX_RESERVE layout, 		uint32_t, 1
-	NASMX_RESERVE timer, 		uint32_t, 1
-	NASMX_RESERVE slide_initial_slider_position, 		uint32_t, 1
-	NASMX_RESERVE slide_initial_coordinate, 		uint32_t, 1
-	NASMX_RESERVE update_timeout_id, 		uint32_t, 1
-	NASMX_RESERVE event_window, 		uint32_t, 1
+;.slider_size_fixed:	RESD 1
+	NASMX_RESERVE min_slider_size,	uint32_t, 1
+	NASMX_RESERVE orientation,	uint32_t, 1
+	NASMX_RESERVE range_rect,	int8_t, GdkRectangle_size
+	NASMX_RESERVE slider_start,	uint32_t, 1
+	NASMX_RESERVE slider_end,	uint32_t, 1
+	NASMX_RESERVE round_digits,	uint32_t, 1
+	NASMX_RESERVE trough_click_forward,	uint32_t, 1
+	NASMX_RESERVE update_pending,	uint32_t, 1
+	NASMX_RESERVE layout,		uint32_t, 1
+	NASMX_RESERVE timer,		uint32_t, 1
+	NASMX_RESERVE slide_initial_slider_position,	uint32_t, 1
+	NASMX_RESERVE slide_initial_coordinate,		uint32_t, 1
+	NASMX_RESERVE update_timeout_id,	uint32_t, 1
+	NASMX_RESERVE event_window,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRangeClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE slider_detail, 		uint32_t, 1
-	NASMX_RESERVE stepper_detail, 		uint32_t, 1
-	NASMX_RESERVE value_changed, 		uint32_t, 1
-	NASMX_RESERVE adjust_bounds, 		uint32_t, 1
-	NASMX_RESERVE move_slider, 		uint32_t, 1
-	NASMX_RESERVE get_range_border, 		uint32_t, 1
-	NASMX_RESERVE change_value, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE slider_detail,	uint32_t, 1
+	NASMX_RESERVE stepper_detail,	uint32_t, 1
+	NASMX_RESERVE value_changed,	uint32_t, 1
+	NASMX_RESERVE adjust_bounds,	uint32_t, 1
+	NASMX_RESERVE move_slider,	uint32_t, 1
+	NASMX_RESERVE get_range_border,	uint32_t, 1
+	NASMX_RESERVE change_value,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkScale
-	NASMX_RESERVE range, 		int8_t, GtkRange_size
-	NASMX_RESERVE digits, 		uint32_t, 1
-	NASMX_RESERVE draw_value, 		uint32_t, 1
+	NASMX_RESERVE range,		int8_t, GtkRange_size
+	NASMX_RESERVE digits,		uint32_t, 1
+	NASMX_RESERVE draw_value,	uint32_t, 1
 ;.value_pos:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkScaleClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkRangeClass_size
-	NASMX_RESERVE format_value, 		uint32_t, 1
-	NASMX_RESERVE draw_value, 		uint32_t, 1
-	NASMX_RESERVE get_layout_offsets, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkRangeClass_size
+	NASMX_RESERVE format_value,	uint32_t, 1
+	NASMX_RESERVE draw_value,	uint32_t, 1
+	NASMX_RESERVE get_layout_offsets,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHScale
-	NASMX_RESERVE scale, 		int8_t, GtkScale_size
+	NASMX_RESERVE scale,		int8_t, GtkScale_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHScaleClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkScaleClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkScaleClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkScrollbar
-	NASMX_RESERVE range, 		int8_t, GtkRange_size
+	NASMX_RESERVE range,		int8_t, GtkRange_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkScrollbarClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkRangeClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkRangeClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHScrollbar
-	NASMX_RESERVE scrollbar, 		int8_t, GtkScrollbar_size
+	NASMX_RESERVE scrollbar,	int8_t, GtkScrollbar_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHScrollbarClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkScrollbarClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkScrollbarClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSeparator
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSeparatorClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHSeparator
-	NASMX_RESERVE separator, 		int8_t, GtkSeparator_size
+	NASMX_RESERVE separator,	int8_t, GtkSeparator_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHSeparatorClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkSeparatorClass_size
+	NASMX_RESERVE parent_class, 	int8_t, GtkSeparatorClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHSV
-	NASMX_RESERVE parent_instance, 		int8_t, GtkWidget_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkWidget_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkHSVClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE move, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE move,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIconFactory
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE icons, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE icons,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIconFactoryClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIconTheme
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIconThemeClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE changed, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE changed,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIconView
-	NASMX_RESERVE parent, 		int8_t, GtkContainer_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkContainer_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIconViewClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE set_scroll_adjustments, 		uint32_t, 1
-	NASMX_RESERVE item_activated, 		uint32_t, 1
-	NASMX_RESERVE selection_changed, 		uint32_t, 1
-	NASMX_RESERVE select_all, 		uint32_t, 1
-	NASMX_RESERVE unselect_all, 		uint32_t, 1
-	NASMX_RESERVE select_cursor_item, 		uint32_t, 1
-	NASMX_RESERVE toggle_cursor_item, 		uint32_t, 1
-	NASMX_RESERVE move_cursor, 		uint32_t, 1
-	NASMX_RESERVE activate_cursor_item, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE set_scroll_adjustments,	uint32_t, 1
+	NASMX_RESERVE item_activated,	uint32_t, 1
+	NASMX_RESERVE selection_changed,	uint32_t, 1
+	NASMX_RESERVE select_all,	uint32_t, 1
+	NASMX_RESERVE unselect_all,	uint32_t, 1
+	NASMX_RESERVE select_cursor_item,	uint32_t, 1
+	NASMX_RESERVE toggle_cursor_item,	uint32_t, 1
+	NASMX_RESERVE move_cursor,	uint32_t, 1
+	NASMX_RESERVE activate_cursor_item,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImageMenuItem
-	NASMX_RESERVE menu_item, 		int8_t, GtkMenuItem_size
-	NASMX_RESERVE image, 		uint32_t, 1
+	NASMX_RESERVE menu_item,	int8_t, GtkMenuItem_size
+	NASMX_RESERVE image,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkImageMenuItemClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMenuItemClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkMenuItemClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIMContextSimple
-	NASMX_RESERVE object, 		int8_t, GtkIMContext_size
-	NASMX_RESERVE tables, 		uint32_t, 1
-	NASMX_RESERVE compose_buffer, 		uint32_t, 8
-	NASMX_RESERVE tentative_match, 		uint32_t, 1
-	NASMX_RESERVE tentative_match_len, 		uint32_t, 1
-	NASMX_RESERVE in_hex_sequence, 		uint32_t, 1
-;.modifiers_dropped:		RESD 1
+	NASMX_RESERVE object,		int8_t, GtkIMContext_size
+	NASMX_RESERVE tables,		uint32_t, 1
+	NASMX_RESERVE compose_buffer,	uint32_t, 8
+	NASMX_RESERVE tentative_match,	uint32_t, 1
+	NASMX_RESERVE tentative_match_len,	uint32_t, 1
+	NASMX_RESERVE in_hex_sequence,	uint32_t, 1
+;.modifiers_dropped:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIMContextSimpleClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkIMContextClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkIMContextClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIMMulticontext
-	NASMX_RESERVE object, 		int8_t, GtkIMContext_size
-	NASMX_RESERVE slave, 		uint32_t, 1
-	NASMX_RESERVE priv, 		uint32_t, 1
-	NASMX_RESERVE context_id, 		uint32_t, 1
+	NASMX_RESERVE object,		int8_t, GtkIMContext_size
+	NASMX_RESERVE slave,		uint32_t, 1
+	NASMX_RESERVE priv,		uint32_t, 1
+	NASMX_RESERVE context_id,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkIMMulticontextClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkIMContextClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkIMContextClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkInfoBar
-	NASMX_RESERVE parent, 		int8_t, GtkHBox_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkHBox_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkInfoBarClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkHBoxClass_size
-	NASMX_RESERVE response, 		uint32_t, 1
-	NASMX_RESERVE close, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved6, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkHBoxClass_size
+	NASMX_RESERVE response,		uint32_t, 1
+	NASMX_RESERVE close,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved6,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkInvisible
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE has_user_ref_count, 		uint32_t, 1
-	NASMX_RESERVE screen, 		uint32_t, 1
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
+	NASMX_RESERVE has_user_ref_count,	uint32_t, 1
+	NASMX_RESERVE screen,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkInvisibleClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkLayout
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE children, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
-	NASMX_RESERVE hadjustment, 		uint32_t, 1
-	NASMX_RESERVE vadjustment, 		uint32_t, 1
-	NASMX_RESERVE bin_window, 		uint32_t, 1
-	NASMX_RESERVE visibility, 		uint32_t, 1
-	NASMX_RESERVE scroll_x, 		uint32_t, 1
-	NASMX_RESERVE scroll_y, 		uint32_t, 1
-	NASMX_RESERVE freeze_count, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE children,		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
+	NASMX_RESERVE hadjustment,	uint32_t, 1
+	NASMX_RESERVE vadjustment,	uint32_t, 1
+	NASMX_RESERVE bin_window,	uint32_t, 1
+	NASMX_RESERVE visibility,	uint32_t, 1
+	NASMX_RESERVE scroll_x,		uint32_t, 1
+	NASMX_RESERVE scroll_y,		uint32_t, 1
+	NASMX_RESERVE freeze_count,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkLayoutClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE set_scroll_adjustments, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE set_scroll_adjustments,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkLinkButton
-	NASMX_RESERVE parent_instance, 		int8_t, GtkButton_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkButton_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkLinkButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkButtonClass_size
-	NASMX_RESERVE _gtk_padding1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_padding2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_padding3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_padding4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkButtonClass_size
+	NASMX_RESERVE _gtk_padding1,	uint32_t, 1
+	NASMX_RESERVE _gtk_padding2,	uint32_t, 1
+	NASMX_RESERVE _gtk_padding3,	uint32_t, 1
+	NASMX_RESERVE _gtk_padding4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMenuBar
-	NASMX_RESERVE menu_shell, 		int8_t, GtkMenuShell_size
+	NASMX_RESERVE menu_shell,	int8_t, GtkMenuShell_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMenuBarClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMenuShellClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkMenuShellClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTooltipsData
-	NASMX_RESERVE tooltips, 		uint32_t, 1
-	NASMX_RESERVE widget, 		uint32_t, 1
-	NASMX_RESERVE tip_text, 		uint32_t, 1
-	NASMX_RESERVE tip_private, 		uint32_t, 1
+	NASMX_RESERVE tooltips,		uint32_t, 1
+	NASMX_RESERVE widget,		uint32_t, 1
+	NASMX_RESERVE tip_text,		uint32_t, 1
+	NASMX_RESERVE tip_private,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTooltips
-	NASMX_RESERVE parent_instance, 		int8_t, GtkObject_size
-	NASMX_RESERVE tip_window, 		uint32_t, 1
-	NASMX_RESERVE tip_label, 		uint32_t, 1
-	NASMX_RESERVE active_tips_data, 		uint32_t, 1
-
-	NASMX_RESERVE tips_data_list, 		uint32_t, 1
-	NASMX_RESERVE delay, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkObject_size
+	NASMX_RESERVE tip_window,	uint32_t, 1
+	NASMX_RESERVE tip_label,	uint32_t, 1
+	NASMX_RESERVE active_tips_data,	uint32_t, 1
+	NASMX_RESERVE tips_data_list,	uint32_t, 1
+	NASMX_RESERVE delay,		uint32_t, 1
 ;.enabled:		RESD 1
 ;.have_grab:		RESD 1
-	NASMX_RESERVE use_sticky_delay, 		uint32_t, 1
-	NASMX_RESERVE timer_tag, 		uint32_t, 1
-	NASMX_RESERVE last_popdown, 		int8_t, GTimeVal_size
+	NASMX_RESERVE use_sticky_delay,	uint32_t, 1
+	NASMX_RESERVE timer_tag,	uint32_t, 1
+	NASMX_RESERVE last_popdown,	int8_t, GTimeVal_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTooltipsClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkObjectClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkObjectClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSizeGroup
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE widgets, 		uint32_t, 1
-	NASMX_RESERVE mode, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE have_width, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE widgets,		uint32_t, 1
+	NASMX_RESERVE mode,		int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE have_width,	uint32_t, 1
 ;.have_height:		RESD 1
-;.ignore_hidden:		RESD 1
-	NASMX_RESERVE requisition, 		int8_t, GtkRequisition_size
+;.ignore_hidden:	RESD 1
+	NASMX_RESERVE requisition,	int8_t, GtkRequisition_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSizeGroupClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolItem
-	NASMX_RESERVE parent, 		int8_t, GtkBin_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkBin_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolItemClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
-	NASMX_RESERVE create_menu_proxy, 		uint32_t, 1
-	NASMX_RESERVE toolbar_reconfigured, 		uint32_t, 1
-	NASMX_RESERVE set_tooltip, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
+	NASMX_RESERVE create_menu_proxy,	uint32_t, 1
+	NASMX_RESERVE toolbar_reconfigured,	uint32_t, 1
+	NASMX_RESERVE set_tooltip,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolButton
-	NASMX_RESERVE parent, 		int8_t, GtkToolItem_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkToolItem_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkToolItemClass_size
-	NASMX_RESERVE button_type, 		uint32_t, 1
-	NASMX_RESERVE clicked, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkToolItemClass_size
+	NASMX_RESERVE button_type,	uint32_t, 1
+	NASMX_RESERVE clicked,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMenuToolButton
-	NASMX_RESERVE parent, 		int8_t, GtkToolButton_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkToolButton_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMenuToolButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkToolButtonClass_size
-	NASMX_RESERVE show_menu, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkToolButtonClass_size
+	NASMX_RESERVE show_menu,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMessageDialog
-	NASMX_RESERVE parent_instance, 		int8_t, GtkDialog_size
-	NASMX_RESERVE image, 		uint32_t, 1
-	NASMX_RESERVE label, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkDialog_size
+	NASMX_RESERVE image,		uint32_t, 1
+	NASMX_RESERVE label,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMessageDialogClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkDialogClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkDialogClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMountOperation
-	NASMX_RESERVE parent_instance, 		int8_t, GMountOperation_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GMountOperation_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkMountOperationClass
-	NASMX_RESERVE parent_class, 		int8_t, GMountOperationClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GMountOperationClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkNotebook
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE cur_page, 		uint32_t, 1
-	NASMX_RESERVE children, 		uint32_t, 1
-	NASMX_RESERVE first_tab, 		uint32_t, 1
-	NASMX_RESERVE focus_tab, 		uint32_t, 1
-	NASMX_RESERVE menu, 		uint32_t, 1
-	NASMX_RESERVE event_window, 		uint32_t, 1
-	NASMX_RESERVE timer, 		uint32_t, 1
-	NASMX_RESERVE tab_hborder, 		uint16_t, 1
-	NASMX_RESERVE tab_vborder, 		uint16_t, 1
-	NASMX_RESERVE show_tabs, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE cur_page,		uint32_t, 1
+	NASMX_RESERVE children,		uint32_t, 1
+	NASMX_RESERVE first_tab,	uint32_t, 1
+	NASMX_RESERVE focus_tab,	uint32_t, 1
+	NASMX_RESERVE menu,		uint32_t, 1
+	NASMX_RESERVE event_window,	uint32_t, 1
+	NASMX_RESERVE timer,		uint32_t, 1
+	NASMX_RESERVE tab_hborder,	uint16_t, 1
+	NASMX_RESERVE tab_vborder,	uint16_t, 1
+	NASMX_RESERVE show_tabs,	uint32_t, 1
 ;.homogeneous:		RESD 1
 ;.show_border:		RESD 1
 ;.tab_pos:		RESD 1
@@ -6212,446 +6210,446 @@ NASMX_STRUC GtkNotebook
 ;.click_child:		RESD 1
 ;.button:		RESD 1
 ;.need_timer:		RESD 1
-;.child_has_focus:		RESD 1
-;.have_visible_child:		RESD 1
+;.child_has_focus:	RESD 1
+;.have_visible_child:	RESD 1
 ;.focus_out:		RESD 1
-;.has_before_previous:		RESD 1
-;.has_before_next:		RESD 1
-;.has_after_previous:		RESD 1
-;.has_after_next:		RESD 1
+;.has_before_previous:	RESD 1
+;.has_before_next:	RESD 1
+;.has_after_previous:	RESD 1
+;.has_after_next:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkNotebookClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE switch_page, 		uint32_t, 1
-	NASMX_RESERVE select_page, 		uint32_t, 1
-	NASMX_RESERVE focus_tab, 		uint32_t, 1
-	NASMX_RESERVE change_current_page, 		uint32_t, 1
-	NASMX_RESERVE move_focus_out, 		uint32_t, 1
-	NASMX_RESERVE reorder_tab, 		uint32_t, 1
-	NASMX_RESERVE insert_page, 		uint32_t, 1
-	NASMX_RESERVE create_window, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE switch_page,	uint32_t, 1
+	NASMX_RESERVE select_page,	uint32_t, 1
+	NASMX_RESERVE focus_tab,	uint32_t, 1
+	NASMX_RESERVE change_current_page,	uint32_t, 1
+	NASMX_RESERVE move_focus_out,	uint32_t, 1
+	NASMX_RESERVE reorder_tab,	uint32_t, 1
+	NASMX_RESERVE insert_page,	uint32_t, 1
+	NASMX_RESERVE create_window,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkOffscreenWindow
-	NASMX_RESERVE parent_object, 		int8_t, GtkWindow_size
+	NASMX_RESERVE parent_object,	int8_t, GtkWindow_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkOffscreenWindowClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWindowClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkWindowClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkOrientableIface
-	NASMX_RESERVE base_iface, 		int8_t, GTypeInterface_size
+	NASMX_RESERVE base_iface,	int8_t, GTypeInterface_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSocket
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE request_width, 		uint16_t, 1
-	NASMX_RESERVE request_height, 		uint16_t, 1
-	NASMX_RESERVE current_width, 		uint16_t, 1
-	NASMX_RESERVE current_height, 		uint16_t, 1
-	NASMX_RESERVE plug_window, 		uint32_t, 1
-	NASMX_RESERVE plug_widget, 		uint32_t, 1
-	NASMX_RESERVE xembed_version, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
-	NASMX_RESERVE same_app, 		uint32_t, 1
-;.focus_in:		RESD 1
-;.have_size:		RESD 1
-;.need_map:		RESD 1
-;.is_mapped:		RESD 1
-;.active:		RESD 1
-	NASMX_RESERVE accel_group, 		uint32_t, 1
-	NASMX_RESERVE toplevel, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE request_width,	uint16_t, 1
+	NASMX_RESERVE request_height,	uint16_t, 1
+	NASMX_RESERVE current_width,	uint16_t, 1
+	NASMX_RESERVE current_height,	uint16_t, 1
+	NASMX_RESERVE plug_window,	uint32_t, 1
+	NASMX_RESERVE plug_widget,	uint32_t, 1
+	NASMX_RESERVE xembed_version,	uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
+	NASMX_RESERVE same_app,		uint32_t, 1
+;.focus_in:	RESD 1
+;.have_size:	RESD 1
+;.need_map:	RESD 1
+;.is_mapped:	RESD 1
+;.active:	RESD 1
+	NASMX_RESERVE accel_group,	uint32_t, 1
+	NASMX_RESERVE toplevel,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSocketClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE plug_added, 		uint32_t, 1
-	NASMX_RESERVE plug_removed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE plug_added,	uint32_t, 1
+	NASMX_RESERVE plug_removed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPlug
-	NASMX_RESERVE window, 		int8_t, GtkWindow_size
-	NASMX_RESERVE socket_window, 		uint32_t, 1
-	NASMX_RESERVE modality_window, 		uint32_t, 1
-	NASMX_RESERVE modality_group, 		uint32_t, 1
-	NASMX_RESERVE grabbed_keys, 		uint32_t, 1
-	NASMX_RESERVE same_app, 		uint32_t, 1
+	NASMX_RESERVE window,		int8_t, GtkWindow_size
+	NASMX_RESERVE socket_window,	uint32_t, 1
+	NASMX_RESERVE modality_window,	uint32_t, 1
+	NASMX_RESERVE modality_group,	uint32_t, 1
+	NASMX_RESERVE grabbed_keys,	uint32_t, 1
+	NASMX_RESERVE same_app,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPlugClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWindowClass_size
-	NASMX_RESERVE embedded, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWindowClass_size
+	NASMX_RESERVE embedded,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPageRange
-	NASMX_RESERVE start, 		uint32_t, 1
-	NASMX_RESERVE end, 		uint32_t, 1
+	NASMX_RESERVE start,		uint32_t, 1
+	NASMX_RESERVE end,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPrintOperationPreviewIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE ready, 		uint32_t, 1
-	NASMX_RESERVE got_page_size, 		uint32_t, 1
-	NASMX_RESERVE render_page, 		uint32_t, 1
-	NASMX_RESERVE is_selected, 		uint32_t, 1
-	NASMX_RESERVE end_preview, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved7, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE ready,		uint32_t, 1
+	NASMX_RESERVE got_page_size,	uint32_t, 1
+	NASMX_RESERVE render_page,	uint32_t, 1
+	NASMX_RESERVE is_selected,	uint32_t, 1
+	NASMX_RESERVE end_preview,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved6,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved7,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPrintOperation
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPrintOperationClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE done, 		uint32_t, 1
-	NASMX_RESERVE begin_print, 		uint32_t, 1
-	NASMX_RESERVE paginate, 		uint32_t, 1
-	NASMX_RESERVE request_page_setup, 		uint32_t, 1
-	NASMX_RESERVE draw_page, 		uint32_t, 1
-	NASMX_RESERVE end_print, 		uint32_t, 1
-	NASMX_RESERVE status_changed, 		uint32_t, 1
-	NASMX_RESERVE create_custom_widget, 		uint32_t, 1
-	NASMX_RESERVE custom_widget_apply, 		uint32_t, 1
-	NASMX_RESERVE preview, 		uint32_t, 1
-	NASMX_RESERVE update_custom_widget, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved6, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE done,		uint32_t, 1
+	NASMX_RESERVE begin_print,	uint32_t, 1
+	NASMX_RESERVE paginate,		uint32_t, 1
+	NASMX_RESERVE request_page_setup,	uint32_t, 1
+	NASMX_RESERVE draw_page,	uint32_t, 1
+	NASMX_RESERVE end_print,	uint32_t, 1
+	NASMX_RESERVE status_changed,	uint32_t, 1
+	NASMX_RESERVE create_custom_widget,	uint32_t, 1
+	NASMX_RESERVE custom_widget_apply,	uint32_t, 1
+	NASMX_RESERVE preview,		uint32_t, 1
+	NASMX_RESERVE update_custom_widget,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved6,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkProgress
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE adjustment, 		uint32_t, 1
-	NASMX_RESERVE offscreen_pixmap, 		uint32_t, 1
-	NASMX_RESERVE format, 		uint32_t, 1
-	NASMX_RESERVE x_align, 		uint32_t, 1
-	NASMX_RESERVE y_align, 		uint32_t, 1
-	NASMX_RESERVE show_text, 		uint32_t, 1
-;.activity_mode:		RESD 1
-;.use_text_format:		RESD 1
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
+	NASMX_RESERVE adjustment,	uint32_t, 1
+	NASMX_RESERVE offscreen_pixmap,	uint32_t, 1
+	NASMX_RESERVE format,		uint32_t, 1
+	NASMX_RESERVE x_align,		uint32_t, 1
+	NASMX_RESERVE y_align,		uint32_t, 1
+	NASMX_RESERVE show_text,	uint32_t, 1
+;.activity_mode:	RESD 1
+;.use_text_format:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkProgressClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE paint, 		uint32_t, 1
-	NASMX_RESERVE update, 		uint32_t, 1
-	NASMX_RESERVE act_mode_enter, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE paint,		uint32_t, 1
+	NASMX_RESERVE update,		uint32_t, 1
+	NASMX_RESERVE act_mode_enter,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkProgressBar
-	NASMX_RESERVE progress, 		int8_t, GtkProgress_size
-	NASMX_RESERVE bar_style, 		uint32_t, 1
-	NASMX_RESERVE orientation, 		uint32_t, 1
-	NASMX_RESERVE blocks, 		uint32_t, 1
-	NASMX_RESERVE in_block, 		uint32_t, 1
-	NASMX_RESERVE activity_pos, 		uint32_t, 1
-	NASMX_RESERVE activity_step, 		uint32_t, 1
-	NASMX_RESERVE activity_blocks, 		uint32_t, 1
-	NASMX_RESERVE pulse_fraction, 		uint32_t, 1
-	NASMX_RESERVE activity_dir, 		uint32_t, 1
-;.ellipsize:		RESD 1
-;.dirty:		RESD 1
+	NASMX_RESERVE progress,		int8_t, GtkProgress_size
+	NASMX_RESERVE bar_style,	uint32_t, 1
+	NASMX_RESERVE orientation,	uint32_t, 1
+	NASMX_RESERVE blocks,		uint32_t, 1
+	NASMX_RESERVE in_block,		uint32_t, 1
+	NASMX_RESERVE activity_pos,	uint32_t, 1
+	NASMX_RESERVE activity_step,	uint32_t, 1
+	NASMX_RESERVE activity_blocks,	uint32_t, 1
+	NASMX_RESERVE pulse_fraction,	uint32_t, 1
+	NASMX_RESERVE activity_dir,	uint32_t, 1
+;.ellipsize:	RESD 1
+;.dirty:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkProgressBarClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkProgressClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkProgressClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToggleAction
-	NASMX_RESERVE parent, 		int8_t, GtkAction_size
-	NASMX_RESERVE private_data, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkAction_size
+	NASMX_RESERVE private_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToggleActionClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkActionClass_size
-	NASMX_RESERVE toggled, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class, 	int8_t, GtkActionClass_size
+	NASMX_RESERVE toggled,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRadioAction
-	NASMX_RESERVE parent, 		int8_t, GtkToggleAction_size
-	NASMX_RESERVE private_data, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkToggleAction_size
+	NASMX_RESERVE private_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRadioActionClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkToggleActionClass_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkToggleActionClass_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRadioButton
-	NASMX_RESERVE check_button, 		int8_t, GtkCheckButton_size
-	NASMX_RESERVE group, 		uint32_t, 1
+	NASMX_RESERVE check_button,	int8_t, GtkCheckButton_size
+	NASMX_RESERVE group,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRadioButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkCheckButtonClass_size
-	NASMX_RESERVE group_changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkCheckButtonClass_size
+	NASMX_RESERVE group_changed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRadioMenuItem
-	NASMX_RESERVE check_menu_item, 		int8_t, GtkCheckMenuItem_size
-	NASMX_RESERVE group, 		uint32_t, 1
+	NASMX_RESERVE check_menu_item,	int8_t, GtkCheckMenuItem_size
+	NASMX_RESERVE group,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRadioMenuItemClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkCheckMenuItemClass_size
-	NASMX_RESERVE group_changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkCheckMenuItemClass_size
+	NASMX_RESERVE group_changed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToggleToolButton
-	NASMX_RESERVE parent, 		int8_t, GtkToolButton_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkToolButton_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToggleToolButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkToolButtonClass_size
-	NASMX_RESERVE toggled, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkToolButtonClass_size
+	NASMX_RESERVE toggled,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRadioToolButton
-	NASMX_RESERVE parent, 		int8_t, GtkToggleToolButton_size
+	NASMX_RESERVE parent,		int8_t, GtkToggleToolButton_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRadioToolButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkToggleToolButtonClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkToggleToolButtonClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentData
-	NASMX_RESERVE display_name, 		uint32_t, 1
-	NASMX_RESERVE description, 		uint32_t, 1
-	NASMX_RESERVE mime_type, 		uint32_t, 1
-	NASMX_RESERVE app_name, 		uint32_t, 1
-	NASMX_RESERVE app_exec, 		uint32_t, 1
-	NASMX_RESERVE groups, 		uint32_t, 1
-	NASMX_RESERVE is_private, 		uint32_t, 1
+	NASMX_RESERVE display_name,	uint32_t, 1
+	NASMX_RESERVE description,	uint32_t, 1
+	NASMX_RESERVE mime_type,	uint32_t, 1
+	NASMX_RESERVE app_name,		uint32_t, 1
+	NASMX_RESERVE app_exec,		uint32_t, 1
+	NASMX_RESERVE groups,		uint32_t, 1
+	NASMX_RESERVE is_private,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentManager
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentManagerClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_recent1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_recent2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_recent3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_recent4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE _gtk_recent1,	uint32_t, 1
+	NASMX_RESERVE _gtk_recent2,	uint32_t, 1
+	NASMX_RESERVE _gtk_recent3,	uint32_t, 1
+	NASMX_RESERVE _gtk_recent4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentAction
-	NASMX_RESERVE parent_instance, 		int8_t, GtkAction_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkAction_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentActionClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkActionClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkActionClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentFilterInfo
-	NASMX_RESERVE contains, 		uint32_t, 1
-	NASMX_RESERVE uri, 		uint32_t, 1
-	NASMX_RESERVE display_name, 		uint32_t, 1
-	NASMX_RESERVE mime_type, 		uint32_t, 1
-	NASMX_RESERVE applications, 		uint32_t, 1
-	NASMX_RESERVE groups, 		uint32_t, 1
-	NASMX_RESERVE age, 		uint32_t, 1
+	NASMX_RESERVE contains,		uint32_t, 1
+	NASMX_RESERVE uri,		uint32_t, 1
+	NASMX_RESERVE display_name,	uint32_t, 1
+	NASMX_RESERVE mime_type,	uint32_t, 1
+	NASMX_RESERVE applications,	uint32_t, 1
+	NASMX_RESERVE groups,		uint32_t, 1
+	NASMX_RESERVE age,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentChooserIface
-	NASMX_RESERVE base_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE set_current_uri, 		uint32_t, 1
-	NASMX_RESERVE get_current_uri, 		uint32_t, 1
-	NASMX_RESERVE select_uri, 		uint32_t, 1
-	NASMX_RESERVE unselect_uri, 		uint32_t, 1
-	NASMX_RESERVE select_all, 		uint32_t, 1
-	NASMX_RESERVE unselect_all, 		uint32_t, 1
-	NASMX_RESERVE get_items, 		uint32_t, 1
-	NASMX_RESERVE get_recent_manager, 		uint32_t, 1
-	NASMX_RESERVE add_filter, 		uint32_t, 1
-	NASMX_RESERVE remove_filter, 		uint32_t, 1
-	NASMX_RESERVE list_filters, 		uint32_t, 1
-	NASMX_RESERVE set_sort_func, 		uint32_t, 1
-	NASMX_RESERVE item_activated, 		uint32_t, 1
-	NASMX_RESERVE selection_changed, 		uint32_t, 1
+	NASMX_RESERVE base_iface,	int8_t, GTypeInterface_size
+	NASMX_RESERVE set_current_uri,	uint32_t, 1
+	NASMX_RESERVE get_current_uri,	uint32_t, 1
+	NASMX_RESERVE select_uri,	uint32_t, 1
+	NASMX_RESERVE unselect_uri,	uint32_t, 1
+	NASMX_RESERVE select_all,	uint32_t, 1
+	NASMX_RESERVE unselect_all,	uint32_t, 1
+	NASMX_RESERVE get_items,	uint32_t, 1
+	NASMX_RESERVE get_recent_manager,	uint32_t, 1
+	NASMX_RESERVE add_filter,	uint32_t, 1
+	NASMX_RESERVE remove_filter,	uint32_t, 1
+	NASMX_RESERVE list_filters,	uint32_t, 1
+	NASMX_RESERVE set_sort_func,	uint32_t, 1
+	NASMX_RESERVE item_activated,	uint32_t, 1
+	NASMX_RESERVE selection_changed,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentChooserDialog
-	NASMX_RESERVE parent_instance, 		int8_t, GtkDialog_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkDialog_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentChooserDialogClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkDialogClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkDialogClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentChooserMenu
-	NASMX_RESERVE parent_instance, 		int8_t, GtkMenu_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkMenu_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentChooserMenuClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMenuClass_size
-	NASMX_RESERVE gtk_recent1, 		uint32_t, 1
-	NASMX_RESERVE gtk_recent2, 		uint32_t, 1
-	NASMX_RESERVE gtk_recent3, 		uint32_t, 1
-	NASMX_RESERVE gtk_recent4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkMenuClass_size
+	NASMX_RESERVE gtk_recent1,	uint32_t, 1
+	NASMX_RESERVE gtk_recent2,	uint32_t, 1
+	NASMX_RESERVE gtk_recent3,	uint32_t, 1
+	NASMX_RESERVE gtk_recent4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentChooserWidget
-	NASMX_RESERVE parent_instance, 		int8_t, GtkVBox_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkVBox_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkRecentChooserWidgetClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkVBoxClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkVBoxClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkScaleButton
-	NASMX_RESERVE parent, 		int8_t, GtkButton_size
-	NASMX_RESERVE plus_button, 		uint32_t, 1
-	NASMX_RESERVE minus_button, 		uint32_t, 1
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkButton_size
+	NASMX_RESERVE plus_button,	uint32_t, 1
+	NASMX_RESERVE minus_button,	uint32_t, 1
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkScaleButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkButtonClass_size
-	NASMX_RESERVE value_changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkButtonClass_size
+	NASMX_RESERVE value_changed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVScrollbar
-	NASMX_RESERVE scrollbar, 		int8_t, GtkScrollbar_size
+	NASMX_RESERVE scrollbar,	int8_t, GtkScrollbar_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVScrollbarClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkScrollbarClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkScrollbarClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkViewport
-	NASMX_RESERVE bin, 		int8_t, GtkBin_size
-	NASMX_RESERVE shadow_type, 		uint32_t, 1
-	NASMX_RESERVE view_window, 		uint32_t, 1
-	NASMX_RESERVE bin_window, 		uint32_t, 1
-	NASMX_RESERVE hadjustment, 		uint32_t, 1
-	NASMX_RESERVE vadjustment, 		uint32_t, 1
+	NASMX_RESERVE bin,		int8_t, GtkBin_size
+	NASMX_RESERVE shadow_type,	uint32_t, 1
+	NASMX_RESERVE view_window,	uint32_t, 1
+	NASMX_RESERVE bin_window,	uint32_t, 1
+	NASMX_RESERVE hadjustment,	uint32_t, 1
+	NASMX_RESERVE vadjustment,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkViewportClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
-	NASMX_RESERVE set_scroll_adjustments, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
+	NASMX_RESERVE set_scroll_adjustments,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkScrolledWindow
-	NASMX_RESERVE container, 		int8_t, GtkBin_size
-	NASMX_RESERVE hscrollbar, 		uint32_t, 1
-	NASMX_RESERVE vscrollbar, 		uint32_t, 1
-	NASMX_RESERVE hscrollbar_policy, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkBin_size
+	NASMX_RESERVE hscrollbar,	uint32_t, 1
+	NASMX_RESERVE vscrollbar,	uint32_t, 1
+	NASMX_RESERVE hscrollbar_policy,	uint32_t, 1
 ;.vscrollbar_policy:		RESD 1
 ;.hscrollbar_visible:		RESD 1
 ;.vscrollbar_visible:		RESD 1
 ;.window_placement:		RESD 1
 ;.focus_out:		RESD 1
-	NASMX_RESERVE shadow_type, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
+	NASMX_RESERVE shadow_type,	uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkScrolledWindowClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkBinClass_size
-	NASMX_RESERVE scrollbar_spacing, 		uint32_t, 1
-	NASMX_RESERVE scroll_child, 		uint32_t, 1
-	NASMX_RESERVE move_focus_out, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkBinClass_size
+	NASMX_RESERVE scrollbar_spacing,	uint32_t, 1
+	NASMX_RESERVE scroll_child,	uint32_t, 1
+	NASMX_RESERVE move_focus_out,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSeparatorMenuItem
-	NASMX_RESERVE menu_item, 		int8_t, GtkMenuItem_size
+	NASMX_RESERVE menu_item,	int8_t, GtkMenuItem_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSeparatorMenuItemClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMenuItemClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkMenuItemClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSeparatorToolItem
-	NASMX_RESERVE parent, 		int8_t, GtkToolItem_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkToolItem_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSeparatorToolItemClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkToolItemClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkToolItemClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSpinButton
-	NASMX_RESERVE entry, 		int8_t, GtkEntry_size
-	NASMX_RESERVE adjustment, 		uint32_t, 1
-	NASMX_RESERVE panel, 		uint32_t, 1
-	NASMX_RESERVE timer, 		uint32_t, 1
-	NASMX_RESERVE climb_rate, 		uint32_t, 1
-	NASMX_RESERVE timer_step, 		uint32_t, 1
-	NASMX_RESERVE update_policy, 		uint32_t, 1
-	NASMX_RESERVE in_child, 		uint32_t, 1
+	NASMX_RESERVE entry,		int8_t, GtkEntry_size
+	NASMX_RESERVE adjustment,	uint32_t, 1
+	NASMX_RESERVE panel,		uint32_t, 1
+	NASMX_RESERVE timer,		uint32_t, 1
+	NASMX_RESERVE climb_rate,	uint32_t, 1
+	NASMX_RESERVE timer_step,	uint32_t, 1
+	NASMX_RESERVE update_policy,	uint32_t, 1
+	NASMX_RESERVE in_child,		uint32_t, 1
 ;.click_child:		RESD 1
 ;.button:		RESD 1
 ;.need_timer:		RESD 1
@@ -6659,104 +6657,104 @@ NASMX_STRUC GtkSpinButton
 ;.digits:		RESD 1
 ;.numeric:		RESD 1
 ;.wrap:		RESD 1
-;.snap_to_ticks:		RESD 1
+;.snap_to_ticks:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSpinButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkEntryClass_size
-	NASMX_RESERVE input, 		uint32_t, 1
-	NASMX_RESERVE output, 		uint32_t, 1
-	NASMX_RESERVE value_changed, 		uint32_t, 1
-	NASMX_RESERVE change_value, 		uint32_t, 1
-	NASMX_RESERVE wrapped, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkEntryClass_size
+	NASMX_RESERVE input,		uint32_t, 1
+	NASMX_RESERVE output,		uint32_t, 1
+	NASMX_RESERVE value_changed,	uint32_t, 1
+	NASMX_RESERVE change_value,	uint32_t, 1
+	NASMX_RESERVE wrapped,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSpinner
-	NASMX_RESERVE parent, 		int8_t, GtkDrawingArea_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GtkDrawingArea_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkSpinnerClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkDrawingAreaClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkDrawingAreaClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkStatusbar
-	NASMX_RESERVE parent_widget, 		int8_t, GtkHBox_size
-	NASMX_RESERVE frame, 		uint32_t, 1
-	NASMX_RESERVE label, 		uint32_t, 1
-	NASMX_RESERVE messages, 		uint32_t, 1
-	NASMX_RESERVE keys, 		uint32_t, 1
-	NASMX_RESERVE seq_context_id, 		uint32_t, 1
-	NASMX_RESERVE seq_message_id, 		uint32_t, 1
-	NASMX_RESERVE grip_window, 		uint32_t, 1
-	NASMX_RESERVE has_resize_grip, 		uint32_t, 1
+	NASMX_RESERVE parent_widget,	int8_t, GtkHBox_size
+	NASMX_RESERVE frame,		uint32_t, 1
+	NASMX_RESERVE label,		uint32_t, 1
+	NASMX_RESERVE messages,		uint32_t, 1
+	NASMX_RESERVE keys,		uint32_t, 1
+	NASMX_RESERVE seq_context_id,	uint32_t, 1
+	NASMX_RESERVE seq_message_id,	uint32_t, 1
+	NASMX_RESERVE grip_window,	uint32_t, 1
+	NASMX_RESERVE has_resize_grip,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkStatusbarClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkHBoxClass_size
-	NASMX_RESERVE reserved, 		uint32_t, 1
-	NASMX_RESERVE text_pushed, 		uint32_t, 1
-	NASMX_RESERVE text_popped, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkHBoxClass_size
+	NASMX_RESERVE reserved,		uint32_t, 1
+	NASMX_RESERVE text_pushed,	uint32_t, 1
+	NASMX_RESERVE text_popped,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkStatusIcon
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkStatusIconClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE activate, 		uint32_t, 1
-	NASMX_RESERVE popup_menu, 		uint32_t, 1
-	NASMX_RESERVE size_changed, 		uint32_t, 1
-	NASMX_RESERVE button_press_event, 		uint32_t, 1
-	NASMX_RESERVE button_release_event, 		uint32_t, 1
-	NASMX_RESERVE scroll_event, 		uint32_t, 1
-	NASMX_RESERVE query_tooltip, 		uint32_t, 1
-	NASMX_RESERVE __gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE __gtk_reserved2, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE activate,		uint32_t, 1
+	NASMX_RESERVE popup_menu,	uint32_t, 1
+	NASMX_RESERVE size_changed,	uint32_t, 1
+	NASMX_RESERVE button_press_event,	uint32_t, 1
+	NASMX_RESERVE button_release_event,	uint32_t, 1
+	NASMX_RESERVE scroll_event,	uint32_t, 1
+	NASMX_RESERVE query_tooltip,	uint32_t, 1
+	NASMX_RESERVE __gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE __gtk_reserved2,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkStockItem
-	NASMX_RESERVE stock_id, 		uint32_t, 1
-	NASMX_RESERVE label, 		uint32_t, 1
-	NASMX_RESERVE modifier, 		uint32_t, 1
-	NASMX_RESERVE keyval, 		uint32_t, 1
-	NASMX_RESERVE translation_domain, 		uint32_t, 1
+	NASMX_RESERVE stock_id,		uint32_t, 1
+	NASMX_RESERVE label,		uint32_t, 1
+	NASMX_RESERVE modifier,		uint32_t, 1
+	NASMX_RESERVE keyval,		uint32_t, 1
+	NASMX_RESERVE translation_domain,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTable
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE children, 		uint32_t, 1
-	NASMX_RESERVE rows, 		uint32_t, 1
-	NASMX_RESERVE cols, 		uint32_t, 1
-	NASMX_RESERVE nrows, 		uint16_t, 1
-	NASMX_RESERVE ncols, 		uint16_t, 1
-	NASMX_RESERVE column_spacing, 		uint16_t, 1
-	NASMX_RESERVE row_spacing, 		uint16_t, 1
-	NASMX_RESERVE homogeneous, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE children,		uint32_t, 1
+	NASMX_RESERVE rows,		uint32_t, 1
+	NASMX_RESERVE cols,		uint32_t, 1
+	NASMX_RESERVE nrows,		uint16_t, 1
+	NASMX_RESERVE ncols,		uint16_t, 1
+	NASMX_RESERVE column_spacing,	uint16_t, 1
+	NASMX_RESERVE row_spacing,	uint16_t, 1
+	NASMX_RESERVE homogeneous,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTableClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTableChild
-	NASMX_RESERVE widget, 		uint32_t, 1
-	NASMX_RESERVE left_attach, 		uint16_t, 1
-	NASMX_RESERVE right_attach, 		uint16_t, 1
-	NASMX_RESERVE top_attach, 		uint16_t, 1
-	NASMX_RESERVE bottom_attach, 		uint16_t, 1
-	NASMX_RESERVE xpadding, 		uint16_t, 1
-	NASMX_RESERVE ypadding, 		uint16_t, 1
-	NASMX_RESERVE xexpand, 		uint32_t, 1
+	NASMX_RESERVE widget,		uint32_t, 1
+	NASMX_RESERVE left_attach,	uint16_t, 1
+	NASMX_RESERVE right_attach,	uint16_t, 1
+	NASMX_RESERVE top_attach,	uint16_t, 1
+	NASMX_RESERVE bottom_attach,	uint16_t, 1
+	NASMX_RESERVE xpadding,		uint16_t, 1
+	NASMX_RESERVE ypadding,		uint16_t, 1
+	NASMX_RESERVE xexpand,		uint32_t, 1
 ;.yexpand:		RESD 1
 ;.xshrink:		RESD 1
 ;.yshrink:		RESD 1
@@ -6765,11 +6763,11 @@ NASMX_STRUC GtkTableChild
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTableRowCol
-	NASMX_RESERVE requisition, 		uint16_t, 1
-	NASMX_RESERVE allocation, 		uint16_t, 1
-	NASMX_RESERVE spacing, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
-	NASMX_RESERVE need_expand, 		uint32_t, 1
+	NASMX_RESERVE requisition,	uint16_t, 1
+	NASMX_RESERVE allocation,	uint16_t, 1
+	NASMX_RESERVE spacing,		uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
+	NASMX_RESERVE need_expand,	uint32_t, 1
 ;.need_shrink:		RESD 1
 ;.expand:		RESD 1
 ;.shrink:		RESD 1
@@ -6777,544 +6775,544 @@ NASMX_STRUC GtkTableRowCol
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTearoffMenuItem
-	NASMX_RESERVE menu_item, 		int8_t, GtkMenuItem_size
-	NASMX_RESERVE torn_off, 		uint32_t, 1
+	NASMX_RESERVE menu_item,	int8_t, GtkMenuItem_size
+	NASMX_RESERVE torn_off,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTearoffMenuItemClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMenuItemClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkMenuItemClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextTagTable
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE hash, 		uint32_t, 1
-	NASMX_RESERVE anonymous, 		uint32_t, 1
-	NASMX_RESERVE anon_count, 		uint32_t, 1
-	NASMX_RESERVE buffers, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE hash,		uint32_t, 1
+	NASMX_RESERVE anonymous,	uint32_t, 1
+	NASMX_RESERVE anon_count,	uint32_t, 1
+	NASMX_RESERVE buffers,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextTagTableClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE tag_changed, 		uint32_t, 1
-	NASMX_RESERVE tag_added, 		uint32_t, 1
-	NASMX_RESERVE tag_removed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE tag_changed,	uint32_t, 1
+	NASMX_RESERVE tag_added,	uint32_t, 1
+	NASMX_RESERVE tag_removed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextMark
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE segment, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE segment,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextMarkClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextBuffer
-	NASMX_RESERVE parent_instance, 		int8_t, GObject_size
-	NASMX_RESERVE tag_table, 		uint32_t, 1
-	NASMX_RESERVE btree, 		uint32_t, 1
-	NASMX_RESERVE clipboard_contents_buffers, 		uint32_t, 1
-	NASMX_RESERVE selection_clipboards, 		uint32_t, 1
-	NASMX_RESERVE log_attr_cache, 		uint32_t, 1
-	NASMX_RESERVE user_action_count, 		uint32_t, 1
-	NASMX_RESERVE modified, 		uint32_t, 1
-;.has_selection:		RESD 1
+	NASMX_RESERVE parent_instance,	int8_t, GObject_size
+	NASMX_RESERVE tag_table,	uint32_t, 1
+	NASMX_RESERVE btree,		uint32_t, 1
+	NASMX_RESERVE clipboard_contents_buffers,	uint32_t, 1
+	NASMX_RESERVE selection_clipboards,	uint32_t, 1
+	NASMX_RESERVE log_attr_cache,	uint32_t, 1
+	NASMX_RESERVE user_action_count,	uint32_t, 1
+	NASMX_RESERVE modified,		uint32_t, 1
+;.has_selection:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextBufferClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE insert_text, 		uint32_t, 1
-	NASMX_RESERVE insert_pixbuf, 		uint32_t, 1
-	NASMX_RESERVE insert_child_anchor, 		uint32_t, 1
-	NASMX_RESERVE delete_range, 		uint32_t, 1
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE modified_changed, 		uint32_t, 1
-	NASMX_RESERVE mark_set, 		uint32_t, 1
-	NASMX_RESERVE mark_deleted, 		uint32_t, 1
-	NASMX_RESERVE apply_tag, 		uint32_t, 1
-	NASMX_RESERVE remove_tag, 		uint32_t, 1
-	NASMX_RESERVE begin_user_action, 		uint32_t, 1
-	NASMX_RESERVE end_user_action, 		uint32_t, 1
-	NASMX_RESERVE paste_done, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE insert_text,	uint32_t, 1
+	NASMX_RESERVE insert_pixbuf,	uint32_t, 1
+	NASMX_RESERVE insert_child_anchor,	uint32_t, 1
+	NASMX_RESERVE delete_range,	uint32_t, 1
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE modified_changed,	uint32_t, 1
+	NASMX_RESERVE mark_set,		uint32_t, 1
+	NASMX_RESERVE mark_deleted,	uint32_t, 1
+	NASMX_RESERVE apply_tag,	uint32_t, 1
+	NASMX_RESERVE remove_tag,	uint32_t, 1
+	NASMX_RESERVE begin_user_action,	uint32_t, 1
+	NASMX_RESERVE end_user_action,	uint32_t, 1
+	NASMX_RESERVE paste_done,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextView
-	NASMX_RESERVE parent_instance, 		int8_t, GtkContainer_size
-	NASMX_RESERVE layout, 		uint32_t, 1
-	NASMX_RESERVE buffer, 		uint32_t, 1
-	NASMX_RESERVE selection_drag_handler, 		uint32_t, 1
-	NASMX_RESERVE scroll_timeout, 		uint32_t, 1
-	NASMX_RESERVE pixels_above_lines, 		uint32_t, 1
-	NASMX_RESERVE pixels_below_lines, 		uint32_t, 1
-	NASMX_RESERVE pixels_inside_wrap, 		uint32_t, 1
-	NASMX_RESERVE wrap_mode, 		uint32_t, 1
-	NASMX_RESERVE justify, 		uint32_t, 1
-	NASMX_RESERVE left_margin, 		uint32_t, 1
-	NASMX_RESERVE right_margin, 		uint32_t, 1
-	NASMX_RESERVE indent, 		uint32_t, 1
-	NASMX_RESERVE tabs, 		uint32_t, 1
-	NASMX_RESERVE editable, 		uint32_t, 1
-;.overwrite_mode:		RESD 1
-;.cursor_visible:		RESD 1
-;.need_im_reset:		RESD 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkContainer_size
+	NASMX_RESERVE layout,		uint32_t, 1
+	NASMX_RESERVE buffer,		uint32_t, 1
+	NASMX_RESERVE selection_drag_handler,	uint32_t, 1
+	NASMX_RESERVE scroll_timeout,	uint32_t, 1
+	NASMX_RESERVE pixels_above_lines,	uint32_t, 1
+	NASMX_RESERVE pixels_below_lines,	uint32_t, 1
+	NASMX_RESERVE pixels_inside_wrap,	uint32_t, 1
+	NASMX_RESERVE wrap_mode,	uint32_t, 1
+	NASMX_RESERVE justify,		uint32_t, 1
+	NASMX_RESERVE left_margin,	uint32_t, 1
+	NASMX_RESERVE right_margin,	uint32_t, 1
+	NASMX_RESERVE indent,		uint32_t, 1
+	NASMX_RESERVE tabs,		uint32_t, 1
+	NASMX_RESERVE editable,		uint32_t, 1
+;.overwrite_mode:	RESD 1
+;.cursor_visible:	RESD 1
+;.need_im_reset:	RESD 1
 ;.accepts_tab:		RESD 1
-;.width_changed:		RESD 1
-;.onscreen_validated:		RESD 1
-;.mouse_cursor_obscured:		RESD 1
-	NASMX_RESERVE text_window, 		uint32_t, 1
-	NASMX_RESERVE left_window, 		uint32_t, 1
-	NASMX_RESERVE right_window, 		uint32_t, 1
-	NASMX_RESERVE top_window, 		uint32_t, 1
-	NASMX_RESERVE bottom_window, 		uint32_t, 1
-	NASMX_RESERVE hadjustment, 		uint32_t, 1
-	NASMX_RESERVE vadjustment, 		uint32_t, 1
-	NASMX_RESERVE xoffset, 		uint32_t, 1
-	NASMX_RESERVE yoffset, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
-	NASMX_RESERVE virtual_cursor_x, 		uint32_t, 1
-	NASMX_RESERVE virtual_cursor_y, 		uint32_t, 1
-	NASMX_RESERVE first_para_mark, 		uint32_t, 1
-	NASMX_RESERVE first_para_pixels, 		uint32_t, 1
-	NASMX_RESERVE dnd_mark, 		uint32_t, 1
-	NASMX_RESERVE blink_timeout, 		uint32_t, 1
-	NASMX_RESERVE first_validate_idle, 		uint32_t, 1
-	NASMX_RESERVE incremental_validate_idle, 		uint32_t, 1
-	NASMX_RESERVE im_context, 		uint32_t, 1
-	NASMX_RESERVE popup_menu, 		uint32_t, 1
-	NASMX_RESERVE drag_start_x, 		uint32_t, 1
-	NASMX_RESERVE drag_start_y, 		uint32_t, 1
-	NASMX_RESERVE children, 		uint32_t, 1
-	NASMX_RESERVE pending_scroll, 		uint32_t, 1
-	NASMX_RESERVE pending_place_cursor_button, 		uint32_t, 1
+;.width_changed:	RESD 1
+;.onscreen_validated:	RESD 1
+;.mouse_cursor_obscured:	RESD 1
+	NASMX_RESERVE text_window,	uint32_t, 1
+	NASMX_RESERVE left_window,	uint32_t, 1
+	NASMX_RESERVE right_window,	uint32_t, 1
+	NASMX_RESERVE top_window,	uint32_t, 1
+	NASMX_RESERVE bottom_window,	uint32_t, 1
+	NASMX_RESERVE hadjustment,	uint32_t, 1
+	NASMX_RESERVE vadjustment,	uint32_t, 1
+	NASMX_RESERVE xoffset,		uint32_t, 1
+	NASMX_RESERVE yoffset,		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
+	NASMX_RESERVE virtual_cursor_x,	uint32_t, 1
+	NASMX_RESERVE virtual_cursor_y,	uint32_t, 1
+	NASMX_RESERVE first_para_mark,	uint32_t, 1
+	NASMX_RESERVE first_para_pixels,	uint32_t, 1
+	NASMX_RESERVE dnd_mark,		uint32_t, 1
+	NASMX_RESERVE blink_timeout,	uint32_t, 1
+	NASMX_RESERVE first_validate_idle,	uint32_t, 1
+	NASMX_RESERVE incremental_validate_idle,	uint32_t, 1
+	NASMX_RESERVE im_context,	uint32_t, 1
+	NASMX_RESERVE popup_menu,	uint32_t, 1
+	NASMX_RESERVE drag_start_x,	uint32_t, 1
+	NASMX_RESERVE drag_start_y,	uint32_t, 1
+	NASMX_RESERVE children,		uint32_t, 1
+	NASMX_RESERVE pending_scroll,	uint32_t, 1
+	NASMX_RESERVE pending_place_cursor_button,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTextViewClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE set_scroll_adjustments, 		uint32_t, 1
-	NASMX_RESERVE populate_popup, 		uint32_t, 1
-	NASMX_RESERVE move_cursor, 		uint32_t, 1
-	NASMX_RESERVE page_horizontally, 		uint32_t, 1
-	NASMX_RESERVE set_anchor, 		uint32_t, 1
-	NASMX_RESERVE insert_at_cursor, 		uint32_t, 1
-	NASMX_RESERVE delete_from_cursor, 		uint32_t, 1
-	NASMX_RESERVE backspace, 		uint32_t, 1
-	NASMX_RESERVE cut_clipboard, 		uint32_t, 1
-	NASMX_RESERVE copy_clipboard, 		uint32_t, 1
-	NASMX_RESERVE paste_clipboard, 		uint32_t, 1
-	NASMX_RESERVE toggle_overwrite, 		uint32_t, 1
-	NASMX_RESERVE move_focus, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved6, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved7, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE set_scroll_adjustments,	uint32_t, 1
+	NASMX_RESERVE populate_popup,	uint32_t, 1
+	NASMX_RESERVE move_cursor,	uint32_t, 1
+	NASMX_RESERVE page_horizontally,	uint32_t, 1
+	NASMX_RESERVE set_anchor,	uint32_t, 1
+	NASMX_RESERVE insert_at_cursor,	uint32_t, 1
+	NASMX_RESERVE delete_from_cursor,	uint32_t, 1
+	NASMX_RESERVE backspace,	uint32_t, 1
+	NASMX_RESERVE cut_clipboard,	uint32_t, 1
+	NASMX_RESERVE copy_clipboard,	uint32_t, 1
+	NASMX_RESERVE paste_clipboard,	uint32_t, 1
+	NASMX_RESERVE toggle_overwrite,	uint32_t, 1
+	NASMX_RESERVE move_focus,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved6,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved7,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPixmap
-	NASMX_RESERVE misc, 		int8_t, GtkMisc_size
-	NASMX_RESERVE pixmap, 		uint32_t, 1
-	NASMX_RESERVE mask, 		uint32_t, 1
-	NASMX_RESERVE pixmap_insensitive, 		uint32_t, 1
-	NASMX_RESERVE build_insensitive, 		uint32_t, 1
+	NASMX_RESERVE misc,		int8_t, GtkMisc_size
+	NASMX_RESERVE pixmap,		uint32_t, 1
+	NASMX_RESERVE mask,		uint32_t, 1
+	NASMX_RESERVE pixmap_insensitive,	uint32_t, 1
+	NASMX_RESERVE build_insensitive,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPixmapClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkMiscClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkMiscClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolbarChild
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE widget, 		uint32_t, 1
-	NASMX_RESERVE icon, 		uint32_t, 1
-	NASMX_RESERVE label, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE widget,		uint32_t, 1
+	NASMX_RESERVE icon,		uint32_t, 1
+	NASMX_RESERVE label,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolbar
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE num_children, 		uint32_t, 1
-	NASMX_RESERVE children, 		uint32_t, 1
-	NASMX_RESERVE orientation, 		uint32_t, 1
-	NASMX_RESERVE style, 		uint32_t, 1
-	NASMX_RESERVE icon_size, 		uint32_t, 1
-	NASMX_RESERVE tooltips, 		uint32_t, 1
-	NASMX_RESERVE button_maxw, 		uint32_t, 1
-	NASMX_RESERVE button_maxh, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE style_set, 		uint32_t, 1
-;.icon_size_set:		RESD 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE num_children,	uint32_t, 1
+	NASMX_RESERVE children,		uint32_t, 1
+	NASMX_RESERVE orientation,	uint32_t, 1
+	NASMX_RESERVE style,		uint32_t, 1
+	NASMX_RESERVE icon_size,	uint32_t, 1
+	NASMX_RESERVE tooltips,		uint32_t, 1
+	NASMX_RESERVE button_maxw,	uint32_t, 1
+	NASMX_RESERVE button_maxh,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE style_set,	uint32_t, 1
+;.icon_size_set:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolbarClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE orientation_changed, 		uint32_t, 1
-	NASMX_RESERVE style_changed, 		uint32_t, 1
-	NASMX_RESERVE popup_context_menu, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE orientation_changed,	uint32_t, 1
+	NASMX_RESERVE style_changed,	uint32_t, 1
+	NASMX_RESERVE popup_context_menu,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolItemGroup
-	NASMX_RESERVE parent_instance, 		int8_t, GtkContainer_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkContainer_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolItemGroupClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolPalette
-	NASMX_RESERVE parent_instance, 		int8_t, GtkContainer_size
-	NASMX_RESERVE priv, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkContainer_size
+	NASMX_RESERVE priv,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolPaletteClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE set_scroll_adjustments, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved5, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved6, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE set_scroll_adjustments,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved5,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved6,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkToolShellIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE get_icon_size, 		uint32_t, 1
-	NASMX_RESERVE get_orientation, 		uint32_t, 1
-	NASMX_RESERVE get_style, 		uint32_t, 1
-	NASMX_RESERVE get_relief_style, 		uint32_t, 1
-	NASMX_RESERVE rebuild_menu, 		uint32_t, 1
-	NASMX_RESERVE get_text_orientation, 		uint32_t, 1
-	NASMX_RESERVE get_text_alignment, 		uint32_t, 1
-	NASMX_RESERVE get_ellipsize_mode, 		uint32_t, 1
-	NASMX_RESERVE get_text_size_group, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE get_icon_size,	uint32_t, 1
+	NASMX_RESERVE get_orientation,	uint32_t, 1
+	NASMX_RESERVE get_style,	uint32_t, 1
+	NASMX_RESERVE get_relief_style,	uint32_t, 1
+	NASMX_RESERVE rebuild_menu,	uint32_t, 1
+	NASMX_RESERVE get_text_orientation,	uint32_t, 1
+	NASMX_RESERVE get_text_alignment,	uint32_t, 1
+	NASMX_RESERVE get_ellipsize_mode,	uint32_t, 1
+	NASMX_RESERVE get_text_size_group,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeDragSourceIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE row_draggable, 		uint32_t, 1
-	NASMX_RESERVE drag_data_get, 		uint32_t, 1
-	NASMX_RESERVE drag_data_delete, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE row_draggable,	uint32_t, 1
+	NASMX_RESERVE drag_data_get,	uint32_t, 1
+	NASMX_RESERVE drag_data_delete,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeDragDestIface
-	NASMX_RESERVE g_iface, 		int8_t, GTypeInterface_size
-	NASMX_RESERVE drag_data_received, 		uint32_t, 1
-	NASMX_RESERVE row_drop_possible, 		uint32_t, 1
+	NASMX_RESERVE g_iface,		int8_t, GTypeInterface_size
+	NASMX_RESERVE drag_data_received,	uint32_t, 1
+	NASMX_RESERVE row_drop_possible,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeModelSort
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE root, 		uint32_t, 1
-	NASMX_RESERVE stamp, 		uint32_t, 1
-	NASMX_RESERVE child_flags, 		uint32_t, 1
-	NASMX_RESERVE child_model, 		uint32_t, 1
-	NASMX_RESERVE zero_ref_count, 		uint32_t, 1
-	NASMX_RESERVE sort_list, 		uint32_t, 1
-	NASMX_RESERVE sort_column_id, 		uint32_t, 1
-	NASMX_RESERVE order, 		uint32_t, 1
-	NASMX_RESERVE default_sort_func, 		uint32_t, 1
-	NASMX_RESERVE default_sort_data, 		uint32_t, 1
-	NASMX_RESERVE default_sort_destroy, 		uint32_t, 1
-	NASMX_RESERVE changed_id, 		uint32_t, 1
-	NASMX_RESERVE inserted_id, 		uint32_t, 1
-	NASMX_RESERVE has_child_toggled_id, 		uint32_t, 1
-	NASMX_RESERVE deleted_id, 		uint32_t, 1
-	NASMX_RESERVE reordered_id, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE root,		uint32_t, 1
+	NASMX_RESERVE stamp,		uint32_t, 1
+	NASMX_RESERVE child_flags,	uint32_t, 1
+	NASMX_RESERVE child_model,	uint32_t, 1
+	NASMX_RESERVE zero_ref_count,	uint32_t, 1
+	NASMX_RESERVE sort_list,	uint32_t, 1
+	NASMX_RESERVE sort_column_id,	uint32_t, 1
+	NASMX_RESERVE order,		uint32_t, 1
+	NASMX_RESERVE default_sort_func,	uint32_t, 1
+	NASMX_RESERVE default_sort_data,	uint32_t, 1
+	NASMX_RESERVE default_sort_destroy,	uint32_t, 1
+	NASMX_RESERVE changed_id,	uint32_t, 1
+	NASMX_RESERVE inserted_id,	uint32_t, 1
+	NASMX_RESERVE has_child_toggled_id,	uint32_t, 1
+	NASMX_RESERVE deleted_id,	uint32_t, 1
+	NASMX_RESERVE reordered_id,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeModelSortClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeSelection
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE tree_view, 		uint32_t, 1
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE user_func, 		uint32_t, 1
-	NASMX_RESERVE user_data, 		uint32_t, 1
-	NASMX_RESERVE destroy, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE tree_view,	uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE user_func,	uint32_t, 1
+	NASMX_RESERVE user_data,	uint32_t, 1
+	NASMX_RESERVE destroy,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeSelectionClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeStore
-	NASMX_RESERVE parent, 		int8_t, GObject_size
-	NASMX_RESERVE stamp, 		uint32_t, 1
-	NASMX_RESERVE root, 		uint32_t, 1
-	NASMX_RESERVE last, 		uint32_t, 1
-	NASMX_RESERVE n_columns, 		uint32_t, 1
-	NASMX_RESERVE sort_column_id, 		uint32_t, 1
-	NASMX_RESERVE sort_list, 		uint32_t, 1
-	NASMX_RESERVE order, 		uint32_t, 1
-	NASMX_RESERVE column_headers, 		uint32_t, 1
-	NASMX_RESERVE default_sort_func, 		uint32_t, 1
-	NASMX_RESERVE default_sort_data, 		uint32_t, 1
-	NASMX_RESERVE default_sort_destroy, 		uint32_t, 1
-	NASMX_RESERVE columns_dirty, 		uint32_t, 1
+	NASMX_RESERVE parent,		int8_t, GObject_size
+	NASMX_RESERVE stamp,		uint32_t, 1
+	NASMX_RESERVE root,		uint32_t, 1
+	NASMX_RESERVE last,		uint32_t, 1
+	NASMX_RESERVE n_columns,	uint32_t, 1
+	NASMX_RESERVE sort_column_id,	uint32_t, 1
+	NASMX_RESERVE sort_list,	uint32_t, 1
+	NASMX_RESERVE order,		uint32_t, 1
+	NASMX_RESERVE column_headers,	uint32_t, 1
+	NASMX_RESERVE default_sort_func,	uint32_t, 1
+	NASMX_RESERVE default_sort_data,	uint32_t, 1
+	NASMX_RESERVE default_sort_destroy,	uint32_t, 1
+	NASMX_RESERVE columns_dirty,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTreeStoreClass
-	NASMX_RESERVE parent_class, 		int8_t, GObjectClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GObjectClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVButtonBox
-	NASMX_RESERVE button_box, 		int8_t, GtkButtonBox_size
+	NASMX_RESERVE button_box,	int8_t, GtkButtonBox_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVButtonBoxClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkButtonBoxClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkButtonBoxClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVolumeButton
-	NASMX_RESERVE parent, 		int8_t, GtkScaleButton_size
+	NASMX_RESERVE parent,		int8_t, GtkScaleButton_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVolumeButtonClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkScaleButtonClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkScaleButtonClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVPaned
-	NASMX_RESERVE paned, 		int8_t, GtkPaned_size
+	NASMX_RESERVE paned,		int8_t, GtkPaned_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVPanedClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkPanedClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkPanedClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVRuler
-	NASMX_RESERVE ruler, 		int8_t, GtkRuler_size
+	NASMX_RESERVE ruler,		int8_t, GtkRuler_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVRulerClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkRulerClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkRulerClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVScale
-	NASMX_RESERVE scale, 		int8_t, GtkScale_size
+	NASMX_RESERVE scale,		int8_t, GtkScale_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVScaleClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkScaleClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkScaleClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVSeparator
-	NASMX_RESERVE separator, 		int8_t, GtkSeparator_size
+	NASMX_RESERVE separator,	int8_t, GtkSeparator_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkVSeparatorClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkSeparatorClass_size
+	NASMX_RESERVE parent_class,	int8_t, GtkSeparatorClass_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCListCellInfo
-	NASMX_RESERVE row, 		uint32_t, 1
-	NASMX_RESERVE column, 		uint32_t, 1
+	NASMX_RESERVE row,		uint32_t, 1
+	NASMX_RESERVE column,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCListDestInfo
-	NASMX_RESERVE cell, 		int8_t, GtkCListCellInfo_size
-	NASMX_RESERVE insert_pos, 		uint32_t, 1
+	NASMX_RESERVE cell,		int8_t, GtkCListCellInfo_size
+	NASMX_RESERVE insert_pos,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCList
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE flags, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
-	NASMX_RESERVE reserved1, 		uint32_t, 1
-	NASMX_RESERVE reserved2, 		uint32_t, 1
-	NASMX_RESERVE freeze_count, 		uint32_t, 1
-	NASMX_RESERVE internal_allocation, 		int8_t, GdkRectangle_size
-	NASMX_RESERVE rows, 		uint32_t, 1
-	NASMX_RESERVE row_height, 		uint32_t, 1
-	NASMX_RESERVE row_list, 		uint32_t, 1
-	NASMX_RESERVE row_list_end, 		uint32_t, 1
-	NASMX_RESERVE columns, 		uint32_t, 1
-	NASMX_RESERVE column_title_area, 		int8_t, GdkRectangle_size
-	NASMX_RESERVE title_window, 		uint32_t, 1
-	NASMX_RESERVE column, 		uint32_t, 1
-	NASMX_RESERVE clist_window, 		uint32_t, 1
-	NASMX_RESERVE clist_window_width, 		uint32_t, 1
-	NASMX_RESERVE clist_window_height, 		uint32_t, 1
-	NASMX_RESERVE hoffset, 		uint32_t, 1
-	NASMX_RESERVE voffset, 		uint32_t, 1
-	NASMX_RESERVE shadow_type, 		uint32_t, 1
-	NASMX_RESERVE selection_mode, 		uint32_t, 1
-	NASMX_RESERVE selection, 		uint32_t, 1
-	NASMX_RESERVE selection_end, 		uint32_t, 1
-	NASMX_RESERVE undo_selection, 		uint32_t, 1
-	NASMX_RESERVE undo_unselection, 		uint32_t, 1
-	NASMX_RESERVE undo_anchor, 		uint32_t, 1
-	NASMX_RESERVE button_actions, 		int8_t, 5
-	NASMX_RESERVE drag_button, 		int8_t, 1
-	NASMX_RESERVE __PADDING2__, 		int8_t, 2
-	NASMX_RESERVE click_cell, 		int8_t, GtkCListCellInfo_size
-	NASMX_RESERVE hadjustment, 		uint32_t, 1
-	NASMX_RESERVE vadjustment, 		uint32_t, 1
-	NASMX_RESERVE xor_gc, 		uint32_t, 1
-	NASMX_RESERVE fg_gc, 		uint32_t, 1
-	NASMX_RESERVE bg_gc, 		uint32_t, 1
-	NASMX_RESERVE cursor_drag, 		uint32_t, 1
-	NASMX_RESERVE x_drag, 		uint32_t, 1
-	NASMX_RESERVE focus_row, 		uint32_t, 1
-	NASMX_RESERVE focus_header_column, 		uint32_t, 1
-	NASMX_RESERVE anchor, 		uint32_t, 1
-	NASMX_RESERVE anchor_state, 		uint32_t, 1
-	NASMX_RESERVE drag_pos, 		uint32_t, 1
-	NASMX_RESERVE htimer, 		uint32_t, 1
-	NASMX_RESERVE vtimer, 		uint32_t, 1
-	NASMX_RESERVE sort_type, 		uint32_t, 1
-	NASMX_RESERVE compare, 		uint32_t, 1
-	NASMX_RESERVE sort_column, 		uint32_t, 1
-	NASMX_RESERVE drag_highlight_row, 		uint32_t, 1
-	NASMX_RESERVE drag_highlight_pos, 		uint32_t, 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE flags,		uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
+	NASMX_RESERVE reserved1,	uint32_t, 1
+	NASMX_RESERVE reserved2,	uint32_t, 1
+	NASMX_RESERVE freeze_count,	uint32_t, 1
+	NASMX_RESERVE internal_allocation,	int8_t, GdkRectangle_size
+	NASMX_RESERVE rows,		uint32_t, 1
+	NASMX_RESERVE row_height,	uint32_t, 1
+	NASMX_RESERVE row_list,		uint32_t, 1
+	NASMX_RESERVE row_list_end,	uint32_t, 1
+	NASMX_RESERVE columns,		uint32_t, 1
+	NASMX_RESERVE column_title_area,	int8_t, GdkRectangle_size
+	NASMX_RESERVE title_window,	uint32_t, 1
+	NASMX_RESERVE column,		uint32_t, 1
+	NASMX_RESERVE clist_window,	uint32_t, 1
+	NASMX_RESERVE clist_window_width,	uint32_t, 1
+	NASMX_RESERVE clist_window_height,	uint32_t, 1
+	NASMX_RESERVE hoffset,		uint32_t, 1
+	NASMX_RESERVE voffset,		uint32_t, 1
+	NASMX_RESERVE shadow_type,	uint32_t, 1
+	NASMX_RESERVE selection_mode,	uint32_t, 1
+	NASMX_RESERVE selection,	uint32_t, 1
+	NASMX_RESERVE selection_end,	uint32_t, 1
+	NASMX_RESERVE undo_selection,	uint32_t, 1
+	NASMX_RESERVE undo_unselection,	uint32_t, 1
+	NASMX_RESERVE undo_anchor,	uint32_t, 1
+	NASMX_RESERVE button_actions,	int8_t, 5
+	NASMX_RESERVE drag_button,	int8_t, 1
+	NASMX_RESERVE __PADDING2__,	int8_t, 2
+	NASMX_RESERVE click_cell,	int8_t, GtkCListCellInfo_size
+	NASMX_RESERVE hadjustment,	uint32_t, 1
+	NASMX_RESERVE vadjustment,	uint32_t, 1
+	NASMX_RESERVE xor_gc,		uint32_t, 1
+	NASMX_RESERVE fg_gc,		uint32_t, 1
+	NASMX_RESERVE bg_gc,		uint32_t, 1
+	NASMX_RESERVE cursor_drag,	uint32_t, 1
+	NASMX_RESERVE x_drag,		uint32_t, 1
+	NASMX_RESERVE focus_row,	uint32_t, 1
+	NASMX_RESERVE focus_header_column,	uint32_t, 1
+	NASMX_RESERVE anchor,		uint32_t, 1
+	NASMX_RESERVE anchor_state,	uint32_t, 1
+	NASMX_RESERVE drag_pos,		uint32_t, 1
+	NASMX_RESERVE htimer,		uint32_t, 1
+	NASMX_RESERVE vtimer,		uint32_t, 1
+	NASMX_RESERVE sort_type,	uint32_t, 1
+	NASMX_RESERVE compare,		uint32_t, 1
+	NASMX_RESERVE sort_column,	uint32_t, 1
+	NASMX_RESERVE drag_highlight_row,	uint32_t, 1
+	NASMX_RESERVE drag_highlight_pos,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCListClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE set_scroll_adjustments, 		uint32_t, 1
-	NASMX_RESERVE refresh, 		uint32_t, 1
-	NASMX_RESERVE select_row, 		uint32_t, 1
-	NASMX_RESERVE unselect_row, 		uint32_t, 1
-	NASMX_RESERVE row_move, 		uint32_t, 1
-	NASMX_RESERVE click_column, 		uint32_t, 1
-	NASMX_RESERVE resize_column, 		uint32_t, 1
-	NASMX_RESERVE toggle_focus_row, 		uint32_t, 1
-	NASMX_RESERVE select_all, 		uint32_t, 1
-	NASMX_RESERVE unselect_all, 		uint32_t, 1
-	NASMX_RESERVE undo_selection, 		uint32_t, 1
-	NASMX_RESERVE start_selection, 		uint32_t, 1
-	NASMX_RESERVE end_selection, 		uint32_t, 1
-	NASMX_RESERVE extend_selection, 		uint32_t, 1
-	NASMX_RESERVE scroll_horizontal, 		uint32_t, 1
-	NASMX_RESERVE scroll_vertical, 		uint32_t, 1
-	NASMX_RESERVE toggle_add_mode, 		uint32_t, 1
-	NASMX_RESERVE abort_column_resize, 		uint32_t, 1
-	NASMX_RESERVE resync_selection, 		uint32_t, 1
-	NASMX_RESERVE selection_find, 		uint32_t, 1
-	NASMX_RESERVE draw_row, 		uint32_t, 1
-	NASMX_RESERVE draw_drag_highlight, 		uint32_t, 1
-	NASMX_RESERVE clear, 		uint32_t, 1
-	NASMX_RESERVE fake_unselect_all, 		uint32_t, 1
-	NASMX_RESERVE sort_list, 		uint32_t, 1
-	NASMX_RESERVE insert_row, 		uint32_t, 1
-	NASMX_RESERVE remove_row, 		uint32_t, 1
-	NASMX_RESERVE set_cell_contents, 		uint32_t, 1
-	NASMX_RESERVE cell_size_request, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE set_scroll_adjustments,	uint32_t, 1
+	NASMX_RESERVE refresh,		uint32_t, 1
+	NASMX_RESERVE select_row,	uint32_t, 1
+	NASMX_RESERVE unselect_row,	uint32_t, 1
+	NASMX_RESERVE row_move,		uint32_t, 1
+	NASMX_RESERVE click_column,	uint32_t, 1
+	NASMX_RESERVE resize_column,	uint32_t, 1
+	NASMX_RESERVE toggle_focus_row,	uint32_t, 1
+	NASMX_RESERVE select_all,	uint32_t, 1
+	NASMX_RESERVE unselect_all,	uint32_t, 1
+	NASMX_RESERVE undo_selection,	uint32_t, 1
+	NASMX_RESERVE start_selection,	uint32_t, 1
+	NASMX_RESERVE end_selection,	uint32_t, 1
+	NASMX_RESERVE extend_selection,	uint32_t, 1
+	NASMX_RESERVE scroll_horizontal,	uint32_t, 1
+	NASMX_RESERVE scroll_vertical,	uint32_t, 1
+	NASMX_RESERVE toggle_add_mode,	uint32_t, 1
+	NASMX_RESERVE abort_column_resize,	uint32_t, 1
+	NASMX_RESERVE resync_selection,	uint32_t, 1
+	NASMX_RESERVE selection_find,	uint32_t, 1
+	NASMX_RESERVE draw_row,		uint32_t, 1
+	NASMX_RESERVE draw_drag_highlight,	uint32_t, 1
+	NASMX_RESERVE clear,		uint32_t, 1
+	NASMX_RESERVE fake_unselect_all,	uint32_t, 1
+	NASMX_RESERVE sort_list,	uint32_t, 1
+	NASMX_RESERVE insert_row,	uint32_t, 1
+	NASMX_RESERVE remove_row,	uint32_t, 1
+	NASMX_RESERVE set_cell_contents,	uint32_t, 1
+	NASMX_RESERVE cell_size_request,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCListColumn
-	NASMX_RESERVE title, 		uint32_t, 1
-	NASMX_RESERVE area, 		int8_t, GdkRectangle_size
-	NASMX_RESERVE button, 		uint32_t, 1
-	NASMX_RESERVE window, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint32_t, 1
-	NASMX_RESERVE min_width, 		uint32_t, 1
-	NASMX_RESERVE max_width, 		uint32_t, 1
-	NASMX_RESERVE justification, 		uint32_t, 1
-	NASMX_RESERVE visible, 		uint32_t, 1
+	NASMX_RESERVE title,		uint32_t, 1
+	NASMX_RESERVE area,		int8_t, GdkRectangle_size
+	NASMX_RESERVE button,		uint32_t, 1
+	NASMX_RESERVE window,		uint32_t, 1
+	NASMX_RESERVE width,		uint32_t, 1
+	NASMX_RESERVE min_width,	uint32_t, 1
+	NASMX_RESERVE max_width,	uint32_t, 1
+	NASMX_RESERVE justification,	uint32_t, 1
+	NASMX_RESERVE visible,		uint32_t, 1
 ;.width_set:		RESD 1
 ;.resizeable:		RESD 1
 ;.auto_resize:		RESD 1
-;.button_passive:		RESD 1
+;.button_passive:	RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCListRow
-	NASMX_RESERVE cell, 		uint32_t, 1
-	NASMX_RESERVE state, 		uint32_t, 1
-	NASMX_RESERVE foreground, 		int8_t, GdkColor_size
-	NASMX_RESERVE background, 		int8_t, GdkColor_size
-	NASMX_RESERVE style, 		uint32_t, 1
-	NASMX_RESERVE data, 		uint32_t, 1
-	NASMX_RESERVE destroy, 		uint32_t, 1
-	NASMX_RESERVE fg_set, 		uint32_t, 1
+	NASMX_RESERVE cell,		uint32_t, 1
+	NASMX_RESERVE state,		uint32_t, 1
+	NASMX_RESERVE foreground,	int8_t, GdkColor_size
+	NASMX_RESERVE background,	int8_t, GdkColor_size
+	NASMX_RESERVE style,		uint32_t, 1
+	NASMX_RESERVE data,		uint32_t, 1
+	NASMX_RESERVE destroy,		uint32_t, 1
+	NASMX_RESERVE fg_set,		uint32_t, 1
 ;.bg_set:		RESD 1
 ;.selectable:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellText
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE vertical, 		uint16_t, 1
-	NASMX_RESERVE horizontal, 		uint16_t, 1
-	NASMX_RESERVE style, 		uint32_t, 1
-	NASMX_RESERVE text, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE vertical,		uint16_t, 1
+	NASMX_RESERVE horizontal,	uint16_t, 1
+	NASMX_RESERVE style,		uint32_t, 1
+	NASMX_RESERVE text,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellPixmap
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE vertical, 		uint16_t, 1
-	NASMX_RESERVE horizontal, 		uint16_t, 1
-	NASMX_RESERVE style, 		uint32_t, 1
-	NASMX_RESERVE pixmap, 		uint32_t, 1
-	NASMX_RESERVE mask, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE vertical,		uint16_t, 1
+	NASMX_RESERVE horizontal,	uint16_t, 1
+	NASMX_RESERVE style,		uint32_t, 1
+	NASMX_RESERVE pixmap,		uint32_t, 1
+	NASMX_RESERVE mask,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellPixText
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE vertical, 		uint16_t, 1
-	NASMX_RESERVE horizontal, 		uint16_t, 1
-	NASMX_RESERVE style, 		uint32_t, 1
-	NASMX_RESERVE text, 		uint32_t, 1
-	NASMX_RESERVE spacing, 		int8_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 3
-	NASMX_RESERVE pixmap, 		uint32_t, 1
-	NASMX_RESERVE mask, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE vertical,		uint16_t, 1
+	NASMX_RESERVE horizontal,	uint16_t, 1
+	NASMX_RESERVE style,		uint32_t, 1
+	NASMX_RESERVE text,		uint32_t, 1
+	NASMX_RESERVE spacing,		int8_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 3
+	NASMX_RESERVE pixmap,		uint32_t, 1
+	NASMX_RESERVE mask,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCellWidget
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE vertical, 		uint16_t, 1
-	NASMX_RESERVE horizontal, 		uint16_t, 1
-	NASMX_RESERVE style, 		uint32_t, 1
-	NASMX_RESERVE widget, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE vertical,		uint16_t, 1
+	NASMX_RESERVE horizontal,	uint16_t, 1
+	NASMX_RESERVE style,		uint32_t, 1
+	NASMX_RESERVE widget,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCell
-	NASMX_RESERVE type, 		uint32_t, 1
-	NASMX_RESERVE vertical, 		uint16_t, 1
-	NASMX_RESERVE horizontal, 		uint16_t, 1
-	NASMX_RESERVE style, 		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
+	NASMX_RESERVE vertical,		uint16_t, 1
+	NASMX_RESERVE horizontal,	uint16_t, 1
+	NASMX_RESERVE style,		uint32_t, 1
 
 ;;union {
 ;;    gchar *text;
@@ -7330,317 +7328,317 @@ NASMX_STRUC GtkCell
 ;;    } pt;
 ;;    GtkWidget *widget;
 ;;  } u;
-	NASMX_RESERVE u_union, 		uint32_t, 4
+	NASMX_RESERVE u_union,	uint32_t, 4
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCTree
-	NASMX_RESERVE clist, 		int8_t, GtkCList_size
-	NASMX_RESERVE lines_gc, 		uint32_t, 1
-	NASMX_RESERVE tree_indent, 		uint32_t, 1
-	NASMX_RESERVE tree_spacing, 		uint32_t, 1
-	NASMX_RESERVE tree_column, 		uint32_t, 1
-	NASMX_RESERVE line_style, 		uint32_t, 1
-;.expander_style:		RESD 1
+	NASMX_RESERVE clist,		int8_t, GtkCList_size
+	NASMX_RESERVE lines_gc,		uint32_t, 1
+	NASMX_RESERVE tree_indent,	uint32_t, 1
+	NASMX_RESERVE tree_spacing,	uint32_t, 1
+	NASMX_RESERVE tree_column,	uint32_t, 1
+	NASMX_RESERVE line_style,	uint32_t, 1
+;.expander_style:	RESD 1
 ;.show_stub:		RESD 1
-	NASMX_RESERVE drag_compare, 		uint32_t, 1
+	NASMX_RESERVE drag_compare,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCTreeClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkCListClass_size
-	NASMX_RESERVE tree_select_row, 		uint32_t, 1
-	NASMX_RESERVE tree_unselect_row, 		uint32_t, 1
-	NASMX_RESERVE tree_expand, 		uint32_t, 1
-	NASMX_RESERVE tree_collapse, 		uint32_t, 1
-	NASMX_RESERVE tree_move, 		uint32_t, 1
-	NASMX_RESERVE change_focus_row_expansion, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkCListClass_size
+	NASMX_RESERVE tree_select_row,	uint32_t, 1
+	NASMX_RESERVE tree_unselect_row,	uint32_t, 1
+	NASMX_RESERVE tree_expand,	uint32_t, 1
+	NASMX_RESERVE tree_collapse,	uint32_t, 1
+	NASMX_RESERVE tree_move,	uint32_t, 1
+	NASMX_RESERVE change_focus_row_expansion,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCTreeRow
-	NASMX_RESERVE row, 		int8_t, GtkCListRow_size
-	NASMX_RESERVE parent, 		uint32_t, 1
-	NASMX_RESERVE sibling, 		uint32_t, 1
-	NASMX_RESERVE children, 		uint32_t, 1
-	NASMX_RESERVE pixmap_closed, 		uint32_t, 1
-	NASMX_RESERVE mask_closed, 		uint32_t, 1
-	NASMX_RESERVE pixmap_opened, 		uint32_t, 1
-	NASMX_RESERVE mask_opened, 		uint32_t, 1
-	NASMX_RESERVE level, 		uint16_t, 1
-	NASMX_RESERVE __PADDING1__, 		int8_t, 2
-	NASMX_RESERVE is_leaf, 		uint32_t, 1
+	NASMX_RESERVE row,		int8_t, GtkCListRow_size
+	NASMX_RESERVE parent,		uint32_t, 1
+	NASMX_RESERVE sibling,		uint32_t, 1
+	NASMX_RESERVE children,		uint32_t, 1
+	NASMX_RESERVE pixmap_closed,	uint32_t, 1
+	NASMX_RESERVE mask_closed,	uint32_t, 1
+	NASMX_RESERVE pixmap_opened,	uint32_t, 1
+	NASMX_RESERVE mask_opened,	uint32_t, 1
+	NASMX_RESERVE level,		uint16_t, 1
+	NASMX_RESERVE __PADDING1__,	int8_t, 2
+	NASMX_RESERVE is_leaf,		uint32_t, 1
 ;.expanded:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCurve
-	NASMX_RESERVE graph, 		int8_t, GtkDrawingArea_size
-	NASMX_RESERVE cursor_type, 		uint32_t, 1
-	NASMX_RESERVE min_x, 		uint32_t, 1
-	NASMX_RESERVE max_x, 		uint32_t, 1
-	NASMX_RESERVE min_y, 		uint32_t, 1
-	NASMX_RESERVE max_y, 		uint32_t, 1
-	NASMX_RESERVE pixmap, 		uint32_t, 1
-	NASMX_RESERVE curve_type, 		uint32_t, 1
-	NASMX_RESERVE height, 		uint32_t, 1
-	NASMX_RESERVE grab_point, 		uint32_t, 1
-	NASMX_RESERVE last, 		uint32_t, 1
-	NASMX_RESERVE num_points, 		uint32_t, 1
-	NASMX_RESERVE point, 		uint32_t, 1
-	NASMX_RESERVE num_ctlpoints, 		uint32_t, 1
-	NASMX_RESERVE ctlpoint, 		uint32_t, 1
+	NASMX_RESERVE graph,		int8_t, GtkDrawingArea_size
+	NASMX_RESERVE cursor_type,	uint32_t, 1
+	NASMX_RESERVE min_x,		uint32_t, 1
+	NASMX_RESERVE max_x,		uint32_t, 1
+	NASMX_RESERVE min_y,		uint32_t, 1
+	NASMX_RESERVE max_y,		uint32_t, 1
+	NASMX_RESERVE pixmap,		uint32_t, 1
+	NASMX_RESERVE curve_type,	uint32_t, 1
+	NASMX_RESERVE height,		uint32_t, 1
+	NASMX_RESERVE grab_point,	uint32_t, 1
+	NASMX_RESERVE last,		uint32_t, 1
+	NASMX_RESERVE num_points,	uint32_t, 1
+	NASMX_RESERVE point,		uint32_t, 1
+	NASMX_RESERVE num_ctlpoints,	uint32_t, 1
+	NASMX_RESERVE ctlpoint,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkCurveClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkDrawingAreaClass_size
-	NASMX_RESERVE curve_type_changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkDrawingAreaClass_size
+	NASMX_RESERVE curve_type_changed,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFileSelection
-	NASMX_RESERVE parent_instance, 		int8_t, GtkDialog_size
-	NASMX_RESERVE dir_list, 		uint32_t, 1
-	NASMX_RESERVE file_list, 		uint32_t, 1
-	NASMX_RESERVE selection_entry, 		uint32_t, 1
-	NASMX_RESERVE selection_text, 		uint32_t, 1
-	NASMX_RESERVE main_vbox, 		uint32_t, 1
-	NASMX_RESERVE ok_button, 		uint32_t, 1
-	NASMX_RESERVE cancel_button, 		uint32_t, 1
-	NASMX_RESERVE help_button, 		uint32_t, 1
-	NASMX_RESERVE history_pulldown, 		uint32_t, 1
-	NASMX_RESERVE history_menu, 		uint32_t, 1
-	NASMX_RESERVE history_list, 		uint32_t, 1
-	NASMX_RESERVE fileop_dialog, 		uint32_t, 1
-	NASMX_RESERVE fileop_entry, 		uint32_t, 1
-	NASMX_RESERVE fileop_file, 		uint32_t, 1
-	NASMX_RESERVE cmpl_state, 		uint32_t, 1
-	NASMX_RESERVE fileop_c_dir, 		uint32_t, 1
-	NASMX_RESERVE fileop_del_file, 		uint32_t, 1
-	NASMX_RESERVE fileop_ren_file, 		uint32_t, 1
-	NASMX_RESERVE button_area, 		uint32_t, 1
-	NASMX_RESERVE action_area, 		uint32_t, 1
-	NASMX_RESERVE selected_names, 		uint32_t, 1
-	NASMX_RESERVE last_selected, 		uint32_t, 1
+	NASMX_RESERVE parent_instance,	int8_t, GtkDialog_size
+	NASMX_RESERVE dir_list,		uint32_t, 1
+	NASMX_RESERVE file_list,	uint32_t, 1
+	NASMX_RESERVE selection_entry,	uint32_t, 1
+	NASMX_RESERVE selection_text,	uint32_t, 1
+	NASMX_RESERVE main_vbox,	uint32_t, 1
+	NASMX_RESERVE ok_button,	uint32_t, 1
+	NASMX_RESERVE cancel_button,	uint32_t, 1
+	NASMX_RESERVE help_button,	uint32_t, 1
+	NASMX_RESERVE history_pulldown,	uint32_t, 1
+	NASMX_RESERVE history_menu,	uint32_t, 1
+	NASMX_RESERVE history_list,	uint32_t, 1
+	NASMX_RESERVE fileop_dialog,	uint32_t, 1
+	NASMX_RESERVE fileop_entry,	uint32_t, 1
+	NASMX_RESERVE fileop_file,	uint32_t, 1
+	NASMX_RESERVE cmpl_state,	uint32_t, 1
+	NASMX_RESERVE fileop_c_dir,	uint32_t, 1
+	NASMX_RESERVE fileop_del_file,	uint32_t, 1
+	NASMX_RESERVE fileop_ren_file,	uint32_t, 1
+	NASMX_RESERVE button_area,	uint32_t, 1
+	NASMX_RESERVE action_area,	uint32_t, 1
+	NASMX_RESERVE selected_names,	uint32_t, 1
+	NASMX_RESERVE last_selected,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkFileSelectionClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkDialogClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkDialogClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkGammaCurve
-	NASMX_RESERVE vbox, 		int8_t, GtkVBox_size
-	NASMX_RESERVE table, 		uint32_t, 1
-	NASMX_RESERVE curve, 		uint32_t, 1
-	NASMX_RESERVE button, 		uint32_t, 1
-	NASMX_RESERVE gamma, 		uint32_t, 1
-	NASMX_RESERVE gamma_dialog, 		uint32_t, 1
-	NASMX_RESERVE gamma_text, 		uint32_t, 1
+	NASMX_RESERVE vbox,		int8_t, GtkVBox_size
+	NASMX_RESERVE table,		uint32_t, 1
+	NASMX_RESERVE curve,		uint32_t, 1
+	NASMX_RESERVE button,		uint32_t, 1
+	NASMX_RESERVE gamma,		uint32_t, 1
+	NASMX_RESERVE gamma_dialog,	uint32_t, 1
+	NASMX_RESERVE gamma_text,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkGammaCurveClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkVBoxClass_size
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkVBoxClass_size
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkInputDialog
-	NASMX_RESERVE dialog, 		int8_t, GtkDialog_size
-	NASMX_RESERVE axis_list, 		uint32_t, 1
-	NASMX_RESERVE axis_listbox, 		uint32_t, 1
-	NASMX_RESERVE mode_optionmenu, 		uint32_t, 1
-	NASMX_RESERVE close_button, 		uint32_t, 1
-	NASMX_RESERVE save_button, 		uint32_t, 1
-	NASMX_RESERVE axis_items, 		uint32_t, 1
-	NASMX_RESERVE current_device, 		uint32_t, 1
-	NASMX_RESERVE keys_list, 		uint32_t, 1
-	NASMX_RESERVE keys_listbox, 		uint32_t, 1
+	NASMX_RESERVE dialog,		int8_t, GtkDialog_size
+	NASMX_RESERVE axis_list,	uint32_t, 1
+	NASMX_RESERVE axis_listbox,	uint32_t, 1
+	NASMX_RESERVE mode_optionmenu,	uint32_t, 1
+	NASMX_RESERVE close_button,	uint32_t, 1
+	NASMX_RESERVE save_button,	uint32_t, 1
+	NASMX_RESERVE axis_items,	uint32_t, 1
+	NASMX_RESERVE current_device,	uint32_t, 1
+	NASMX_RESERVE keys_list,	uint32_t, 1
+	NASMX_RESERVE keys_listbox,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkInputDialogClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkDialogClass_size
-	NASMX_RESERVE enable_device, 		uint32_t, 1
-	NASMX_RESERVE disable_device, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkDialogClass_size
+	NASMX_RESERVE enable_device,	uint32_t, 1
+	NASMX_RESERVE disable_device,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkItemFactory
-	NASMX_RESERVE object, 		int8_t, GtkObject_size
-	NASMX_RESERVE path, 		uint32_t, 1
-	NASMX_RESERVE accel_group, 		uint32_t, 1
-	NASMX_RESERVE widget, 		uint32_t, 1
-	NASMX_RESERVE items, 		uint32_t, 1
-	NASMX_RESERVE translate_func, 		uint32_t, 1
-	NASMX_RESERVE translate_data, 		uint32_t, 1
-	NASMX_RESERVE translate_notify, 		uint32_t, 1
+	NASMX_RESERVE object,		int8_t, GtkObject_size
+	NASMX_RESERVE path,		uint32_t, 1
+	NASMX_RESERVE accel_group,	uint32_t, 1
+	NASMX_RESERVE widget,		uint32_t, 1
+	NASMX_RESERVE items,		uint32_t, 1
+	NASMX_RESERVE translate_func,	uint32_t, 1
+	NASMX_RESERVE translate_data,	uint32_t, 1
+	NASMX_RESERVE translate_notify,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkItemFactoryClass
-	NASMX_RESERVE object_class, 		int8_t, GtkObjectClass_size
-	NASMX_RESERVE item_ht, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE object_class,	int8_t, GtkObjectClass_size
+	NASMX_RESERVE item_ht,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkItemFactoryEntry
-	NASMX_RESERVE path, 		uint32_t, 1
-	NASMX_RESERVE accelerator, 		uint32_t, 1
-	NASMX_RESERVE callback, 		uint32_t, 1
-	NASMX_RESERVE callback_action, 		uint32_t, 1
-	NASMX_RESERVE item_type, 		uint32_t, 1
-	NASMX_RESERVE extra_data, 		uint32_t, 1
+	NASMX_RESERVE path,		uint32_t, 1
+	NASMX_RESERVE accelerator,	uint32_t, 1
+	NASMX_RESERVE callback,		uint32_t, 1
+	NASMX_RESERVE callback_action,	uint32_t, 1
+	NASMX_RESERVE item_type,	uint32_t, 1
+	NASMX_RESERVE extra_data,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkItemFactoryItem
-	NASMX_RESERVE path, 		uint32_t, 1
-	NASMX_RESERVE widgets, 		uint32_t, 1
+	NASMX_RESERVE path,		uint32_t, 1
+	NASMX_RESERVE widgets,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkList
-	NASMX_RESERVE container, 		int8_t, GtkContainer_size
-	NASMX_RESERVE children, 		uint32_t, 1
-	NASMX_RESERVE selection, 		uint32_t, 1
-	NASMX_RESERVE undo_selection, 		uint32_t, 1
-	NASMX_RESERVE undo_unselection, 		uint32_t, 1
-	NASMX_RESERVE last_focus_child, 		uint32_t, 1
-	NASMX_RESERVE undo_focus_child, 		uint32_t, 1
-	NASMX_RESERVE htimer, 		uint32_t, 1
-	NASMX_RESERVE vtimer, 		uint32_t, 1
-	NASMX_RESERVE anchor, 		uint32_t, 1
-	NASMX_RESERVE drag_pos, 		uint32_t, 1
-	NASMX_RESERVE anchor_state, 		uint32_t, 1
-	NASMX_RESERVE selection_mode, 		uint32_t, 1
-;.drag_selection:		RESD 1
+	NASMX_RESERVE container,	int8_t, GtkContainer_size
+	NASMX_RESERVE children,		uint32_t, 1
+	NASMX_RESERVE selection,	uint32_t, 1
+	NASMX_RESERVE undo_selection,	uint32_t, 1
+	NASMX_RESERVE undo_unselection,	uint32_t, 1
+	NASMX_RESERVE last_focus_child,	uint32_t, 1
+	NASMX_RESERVE undo_focus_child,	uint32_t, 1
+	NASMX_RESERVE htimer,		uint32_t, 1
+	NASMX_RESERVE vtimer,		uint32_t, 1
+	NASMX_RESERVE anchor,		uint32_t, 1
+	NASMX_RESERVE drag_pos,		uint32_t, 1
+	NASMX_RESERVE anchor_state,	uint32_t, 1
+	NASMX_RESERVE selection_mode,	uint32_t, 1
+;.drag_selection:	RESD 1
 ;.add_mode:		RESD 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkListClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkContainerClass_size
-	NASMX_RESERVE selection_changed, 		uint32_t, 1
-	NASMX_RESERVE select_child, 		uint32_t, 1
-	NASMX_RESERVE unselect_child, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkContainerClass_size
+	NASMX_RESERVE selection_changed,	uint32_t, 1
+	NASMX_RESERVE select_child,	uint32_t, 1
+	NASMX_RESERVE unselect_child,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkListItem
-	NASMX_RESERVE item, 		int8_t, GtkItem_size
+	NASMX_RESERVE item,		int8_t, GtkItem_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkListItemClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkItemClass_size
-	NASMX_RESERVE toggle_focus_row, 		uint32_t, 1
-	NASMX_RESERVE select_all, 		uint32_t, 1
-	NASMX_RESERVE unselect_all, 		uint32_t, 1
-	NASMX_RESERVE undo_selection, 		uint32_t, 1
-	NASMX_RESERVE start_selection, 		uint32_t, 1
-	NASMX_RESERVE end_selection, 		uint32_t, 1
-	NASMX_RESERVE extend_selection, 		uint32_t, 1
-	NASMX_RESERVE scroll_horizontal, 		uint32_t, 1
-	NASMX_RESERVE scroll_vertical, 		uint32_t, 1
-	NASMX_RESERVE toggle_add_mode, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkItemClass_size
+	NASMX_RESERVE toggle_focus_row,	uint32_t, 1
+	NASMX_RESERVE select_all,	uint32_t, 1
+	NASMX_RESERVE unselect_all,	uint32_t, 1
+	NASMX_RESERVE undo_selection,	uint32_t, 1
+	NASMX_RESERVE start_selection,	uint32_t, 1
+	NASMX_RESERVE end_selection,	uint32_t, 1
+	NASMX_RESERVE extend_selection,	uint32_t, 1
+	NASMX_RESERVE scroll_horizontal,	uint32_t, 1
+	NASMX_RESERVE scroll_vertical,	uint32_t, 1
+	NASMX_RESERVE toggle_add_mode,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkOldEditable
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE current_pos, 		uint32_t, 1
-	NASMX_RESERVE selection_start_pos, 		uint32_t, 1
-	NASMX_RESERVE selection_end_pos, 		uint32_t, 1
-	NASMX_RESERVE has_selection, 		uint32_t, 1
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
+	NASMX_RESERVE current_pos,	uint32_t, 1
+	NASMX_RESERVE selection_start_pos,	uint32_t, 1
+	NASMX_RESERVE selection_end_pos,	uint32_t, 1
+	NASMX_RESERVE has_selection,	uint32_t, 1
 ;.editable:		RESD 1
 ;.visible:		RESD 1
-	NASMX_RESERVE clipboard_text, 		uint32_t, 1
+	NASMX_RESERVE clipboard_text,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkOldEditableClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE activate, 		uint32_t, 1
-	NASMX_RESERVE set_editable, 		uint32_t, 1
-	NASMX_RESERVE move_cursor, 		uint32_t, 1
-	NASMX_RESERVE move_word, 		uint32_t, 1
-	NASMX_RESERVE move_page, 		uint32_t, 1
-	NASMX_RESERVE move_to_row, 		uint32_t, 1
-	NASMX_RESERVE move_to_column, 		uint32_t, 1
-	NASMX_RESERVE kill_char, 		uint32_t, 1
-	NASMX_RESERVE kill_word, 		uint32_t, 1
-	NASMX_RESERVE kill_line, 		uint32_t, 1
-	NASMX_RESERVE cut_clipboard, 		uint32_t, 1
-	NASMX_RESERVE copy_clipboard, 		uint32_t, 1
-	NASMX_RESERVE paste_clipboard, 		uint32_t, 1
-	NASMX_RESERVE update_text, 		uint32_t, 1
-	NASMX_RESERVE get_chars, 		uint32_t, 1
-	NASMX_RESERVE set_selection, 		uint32_t, 1
-	NASMX_RESERVE set_position, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE activate,		uint32_t, 1
+	NASMX_RESERVE set_editable,	uint32_t, 1
+	NASMX_RESERVE move_cursor,	uint32_t, 1
+	NASMX_RESERVE move_word,	uint32_t, 1
+	NASMX_RESERVE move_page,	uint32_t, 1
+	NASMX_RESERVE move_to_row,	uint32_t, 1
+	NASMX_RESERVE move_to_column,	uint32_t, 1
+	NASMX_RESERVE kill_char,	uint32_t, 1
+	NASMX_RESERVE kill_word,	uint32_t, 1
+	NASMX_RESERVE kill_line,	uint32_t, 1
+	NASMX_RESERVE cut_clipboard,	uint32_t, 1
+	NASMX_RESERVE copy_clipboard,	uint32_t, 1
+	NASMX_RESERVE paste_clipboard,	uint32_t, 1
+	NASMX_RESERVE update_text,	uint32_t, 1
+	NASMX_RESERVE get_chars,	uint32_t, 1
+	NASMX_RESERVE set_selection,	uint32_t, 1
+	NASMX_RESERVE set_position,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkOptionMenu
-	NASMX_RESERVE button, 		int8_t, GtkButton_size
-	NASMX_RESERVE menu, 		uint32_t, 1
-	NASMX_RESERVE menu_item, 		uint32_t, 1
-	NASMX_RESERVE width, 		uint16_t, 1
-	NASMX_RESERVE height, 		uint16_t, 1
+	NASMX_RESERVE button,		int8_t, GtkButton_size
+	NASMX_RESERVE menu,		uint32_t, 1
+	NASMX_RESERVE menu_item,	uint32_t, 1
+	NASMX_RESERVE width,		uint16_t, 1
+	NASMX_RESERVE height,		uint16_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkOptionMenuClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkButtonClass_size
-	NASMX_RESERVE changed, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkButtonClass_size
+	NASMX_RESERVE changed,		uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPreview
-	NASMX_RESERVE widget, 		int8_t, GtkWidget_size
-	NASMX_RESERVE buffer, 		uint32_t, 1
-	NASMX_RESERVE buffer_width, 		uint16_t, 1
-	NASMX_RESERVE buffer_height, 		uint16_t, 1
-	NASMX_RESERVE bpp, 		uint16_t, 1
-	NASMX_RESERVE rowstride, 		uint16_t, 1
-	NASMX_RESERVE dither, 		uint32_t, 1
-	NASMX_RESERVE type, 		uint32_t, 1
+	NASMX_RESERVE widget,		int8_t, GtkWidget_size
+	NASMX_RESERVE buffer,		uint32_t, 1
+	NASMX_RESERVE buffer_width,	uint16_t, 1
+	NASMX_RESERVE buffer_height,	uint16_t, 1
+	NASMX_RESERVE bpp,		uint16_t, 1
+	NASMX_RESERVE rowstride,	uint16_t, 1
+	NASMX_RESERVE dither,		uint32_t, 1
+	NASMX_RESERVE type,		uint32_t, 1
 ;.expand:		RESD 1	
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPreviewInfo
-	NASMX_RESERVE lookup, 		uint32_t, 1
-	NASMX_RESERVE gamma, 		uint32_t, 1
+	NASMX_RESERVE lookup,		uint32_t, 1
+	NASMX_RESERVE gamma,		uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkPreviewClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkWidgetClass_size
-	NASMX_RESERVE info, 		int8_t, GtkPreviewInfo_size
+	NASMX_RESERVE parent_class,	int8_t, GtkWidgetClass_size
+	NASMX_RESERVE info,		int8_t, GtkPreviewInfo_size
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTipsQuery
-	NASMX_RESERVE label, 		int8_t, GtkLabel_size
-	NASMX_RESERVE emit_always, 		uint32_t, 1
+	NASMX_RESERVE label,		int8_t, GtkLabel_size
+	NASMX_RESERVE emit_always,	uint32_t, 1
 ;.in_query:		RESD 1
-	NASMX_RESERVE label_inactive, 		uint32_t, 1
-	NASMX_RESERVE label_no_tip, 		uint32_t, 1
-	NASMX_RESERVE caller, 		uint32_t, 1
-	NASMX_RESERVE last_crossed, 		uint32_t, 1
-	NASMX_RESERVE query_cursor, 		uint32_t, 1
+	NASMX_RESERVE label_inactive,	uint32_t, 1
+	NASMX_RESERVE label_no_tip,	uint32_t, 1
+	NASMX_RESERVE caller,		uint32_t, 1
+	NASMX_RESERVE last_crossed,	uint32_t, 1
+	NASMX_RESERVE query_cursor,	uint32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC GtkTipsQueryClass
-	NASMX_RESERVE parent_class, 		int8_t, GtkLabelClass_size
-	NASMX_RESERVE start_query, 		uint32_t, 1
-	NASMX_RESERVE stop_query, 		uint32_t, 1
-	NASMX_RESERVE widget_entered, 		uint32_t, 1
-	NASMX_RESERVE widget_selected, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved1, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved2, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved3, 		uint32_t, 1
-	NASMX_RESERVE _gtk_reserved4, 		uint32_t, 1
+	NASMX_RESERVE parent_class,	int8_t, GtkLabelClass_size
+	NASMX_RESERVE start_query,	uint32_t, 1
+	NASMX_RESERVE stop_query,	uint32_t, 1
+	NASMX_RESERVE widget_entered,	uint32_t, 1
+	NASMX_RESERVE widget_selected,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved1,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved2,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved3,	uint32_t, 1
+	NASMX_RESERVE _gtk_reserved4,	uint32_t, 1
 NASMX_ENDSTRUC
 
 
