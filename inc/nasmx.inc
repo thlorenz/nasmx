@@ -211,43 +211,43 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 ;//
 ;// nasm storage types
 ;//
-%ixdefine byte_reserve   RESB
-%ixdefine word_reserve   RESW
-%ixdefine dword_reserve  RESD
-%ixdefine qword_reserve  RESQ
-%ixdefine tword_reserve  REST
-%ixdefine oword_reserve  RESO
-%ixdefine __m64_reserve  RESQ
-%ixdefine __m128_reserve RESO
-%ixdefine __int64_reserve  RESQ
-%ixdefine __int128_reserve RESO
-%ixdefine __nxfloat_reserve    RESD
-%ixdefine __nxdouble_reserve   RESQ
-%ixdefine __nxfloat32_reserve  RESD
-%ixdefine __nxfloat64_reserve  RESQ
-%ixdefine __nxfloat80_reserve  RESO
-%ixdefine __nxfloat128_reserve RESO
+%ixdefine byte__nx_reserve   RESB
+%ixdefine word__nx_reserve   RESW
+%ixdefine dword__nx_reserve  RESD
+%ixdefine qword__nx_reserve  RESQ
+%ixdefine tword__nx_reserve  REST
+%ixdefine oword__nx_reserve  RESO
+%ixdefine __m64__nx_reserve  RESQ
+%ixdefine __m128__nx_reserve RESO
+%ixdefine __int64__nx_reserve  RESQ
+%ixdefine __int128__nx_reserve RESO
+%ixdefine __nxfloat__nx_reserve    RESD
+%ixdefine __nxdouble__nx_reserve   RESQ
+%ixdefine __nxfloat32__nx_reserve  RESD
+%ixdefine __nxfloat64__nx_reserve  RESQ
+%ixdefine __nxfloat80__nx_reserve  RESO
+%ixdefine __nxfloat128__nx_reserve RESO
 
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// nasm storage types
 ;//
-%ixdefine byte_storage   DB
-%ixdefine word_storage   DW
-%ixdefine dword_storage  DD
-%ixdefine qword_storage  DQ
-%ixdefine tword_storage  DT
-%ixdefine oword_storage  DO
-%ixdefine __m64_storage  DQ
-%ixdefine __m128_storage DO
-%ixdefine __int64_storage  DQ
-%ixdefine __int128_storage DO
-%ixdefine __nxfloat_storage    DD
-%ixdefine __nxdouble_storage   DQ
-%ixdefine __nxfloat32_storage  DD
-%ixdefine __nxfloat64_storage  DQ
-%ixdefine __nxfloat80_storage  DO
-%ixdefine __nxfloat128_storage DO
+%ixdefine byte__nx_storage   DB
+%ixdefine word__nx_storage   DW
+%ixdefine dword__nx_storage  DD
+%ixdefine qword__nx_storage  DQ
+%ixdefine tword__nx_storage  DT
+%ixdefine oword__nx_storage  DO
+%ixdefine __m64__nx_storage  DQ
+%ixdefine __m128__nx_storage DO
+%ixdefine __int64__nx_storage  DQ
+%ixdefine __int128__nx_storage DO
+%ixdefine __nxfloat__nx_storage    DD
+%ixdefine __nxdouble__nx_storage   DQ
+%ixdefine __nxfloat32__nx_storage  DD
+%ixdefine __nxfloat64__nx_storage  DQ
+%ixdefine __nxfloat80__nx_storage  DO
+%ixdefine __nxfloat128__nx_storage DO
 
 ;//////////////////////////////////////////////////////////////
 ;//
@@ -265,24 +265,24 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 ;//     13 : set if union type
 ;//     14 : set if class type
 ;//     15 : set if float type, otherwise clear
-;// 
-%ixdefine byte_type   0x0001
-%ixdefine word_type   0x0002
-%ixdefine dword_type  0x0004
-%ixdefine qword_type  0x0008
-%ixdefine tword_type  0x000A
-%ixdefine oword_type  0x0010
-%ixdefine __m64_type  0x8008
-%ixdefine __m128_type 0x8010
-%ixdefine __m256_type 0x8020
-%ixdefine __int64_type  0x8008
-%ixdefine __int128_type 0x8010
-%ixdefine __nxfloat_type    0x8004
-%ixdefine __nxdouble_type   0x8008
-%ixdefine __nxfloat32_type  0x8004
-%ixdefine __nxfloat64_type  0x8008
-%ixdefine __nxfloat80_type  0x800A
-%ixdefine __nxfloat128_type 0x8010
+;//
+%ixdefine byte__nx_type   0x0001
+%ixdefine word__nx_type   0x0002
+%ixdefine dword__nx_type  0x0004
+%ixdefine qword__nx_type  0x0008
+%ixdefine tword__nx_type  0x000A
+%ixdefine oword__nx_type  0x0010
+%ixdefine __m64__nx_type  0x8008
+%ixdefine __m128__nx_type 0x8010
+%ixdefine __m256__nx_type 0x8020
+%ixdefine __int64__nx_type  0x8008
+%ixdefine __int128__nx_type 0x8010
+%ixdefine __nxfloat__nx_type    0x8004
+%ixdefine __nxdouble__nx_type   0x8008
+%ixdefine __nxfloat32__nx_type  0x8004
+%ixdefine __nxfloat64__nx_type  0x8008
+%ixdefine __nxfloat80__nx_type  0x800A
+%ixdefine __nxfloat128__nx_type 0x8010
 
 %xdefine __NX_STRUC_TYPE 0x1000
 %xdefine __NX_UNION_TYPE 0x2000
@@ -345,32 +345,34 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 %ixdefine __nx_error_token_size_16 xmm
 %ixdefine __nx_error_token_size_32 xmm
 
-%define typeof(x) ((x %+ _type >> 12) & 0x000F)
+%define typeof(x) ((x %+ __nx_type >> 12) & 0x000F)
 %define sizeof(x) x %+ _size
-%define reserve(x) x %+ _reserve
-%define declare(x) x %+ _storage
+%define reserve(x) x %+ __nx_reserve
+%define declare(x) x %+ __nx_storage
 %define nx_token_from_size(x) __nx_error_token_size_ %+ x
-%idefine is_typeof_struc(x) ((x %+ _type >> 12) & 0x0001)
-%idefine is_typeof_union(x) ((x %+ _type >> 13) & 0x0001)
-%idefine is_typeof_class(x) ((x %+ _type >> 14) & 0x0001)
-%idefine is_typeof_float(x) ((x %+ _type >> 15) & 0x0001)
-%idefine nx_is_typeof_container(x) ((x %+ _type >> 12) & 0x0007)
+%idefine is_typeof_struc(x) ((x %+ __nx_type >> 12) & 0x0001)
+%idefine is_typeof_union(x) ((x %+ __nx_type >> 13) & 0x0001)
+%idefine is_typeof_class(x) ((x %+ __nx_type >> 14) & 0x0001)
+%idefine is_typeof_float(x) ((x %+ __nx_type >> 15) & 0x0001)
+%idefine nx_is_typeof_container(x) ((x %+ __nx_type >> 12) & 0x0007)
 
 ;// class and member access specifiers
-%ixdefine __nx_class_static    0x0100
-%ixdefine __nx_class_abstract  0x0200
-%ixdefine __nx_class_virtual   0x0400
+%ixdefine __nx_class_const     0x0100
+%ixdefine __nx_class_static    0x0200
+%ixdefine __nx_class_abstract  0x0400
+%ixdefine __nx_class_virtual   0x0800
 %ixdefine __nx_class_private   0x1000
 %ixdefine __nx_class_protected 0x2000
 %ixdefine __nx_class_public    0x4000
 
 ;// class and member tests - returns 0 if false, otherwise non-zero
-%idefine is_class_typeof_static(x) ((x %+ _class_type) & __nx_class_static)
-%idefine is_class_typeof_abstract(x) ((x %+ _class_type) & __nx_class_abstract)
-%idefine is_class_typeof_virtual(x) ((x %+ _class_type) & __nx_class_virtual)
-%idefine is_class_typeof_private(x) ((x %+ _class_type) & __nx_class_private)
-%idefine is_class_typeof_protected(x) ((x %+ _class_type) & __nx_class_protected)
-%idefine is_class_typeof_public(x) ((x %+ _class_type) & __nx_class_public)
+%idefine is_class_typeof_const(x) ((x %+ __nx_class_type) & __nx_class_const)
+%idefine is_class_typeof_static(x) ((x %+ __nx_class_type) & __nx_class_static)
+%idefine is_class_typeof_abstract(x) ((x %+ __nx_class_type) & __nx_class_abstract)
+%idefine is_class_typeof_virtual(x) ((x %+ __nx_class_type) & __nx_class_virtual)
+%idefine is_class_typeof_private(x) ((x %+ __nx_class_type) & __nx_class_private)
+%idefine is_class_typeof_protected(x) ((x %+ __nx_class_type) & __nx_class_protected)
+%idefine is_class_typeof_public(x) ((x %+ __nx_class_type) & __nx_class_public)
 
 ;//////////////////////////////////////////////////////////////
 ;//
@@ -1017,7 +1019,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 			%endif
 		%else
 			;// obtain the type and size of the equate to build
-			%xdefine %%__type %[%%__name %+ _type]
+			%xdefine %%__type %[%%__name %+ __nx_type]
 			%assign %%__size %[%%__name %+ _size]
 
 			;// In order to properly align the offset we need
@@ -1173,8 +1175,8 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 	%assign %$__nx_offset 0
 	%assign %$__nx_equcount %%__equcount
 
-	%xdefine %{$__nx_name}_reserve byte_reserve
-	%xdefine %{$__nx_name}_storage byte_storage
+	%xdefine %{$__nx_name}__nx_reserve byte__nx_reserve
+	%xdefine %{$__nx_name}__nx_storage byte__nx_storage
 %endmacro
 
 %imacro NASMX_UNION 1-2.nolist __NX_ROOT
@@ -1219,11 +1221,11 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 		%fatal unknown size for %{$__nx_name}.%{1}: %{2}
 	%endif
 
-	%ifndef %{2}_type
+	%ifndef %{2}__nx_type
 		%fatal unknown type tag for %{$__nx_name}.%{1}
 	%endif
 
-	%ifndef %{2}_storage
+	%ifndef %{2}__nx_storage
 		%fatal unknown storage tag for %{$__nx_name}.%{1}
 	%endif
 
@@ -1238,17 +1240,17 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 		%assign %%__amt (%%size * %%__qty)
 		%xdefine %[%{$__nx_name}.%{1}]_size %%__amt
 		;// use struc alignment as type
-		%assign %%typ %[%{2}_type]
+		%assign %%typ %[%{2}__nx_type]
 		%assign %%__align (0x0001 << (%%typ & 0x000F))
-		%xdefine %[%{$__nx_name}.%{1}]_type %%__align
-		%xdefine %[%{$__nx_name}.%{1}]_reserve byte_reserve
-		%xdefine %[%{$__nx_name}.%{1}]_storage byte_storage
+		%xdefine %[%{$__nx_name}.%{1}]__nx_type %%__align
+		%xdefine %[%{$__nx_name}.%{1}]__nx_reserve byte__nx_reserve
+		%xdefine %[%{$__nx_name}.%{1}]__nx_storage byte__nx_storage
 	%else
 		%assign %%__amt (%%__argsize * %%__qty)
 		%xdefine %[%{$__nx_name}.%{1}]_size %%__amt
-		%xdefine %[%{$__nx_name}.%{1}]_type %[%{2}]_type
-		%xdefine %[%{$__nx_name}.%{1}]_reserve %[%{2}]_reserve
-		%xdefine %[%{$__nx_name}.%{1}]_storage %[%{2}]_storage
+		%xdefine %[%{$__nx_name}.%{1}]__nx_type %[%{2}]__nx_type
+		%xdefine %[%{$__nx_name}.%{1}]__nx_reserve %[%{2}]__nx_reserve
+		%xdefine %[%{$__nx_name}.%{1}]__nx_storage %[%{2}]__nx_storage
 	%endif
 
 	;// create the equate names for offset processing
@@ -1261,7 +1263,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 		;// already been established, thus we simply
 		;// simply obtain that value.  Remember,
 		;// container alignment is in exponent form!
-		%assign %%typ %[%{2}_type]
+		%assign %%typ %[%{2}__nx_type]
 		%assign %%__align (0x0001 << (%%typ & 0x000F))
 	%else
 		;// if the size of the base type for the current
@@ -1356,7 +1358,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 	%endif
 	%assign %%type (%%type | %%exp)
 
-	%xdefine %[%{$__nx_name}]_type %%type
+	%xdefine %[%{$__nx_name}]__nx_type %%type
 	
 	;// save ctx data and pop stack
 	%xdefine %%__tname %$__nx_name 
@@ -1467,7 +1469,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 	%if (%%__count > 0)
 		times %%__count db 0
 	%endif
-	%{$__nx_name}.%{1}_storage %2
+	%{$__nx_name}.%{1}__nx_storage %2
 %endmacro
 
 %imacro NASMX_IENDSTRUC 0.nolist
@@ -1941,7 +1943,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 					%error %1 exceeds allowable parameter size
 				%endif
 				%assign %$__bytecount %$__bytecount + %%__param_size
-				%xdefine __nx_import_argtype %$__nx_token %+ _type
+				%xdefine __nx_import_argtype %$__nx_token %+ __nx_type
 				%ifndef __nx_import_param_list
 					%defstr __nx_import_param_list __nx_import_argtype
 				%else
@@ -2028,7 +2030,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 					%error %1 exceeds allowable parameter size
 				%endif
 				%assign %$__bytecount %$__bytecount + %%__param_size
-				%xdefine __nx_proto_argtype %$__nx_token %+ _type
+				%xdefine __nx_proto_argtype %$__nx_token %+ __nx_type
 				%ifndef __nx_proto_param_list
 					%defstr __nx_proto_param_list __nx_proto_argtype
 				%else
@@ -2859,7 +2861,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 		;// %assign %$__nx_bytecount %$__nx_repcnt * sizeof(size_t)
 		;// Also build the parameter type list here in case the procedure
 		;// has not been prototyped or imported.
-		%xdefine __nx_proto_argtype %$__nx_token %+ _type
+		%xdefine __nx_proto_argtype %$__nx_token %+ __nx_type
 		%assign %%__param_type __nx_proto_argtype
 		%assign %%__param_size (%%__param_type & 0x7F)
 		%if %%__param_size < sizeof(size_t)
