@@ -18,7 +18,7 @@ The community forum can be found at:
 Downloads and snapshots are available from:
   http://sourceforge.net/projects/nasmx/
 
-In this package, you will find 3 main directories and they
+In this package, you will find 4 main directories and they
 are as follows...
 
 bin	- This directory is the primary location of all
@@ -37,6 +37,11 @@ demos	- This directory holds various applications that
           All file and directory paths found in the related
           demo files are relative to where NASMX is
           installed.
+
+doc	- This directory contains the Nasm documentation in
+	  .pdf and .chm ( Windows compiled help module )
+	  format.  It also contains the latest NASMX html
+	  and .chm files.
 
 inc	- This directory holds vital include files needed
           by NASMX... PLEASE DO NOT ALTER ANY FILES IN THIS
