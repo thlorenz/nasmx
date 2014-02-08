@@ -7,14 +7,18 @@
 <h2><a name="chapter-1">Chapter 1: Introduction</a></h2>
 <h3><a name="section-1.1">1.1 What Is NASM-X?</a></h3>
 <p>NASM-X is a set of macros for the Netwide Assembler, NASM, designed
-for portability and modularity. It currently supports both 32 and 64-bit
-development on the following operating systems:
-
-Linux
-FreeBSD
-NetBSD
-OpenBSD
-Windows
+for portability, modularity, ease of use, and speed of development.  Portability means that the complete macro-set can be used for both 32 and 64 bit assembly with no change in syntax.
+Modularity implies NASM-X fully supports projects having multiple source files along with external linkage.
+Ease of use and speed of development are featured benefits of using NASM-X as the macros correctly handle all supported calling conventions, ensure proper stack alignment, and ensure proper structure layout and memory alignment.<br>
+<br>
+NASM-X currently supports both 32 and 64-bit development on the following operating systems:<br>
+<ul>
+<li>Linux</li>
+<li>FreeBSD</li>
+<li>NetBSD</li>
+<li>OpenBSD</li>
+<li>Windows</li>
+</ul>
 
 <h4><a name="section-1.2">1.2 License Conditions</a></h4>
 <p>Please see the file <code><nobr>LICENSE</nobr></code>, supplied as part
@@ -54,7 +58,7 @@ NASM-X are available from
 <a href="http://www.sourceforge.net/"><code><nobr>http://www.sourceforge.net/</nobr></code></a>.
 
 <h3><a name="section-1.4">1.4 Installation</a></h3>
-<h4><a name="section-1.4.1">1.4.1 Installing NASM-X under MS-DOS or Windows</a></h4>
+<h4><a name="section-1.4.1">1.4.1 Installing NASM-X under Windows</a></h4>
 <p>Once you've obtained the appropriate archive for NASM-X,
 <code><nobr>nasmx-X.X.zip</nobr></code> (where
 <code><nobr>X.X</nobr></code> denotes the version number of NASM-X contained
@@ -63,14 +67,16 @@ in the archive), unpack it into its own directory (for example
 <p>The archive will contain a set of executable files: the NASM executable
 file <code><nobr>nasm.exe</nobr></code>, the NDISASM executable file
 <code><nobr>ndisasm.exe</nobr></code>, and additional utilities.
-<p>The only file NASM-X needs to run is its own executable, so copy
-<code><nobr>nasm.exe</nobr></code> to a directory on your PATH, or
-alternatively edit <code><nobr>autoexec.bat</nobr></code> to add the
-<code><nobr>nasm</nobr></code> directory to your
+<p>The files NASM-X needs to run are located in the <code><nobr>nasm-X.X/bin</nobr></code> directory.
+You may either copy these programs to a directory on your PATH, or
+alternatively, edit <code><nobr>autoexec.bat</nobr></code> to add the
+<code><nobr>nasmx/bin</nobr></code> directory to your
 <code><nobr>PATH</nobr></code> (to do that under Windows XP, go to Start
 &gt; Control Panel &gt; System &gt; Advanced &gt; Environment Variables;
 these instructions may work under other versions of Windows as well.)
-<p>That's it - NASM-X is installed.
+<p>You must also set the <code><nobr>NASMENV</nobr></code> environment variable
+to point to the install include directory, eg: <code><nobr>NASMENV=-IC:\nasmx\nasmx-X.X\inc\</nobr></code>
+<p>That's it - NASM-X is installed.<br>
 <h4><a name="section-1.4.2">1.4.2 Installing NASM-X under Unix</a></h4>
 <p>Once you've obtained the Unix source archive for NASM-X,
 <code><nobr>nasmx-X.X.tar.gz</nobr></code> (where
@@ -81,7 +87,13 @@ create its own subdirectory <code><nobr>nasmx-X.X</nobr></code>.
 <p>NASM-X is not an auto-configuring package: once you've unpacked it,
 <code><nobr>cd</nobr></code> to the directory it's been unpacked into and
 type <code><nobr>./setpaths.sh</nobr></code>. This shell script will set up
-your environment so that you can use NASM-X.
+your environment so that you can use NASM-X.  So that you don't have to
+source this file each time you open a new terminal you can simply add the
+<code><nobr>NASMENV</nobr></code> environment variable to your login profile.
+For example, when using the <code><nobr>bash</nobr></code> shell, add the line <code><nobr>export NASMENV=-I/usr/local/src/nasmx-X.X/inc/</nobr></code>
+to your <code><nobr>.bashrc</nobr></code> file located in your home directory.
+<p>The NASM-X package for Linux does not come with any binaries.  The demo programs require that the following programs already exist on your computer:
+<code><nobr>nasm, gcc, make</nobr></code>.
 
 <p align=center><a href="nasmx2.html">Next Chapter</a> |
 <a href="nasmx0.html">Contents</a> |
