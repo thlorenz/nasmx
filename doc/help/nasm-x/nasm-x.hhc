@@ -42,15 +42,15 @@
 	</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.1: BREAK: looping">
+		<param name="Name" value="2.1: BREAK: exiting a loop">
 		<param name="Local" value="html\nasmx2.html#section-2.1">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.2: CONTINUE: looping">
+		<param name="Name" value="2.2: CONTINUE: continuing a loop">
 		<param name="Local" value="html\nasmx2.html#section-2.2">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.3: DO: looping">
+		<param name="Name" value="2.3: DO: starting a loop">
 		<param name="Local" value="html\nasmx2.html#section-2.3">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
@@ -58,100 +58,116 @@
 		<param name="Local" value="html\nasmx2.html#section-2.4">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.5: ENTRY: Specifying program starting point">
+		<param name="Name" value="2.5: ELSIF: Conditional branching">
 		<param name="Local" value="html\nasmx2.html#section-2.5">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.6: ENDIF: Conditional branching">
+		<param name="Name" value="2.6: ENTRY: Specifying program starting point">
 		<param name="Local" value="html\nasmx2.html#section-2.6">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.7: ENDPROC: Terminating a PROC definition">
+		<param name="Name" value="2.7: ENDIF: Conditional branching">
 		<param name="Local" value="html\nasmx2.html#section-2.7">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.8: ENDLOCALS: Ending procedure stack variable definition">
+		<param name="Name" value="2.8: ENDPROC: Terminating a PROC definition">
 		<param name="Local" value="html\nasmx2.html#section-2.8">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.9: ENDWHILE: Conditional branching">
+		<param name="Name" value="2.9: ENDLOCALS: Ending procedure stack variable definition">
 		<param name="Local" value="html\nasmx2.html#section-2.9">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.10: IF: Conditional branching">
+		<param name="Name" value="2.10: ENDWHILE: Ending a while loop">
 		<param name="Local" value="html\nasmx2.html#section-2.10">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.11: IMPORT: Importing Symbols from Other Modules">
+		<param name="Name" value="2.11: IF: Conditional branching">
 		<param name="Local" value="html\nasmx2.html#section-2.11">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.12: INVOKE: Calling a procedure">
+		<param name="Name" value="2.12: IMPORT: Importing Symbols from Other Modules">
 		<param name="Local" value="html\nasmx2.html#section-2.12">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.13: LOCAL: Stack parameters">
+		<param name="Name" value="2.13: INVOKE: Calling a procedure">
 		<param name="Local" value="html\nasmx2.html#section-2.13">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.14: LOCALS: Stack parameters">
+		<param name="Name" value="2.14: LOCAL: Defining a local stack parameter">
 		<param name="Local" value="html\nasmx2.html#section-2.14">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.15: NASMX_ENDSTRUC: Ending a structure definition">
+		<param name="Name" value="2.15: LOCALS: Start of procedure local stack parameters">
 		<param name="Local" value="html\nasmx2.html#section-2.15">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.16: NASMX_ENDUNION: Ending a union definition">
+		<param name="Name" value="2.16: NASMX_AT: Structure instance assignment">
 		<param name="Local" value="html\nasmx2.html#section-2.16">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.17: NASMX_PRAGMA: Defining pragmas">
+		<param name="Name" value="2.17: NASMX_ENDSTRUC: Ending a structure definition">
 		<param name="Local" value="html\nasmx2.html#section-2.17">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.18: NASMX_RESERVE: Defining structure/union members">
+		<param name="Name" value="2.18: NASMX_ENDUNION: Ending a union definition">
 		<param name="Local" value="html\nasmx2.html#section-2.18">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.19: NASMX_STRUC: Defining a structure">
+		<param name="Name" value="2.19: NASMX_IENDSTRUC: Ending a structure instance">
 		<param name="Local" value="html\nasmx2.html#section-2.19">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.20: NASMX_TCHAR: Character portability">
+		<param name="Name" value="2.20: NASMX_ISTRUC: Beginning a structure instance">
 		<param name="Local" value="html\nasmx2.html#section-2.20">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.21: NASMX_TEXT: Character portability">
+		<param name="Name" value="2.21: NASMX_PRAGMA: Defining pragmas">
 		<param name="Local" value="html\nasmx2.html#section-2.21">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.22: NASMX_UNION: Defining a union">
+		<param name="Name" value="2.22: NASMX_RESERVE: Defining structure/union members">
 		<param name="Local" value="html\nasmx2.html#section-2.22">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.23: PROC: Defining a procedure">
+		<param name="Name" value="2.23: NASMX_STRUC: Defining a structure">
 		<param name="Local" value="html\nasmx2.html#section-2.23">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.24: PROTO: Exporting Symbols to Other Modules">
+		<param name="Name" value="2.24: NASMX_TCHAR: Character portability">
 		<param name="Local" value="html\nasmx2.html#section-2.24">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.25: REPEAT: looping">
+		<param name="Name" value="2.25: NASMX_TEXT: Character portability">
 		<param name="Local" value="html\nasmx2.html#section-2.25">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.26: UNTIL: looping">
+		<param name="Name" value="2.26: NASMX_UNION: Defining a union">
 		<param name="Local" value="html\nasmx2.html#section-2.26">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.27: USES: Saving registers to the stack">
+		<param name="Name" value="2.27: PROC: Defining a procedure">
 		<param name="Local" value="html\nasmx2.html#section-2.27">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.28: WHILE: looping">
+		<param name="Name" value="2.28: PROTO: Exporting Symbols to Other Modules">
 		<param name="Local" value="html\nasmx2.html#section-2.28">
+		</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="2.29: REPEAT: looping">
+		<param name="Local" value="html\nasmx2.html#section-2.29">
+		</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="2.30: UNTIL: looping">
+		<param name="Local" value="html\nasmx2.html#section-2.30">
+		</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="2.31: USES: Saving registers to the stack">
+		<param name="Local" value="html\nasmx2.html#section-2.31">
+		</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="2.32: WHILE: looping">
+		<param name="Local" value="html\nasmx2.html#section-2.32">
 		</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
@@ -207,6 +223,10 @@
 			<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="EX. 4 : Exponent">
 			<param name="Local" value="html\nasmxe.html#section-E.4">
+			</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="EX. 5 : Structures">
+			<param name="Local" value="html\nasmxe.html#section-E.5">
 			</OBJECT>
 		</UL>
 	</UL>
