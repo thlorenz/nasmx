@@ -1,10 +1,11 @@
 Linux NASM Demo Applications
-Copyright (c) 2006-2011 The NASMX Project
+Copyright (c) 2006-2014 The NASMX Project
 All rights reserved.
 Contributors:
     Bryant Keller <bkeller@asmcommunity.net>
     Keith Kanios <keith@asmcommunity.net>
     Rob Neff <p1ranha@javalin.org>
+    Mathi Maaran <mathi_tuty@rediffmail.com>
 
  IMPORTANT:
  To properly assemble the Linux demos make sure you set the
@@ -41,6 +42,10 @@ Contributors:
            macros when creating multiple assembly modules.
 
   DEMO6  - Demonstrates a simple XWindows program
+
+  DEMO7  - OpenGL / Glut demo
+
+  DEMO8  - gtk demo
 
  All of these applications, as well as the NASMX.INC file,
  were completely developed and designed by Bryant Keller,
