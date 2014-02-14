@@ -1,5 +1,5 @@
 Linux64 NASM Demo Applications
-Copyright (c) 2006-2013 The NASMX Project
+Copyright (c) 2006-2014 The NASMX Project
 All rights reserved.
 Contributors:
     Bryant Keller <bkeller@asmcommunity.net>
