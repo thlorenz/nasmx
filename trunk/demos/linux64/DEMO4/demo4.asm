@@ -1,6 +1,6 @@
 ;// DEMO4.ASM
 ;//
-;// Copyright (C)2005-2011 The NASMX Project
+;// Copyright (C)2005-2014 The NASMX Project
 ;//
 ;// Purpose:
 ;//    This program demonstrates basic arithmetic operations
@@ -15,7 +15,8 @@
 ;; Floating point args to vararg functions
 ;; like printf() must be of type double and 
 ;; must also be pre-loaded manually into the
-;; correct xmm register!!!
+;; correct xmm register!  Register RAX contains
+;; the number of floating point registers used!
 
 
 %include 'nasmx.inc'
@@ -59,7 +60,8 @@ endlocals
     add    rax, rcx
 
     mov    qword [var(.value)], rax
-    invoke printf, strIntegerFormat, strAddition, rax
+    xor    rax, rax
+    invoke printf, strIntegerFormat, strAddition, qword [var(.value)]
     mov    rax, qword [var(.value)]
 ENDPROC
 
@@ -74,7 +76,8 @@ endlocals
     sub    rax, rcx
 
     mov    qword [var(.value)], rax
-    invoke printf, strIntegerFormat, strSubtraction, rax
+    xor    rax, rax
+    invoke printf, strIntegerFormat, strSubtraction, qword [var(.value)]
     mov    rax, qword [var(.value)]
 ENDPROC
 
@@ -89,7 +92,8 @@ endlocals
     mul    rcx
 
     mov    qword [var(.value)], rax
-    invoke printf, strIntegerFormat, strMultiplication, rax
+    xor    rax, rax
+    invoke printf, strIntegerFormat, strMultiplication, qword [var(.value)]
     mov    rax, qword [var(.value)]
 ENDPROC
 
@@ -105,7 +109,8 @@ endlocals
     idiv   rcx
 
     mov    qword [var(.value)], rax
-    invoke printf, strIntegerFormat, strDivision, rax
+    xor    rax, rax
+    invoke printf, strIntegerFormat, strDivision, qword [var(.value)]
     mov    rax, qword [var(.value)]
 ENDPROC
 
@@ -116,6 +121,7 @@ locals none
     movsd  xmm0, [fltVariableA]
     addsd  xmm0, [fltVariableB]
     movsd  [fltVariableC], xmm0
+    mov    rax, 1
     invoke printf, strFloatPointFormat, strAddition, qword [fltVariableC]
 
 ENDPROC
@@ -127,6 +133,7 @@ locals none
     movsd  xmm0, [fltVariableA]
     subsd  xmm0, [fltVariableB]
     movsd  [fltVariableC], xmm0
+    mov    rax, 1
     invoke printf, strFloatPointFormat, strSubtraction, qword [fltVariableC]
 
 ENDPROC
@@ -138,6 +145,7 @@ locals none
     movsd  xmm0, [fltVariableA]
     mulsd  xmm0, [fltVariableB]
     movsd  [fltVariableC], xmm0
+    mov    rax, 1
     invoke printf, strFloatPointFormat, strMultiplication, qword [fltVariableC]
 
 ENDPROC
@@ -149,6 +157,7 @@ locals none
     movsd  xmm0, [fltVariableA]
     divsd  xmm0, [fltVariableB]
     movsd  [fltVariableC], xmm0
+    mov    rax, 1
     invoke printf, strFloatPointFormat, strDivision, qword [fltVariableC]
 
 ENDPROC
