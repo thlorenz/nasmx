@@ -10,13 +10,17 @@ Downloads and snapshots are available from:
 Change Log
 ~~~~~~~~~~
 
-NASMX v1.3: xx Feb 2014
+NASMX v1.3: 14 Feb 2014
 
 - Refresh Win32 distribution "bin" directory with
   latest release version of Nasm:
   NASM v2.11, NDISASM v2.11
-- Updated NASMDOC.CHM to Nasm 2.11
-- Corrected x64 structure alignment issue
+- New docs directory added.
+- Added NASM-X html document files
+- Windows Compiled Help Modules:
+  * Created NASM-X.CHM
+  * Updated NASMDOC.CHM to Nasm 2.11
+- Corrected structure alignment issue
 - Added defines to win32 include files
   based on value of UNICODE
 - Added FASTCALL_STACK_PRELOAD pragma
@@ -24,7 +28,6 @@ NASMX v1.3: xx Feb 2014
   automatically spill into the register shadow space on the stack.
   It is enabled by default only on Win64 to remain backward compatible.
 - Fixed issue when user specifies structure member name with _type appended.
-- New docs directory added.
 _________________________________________________________
 
 NASMX v1.2: 12 Jan 2013
