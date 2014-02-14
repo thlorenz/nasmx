@@ -1,0 +1,34 @@
+[OPTIONS]
+Binary TOC=Yes
+Compatibility=1.1 or later
+Compiled file=NASMDOC.CHM
+Contents file=nasm.hhc
+Default Font=MS Sans Serif,10,0
+Default topic=html\nasmdoc1.html
+Display compile progress=Yes
+Index file=nasm.hhk
+Language=0x409 English (United States)
+Title=Netwide Assembler Help
+
+
+[FILES]
+html\nasmdoc0.html
+html\nasmdoc1.html
+html\nasmdoc2.html
+html\nasmdoc3.html
+html\nasmdoc4.html
+html\nasmdoc5.html
+html\nasmdoc6.html
+html\nasmdoc7.html
+html\nasmdoc8.html
+html\nasmdoc9.html
+html\nasmdo10.html
+html\nasmdo11.html
+html\nasmdo12.html
+html\nasmdoca.html
+html\nasmdocb.html
+html\nasmdocc.html
+html\nasmdoci.html
+
+[INFOTYPES]
+
