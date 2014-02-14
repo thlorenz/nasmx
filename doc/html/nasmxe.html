@@ -127,7 +127,7 @@ These Makefiles assume you're building 32-bit programs considering that the exam
             IF eax,==,0
                 CONTINUE
             ENDIF
-           INVOKE printf, message, ecx
+            INVOKE printf, message, ecx
         ENDWHILE
     ENDPROC
 
@@ -163,6 +163,10 @@ These Makefiles assume you're building 32-bit programs considering that the exam
         mov eax, 1
         mov ecx, uint32_t [argv(.exp)]
         WHILE ecx,!=,0
+            IF ecx,>,31
+                xor eax,eax   ; return 0 to indicate error
+                BREAK         ; break out of while loop
+            ENDIF
             shl eax, 1
             dec ecx
         ENDWHILE
@@ -173,15 +177,20 @@ These Makefiles assume you're building 32-bit programs considering that the exam
         LOCAL result, unint32_t, 1
     ENDLOCALS
         INVOKE my_pow2, EXPONENT
-	mov uint32_t [var(.result)], eax
-        INVOKE printf, message, EXPONENT, uint32_t [var(.result)]
+	IF eax,!=,0
+            mov uint32_t [var(.result)], eax
+            INVOKE printf, message, EXPONENT, uint32_t [var(.result)]
+        ELSE
+            INVOKE printf, errmsg
+        ENDIF
     ENDPROC
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     [section .data]
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-    message: declare(NASMX_TCHAR) NASMX_TEXT('The power of 2 to %d = %d'),13,10,0
+    message: declare(NASMX_TCHAR) NASMX_TEXT('The power of 2 to %u = %u'),13,10,0
+    errmsg: declare(NASMX_TCHAR) NASMX_TEXT('an error occurred!'),13,10,0
 
 </pre><br>
 
