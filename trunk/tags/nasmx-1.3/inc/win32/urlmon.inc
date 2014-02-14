@@ -1,0 +1,97 @@
+%ifndef __urlmon_INC__
+%define __urlmon_INC__
+
+IMPORT BindAsyncMoniker, 20
+IMPORT CoGetClassObjectFromURL, 40
+IMPORT CoInternetCombineUrl, 28
+IMPORT CoInternetCompareUrl, 12
+IMPORT CoInternetCreateSecurityManager, 12
+IMPORT CoInternetCreateZoneManager, 12
+IMPORT CoInternetGetProtocolFlags, 12
+IMPORT CoInternetGetSecurityUrl, 16
+IMPORT CoInternetGetSession, 12
+IMPORT CoInternetIsFeatureEnabled, 8
+IMPORT CoInternetIsFeatureEnabledForUrl, 16
+IMPORT CoInternetIsFeatureZoneElevationEnabled, 16
+IMPORT CoInternetParseUrl, 28
+IMPORT CoInternetQueryInfo, 28
+IMPORT CoInternetSetFeatureEnabled, 12
+IMPORT CompareSecurityIds, 20
+IMPORT CompatFlagsFromClsid, 12
+IMPORT CopyBindInfo, 8
+IMPORT CopyStgMedium, 8
+IMPORT CreateAsyncBindCtx, 16
+IMPORT CreateAsyncBindCtxEx, 24
+IMPORT CreateFormatEnumerator, 12
+IMPORT CreateURLMoniker, 12
+IMPORT CreateURLMonikerEx, 16
+IMPORT Extract, 8
+IMPORT FaultInIEFeature, 16
+IMPORT FindMediaType, 8
+IMPORT FindMediaTypeClass, 16
+IMPORT FindMimeFromData, 32
+IMPORT GetClassFileOrMime, 28
+IMPORT GetClassURL, 8
+IMPORT GetComponentIDFromCLSSPEC, 8
+IMPORT GetSoftwareUpdateInfo, 8
+IMPORT HlinkGoBack, 4
+IMPORT HlinkGoForward, 4
+IMPORT HlinkNavigateMoniker, 8
+IMPORT HlinkNavigateString, 8
+IMPORT HlinkSimpleNavigateToMoniker, 32
+IMPORT HlinkSimpleNavigateToString, 32
+IMPORT IsAsyncMoniker, 4
+IMPORT IsJITInProgress, 0
+IMPORT IsLoggingEnabledA, 4
+IMPORT IsLoggingEnabledW, 4
+IMPORT IsValidURL, 12
+IMPORT MkParseDisplayNameEx, 16
+IMPORT ObtainUserAgentString, 12
+IMPORT RegisterBindStatusCallback, 16
+IMPORT RegisterFormatEnumerator, 12
+IMPORT RegisterMediaTypeClass, 20
+IMPORT RegisterMediaTypes, 12
+IMPORT ReleaseBindInfo, 4
+IMPORT RevokeBindStatusCallback, 8
+IMPORT RevokeFormatEnumerator, 8
+IMPORT SetSoftwareUpdateAdvertisementState, 16
+IMPORT URLDownloadA, 20
+IMPORT URLDownloadToCacheFileA, 24
+IMPORT URLDownloadToCacheFileW, 24
+IMPORT URLDownloadToFileA, 20
+IMPORT URLDownloadToFileW, 20
+IMPORT URLDownloadW, 20
+IMPORT URLOpenBlockingStreamA, 20
+IMPORT URLOpenBlockingStreamW, 20
+IMPORT URLOpenPullStreamA, 16
+IMPORT URLOpenPullStreamW, 16
+IMPORT URLOpenStreamA, 16
+IMPORT URLOpenStreamW, 16
+IMPORT UrlMkBuildVersion, 0
+IMPORT UrlMkGetSessionOption, 20
+IMPORT UrlMkSetSessionOption, 16
+IMPORT WriteHitLogging, 4
+
+%ifdef UNICODE
+
+%define IsLoggingEnabled IsLoggingEnabledW
+%define URLDownload URLDownloadW
+%define URLDownloadToCacheFile URLDownloadToCacheFileW
+%define URLDownloadToFile URLDownloadToFileW
+%define URLOpenBlockingStream URLOpenBlockingStreamW
+%define URLOpenPullStream URLOpenPullStreamW
+%define URLOpenStream URLOpenStreamW
+
+%else  ;// ANSI
+
+%define IsLoggingEnabled IsLoggingEnabledA
+%define URLDownload URLDownloadA
+%define URLDownloadToCacheFile URLDownloadToCacheFileA
+%define URLDownloadToFile URLDownloadToFileA
+%define URLOpenBlockingStream URLOpenBlockingStreamA
+%define URLOpenPullStream URLOpenPullStreamA
+%define URLOpenStream URLOpenStreamA
+
+%endif  ;// UNICODE
+
+%endif

@@ -1,0 +1,114 @@
+%ifndef __NASMX_NTMSAPI_INC__
+%define __NASMX_NTMSAPI_INC__
+
+IMPORT AccessNtmsLibraryDoor, 12
+IMPORT AddNtmsMediaType, 12
+IMPORT AllocateNtmsMedia, 28
+IMPORT BeginNtmsDeviceChangeDetection, 8
+IMPORT CancelNtmsLibraryRequest, 8
+IMPORT CancelNtmsOperatorRequest, 8
+IMPORT ChangeNtmsMediaType, 12
+IMPORT CleanNtmsDrive, 8
+IMPORT CloseNtmsNotification, 4
+IMPORT CloseNtmsSession, 4
+IMPORT CreateNtmsMediaA, 16
+IMPORT CreateNtmsMediaPoolA, 24
+IMPORT CreateNtmsMediaPoolW, 24
+IMPORT CreateNtmsMediaW, 16
+IMPORT DeallocateNtmsMedia, 12
+IMPORT DecommissionNtmsMedia, 8
+IMPORT DeleteNtmsDrive, 8
+IMPORT DeleteNtmsLibrary, 8
+IMPORT DeleteNtmsMedia, 8
+IMPORT DeleteNtmsMediaPool, 8
+IMPORT DeleteNtmsMediaType, 12
+IMPORT DeleteNtmsRequests, 16
+IMPORT DisableNtmsObject, 12
+IMPORT DismountNtmsDrive, 8
+IMPORT DismountNtmsMedia, 16
+IMPORT DoEjectFromSADriveW, 24
+IMPORT EjectDiskFromSADriveA, 28
+IMPORT EjectDiskFromSADriveW, 28
+IMPORT EjectNtmsCleaner, 16
+IMPORT EjectNtmsMedia, 16
+IMPORT EnableNtmsObject, 12
+IMPORT EndNtmsDeviceChangeDetection, 8
+IMPORT EnumerateNtmsObject, 24
+IMPORT ExportNtmsDatabase, 4
+IMPORT GetNtmsMediaPoolNameA, 16
+IMPORT GetNtmsMediaPoolNameW, 16
+IMPORT GetNtmsObjectAttributeA, 24
+IMPORT GetNtmsObjectAttributeW, 24
+IMPORT GetNtmsObjectInformationA, 12
+IMPORT GetNtmsObjectInformationW, 12
+IMPORT GetNtmsObjectSecurity, 28
+IMPORT GetNtmsRequestOrder, 12
+IMPORT GetNtmsUIOptionsA, 20
+IMPORT GetNtmsUIOptionsW, 20
+IMPORT GetVolumesFromDriveA, 12
+IMPORT GetVolumesFromDriveW, 12
+IMPORT IdentifyNtmsSlot, 12
+IMPORT ImportNtmsDatabase, 4
+IMPORT InjectNtmsCleaner, 20
+IMPORT InjectNtmsMedia, 16
+IMPORT InventoryNtmsLibrary, 12
+IMPORT MountNtmsMedia, 32
+IMPORT MoveToNtmsMediaPool, 12
+IMPORT OpenNtmsNotification, 8
+IMPORT OpenNtmsSessionA, 12
+IMPORT OpenNtmsSessionW, 12
+IMPORT ReleaseNtmsCleanerSlot, 8
+IMPORT ReserveNtmsCleanerSlot, 12
+IMPORT SatisfyNtmsOperatorRequest, 8
+IMPORT SetNtmsDeviceChangeDetection, 20
+IMPORT SetNtmsMediaComplete, 8
+IMPORT SetNtmsObjectAttributeA, 24
+IMPORT SetNtmsObjectAttributeW, 24
+IMPORT SetNtmsObjectInformationA, 12
+IMPORT SetNtmsObjectInformationW, 12
+IMPORT SetNtmsObjectSecurity, 20
+IMPORT SetNtmsRequestOrder, 12
+IMPORT SetNtmsUIOptionsA, 20
+IMPORT SetNtmsUIOptionsW, 20
+IMPORT SubmitNtmsOperatorRequestA, 24
+IMPORT SubmitNtmsOperatorRequestW, 24
+IMPORT SwapNtmsMedia, 12
+IMPORT UpdateNtmsOmidInfo, 20
+IMPORT WaitForNtmsNotification, 12
+IMPORT WaitForNtmsOperatorRequest, 12
+
+%ifdef UNICODE
+
+%define CreateNtmsMedia CreateNtmsMediaW
+%define CreateNtmsMediaPool CreateNtmsMediaPoolW
+%define EjectDiskFromSADrive EjectDiskFromSADriveW
+%define GetNtmsMediaPoolName GetNtmsMediaPoolNameW
+%define GetNtmsObjectAttribute GetNtmsObjectAttributeW
+%define GetNtmsObjectInformation GetNtmsObjectInformationW
+%define GetNtmsUIOptions GetNtmsUIOptionsW
+%define GetVolumesFromDrive GetVolumesFromDriveW
+%define OpenNtmsSession OpenNtmsSessionW
+%define SetNtmsObjectAttribute SetNtmsObjectAttributeW
+%define SetNtmsObjectInformation SetNtmsObjectInformationW
+%define SetNtmsUIOptions SetNtmsUIOptionsW
+%define SubmitNtmsOperatorRequest SubmitNtmsOperatorRequestW
+
+%else  ;// ANSI
+
+%define CreateNtmsMedia CreateNtmsMediaA
+%define CreateNtmsMediaPool CreateNtmsMediaPoolA
+%define EjectDiskFromSADrive EjectDiskFromSADriveA
+%define GetNtmsMediaPoolName GetNtmsMediaPoolNameA
+%define GetNtmsObjectAttribute GetNtmsObjectAttributeA
+%define GetNtmsObjectInformation GetNtmsObjectInformationA
+%define GetNtmsUIOptions GetNtmsUIOptionsA
+%define GetVolumesFromDrive GetVolumesFromDriveA
+%define OpenNtmsSession OpenNtmsSessionA
+%define SetNtmsObjectAttribute SetNtmsObjectAttributeA
+%define SetNtmsObjectInformation SetNtmsObjectInformationA
+%define SetNtmsUIOptions SetNtmsUIOptionsA
+%define SubmitNtmsOperatorRequest SubmitNtmsOperatorRequestA
+
+%endif  ;// UNICODE
+
+%endif  ;// __NASMX_NTMSAPI_INC__

@@ -1,0 +1,14 @@
+#include "..\..\..\inc\win32\resource.h"
+
+MyDialog DIALOG DISCARDABLE  0,0,155,95
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CENTER | DS_CENTERMOUSE | WS_CAPTION
+CAPTION "Demo4"
+FONT 8, "Tahoma"
+BEGIN
+  DEFPUSHBUTTON  "Click Me!", IDOK, 95, 75, 50, 14, WS_TABSTOP
+  PUSHBUTTON     "Exit", IDCANCEL, 10, 75, 50, 14, WS_TABSTOP
+  CTEXT          "Win32 Nasm using Resources!", 202, 6, 10, 140, 55
+  CTEXT          "Created by Bryant Keller and Rob Neff", 203, 6, 20, 140, 55
+  CONTROL        "", 204, "Static", SS_BLACKFRAME | SS_SUNKEN, 5, 68, 143, 1
+END
+

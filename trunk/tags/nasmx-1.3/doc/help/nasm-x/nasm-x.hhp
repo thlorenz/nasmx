@@ -1,0 +1,21 @@
+[OPTIONS]
+Binary TOC=Yes
+Compatibility=1.1 or later
+Compiled file=NASM-X.CHM
+Contents file=nasm-x.hhc
+Default Font=MS Sans Serif,10,0
+Default topic=html\nasmx0.html
+Display compile progress=Yes
+Index file=nasm-x.hhk
+Language=0x409 English (United States)
+Title=NASM-X Help
+
+[FILES]
+html\nasmx0.html
+html\nasmx1.html
+html\nasmx2.html
+html\nasmxa.html
+html\nasmxi.html
+
+[INFOTYPES]
+

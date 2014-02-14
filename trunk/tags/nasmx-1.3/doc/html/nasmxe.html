@@ -1,0 +1,370 @@
+<html><head><title>NASM-X Manual</title></head>
+<body><h1 align=center>NASM-X</h1>
+
+<p align=center>
+<a href="nasmxa.html">Previous Chapter</a> |
+<a href="nasmx0.html">Contents</a> |
+<a href="nasmxi.html">Index</a>
+<h2><a name="appendix-E">Appendix E: NASM-X Examples</a></h2>
+<p>
+These examples show how to use the NASMX macro system to create assembly programs.
+It is recommended that you read the examples in order starting with the first example.
+Each subsequent example builds upon the previous example.<br>
+<br>
+Please note that, being examples, they are not optimized nor are errors checked for.
+They are, however, working examples that you can build from.<br>
+Simply create a new working directory for each example and copy/paste the code into a new file within each directory.<br>
+<p>Once you understand how these examples work you are ready to begin building the DEMOS for your system.
+The DEMOS directories contain additional working examples that show some of the more advanced features of NASMX.<br>
+<h4>Examples:</h4>
+<a href="nasmxe.html#section-E.1">EX. 1 : Hello, World!</a><br>
+<a href="nasmxe.html#section-E.2">EX. 2 : Odd or Even</a><br>
+<a href="nasmxe.html#section-E.3">EX. 3 : Printing odd numbers</a><br>
+<a href="nasmxe.html#section-E.4">EX. 4 : Exponent</a><br>
+<a href="nasmxe.html#section-E.5">EX. 5 : Using structures</a><br>
+<h4>Makefiles:</h4>
+For convenience we've provided a Makefile that you can use to build each example.
+Simply save the Makefile to your working directory then edit the first line containing NAME=MYDEMO substituting MYDEMO with the name of the file you saved the example as (without the filename extension).<br>
+These Makefiles assume you're building 32-bit programs considering that the example code provided is also 32-bit.<br>
+<br>
+<a href="nasmxe.html#section-E.6">Linux Makefile</a><br>
+<a href="nasmxe.html#section-E.7">Windows Makefile</a><br>
+<br>
+
+<h3><a name="section-E.1">EX. 1 : Hello, World!</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp Displays a simple message to the console.
+<h4>Code:</h4>
+<pre>
+    %include 'nasmx.inc'
+
+    IMPORT cdecl, printf
+
+    ENTRY my_main
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .text]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    PROC my_main
+    LOCALS NONE
+        INVOKE printf, message
+    ENDPROC
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .data]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    message: declare(NASMX_TCHAR) NASMX_TEXT('Hello, World!'),13,10,0
+
+</pre><br>
+
+<h3><a name="section-E.2">EX. 2 : Odd or Even</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp  Displays the odd or even status of a number.
+<h4>Code:</h4>
+<pre>
+    %include 'nasmx.inc'
+
+    IMPORT cdecl,printf
+
+    ENTRY my_main
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .text]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    %define ODD_OR_EVEN 8
+
+    PROC my_main
+    LOCALS NONE
+        mov ecx, ODD_OR_EVEN
+        mov eax, ecx
+        and eax,1
+        IF eax,==,0
+            INVOKE printf, message, ecx, msgEven
+        ELSE
+            INVOKE printf, message, ecx, msgOdd 
+        ENDIF
+    ENDPROC
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .data]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    message: declare(NASMX_TCHAR) NASMX_TEXT('%d is an %s number.'),13,10,0
+    msgOdd: declare(NASMX_TCHAR) NASMX_TEXT('ODD'),0
+    msgEven: declare(NASMX_TCHAR) NASMX_TEXT('EVEN'),0
+
+</pre><br>
+
+<h3><a name="section-E.3">EX. 3 : Printing odd numbers</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp Displays odd numbers to the screen.  Extend this example to factor prime numbers.
+<h4>Code:</h4>
+<pre>
+    %include 'nasmx.inc'
+
+    IMPORT cdecl,printf
+
+    ENTRY my_main
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .text]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    %define LIMIT 100
+
+    PROC my_main
+    USES ebx
+    LOCALS NONE
+        mov ebx, LIMIT
+        WHILE ebx,!=, 0
+            mov ecx, ebx
+            mov eax, ebx
+            dec ebx
+            and eax,1
+            IF eax,==,0
+                CONTINUE
+            ENDIF
+            INVOKE printf, message, ecx
+        ENDWHILE
+    ENDPROC
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .data]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    message: declare(NASMX_TCHAR) NASMX_TEXT('%d is odd.'),13,10,0
+
+</pre><br>
+
+<h3><a name="section-E.4">EX. 4 : Exponent</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp  Displays the result of the number 2 raised to the power of X.
+<h4>Code:</h4>
+<pre>
+    %include 'nasmx.inc'
+
+    IMPORT cdecl,printf
+
+    PROTO my_pow2, uint32_t exp
+
+    ENTRY my_main
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .text]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    %define EXPONENT 8
+
+    PROC my_pow2, uint32_t exp
+    LOCALS NONE
+        mov eax, 1
+        mov ecx, uint32_t [argv(.exp)]
+        WHILE ecx,!=,0
+            IF ecx,>,31
+                xor eax,eax   ; return 0 to indicate error
+                BREAK         ; break out of while loop
+            ENDIF
+            shl eax, 1
+            dec ecx
+        ENDWHILE
+    ENDPROC
+
+    PROC my_main
+    LOCALS
+        LOCAL result, unint32_t, 1
+    ENDLOCALS
+        INVOKE my_pow2, EXPONENT
+	IF eax,!=,0
+            mov uint32_t [var(.result)], eax
+            INVOKE printf, message, EXPONENT, uint32_t [var(.result)]
+        ELSE
+            INVOKE printf, errmsg
+        ENDIF
+    ENDPROC
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .data]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    message: declare(NASMX_TCHAR) NASMX_TEXT('The power of 2 to %u = %u'),13,10,0
+    errmsg: declare(NASMX_TCHAR) NASMX_TEXT('an error occurred!'),13,10,0
+
+</pre><br>
+
+<h3><a name="section-E.5">EX. 5 : Using structures</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp  This example shows how to define, create, and access structures.
+It makes use of two structures, POINT and RECT, which define a rectangle in a coordinate system where (0,0 ) represents the top-left most point.
+This type of coordinate system is used in many computer graphics systems.  It defines a procedure to calculate the area of a rectangle.
+<h4>Code:</h4>
+<pre>
+    %include 'nasmx.inc'
+    
+    NASMX_STRUC POINT
+        NASMX_RESERVE x, uint32_t, 1
+        NASMX_RESERVE y, uint32_t, 1
+    NASMX_ENDSTRUC
+
+    NASMX_STRUC RECT
+        NASMX_STRUC top_left, POINT
+            NASMX_RESERVE x, uint32_t, 1
+            NASMX_RESERVE y, uint32_t, 1
+	NASMX_ENDSTRUC
+        NASMX_STRUC bottom_right, POINT
+            NASMX_RESERVE x, uint32_t, 1
+            NASMX_RESERVE y, uint32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_ENDSTRUC
+
+    IMPORT cdecl,printf
+
+    PROTO calc_area, ptrdiff_t rect
+
+    ENTRY my_main
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .text]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    PROC calc_area, ptrdiff_t rect
+    USES ebx
+    LOCALS
+        LOCAL height, uint32_t, 1
+        LOCAL width, uint32_t, 1
+    ENDLOCALS
+        ; get the pointer to the RECT structure
+        mov ebx, ptrdiff_t [argv(.rect)]
+
+	; calculate height
+	mov eax, uint32_t [ebx + RECT.bottom_right.y]
+	mov ecx, uint32_t [ebx + RECT.top_left.y]
+	sub eax, ecx
+	mov uint32_t [var(.height)], eax
+
+	; calculate width
+	mov eax, uint32_t [ebx + RECT.bottom_right.x]
+	mov ecx, uint32_t [ebx + RECT.top_left.x]
+	sub eax, ecx
+	mov uint32_t [var(.width)], eax
+
+	; area = width * height
+	xor edx, edx
+	mov ecx, uint32_t [var(.height)]
+	mul ecx   ; return result in eax
+    ENDPROC
+
+    PROC my_main
+    LOCALS
+        LOCAL area, uint32_t, 1
+    ENDLOCALS
+        INVOKE calc_area, my_rect
+	mov uint32_t [var(.area)], eax
+        INVOKE printf, message, uint32_t [var(.area)]
+    ENDPROC
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    [section .data]
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    message: declare(NASMX_TCHAR) NASMX_TEXT('area of rectangle = %d'),13,10,0
+
+    ; instantiate a 20 x 20 rectangle
+    NASMX_ISTRUC my_rect, RECT
+        NASMX_AT top_left.x, 10
+        NASMX_AT top_left.y, 10
+        NASMX_AT bottom_right.x, 30
+        NASMX_AT bottom_right.y, 30
+    NASMX_IENDSTRUC
+
+</pre><br>
+
+<h3><a name="section-E.6">Linux Makefile</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp This Makefile can be used along with each example to build a working program for Linux 32-bit systems.
+<h4>Code:</h4>
+<pre>
+##### Makefile #####
+NAME=MYDEMO
+AS=nasm
+ASFLAGS=-f elf32
+LD=gcc
+LDFLAGS		=-Wall -s
+LIBS		=-lc
+
+# [ Suffixes ]
+# Change the suffixes to match your system environment
+O           = .o
+ASM         = .asm
+INC         = .inc
+LST         = .lst
+
+OBJS = $(NAME)$(O)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(LD) $(LDFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+
+$(NAME)$(O): $(NAME)$(ASM)
+	$(AS) $(ASFLAGS) $(NAME)$(ASM) -o $(NAME)$(O)
+
+clean:
+	rm *$(O) ./$(NAME)
+
+##### End Makefile #####
+</pre><br>
+
+
+<h3><a name="section-E.7">Windows Makefile</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp This Makefile can be used along with each example to build a working program for Windows 32-bit systems.
+<h4>Code:</h4>
+<pre>
+##### Makefile #####
+NAME=MYDEMO
+AS=nasm
+AFLAGS=-f win32
+LD=GoLink
+LDFLAGS		=/console /mix /entry _main
+LIBS		=msvcrt.dll
+
+# [ Suffixes ]
+# Change the suffixes to match your system environment
+O           = .obj
+X           = .exe
+ASM         = .asm
+INC         = .inc
+LST         = .lst
+
+# rules
+all: $(NAME)$(X)
+
+$(NAME)$(X): $(NAME)$(O)
+	$(LD) $(LDFLAGS) $(NAME)$(O) $(LIBS)
+
+$(NAME)$(O): $(NAME)$(ASM)
+	$(AS) $(AFLAGS) $(NAME)$(ASM) -o $(NAME)$(O) -l $(NAME)$(LST)
+
+clean:
+	-del /f *.obj
+	-del /f *.lst
+
+cleaner:
+	-del /f *.bak
+	-del /f *.lst
+	-del /f *.obj
+	-del /f *.exe
+
+##### End Makefile #####
+</pre><br>
+
+
+
+<p align=center>
+<a href="nasmxa.html">Previous Chapter</a> |
+<a href="nasmx0.html">Contents</a> |
+<a href="nasmxi.html">Index</a>
+</body></html>

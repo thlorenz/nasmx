@@ -1,0 +1,69 @@
+<html><head><title>NASM-X Manual</title></head>
+<body><h1 align=center>NASM-X</h1>
+
+<p align=center>
+<a href="nasmxe.html">Next Chapter</a> |
+<a href="nasmx2.html">Previous Chapter</a> |
+<a href="nasmx0.html">Contents</a> |
+<a href="nasmxi.html">Index</a>
+<h2><a name="appendix-A">Appendix A: NASM-X Version History</a></h2>
+<h3><a name="section-A.1">A.1 NASM-X 1 Series</a></h3>
+<h4><a name="section-A.1.1">A.1.1 NASMX v1.3: 14 Feb 2014</a></h4>
+<ul>
+<li>Refresh Win32 distribution "bin" directory with
+  latest release version of Nasm:
+  NASM v2.11, NDISASM v2.11
+<li>New docs directory added.
+<li>Added NASM-X html document files
+<li>Windows Compiled Help Modules:
+<ul><li>Created NASM-X.CHM
+    <li>Updated NASMDOC.CHM to Nasm 2.11</ul>
+<li>Corrected structure alignment issue
+<li>Added defines to all win32 include files
+  based on value of UNICODE
+<li>Added FASTCALL_STACK_PRELOAD pragma<br>
+  When disabled the fastcall register arguments will no longer
+  automatically spill into the register shadow space on the stack.
+  It is enabled by default only on Win64 to remain backward compatible.
+<li>Fixed issue when user specifies structure member name with _type appended.
+</ul>
+<h4><a name="section-A.1.2">A.1.2 NASMX v1.2: 12 Jan 2013</a></h4>
+<li>Added BSD x86 & x64 syscall support
+<li>Added BSD Demos 1-5
+<li>Refresh Win32 distribution "bin" directory with
+  latest release version of Nasm:
+  NASM v2.10.07, NDISASM v2.10.07
+<li>Updated NASMDOC.CHM to Nasm 2.10.07
+<li>Added Win32 Demo 15 - OpenGL Torus example
+<li>Added Win32 Demo 16 - GTK example program
+<li>Added Win32 Demo 17 - GDI floor program
+<li>Added Win64 Demo 6 - GDI floor program
+<li>Added Linux64 Demo 5 - Xlib example
+<li>Added REPEAT, UNTIL, CONTINUE macros
+<li>Fixed BREAK macro bug
+<li>Fixed INVOKE macro bug for x64 Linux procs
+  with more than 6 arguments
+<h4><a name="section-A.1.3">A.1.3 NASMX v1.1: 29 Sep 2012</a></h4>
+<li>Refresh Win32 distribution "bin" directory with
+  latest release version of tool chain:
+  NASM v2.10.05, NDISASM v2.10.05
+  GoLink v0.27.00
+<li>Update NASMDOC.CHM Windows help file to include
+  latest Nasm documentation changes.
+<li>Fixed SOCKET definition in winsock.inc
+<h4><a name="section-A.1.4">A.1.4 NASMX v1.0: 20 Aug 2011</a></h4>
+<li>Official release
+<li>Updated Win32 "bin" directory with latest release
+  versions of nasm tools:
+    NASM v2.09.10, NDISASM v2.09.10
+<li>Added convenience scripts for setting NASMENV
+<li>Added Linux x64 syscall support
+<h4><a name="section-A.1.5">A.1.5 Archived releases</a></h4>
+<li>See CHANGES.TXT for more history
+
+<p align=center>
+<a href="nasmxe.html">Next Chapter</a> |
+<a href="nasmx2.html">Previous Chapter</a> |
+<a href="nasmx0.html">Contents</a> |
+<a href="nasmxi.html">Index</a>
+</body></html>
