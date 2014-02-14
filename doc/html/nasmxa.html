@@ -8,19 +8,24 @@
 <a href="nasmxi.html">Index</a>
 <h2><a name="appendix-A">Appendix A: NASM-X Version History</a></h2>
 <h3><a name="section-A.1">A.1 NASM-X 1 Series</a></h3>
-<h4><a name="section-A.1.1">A.1.1 NASMX v1.3: XX Feb 2014</a></h4>
+<h4><a name="section-A.1.1">A.1.1 NASMX v1.3: 14 Feb 2014</a></h4>
 <ul>
 <li>Refresh Win32 distribution "bin" directory with
   latest release version of Nasm:
   NASM v2.11, NDISASM v2.11
-<li>Updated NASMDOC.CHM to Nasm 2.11
-<li>Corrected x64 structure alignment issue
+<li>New docs directory added.
+<li>Added NASM-X html document files
+<li>Windows Compiled Help Modules:
+<ul><li>Created NASM-X.CHM
+    <li>Updated NASMDOC.CHM to Nasm 2.11</ul>
+<li>Corrected structure alignment issue
 <li>Added defines to all win32 include files
   based on value of UNICODE
-<li>Added FASTCALL_STACK_PRELOAD pragma
+<li>Added FASTCALL_STACK_PRELOAD pragma<br>
   When disabled the fastcall register arguments will no longer
   automatically spill into the register shadow space on the stack.
   It is enabled by default only on Win64 to remain backward compatible.
+<li>Fixed issue when user specifies structure member name with _type appended.
 </ul>
 <h4><a name="section-A.1.2">A.1.2 NASMX v1.2: 12 Jan 2013</a></h4>
 <li>Added BSD x86 & x64 syscall support
@@ -53,6 +58,9 @@
     NASM v2.09.10, NDISASM v2.09.10
 <li>Added convenience scripts for setting NASMENV
 <li>Added Linux x64 syscall support
+<h4><a name="section-A.1.5">A.1.5 Archived releases</a></h4>
+<li>See CHANGES.TXT for more history
+
 <p align=center>
 <a href="nasmxe.html">Next Chapter</a> |
 <a href="nasmx2.html">Previous Chapter</a> |

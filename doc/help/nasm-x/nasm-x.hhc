@@ -28,7 +28,7 @@
 		<param name="Local" value="html\nasmx1.html#section-1.4">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="1.4.1: Installing NASM-X under MS-DOS or Windows">
+		<param name="Name" value="1.4.1: Installing NASM-X under Windows">
 		<param name="Local" value="html\nasmx1.html#section-1.4.1">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
@@ -181,7 +181,7 @@
 		</OBJECT>
 		<UL>
 			<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="A.1.1 NASMX v1.3: XX Feb 2014">
+			<param name="Name" value="A.1.1 NASMX v1.3: 14 Feb 2014">
 			<param name="Local" value="html\nasmxa.html#section-A.1.1">
 			</OBJECT>
 			<LI> <OBJECT type="text/sitemap">
@@ -204,31 +204,25 @@
 	</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="E.1: NASM-X Examples">
+		<param name="Name" value="EX. 1 : Hello, World!">
 		<param name="Local" value="html\nasmxe.html#section-E.1">
 		</OBJECT>
-		<UL>
-			<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="EX. 1 : Hello, World!">
-			<param name="Local" value="html\nasmxe.html#section-E.1">
-			</OBJECT>
-			<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="EX. 2 : Odd or Even">
-			<param name="Local" value="html\nasmxe.html#section-E.2">
-			</OBJECT>
-			<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="EX. 3 : Printing odd numbers">
-			<param name="Local" value="html\nasmxe.html#section-E.3">
-			</OBJECT>
-			<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="EX. 4 : Exponent">
-			<param name="Local" value="html\nasmxe.html#section-E.4">
-			</OBJECT>
-			<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="EX. 5 : Structures">
-			<param name="Local" value="html\nasmxe.html#section-E.5">
-			</OBJECT>
-		</UL>
+		<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="EX. 2 : Odd or Even">
+		<param name="Local" value="html\nasmxe.html#section-E.2">
+		</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="EX. 3 : Printing odd numbers">
+		<param name="Local" value="html\nasmxe.html#section-E.3">
+		</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="EX. 4 : Exponent">
+		<param name="Local" value="html\nasmxe.html#section-E.4">
+		</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="EX. 5 : Structures">
+		<param name="Local" value="html\nasmxe.html#section-E.5">
+		</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
 	<param name="Name" value="Index">

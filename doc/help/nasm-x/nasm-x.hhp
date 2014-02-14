@@ -8,7 +8,7 @@ Default topic=html\nasmx0.html
 Display compile progress=Yes
 Index file=nasm-x.hhk
 Language=0x409 English (United States)
-Title=Netwide Assembler Help
+Title=NASM-X Help
 
 [FILES]
 html\nasmx0.html
