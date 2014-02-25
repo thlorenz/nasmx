@@ -65,8 +65,8 @@
 NASMX_DEFINE VERSION,"1.3"
 NASMX_DEFINE VERSION_MAJOR, 1
 NASMX_DEFINE VERSION_MINOR, 3
-NASMX_DEFINE VERSION_REV, 14
-NASMX_DEFINE VERSION_ID, 0x0103000E
+NASMX_DEFINE VERSION_REV, 15
+NASMX_DEFINE VERSION_ID, 0x0103000F
 
 
 ;//////////////////////////////////////////////////////////////
@@ -3119,9 +3119,21 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 		mov  __BP, __SP
 	%endif
 
+	;// How many bytes needed?
 	%assign %%__size __NASMX_ABI_BITS__ / 8
+	%assign %%__bytes %%__size * %0
+
+	;// ensure we align register save area
+	%assign %$__nx_uses_stack_adjust 0
+	%assign %%__align __NASMX_ABI_BITS__ / 4
+	%assign %%__off (((%%__bytes + %%__align) / %%__align) * %%__align)
+	%assign %%__tmp (%%__bytes + %%__align)
+	%if ( %%__off != %%__tmp )
+		%assign %$__nx_locnt ( %$__nx_locnt + %%__size )
+		%assign %$__nx_uses_stack_adjust %%__size
+	%endif
+
 	%assign %%__sys_size __NASMX_ABI_BITS__
-	%assign %$__nx_uses_count 0
 	%rep %0
 		%ifndef %[%1]_size
 			%fatal unknown register: %1
@@ -3132,17 +3144,15 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 		%elif %%__reg_size > %%__size
 			%fatal %1 not available in %%__sys_size bit mode
 		%endif
-
+		__nx_stack_push NASMX_USES_REGS, %[%1]
+		%assign %$__nx_uses_stack_adjust %$__nx_uses_stack_adjust + %%__size
 		%assign %$__nx_locnt %$__nx_locnt + %%__size
-		%assign %$__nx_uses_count 1 + %$__nx_uses_count
-		%xdefine __nx_uses_reg_%[%$__nx_uses_count] %[%1]
 		mov [__BP - %$__nx_locnt ], %[%1]
 		%rotate 1
 	%endrep
 
 	;// during endproc stack adjustment to include difference
 	;// between locnt and uses_adjust
-	%assign %$__nx_uses_stack_adjust %%__size  * %$__nx_uses_count
 	%xdefine __NX_PROLOGUE_USES_ADJUST__ %[%$__nx_uses_stack_adjust]
 
 %endmacro
@@ -3308,7 +3318,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 				%endif
 			%endif
 			%ifdef __NX_PROLOGUE_USES_ADJUST__
-				%if %$__nx_locnt > __NX_PROLOGUE_USES_ADJUST__
+				%if %$__nx_locnt >= __NX_PROLOGUE_USES_ADJUST__
 					%assign %$__nx_locnt %$__nx_locnt - __NX_PROLOGUE_USES_ADJUST__
 				%endif
 			%endif
@@ -3319,10 +3329,11 @@ NASMX_DEFINE VERSION_ID, 0x0103000E
 			%endif
 			;// restore any non-volatile registers
 			%ifdef __NX_USES_PRESENT__
-				%assign %%__nx_reg %$__nx_uses_count
+				%assign %%__nx_reg __NX_STACK_IDX_NASMX_USES_REGS
+				%assign %$__nx_uses_count __NX_STACK_IDX_NASMX_USES_REGS
 				%rep %$__nx_uses_count
-					pop __nx_uses_reg_%[%%__nx_reg]
-					%undef __nx_uses_reg_%[%%__nx_reg]
+					pop __NX_STACK_NASMX_USES_REGS_%[%%__nx_reg]
+					__nx_stack_pop NASMX_USES_REGS
 					%assign %%__nx_reg %%__nx_reg - 1
 				%endrep
 			%endif
