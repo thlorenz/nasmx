@@ -56,12 +56,12 @@ locals none
 endproc
 
 proc GL_Resize,dword w,dword h
-	locals
-	    local left, qword
-	    local right, qword
-	    local bottom, qword
-	    local top, qword
-	endlocals
+locals
+	local left, qword
+	local right, qword
+	local bottom, qword
+	local top, qword
+endlocals
 		
 	fld dword [glHalf]
 	fst qword [var(.right)]   ; 0.5
@@ -107,6 +107,7 @@ locals none
 endproc
 
 proc SelectMaterial,dword matNum
+locals none
 	if dword [argv(.matNum)],==,0
 		_glMaterialfv GL_FRONT,GL_AMBIENT,mat0_Ambient
 		_glMaterialfv GL_FRONT,GL_DIFFUSE,mat0_Diffuse
