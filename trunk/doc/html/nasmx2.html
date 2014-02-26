@@ -489,11 +489,27 @@ The INVOKE macro, however, fully supports the calling convention.</li>
 <a href="nasmxe.html#section-E.3">Section E.3</a><br>
 <h4>See also:</h4>
 <a href="nasmx2.html#section-2.1">Section 2.1: BREAK</a><br>
-<a href="nasmx2.html#section-2.30">Section 2.30: UNTIL</a><br>
+<a href="nasmx2.html#section-2.31">Section 2.31: UNTIL</a><br>
 <br><br>
 
 
-<h3><a name="section-2.30">2.30: UNTIL: loop condition</a></h3>
+<h3><a name="section-2.30">2.30: RETURN: returning from a procedure</a></h3>
+<h4>Description</h4>
+&nbsp&nbsp&nbsp&nbsp This macro causes a jump to the procedure epilogue.
+<h4>Syntax</h4>
+&nbsp&nbsp&nbsp&nbsp RETURN [ val ]<br>
+&nbsp&nbsp&nbsp&nbsp <br>
+&nbsp&nbsp&nbsp&nbsp where val is the optional procedure return value<br>
+<h4>Examples</h4>
+See demos/win32/demo2 for example usage.<br>
+<h4>Notes</h4>
+At the end of your procedure you may simply <code><nobr>mov eax, val</nobr></code> as the last statement to be executed in order to optimize out the jump to the procedure epilogue.
+<h4>See also:</h4>
+<a href="nasmx2.html#section-2.8">Section 2.8: ENDPROC</a><br>
+<a href="nasmx2.html#section-2.27">Section 2.27: PROC</a><br>
+<br><br>
+
+<h3><a name="section-2.31">2.31: UNTIL: loop condition</a></h3>
 <h4>Description</h4>
 &nbsp&nbsp&nbsp&nbsp Specifying a REPEAT block terminating condition.
 <h4>Syntax</h4>
@@ -513,7 +529,7 @@ The INVOKE macro, however, fully supports the calling convention.</li>
 <a href="nasmx2.html#section-2.29">Section 2.29: REPEAT</a><br>
 <br><br>
 
-<h3><a name="section-2.31">2.31: USES: Saving registers to the stack</a></h3>
+<h3><a name="section-2.32">2.32: USES: Saving registers to the stack</a></h3>
 <h4>Description</h4>
 &nbsp&nbsp&nbsp&nbsp This macro enables the developer to specific registers that must be saved during the procedure prologue.  Saved registers are restored automatically by NASMX during ENDPROC.<br>
 &nbsp&nbsp&nbsp&nbsp This macro, if used, must appear immediately following a PROC statement and immediate before the LOCALS statement<br>
@@ -527,7 +543,7 @@ The INVOKE macro, however, fully supports the calling convention.</li>
 <br><br>
 
 
-<h3><a name="section-2.32">2.32: WHILE: looping</a></h3>
+<h3><a name="section-2.33">2.33: WHILE: looping</a></h3>
 <h4>Description</h4>
 &nbsp&nbsp&nbsp&nbsp This macro creates a procedure specific label to implement a looping block.
 <h4>Syntax</h4>

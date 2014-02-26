@@ -158,16 +158,20 @@
 		<param name="Local" value="html\nasmx2.html#section-2.29">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.30: UNTIL: looping">
+		<param name="Name" value="2.30: RETURN: returning from a procedure">
 		<param name="Local" value="html\nasmx2.html#section-2.30">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.31: USES: Saving registers to the stack">
+		<param name="Name" value="2.31: UNTIL: looping">
 		<param name="Local" value="html\nasmx2.html#section-2.31">
 		</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="2.32: WHILE: looping">
+		<param name="Name" value="2.32: USES: Saving registers to the stack">
 		<param name="Local" value="html\nasmx2.html#section-2.32">
+		</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="2.33: WHILE: looping">
+		<param name="Local" value="html\nasmx2.html#section-2.33">
 		</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">

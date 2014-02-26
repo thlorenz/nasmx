@@ -152,18 +152,23 @@
 	</OBJECT>
 
 	<LI><OBJECT type="text/sitemap">
-	<param name="Name" value="UNTIL">
+	<param name="Name" value="RETURN">
 	<param name="Local" value="html\nasmx2.html#section-2.30">
 	</OBJECT>
 
 	<LI><OBJECT type="text/sitemap">
-	<param name="Name" value="USES">
+	<param name="Name" value="UNTIL">
 	<param name="Local" value="html\nasmx2.html#section-2.31">
 	</OBJECT>
 
 	<LI><OBJECT type="text/sitemap">
-	<param name="Name" value="WHILE">
+	<param name="Name" value="USES">
 	<param name="Local" value="html\nasmx2.html#section-2.32">
+	</OBJECT>
+
+	<LI><OBJECT type="text/sitemap">
+	<param name="Name" value="WHILE">
+	<param name="Local" value="html\nasmx2.html#section-2.33">
 	</OBJECT>
 </UL>
 </BODY>
