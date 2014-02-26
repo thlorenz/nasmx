@@ -1,6 +1,6 @@
 ;// DEMO6.ASM
 ;//
-;// Copyright (C)2005-2011 The NASMX Project
+;// Copyright (C)2005-2014 The NASMX Project
 ;//
 ;// This is a fully UNICODE aware, typedefined demo that demonstrates
 ;// using NASMX typedef system to make your code truly portable between
@@ -16,29 +16,32 @@
 
 entry    demo6
 
-proc   dlgproc, ptrdiff_t hwnd, size_t umsg, size_t wparam, size_t lparam
-locals none
-    cmp      dword [argv(.umsg)], 1024
-    jg       wm_default
-    mov      eax, dword [argv(.umsg)]
-    push     size_t [argv(.lparam)]
-    push     size_t [argv(.wparam)]
-    push     size_t [argv(.hwnd)]
-    call     [msg_table + eax * 4]
-    return
 
-wm_default:
+;//////////////////////////////////////////////////////////////////
+;// This procedure is the default message handler
+;// Note that you could hand-optimize this as
+;// Wm_DefaultProc:
+;//     xor eax, eax
+;//     ret 12
+;//
+proc Wm_DefaultProc, ptrdiff_t hwnd, size_t wparam, size_t lparam
+locals none
     xor      eax, eax
 endproc
 
+;//////////////////////////////////////////////////////////////////
+;// This procedure handles the WM_DESTROY window message
+;//
 proc   Wm_DestroyProc, ptrdiff_t hwnd, size_t wparam, size_t lparam
 locals none
     invoke   EndDialog, ptrdiff_t [argv(.hwnd)], 1
-    return   1
+    mov      eax, 1
 endproc
 
+;//////////////////////////////////////////////////////////////////
+;// This procedure handles the WM_COMMAND window message
+;//
 proc   Wm_CommandProc, ptrdiff_t hwnd, size_t wparam, size_t lparam
-uses __BX
 locals none
 
     mov      eax, size_t [argv(.wparam)]
@@ -55,7 +58,7 @@ locals none
 
 .cmd_idok:
     invoke   EndDialog, ptrdiff_t [argv(.hwnd)], 1
-	return   1
+    return   1
 
 .cmd_idgo:
     invoke   SendDlgItemMessage, ptrdiff_t [argv(.hwnd)], 205, WM_GETTEXTLENGTH, NULL, NULL
@@ -70,21 +73,40 @@ locals none
     push     eax
     invoke   GetProcessHeap
     mov      dword [dwHeap], eax
-	pop      ecx
+    pop      ecx
     invoke   HeapAlloc, eax, 0x000008, ecx 
     mov      dword [dwText], eax
     invoke   SendDlgItemMessage, ptrdiff_t [argv(.hwnd)], 205, WM_GETTEXT, eax, dwText
     invoke   SendDlgItemMessage, ptrdiff_t [argv(.hwnd)], 206, WM_SETTEXT, 0, dwText
     invoke   HeapFree, dwHeap, 0x000008, dwText
-    return   1
+    mov      eax, 1
 
 endproc
 
+;//////////////////////////////////////////////////////////////////
+;// This procedure is the dialog window message handler
+;//
+proc   dlgproc, ptrdiff_t hwnd, size_t umsg, size_t wparam, size_t lparam
+locals none
+    mov      eax, dword [argv(.umsg)]
+    cmp      eax, 1024
+    jle      .ok
+    return   0
+.ok:
+    push     size_t [argv(.lparam)]
+    push     size_t [argv(.wparam)]
+    push     size_t [argv(.hwnd)]
+    call     [msg_table + eax * 4]
+endproc
+
+;//////////////////////////////////////////////////////////////////
+;// This is our main procedure
+;//
 proc   demo6, ptrdiff_t argcount, ptrdiff_t cmdline
 locals none
     mov      eax, msg_table
-    mov      [eax + WM_COMMAND * 4], dword Wm_CommandProc
-    mov      [eax + WM_DESTROY * 4], dword Wm_DestroyProc
+    mov      dword [eax + WM_COMMAND * 4], Wm_CommandProc
+    mov      dword [eax + WM_DESTROY * 4], Wm_DestroyProc
     invoke   DialogBoxParam, NULL, szTemplate, NULL, dlgproc, NULL
     invoke   ExitProcess, NULL
 endproc
@@ -94,7 +116,8 @@ endproc
     dwHeap:     reserve(ptrdiff_t) 1
 
 [section .data]
+    ;// build the dialog message handler table
+    msg_table:  times 1024*4 dd Wm_DefaultProc
     szTitle:    declare(NASMX_TCHAR) NASMX_TEXT("Demo6"), 0x0
     szContent:  declare(NASMX_TCHAR) NASMX_TEXT("Error: you must enter text into the top edit box!"), 0x0
     szTemplate: declare(NASMX_TCHAR) NASMX_TEXT("MyDialog"), 0x0
-    msg_table:  times 1024*4 dd wm_default
