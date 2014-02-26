@@ -2800,12 +2800,8 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 	%endif
 	%push __NX_CTX_PROC__
 	%assign %$__nx_locnt 0             ;// init locals offset
-	%assign %$__nx_arg_bias 0          ;// init 64-bit bias
-	%assign %$__nx_uses_stack_adjust 0 ;// init regs used save area
 	%assign %$__nx_intargs 0           ;// init int args counter
 	%assign %$__nx_floatargs 0         ;// init float args counter
-	%assign %$__nx_uses_count 0        ;// init regs used counter
-	%assign %$__nx_argcount 0          ;// init proc args counter
 	%assign %$__nx_bytecount 0         ;// init total args byte count
 	%assign %$__nx_protobytecount -1   ;// >= 0 if defined
 	%ifndef __NASMX_DECLSPEC_CALLCONV_%[%1]__
@@ -2818,7 +2814,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 			%assign %$__nx_callconv __NASMX_DECLSPEC_CALLCONV_DEFAULT__
 		%endif
 		%define %$__nx_proc %1
-		%assign %$__nx_repcnt %0-1
+		%assign %$__nx_repcnt %0 - 1
 	%else
 		%if %0 < 2
 			%fatal 'usage: PROC [CALLCONV, ] FUNCNAME [,ARG1,ARG2,...]'
@@ -2836,6 +2832,8 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 		%endif
 	%endif
 
+	;// init proc args counter and get callconv enum
+	%assign %$__nx_argv_count %$__nx_repcnt
 	%assign %$__nx_cc_enum nx_declspec_cc_enum(%[%$__nx_callconv])
 	
 	;// v1.0rc2 - we must always calculate a true bytecount such that
@@ -2913,34 +2911,6 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 
 	%if %$__nx_cc_enum != __NASMX_DECLSPEC_CC_ENUM_NAKED__
 		%assign %$__nx_argv __NASMX_ABI_BITS__ / 4
-		%if __NASMX_ABI_BITS__ > 32
-			%ifdef __NX_PROLOGUE_X64_SPILL_OFFSET__
-				%undef __NX_PROLOGUE_X64_SPILL_OFFSET__
-			%endif
-			%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ != __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-				%if %$__nx_cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
-					;// assert: create Linux spill area based on param byte count.
-					;// This may result in slightly wasted stack space but is
-					;// required to avoid alignment issues for params that
-					;// exceed allocated registers and are located on the
-					;// stack above RBP.
-					%assign %$__nx_arg_bias %$__nx_bytecount
-
-					;// keep stack aligned
-					%assign %%__align __NASMX_ABI_BITS__ / 4
-					%assign %%__off (((%$__nx_arg_bias + %%__align) / %%__align) * %%__align)
-					%assign %%__tmp (%$__nx_arg_bias + %%__align)
-					%if (%%__off != %%__tmp)
-						%assign %$__nx_arg_bias %%__off
-					%endif
-					%xdefine __NX_PROLOGUE_X64_SPILL_OFFSET__ %[%$__nx_arg_bias]
-				%endif
-			%endif
-			%ifndef __NX_PROLOGUE_X64_SPILL_OFFSET__
-				;// assert: must always be defined for x64
-				%xdefine __NX_PROLOGUE_X64_SPILL_OFFSET__ 0
-			%endif
-		%endif
 
 		;// assert: calc byte count for sig check and argv() offsets
 		;// we must reverse arg push logic to get correct results
@@ -2989,34 +2959,9 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 						.%[%$__nx_token] EQU %[%$__nx_argv]
 						%assign %$__nx_argv %%__param_size + %$__nx_argv
 					%else
-						;// assert: Linux 64-bit register spill area
-						;// located below frame pointer thus we must
-						;// account for bias of args from frame while
-						;// accounting for param types supplied
-						%if %%__isfloat == 0
-							%assign %$__nx_intargs 1 + %$__nx_intargs
-							%if %$__nx_intargs > __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
-								.%[%$__nx_token] EQU __NX_PROLOGUE_X64_SPILL_OFFSET__ + %[%$__nx_argv]
-								%assign %$__nx_argv %%__param_size + %$__nx_argv
-							%else
-								%if %$__nx_intargs == __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
-									%if %%__param_size > sizeof(size_t)
-										%error in procedure %$__nx_proc %$__nx_token exceeds available register size
-									%endif
-								%endif
-								.%[%$__nx_token] EQU %[%$__nx_locnt]
-								%assign %$__nx_locnt %%__param_size + %$__nx_locnt
-							%endif
-						%else
-							%assign %$__nx_floatargs 1 + %$__nx_floatargs
-							%if %$__nx_floatargs > __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__
-								.%[%$__nx_token] EQU __NX_PROLOGUE_X64_SPILL_OFFSET__ + %$__nx_argv
-								%assign %$__nx_argv %%__param_size + %$__nx_argv
-							%else
-								.%[%$__nx_token] EQU %[%$__nx_locnt]
-								%assign %$__nx_locnt %%__param_size + %$__nx_locnt
-							%endif
-						%endif
+						;// assert: Linux 64-bit register spill area located
+						;// below frame pointer, defer equating until later.
+						__nx_stack_push PROLOGUE_X64_PARAM_NAME, %[%$__nx_token]
 					%endif
 				%else
 					.%[%$__nx_token] EQU %[%$__nx_argv]
@@ -3057,12 +3002,12 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 			%endif
 		%endif
 
-		;// assert: always push __BP to get an aligned stack
-		%define __NX_PROLOGUE_PRESENT__
-		push __BP
-		mov  __BP, __SP
-
 		%ifidni %$__nx_proc, main
+			;// assert: always push __BP to get an aligned stack
+			%define __NX_PROLOGUE_PRESENT__
+			push __BP
+			mov  __BP, __SP
+
 			;// assert: ensure we start out with an aligned stack
 			%assign %%__nx_align ((__NASMX_ABI_BITS__ / 4 ) - 1)
 			mov   __AX, __SP
@@ -3095,7 +3040,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 ;//    extremely critical to proper function definition and
 ;//    stack alignment if used.
 ;//
-%imacro USES 1-8.nolist
+%imacro USES 1-16.nolist
 	%ifndef NASMX_ENDPROC
 		%fatal 'missing proc directive.'
 	%endif
@@ -3109,31 +3054,10 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 		%fatal 'uses directive previously set for this procedure.'
 	%endif
 	%define __NX_USES_PRESENT__
-	%ifndef __NX_PROLOGUE_PRESENT__
-		;// assert: at this point we have absolutely no way of knowing whether
-		;// the function will contain locals or not; thus, using this macro
-		;// forces our hand and requires us to set up the function prologue.
-		;// The good news is that this aligns our stack properly.
-		%define __NX_PROLOGUE_PRESENT__
-		push __BP
-		mov  __BP, __SP
-	%endif
-
-	;// How many bytes needed?
-	%assign %%__size __NASMX_ABI_BITS__ / 8
-	%assign %%__bytes %%__size * %0
-
-	;// ensure we align register save area
-	%assign %$__nx_uses_stack_adjust 0
-	%assign %%__align __NASMX_ABI_BITS__ / 4
-	%assign %%__off (((%%__bytes + %%__align) / %%__align) * %%__align)
-	%assign %%__tmp (%%__bytes + %%__align)
-	%if ( %%__off != %%__tmp )
-		%assign %$__nx_locnt ( %$__nx_locnt + %%__size )
-		%assign %$__nx_uses_stack_adjust %%__size
-	%endif
 
 	%assign %%__sys_size __NASMX_ABI_BITS__
+	%assign %%__size __NASMX_ABI_BITS__ / 8
+	%assign %$__nx_uses_adjust %0 * %%__size
 	%rep %0
 		%ifndef %[%1]_size
 			%fatal unknown register: %1
@@ -3145,15 +3069,12 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 			%fatal %1 not available in %%__sys_size bit mode
 		%endif
 		__nx_stack_push NASMX_USES_REGS, %[%1]
-		%assign %$__nx_uses_stack_adjust %$__nx_uses_stack_adjust + %%__size
-		%assign %$__nx_locnt %$__nx_locnt + %%__size
-		mov [__BP - %$__nx_locnt ], %[%1]
 		%rotate 1
 	%endrep
 
 	;// during endproc stack adjustment to include difference
 	;// between locnt and uses_adjust
-	%xdefine __NX_PROLOGUE_USES_ADJUST__ %[%$__nx_uses_stack_adjust]
+	%xdefine __NX_PROLOGUE_USES_ADJUST__ %[%$__nx_uses_adjust]
 
 %endmacro
 
@@ -3194,6 +3115,47 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 		%xdefine __NX_PROLOGUE_USES_ADJUST__ 0
 	%endif
 
+	%ifndef __NX_PROLOGUE_PRESENT__
+		%define __NX_PROLOGUE_PRESENT__
+		push __BP
+
+		;// if there are no locals, no parameters, and no x64 prologue requirements
+		;// then don't emit mov __SP, __BP
+		%ifnidni %$__nx_proc, main
+			%ifdef __NX_STACK_IDX_PROLOGUE_X64_PARAM_NAME
+				mov  __BP, __SP
+			%elifndef __NX_LOCALS_NONE__
+				mov  __BP, __SP
+			%elif %$__nx_argv_count > 0
+				mov  __BP, __SP
+			%endif
+		%endif
+	%endif
+
+	%ifdef __NX_USES_PRESENT__
+		%assign %%__size __NASMX_ABI_BITS__ / 8
+		%assign %%__nx_reg 1
+		%assign %$__nx_uses_count __NX_STACK_IDX_NASMX_USES_REGS
+		%rep %$__nx_uses_count
+			push %[__NX_STACK_NASMX_USES_REGS_ %+ %%__nx_reg]
+			%assign %$__nx_locnt %$__nx_locnt + %%__size
+			%assign %%__nx_reg %%__nx_reg + 1
+		%endrep
+	%endif
+
+	;// at this point we can create the linux spill area if necessary
+	%ifdef __NX_STACK_IDX_PROLOGUE_X64_PARAM_NAME
+		%assign %%__size __NASMX_ABI_BITS__ / 8
+		%assign %%__idx __NX_STACK_IDX_PROLOGUE_X64_PARAM_NAME
+		%assign %%__params %%__idx
+		%rep %%__params
+			%assign %$__nx_locnt %%__size + %$__nx_locnt
+			.%[__NX_STACK_PROLOGUE_X64_PARAM_NAME_ %+ %%__idx] EQU %[%$__nx_locnt]
+			%assign %%__idx %%__idx - 1
+			__nx_stack_pop PROLOGUE_X64_PARAM_NAME
+		%endrep
+	%endif
+
 	%ifdef __NX_LOCALS_NONE__
 		%ifdef __NX_PROLOGUE_CALLSTACK_ADJUST__
 			%assign %$__nx_locnt %$__nx_locnt + __NX_PROLOGUE_CALLSTACK_ADJUST__
@@ -3209,7 +3171,10 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 			%if (%%__off != %%__tmp)
 				%assign %$__nx_locnt (%$__nx_locnt + (__NASMX_ABI_BITS__ / 8))
 			%endif
-			sub  __SP, %$__nx_locnt
+			%assign %%__alloca %$__nx_locnt - __NX_PROLOGUE_USES_ADJUST__
+			%if %%__alloca > 0
+				sub  __SP, %%__alloca
+			%endif
 		%endif
 	%endif
 %endmacro
@@ -3226,7 +3191,7 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 		%error %1 unknown size: %2
 	%endif
 	%assign %%__size %[%2]_size
-	%assign %$__nx_locnt %$__nx_locnt + %%__size * %3
+	%assign %$__nx_locnt %$__nx_locnt + (%%__size * %3)
 
 	;// ensure natural alignment of stack local variables
 	;// TODO: A nice, but not trivial, optimization to reduce
@@ -3258,15 +3223,18 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 		%ifdef __NX_PROLOGUE_CALLSTACK_ADJUST__
 			%assign %$__nx_locnt %$__nx_locnt + __NX_PROLOGUE_CALLSTACK_ADJUST__
 		%endif
-		%assign %%__align __NASMX_ABI_BITS__ / 4
 		%if %$__nx_locnt > 0
 			;// keep stack aligned
+			%assign %%__align __NASMX_ABI_BITS__ / 4
 			%assign %%__off (((%$__nx_locnt + %%__align) / %%__align) * %%__align)
 			%assign %%__tmp (%$__nx_locnt + %%__align)
 			%if (%%__off != %%__tmp)
 				%assign %$__nx_locnt %%__off
 			%endif
-			sub  __SP, %$__nx_locnt
+			%assign %%__alloca %$__nx_locnt - __NX_PROLOGUE_USES_ADJUST__
+			%if %%__alloca > 0
+				sub  __SP, %%__alloca
+			%endif
 		%endif
 	%endif
 %endmacro
@@ -3275,8 +3243,8 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 ;// parameter arguments and local variables
 %if __NASMX_ABI_BITS__ > 32
 	%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ != __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-		;// Linux x64 argv offsets defined as positive offsets from spill area
-		%idefine argv(v) rbp + ( v - __NX_PROLOGUE_X64_SPILL_OFFSET__ )
+		;// Linux x64 argv offsets defined identically to var offsets
+		%idefine argv(v) rbp - v
 	%else
 		%idefine argv(v) rbp + v
 	%endif
@@ -3312,19 +3280,10 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 		%define __NX_LEAVE_PRESENT__
 		%ifdef NASMX_ENDPROC
 			;// reset __SP to end of saved registers, if any
-			%if __NASMX_ABI_BITS__ > 32
-				%ifdef __NX_PROLOGUE_X64_SPILL_OFFSET__
-					%assign %$__nx_locnt %$__nx_locnt - __NX_PROLOGUE_X64_SPILL_OFFSET__
-				%endif
-			%endif
-			%ifdef __NX_PROLOGUE_USES_ADJUST__
-				%if %$__nx_locnt >= __NX_PROLOGUE_USES_ADJUST__
-					%assign %$__nx_locnt %$__nx_locnt - __NX_PROLOGUE_USES_ADJUST__
-				%endif
-			%endif
 			%ifdef __NX_LOCALS_PRESENT__
-				%if %$__nx_locnt > 0
-					add  __SP, %$__nx_locnt
+				%assign %%__alloc %$__nx_locnt - __NX_PROLOGUE_USES_ADJUST__
+				%if %%__alloc > 0
+					add  __SP, %%__alloc
 				%endif
 			%endif
 			;// restore any non-volatile registers
@@ -3339,7 +3298,9 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 			%endif
 		%endif
 		%ifdef __NX_PROLOGUE_PRESENT__
-			mov __SP, __BP
+			%ifidn %[%$__nx_proc],main
+				mov __SP, __BP
+			%endif
 			pop __BP
 		%endif
 	%endif
@@ -3378,6 +3339,12 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 %imacro ENDPROC 0.nolist
 	%ifndef NASMX_ENDPROC
 		%fatal 'missing proc directive.'
+	%endif
+	;// NASMX v1.3.1
+	;// added check to ensure stack was set up
+	;// properly in case invoke macro not used.
+	%ifndef __NX_LOCALS_PRESENT__
+		%fatal 'missing locals directive.'
 	%endif
 
 	;// provide a proc end jmp label
@@ -3432,9 +3399,6 @@ NASMX_DEFINE VERSION_ID, 0x0103000F
 	%endif
 	%ifdef __NX_PROLOGUE_USES_ADJUST__
 		%undef __NX_PROLOGUE_USES_ADJUST__
-	%endif
-	%ifdef __NX_PROLOGUE_X64_SPILL_OFFSET__
-		%undef __NX_PROLOGUE_X64_SPILL_OFFSET__
 	%endif
 %endmacro
 
