@@ -338,7 +338,7 @@
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp options are optional values specified for the directive.<br>
 &nbsp&nbsp&nbsp&nbsp directives:<br>
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp CALLSTACK, stack-size<br>
-&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp FASTCALL_STACK_PRELOAD, [ ENABLED | DISABLE ]<br>
+&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp FASTCALL_STACK_PRELOAD, [ ENABLE | DISABLE ]<br>
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp PACK, [ PUSH | POP ]<br>
 <h4>Example</h4>
 <p>Please see demos
@@ -433,6 +433,27 @@
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp supported conventions: CDECL, FASTCALL, NAKED, PASCAL, STDCALL<br>
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp proc_name is the name of the procedure.<br>
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp param is the type and parameter name(s) of the procedure.<br>
+<br>
+<h4>Notes</h4>
+Procedures that define parameter arguments will have the parameter names equated to offsets from the frame.<br>
+<br>
+Windows stack parameters are always located above the return address for both 32-bit and 64-bit.  By default,
+NASMX will pre-fill all stack parameters including 64-bit mode.  To prevent NASMX from spilling
+the first 4 register parameters to the stack in 64-bit mode you should place a <code><nobr>NASMX_PRAGMA FASTCALL_STACK_PRELOAD, DISABLE</nobr></code> at the beginning
+of your source file after including nasmx.inc<br><br>
+Linux 32-bit stack parameters are located above the return address.  For Linux 64-bit mode NASMX will create
+a spill area below the return address in a manner similar to local variables but will not automatically spill register parameters to this area.
+Thus you may safely save register parameters to these locations.  If you do not desire a pre-built spill area you can simply
+define a procedure with no parameters.<br>
+<h4>Known Issues</h4>
+<ul>
+<li>For Linux 64-bit mode NASMX does not fully support defining a PROC with more parameters than the maximum registers defined for the fastcall calling convention.
+The INVOKE macro, however, fully supports the calling convention.</li>
+<li>There is currently no support for passing parameter values larger than 64-bits.</li>
+</ul>
+
+
+
 <h4>Example</h4>
 <a href="nasmxe.html#section-E.3">Section E.3</a><br>
 <h4>See also:</h4>
