@@ -19,7 +19,8 @@ entry    demo6
 
 ;//////////////////////////////////////////////////////////////////
 ;// This procedure is the default message handler
-;// Note that you could hand-optimize this as
+;// Note that you could hand-optimize this by replacing
+;// the entire procedure with
 ;// Wm_DefaultProc:
 ;//     xor eax, eax
 ;//     ret 12
@@ -116,7 +117,7 @@ endproc
     dwHeap:     reserve(ptrdiff_t) 1
 
 [section .data]
-    ;// build the dialog message handler table
+    ;// build the dialog message handler call table
     msg_table:  times 1024*4 dd Wm_DefaultProc
     szTitle:    declare(NASMX_TCHAR) NASMX_TEXT("Demo6"), 0x0
     szContent:  declare(NASMX_TCHAR) NASMX_TEXT("Error: you must enter text into the top edit box!"), 0x0
