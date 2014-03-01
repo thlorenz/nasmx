@@ -281,7 +281,7 @@ endproc
 
 [section .data]
 
-    szTitle:               declare(NASMX_TCHAR) NASMX_TEXT("Demo 16 - WinFloor"), 0x0
+    szTitle:               declare(NASMX_TCHAR) NASMX_TEXT("Demo 17 - WinFloor"), 0x0
     szClass:               declare(NASMX_TCHAR) NASMX_TEXT("WinFloorClass"), 0x0
     vbMotion:              db    0
     MsgAgradecimiento:     declare(NASMX_TCHAR) NASMX_TEXT("* To Toni Gual for their floor demo in QBasic, I learned from him."), 13, 10
