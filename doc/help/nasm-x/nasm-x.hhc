@@ -185,20 +185,24 @@
 		</OBJECT>
 		<UL>
 			<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="A.1.1 NASMX v1.3: 14 Feb 2014">
+			<param name="Name" value="A.1.1 NASM-X v1.4: 05 Mar 2014">
 			<param name="Local" value="html\nasmxa.html#section-A.1.1">
 			</OBJECT>
 			<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="A.1.2 NASMX v1.2: 12 Jan 2013">
+			<param name="Name" value="A.1.2 NASM-X v1.3: 14 Feb 2014">
 			<param name="Local" value="html\nasmxa.html#section-A.1.2">
 			</OBJECT>
 			<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="A.1.3 NASMX v1.1: 29 Sep 2012">
+			<param name="Name" value="A.1.3 NASM-X v1.2: 12 Jan 2013">
 			<param name="Local" value="html\nasmxa.html#section-A.1.3">
 			</OBJECT>
 			<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="A.1.4 NASMX v1.0: 20 Aug 2011">
+			<param name="Name" value="A.1.4 NASM-X v1.1: 29 Sep 2012">
 			<param name="Local" value="html\nasmxa.html#section-A.1.4">
+			</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="A.1.5 NASM-X v1.0: 20 Aug 2011">
+			<param name="Local" value="html\nasmxa.html#section-A.1.5">
 			</OBJECT>
 		</UL>
 	</UL>

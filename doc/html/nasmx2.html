@@ -208,11 +208,17 @@
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp supported conventions: CDECL, FASTCALL, NAKED, PASCAL, STDCALL<br>
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp proc_name is the name of the procedure to call.<br>
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp param is the type and parameter name(s) of the procedure.<br>
+<h4>Notes</h4>
+Fox x64 programming INVOKE will not normally spill register arguments to the stack prior to the call.  If this behavior is desired due
+to calling a non-conformant function then you may use <code><nobr>NASMX_PRAGMA INVOKE_FASTCALL_STACK_PRELOAD, ENABLE</nobr></code> prior
+to INVOKE to enable this behavior.<br>
+<br>
 <h4>Example</h4>
 <a href="nasmxe.html#section-E.1">Section E.1</a><br>
 <h4>See also:</h4>
 <a href="nasmx2.html#section-2.6">Section 2.6: ENTRY</a><br>
 <a href="nasmx2.html#section-2.12">Section 2.12: IMPORT</a><br>
+<a href="nasmx2.html#section-2.21">2.21: NASMX_PRAGMA</a>
 <a href="nasmx2.html#section-2.27">Section 2.27: PROC</a><br>
 <br><br>
 
@@ -334,12 +340,16 @@
 &nbsp&nbsp&nbsp&nbsp NASMX_PRAGMA directive,option [,options]<br>
 &nbsp&nbsp&nbsp&nbsp <br>
 &nbsp&nbsp&nbsp&nbsp where:<br>
-&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp directive provides instruction to NASMX<br>
-&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp options are optional values specified for the directive.<br>
+&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp <code><nobr>directive</nobr></code> provides instruction to NASMX<br>
+&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp <code><nobr>options</nobr></code> are optional values specified for the directive.<br>
 &nbsp&nbsp&nbsp&nbsp directives:<br>
-&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp CALLSTACK, stack-size<br>
-&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp FASTCALL_STACK_PRELOAD, [ ENABLE | DISABLE ]<br>
-&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp PACK, [ PUSH | POP ]<br>
+&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp <code><nobr>CALLSTACK, size</nobr></code>  ; Win64 minimum callstack size is 32<br>
+&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp <code><nobr>PACK, PUSH, align_val</nobr></code>  ; default is natural structure member alignment<br>
+&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp <code><nobr>PACK, POP</nobr></code><br>
+&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp <code><nobr>PROC_FASTCALL_STACK_PRELOAD, [ ENABLE | DISABLE ]</nobr></code> ; default is enable<br>
+&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp <code><nobr>INVOKE_FASTCALL_STACK_PRELOAD, [ ENABLE | DISABLE ]</nobr></code> ; default is disable<br>
+<br>
+Note: The pragma INVOKE_FASTCALL_STACK_PRELOAD is applicable only for Windows 64-bit.<br>
 <h4>Example</h4>
 <p>Please see demos
 <h4>See also:</h4>
@@ -435,30 +445,40 @@
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp param is the type and parameter name(s) of the procedure.<br>
 <br>
 <h4>Notes</h4>
-Procedures that define parameter arguments will have the parameter names equated to offsets from the frame.<br>
+The stack frame is automatically created whenever you have defined either procedure parameters or local stack variables.
+Arguments are always located on the stack above the return address for both 32-bit and 64-bit.
+The 32-bit register EBP ( RBP in 64-bit ) is used as the frame pointer.  Procedures that define parameter arguments will have the parameter
+names equated to offsets from the frame.  Use the macro <code><nobr>argv()</nobr></code> to access the procedure arguments.<br>
 <br>
-Windows stack parameters are always located above the return address for both 32-bit and 64-bit.  By default,
-NASMX will pre-fill all stack parameters including 64-bit mode.  To prevent NASMX from spilling
-the first 4 register parameters to the stack in 64-bit mode you should place a <code><nobr>NASMX_PRAGMA FASTCALL_STACK_PRELOAD, DISABLE</nobr></code> at the beginning
-of your source file after including nasmx.inc<br><br>
-Linux 32-bit stack parameters are located above the return address.  For Linux 64-bit mode NASMX will create
-a spill area below the return address in a manner similar to local variables but will not automatically spill register parameters to this area.
-Thus you may safely save register parameters to these locations.  If you do not desire a pre-built spill area you can simply
-define a procedure with no parameters.<br>
+For the 64-bit fastcall calling convention:<br>
+By default, during the procedure prologue, NASM-X will automatically save the registers used for
+the procedure parameters you define to the stack.  To prevent NASM-X from saving register parameters to the stack you can place a
+<code><nobr>NASMX_PRAGMA PROC_FASTCALL_STACK_PRELOAD, DISABLE</nobr></code> at the beginning of your source file after including nasmx.inc<br>
+You may enable or disable stack pre-loading at any time by using multiple NASMX_PRAGMA directives in your source file.<br>
+<br>
+For Linux 64-bit mode:<br>
+NASM-X will create a register argument spill area below the return address in a manner similar to local variables.
+Automatic register argument saving is enabled or disabled as indicated previously.  The macro <code><nobr>argv()</nobr></code> will
+correctly provide the parameter offsets in this area.<br>
+<br>
+Finally, if your procedure does not require automatic register saves or you will not access the register spill area then you may simply
+define a PROC without parameters.  Doing so may eliminate the need to use register EBP/RBP to create the stack frame depending on whether
+local variable stack space is required or not thus freeing up that register for use.  The exceptions are 1.) the program main entry point which,
+if defined, must establish the initial frame; and 2.) procedures that expect floating point arguments must be prototyped in order for INVOKE to
+assign the appropriate floating point registers.
+<br>
 <h4>Known Issues</h4>
 <ul>
-<li>For Linux 64-bit mode NASMX does not fully support defining a PROC with more parameters than the maximum registers defined for the fastcall calling convention.
-The INVOKE macro, however, fully supports the calling convention.</li>
 <li>There is currently no support for passing parameter values larger than 64-bits.</li>
+<li>For Linux 64-bit mode NASM-X currently does not support defining a PROC with more parameters than the maximum registers defined for the x64 fastcall calling convention.
+The INVOKE macro, however, fully supports the calling convention.</li>
 </ul>
-
-
-
 <h4>Example</h4>
 <a href="nasmxe.html#section-E.3">Section E.3</a><br>
 <h4>See also:</h4>
 &nbsp&nbsp&nbsp&nbsp <a href="nasmx2.html#section-2.6">Section 2.6: ENTRY</a><br>
 &nbsp&nbsp&nbsp&nbsp <a href="nasmx2.html#section-2.12">Section 2.12: IMPORT</a><br>
+&nbsp&nbsp&nbsp&nbsp <a href="nasmx2.html#section-2.21">2.21: NASMX_PRAGMA</a><br>
 &nbsp&nbsp&nbsp&nbsp <a href="nasmx2.html#section-2.28">Section 2.28: PROTO</a><br>
 <br><br>
 
