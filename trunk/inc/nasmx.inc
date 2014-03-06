@@ -855,6 +855,7 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    6
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  8
+	%define __NASMX_DECLSPEC_FASTCALL_REGFLOATARGS_8__ 'XMM0XMM1XMM2XMM3XMM4XMM5XMM6XMM7'
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_8__ 'RDIRSIRDXRCXR8 R9 '
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'EDIESIEDXECXR8DR9D'
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_2__ 'DI SI DX CX R8WR9W'
@@ -920,6 +921,7 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0501
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    6
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  8
+	%define __NASMX_DECLSPEC_FASTCALL_REGFLOATARGS_8__ 'XMM0XMM1XMM2XMM3XMM4XMM5XMM6XMM7'
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_8__ 'RDIRSIRDXRCXR8 R9 '
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'EDIESIEDXECXR8dR9d'
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_2__ 'DI SI DX CX R8wR9w'
@@ -961,6 +963,7 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 	%idefine __NASMX_DECLSPEC_CALLCONV_FASTCALL__ 0x0500
 	%define __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__    4
 	%define __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__  4
+	%define __NASMX_DECLSPEC_FASTCALL_REGFLOATARGS_8__ 'XMM0XMM1XMM2XMM3'
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_8__ 'RCXRDXR8 R9 '
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_4__ 'ECXEDXR8DR9D'
 	%define __NASMX_DECLSPEC_FASTCALL_REGINTARGS_2__ 'CX DX R8WR9W'
@@ -2259,23 +2262,26 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 			%else
 				nx_strtok %1, ' '
 				%ifndef __nx_reg_%[%$__nx_token]
-					%iftoken %1
-						%fatal expected floating point at arg %1
+					nx_strstr __NASMX_DECLSPEC_FASTCALL_REGFLOATARGS_8__,%$__nx_token
+					%if %$__nx_strstr_pos == 0
+						%iftoken %1
+							%fatal expected floating point at arg %1
+						%endif
+						;// must check for casts which indicate
+						;// __float() or __double() may have been used
+						%ifdef %[%$__nx_token]_size
+							%assign %%__size %[%$__nx_token]_size
+							nx_strtok 0, ';'
+						%else
+							%assign %%__size %$__nx_argv_mode_param_size
+							nx_strtok %1, ';'
+						%endif
+						%if %%__size > %$__nx_argv_mode_param_size
+							%warning potential loss of precision from double to float for arg %1
+						%endif
+						%assign %$__nx_argv_mode_fp_isnum 1
+						%assign %$__nx_argv_mode_fp_num %$__nx_token
 					%endif
-					;// must check for casts which indicate
-					;// __float() or __double() may have been used
-					%ifdef %[%$__nx_token]_size
-						%assign %%__size %[%$__nx_token]_size
-						nx_strtok 0, ';'
-					%else
-						%assign %%__size %$__nx_argv_mode_param_size
-						nx_strtok %1, ';'
-					%endif
-					%if %%__size > %$__nx_argv_mode_param_size
-						%warning potential loss of precision from double to float for arg %1
-					%endif
-					%assign %$__nx_argv_mode_fp_isnum 1
-					%assign %$__nx_argv_mode_fp_num %$__nx_token
 				%endif
 			%endif
 		%endif
@@ -2644,38 +2650,19 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 			%elif %$__nx_floatargs < __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__
 				%assign %%__argtostack 0
 				%if __NASMX_ABI_BITS__ > 32
-					;// assert: use 64-bit registers
-					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-						%if   %$args == 0
-							%xdefine %$arg_cur xmm0
-						%elif %$args == 8
-							%xdefine %$arg_cur xmm1
-						%elif %$args == 16
-							%xdefine %$arg_cur xmm2
-						%elif %$args == 24
-							%xdefine %$arg_cur xmm3
-						%endif
-					%else
-						%if   %$__nx_floatargs == 0
-							%xdefine %$arg_cur xmm0
-						%elif %$__nx_floatargs == 1
-							%xdefine %$arg_cur xmm1
-						%elif %$__nx_floatargs == 2
-							%xdefine %$arg_cur xmm2
-						%elif %$__nx_floatargs == 3
-							%xdefine %$arg_cur xmm3
-						%elif  %$__nx_floatargs == 4
-							%xdefine %$arg_cur xmm4
-						%elif %$__nx_floatargs == 5
-							%xdefine %$arg_cur xmm5
-						%elif %$__nx_floatargs == 6
-							%xdefine %$arg_cur xmm6
-						%elif %$__nx_floatargs == 7
-							%xdefine %$arg_cur xmm7
-						%endif
-					%endif
+					%substr %%__regstr __NASMX_DECLSPEC_FASTCALL_REGFLOATARGS_8__ (%$__nx_floatargs * 4 + 1), 4
+					%deftok %$arg_cur %%__regstr
+					%undef %%__regstr
 
-					%if %$__nx_argv_mode_indirect > 0
+					%ifnum %1
+						%warning ifnum is true
+						mov __AX, %1
+						mov size_t [__SP - __NASMX_ABI_BITS__ / 4 ], __AX
+						movsd %$arg_cur, size_t [__SP - __NASMX_ABI_BITS__ / 4 ]
+						%if %$__reg_ax_saved != 0
+							mov __AX, size_t [__SP - __NASMX_ABI_BITS__ / 8]
+						%endif
+					%elif %$__nx_argv_mode_indirect > 0
 						nx_strtok %1, ' '
 						%ifdef %[%$__nx_token]_size
 							nx_strtok 0, ';'
@@ -2683,7 +2670,6 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 						%else
 							movsd %$arg_cur, %1
 						%endif
-						movsd [__SP + %$args], %$arg_cur
 					%elif %$__nx_argv_mode_bp > 0
 						nx_strtok %1, ' '
 						%ifdef __nx_reg_%[%$__nx_token]
@@ -2694,18 +2680,35 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 						%else
 							movsd %$arg_cur, [%1]
 						%endif
-						movsd [__SP + %$args], %$arg_cur
 					%else
-						%if %$__nx_argv_mode_fp_isnum != 0
-							mov rax, %$__nx_argv_mode_fp_num
-							mov qword [__SP + %$args], rax
+						nx_strtok %1, ' '
+						%ifdef __nx_reg_%[%$__nx_token]
+							mov size_t [__SP - __NASMX_ABI_BITS__ / 4 ], %1
+							movsd %$arg_cur, size_t [__SP - __NASMX_ABI_BITS__ / 4 ]
+						%elif %$__nx_argv_mode_fp_isnum != 0
+							mov __AX, %1
+							mov size_t [__SP - __NASMX_ABI_BITS__ / 4 ], __AX
+							movsd %$arg_cur, size_t [__SP - __NASMX_ABI_BITS__ / 4 ]
 							%if %$__reg_ax_saved != 0
-								mov rax, size_t [__SP - __NASMX_ABI_BITS__ / 8]
+								mov __AX, size_t [__SP - __NASMX_ABI_BITS__ / 8]
 							%endif
 						%else
-							mov qword [__SP + %$args], %1
+							nx_strstr __NASMX_DECLSPEC_FASTCALL_REGFLOATARGS_8__,%1
+							%if %$__nx_strstr_pos != 0
+								%ifnidni %$arg_cur,%1
+									movq %$arg_cur,%1
+								%endif
+							%else
+								movsd %$arg_cur, %1
+							%endif
 						%endif
-						movsd %$arg_cur, [__SP + %$args]
+					%endif
+
+					;// Only spill Win64 float register if user specifies
+					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+						%ifdef ENABLE_INVOKE_FASTCALL_STACK_PRELOAD
+							movsd [__SP + %$args], %$arg_cur
+						%endif
 					%endif
 				%else
 					;// 32-bit fastcall float param
@@ -3068,16 +3071,39 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 		%undef __nx_proto_argtype
 
 		;// NASMX 1.4 - New behavior: auto-spill register args if not disabled
-		%ifndef DISABLE_PROC_FASTCALL_STACK_PRELOAD
-			%if %$__nx_cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
-				%if %$__nx_intargs < __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
-					%assign %$__reg_size __NASMX_ABI_BITS__ / 8
-					%substr %%__regstr __NASMX_DECLSPEC_FASTCALL_REGINTARGS_%[%$__reg_size]__ (%$__nx_intargs * 3 + 1), 3
-					%deftok %$arg_cur %%__regstr
-					__nx_stack_push NASMX_SPILL_REG, %[%$arg_cur]
-					%undef %%__regstr
+		%if %$__nx_cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
+			%ifndef DISABLE_PROC_FASTCALL_STACK_PRELOAD
+				%assign %$__reg_size __NASMX_ABI_BITS__ / 8
+				%assign %%__isfloat is_typeof_float(%[%$__nx_token])
+				%if %%__isfloat == 0
+					%if %$__nx_intargs < __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
+						%substr %%__regstr __NASMX_DECLSPEC_FASTCALL_REGINTARGS_%[%$__reg_size]__ (%$__nx_intargs * 3 + 1), 3
+						%deftok %$arg_cur %%__regstr
+						__nx_stack_push NASMX_SPILL_REG_NAME, %[%$arg_cur]
+						__nx_stack_push NASMX_SPILL_REG_TYPE, %[%$__nx_token]
+						%undef %%__regstr
+					%endif
+					%assign %$__nx_intargs %$__nx_intargs + 1
+					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+						;// Windows fastcall uses one index for either
+						;// int or float params for purpose of preloading regs
+						%assign %$__nx_floatargs %$__nx_floatargs + 1
+					%endif
+				%else
+					%if %$__nx_floatargs < __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__
+						%substr %%__regstr __NASMX_DECLSPEC_FASTCALL_REGFLOATARGS_%[%$__reg_size]__ (%$__nx_floatargs * 4 + 1), 4
+						%deftok %$arg_cur %%__regstr
+						__nx_stack_push NASMX_SPILL_REG_NAME, %[%$arg_cur]
+						__nx_stack_push NASMX_SPILL_REG_TYPE, %[%$__nx_token]
+						%undef %%__regstr
+					%endif
+					%assign %$__nx_floatargs %$__nx_floatargs + 1
+					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+						;// Windows fastcall uses one index for either
+						;// int or float params for purpose of preloading regs
+						%assign %$__nx_intargs 1 + %$__nx_intargs
+					%endif
 				%endif
-				%assign %$__nx_intargs %$__nx_intargs + 1
 			%endif
 		%endif
 
@@ -3115,6 +3141,7 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 
 	%if %$__nx_cc_enum != __NASMX_DECLSPEC_CC_ENUM_NAKED__
 		%assign %$__nx_intargs 0
+		%assign %$__nx_floatargs 0
 		%assign %$__nx_argv __NASMX_ABI_BITS__ / 4
 
 		;// assert: calc byte count for sig check and argv() offsets
@@ -3385,22 +3412,34 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 		%endif
 
 		;// auto-spill registers, if any
-		%ifdef __NX_STACK_IDX_NASMX_SPILL_REG
+		%ifdef __NX_STACK_IDX_NASMX_SPILL_REG_NAME
 			%assign %%__ofst %$__reg_size * 2
 			%assign %%ctr 1
-			%assign %%__repcnt __NX_STACK_IDX_NASMX_SPILL_REG
+			%assign %%__repcnt __NX_STACK_IDX_NASMX_SPILL_REG_NAME
 			%rep %%__repcnt
-				%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-					mov size_t [__BP + %%__ofst], %[__NX_STACK_NASMX_SPILL_REG_ %+ %%ctr]
-					%assign %%__ofst %%__ofst + %$__reg_size
+				%assign %%__isfloat is_typeof_float(%[__NX_STACK_NASMX_SPILL_REG_TYPE_ %+ %%ctr])
+				%if %%__isfloat == 0
+					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+						mov size_t [__BP + %%__ofst], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
+						%assign %%__ofst %%__ofst + %$__reg_size
+					%else
+						mov size_t [__BP - %$__nx_x64_loc], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
+						%assign %$__nx_x64_loc %$__nx_x64_loc - %$__reg_size
+					%endif
 				%else
-					mov size_t [__BP - %$__nx_x64_loc], %[__NX_STACK_NASMX_SPILL_REG_ %+ %%ctr]
-					%assign %$__nx_x64_loc %$__nx_x64_loc - %$__reg_size
+					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+						movsd size_t [__BP + %%__ofst], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
+						%assign %%__ofst %%__ofst + %$__reg_size
+					%else
+						movsd size_t [__BP - %$__nx_x64_loc], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
+						%assign %$__nx_x64_loc %$__nx_x64_loc - %$__reg_size
+					%endif				
 				%endif
 				%assign %%ctr %%ctr + 1
 			%endrep
 			%rep %%__repcnt
-				__nx_stack_pop NASMX_SPILL_REG
+				__nx_stack_pop NASMX_SPILL_REG_NAME
+				__nx_stack_pop NASMX_SPILL_REG_TYPE
 			%endrep
 		%endif
 	%endif
@@ -3465,22 +3504,34 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 		%endif
 
 		;// auto-spill registers, if any
-		%ifdef __NX_STACK_IDX_NASMX_SPILL_REG
+		%ifdef __NX_STACK_IDX_NASMX_SPILL_REG_NAME
 			%assign %%__ofst %$__reg_size * 2
 			%assign %%ctr 1
-			%assign %%__repcnt __NX_STACK_IDX_NASMX_SPILL_REG
+			%assign %%__repcnt __NX_STACK_IDX_NASMX_SPILL_REG_NAME
 			%rep %%__repcnt
-				%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-					mov size_t [__BP + %%__ofst], %[__NX_STACK_NASMX_SPILL_REG_ %+ %%ctr]
-					%assign %%__ofst %%__ofst + %$__reg_size
+				%assign %%__isfloat is_typeof_float(%[__NX_STACK_NASMX_SPILL_REG_TYPE_ %+ %%ctr])
+				%if %%__isfloat == 0
+					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+						mov size_t [__BP + %%__ofst], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
+						%assign %%__ofst %%__ofst + %$__reg_size
+					%else
+						mov size_t [__BP - %$__nx_x64_loc], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
+						%assign %$__nx_x64_loc %$__nx_x64_loc - %$__reg_size
+					%endif
 				%else
-					mov size_t [__BP - %$__nx_x64_loc], %[__NX_STACK_NASMX_SPILL_REG_ %+ %%ctr]
-					%assign %$__nx_x64_loc %$__nx_x64_loc - %$__reg_size
+					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+						movsd size_t [__BP + %%__ofst], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
+						%assign %%__ofst %%__ofst + %$__reg_size
+					%else
+						movsd size_t [__BP - %$__nx_x64_loc], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
+						%assign %$__nx_x64_loc %$__nx_x64_loc - %$__reg_size
+					%endif
 				%endif
 				%assign %%ctr %%ctr + 1
 			%endrep
 			%rep %%__repcnt
-				__nx_stack_pop NASMX_SPILL_REG
+				__nx_stack_pop NASMX_SPILL_REG_NAME
+				__nx_stack_pop NASMX_SPILL_REG_TYPE
 			%endrep
 		%endif
 	%endif
