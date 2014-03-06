@@ -10,6 +10,18 @@ Downloads and snapshots are available from:
 Change Log
 ~~~~~~~~~~
 
+NASM-X v1.4: 05 Mar 2014
+
+- Fixed INVOKE stack alignment bug
+- Fixed INVOKE bug when eax/rax used as argument
+- Optimized USES macro
+- Corrected x64 register parameter spill behavior
+- Added pragmas PROC_FASTCALL_STACK_PRELOAD and INVOKE_FASTCALL_STACK_PRELOAD
+- Deprecated previous FASTCALL_STACK_PRELOAD pragma
+- Updated Windows distribution "bin" directory with NASM v2.11.02
+- Updated html docs and Windows Compiled Help Modules
+_________________________________________________________
+
 NASMX v1.3: 14 Feb 2014
 
 - Refresh Win32 distribution "bin" directory with
