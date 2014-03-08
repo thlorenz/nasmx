@@ -1,8 +1,7 @@
 ;//////////////////////////////////////////////////////////////
-;//////////////////////////////////////////////////////////////
 ;//
 ;// NASMX Preprocessor
-;// Copyright (c) 2005-2010, The NASMX Project
+;// Copyright (c) 2005-2014, The NASMX Project
 ;//
 ;// Windows.Inc
 ;// created by Bryant Keller
@@ -8232,7 +8231,7 @@ NASMX_ENDSTRUC
 
 NASMX_STRUC SECURITY_QUALITY_OF_SERVICE
     NASMX_RESERVE Length,              int32_t, 1
-    NASMX_RESERVE Impersonationlevel,  short_t, 1
+    NASMX_RESERVE Impersonationlevel,  uint_t, 1
     NASMX_RESERVE ContextTrackingMode, uint8_t, 1
     NASMX_RESERVE EffectiveOnly,       uint8_t, 1
 NASMX_ENDSTRUC
