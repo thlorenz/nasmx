@@ -10,9 +10,9 @@
 ;//
 ;// Check NASM Version
 ;//
-%define __nxerrmsg "NASM v2.09.08 or later required"
+%define __nxerrmsg "NASM v2.11 or later required"
 %ifdef __NASM_VERSION_ID__
-	%if __NASM_VERSION_ID__ < 0x02090800
+	%if __NASM_VERSION_ID__ < 0x020B0000
 		%fatal __nxerrmsg
 	%endif
 %else
@@ -24,7 +24,7 @@
 ;//
 ;// Set a NASMX Definition
 ;//
-%macro NASMX_DEFINE 1-2
+%macro NASMX_DEFINE 1-2.nolist
 	%if %0 > 1
 		%ixdefine __NASMX_%[%1]__ %[2]
 	%else
@@ -37,7 +37,7 @@
 ;//
 ;// Get a NASMX Definition
 ;//
-%macro NASMX_GET_DEFINE 2
+%macro NASMX_GET_DEFINE 2.nolist
 	%ifdef __NASMX_%[%1]__
 		%xdefine %[%2] __NASMX_%[%1]__
 	%elifdef %2
@@ -49,7 +49,7 @@
 ;//
 ;// Undefine a NASMX Definition
 ;//
-%macro NASMX_UNDEF 1
+%macro NASMX_UNDEF 1.nolist
 	%ifdef __NASMX_%[%1]__
 		%undef __NASMX_%[%1]__
 	%else
@@ -80,7 +80,7 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 ;//
 ;// Set a Context Stack Value
 ;//
-%macro NASMX_SET_CONTEXT_VALUE 2
+%macro NASMX_SET_CONTEXT_VALUE 2.nolist
 	%xdefine %$$%1 %2
 %endmacro
 
@@ -1531,7 +1531,7 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 ;//    nx_isalnum chr
 ;//    nx_isalnum 'x'
 ;//
-%macro nx_isalnum 1
+%macro nx_isalnum 1.nolist
     %ifstr %1
         %define %%__arg_chr %1
     %else
@@ -1562,7 +1562,7 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 ;//    nx_ishexchr chr
 ;//    nx_ishexchr 'f'
 ;//
-%macro nx_ishexchr 1
+%macro nx_ishexchr 1.nolist
     %ifstr %1
         %define %%__arg_chr %1
     %else
@@ -1587,41 +1587,72 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 ;// Purpose
 ;//    This macro is designed to return in the current context
 ;//    stack variable %$__nx_isfloattok_bool if the parameter is
-;//    a float token.
+;//    a float token and %$__nx_isfloattok_num returns the number.
 ;//
 ;// Usage:
 ;//    %define PI 3.14159
 ;//    nx_isfloattok PI
+;//    nx_isfloattok __float(2.0)
 ;//    nx_isfloattok string
 ;//
-%macro nx_isfloattok 1
-    %ifstr %1
-        %define %%__arg_str %1
+%macro nx_isfloattok 1-2.nolist 0
+    %assign %$__nx_isfloattok_num 0
+    %ifnum %1
+        %assign %$__nx_isfloattok_bool 0
     %else
-	%defstr %%__arg_str %1
+        %ifstr %1
+            %define %%__arg_str %1
+        %else
+            %defstr %%__arg_str %1
+        %endif
+        nx_strstr %{1}, '__float'
+        %if %$__nx_strstr_pos != 0
+            %assign %$__nx_isfloattok_bool 1
+            %substr %%__fpnum %%__arg_str %$__nx_strstr_pos,-1
+            %deftok %%__fptok %%__fpnum
+            %assign %$__nx_isfloattok_num %%__fptok
+            %undef  %%__fpnum
+            %undef  %%__fptok
+        %else
+            %assign %%__found 0
+            %assign %%__arg_idx 0
+            %strlen %%__arg_len %%__arg_str
+            %rep %%__arg_len
+                %assign %%__arg_idx %%__arg_idx + 1
+                %substr %%__arg_chr %%__arg_str %%__arg_idx, 1
+                %assign %%__found 0
+                %assign %%__idx 0
+                %rep 15
+                    %assign %%__idx %%__idx + 1
+                    %substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
+                    %ifidn %%__chr, %%__arg_chr
+                        %assign %%__found %%__idx
+                        %exitrep
+                    %endif
+                %endrep
+                %if %%__found == 0
+                    %exitrep
+                %endif
+            %endrep
+            %assign %$__nx_isfloattok_bool %%__found
+            %if %%__found
+                %if %2 == 0
+                    ;// we can only assume the number provided
+                    ;// fits in the bits defined
+                    %if __NASMX_ABI_BITS__ > 32
+                        %assign %$__nx_isfloattok_num __float64__(%1)
+                    %else
+                        %assign %$__nx_isfloattok_num __float32__(%1)
+                    %endif
+                %elif %2 == 4
+                    %assign %$__nx_isfloattok_num __float32__(%1)
+                %else
+                    %assign %$__nx_isfloattok_num __float64__(%1)
+                %endif
+            %endif
+            %undef %%__arg_str
+        %endif
     %endif
-    %strlen %%__arg_len %%__arg_str
-    %assign %$__nx_isfloattok 0
-    %assign %%__found 0
-    %assign %%__arg_idx 0
-    %rep %%__arg_len
-        %assign %%__arg_idx %%__arg_idx + 1
-        %substr %%__arg_chr %%__arg_str %%__arg_idx, 1
-        %assign %%__found 0
-        %assign %%__idx 0
-        %rep 15
-            %assign %%__idx %%__idx + 1
-            %substr %%__chr __NASMX_NUMALPHATOKEN__ %%__idx, 1
-            %ifidn %%__chr, %%__arg_chr
-              %assign %%__found %%__idx
-              %exitrep
-        %endif
-        %endrep
-        %if %%__found == 0
-            %exitrep
-        %endif
-    %endrep
-    %assign %$__nx_isfloattok_bool %%__found
 %endmacro
 
 ;//////////////////////////////////////////////////////////////
@@ -1638,7 +1669,7 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 ;//    nx_ishextok token
 ;//    nx_ishextok 0xFFF0
 ;//
-%macro nx_ishextok 1
+%macro nx_ishextok 1.nolist
     %ifstr %1
         %define %%__arg_str %1
     %else
@@ -1848,7 +1879,7 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 ;//    nx_strchr string, chr
 ;//    nx_strchr [wc + hInstance], 'x'
 ;//
-%macro nx_strchr 2
+%macro nx_strchr 2.nolist
 	%ifdef %$__nx_strchr_string
 		%undef %$__nx_strchr_string
 	%endif
@@ -1883,7 +1914,7 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 ;//    nx_strstr string, substr
 ;//    nx_strstr [rpb + hInstance], rbp
 ;//
-%macro nx_strstr 2
+%macro nx_strstr 2.nolist
 	%ifdef %$__nx_strstr_string
 		%undef %$__nx_strstr_string
 	%endif
@@ -2251,18 +2282,17 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 			%deftok %$__nx_argv_mode_bp_offset %%__off
 		%elif %$__nx_argv_mode_param_isfloat > 0
 			;// assert: check for float type and process
-			nx_isfloattok %1
+			nx_isfloattok %1, %$__nx_argv_mode_param_size
 			%if %$__nx_isfloattok_bool != 0
 				%assign %$__nx_argv_mode_fp_isnum 1
-				%if %$__nx_argv_mode_param_size == 4
-					%assign %$__nx_argv_mode_fp_num __float32__(%1)
-				%else
-					%assign %$__nx_argv_mode_fp_num __float64__(%1)
-				%endif
+				%assign %$__nx_argv_mode_fp_num %$__nx_isfloattok_num
 			%else
 				nx_strtok %1, ' '
 				%ifndef __nx_reg_%[%$__nx_token]
-					nx_strstr __NASMX_DECLSPEC_FASTCALL_REGFLOATARGS_8__,%$__nx_token
+					%assign %$__nx_strstr_pos 0
+					%if __NASMX_DECLSPEC_FASTCALL_MAXFLOATREGS__ > 0
+						nx_strstr __NASMX_DECLSPEC_FASTCALL_REGFLOATARGS_%[%$__nx_argv_mode_castsize]__,%$__nx_token
+					%endif
 					%if %$__nx_strstr_pos == 0
 						%iftoken %1
 							%fatal expected floating point at arg %1
@@ -2363,113 +2393,115 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 	%assign %$__reg_ax_used 0
 	%assign %$__reg_ax_saved 0
 	%assign %%__repcnt 0   ; assume no reg ax checking
-	%if %%__cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
-		%assign %%__tmp __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__ + 1
-		%if %0 > %%__tmp
+	%if %0 > 1
+		%assign %%__repcnt %0 - 1
+		%if %%__cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
 			%assign %%__arg_rotate 1
-			%assign %%__repcnt %0 - %%__tmp
-			%rep %%__tmp
+			%assign %%__maxregs __NASMX_DECLSPEC_FASTCALL_MAXINTREGS__
+			%if %%__repcnt > %%__maxregs
+				%assign %%__repcnt %%__maxregs
+			%endif
+			%rep %%__repcnt
 				%rotate %%__arg_rotate
+				;// assert: must check for float tokens since
+				;// __AX will be used to load stack
+				nx_isfloattok %{1}
+				%if %$__nx_isfloattok_bool != 0
+					%if %$__reg_ax_used != 0
+						%assign %$__reg_ax_saved 1
+					%endif
+					%assign %$__reg_ax_used %$__reg_ax_used + 1
+				%elifidni %{1},__AX
+					%if %$__reg_ax_used != 0
+						%assign %$__reg_ax_saved 1
+					%endif
+				%endif
 			%endrep
-		%endif
-	%else
-		%if %0 > 1
-			%assign %%__arg_rotate %$__nx_argrotate
-			%assign %%__repcnt %0 - 1
 			%rotate %%__arg_rotate
-
+			%assign %%__repcnt %0 - 1
+			%if %%__repcnt > %%__maxregs
+				%assign %%__repcnt %%__repcnt - %%__maxregs
+			%else
+				%assign %%__repcnt 0
+			%endif
+		%else
+			%assign %%__arg_rotate %$__nx_argrotate
+			%rotate %%__arg_rotate
 		%endif
 	%endif
 	%if %%__repcnt != 0
-		%assign %%__saw_bp 0
 		%rep %%__repcnt
-			%assign %%__chk_for_bp 0
 			%assign %$__nx_strchr_pos 0
-			%if %%__cc_enum == __NASMX_DECLSPEC_CC_ENUM_FASTCALL__
-				%assign %%__parse_arg 0
-				%ifnum %{1}
+			%assign %%__parse_arg 0
+			%ifnum %{1}
+				%if __NASMX_ABI_BITS__ > 32
 					%assign %$__reg_ax_used %$__reg_ax_used + 1
-				%elifstr %{1}
+				%endif
+			%elifstr %{1}
+				%if __NASMX_ABI_BITS__ > 32
 					%assign %$__reg_ax_used %$__reg_ax_used + 1
-				%elifidni %{1},__AX
+				%endif
+			%elifidni %{1},__AX
+				%if %$__reg_ax_used != 0
+					%assign %$__reg_ax_saved 1
+				%endif
+			%else
+				nx_strchr %{1},'['
+				%if %$__nx_strchr_pos != 0
 					%if %$__reg_ax_used != 0
 						%assign %$__reg_ax_saved 1
 					%endif
-				%elifidni %{1},__BP
-					%assign %%__parse_arg 0
+					%assign %$__reg_ax_used %$__reg_ax_used + 1
 				%else
-					%assign %%__parse_arg 1
-					nx_strchr %{1},'['
-					%if %$__nx_strchr_pos == 0
-						;// check for __BP + OFST
-						%assign %%__chk_for_bp 1
+					nx_isfloattok %{1}
+					%if %$__nx_isfloattok_bool != 0
+						%if __NASMX_ABI_BITS__ > 32
+							%if %$__reg_ax_used != 0
+								%assign %$__reg_ax_saved 1
+							%endif
+							%assign %$__reg_ax_used %$__reg_ax_used + 1
+						%endif
 					%else
+						%assign %%__parse_arg 1
+					%endif
+				%endif
+			%endif
+
+			%if %%__parse_arg != 0
+				;// parse this argument looking for __AX
+				%assign %%__tokctr 0
+				%assign %%__saw_ax 0
+				%assign %%__saw_reg 0
+				nx_strtok %{1},' -+*/%'
+				%rep 8
+					%if %$__nx_token_len == 0
+						%exitrep
+					%else
+						%assign %%__tokctr %%__tokctr + 1
+						%if %$__nx_token_len == 3
+							nx_strstr %$__nx_token,__AX
+							%if %$__nx_strstr_pos != 0
+								%assign %%__saw_ax 1
+								%if %$__reg_ax_used != 0
+									%assign %$__reg_ax_saved 1
+								%endif
+							%elifdef __nx_reg_%[%$__nx_token]
+								%assign %%__saw_reg 1
+							%endif
+						%endif
+						nx_strtok 0,' -+*/%'
+					%endif
+				%endrep
+				%if %%__saw_reg != 0
+					;// we don't support the combination of
+					;// REG and AX for calculating offset.
+					%if %%__saw_ax != 0
+						%fatal loading __AX with invalid arg: %1
+					%endif
+					%if %%__tokctr > 1
 						%assign %$__reg_ax_used %$__reg_ax_used + 1
 					%endif
 				%endif
-			%else
-				%ifstr %1
-					%assign %%__parse_arg 0
-				%elifnum %1
-					%assign %%__parse_arg 0
-				%elifidni %{1},__AX
-					%assign %%__parse_arg 0
-					%if %$__reg_ax_used != 0
-						%assign %$__reg_ax_saved 1
-					%endif
-				%elifidni %{1},__BP
-					%assign %%__parse_arg 0
-				%else
-					%assign %%__parse_arg 1
-					nx_strchr %{1},'['
-					%if %$__nx_strchr_pos == 0
-						;// check for __BP + OFST
-						%assign %%__chk_for_bp 1
-					%endif
-				%endif
-			%endif
-
-			;// avoid token parsing if we already know to save __AX
-			%if %%__parse_arg != 0
-				%if %$__reg_ax_saved != 0
-					%assign %%__parse_arg 0
-				%endif
-			%endif
-			%if %%__parse_arg != 0
-				;// parse arguments looking for __AX and possibly __BP
-				nx_strtok %{1},' []-+*/%'
-				%rep 8
-					%if %$__nx_token_len > 0
-						%if %$__nx_token_len == 3
-							;// we don't support the combination of both BP and AX for
-							;// calculating one offset if not indirect reference arg.
-							nx_strstr %$__nx_token,__AX
-							%if %$__nx_strstr_pos != 0
-								%if %$__nx_strchr_pos != 0
-									;// assert: parsing indirect reference arg
-									%if %$__reg_ax_used > 1
-										%assign %$__reg_ax_saved 1
-									%elif %%__saw_bp != 0
-										%assign %$__reg_ax_saved 1
-									%endif
-								%elif %$__reg_ax_used != 0
-									%assign %$__reg_ax_saved 1
-								%endif
-								%exitrep
-							%elif %%__chk_for_bp != 0
-								nx_strstr %$__nx_token,__BP
-								%if %$__nx_strstr_pos != 0
-									%assign %%__saw_bp 1
-									%assign %$__reg_ax_used %$__reg_ax_used + 1
-								%endif
-							%endif
-						%endif
-						nx_strtok 0,' []-+*/%'
-					%else
-						%exitrep
-					%endif
-				%endrep
-
 			%endif
 			%rotate %%__arg_rotate
 		%endrep
@@ -2655,7 +2687,6 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 					%undef %%__regstr
 
 					%ifnum %1
-						%warning ifnum is true
 						mov __AX, %1
 						mov size_t [__SP - __NASMX_ABI_BITS__ / 4 ], __AX
 						movsd %$arg_cur, size_t [__SP - __NASMX_ABI_BITS__ / 4 ]
@@ -2704,11 +2735,15 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 						%endif
 					%endif
 
-					;// Only spill Win64 float register if user specifies
 					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
+						;// Only spill Win64 float register if user specifies
 						%ifdef ENABLE_INVOKE_FASTCALL_STACK_PRELOAD
 							movsd [__SP + %$args], %$arg_cur
 						%endif
+
+						;// Unlike Linux/BSD x64 all current 32-bit and 64-bit versions
+						;// of Windows increase arg stack offset.
+						%assign %$args %$args + sizeof(size_t)
 					%endif
 				%else
 					;// 32-bit fastcall float param
@@ -2827,23 +2862,38 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 							;// assert: arg is floating point constant
 							%if %$__nx_argv_mode_param_size == 4
 								;// assert: callee expecting float type
-								mov dword [__SP + %$args], %$__nx_argv_mode_fp_num
+								mov  eax, %$__nx_argv_mode_fp_num
+								mov  size_t [__SP + %$args], __AX
 							%else
 								;// assert: callee expecting double type
-								%assign %%__tmp (%$__nx_argv_mode_fp_num & 0x00000000FFFFFFFF)
-								mov dword [__SP + %$args], %%__tmp
-								%assign %%__tmp ((%$__nx_argv_mode_fp_num >> 32) & 0x00000000FFFFFFFF)
-								mov dword [__SP+%$args+4], %%__tmp
+								%if __NASMX_ABI_BITS__ > 32
+									mov  __AX, %1
+									mov  qword [__SP + %$args], __AX
+									%if %$__reg_ax_saved != 0
+										mov __AX, size_t [__SP - __NASMX_ABI_BITS__ / 8]
+									%endif
+								%else
+									%assign %%__tmp (%$__nx_argv_mode_fp_num & 0x00000000FFFFFFFF)
+									mov dword [__SP + %$args], %%__tmp
+									%assign %%__tmp ((%$__nx_argv_mode_fp_num >> 32) & 0x00000000FFFFFFFF)
+									mov dword [__SP+%$args+4], %%__tmp
+								%endif
 							%endif
 						%else
 							mov __nx_error_token_size_%[%$__nx_argv_mode_param_size] [__SP + %$args], %1
 						%endif
 					%endif
 				%endif
-				%if %$__nx_argv_mode_param_size < sizeof(size_t)
+				%if __NASMX_ABI_BITS__ > 32
+					;// assert: we must increase stack offset by size_t regardless
+					;// of whether we're storing a float or a double
 					%assign %$args %$args + sizeof(size_t)
 				%else
-					%assign %$args %$args + %$__nx_argv_mode_param_size
+					%if %$__nx_argv_mode_param_size <= sizeof(size_t)
+						%assign %$args %$args + sizeof(size_t)
+					%else
+						%assign %$args %$args + %$__nx_argv_mode_param_size
+					%endif
 				%endif
 			%endif
 		%endrep
@@ -3428,10 +3478,10 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 					%endif
 				%else
 					%if __NASMX_DECLSPEC_SYSTYPE_DEFAULT__ == __NASMX_DECLSPEC_SYSTYPE_WINDOWS__
-						movsd size_t [__BP + %%__ofst], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
+						movq size_t [__BP + %%__ofst], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
 						%assign %%__ofst %%__ofst + %$__reg_size
 					%else
-						movsd size_t [__BP - %$__nx_x64_loc], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
+						movq size_t [__BP - %$__nx_x64_loc], %[__NX_STACK_NASMX_SPILL_REG_NAME_ %+ %%ctr]
 						%assign %$__nx_x64_loc %$__nx_x64_loc - %$__reg_size
 					%endif				
 				%endif
