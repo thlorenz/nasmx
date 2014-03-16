@@ -5503,6 +5503,11 @@ NASMX_STRUC POINT
     NASMX_RESERVE y, int32_t, 1
 NASMX_ENDSTRUC
 
+NASMX_STRUC POINTS
+    NASMX_RESERVE x, int16_t, 1
+    NASMX_RESERVE y, int16_t, 1
+NASMX_ENDSTRUC
+
 NASMX_STRUC SIZEL
     NASMX_RESERVE x, int32_t, 1
     NASMX_RESERVE y, int32_t, 1
@@ -5614,24 +5619,7 @@ NASMX_ENDSTRUC
 NASMX_STRUC DCB
     NASMX_RESERVE DCBlength, int32_t, 1
     NASMX_RESERVE BaudRate,  int32_t, 1
-
-    NASMX_RESERVE bits, uint32_t, 1
-;    NASMX_UNION bits
-;        NASMX_RESERVE fBinary, uint32_t, 1             ;// :1  Binary Mode (skip EOF check)
-;        NASMX_RESERVE fParity, uint32_t, 1             ;// :1  Enable parity checking
-;        NASMX_RESERVE fOutxCtsFlow, uint32_t, 1        ;// :1  CTS handshaking on output
-;        NASMX_RESERVE fOutxDsrFlow, uint32_t, 1        ;// :1  DSR handshaking on output
-;        NASMX_RESERVE fDtrControl, uint32_t, 1         ;// :2  DTR Flow control
-;        NASMX_RESERVE fDsrSensitivity, uint32_t, 1     ;// :1  DSR Sensitivity
-;        NASMX_RESERVE fTXContinueOnXoff, uint32_t, 1   ;// :1  Continue TX when Xoff sent
-;        NASMX_RESERVE fOutX, uint32_t, 1               ;// :1  Enable output X-ON/X-OFF
-;        NASMX_RESERVE fInX, uint32_t, 1                ;// :1  Enable input X-ON/X-OFF
-;        NASMX_RESERVE fErrorChar, uint32_t, 1          ;// :1  Enable Err Replacement
-;        NASMX_RESERVE fNull, uint32_t, 1               ;// :1  Enable Null stripping
-;        NASMX_RESERVE fRtsControl, uint32_t, 1         ;// :2  Rts Flow control
-;        NASMX_RESERVE fAbortOnError, uint32_t, 1       ;// :1  Abort all reads and writes on Error
-;        NASMX_RESERVE fDummy2, uint32_t, 1             ;// :17 Reserved
-;    NASMX_ENDUNION
+    NASMX_RESERVE uFlags, uint32_t, 1
     NASMX_RESERVE wReserved, short_t, 1
     NASMX_RESERVE XonLim,    short_t, 1
     NASMX_RESERVE XoffLim,   short_t, 1
@@ -5643,6 +5631,7 @@ NASMX_STRUC DCB
     NASMX_RESERVE ErrorChar, int8_t, 1
     NASMX_RESERVE EofChar,   int8_t, 1
     NASMX_RESERVE EvtChar,   int8_t, 1
+    NASMX_RESERVE wReserved1, short_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC COMMTIMEOUTS
@@ -5865,7 +5854,7 @@ NASMX_ENDSTRUC
 NASMX_STRUC OUTPUT_DEBUG_STRING_INFO
     NASMX_RESERVE lpDebugStringData,   ptrdiff_t, 1
     NASMX_RESERVE fUnicode,            uint16_t, 1
-    NASMX_RESERVE nDebugStringiLength, uint16_t, 1
+    NASMX_RESERVE nDebugStringLength,  uint16_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC RIP_INFO
@@ -6184,16 +6173,25 @@ NASMX_STRUC CHAR_INFO
 NASMX_ENDSTRUC
 
 NASMX_STRUC CONSOLE_SCREEN_BUFFER_INFO
-    NASMX_RESERVE dwSize, int32_t, 1
-    NASMX_RESERVE dwCursorPosition, int32_t, 1
+    NASMX_STRUC dwSize, COORD
+        NASMX_RESERVE x, short_t, 1
+        NASMX_RESERVE y, short_t, 1
+    NASMX_ENDSTRUC
+    NASMX_STRUC dwCursorPosition, COORD
+        NASMX_RESERVE x, short_t, 1
+        NASMX_RESERVE y, short_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE wAttributes, short_t, 1
-	NASMX_STRUC srWindow, SMALL_RECT
-		NASMX_RESERVE Left,   short_t, 1
-		NASMX_RESERVE Top,    short_t, 1
-		NASMX_RESERVE Right,  short_t, 1
-		NASMX_RESERVE Bottom, short_t, 1
-	NASMX_ENDSTRUC
-    NASMX_RESERVE dwMaximumWindowSize, int32_t, 1
+    NASMX_STRUC srWindow, SMALL_RECT
+        NASMX_RESERVE Left,   short_t, 1
+        NASMX_RESERVE Top,    short_t, 1
+        NASMX_RESERVE Right,  short_t, 1
+        NASMX_RESERVE Bottom, short_t, 1
+    NASMX_ENDSTRUC
+    NASMX_STRUC dwMaximumWindowSize, COORD
+        NASMX_RESERVE x, short_t, 1
+        NASMX_RESERVE y, short_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC CONSOLE_CURSOR_INFO
@@ -6202,22 +6200,22 @@ NASMX_STRUC CONSOLE_CURSOR_INFO
 NASMX_ENDSTRUC
 
 NASMX_STRUC XFORM
-    NASMX_RESERVE eM11, int64_t,1
-    NASMX_RESERVE eM12, int64_t, 1
-    NASMX_RESERVE eM21, int64_t, 1
-    NASMX_RESERVE eM22, int64_t, 1
-    NASMX_RESERVE ex, int64_t, 1
-    NASMX_RESERVE ey, int64_t, 1
+    NASMX_RESERVE eM11, int32_t,1
+    NASMX_RESERVE eM12, int32_t, 1
+    NASMX_RESERVE eM21, int32_t, 1
+    NASMX_RESERVE eM22, int32_t, 1
+    NASMX_RESERVE eDx,  int32_t, 1
+    NASMX_RESERVE eDy,  int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC BITMAP
-    NASMX_RESERVE bmType, int32_t, 1
-    NASMX_RESERVE bmWidth, int32_t, 1
-    NASMX_RESERVE bmHeight, int32_t, 1
+    NASMX_RESERVE bmType,       int32_t, 1
+    NASMX_RESERVE bmWidth,      int32_t, 1
+    NASMX_RESERVE bmHeight,     int32_t, 1
     NASMX_RESERVE bmWidthBytes, int32_t, 1
-    NASMX_RESERVE bmPlanes, short_t, 1
-    NASMX_RESERVE bmBitsPixel, short_t, 1
-    NASMX_RESERVE bmBits, int32_t, 1
+    NASMX_RESERVE bmPlanes,     short_t, 1
+    NASMX_RESERVE bmBitsPixel,  short_t, 1
+    NASMX_RESERVE bmBits,       ptrdiff_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC RGBTRIPLE
@@ -6234,43 +6232,61 @@ NASMX_STRUC RGBQUAD
 NASMX_ENDSTRUC
 
 NASMX_STRUC BITMAPCOREHEADER
-    NASMX_RESERVE bcSize, int32_t, 1
-    NASMX_RESERVE bcWidth, short_t, 1
-    NASMX_RESERVE bcHeight, short_t, 1
-    NASMX_RESERVE bcPlanes, short_t, 1
+    NASMX_RESERVE bcSize,     int32_t, 1
+    NASMX_RESERVE bcWidth,    short_t, 1
+    NASMX_RESERVE bcHeight,   short_t, 1
+    NASMX_RESERVE bcPlanes,   short_t, 1
     NASMX_RESERVE bcBitCount, short_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC BITMAPINFOHEADER
-    NASMX_RESERVE biSize, int32_t, 1
-    NASMX_RESERVE biWidth, int32_t, 1
-    NASMX_RESERVE biHeight, int32_t, 1
-    NASMX_RESERVE biPlanes, short_t, 1
-    NASMX_RESERVE biBitCount, short_t, 1
-    NASMX_RESERVE biCompression, int32_t, 1
-    NASMX_RESERVE biSizeImage, int32_t, 1
+    NASMX_RESERVE biSize,          int32_t, 1
+    NASMX_RESERVE biWidth,         int32_t, 1
+    NASMX_RESERVE biHeight,        int32_t, 1
+    NASMX_RESERVE biPlanes,        short_t, 1
+    NASMX_RESERVE biBitCount,      short_t, 1
+    NASMX_RESERVE biCompression,   int32_t, 1
+    NASMX_RESERVE biSizeImage,     int32_t, 1
     NASMX_RESERVE biXPelsPerMeter, int32_t, 1
     NASMX_RESERVE biYPelsPerMeter, int32_t, 1
-    NASMX_RESERVE biClrUsed, int32_t, 1
-    NASMX_RESERVE biClrImportant, int32_t, 1
+    NASMX_RESERVE biClrUsed,       int32_t, 1
+    NASMX_RESERVE biClrImportant,  int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC BITMAPINFO
-    NASMX_RESERVE bmiHeader, int32_t, 1
+    NASMX_STRUC bmiHeader, BITMAPINFOHEADER
+        NASMX_RESERVE biSize,          int32_t, 1
+        NASMX_RESERVE biWidth,         int32_t, 1
+        NASMX_RESERVE biHeight,        int32_t, 1
+        NASMX_RESERVE biPlanes,        short_t, 1
+        NASMX_RESERVE biBitCount,      short_t, 1
+        NASMX_RESERVE biCompression,   int32_t, 1
+        NASMX_RESERVE biSizeImage,     int32_t, 1
+        NASMX_RESERVE biXPelsPerMeter, int32_t, 1
+        NASMX_RESERVE biYPelsPerMeter, int32_t, 1
+        NASMX_RESERVE biClrUsed,       int32_t, 1
+        NASMX_RESERVE biClrImportant,  int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE bmiColors, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC BITMAPCOREINFO
-    NASMX_RESERVE bmciHeader, int32_t, 1
+    NASMX_STRUC bmciHeader, BITMAPCOREHEADER
+        NASMX_RESERVE bcSize,     int32_t, 1
+        NASMX_RESERVE bcWidth,    short_t, 1
+        NASMX_RESERVE bcHeight,   short_t, 1
+        NASMX_RESERVE bcPlanes,   short_t, 1
+        NASMX_RESERVE bcBitCount, short_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE bmciColors, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC BITMAPFILEHEADER
-    NASMX_RESERVE bfType, short_t, 1
-    NASMX_RESERVE bfSize, int32_t, 1
+    NASMX_RESERVE bfType,      short_t, 1
+    NASMX_RESERVE bfSize,      int32_t, 1
     NASMX_RESERVE bfReserved1, short_t, 1
     NASMX_RESERVE bfReserved2, short_t, 1
-    NASMX_RESERVE bfOffBits, int32_t, 1
+    NASMX_RESERVE bfOffBits,   int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC HANDLETABLE
@@ -6290,15 +6306,17 @@ NASMX_STRUC METAFILEPICT
     NASMX_RESERVE hMF, int32_t, 1
 NASMX_ENDSTRUC
 
+NASMX_PRAGMA PACK, PUSH, 2
 NASMX_STRUC METAHEADER
-    NASMX_RESERVE mtType, short_t, 1
-    NASMX_RESERVE mtHeaderSize, short_t, 1
-    NASMX_RESERVE mtVersion, short_t, 1
-    NASMX_RESERVE mtSize, int32_t, 1
-    NASMX_RESERVE mtNoObjects, short_t, 1
-    NASMX_RESERVE mtMaxRecord, int32_t, 1
+    NASMX_RESERVE mtType,         short_t, 1
+    NASMX_RESERVE mtHeaderSize,   short_t, 1
+    NASMX_RESERVE mtVersion,      short_t, 1
+    NASMX_RESERVE mtSize,         int32_t, 1
+    NASMX_RESERVE mtNoObjects,    short_t, 1
+    NASMX_RESERVE mtMaxRecord,    int32_t, 1
     NASMX_RESERVE mtNoParameters, short_t, 1
 NASMX_ENDSTRUC
+NASMX_PRAGMA PACK, POP
 
 NASMX_STRUC ENHMETARECORD
     NASMX_RESERVE iType, int32_t, 1
@@ -6309,79 +6327,82 @@ NASMX_ENDSTRUC
 NASMX_STRUC ENHMETAHEADER
     NASMX_RESERVE iType, int32_t, 1
     NASMX_RESERVE nSize, int32_t, 1
-	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
-		NASMX_RESERVE bottom, int32_t, 1
-	NASMX_ENDSTRUC
-	NASMX_STRUC rclFrame, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
-		NASMX_RESERVE bottom, int32_t, 1
-	NASMX_ENDSTRUC
-    NASMX_RESERVE dSignature, int32_t, 1
-    NASMX_RESERVE nVersion, int32_t, 1
-    NASMX_RESERVE nBytes, int32_t, 1
-    NASMX_RESERVE nRecords, int32_t, 1
-    NASMX_RESERVE nHandles, short_t, 1
-    NASMX_RESERVE sReserved, short_t, 1
-    NASMX_RESERVE nDescription, int32_t, 1
+    NASMX_STRUC rclBounds, RECT
+        NASMX_RESERVE left,   int32_t, 1
+        NASMX_RESERVE top,    int32_t, 1
+        NASMX_RESERVE right,  int32_t, 1
+        NASMX_RESERVE bottom, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_STRUC rclFrame, RECT
+        NASMX_RESERVE left,   int32_t, 1
+        NASMX_RESERVE top,    int32_t, 1
+        NASMX_RESERVE right,  int32_t, 1
+        NASMX_RESERVE bottom, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_RESERVE dSignature,     int32_t, 1
+    NASMX_RESERVE nVersion,       int32_t, 1
+    NASMX_RESERVE nBytes,         int32_t, 1
+    NASMX_RESERVE nRecords,       int32_t, 1
+    NASMX_RESERVE nHandles,       short_t, 1
+    NASMX_RESERVE sReserved,      short_t, 1
+    NASMX_RESERVE nDescription,   int32_t, 1
     NASMX_RESERVE offDescription, int32_t, 1
-    NASMX_RESERVE nPalEntries, int32_t, 1
-    NASMX_RESERVE szlDevice, int32_t, 1
+    NASMX_RESERVE nPalEntries,    int32_t, 1
+    NASMX_RESERVE szlDevice,      int32_t, 1
     NASMX_RESERVE szlMillimeters, int32_t, 1
+    NASMX_RESERVE cbPixelFormat,  int32_t, 1
+    NASMX_RESERVE offPixelFormat, int32_t, 1
+    NASMX_RESERVE bOpenGL,        int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC TEXTMETRIC
-    NASMX_RESERVE tmHeight, int32_t, 1
-    NASMX_RESERVE tmAscent, int32_t, 1
-    NASMX_RESERVE tmDescent, int32_t, 1
-    NASMX_RESERVE tmInternalLeading, int32_t, 1
-    NASMX_RESERVE tmExternalLeading, int32_t, 1
-    NASMX_RESERVE tmAveCharWidth, int32_t, 1
-    NASMX_RESERVE tmMaxCharWidth, int32_t, 1
-    NASMX_RESERVE tmWeight, int32_t, 1
-    NASMX_RESERVE tmOverhang, int32_t, 1
+    NASMX_RESERVE tmHeight,           int32_t, 1
+    NASMX_RESERVE tmAscent,           int32_t, 1
+    NASMX_RESERVE tmDescent,          int32_t, 1
+    NASMX_RESERVE tmInternalLeading,  int32_t, 1
+    NASMX_RESERVE tmExternalLeading,  int32_t, 1
+    NASMX_RESERVE tmAveCharWidth,     int32_t, 1
+    NASMX_RESERVE tmMaxCharWidth,     int32_t, 1
+    NASMX_RESERVE tmWeight,           int32_t, 1
+    NASMX_RESERVE tmOverhang,         int32_t, 1
     NASMX_RESERVE tmDigitizedAspectX, int32_t, 1
     NASMX_RESERVE tmDigitizedAspectY, int32_t, 1
-    NASMX_RESERVE tmFirstChar, int8_t, 1
-    NASMX_RESERVE tmLastChar, int8_t, 1
-    NASMX_RESERVE tmDefaultChar, int8_t, 1
-    NASMX_RESERVE tmBreakChar, int8_t, 1
-    NASMX_RESERVE tmItalic, int8_t, 1
-    NASMX_RESERVE tmUnderlined, int8_t, 1
-    NASMX_RESERVE tmStruckOut, int8_t, 1
-    NASMX_RESERVE tmPitchAndFamily, int8_t, 1
-    NASMX_RESERVE tmCharSet, int8_t, 1
+    NASMX_RESERVE tmFirstChar,        NASMX_TCHAR, 1
+    NASMX_RESERVE tmLastChar,         NASMX_TCHAR, 1
+    NASMX_RESERVE tmDefaultChar,      NASMX_TCHAR, 1
+    NASMX_RESERVE tmBreakChar,        NASMX_TCHAR, 1
+    NASMX_RESERVE tmItalic,           int8_t, 1
+    NASMX_RESERVE tmUnderlined,       int8_t, 1
+    NASMX_RESERVE tmStruckOut,        int8_t, 1
+    NASMX_RESERVE tmPitchAndFamily,   int8_t, 1
+    NASMX_RESERVE tmCharSet,          int8_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC NEWTEXTMETRIC
-    NASMX_RESERVE tmHeight, int32_t, 1
-    NASMX_RESERVE tmAscent, int32_t, 1
-    NASMX_RESERVE tmDescent, int32_t, 1
-    NASMX_RESERVE tmInternalLeading, int32_t, 1
-    NASMX_RESERVE tmExternalLeading, int32_t, 1
-    NASMX_RESERVE tmAveCharWidth, int32_t, 1
-    NASMX_RESERVE tmMaxCharWidth, int32_t, 1
-    NASMX_RESERVE tmWeight, int32_t, 1
-    NASMX_RESERVE tmOverhang, int32_t, 1
+    NASMX_RESERVE tmHeight,           int32_t, 1
+    NASMX_RESERVE tmAscent,           int32_t, 1
+    NASMX_RESERVE tmDescent,          int32_t, 1
+    NASMX_RESERVE tmInternalLeading,  int32_t, 1
+    NASMX_RESERVE tmExternalLeading,  int32_t, 1
+    NASMX_RESERVE tmAveCharWidth,     int32_t, 1
+    NASMX_RESERVE tmMaxCharWidth,     int32_t, 1
+    NASMX_RESERVE tmWeight,           int32_t, 1
+    NASMX_RESERVE tmOverhang,         int32_t, 1
     NASMX_RESERVE tmDigitizedAspectX, int32_t, 1
     NASMX_RESERVE tmDigitizedAspectY, int32_t, 1
-    NASMX_RESERVE tmFirstChar, int8_t, 1
-    NASMX_RESERVE tmLastChar, int8_t, 1
-    NASMX_RESERVE tmDefaultChar, int8_t, 1
-    NASMX_RESERVE tmBreakChar, int8_t, 1
-    NASMX_RESERVE tmItalic, int8_t, 1
-    NASMX_RESERVE tmUnderlined, int8_t, 1
-    NASMX_RESERVE tmStruckOut, int8_t, 1
-    NASMX_RESERVE tmPitchAndFamily, int8_t, 1
-    NASMX_RESERVE tmCharSet, int8_t, 1
-    NASMX_RESERVE ntmFlags, int32_t, 1
-    NASMX_RESERVE ntmSizeEM, int32_t, 1
-    NASMX_RESERVE ntmCellHeight, int32_t, 1
-    NASMX_RESERVE ntmAveWidth, int32_t, 1
+    NASMX_RESERVE tmFirstChar,        NASMX_TCHAR, 1
+    NASMX_RESERVE tmLastChar,         NASMX_TCHAR, 1
+    NASMX_RESERVE tmDefaultChar,      NASMX_TCHAR, 1
+    NASMX_RESERVE tmBreakChar,        int8_t, 1
+    NASMX_RESERVE tmItalic,           int8_t, 1
+    NASMX_RESERVE tmUnderlined,       int8_t, 1
+    NASMX_RESERVE tmStruckOut,        int8_t, 1
+    NASMX_RESERVE tmPitchAndFamily,   int8_t, 1
+    NASMX_RESERVE tmCharSet,          int8_t, 1
+    NASMX_RESERVE ntmFlags,           int32_t, 1
+    NASMX_RESERVE ntmSizeEM,          int32_t, 1
+    NASMX_RESERVE ntmCellHeight,      int32_t, 1
+    NASMX_RESERVE ntmAveWidth,        int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PELARRAY
@@ -6400,48 +6421,56 @@ NASMX_ENDSTRUC
 
 NASMX_STRUC LOGPEN
     NASMX_RESERVE lopnStyle, int32_t, 1
-    NASMX_RESERVE lopnWidth, int32_t, 1
+    NASMX_STRUC lopnWidth, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE lopnColor, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EXTLOGPEN
-    NASMX_RESERVE elpPenStyle, int32_t, 1
-    NASMX_RESERVE elpWidth, int32_t, 1
+    NASMX_RESERVE elpPenStyle,   int32_t, 1
+    NASMX_RESERVE elpWidth,      int32_t, 1
     NASMX_RESERVE elpBrushStyle, int32_t, 1
-    NASMX_RESERVE elpColor, int32_t, 1
-    NASMX_RESERVE elpHatch, int32_t, 1
+    NASMX_RESERVE elpColor,      int32_t, 1
+    NASMX_RESERVE elpHatch,      ptrdiff_t, 1
     NASMX_RESERVE elpNumEntries, int32_t, 1
     NASMX_RESERVE elpStyleEntry, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PALETTEENTRY
-    NASMX_RESERVE peRed, int8_t, 1
+    NASMX_RESERVE peRed,   int8_t, 1
     NASMX_RESERVE peGreen, int8_t, 1
-    NASMX_RESERVE peBlue, int8_t, 1
+    NASMX_RESERVE peBlue,  int8_t, 1
     NASMX_RESERVE peFlags, int8_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC LOGPALETTE
     NASMX_RESERVE palVersion, short_t, 1
     NASMX_RESERVE palNumEntries, short_t, 1
-    NASMX_RESERVE palPalEntry, int32_t, 1
+    NASMX_STRUC palPalEntry, PALETTEENTRY
+        NASMX_RESERVE peRed,   int8_t, 1
+        NASMX_RESERVE peGreen, int8_t, 1
+        NASMX_RESERVE peBlue,  int8_t, 1
+        NASMX_RESERVE peFlags, int8_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC LOGFONT
-    NASMX_RESERVE lfHeight, int32_t, 1
-    NASMX_RESERVE lfWidth, int32_t, 1
-    NASMX_RESERVE lfEscapement, int32_t, 1
-    NASMX_RESERVE lfOrientation, int32_t, 1
-    NASMX_RESERVE lfWeight, int32_t, 1
-    NASMX_RESERVE lfItalic, int8_t, 1
-    NASMX_RESERVE lfUnderline, int8_t, 1
-    NASMX_RESERVE lfStrikeOut, int8_t, 1
-    NASMX_RESERVE lfCharSet, int8_t, 1
-    NASMX_RESERVE lfOutPrecision, int8_t, 1
-    NASMX_RESERVE lfClipPrecision, int8_t, 1
-    NASMX_RESERVE lfQuality, int8_t, 1
+    NASMX_RESERVE lfHeight,         int32_t, 1
+    NASMX_RESERVE lfWidth,          int32_t, 1
+    NASMX_RESERVE lfEscapement,     int32_t, 1
+    NASMX_RESERVE lfOrientation,    int32_t, 1
+    NASMX_RESERVE lfWeight,         int32_t, 1
+    NASMX_RESERVE lfItalic,         int8_t, 1
+    NASMX_RESERVE lfUnderline,      int8_t, 1
+    NASMX_RESERVE lfStrikeOut,      int8_t, 1
+    NASMX_RESERVE lfCharSet,        int8_t, 1
+    NASMX_RESERVE lfOutPrecision,   int8_t, 1
+    NASMX_RESERVE lfClipPrecision,  int8_t, 1
+    NASMX_RESERVE lfQuality,        int8_t, 1
     NASMX_RESERVE lfPitchAndFamily, int8_t, 1
-    NASMX_RESERVE lfFaceName, int8_t, LF_FACESIZE
+    NASMX_RESERVE lfFaceName,       NASMX_TCHAR, LF_FACESIZE
 NASMX_ENDSTRUC
 
 NASMX_STRUC NONCLIENTMETRICS
@@ -6463,64 +6492,116 @@ NASMX_STRUC NONCLIENTMETRICS
 NASMX_ENDSTRUC
 
 NASMX_STRUC ENUMLOGFONT
-    NASMX_RESERVE elfLogFont, int32_t, 1
-    NASMX_RESERVE elfFullName, int8_t, 1
-    NASMX_RESERVE elfStyle, int8_t, 1
+    NASMX_STRUC elfLogFont, LOGFONT
+        NASMX_RESERVE lfHeight,         int32_t, 1
+        NASMX_RESERVE lfWidth,          int32_t, 1
+        NASMX_RESERVE lfEscapement,     int32_t, 1
+        NASMX_RESERVE lfOrientation,    int32_t, 1
+        NASMX_RESERVE lfWeight,         int32_t, 1
+        NASMX_RESERVE lfItalic,         int8_t, 1
+        NASMX_RESERVE lfUnderline,      int8_t, 1
+        NASMX_RESERVE lfStrikeOut,      int8_t, 1
+        NASMX_RESERVE lfCharSet,        int8_t, 1
+        NASMX_RESERVE lfOutPrecision,   int8_t, 1
+        NASMX_RESERVE lfClipPrecision,  int8_t, 1
+        NASMX_RESERVE lfQuality,        int8_t, 1
+        NASMX_RESERVE lfPitchAndFamily, int8_t, 1
+        NASMX_RESERVE lfFaceName,       NASMX_TCHAR, LF_FACESIZE
+    NASMX_ENDSTRUC
+    NASMX_RESERVE elfFullName, NASMX_TCHAR, LF_FULLFACESIZE
+    NASMX_RESERVE elfStyle, NASMX_TCHAR, LF_FACESIZE
 NASMX_ENDSTRUC
 
 NASMX_STRUC PANOSE
-    NASMX_RESERVE ulculture, int32_t, 1
-    NASMX_RESERVE bFamilyType, int8_t, 1
-    NASMX_RESERVE bSerifStyle, int8_t, 1
-    NASMX_RESERVE bWeight, int8_t, 1
-    NASMX_RESERVE bProportion, int8_t, 1
-    NASMX_RESERVE bContrast, int8_t, 1
+    NASMX_RESERVE bFamilyType,      int8_t, 1
+    NASMX_RESERVE bSerifStyle,      int8_t, 1
+    NASMX_RESERVE bWeight,          int8_t, 1
+    NASMX_RESERVE bProportion,      int8_t, 1
+    NASMX_RESERVE bContrast,        int8_t, 1
     NASMX_RESERVE bStrokeVariation, int8_t, 1
-    NASMX_RESERVE bArmStyle, int8_t, 1
-    NASMX_RESERVE bLetterform, int8_t, 1
-    NASMX_RESERVE bMidline, int8_t, 1
-    NASMX_RESERVE bXHeight, int8_t, 1
+    NASMX_RESERVE bArmStyle,        int8_t, 1
+    NASMX_RESERVE bLetterform,      int8_t, 1
+    NASMX_RESERVE bMidline,         int8_t, 1
+    NASMX_RESERVE bXHeight,         int8_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EXTLOGFONT
-    NASMX_RESERVE elfLogFont, int32_t, 1
-    NASMX_RESERVE elfFullName, int8_t, 1
-    NASMX_RESERVE elfStyle, int8_t, 1
-    NASMX_RESERVE elfVersion, int32_t, 1
+    NASMX_STRUC elfLogFont, LOGFONT
+        NASMX_RESERVE lfHeight,         int32_t, 1
+        NASMX_RESERVE lfWidth,          int32_t, 1
+        NASMX_RESERVE lfEscapement,     int32_t, 1
+        NASMX_RESERVE lfOrientation,    int32_t, 1
+        NASMX_RESERVE lfWeight,         int32_t, 1
+        NASMX_RESERVE lfItalic,         int8_t, 1
+        NASMX_RESERVE lfUnderline,      int8_t, 1
+        NASMX_RESERVE lfStrikeOut,      int8_t, 1
+        NASMX_RESERVE lfCharSet,        int8_t, 1
+        NASMX_RESERVE lfOutPrecision,   int8_t, 1
+        NASMX_RESERVE lfClipPrecision,  int8_t, 1
+        NASMX_RESERVE lfQuality,        int8_t, 1
+        NASMX_RESERVE lfPitchAndFamily, int8_t, 1
+        NASMX_RESERVE lfFaceName,       NASMX_TCHAR, LF_FACESIZE
+    NASMX_ENDSTRUC
+    NASMX_RESERVE elfFullName,  NASMX_TCHAR, LF_FULLFACESIZE
+    NASMX_RESERVE elfStyle,     NASMX_TCHAR, LF_FACESIZE
+    NASMX_RESERVE elfVersion,   int32_t, 1
     NASMX_RESERVE elfStyleSize, int32_t, 1
-    NASMX_RESERVE elfMatch, int32_t, 1
-    NASMX_RESERVE elfReserved, int32_t, 1
-    NASMX_RESERVE elfVendorId, int8_t, 1
-    NASMX_RESERVE elfCulture, int32_t, 1
-    NASMX_RESERVE elfPanose, int32_t, 1
+    NASMX_RESERVE elfMatch,     int32_t, 1
+    NASMX_RESERVE elfReserved,  int32_t, 1
+    NASMX_RESERVE elfVendorId,  int8_t,  ELF_VENDOR_SIZE
+    NASMX_RESERVE elfCulture,   int32_t, 1
+    NASMX_STRUC elfPanose, PANOSE
+        NASMX_RESERVE bFamilyType,      int8_t, 1
+        NASMX_RESERVE bSerifStyle,      int8_t, 1
+        NASMX_RESERVE bWeight,          int8_t, 1
+        NASMX_RESERVE bProportion,      int8_t, 1
+        NASMX_RESERVE bContrast,        int8_t, 1
+        NASMX_RESERVE bStrokeVariation, int8_t, 1
+        NASMX_RESERVE bArmStyle,        int8_t, 1
+        NASMX_RESERVE bLetterform,      int8_t, 1
+        NASMX_RESERVE bMidline,         int8_t, 1
+        NASMX_RESERVE bXHeight,         int8_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC DEVMODE
-    NASMX_RESERVE dmDeviceName, int8_t, 1
-    NASMX_RESERVE dmSpecVersion, short_t, 1
+    NASMX_RESERVE dmDeviceName,    NASMX_TCHAR, CCHDEVICENAME
+    NASMX_RESERVE dmSpecVersion,   short_t, 1
     NASMX_RESERVE dmDriverVersion, short_t, 1
-    NASMX_RESERVE dmSize, short_t, 1
-    NASMX_RESERVE dmDriverExtra, short_t, 1
-    NASMX_RESERVE dmFields, int32_t, 1
-    NASMX_RESERVE dmOrientation, short_t, 1
-    NASMX_RESERVE dmPaperSize, short_t, 1
-    NASMX_RESERVE dmPaperiLength, short_t, 1
-    NASMX_RESERVE dmPaperWidth, short_t, 1
-    NASMX_RESERVE dmScale, short_t, 1
-    NASMX_RESERVE dmCopies, short_t, 1
-    NASMX_RESERVE dmDefaultSource, short_t, 1
-    NASMX_RESERVE dmPrintQuality, short_t, 1
-    NASMX_RESERVE dmColor, short_t, 1
-    NASMX_RESERVE dmDuplex, short_t, 1
-    NASMX_RESERVE dmYResolution, short_t, 1
-    NASMX_RESERVE dmTTOption, short_t, 1
-    NASMX_RESERVE dmCollate, short_t, 1
-    NASMX_RESERVE dmFormName, int8_t, CCHFORMNAME
-    NASMX_RESERVE dmUnusedPadding, short_t, 1
-    NASMX_RESERVE dmBitsPerPel, short_t, 1
-    NASMX_RESERVE dmPelsWidth, int32_t, 1
-    NASMX_RESERVE dmPelsHeight, int32_t, 1
-    NASMX_RESERVE dmDisplayFlags, int32_t, 1
+    NASMX_RESERVE dmSize,          short_t, 1
+    NASMX_RESERVE dmDriverExtra,   short_t, 1
+    NASMX_RESERVE dmFields,        int32_t, 1
+    NASMX_UNION u
+        NASMX_STRUC printer
+            NASMX_RESERVE dmOrientation,   short_t, 1
+            NASMX_RESERVE dmPaperSize,     short_t, 1
+            NASMX_RESERVE dmPaperiLength,  short_t, 1
+            NASMX_RESERVE dmPaperWidth,    short_t, 1
+            NASMX_RESERVE dmScale,         short_t, 1
+            NASMX_RESERVE dmCopies,        short_t, 1
+            NASMX_RESERVE dmDefaultSource, short_t, 1
+            NASMX_RESERVE dmPrintQuality,  short_t, 1
+	NASMX_ENDSTRUC
+        NASMX_STRUC display
+            NASMX_STRUC dmPosition, POINT
+                NASMX_RESERVE x, int32_t, 1
+                NASMX_RESERVE y, int32_t, 1
+	    NASMX_ENDSTRUC
+            NASMX_RESERVE dmDisplayOrientation,  int32_t, 1
+            NASMX_RESERVE dmDisplayFixedOutput,  int32_t, 1
+	NASMX_ENDSTRUC
+    NASMX_ENDUNION
+    NASMX_RESERVE dmColor,         short_t, 1
+    NASMX_RESERVE dmDuplex,        short_t, 1
+    NASMX_RESERVE dmYResolution,   short_t, 1
+    NASMX_RESERVE dmTTOption,      short_t, 1
+    NASMX_RESERVE dmCollate,       short_t, 1
+    NASMX_RESERVE dmFormName,      int8_t, CCHFORMNAME
+    NASMX_RESERVE dmLogPixels,     short_t, 1
+    NASMX_RESERVE dmBitsPerPel,    int32_t, 1
+    NASMX_RESERVE dmPelsWidth,     int32_t, 1
+    NASMX_RESERVE dmPelsHeight,    int32_t, 1
+    NASMX_RESERVE dmDisplayFlags,  int32_t, 1
     NASMX_RESERVE dmDisplayFrequency, int32_t, 1
 NASMX_ENDSTRUC
 
@@ -6549,9 +6630,9 @@ NASMX_STRUC ABC
 NASMX_ENDSTRUC
 
 NASMX_STRUC ABCFLOAT
-    NASMX_RESERVE abcfA, int64_t, 1
-    NASMX_RESERVE abcfB, int64_t, 1
-    NASMX_RESERVE abcfC, int64_t, 1
+    NASMX_RESERVE abcfA, int32_t, 1
+    NASMX_RESERVE abcfB, int32_t, 1
+    NASMX_RESERVE abcfC, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC OUTLINETEXTMETRIC
@@ -6625,7 +6706,10 @@ NASMX_ENDSTRUC
 NASMX_STRUC GLYPHMETRICS
     NASMX_RESERVE gmBlackBoxX, int32_t, 1
     NASMX_RESERVE gmBlackBoxY, int32_t, 1
-    NASMX_RESERVE gmptGlyphOrigin, int32_t, 1
+    NASMX_STRUC gmptGlyphOrigin, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE gmCellIncX, short_t, 1
     NASMX_RESERVE gmCellIncY, short_t, 1
 NASMX_ENDSTRUC
@@ -6669,9 +6753,11 @@ NASMX_STRUC COLORADJUSTMENT
 NASMX_ENDSTRUC
 
 NASMX_STRUC DOCINFO
-    NASMX_RESERVE cbSize, int32_t, 1
-    NASMX_RESERVE lpszDocName, ptrdiff_t, 1
-    NASMX_RESERVE lpszOutput, ptrdiff_t, 1
+    NASMX_RESERVE cbSize,        int32_t, 1
+    NASMX_RESERVE lpszDocName,   ptrdiff_t, 1
+    NASMX_RESERVE lpszOutput,    ptrdiff_t, 1
+    NASMX_RESERVE lpszDatatype,  ptrdiff_t, 1
+    NASMX_RESERVE fwType,        int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC KERNINGPAIR
@@ -6680,26 +6766,26 @@ NASMX_STRUC KERNINGPAIR
     NASMX_RESERVE iKernAmount, int32_t, 1
 NASMX_ENDSTRUC
 
-NASMX_STRUC emr
-    NASMX_RESERVE iType, int32_t, 1
-    NASMX_RESERVE nSize, int32_t, 1
-NASMX_ENDSTRUC
-
-NASMX_STRUC emrtext
-	NASMX_STRUC ptlReference, POINT
-		NASMX_RESERVE x, int32_t, 1
-		NASMX_RESERVE y, int32_t, 1
-	NASMX_ENDSTRUC
-    NASMX_RESERVE nchars, int32_t, 1
-    NASMX_RESERVE offString, int32_t, 1
-    NASMX_RESERVE fOptions, int32_t, 1
-    NASMX_RESERVE ircl, int32_t, 1
-    NASMX_RESERVE offDx, int32_t, 1
-NASMX_ENDSTRUC
-
 NASMX_STRUC EMR
     NASMX_RESERVE iType, uint32_t, 1
     NASMX_RESERVE nSize, uint32_t, 1
+NASMX_ENDSTRUC
+
+NASMX_STRUC EMRTEXT
+    NASMX_STRUC ptlReference, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_RESERVE nchars,    int32_t, 1
+    NASMX_RESERVE offString, int32_t, 1
+    NASMX_RESERVE fOptions,  int32_t, 1
+    NASMX_STRUC rcl, RECT
+        NASMX_RESERVE left,   int32_t, 1
+        NASMX_RESERVE top,    int32_t, 1
+        NASMX_RESERVE right,  int32_t, 1
+        NASMX_RESERVE bottom, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_RESERVE offDx, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRABORTPATH
@@ -7113,19 +7199,33 @@ NASMX_STRUC EMRSCALEWINDOWEXTEX
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRSETWORLDTRANSFORM
-	NASMX_STRUC emr, EMR
-		NASMX_RESERVE iType, int32_t, 1
-		NASMX_RESERVE nSize, int32_t, 1
-	NASMX_ENDSTRUC
-    NASMX_RESERVE xform, int32_t, 1
+    NASMX_STRUC emr, EMR
+        NASMX_RESERVE iType, int32_t, 1
+        NASMX_RESERVE nSize, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_STRUC xform, XFORM
+        NASMX_RESERVE eM11, int32_t,1
+        NASMX_RESERVE eM12, int32_t, 1
+        NASMX_RESERVE eM21, int32_t, 1
+        NASMX_RESERVE eM22, int32_t, 1
+        NASMX_RESERVE eDx,  int32_t, 1
+        NASMX_RESERVE eDy,  int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRMODIFYWORLDTRANSFORM
-	NASMX_STRUC emr, EMR
-		NASMX_RESERVE iType, int32_t, 1
-		NASMX_RESERVE nSize, int32_t, 1
-	NASMX_ENDSTRUC
-    NASMX_RESERVE xform, int32_t, 1
+    NASMX_STRUC emr, EMR
+        NASMX_RESERVE iType, int32_t, 1
+        NASMX_RESERVE nSize, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_STRUC xform, XFORM
+        NASMX_RESERVE eM11, int32_t,1
+        NASMX_RESERVE eM12, int32_t, 1
+        NASMX_RESERVE eM21, int32_t, 1
+        NASMX_RESERVE eM22, int32_t, 1
+        NASMX_RESERVE eDx,  int32_t, 1
+        NASMX_RESERVE eDy,  int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE iMode, int32_t, 1
 NASMX_ENDSTRUC
 
@@ -7287,9 +7387,9 @@ NASMX_STRUC EMRANGLEARC
 		NASMX_RESERVE x, int32_t, 1
 		NASMX_RESERVE y, int32_t, 1
 	NASMX_ENDSTRUC
-    NASMX_RESERVE nRadius, int32_t, 1
-    NASMX_RESERVE eStartAngle, int64_t, 1
-    NASMX_RESERVE eSweepAngle, int64_t, 1
+    NASMX_RESERVE nRadius,     int32_t, 1
+    NASMX_RESERVE eStartAngle, int32_t, 1
+    NASMX_RESERVE eSweepAngle, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYLINE
@@ -7304,7 +7404,10 @@ NASMX_STRUC EMRPOLYLINE
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cptl, int32_t, 1
-    NASMX_RESERVE aptl1, int32_t, 1
+    NASMX_STRUC aptl1, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYBEZIER
@@ -7319,7 +7422,10 @@ NASMX_STRUC EMRPOLYBEZIER
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cptl, int32_t, 1
-    NASMX_RESERVE aptl1, int32_t, 1
+    NASMX_STRUC aptl1, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYGON
@@ -7334,7 +7440,10 @@ NASMX_STRUC EMRPOLYGON
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cptl, int32_t, 1
-    NASMX_RESERVE aptl1, int32_t, 1
+    NASMX_STRUC aptl1, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYBEZIERTO
@@ -7349,7 +7458,10 @@ NASMX_STRUC EMRPOLYBEZIERTO
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cptl, int32_t, 1
-    NASMX_RESERVE aptl1, int32_t, 1
+    NASMX_STRUC aptl1, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYLINE16
@@ -7358,13 +7470,16 @@ NASMX_STRUC EMRPOLYLINE16
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cpts, int32_t, 1
-    NASMX_RESERVE apts1, int32_t, 1
+    NASMX_STRUC apts, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYBEZIER16
@@ -7373,13 +7488,16 @@ NASMX_STRUC EMRPOLYBEZIER16
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cpts, int32_t, 1
-    NASMX_RESERVE apts1, int32_t, 1
+    NASMX_STRUC apts, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYGON16
@@ -7388,13 +7506,16 @@ NASMX_STRUC EMRPOLYGON16
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cpts, int32_t, 1
-    NASMX_RESERVE apts1, int32_t, 1
+    NASMX_STRUC apts, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPLOYBEZIERTO16
@@ -7403,13 +7524,16 @@ NASMX_STRUC EMRPLOYBEZIERTO16
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cpts, int32_t, 1
-    NASMX_RESERVE apts1, int32_t, 1
+    NASMX_STRUC apts, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYLINETO16
@@ -7418,13 +7542,16 @@ NASMX_STRUC EMRPOLYLINETO16
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cpts, int32_t, 1
-    NASMX_RESERVE apts1, int32_t, 1
+    NASMX_STRUC apts, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYDRAW
@@ -7433,13 +7560,16 @@ NASMX_STRUC EMRPOLYDRAW
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cptl, int32_t, 1
-    NASMX_RESERVE aptl1, int32_t, 1
+    NASMX_STRUC aptl1, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE abTypes1, short_t, 1
 NASMX_ENDSTRUC
 
@@ -7455,7 +7585,10 @@ NASMX_STRUC EMRPOLYDRAW16
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cpts, int32_t, 1
-    NASMX_RESERVE apts, int32_t, 1
+    NASMX_STRUC apts, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE abTypes, short_t, 1
 NASMX_ENDSTRUC
 
@@ -7465,15 +7598,18 @@ NASMX_STRUC EMRPOLYPOLYLINE
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
-    NASMX_RESERVE nPolys, int32_t, 1
-    NASMX_RESERVE cptl, int32_t, 1
+    NASMX_RESERVE nPolys,      int32_t, 1
+    NASMX_RESERVE cptl,        int32_t, 1
     NASMX_RESERVE aPolyCounts, int32_t, 1
-    NASMX_RESERVE aptl, int32_t, 1
+    NASMX_STRUC aptl, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYPOLYGON
@@ -7482,15 +7618,18 @@ NASMX_STRUC EMRPOLYPOLYGON
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
-    NASMX_RESERVE nPolys, int32_t, 1
-    NASMX_RESERVE cptl, int32_t, 1
+    NASMX_RESERVE nPolys,      int32_t, 1
+    NASMX_RESERVE cptl,        int32_t, 1
     NASMX_RESERVE aPolyCounts, int32_t, 1
-    NASMX_RESERVE aptl1, int32_t, 1
+    NASMX_STRUC aptl, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYPOLYLINE16
@@ -7499,15 +7638,18 @@ NASMX_STRUC EMRPOLYPOLYLINE16
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
-    NASMX_RESERVE nPolys, int32_t, 1
-    NASMX_RESERVE cpts, int32_t, 1
+    NASMX_RESERVE nPolys,      int32_t, 1
+    NASMX_RESERVE cpts,        int32_t, 1
     NASMX_RESERVE aPolyCounts, int32_t, 1
-    NASMX_RESERVE apts1, int32_t, 1
+    NASMX_STRUC apts1, POINTS
+        NASMX_RESERVE x, int16_t, 1
+        NASMX_RESERVE y, int16_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPOLYPOLYGON16
@@ -7516,15 +7658,18 @@ NASMX_STRUC EMRPOLYPOLYGON16
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
-    NASMX_RESERVE nPolys, int32_t, 1
-    NASMX_RESERVE cpts, int32_t, 1
+    NASMX_RESERVE nPolys,      int32_t, 1
+    NASMX_RESERVE cpts,        int32_t, 1
     NASMX_RESERVE aPolyCounts, int32_t, 1
-    NASMX_RESERVE apts1, int32_t, 1
+    NASMX_STRUC apts1, POINTS
+        NASMX_RESERVE x, int16_t, 1
+        NASMX_RESERVE y, int16_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRINVERTRGN
@@ -7533,13 +7678,13 @@ NASMX_STRUC EMRINVERTRGN
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cbRgnData, int32_t, 1
-    NASMX_RESERVE RgnData1, short_t, 1
+    NASMX_RESERVE RgnData1,  short_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPAINTRGN
@@ -7548,13 +7693,13 @@ NASMX_STRUC EMRPAINTRGN
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cbRgnData, int32_t, 1
-    NASMX_RESERVE RgnData1, short_t, 1
+    NASMX_RESERVE RgnData1,  short_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRFILLRGN
@@ -7563,14 +7708,14 @@ NASMX_STRUC EMRFILLRGN
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE cbRgnData, int32_t, 1
-    NASMX_RESERVE ihBrush, int32_t, 1
-    NASMX_RESERVE RgnData, short_t, 1
+    NASMX_RESERVE ihBrush,   int32_t, 1
+    NASMX_RESERVE RgnData,   short_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRFRAMERGN
@@ -7618,59 +7763,73 @@ NASMX_STRUC EMREXTTEXTOUT
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRBITBLT
-	NASMX_STRUC emr, EMR
-		NASMX_RESERVE iType, int32_t, 1
-		NASMX_RESERVE nSize, int32_t, 1
-	NASMX_ENDSTRUC
-	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
-		NASMX_RESERVE bottom, int32_t, 1
-	NASMX_ENDSTRUC
-    NASMX_RESERVE xDest, int32_t, 1
-    NASMX_RESERVE yDest, int32_t, 1
-    NASMX_RESERVE cxDest, int32_t, 1
-    NASMX_RESERVE cyDest, int32_t, 1
-    NASMX_RESERVE dwRop, int32_t, 1
-    NASMX_RESERVE xSrc, int32_t, 1
-    NASMX_RESERVE ySrc, int32_t, 1
-    NASMX_RESERVE xformSrc, int32_t, 1
+    NASMX_STRUC emr, EMR
+        NASMX_RESERVE iType, int32_t, 1
+        NASMX_RESERVE nSize, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_STRUC rclBounds, RECT
+        NASMX_RESERVE left,   int32_t, 1
+        NASMX_RESERVE top,    int32_t, 1
+        NASMX_RESERVE right,  int32_t, 1
+        NASMX_RESERVE bottom, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_RESERVE xDest,        int32_t, 1
+    NASMX_RESERVE yDest,        int32_t, 1
+    NASMX_RESERVE cxDest,       int32_t, 1
+    NASMX_RESERVE cyDest,       int32_t, 1
+    NASMX_RESERVE dwRop,        int32_t, 1
+    NASMX_RESERVE xSrc,         int32_t, 1
+    NASMX_RESERVE ySrc,         int32_t, 1
+    NASMX_STRUC xformSrc, XFORM
+        NASMX_RESERVE eM11, int32_t,1
+        NASMX_RESERVE eM12, int32_t, 1
+        NASMX_RESERVE eM21, int32_t, 1
+        NASMX_RESERVE eM22, int32_t, 1
+        NASMX_RESERVE eDx,  int32_t, 1
+        NASMX_RESERVE eDy,  int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE crBkColorSrc, int32_t, 1
-    NASMX_RESERVE iUsageSrc, int32_t, 1
-    NASMX_RESERVE offBmiSrc, int32_t, 1
-    NASMX_RESERVE cbBmiSrc, int32_t, 1
-    NASMX_RESERVE offBitsSrc, int32_t, 1
-    NASMX_RESERVE cbBitsSrc, int32_t, 1
+    NASMX_RESERVE iUsageSrc,    int32_t, 1
+    NASMX_RESERVE offBmiSrc,    int32_t, 1
+    NASMX_RESERVE cbBmiSrc,     int32_t, 1
+    NASMX_RESERVE offBitsSrc,   int32_t, 1
+    NASMX_RESERVE cbBitsSrc,    int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRSTRETCHBLT
-	NASMX_STRUC emr, EMR
-		NASMX_RESERVE iType, int32_t, 1
-		NASMX_RESERVE nSize, int32_t, 1
-	NASMX_ENDSTRUC
-	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
-		NASMX_RESERVE bottom, int32_t, 1
-	NASMX_ENDSTRUC
-    NASMX_RESERVE xDest, int32_t, 1
-    NASMX_RESERVE yDest, int32_t, 1
+    NASMX_STRUC emr, EMR
+        NASMX_RESERVE iType, int32_t, 1
+        NASMX_RESERVE nSize, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_STRUC rclBounds, RECT
+        NASMX_RESERVE left,   int32_t, 1
+        NASMX_RESERVE top,    int32_t, 1
+        NASMX_RESERVE right,  int32_t, 1
+        NASMX_RESERVE bottom, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_RESERVE xDest,  int32_t, 1
+    NASMX_RESERVE yDest,  int32_t, 1
     NASMX_RESERVE cxDest, int32_t, 1
     NASMX_RESERVE cyDest, int32_t, 1
-    NASMX_RESERVE dwRop, int32_t, 1
-    NASMX_RESERVE xSrc, int32_t, 1
-    NASMX_RESERVE ySrc, int32_t, 1
-    NASMX_RESERVE xformSrc, int32_t, 1
+    NASMX_RESERVE dwRop,  int32_t, 1
+    NASMX_RESERVE xSrc,   int32_t, 1
+    NASMX_RESERVE ySrc,   int32_t, 1
+    NASMX_STRUC xformSrc, XFORM
+        NASMX_RESERVE eM11, int32_t,1
+        NASMX_RESERVE eM12, int32_t, 1
+        NASMX_RESERVE eM21, int32_t, 1
+        NASMX_RESERVE eM22, int32_t, 1
+        NASMX_RESERVE eDx,  int32_t, 1
+        NASMX_RESERVE eDy,  int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE crBkColorSrc, int32_t, 1
-    NASMX_RESERVE iUsageSrc, int32_t, 1
-    NASMX_RESERVE offBmiSrc, int32_t, 1
-    NASMX_RESERVE cbBmiSrc, int32_t, 1
-    NASMX_RESERVE offBitsSrc, int32_t, 1
-    NASMX_RESERVE cbBitsSrc, int32_t, 1
-    NASMX_RESERVE cxSrc, int32_t, 1
-    NASMX_RESERVE cySrc, int32_t, 1
+    NASMX_RESERVE iUsageSrc,    int32_t, 1
+    NASMX_RESERVE offBmiSrc,    int32_t, 1
+    NASMX_RESERVE cbBmiSrc,     int32_t, 1
+    NASMX_RESERVE offBitsSrc,   int32_t, 1
+    NASMX_RESERVE cbBitsSrc,    int32_t, 1
+    NASMX_RESERVE cxSrc,        int32_t, 1
+    NASMX_RESERVE cySrc,        int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRMASKBLT
@@ -7679,67 +7838,81 @@ NASMX_STRUC EMRMASKBLT
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
 	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
+		NASMX_RESERVE left,   int32_t, 1
+		NASMX_RESERVE top,    int32_t, 1
+		NASMX_RESERVE right,  int32_t, 1
 		NASMX_RESERVE bottom, int32_t, 1
 	NASMX_ENDSTRUC
-    NASMX_RESERVE xDest, int32_t, 1
-    NASMX_RESERVE yDest, int32_t, 1
-    NASMX_RESERVE cxDest, int32_t, 1
-    NASMX_RESERVE cyDest, int32_t, 1
-    NASMX_RESERVE dwRop, int32_t, 1
-    NASMX_RESERVE xSrc2, int32_t, 1
+    NASMX_RESERVE xDest,   int32_t, 1
+    NASMX_RESERVE yDest,   int32_t, 1
+    NASMX_RESERVE cxDest,  int32_t, 1
+    NASMX_RESERVE cyDest,  int32_t, 1
+    NASMX_RESERVE dwRop,   int32_t, 1
+    NASMX_RESERVE xSrc2,   int32_t, 1
     NASMX_RESERVE cyDest2, int32_t, 1
-    NASMX_RESERVE dwRop2, int32_t, 1
-    NASMX_RESERVE xSrc, int32_t, 1
-    NASMX_RESERVE ySrc, int32_t, 1
-    NASMX_RESERVE xformSrc, int32_t, 1
+    NASMX_RESERVE dwRop2,  int32_t, 1
+    NASMX_RESERVE xSrc,    int32_t, 1
+    NASMX_RESERVE ySrc,    int32_t, 1
+    NASMX_STRUC xformSrc, XFORM
+        NASMX_RESERVE eM11, int32_t,1
+        NASMX_RESERVE eM12, int32_t, 1
+        NASMX_RESERVE eM21, int32_t, 1
+        NASMX_RESERVE eM22, int32_t, 1
+        NASMX_RESERVE eDx,  int32_t, 1
+        NASMX_RESERVE eDy,  int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE crBkColorSrc, int32_t, 1
-    NASMX_RESERVE iUsageSrc, int32_t, 1
-    NASMX_RESERVE offBmiSrc, int32_t, 1
-    NASMX_RESERVE cbBmiSrc, int32_t, 1
-    NASMX_RESERVE offBitsSrc, int32_t, 1
-    NASMX_RESERVE cbBitsSrc, int32_t, 1
-    NASMX_RESERVE xMask, int32_t, 1
-    NASMX_RESERVE yMask, int32_t, 1
-    NASMX_RESERVE iUsageMask, int32_t, 1
-    NASMX_RESERVE offBmiMask, int32_t, 1
-    NASMX_RESERVE cbBmiMask, int32_t, 1
-    NASMX_RESERVE offBitsMask, int32_t, 1
-    NASMX_RESERVE cbBitsMask, int32_t, 1
+    NASMX_RESERVE iUsageSrc,    int32_t, 1
+    NASMX_RESERVE offBmiSrc,    int32_t, 1
+    NASMX_RESERVE cbBmiSrc,     int32_t, 1
+    NASMX_RESERVE offBitsSrc,   int32_t, 1
+    NASMX_RESERVE cbBitsSrc,    int32_t, 1
+    NASMX_RESERVE xMask,        int32_t, 1
+    NASMX_RESERVE yMask,        int32_t, 1
+    NASMX_RESERVE iUsageMask,   int32_t, 1
+    NASMX_RESERVE offBmiMask,   int32_t, 1
+    NASMX_RESERVE cbBmiMask,    int32_t, 1
+    NASMX_RESERVE offBitsMask,  int32_t, 1
+    NASMX_RESERVE cbBitsMask,   int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRPLGBLT
-	NASMX_STRUC emr, EMR
-		NASMX_RESERVE iType, int32_t, 1
-		NASMX_RESERVE nSize, int32_t, 1
-	NASMX_ENDSTRUC
-	NASMX_STRUC rclBounds, RECT
-		NASMX_RESERVE left, int32_t, 1
-		NASMX_RESERVE top, int32_t, 1
-		NASMX_RESERVE right, int32_t, 1
-		NASMX_RESERVE bottom, int32_t, 1
-	NASMX_ENDSTRUC
-    NASMX_RESERVE aptlDest3, int32_t, 1
-    NASMX_RESERVE xSrc, int32_t, 1
-    NASMX_RESERVE ySrc, int32_t, 1
-    NASMX_RESERVE cxSrc, int32_t, 1
-    NASMX_RESERVE cySrc, int32_t, 1
-    NASMX_RESERVE xformSrc, int32_t, 1
+    NASMX_STRUC emr, EMR
+        NASMX_RESERVE iType, int32_t, 1
+        NASMX_RESERVE nSize, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_STRUC rclBounds, RECT
+        NASMX_RESERVE left,   int32_t, 1
+        NASMX_RESERVE top,    int32_t, 1
+        NASMX_RESERVE right,  int32_t, 1
+        NASMX_RESERVE bottom, int32_t, 1
+    NASMX_ENDSTRUC
+    NASMX_RESERVE aptlDest3,    POINT, 3
+    NASMX_RESERVE xSrc,         int32_t, 1
+    NASMX_RESERVE ySrc,         int32_t, 1
+    NASMX_RESERVE cxSrc,        int32_t, 1
+    NASMX_RESERVE cySrc,        int32_t, 1
+    NASMX_STRUC xformSrc, XFORM
+        NASMX_RESERVE eM11, int32_t,1
+        NASMX_RESERVE eM12, int32_t, 1
+        NASMX_RESERVE eM21, int32_t, 1
+        NASMX_RESERVE eM22, int32_t, 1
+        NASMX_RESERVE eDx,  int32_t, 1
+        NASMX_RESERVE eDy,  int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE crBkColorSrc, int32_t, 1
-    NASMX_RESERVE iUsageSrc, int32_t, 1
-    NASMX_RESERVE offBmiSrc, int32_t, 1
-    NASMX_RESERVE cbBmiSrc, int32_t, 1
-    NASMX_RESERVE offBitsSrc, int32_t, 1
-    NASMX_RESERVE cbBitsSrc, int32_t, 1
-    NASMX_RESERVE xMask, int32_t, 1
-    NASMX_RESERVE yMask, int32_t, 1
-    NASMX_RESERVE iUsageMask, int32_t, 1
-    NASMX_RESERVE offBmiMask, int32_t, 1
-    NASMX_RESERVE cbBmiMask, int32_t, 1
-    NASMX_RESERVE offBitsMask, int32_t, 1
-    NASMX_RESERVE cbBitsMask, int32_t, 1
+    NASMX_RESERVE iUsageSrc,    int32_t, 1
+    NASMX_RESERVE offBmiSrc,    int32_t, 1
+    NASMX_RESERVE cbBmiSrc,     int32_t, 1
+    NASMX_RESERVE offBitsSrc,   int32_t, 1
+    NASMX_RESERVE cbBitsSrc,    int32_t, 1
+    NASMX_RESERVE xMask,        int32_t, 1
+    NASMX_RESERVE yMask,        int32_t, 1
+    NASMX_RESERVE iUsageMask,   int32_t, 1
+    NASMX_RESERVE offBmiMask,   int32_t, 1
+    NASMX_RESERVE cbBmiMask,    int32_t, 1
+    NASMX_RESERVE offBitsMask,  int32_t, 1
+    NASMX_RESERVE cbBitsMask,   int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRSETDIBITSTODEVICE
@@ -7805,12 +7978,21 @@ NASMX_STRUC EMREXTCREATEFONTINDIRECT
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRCREATEPALETTE
-	NASMX_STRUC emr, EMR
-		NASMX_RESERVE iType, int32_t, 1
-		NASMX_RESERVE nSize, int32_t, 1
-	NASMX_ENDSTRUC
+    NASMX_STRUC emr, EMR
+        NASMX_RESERVE iType, int32_t, 1
+        NASMX_RESERVE nSize, int32_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE ihPal, int32_t, 1
-    NASMX_RESERVE lgpl, int32_t, 1
+    NASMX_STRUC lgpl, LOGPALETTE
+        NASMX_RESERVE palVersion,    short_t, 1
+        NASMX_RESERVE palNumEntries, short_t, 1
+        NASMX_STRUC palPalEntry, PALETTEENTRY
+            NASMX_RESERVE peRed,   int8_t, 1
+            NASMX_RESERVE peGreen, int8_t, 1
+            NASMX_RESERVE peBlue,  int8_t, 1
+            NASMX_RESERVE peFlags, int8_t, 1
+        NASMX_ENDSTRUC
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRCREATEPEN
@@ -7841,7 +8023,11 @@ NASMX_STRUC EMRCREATEBRUSHINDIRECT
 		NASMX_RESERVE nSize, int32_t, 1
 	NASMX_ENDSTRUC
     NASMX_RESERVE ihBrush, int32_t, 1
-    NASMX_RESERVE lb, int32_t, 1
+    NASMX_STRUC lb, LOGBRUSH
+        NASMX_RESERVE lbStyle, int32_t, 1
+        NASMX_RESERVE lbColor, int32_t, 1
+        NASMX_RESERVE lbHatch, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRCREATEMONOBRUSH
@@ -7887,21 +8073,40 @@ NASMX_STRUC BITMAPV4HEADER
     NASMX_RESERVE bV4BlueMask, int32_t, 1
     NASMX_RESERVE bV4AlphaMask, int32_t, 1
     NASMX_RESERVE bV4CSType, int32_t, 1
-    NASMX_RESERVE bV4Endpoints, int32_t, 1
+    NASMX_STRUC bV4Endpoints, CIEXYZTRIPLE
+        NASMX_STRUC ciexyzRed, CIEXYZ
+            NASMX_RESERVE ciexyzX, int32_t, 1
+            NASMX_RESERVE ciexyzY, int32_t, 1
+            NASMX_RESERVE ciexyzZ, int32_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC ciexyzGreen, CIEXYZ
+            NASMX_RESERVE ciexyzX, int32_t, 1
+            NASMX_RESERVE ciexyzY, int32_t, 1
+            NASMX_RESERVE ciexyzZ, int32_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC ciexyBlue, CIEXYZ
+            NASMX_RESERVE ciexyzX, int32_t, 1
+            NASMX_RESERVE ciexyzY, int32_t, 1
+            NASMX_RESERVE ciexyzZ, int32_t, 1
+        NASMX_ENDSTRUC
+    NASMX_ENDSTRUC    
     NASMX_RESERVE bV4GammaRed, int32_t, 1
     NASMX_RESERVE bV4GammaGreen, int32_t, 1
     NASMX_RESERVE bV4GammaBlue, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC FONTSIGNATURE
-    NASMX_RESERVE fsUsb4, int32_t, 1
-    NASMX_RESERVE fsCsb2, int32_t, 1
+    NASMX_RESERVE fsUsb, int32_t, 4
+    NASMX_RESERVE fsCsb, int32_t, 2
 NASMX_ENDSTRUC
 
 NASMX_STRUC CHARSETINFO
     NASMX_RESERVE ciCharset, int32_t, 1
     NASMX_RESERVE ciACP, int32_t, 1
-    NASMX_RESERVE xlfs, int32_t, 1
+    NASMX_STRUC fs, FONTSIGNATURE
+        NASMX_RESERVE fsUsb, int32_t, 4
+        NASMX_RESERVE fsCsb, int32_t, 2
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC LOCALESIGNATURE
@@ -7916,10 +8121,25 @@ NASMX_STRUC NEWTEXTMETRICEX
 NASMX_ENDSTRUC
 
 NASMX_STRUC ENUMLOGFONTEX
-    NASMX_RESERVE elfLogFont, int32_t, 1
-    NASMX_RESERVE elfFullName, int8_t, 1
-    NASMX_RESERVE elfStyle, int8_t, 1
-    NASMX_RESERVE elfScript, int8_t, 1
+    NASMX_STRUC elfLogFont, LOGFONT
+        NASMX_RESERVE lfHeight,         int32_t, 1
+        NASMX_RESERVE lfWidth,          int32_t, 1
+        NASMX_RESERVE lfEscapement,     int32_t, 1
+        NASMX_RESERVE lfOrientation,    int32_t, 1
+        NASMX_RESERVE lfWeight,         int32_t, 1
+        NASMX_RESERVE lfItalic,         int8_t, 1
+        NASMX_RESERVE lfUnderline,      int8_t, 1
+        NASMX_RESERVE lfStrikeOut,      int8_t, 1
+        NASMX_RESERVE lfCharSet,        int8_t, 1
+        NASMX_RESERVE lfOutPrecision,   int8_t, 1
+        NASMX_RESERVE lfClipPrecision,  int8_t, 1
+        NASMX_RESERVE lfQuality,        int8_t, 1
+        NASMX_RESERVE lfPitchAndFamily, int8_t, 1
+        NASMX_RESERVE lfFaceName,       NASMX_TCHAR, LF_FACESIZE
+    NASMX_ENDSTRUC
+    NASMX_RESERVE elfFullName, NASMX_TCHAR, LF_FULLFACESIZE
+    NASMX_RESERVE elfStyle, NASMX_TCHAR, LF_FACESIZE
+    NASMX_RESERVE elfScript, NASMX_TCHAR, LF_FACESIZE
 NASMX_ENDSTRUC
 
 NASMX_STRUC GCP_RESULTS
@@ -7941,22 +8161,50 @@ NASMX_STRUC CIEXYZ
 NASMX_ENDSTRUC
 
 NASMX_STRUC CIEXYZTRIPLE
-    NASMX_RESERVE ciexyzRed, int32_t, 1
-    NASMX_RESERVE ciexyzGreen, int32_t, 1
-    NASMX_RESERVE ciexyBlue, int32_t, 1
+        NASMX_STRUC ciexyzRed, CIEXYZ
+            NASMX_RESERVE ciexyzX, int32_t, 1
+            NASMX_RESERVE ciexyzY, int32_t, 1
+            NASMX_RESERVE ciexyzZ, int32_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC ciexyzGreen, CIEXYZ
+            NASMX_RESERVE ciexyzX, int32_t, 1
+            NASMX_RESERVE ciexyzY, int32_t, 1
+            NASMX_RESERVE ciexyzZ, int32_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC ciexyBlue, CIEXYZ
+            NASMX_RESERVE ciexyzX, int32_t, 1
+            NASMX_RESERVE ciexyzY, int32_t, 1
+            NASMX_RESERVE ciexyzZ, int32_t, 1
+        NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC LOGCOLORSPACE
-    NASMX_RESERVE lcsSignature, int32_t, 1
-    NASMX_RESERVE lcsVersion, int32_t, 1
-    NASMX_RESERVE lcsSize, int32_t, 1
-    NASMX_RESERVE lcsCSType, int32_t, 1
-    NASMX_RESERVE lcsIntent, int32_t, 1
-    NASMX_RESERVE lcsEndPoints, int32_t, 1
-    NASMX_RESERVE lcsGammaRed, int32_t, 1
+    NASMX_RESERVE lcsSignature,  int32_t, 1
+    NASMX_RESERVE lcsVersion,    int32_t, 1
+    NASMX_RESERVE lcsSize,       int32_t, 1
+    NASMX_RESERVE lcsCSType,     int32_t, 1
+    NASMX_RESERVE lcsIntent,     int32_t, 1
+    NASMX_STRUC lcsEndPoints, CIEXYZTRIPLE
+        NASMX_STRUC ciexyzRed, CIEXYZ
+            NASMX_RESERVE ciexyzX, int32_t, 1
+            NASMX_RESERVE ciexyzY, int32_t, 1
+            NASMX_RESERVE ciexyzZ, int32_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC ciexyzGreen, CIEXYZ
+            NASMX_RESERVE ciexyzX, int32_t, 1
+            NASMX_RESERVE ciexyzY, int32_t, 1
+            NASMX_RESERVE ciexyzZ, int32_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC ciexyBlue, CIEXYZ
+            NASMX_RESERVE ciexyzX, int32_t, 1
+            NASMX_RESERVE ciexyzY, int32_t, 1
+            NASMX_RESERVE ciexyzZ, int32_t, 1
+        NASMX_ENDSTRUC
+    NASMX_ENDSTRUC
+    NASMX_RESERVE lcsGammaRed,   int32_t, 1
     NASMX_RESERVE lcsGammaGreen, int32_t, 1
-    NASMX_RESERVE lcsGammaBlue, int32_t, 1
-    NASMX_RESERVE lcsFileName, int8_t, MAX_PATH
+    NASMX_RESERVE lcsGammaBlue,  int32_t, 1
+    NASMX_RESERVE lcsFileName, NASMX_TCHAR, MAX_PATH
 NASMX_ENDSTRUC
 
 NASMX_STRUC EMRSELECTCOLORSPACE
@@ -8148,34 +8396,42 @@ NASMX_STRUC DELETEITEMSTRUCT
 NASMX_ENDSTRUC
 
 NASMX_STRUC COMPAREITEMSTRUCT
-    NASMX_RESERVE CtlType, int32_t, 1
-    NASMX_RESERVE CtlID, int32_t, 1
-    NASMX_RESERVE hwndItem, ptrdiff_t, 1
-    NASMX_RESERVE itemID1, int32_t, 1
-    NASMX_RESERVE itemData1, int32_t, 1
-    NASMX_RESERVE itemID2, int32_t, 1
-    NASMX_RESERVE itemData2, int32_t, 1
+    NASMX_RESERVE CtlType,    int32_t, 1
+    NASMX_RESERVE CtlID,      int32_t, 1
+    NASMX_RESERVE hwndItem,   ptrdiff_t, 1
+    NASMX_RESERVE itemID1,    int32_t, 1
+    NASMX_RESERVE itemData1,  ptrdiff_t, 1
+    NASMX_RESERVE itemID2,    int32_t, 1
+    NASMX_RESERVE itemData2,  ptrdiff_t, 1
+    NASMX_RESERVE dwLocaleId, int32_t, 1
 NASMX_ENDSTRUC
 
+; WINUSER.H WARNING:
+; The following structures must NOT be DWORD padded because they are
+; followed by strings, etc that do not have to be DWORD aligned.
+NASMX_PRAGMA PACK, PUSH, 2
+
 NASMX_STRUC DLGTEMPLATE
-    NASMX_RESERVE style, int32_t, 1
+    NASMX_RESERVE style,           int32_t, 1
     NASMX_RESERVE dwExtendedStyle, int32_t, 1
-    NASMX_RESERVE cdit, short_t, 1
-    NASMX_RESERVE x, short_t, 1
-    NASMX_RESERVE y, short_t, 1
-    NASMX_RESERVE lx, short_t, 1
-    NASMX_RESERVE ly, short_t, 1
+    NASMX_RESERVE cdit,            int16_t, 1
+    NASMX_RESERVE x,               short_t, 1
+    NASMX_RESERVE y,               short_t, 1
+    NASMX_RESERVE cx,              short_t, 1
+    NASMX_RESERVE cy,              short_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC DLGITEMTEMPLATE
-    NASMX_RESERVE style, int32_t, 1
+    NASMX_RESERVE style,           int32_t, 1
     NASMX_RESERVE dwExtendedStyle, int32_t, 1
-    NASMX_RESERVE x, short_t, 1
-    NASMX_RESERVE y, short_t, 1
-    NASMX_RESERVE lx, short_t, 1
-    NASMX_RESERVE ly, short_t, 1
-    NASMX_RESERVE id, short_t, 1
+    NASMX_RESERVE x,               short_t, 1
+    NASMX_RESERVE y,               short_t, 1
+    NASMX_RESERVE cx,              short_t, 1
+    NASMX_RESERVE cy,              short_t, 1
+    NASMX_RESERVE id,              short_t, 1
 NASMX_ENDSTRUC
+
+NASMX_PRAGMA PACK, POP
 
 NASMX_STRUC MENUITEMTEMPLATEHEADER
     NASMX_RESERVE versionNumber, short_t, 1
@@ -8606,14 +8862,14 @@ NASMX_STRUC APPBARDATA
 NASMX_ENDSTRUC
 
 NASMX_STRUC SHFILEOPSTRUCT
-    NASMX_RESERVE hwnd, ptrdiff_t, 1
-    NASMX_RESERVE wFunc, int32_t, 1
-    NASMX_RESERVE pFrom, int32_t, 1
-    NASMX_RESERVE pTo, int32_t, 1
-    NASMX_RESERVE fFlags, short_t, 1
+    NASMX_RESERVE hwnd,                  size_t, 1
+    NASMX_RESERVE wFunc,                 int32_t, 1
+    NASMX_RESERVE pFrom,                 ptrdiff_t, 1
+    NASMX_RESERVE pTo,                   ptrdiff_t, 1
+    NASMX_RESERVE fFlags,                short_t, 1
     NASMX_RESERVE fAnyOperationsAborted, int32_t, 1
-    NASMX_RESERVE hNameMappings, int32_t, 1
-    NASMX_RESERVE lpszProgressTitle, ptrdiff_t, 1
+    NASMX_RESERVE hNameMappings,         ptrdiff_t, 1
+    NASMX_RESERVE lpszProgressTitle,     ptrdiff_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC SHNAMEMAPPING
@@ -8676,20 +8932,38 @@ NASMX_STRUC VS_FIXEDFILEINFO
 NASMX_ENDSTRUC
 
 NASMX_STRUC ICONMETRICS
-    NASMX_RESERVE cbSize, int32_t, 1
+    NASMX_RESERVE cbSize,       int32_t, 1
     NASMX_RESERVE iHorzSpacing, int32_t, 1
     NASMX_RESERVE iVertSpacing, int32_t, 1
-    NASMX_RESERVE iTitleWrap, int32_t, 1
-    NASMX_RESERVE lfFont, int32_t, 1
+    NASMX_RESERVE iTitleWrap,   int32_t, 1
+    NASMX_STRUC lfFont, LOGFONT
+        NASMX_RESERVE lfHeight,         int32_t, 1
+        NASMX_RESERVE lfWidth,          int32_t, 1
+        NASMX_RESERVE lfEscapement,     int32_t, 1
+        NASMX_RESERVE lfOrientation,    int32_t, 1
+        NASMX_RESERVE lfWeight,         int32_t, 1
+        NASMX_RESERVE lfItalic,         int8_t, 1
+        NASMX_RESERVE lfUnderline,      int8_t, 1
+        NASMX_RESERVE lfStrikeOut,      int8_t, 1
+        NASMX_RESERVE lfCharSet,        int8_t, 1
+        NASMX_RESERVE lfOutPrecision,   int8_t, 1
+        NASMX_RESERVE lfClipPrecision,  int8_t, 1
+        NASMX_RESERVE lfQuality,        int8_t, 1
+        NASMX_RESERVE lfPitchAndFamily, int8_t, 1
+        NASMX_RESERVE lfFaceName,       NASMX_TCHAR, LF_FACESIZE
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC HELPINFO
-    NASMX_RESERVE cbSize, int32_t, 1
-    NASMX_RESERVE iContextType, int32_t, 1
-    NASMX_RESERVE iCtrlId, int32_t, 1
-    NASMX_RESERVE hItemHandle, int32_t, 1
-    NASMX_RESERVE dwContextId, int32_t, 1
-    NASMX_RESERVE MousePos, int32_t, 1
+    NASMX_RESERVE cbSize,       int32_t,   1
+    NASMX_RESERVE iContextType, int32_t,   1
+    NASMX_RESERVE iCtrlId,      int32_t,   1
+    NASMX_RESERVE hItemHandle,  size_t,    1
+    NASMX_RESERVE dwContextId,  ptrdiff_t, 1
+    NASMX_STRUC MousePos, POINT
+        NASMX_RESERVE x, int32_t, 1
+        NASMX_RESERVE y, int32_t, 1
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC ANIMATIONINFO
@@ -8707,12 +8981,12 @@ NASMX_STRUC MINIMIZEDMETRICS
 NASMX_ENDSTRUC
 
 NASMX_STRUC OSVERSIONINFO
-    NASMX_RESERVE dwOSVersionInfoSize, int32_t, 1
-    NASMX_RESERVE dwMajorVersion, int32_t, 1
-    NASMX_RESERVE dwMinorVersion, int32_t, 1
-    NASMX_RESERVE dwBuildNumber, int32_t, 1
-    NASMX_RESERVE dwPlatformId, int32_t, 1
-    NASMX_RESERVE szCSDVersion, int8_t, 128
+    NASMX_RESERVE dwOSVersionInfoSize, DWORD, 1
+    NASMX_RESERVE dwMajorVersion,      DWORD, 1
+    NASMX_RESERVE dwMinorVersion,      DWORD, 1
+    NASMX_RESERVE dwBuildNumber,       DWORD, 1
+    NASMX_RESERVE dwPlatformId,        DWORD, 1
+    NASMX_RESERVE szCSDVersion, NASMX_TCHAR, 128
 NASMX_ENDSTRUC
 
 NASMX_STRUC SYSTEM_POWER_STATUS
@@ -8758,95 +9032,166 @@ NASMX_STRUC PAGESETUPDLGAPI
 NASMX_ENDSTRUC
 
 NASMX_STRUC COMMCONFIG
-    NASMX_RESERVE dwSize, int32_t, 1
-    NASMX_RESERVE wVersion, short_t, 1
+    NASMX_RESERVE dwSize,    int32_t, 1
+    NASMX_RESERVE wVersion,  short_t, 1
     NASMX_RESERVE wReserved, short_t, 1
-    NASMX_RESERVE dcbx, int32_t, 1
+    NASMX_STRUC dcb, DCB
+        NASMX_RESERVE DCBlength,  int32_t, 1
+        NASMX_RESERVE BaudRate,   int32_t, 1
+        NASMX_RESERVE uFlags,     uint32_t, 1
+        NASMX_RESERVE wReserved,  short_t, 1
+        NASMX_RESERVE XonLim,     short_t, 1
+        NASMX_RESERVE XoffLim,    short_t, 1
+        NASMX_RESERVE ByteSize,   int8_t, 1
+        NASMX_RESERVE Parity,     int8_t, 1
+        NASMX_RESERVE StopBits,   int8_t, 1
+        NASMX_RESERVE XonChar,    int8_t, 1
+        NASMX_RESERVE XoffChar,   int8_t, 1
+        NASMX_RESERVE ErrorChar,  int8_t, 1
+        NASMX_RESERVE EofChar,    int8_t, 1
+        NASMX_RESERVE EvtChar,    int8_t, 1
+        NASMX_RESERVE wReserved1, short_t, 1
+    NASMX_ENDSTRUC
     NASMX_RESERVE dwProviderSubType, int32_t, 1
-    NASMX_RESERVE dwProviderOffset, int32_t, 1
-    NASMX_RESERVE dwProviderSize, int32_t, 1
-    NASMX_RESERVE wcProviderData, int8_t, 1
+    NASMX_RESERVE dwProviderOffset,  int32_t, 1
+    NASMX_RESERVE dwProviderSize,    int32_t, 1
+    NASMX_RESERVE wcProviderData,    int16_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC PIXELFORMATDESCRIPTOR
-    NASMX_RESERVE nSize, short_t, 1
-    NASMX_RESERVE nVersion, short_t, 1
-    NASMX_RESERVE dwFlags, int32_t, 1
-    NASMX_RESERVE iPixelType, int8_t, 1
-    NASMX_RESERVE cColorBits, int8_t, 1
-    NASMX_RESERVE cRedBits, int8_t, 1
-    NASMX_RESERVE cRedShift, int8_t, 1
-    NASMX_RESERVE cGreenBits, int8_t, 1
-    NASMX_RESERVE cGreenShift, int8_t, 1
-    NASMX_RESERVE cBlueBits, int8_t, 1
-    NASMX_RESERVE cBlueShift, int8_t, 1
-    NASMX_RESERVE cAlphaBits, int8_t, 1
-    NASMX_RESERVE cAlphaShift, int8_t, 1
-    NASMX_RESERVE cAccumBits, int8_t, 1
-    NASMX_RESERVE cAccumRedBits, int8_t, 1
+    NASMX_RESERVE nSize,           short_t, 1
+    NASMX_RESERVE nVersion,        short_t, 1
+    NASMX_RESERVE dwFlags,         int32_t, 1
+    NASMX_RESERVE iPixelType,      int8_t, 1
+    NASMX_RESERVE cColorBits,      int8_t, 1
+    NASMX_RESERVE cRedBits,        int8_t, 1
+    NASMX_RESERVE cRedShift,       int8_t, 1
+    NASMX_RESERVE cGreenBits,      int8_t, 1
+    NASMX_RESERVE cGreenShift,     int8_t, 1
+    NASMX_RESERVE cBlueBits,       int8_t, 1
+    NASMX_RESERVE cBlueShift,      int8_t, 1
+    NASMX_RESERVE cAlphaBits,      int8_t, 1
+    NASMX_RESERVE cAlphaShift,     int8_t, 1
+    NASMX_RESERVE cAccumBits,      int8_t, 1
+    NASMX_RESERVE cAccumRedBits,   int8_t, 1
     NASMX_RESERVE cAccumGreenBits, int8_t, 1
-    NASMX_RESERVE cAccumBlueBits, int8_t, 1
+    NASMX_RESERVE cAccumBlueBits,  int8_t, 1
     NASMX_RESERVE cAccumAlphaBits, int8_t, 1
-    NASMX_RESERVE cDepthBits, int8_t, 1
-    NASMX_RESERVE cStencilBits, int8_t, 1
-    NASMX_RESERVE cAuxBuffers, int8_t, 1
-    NASMX_RESERVE iLayerType, int8_t, 1
-    NASMX_RESERVE bReserved, int8_t, 1
-    NASMX_RESERVE dwLayerMask, int32_t, 1
-    NASMX_RESERVE dwVisibleMask, int32_t, 1
-    NASMX_RESERVE dwDamageMask, int32_t, 1
+    NASMX_RESERVE cDepthBits,      int8_t, 1
+    NASMX_RESERVE cStencilBits,    int8_t, 1
+    NASMX_RESERVE cAuxBuffers,     int8_t, 1
+    NASMX_RESERVE iLayerType,      int8_t, 1
+    NASMX_RESERVE bReserved,       int8_t, 1
+    NASMX_RESERVE dwLayerMask,     int32_t, 1
+    NASMX_RESERVE dwVisibleMask,   int32_t, 1
+    NASMX_RESERVE dwDamageMask,    int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC DRAWTEXTPARAMS
-    NASMX_RESERVE cbSize, int32_t, 1
-    NASMX_RESERVE iTabiLength, int32_t, 1
-    NASMX_RESERVE iLeftMargin, int32_t, 1
-    NASMX_RESERVE iRightMargin, int32_t, 1
+    NASMX_RESERVE cbSize,         int32_t, 1
+    NASMX_RESERVE iTabiLength,    int32_t, 1
+    NASMX_RESERVE iLeftMargin,    int32_t, 1
+    NASMX_RESERVE iRightMargin,   int32_t, 1
     NASMX_RESERVE uiiLengthDrawn, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC MENUITEMINFO
-    NASMX_RESERVE cbSize, int32_t, 1
-    NASMX_RESERVE fMask, int32_t, 1
-    NASMX_RESERVE fType, int32_t, 1
-    NASMX_RESERVE fState, int32_t, 1
-    NASMX_RESERVE wID, int32_t, 1
-    NASMX_RESERVE hSubMenu, int32_t, 1
-    NASMX_RESERVE hbmpChecked, int32_t, 1
-    NASMX_RESERVE hbmpUnchecked, int32_t, 1
-    NASMX_RESERVE dwItemData, int32_t, 1
-    NASMX_RESERVE dwTypeData, int32_t, 1
-    NASMX_RESERVE cch, int32_t, 1
+    NASMX_RESERVE cbSize,        int32_t, 1
+    NASMX_RESERVE fMask,         int32_t, 1
+    NASMX_RESERVE fType,         int32_t, 1
+    NASMX_RESERVE fState,        int32_t, 1
+    NASMX_RESERVE wID,           int32_t, 1
+    NASMX_RESERVE hSubMenu,      size_t, 1
+    NASMX_RESERVE hbmpChecked,   size_t, 1
+    NASMX_RESERVE hbmpUnchecked, size_t, 1
+    NASMX_RESERVE dwItemData,    size_t, 1
+    NASMX_RESERVE dwTypeData,    size_t, 1
+    NASMX_RESERVE cch,           int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC SCROLLINFO
-    NASMX_RESERVE cbSize, int32_t, 1
-    NASMX_RESERVE fMask, int32_t, 1
-    NASMX_RESERVE nMin, int32_t, 1
-    NASMX_RESERVE nMax, int32_t, 1
-    NASMX_RESERVE nPage, int32_t, 1
-    NASMX_RESERVE nPos, int32_t, 1
+    NASMX_RESERVE cbSize,    int32_t, 1
+    NASMX_RESERVE fMask,     int32_t, 1
+    NASMX_RESERVE nMin,      int32_t, 1
+    NASMX_RESERVE nMax,      int32_t, 1
+    NASMX_RESERVE nPage,     int32_t, 1
+    NASMX_RESERVE nPos,      int32_t, 1
     NASMX_RESERVE nTrackPos, int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC MSGBOXPARAMS
-    NASMX_RESERVE cbSize, int32_t, 1
-    NASMX_RESERVE hwndOwner, ptrdiff_t, 1
-    NASMX_RESERVE hInstance, int32_t, 1
-    NASMX_RESERVE lpszText, ptrdiff_t, 1
-    NASMX_RESERVE lpszCaption, ptrdiff_t, 1
-    NASMX_RESERVE dwStyle, int32_t, 1
-    NASMX_RESERVE lpszIcon, ptrdiff_t, 1
-    NASMX_RESERVE dwContextHelpId, int32_t, 1
+    NASMX_RESERVE cbSize,             int32_t, 1
+    NASMX_RESERVE hwndOwner,          ptrdiff_t, 1
+    NASMX_RESERVE hInstance,          int32_t, 1
+    NASMX_RESERVE lpszText,           ptrdiff_t, 1
+    NASMX_RESERVE lpszCaption,        ptrdiff_t, 1
+    NASMX_RESERVE dwStyle,            int32_t, 1
+    NASMX_RESERVE lpszIcon,           ptrdiff_t, 1
+    NASMX_RESERVE dwContextHelpId,    int32_t, 1
     NASMX_RESERVE lpfnMsgBoxCallback, int32_t, 1
-    NASMX_RESERVE dwLanguageId, int32_t, 1
+    NASMX_RESERVE dwLanguageId,       int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC DEBUG_EVENT
     NASMX_RESERVE dwDebugEventCode, int32_t, 1
-    NASMX_RESERVE dwProcessId, int32_t, 1
-    NASMX_RESERVE dwThreadId, int32_t, 1
-    NASMX_RESERVE u, int32_t, 1
+    NASMX_RESERVE dwProcessId,      int32_t, 1
+    NASMX_RESERVE dwThreadId,       int32_t, 1
+    NASMX_UNION u
+        NASMX_STRUC Exception, EXCEPTION_DEBUG_INFO
+            NASMX_STRUC ExceptionRecord, EXCEPTION_RECORD
+                NASMX_RESERVE ExceptionCode,        uint32_t, 1
+                NASMX_RESERVE ExceptionFlags,       uint32_t, 1
+                NASMX_RESERVE pExceptionRecord,     ptrdiff_t, 1
+                NASMX_RESERVE ExceptionAddress,     ptrdiff_t, 1
+                NASMX_RESERVE NumberParameters,     uint32_t, 1
+                NASMX_RESERVE ExceptionInformation, size_t, EXCEPTION_MAXIMUM_PARAMETERS
+            NASMX_ENDSTRUC
+            NASMX_RESERVE dwFirstChance, uint32_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC CreateThread, CREATE_THREAD_DEBUG_INFO
+            NASMX_RESERVE hThread,           ptrdiff_t, 1
+            NASMX_RESERVE lpThreadLocalBase, ptrdiff_t, 1
+            NASMX_RESERVE lpStartAddress,    ptrdiff_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC CreateProcessInfo, CREATE_PROCESS_DEBUG_INFO
+            NASMX_RESERVE hFile,             ptrdiff_t, 1
+            NASMX_RESERVE hProcess,          ptrdiff_t, 1
+            NASMX_RESERVE hThread,           ptrdiff_t, 1
+            NASMX_RESERVE lpBaseOfImage,     ptrdiff_t, 1
+            NASMX_RESERVE dwDebugInfoFileOffset, uint32_t, 1
+            NASMX_RESERVE nDebugInfoSize,    uint32_t, 1
+            NASMX_RESERVE lpThreadLocalBase, ptrdiff_t, 1
+            NASMX_RESERVE lpStartAddress,    ptrdiff_t, 1
+            NASMX_RESERVE lpImageName,       ptrdiff_t, 1
+            NASMX_RESERVE fUnicode,          uint16_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC ExitThread, EXIT_THREAD_DEBUG_INFO
+            NASMX_RESERVE dwExitCode, uint32_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC ExitProcess, EXIT_PROCESS_DEBUG_INFO
+            NASMX_RESERVE dwExitCode, uint32_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC LoadDll, LOAD_DLL_DEBUG_INFO
+            NASMX_RESERVE hFile,                 ptrdiff_t, 1
+            NASMX_RESERVE lpBaseOfDll,           ptrdiff_t, 1
+            NASMX_RESERVE dwDebugInfoFileOffset, uint32_t, 1
+            NASMX_RESERVE nDebugInfoSize,        uint32_t, 1
+            NASMX_RESERVE lpImageName,           ptrdiff_t, 1
+            NASMX_RESERVE fUnicode,              uint16_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC UnloadDll, UNLOAD_DLL_DEBUG_INFO
+            NASMX_RESERVE lpBaseOfDll, ptrdiff_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC DebugString, OUTPUT_DEBUG_STRING_INFO
+            NASMX_RESERVE lpDebugStringData,   ptrdiff_t, 1
+            NASMX_RESERVE fUnicode,            uint16_t, 1
+            NASMX_RESERVE nDebugStringLength,  uint16_t, 1
+        NASMX_ENDSTRUC
+        NASMX_STRUC RipInfo, RIP_INFO
+            NASMX_RESERVE dwError, uint32_t, 1
+            NASMX_RESERVE dwType,  uint32_t, 1
+        NASMX_ENDSTRUC
+    NASMX_ENDUNION
 NASMX_ENDSTRUC
 
 NASMX_STRUC COLORMAP
@@ -8880,54 +9225,94 @@ NASMX_STRUC IMAGE_DATA_DIRECTORY
     NASMX_RESERVE isize, int32_t, 1
 NASMX_ENDSTRUC
 
-NASMX_STRUC IMAGE_OPTIONAL_HEADER
-    NASMX_RESERVE Magic, short_t, 1
-    NASMX_RESERVE MajorLinkerVersion, int8_t, 1
-    NASMX_RESERVE MinorLinkerVersion, int8_t, 1
-    NASMX_RESERVE SizeOfCode, int32_t, 1
-    NASMX_RESERVE SizeOfInitializedData, int32_t, 1
-    NASMX_RESERVE SizeOfUninitializedData, int32_t, 1
-    NASMX_RESERVE AddressOfEntryPoint, int32_t, 1
-    NASMX_RESERVE BaseOfCode, int32_t, 1
-    NASMX_RESERVE BaseOfData, int32_t, 1
-    NASMX_RESERVE ImageBase, int32_t, 1
-    NASMX_RESERVE SectionAlignment, int32_t, 1
-    NASMX_RESERVE FileAlignment, int32_t, 1
-    NASMX_RESERVE MajorOperatingSystemVersion, short_t, 1
-    NASMX_RESERVE MinorOperatingSystemVersion, short_t, 1
-    NASMX_RESERVE MajorImageVersion, short_t, 1
-    NASMX_RESERVE MinorImageVersion, short_t, 1
-    NASMX_RESERVE MajorSubsystemVersion, short_t, 1
-    NASMX_RESERVE MinorSubsystemVersion, short_t, 1
-    NASMX_RESERVE Reserved1, int32_t, 1
-    NASMX_RESERVE SizeOfImage, int32_t, 1
-    NASMX_RESERVE SizeOfHeaders, int32_t, 1
-    NASMX_RESERVE CheckSum, int32_t, 1
-    NASMX_RESERVE Subsystem, short_t, 1
-    NASMX_RESERVE DllCharacteristics, short_t, 1
-    NASMX_RESERVE SizeOfStackReserve, int32_t, 1
-    NASMX_RESERVE SizeOfStackCommit, int32_t, 1
-    NASMX_RESERVE SizeOfHeapReserve, int32_t, 1
-    NASMX_RESERVE SizeOfHeapCommit, int32_t, 1
-    NASMX_RESERVE LoaderFlags, int32_t, 1
-    NASMX_RESERVE NumberOfRvaAndSizes, int32_t, 1
-    NASMX_RESERVE DataDirectory, int64_t, 1
+NASMX_STRUC IMAGE_FILE_HEADER
+    NASMX_RESERVE Machine,              short_t, 1
+    NASMX_RESERVE NumberOfSections,     short_t, 1
+    NASMX_RESERVE TimeDateStamp,        int32_t, 1
+    NASMX_RESERVE PointerToSymbolTable, int32_t, 1
+    NASMX_RESERVE NumberOfSymbols,      int32_t, 1
+    NASMX_RESERVE SizeOfOptionalHeader, short_t, 1
+    NASMX_RESERVE Characteristics,      short_t, 1
 NASMX_ENDSTRUC
 
-NASMX_STRUC IMAGE_FILE_HEADER
-    NASMX_RESERVE Machine, short_t, 1
-    NASMX_RESERVE NumberOfSections, short_t, 1
-    NASMX_RESERVE TimeDateStamp, int32_t, 1
-    NASMX_RESERVE PointerToSymbolTable, int32_t, 1
-    NASMX_RESERVE NumberOfSymbols, int32_t, 1
-    NASMX_RESERVE SizeOfOptionalHeader, short_t, 1
-    NASMX_RESERVE Characteristics, short_t, 1
+NASMX_STRUC IMAGE_OPTIONAL_HEADER
+    NASMX_RESERVE Magic,                       WORD, 1
+    NASMX_RESERVE MajorLinkerVersion,          BYTE, 1
+    NASMX_RESERVE MinorLinkerVersion,          BYTE, 1
+    NASMX_RESERVE SizeOfCode,                  DWORD, 1
+    NASMX_RESERVE SizeOfInitializedData,       DWORD, 1
+    NASMX_RESERVE SizeOfUninitializedData,     DWORD, 1
+    NASMX_RESERVE AddressOfEntryPoint,         DWORD, 1
+    NASMX_RESERVE BaseOfCode,                  DWORD, 1
+    NASMX_RESERVE BaseOfData,                  DWORD, 1
+    NASMX_RESERVE ImageBase,                   DWORD, 1
+    NASMX_RESERVE SectionAlignment,            DWORD, 1
+    NASMX_RESERVE FileAlignment,               DWORD, 1
+    NASMX_RESERVE MajorOperatingSystemVersion, WORD, 1
+    NASMX_RESERVE MinorOperatingSystemVersion, WORD, 1
+    NASMX_RESERVE MajorImageVersion,           WORD, 1
+    NASMX_RESERVE MinorImageVersion,           WORD, 1
+    NASMX_RESERVE MajorSubsystemVersion,       WORD, 1
+    NASMX_RESERVE MinorSubsystemVersion,       WORD, 1
+    NASMX_RESERVE Win32VersionValue,           DWORD, 1
+    NASMX_RESERVE SizeOfImage,                 DWORD, 1
+    NASMX_RESERVE SizeOfHeaders,               DWORD, 1
+    NASMX_RESERVE CheckSum,                    DWORD, 1
+    NASMX_RESERVE Subsystem,                   WORD, 1
+    NASMX_RESERVE DllCharacteristics,          WORD, 1
+    NASMX_RESERVE SizeOfStackReserve,          DWORD, 1
+    NASMX_RESERVE SizeOfStackCommit,           DWORD, 1
+    NASMX_RESERVE SizeOfHeapReserve,           DWORD, 1
+    NASMX_RESERVE SizeOfHeapCommit,            DWORD, 1
+    NASMX_RESERVE LoaderFlags,                 DWORD, 1
+    NASMX_RESERVE NumberOfRvaAndSizes,         DWORD, 1
+    NASMX_RESERVE DataDirectory, IMAGE_DATA_DIRECTORY, IMAGE_NUMBEROF_DIRECTORY_ENTRIES
 NASMX_ENDSTRUC
 
 NASMX_STRUC IMAGE_NT_HEADERS
     NASMX_RESERVE Signature, int32_t, 1
-    NASMX_RESERVE FileHeader, int32_t, 1
-    NASMX_RESERVE OptionalHeader, int32_t, 1
+    NASMX_STRUC FileHeader, IMAGE_FILE_HEADER
+        NASMX_RESERVE Machine,              short_t, 1
+        NASMX_RESERVE NumberOfSections,     short_t, 1
+        NASMX_RESERVE TimeDateStamp,        int32_t, 1
+        NASMX_RESERVE PointerToSymbolTable, int32_t, 1
+        NASMX_RESERVE NumberOfSymbols,      int32_t, 1
+        NASMX_RESERVE SizeOfOptionalHeader, short_t, 1
+        NASMX_RESERVE Characteristics,      short_t, 1
+    NASMX_ENDSTRUC
+    NASMX_STRUC OptionalHeader, IMAGE_OPTIONAL_HEADER
+        NASMX_RESERVE Magic,                       WORD, 1
+        NASMX_RESERVE MajorLinkerVersion,          BYTE, 1
+        NASMX_RESERVE MinorLinkerVersion,          BYTE, 1
+        NASMX_RESERVE SizeOfCode,                  DWORD, 1
+        NASMX_RESERVE SizeOfInitializedData,       DWORD, 1
+        NASMX_RESERVE SizeOfUninitializedData,     DWORD, 1
+        NASMX_RESERVE AddressOfEntryPoint,         DWORD, 1
+        NASMX_RESERVE BaseOfCode,                  DWORD, 1
+        NASMX_RESERVE BaseOfData,                  DWORD, 1
+        NASMX_RESERVE ImageBase,                   DWORD, 1
+        NASMX_RESERVE SectionAlignment,            DWORD, 1
+        NASMX_RESERVE FileAlignment,               DWORD, 1
+        NASMX_RESERVE MajorOperatingSystemVersion, WORD, 1
+        NASMX_RESERVE MinorOperatingSystemVersion, WORD, 1
+        NASMX_RESERVE MajorImageVersion,           WORD, 1
+        NASMX_RESERVE MinorImageVersion,           WORD, 1
+        NASMX_RESERVE MajorSubsystemVersion,       WORD, 1
+        NASMX_RESERVE MinorSubsystemVersion,       WORD, 1
+        NASMX_RESERVE Win32VersionValue,           DWORD, 1
+        NASMX_RESERVE SizeOfImage,                 DWORD, 1
+        NASMX_RESERVE SizeOfHeaders,               DWORD, 1
+        NASMX_RESERVE CheckSum,                    DWORD, 1
+        NASMX_RESERVE Subsystem,                   WORD, 1
+        NASMX_RESERVE DllCharacteristics,          WORD, 1
+        NASMX_RESERVE SizeOfStackReserve,          DWORD, 1
+        NASMX_RESERVE SizeOfStackCommit,           DWORD, 1
+        NASMX_RESERVE SizeOfHeapReserve,           DWORD, 1
+        NASMX_RESERVE SizeOfHeapCommit,            DWORD, 1
+        NASMX_RESERVE LoaderFlags,                 DWORD, 1
+        NASMX_RESERVE NumberOfRvaAndSizes,         DWORD, 1
+        NASMX_RESERVE DataDirectory, IMAGE_DATA_DIRECTORY, IMAGE_NUMBEROF_DIRECTORY_ENTRIES
+    NASMX_ENDSTRUC
 NASMX_ENDSTRUC
 
 NASMX_STRUC IMAGE_EXPORT_DIRECTORY
@@ -8945,25 +9330,25 @@ NASMX_STRUC IMAGE_EXPORT_DIRECTORY
 NASMX_ENDSTRUC
 
 NASMX_STRUC IMAGE_DOS_HEADER
-    NASMX_RESERVE e_magic, short_t, 1
-    NASMX_RESERVE e_cblp, short_t, 1
-    NASMX_RESERVE e_cp, short_t, 1
-    NASMX_RESERVE e_crlc, short_t, 1
-    NASMX_RESERVE e_cparhdr, short_t, 1
+    NASMX_RESERVE e_magic,    short_t, 1
+    NASMX_RESERVE e_cblp,     short_t, 1
+    NASMX_RESERVE e_cp,       short_t, 1
+    NASMX_RESERVE e_crlc,     short_t, 1
+    NASMX_RESERVE e_cparhdr,  short_t, 1
     NASMX_RESERVE e_minalloc, short_t, 1
     NASMX_RESERVE e_maxalloc, short_t, 1
-    NASMX_RESERVE e_ss, short_t, 1
-    NASMX_RESERVE e_sp, short_t, 1
-    NASMX_RESERVE e_csum, short_t, 1
-    NASMX_RESERVE e_ip, short_t, 1
-    NASMX_RESERVE e_cs, short_t, 1
-    NASMX_RESERVE e_lfarlc, short_t, 1
-    NASMX_RESERVE e_ovno, short_t, 1
-    NASMX_RESERVE e_res4, short_t, 1
-    NASMX_RESERVE e_oemid, short_t, 1
-    NASMX_RESERVE e_oeminfo, short_t, 1
-    NASMX_RESERVE e_res2, short_t, 1
-    NASMX_RESERVE e_lfanew, int32_t, 1
+    NASMX_RESERVE e_ss,       short_t, 1
+    NASMX_RESERVE e_sp,       short_t, 1
+    NASMX_RESERVE e_csum,     short_t, 1
+    NASMX_RESERVE e_ip,       short_t, 1
+    NASMX_RESERVE e_cs,       short_t, 1
+    NASMX_RESERVE e_lfarlc,   short_t, 1
+    NASMX_RESERVE e_ovno,     short_t, 1
+    NASMX_RESERVE e_res4,     short_t, 4
+    NASMX_RESERVE e_oemid,    short_t, 1
+    NASMX_RESERVE e_oeminfo,  short_t, 1
+    NASMX_RESERVE e_res2,     short_t, 10
+    NASMX_RESERVE e_lfanew,   int32_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC USER_INFO_3
@@ -9534,26 +9919,26 @@ NASMX_STRUC PRINTDLGAPI
 NASMX_ENDSTRUC
 
 NASMX_STRUC OPENFILENAME
-    NASMX_RESERVE lStructSize, int32_t, 1
-    NASMX_RESERVE hWndOwner, ptrdiff_t, 1
-    NASMX_RESERVE hInstance, int32_t, 1
-    NASMX_RESERVE lpstrFilter, int32_t, 1
-    NASMX_RESERVE lpstrCustomFilter, int32_t, 1
-    NASMX_RESERVE nMaxCustFilter, int32_t, 1
-    NASMX_RESERVE nFilterIndex, int32_t, 1
-    NASMX_RESERVE lpstrFile, int32_t, 1
-    NASMX_RESERVE nMaxFile, int32_t, 1
-    NASMX_RESERVE lpstrFileTitle, int32_t, 1
-    NASMX_RESERVE nMaxFileTitle, int32_t, 1
-    NASMX_RESERVE lpstrInitialDir, int32_t, 1
-    NASMX_RESERVE lpstrTitle, int32_t, 1
-    NASMX_RESERVE Flags, int32_t, 1
-    NASMX_RESERVE nFileOffset, short_t, 1
-    NASMX_RESERVE nFileExtension, short_t, 1
-    NASMX_RESERVE lpstrDefExt, int32_t, 1
-    NASMX_RESERVE lCustData, int32_t, 1
-    NASMX_RESERVE lpfnHook, int32_t, 1
-    NASMX_RESERVE lpTemplateName, int32_t, 1
+    NASMX_RESERVE lStructSize,       int32_t, 1
+    NASMX_RESERVE hWndOwner,         size_t, 1
+    NASMX_RESERVE hInstance,         size_t, 1
+    NASMX_RESERVE lpstrFilter,       ptrdiff_t, 1
+    NASMX_RESERVE lpstrCustomFilter, ptrdiff_t, 1
+    NASMX_RESERVE nMaxCustFilter,    int32_t, 1
+    NASMX_RESERVE nFilterIndex,      int32_t, 1
+    NASMX_RESERVE lpstrFile,         ptrdiff_t, 1
+    NASMX_RESERVE nMaxFile,          int32_t, 1
+    NASMX_RESERVE lpstrFileTitle,    ptrdiff_t, 1
+    NASMX_RESERVE nMaxFileTitle,     int32_t, 1
+    NASMX_RESERVE lpstrInitialDir,   ptrdiff_t, 1
+    NASMX_RESERVE lpstrTitle,        ptrdiff_t, 1
+    NASMX_RESERVE Flags,             int32_t, 1
+    NASMX_RESERVE nFileOffset,       short_t, 1
+    NASMX_RESERVE nFileExtension,    short_t, 1
+    NASMX_RESERVE lpstrDefExt,       ptrdiff_t, 1
+    NASMX_RESERVE lCustData,         size_t, 1
+    NASMX_RESERVE lpfnHook,          ptrdiff_t, 1
+    NASMX_RESERVE lpTemplateName,    ptrdiff_t, 1
 NASMX_ENDSTRUC
 
 NASMX_STRUC CHARFORMAT
