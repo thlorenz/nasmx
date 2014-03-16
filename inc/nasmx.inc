@@ -1042,9 +1042,9 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 			;// Get the size of the current container
 			%assign %%__size %$__nx_usize
 
-			%ifdef __NX_DEBUG_STRUC
-				%warning popping context, container size: %%__size
-			%endif
+			; %ifdef __NX_DEBUG_STRUC
+			;	%warning popping context, container size: %%__size
+			; %endif
 
 			%pop
 			%ifnctx __NX_CTX_UNION
@@ -1072,15 +1072,15 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 				;// modifying other union members offsets.
 				%assign %%__ofst %$__nx_offset
  				%if ( is_typeof_union(%%__name) != 0 )
-					%ifdef __NX_DEBUG_STRUC
-						%warning pushing union %%__name
-					%endif
+					; %ifdef __NX_DEBUG_STRUC
+					;	%warning pushing union %%__name
+					; %endif
  					%push __NX_CTX_UNION
 				%else
 					;// assert: struc/class
-					%ifdef __NX_DEBUG_STRUC
-						%warning pushing struct %%__name
-					%endif
+					; %ifdef __NX_DEBUG_STRUC
+					;	%warning pushing struct %%__name
+					; %endif
  					%push __NX_CTX_STRUC
  				%endif
 				%assign %$__nx_usize %%__size
@@ -1117,10 +1117,10 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 			;// Do not equate the outermost parent!
 			%if ( %%__idx > 1 )
 				%[%%__name] equ %$__nx_offset
-				%ifdef __NX_DEBUG_STRUC
-					%assign %%toff %[%%__name]
-					%warning name: %%__name type: %%__type size: %%__size align: %%__align off: %%toff
-				%endif
+				; %ifdef __NX_DEBUG_STRUC
+				;	%assign %%toff %[%%__name]
+				;	%warning name: %%__name type: %%__type size: %%__size align: %%__align off: %%toff
+				; %endif
 
 				%if ( %%__is_container == 0 )
 					%ifnctx __NX_CTX_UNION
@@ -1136,10 +1136,10 @@ NASMX_DEFINE VERSION_ID, 0x01040010
 	%endrep
 
 	%ifctx __NX_CTX_FINALIZE
-		%ifdef __NX_DEBUG_STRUC
-			%assign %%tsize %$__nx_offset
-			%warning ctx ok, final offset: %%tsize , undefining equated names
-		%endif
+		; %ifdef __NX_DEBUG_STRUC
+		;	%assign %%tsize %$__nx_offset
+		;	%warning ctx ok, final offset: %%tsize , undefining equated names
+		; %endif
 		%assign %%__idx 1
 		%rep %1
 			%undef __NX_EQUATE_NAME_%[%%__idx]
