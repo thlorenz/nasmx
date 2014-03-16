@@ -8,12 +8,13 @@
 <a href="nasmxi.html">Index</a>
 <h2><a name="appendix-A">Appendix A: NASM-X Version History</a></h2>
 <h3><a name="section-A.1">A.1 NASM-X 1 Series</a></h3>
-<h4><a name="section-A.1.1">A.1.1 NASM-X v1.4: 12 Mar 2014</a></h4>
+<h4><a name="section-A.1.1">A.1.1 NASM-X v1.4: 16 Mar 2014</a></h4>
 <ul>
 <li>Fixed INVOKE stack alignment bug
-<li>Fixed INVOKE bug when eax/rax used as argument
+<li>Enhanced INVOKE to save and restore register eax/rax when used in parameter arguments if necessary
 <li>Optimized USES macro
 <li>Corrected x64 register parameter spill behavior
+<li>Corrected various Windows structure definitions
 <li>Added pragmas PROC_FASTCALL_STACK_PRELOAD and INVOKE_FASTCALL_STACK_PRELOAD
 <li>Deprecated previous FASTCALL_STACK_PRELOAD pragma
 <li>Nasm v2.11 or greater now required due to preprocessor fixes
