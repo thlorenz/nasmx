@@ -1,7 +1,7 @@
 ;//////////////////////////////////////////////////////////////
 ;//
 ;// NASMX Preprocessor
-;// Copyright (c) 2005-2010, The NASMX Project
+;// Copyright (c) 2005-2014, The NASMX Project
 ;//
 ;// mmsystem.inc
 ;// Created by Rob Neff
@@ -9,6 +9,8 @@
 
 %ifndef __NASMX_MMSYSTEM_INCLUDED__
 %define __NASMX_MMSYSTEM_INCLUDED__
+
+NASMX_PRAGMA PACK, PUSH, 1
 
 %define MAXPNAMELEN 32
 %define MAXERRORLENGTH 256
@@ -252,13 +254,13 @@ NASMX_ENDSTRUC
 %define WAVE_FORMAT_DIRECT_QUERY WAVE_FORMAT_QUERY|WAVE_FORMAT_DIRECT
 
 NASMX_STRUC WAVEHDR
-    NASMX_RESERVE lpData,          NASMX_PTR, 1
+    NASMX_RESERVE lpData,          ptrdiff_t, 1
     NASMX_RESERVE dwBufferiLength, uint32_t, 1
     NASMX_RESERVE dwBytesRecorded, uint32_t, 1
     NASMX_RESERVE dwUser,          size_t, 1
     NASMX_RESERVE dwFlags,         uint32_t, 1
     NASMX_RESERVE dwLoops,         uint32_t, 1
-    NASMX_RESERVE lpNext,          NASMX_PTR, 1
+    NASMX_RESERVE lpNext,          ptrdiff_t, 1
     NASMX_RESERVE Reserved,        size_t, 1
 NASMX_ENDSTRUC
 
@@ -270,62 +272,22 @@ NASMX_ENDSTRUC
 %define WHDR_INQUEUE  10h
 
 ;// waveform output device capabilities structure
-NASMX_STRUC WAVEOUTCAPSA
+NASMX_STRUC WAVEOUTCAPS
     NASMX_RESERVE wMid,           uint16_t, 1
     NASMX_RESERVE wPid,           uint16_t, 1
     NASMX_RESERVE vDriverVersion, uint32_t, 1
-    NASMX_RESERVE szPname,        char_t, MAXPNAMELEN
+    NASMX_RESERVE szPname,        NASMX_TCHAR, MAXPNAMELEN
     NASMX_RESERVE dwFormats,      uint32_t, 1
     NASMX_RESERVE wChannels,      uint16_t, 1
     NASMX_RESERVE wReserved1,     uint16_t, 1
     NASMX_RESERVE dwSupport,      uint32_t, 1
 NASMX_ENDSTRUC
 
-NASMX_STRUC WAVEOUTCAPSW
+NASMX_STRUC WAVEOUTCAPS2
     NASMX_RESERVE wMid,           uint16_t, 1
     NASMX_RESERVE wPid,           uint16_t, 1
     NASMX_RESERVE vDriverVersion, uint32_t, 1
-    NASMX_RESERVE szPname,        wchar_t, MAXPNAMELEN
-    NASMX_RESERVE dwFormats,      uint32_t, 1
-    NASMX_RESERVE wChannels,      uint16_t, 1
-    NASMX_RESERVE wReserved1,     uint16_t, 1
-    NASMX_RESERVE dwSupport,      uint32_t, 1
-NASMX_ENDSTRUC
-
-NASMX_STRUC WAVEOUTCAPS2A
-    NASMX_RESERVE wMid,           uint16_t, 1
-    NASMX_RESERVE wPid,           uint16_t, 1
-    NASMX_RESERVE vDriverVersion, uint32_t, 1
-    NASMX_RESERVE szPname,        char_t, MAXPNAMELEN
-    NASMX_RESERVE dwFormats,      uint32_t, 1
-    NASMX_RESERVE wChannels,      uint16_t, 1
-    NASMX_RESERVE wReserved1,     uint16_t, 1
-    NASMX_RESERVE dwSupport,      uint32_t, 1
-    NASMX_STRUC ManufacturerGuid, GUID
-        NASMX_RESERVE Data1, uint32_t, 1
-        NASMX_RESERVE Data2, uint16_t, 1
-        NASMX_RESERVE Data3, uint16_t, 1
-        NASMX_RESERVE Data4, uint8_t, 8
-	NASMX_ENDSTRUC
-    NASMX_STRUC ProductGuid, GUID
-        NASMX_RESERVE Data1, uint32_t, 1
-        NASMX_RESERVE Data2, uint16_t, 1
-        NASMX_RESERVE Data3, uint16_t, 1
-        NASMX_RESERVE Data4, uint8_t, 8
-	NASMX_ENDSTRUC
-    NASMX_STRUC NameGuid, GUID
-        NASMX_RESERVE Data1, uint32_t, 1
-        NASMX_RESERVE Data2, uint16_t, 1
-        NASMX_RESERVE Data3, uint16_t, 1
-        NASMX_RESERVE Data4, uint8_t, 8
-	NASMX_ENDSTRUC
-NASMX_ENDSTRUC
-
-NASMX_STRUC WAVEOUTCAPS2W
-    NASMX_RESERVE wMid,           uint16_t, 1
-    NASMX_RESERVE wPid,           uint16_t, 1
-    NASMX_RESERVE vDriverVersion, uint32_t, 1
-    NASMX_RESERVE szPname,        wchar_t, MAXPNAMELEN
+    NASMX_RESERVE szPname,        NASMX_TCHAR, MAXPNAMELEN
     NASMX_RESERVE dwFormats,      uint32_t, 1
     NASMX_RESERVE wChannels,      uint16_t, 1
     NASMX_RESERVE wReserved1,     uint16_t, 1
@@ -359,59 +321,21 @@ NASMX_ENDSTRUC
 %define WAVECAPS_SAMPLEACCURATE 20h
 
 ;// waveform input device capabilities structure
-NASMX_STRUC WAVEINCAPSA
+NASMX_STRUC WAVEINCAPS
     NASMX_RESERVE wMid,           uint16_t, 1
     NASMX_RESERVE wPid,           uint16_t, 1
     NASMX_RESERVE vDriverVersion, int32_t, 1
-    NASMX_RESERVE szPname,        char_t, MAXPNAMELEN
+    NASMX_RESERVE szPname,        NASMX_TCHAR, MAXPNAMELEN
     NASMX_RESERVE dwFormats,      int32_t, 1
     NASMX_RESERVE wChannels,      uint16_t, 1
     NASMX_RESERVE wReserved1,     uint16_t, 1
 NASMX_ENDSTRUC
 
-NASMX_STRUC WAVEINCAPSW
+NASMX_STRUC WAVEINCAPS2
     NASMX_RESERVE wMid,           uint16_t, 1
     NASMX_RESERVE wPid,           uint16_t, 1
     NASMX_RESERVE vDriverVersion, int32_t, 1
-    NASMX_RESERVE szPname,        wchar_t, MAXPNAMELEN
-    NASMX_RESERVE dwFormats,      int32_t, 1
-    NASMX_RESERVE wChannels,      uint16_t, 1
-    NASMX_RESERVE wReserved1,     uint16_t, 1
-NASMX_ENDSTRUC
-
-NASMX_STRUC WAVEINCAPS2A
-    NASMX_RESERVE wMid,           uint16_t, 1
-    NASMX_RESERVE wPid,           uint16_t, 1
-    NASMX_RESERVE vDriverVersion, int32_t, 1
-    NASMX_RESERVE szPname,        char_t, MAXPNAMELEN
-    NASMX_RESERVE dwFormats,      int32_t, 1
-    NASMX_RESERVE wChannels,      uint16_t, 1
-    NASMX_RESERVE wReserved1,     uint16_t, 1
-    NASMX_STRUC ManufacturerGuid, GUID
-        NASMX_RESERVE Data1, uint32_t, 1
-        NASMX_RESERVE Data2, uint16_t, 1
-        NASMX_RESERVE Data3, uint16_t, 1
-        NASMX_RESERVE Data4, uint8_t, 8
-	NASMX_ENDSTRUC
-    NASMX_STRUC ProductGuid, GUID
-        NASMX_RESERVE Data1, uint32_t, 1
-        NASMX_RESERVE Data2, uint16_t, 1
-        NASMX_RESERVE Data3, uint16_t, 1
-        NASMX_RESERVE Data4, uint8_t, 8
-	NASMX_ENDSTRUC
-    NASMX_STRUC NameGuid, GUID
-        NASMX_RESERVE Data1, uint32_t, 1
-        NASMX_RESERVE Data2, uint16_t, 1
-        NASMX_RESERVE Data3, uint16_t, 1
-        NASMX_RESERVE Data4, uint8_t, 8
-	NASMX_ENDSTRUC
-NASMX_ENDSTRUC
-
-NASMX_STRUC WAVEINCAPS2W
-    NASMX_RESERVE wMid,           uint16_t, 1
-    NASMX_RESERVE wPid,           uint16_t, 1
-    NASMX_RESERVE vDriverVersion, int32_t, 1
-    NASMX_RESERVE szPname,        wchar_t, MAXPNAMELEN
+    NASMX_RESERVE szPname,        NASMX_TCHAR, MAXPNAMELEN
     NASMX_RESERVE dwFormats,      int32_t, 1
     NASMX_RESERVE wChannels,      uint16_t, 1
     NASMX_RESERVE wReserved1,     uint16_t, 1
@@ -2333,5 +2257,7 @@ NASMX_ENDSTRUC
 %ifndef SC_SCREENSAVE
 %define SC_SCREENSAVE 0F140h
 %endif
+
+NASMX_PRAGMA PACK, POP
 
 %endif  ;// ifndef __NASMX_MMSYSTEM_INCLUDED__
