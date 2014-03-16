@@ -207,11 +207,12 @@
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp callconv is the calling convention used if not the default.<br>
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp supported conventions: CDECL, FASTCALL, NAKED, PASCAL, STDCALL<br>
 &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp proc_name is the name of the procedure to call.<br>
-&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp param is the type and parameter name(s) of the procedure.<br>
+&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp param is the parameter type and value of the called procedure.<br>
 <h4>Notes</h4>
-Fox x64 programming INVOKE will not normally spill register arguments to the stack prior to the call.  If this behavior is desired due
-to calling a non-conformant function then you may use <code><nobr>NASMX_PRAGMA INVOKE_FASTCALL_STACK_PRELOAD, ENABLE</nobr></code> prior
-to INVOKE to enable this behavior.<br>
+Fox Windows x64 programming:<br>
+INVOKE will not normally spill register arguments to the stack prior to the call.  If this behavior is desired due
+to calling a non-conformant function then you may use <code><nobr>NASMX_PRAGMA INVOKE_FASTCALL_STACK_PRELOAD, ENABLE</nobr></code>
+prior to INVOKE to enable this behavior and then disable the pragma after INVOKE.<br>
 <br>
 <h4>Example</h4>
 <a href="nasmxe.html#section-E.1">Section E.1</a><br>
